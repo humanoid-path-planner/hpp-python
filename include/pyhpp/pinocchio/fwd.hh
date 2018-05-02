@@ -23,6 +23,7 @@
 namespace pyhpp {
   namespace pinocchio {
     void exposeDevice ();
+    void exposeLiegroup ();
   }
 }
 

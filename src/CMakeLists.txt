@@ -48,6 +48,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/pinocchio
   FILES
   pyhpp/pinocchio/device.cc
+  pyhpp/pinocchio/liegroup.cc
   pyhpp/pinocchio/bindings.cc
   )
 
