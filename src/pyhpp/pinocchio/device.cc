@@ -34,6 +34,11 @@ namespace pyhpp {
   namespace pinocchio {
     using namespace hpp::pinocchio;
 
+    bool Device_currentConfiguration (Device& d, const Configuration_t& c)
+    {
+      return d.currentConfiguration(c);
+    }
+
     void exposeDevice()
     {
       enum_ <Device::Computation_t> ("ComputationFlag")
@@ -45,6 +50,7 @@ namespace pyhpp {
         .value ("ALL"           , Device::ALL           )
         ;
       class_<Device, DevicePtr_t, boost::noncopyable> ("Device", no_init)
+        .def ("name",   &Device::name, return_value_policy<return_by_value>())
         .def ("create", &Device::create)
         .staticmethod("create")
 
@@ -54,7 +60,7 @@ namespace pyhpp {
         .def ("geomModel", static_cast<GeomModel& (Device::*) ()> (&Device::geomModel), return_internal_reference<>())
 
         .def ("currentConfiguration", static_cast<const Configuration_t& (Device::*) () const> (&Device::currentConfiguration), return_value_policy<return_by_value>())
-        .def ("currentConfiguration", static_cast<bool (Device::*) (ConfigurationIn_t)> (&Device::currentConfiguration))
+        .def ("currentConfiguration", Device_currentConfiguration)
 
         .add_property ("computationFlag",
             &Device::computationFlag,
