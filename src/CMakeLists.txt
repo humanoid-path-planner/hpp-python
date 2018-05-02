@@ -61,6 +61,15 @@ ADD_PYTHON_LIBRARY(
   )
 
 ADD_PYTHON_LIBRARY(
+  pyhppconstraints
+  pyhpp/constraints
+  FILES
+  pyhpp/constraints/differentiable-function.cc
+  pyhpp/constraints/generic-transformation.cc
+  pyhpp/constraints/bindings.cc
+  )
+
+ADD_PYTHON_LIBRARY(
   pyhppcore
   pyhpp/core
   FILES
