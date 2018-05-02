@@ -65,7 +65,10 @@ ADD_PYTHON_LIBRARY(
   pyhpp/constraints
   FILES
   pyhpp/constraints/differentiable-function.cc
+  pyhpp/constraints/explicit-solver.cc
   pyhpp/constraints/generic-transformation.cc
+  pyhpp/constraints/iterative-solver.cc
+  pyhpp/constraints/hybrid-solver.cc
   pyhpp/constraints/bindings.cc
   )
 

@@ -24,6 +24,10 @@ namespace pyhpp {
   namespace constraints {
     void exposeDifferentiableFunction ();
     void exposeGenericTransformations ();
+
+    void exposeExplicitSolver ();
+    void exposeHierarchicalIterativeSolver ();
+    void exposeHybridSolver ();
   }
 }
 
