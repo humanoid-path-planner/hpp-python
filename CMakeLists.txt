@@ -24,6 +24,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/python.cmake)
 INCLUDE(cmake/boost.cmake)
+INCLUDE(cmake/test.cmake)
 
 SET(PROJECT_NAME hpp-python)
 SET(PROJECT_DESCRIPTION "Python bindings for HPP.")
@@ -60,7 +61,7 @@ ADD_REQUIRED_DEPENDENCY("eigenpy >= 1.2")
 ADD_REQUIRED_DEPENDENCY("hpp-constraints >= 4")
 
 ADD_SUBDIRECTORY(src)
-# ADD_SUBDIRECTORY(tests)
+ADD_SUBDIRECTORY(tests)
 
 # Add dependency toward hpp-python library in pkg-config file.
 # PKG_CONFIG_APPEND_LIBS("hpp-python")
