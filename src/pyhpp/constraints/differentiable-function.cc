@@ -34,48 +34,80 @@ namespace pyhpp {
   namespace constraints {
     using namespace hpp::constraints;
 
-    LiegroupElement DifferentiableFunction_call (
-        const DifferentiableFunction& f, const Configuration_t& q)
+    struct DFWrapper : DifferentiableFunction, wrapper<DifferentiableFunction>
     {
-      return f(q);
-    }
+      typedef boost::shared_ptr<DFWrapper> Ptr_t;
 
-    void DifferentiableFunction_value (
-        const DifferentiableFunction& f, LiegroupElement& lge, const Configuration_t& q)
-    {
-      f.value(lge, q);
-    }
+      DFWrapper (size_type sizeInput,
+          size_type sizeInputDerivative,
+          size_type sizeOutput,
+          std::string name) :
+        DifferentiableFunction (sizeInput, sizeInputDerivative, sizeOutput, name)
+      {}
 
-    // NOTE: eigenpy::Ref<const vector_t> is not binded so far. It is not very
-    // useful since it cannot be used to return a value.
-    void DifferentiableFunction_jacobian_wrap (
-        const DifferentiableFunction& f,
-        eigenpy::Ref<matrix_t> J,
-        const Configuration_t& q)
+      void impl_compute (LiegroupElement& result,
+          vectorIn_t argument) const
+      {
+        override f = this->get_override("impl_compute");
+        if (!f)
+          throw std::runtime_error ("impl_compute not implemented in child class");
+        f (boost::ref(result), vector_t(argument));
+      }
+
+      void impl_jacobian (matrixOut_t jacobian,
+          vectorIn_t arg) const
+      {
+        override f = this->get_override("impl_jacobian");
+        if (!f)
+          throw std::runtime_error ("impl_compute not implemented in child class");
+        matrix_t J (outputDerivativeSize(), inputDerivativeSize());
+        jacobian = (f (J, vector_t(arg))).as<matrix_t>();
+      }
+
+      // TODO add virtual method print
+      // so that it can be reimplemented in Python
+
+      static void value_wrap (const DifferentiableFunction& f,
+          LiegroupElement& lge, const Configuration_t& q)
+      {
+        f.value(lge, q);
+      }
+
+      // NOTE: eigenpy::Ref<const vector_t> is not binded so far. It is not very
+      // useful since it cannot be used to return a value.
+      static void jacobian_wrap ( const DifferentiableFunction& f,
+          eigenpy::Ref<matrix_t> J,
+          const Configuration_t& q)
         // const eigenpy::Ref<const vector_t>& q)
-    {
-      matrix_t Jtmp (f.outputDerivativeSize(), f.inputDerivativeSize());
-      f.jacobian(Jtmp, q);
-      J = Jtmp;
-      // f.jacobian(J, q);
-    }
+      {
+        J = py_jacobian (f, q);
+        // f.jacobian(J, q);
+      }
 
-    matrix_t DifferentiableFunction_jacobian (
-        const DifferentiableFunction& f, 
-        const Configuration_t& q)
-    {
-      matrix_t J (f.outputDerivativeSize(), f.inputDerivativeSize());
-      f.jacobian(J, q);
-      return J;
-    }
+      static LiegroupElement py_value (const DifferentiableFunction& f,
+          const Configuration_t& q)
+      {
+        return f(q);
+      }
+
+      static matrix_t py_jacobian (const DifferentiableFunction& f, 
+          const Configuration_t& q)
+      {
+        matrix_t J (f.outputDerivativeSize(), f.inputDerivativeSize());
+        f.jacobian(J, q);
+        return J;
+      }
+    };
 
     void exposeDifferentiableFunction ()
     {
-      class_<DifferentiableFunction, DifferentiableFunctionPtr_t, boost::noncopyable> ("DifferentiableFunction", no_init)
+      // class_<DifferentiableFunction, DifferentiableFunctionPtr_t, boost::noncopyable>
+      class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable>
+          ("DifferentiableFunction", no_init)
         // Pythonic API
         .def ("__str__", &to_str<DifferentiableFunction>)
-        .def ("__call__", &DifferentiableFunction_call)
-        .def ("J",        &DifferentiableFunction_jacobian)
+        .def ("__call__", &DFWrapper::py_value)
+        .def ("J",        &DFWrapper::py_jacobian)
 
         .add_property ("ni",  &DifferentiableFunction::inputSize)
         .add_property ("no", &DifferentiableFunction::outputSize)
@@ -83,8 +115,8 @@ namespace pyhpp {
         .add_property ("ndo", &DifferentiableFunction::outputDerivativeSize)
 
         // C++ API
-        .def ("value",    &DifferentiableFunction_value)
-        .def ("jacobian", &DifferentiableFunction_jacobian_wrap)
+        .def ("value",    &DFWrapper::value_wrap)
+        .def ("jacobian", &DFWrapper::jacobian_wrap)
 
         .def ("outputSpace", &DifferentiableFunction::outputSpace)
 
@@ -92,6 +124,10 @@ namespace pyhpp {
         .def ("outputSize", &DifferentiableFunction::outputSize)
         .def ("inputDerivativeSize",  &DifferentiableFunction::inputDerivativeSize)
         .def ("outputDerivativeSize", &DifferentiableFunction::outputDerivativeSize)
+
+        .def (init <size_type, size_type, size_type, std::string>())
+        .def ("impl_compute" , pure_virtual(&DFWrapper::impl_compute))
+        .def ("impl_jacobian", pure_virtual(&DFWrapper::impl_jacobian))
         ;
     }
   }
