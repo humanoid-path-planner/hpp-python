@@ -19,14 +19,9 @@
 
 #include <boost/python.hpp>
 
-#include <pyhpp/util.hh>
-#include <pyhpp/core/fwd.hh>
+#include <pyhpp/core/path-optimization/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppcore)
+BOOST_PYTHON_MODULE(pyhppcorepathoptimization)
 {
-  pyhpp::core::exposeProblemSolver();
-
-  // Expose main abstract classes
-  pyhpp::core::exposePath();
-  pyhpp::core::exposePathOptimizer();
+  pyhpp::core::pathOptimization::exposeSplineGradientBasedAbstracts();
 }

@@ -78,6 +78,24 @@ ADD_PYTHON_LIBRARY(
   pyhppcore
   pyhpp/core
   FILES
+  pyhpp/core/path.cc
+  pyhpp/core/path-optimizer.cc
   pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc
+  )
+
+ADD_PYTHON_LIBRARY(
+  pyhppcorepath
+  pyhpp/core/path
+  FILES
+  pyhpp/core/path/spline.cc
+  pyhpp/core/path/bindings.cc
+  )
+
+ADD_PYTHON_LIBRARY(
+  pyhppcorepathoptimization
+  pyhpp/core/pathoptimization
+  FILES
+  pyhpp/core/path-optimization/spline-gradient-based-abstract.cc
+  pyhpp/core/path-optimization/bindings.cc
   )

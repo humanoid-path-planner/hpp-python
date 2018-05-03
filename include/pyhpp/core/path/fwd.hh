@@ -17,16 +17,15 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
+#ifndef PYHPP_CORE_PATH_FWD_HH
+#define PYHPP_CORE_PATH_FWD_HH
 
-#include <pyhpp/util.hh>
-#include <pyhpp/core/fwd.hh>
-
-BOOST_PYTHON_MODULE(pyhppcore)
-{
-  pyhpp::core::exposeProblemSolver();
-
-  // Expose main abstract classes
-  pyhpp::core::exposePath();
-  pyhpp::core::exposePathOptimizer();
+namespace pyhpp {
+  namespace core {
+    namespace path {
+      void exposeSplines();
+    }
+  }
 }
+
+#endif // PYHPP_CORE_PATH_FWD_HH

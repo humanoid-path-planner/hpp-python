@@ -17,16 +17,38 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <pyhpp/core/path/fwd.hh>
+
 #include <boost/python.hpp>
 
+#include <hpp/core/path/spline.hh>
+
 #include <pyhpp/util.hh>
-#include <pyhpp/core/fwd.hh>
+#include <hpp/python/config.hh>
 
-BOOST_PYTHON_MODULE(pyhppcore)
-{
-  pyhpp::core::exposeProblemSolver();
+using namespace boost::python;
 
-  // Expose main abstract classes
-  pyhpp::core::exposePath();
-  pyhpp::core::exposePathOptimizer();
+namespace pyhpp {
+  namespace core {
+    namespace path {
+      using hpp::core::Path;
+      using namespace hpp::core::path;
+
+      template <int _PolynomeBasis, int _Order>
+      void exposeSpline (const char* name)
+      {
+        typedef Spline<_PolynomeBasis, _Order> S_t;
+        typedef typename S_t::Ptr_t Ptr_t;
+
+        class_ <S_t, Ptr_t, bases<Path>, boost::noncopyable> (name, no_init)
+          ;
+      }
+
+      void exposeSplines()
+      {
+        exposeSpline<BernsteinBasis, 1> ("SplineB1");
+        exposeSpline<BernsteinBasis, 3> ("SplineB3");
+      }
+    }
+  }
 }

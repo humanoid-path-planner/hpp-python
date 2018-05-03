@@ -23,6 +23,9 @@
 namespace pyhpp {
   namespace core {
     void exposeProblemSolver();
+
+    void exposePath();
+    void exposePathOptimizer();
   }
 }
 

@@ -17,16 +17,33 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-
-#include <pyhpp/util.hh>
 #include <pyhpp/core/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppcore)
-{
-  pyhpp::core::exposeProblemSolver();
+#include <boost/python.hpp>
 
-  // Expose main abstract classes
-  pyhpp::core::exposePath();
-  pyhpp::core::exposePathOptimizer();
+#include <hpp/core/path.hh>
+
+#include <pyhpp/util.hh>
+#include <hpp/python/config.hh>
+
+using namespace boost::python;
+
+namespace pyhpp {
+  namespace core {
+    using namespace hpp::core;
+
+    struct HPP_PYTHON_LOCAL PWrapper {
+    };
+
+    void exposePath()
+    {
+      class_<Path, PathPtr_t, boost::noncopyable> ("Path", no_init)
+        .def ("__str__", &to_str_from_operator<Path>)
+
+        // .def ("__call__", static_cast<Configuration_t (Path::*) (const value_type&)>(&Path::operator()))
+        // TODO check that the boolean is returned to Python
+        .def ("__call__", static_cast<Configuration_t (Path::*) (const value_type&, bool&) const>(&Path::operator()))
+        ;
+    }
+  }
 }
