@@ -26,19 +26,34 @@
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <hpp/pinocchio/liegroup-element.hh>
 
+#include <pyhpp/util.hh>
+
 using namespace boost::python;
 
 namespace pyhpp {
   namespace pinocchio {
     using namespace hpp::pinocchio;
 
+    struct LgEWrapper {
+      static vector_t vector_wrap_read (const LiegroupElement& lge) { return lge.vector(); }
+      static void vector_wrap_write (LiegroupElement& lge, const vector_t& v) { lge.vector() = v; }
+    };
+
     void exposeLiegroup()
     {
       class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable> ("LiegroupSpace", no_init)
+        .def ("__str__", &to_str_from_operator<LiegroupSpace>)
         .def ("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
         ;
       class_<LiegroupElement> ("LiegroupElement", init<const vector_t&, const LiegroupSpacePtr_t&>())
         .def (init <const LiegroupSpacePtr_t&>())
+        // Pythonic API
+        .def ("__str__", &to_str_from_operator<LiegroupElement>)
+        .add_property ("v",
+            &LgEWrapper::vector_wrap_read,
+            &LgEWrapper::vector_wrap_write)
+
+        // C++ API
         .def ("vector", static_cast <const vector_t& (LiegroupElement::*) () const> (&LiegroupElement::vector), return_value_policy<return_by_value>())
         .def ("space", &LiegroupElement::space, return_value_policy<return_by_value>())
         ;

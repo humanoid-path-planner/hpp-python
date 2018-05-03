@@ -30,6 +30,13 @@ namespace pyhpp {
     obj.print(oss);
     return oss.str();
   }
+  template <typename ObjectWithPrintMethod>
+  std::string to_str_from_operator (const ObjectWithPrintMethod& obj)
+  {
+    std::ostringstream oss;
+    oss << obj;
+    return oss.str();
+  }
 
   template<typename T1, typename T2>
     struct PairToPythonConverter {
