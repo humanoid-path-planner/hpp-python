@@ -24,27 +24,78 @@
 
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 
+#include <pyhpp/util.hh>
+
 using namespace boost::python;
 
 namespace pyhpp {
   namespace core {
     namespace pathOptimization {
-      using hpp::core::PathOptimizer;
+      using namespace hpp::core;
       using namespace hpp::core::pathOptimization;
+
+      template <int _PolynomeBasis, int _Order> class SGBWrapper :
+        public SplineGradientBasedAbstract<_PolynomeBasis, _Order>,
+        public wrapper <SplineGradientBasedAbstract<_PolynomeBasis, _Order> >
+      {
+        public:
+          typedef SplineGradientBasedAbstract<_PolynomeBasis, _Order> Base;
+          typedef typename Base::Splines_t Splines_t;
+          typedef typename Base::Reports_t Reports_t;
+
+          void appendEquivalentSpline (const PathVectorPtr_t& pv, Splines_t& ss) const
+          {
+            Base::appendEquivalentSpline (pv, ss);
+          }
+
+          void initializePathValidation(const Splines_t& splines)
+          {
+            override f = this->get_override("initializePathValidation");
+            if (!f) Base::initializePathValidation (splines);
+            else    f (splines);
+          }
+
+          Reports_t validatePath (const Splines_t& splines, bool stopAtFirst) const
+          {
+            return Base::validatePath (splines, stopAtFirst);
+          }
+
+          PathVectorPtr_t buildPathVector (const Splines_t& splines) const
+          {
+            return buildPathVector (splines);
+          }
+
+          PathVectorPtr_t optimize (const PathVectorPtr_t& path) const
+          {
+            override f = this->get_override("optimize");
+            if (!f)
+              throw std::runtime_error ("optimize not implemented in child class");
+            return f (path);
+          }
+      };
 
       template <int _PolynomeBasis, int _Order>
       void exposeSplineGradientBasedAbstract (const char* name)
       {
         typedef SplineGradientBasedAbstract<_PolynomeBasis, _Order> SGB_t;
-        typedef boost::shared_ptr<SGB_t> Ptr_t;
+        typedef SGBWrapper <_PolynomeBasis, _Order> SGBW_t;
+        typedef boost::shared_ptr<SGBW_t> Ptr_t;
+        typedef typename SGB_t::Splines_t Splines_t;
+        typedef typename SGBW_t::Reports_t Reports_t;
 
         scope s =
-          class_ <SGB_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, no_init)
+          class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, no_init)
+          PYHPP_DEFINE_METHOD (SGBW_t, appendEquivalentSpline)
+          PYHPP_DEFINE_METHOD (SGBW_t, initializePathValidation)
+          PYHPP_DEFINE_METHOD (SGBW_t, validatePath)
           ;
 
-        typedef typename SGB_t::Splines_t Splines_t;
         class_ <Splines_t> ("Splines")
           .def (vector_indexing_suite <Splines_t> ())
+          ;
+
+        class_ <Reports_t> ("Reports")
+          .def (vector_indexing_suite <Reports_t> ())
           ;
       }
 

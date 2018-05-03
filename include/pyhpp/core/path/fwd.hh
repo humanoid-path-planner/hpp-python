@@ -24,6 +24,7 @@ namespace pyhpp {
   namespace core {
     namespace path {
       void exposeSplines();
+      void exposeVector();
     }
   }
 }

@@ -22,6 +22,8 @@
 
 #include <boost/python.hpp>
 
+#define PYHPP_DEFINE_METHOD(CLASS, METHOD) .def (#METHOD, &CLASS::METHOD)
+
 namespace pyhpp {
   template <typename ObjectWithPrintMethod>
   std::string to_str (const ObjectWithPrintMethod& obj)

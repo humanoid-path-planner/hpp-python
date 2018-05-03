@@ -24,4 +24,5 @@
 BOOST_PYTHON_MODULE(pyhppcorepath)
 {
   pyhpp::core::path::exposeSplines();
+  pyhpp::core::path::exposeVector();
 }

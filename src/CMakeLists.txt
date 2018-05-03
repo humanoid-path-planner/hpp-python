@@ -89,6 +89,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/path
   FILES
   pyhpp/core/path/spline.cc
+  pyhpp/core/path/vector.cc
   pyhpp/core/path/bindings.cc
   )
 

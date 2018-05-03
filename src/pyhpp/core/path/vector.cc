@@ -17,11 +17,11 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/fwd.hh>
+#include <pyhpp/core/path/fwd.hh>
 
 #include <boost/python.hpp>
 
-#include <hpp/core/path.hh>
+#include <hpp/core/path-vector.hh>
 
 #include <pyhpp/util.hh>
 #include <hpp/python/config.hh>
@@ -30,24 +30,22 @@ using namespace boost::python;
 
 namespace pyhpp {
   namespace core {
-    using namespace hpp::core;
+    namespace path {
+      using namespace hpp::core;
 
-    struct HPP_PYTHON_LOCAL PWrapper {
-    };
-
-    void exposePath()
-    {
-      class_<Path, PathPtr_t, boost::noncopyable> ("Path", no_init)
-        .def ("__str__", &to_str_from_operator<Path>)
-
-        // .def ("__call__", static_cast<Configuration_t (Path::*) (const value_type&)>(&Path::operator()))
-        // TODO check that the boolean is returned to Python
-        .def ("__call__", static_cast<Configuration_t (Path::*) (const value_type&, bool&) const>(&Path::operator()))
-
-        .def ("copy", static_cast<PathPtr_t (Path::*) () const> (&Path::copy))
-        PYHPP_DEFINE_METHOD (Path, initial)
-        PYHPP_DEFINE_METHOD (Path, end)
-        ;
+      void exposeVector()
+      {
+        class_ <PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable> ("Vector", no_init)
+          .def ("create", &PathVector::create)
+          .staticmethod ("create")
+          PYHPP_DEFINE_METHOD (PathVector, numberPaths)
+          PYHPP_DEFINE_METHOD (PathVector, pathAtRank)
+          PYHPP_DEFINE_METHOD (PathVector, rankAtParam)
+          PYHPP_DEFINE_METHOD (PathVector, appendPath)
+          // PYHPP_DEFINE_METHOD (PathVector, concatenate)
+          PYHPP_DEFINE_METHOD (PathVector, flatten)
+          ;
+      }
     }
   }
 }
