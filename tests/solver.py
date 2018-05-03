@@ -30,3 +30,4 @@ solver.explicitSolver().add (pc,
         [ (0,2), ], [ (2,4), ],
         [ (0,2), ], [ (2,4), ],
         cts)
+solver.explicitSolverHasChanged()

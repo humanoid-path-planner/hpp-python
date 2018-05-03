@@ -41,6 +41,7 @@ namespace pyhpp {
       class_<HybridSolver, bases<HierarchicalIterativeSolver> > ("HybridSolver", init<std::size_t, std::size_t>())
         .def ("explicitSolver", static_cast <ExplicitSolver& (HybridSolver::*) ()> (&HybridSolver::explicitSolver),
             return_internal_reference<>())
+        .def ("explicitSolverHasChanged", &HybridSolver::explicitSolverHasChanged)
         .def ("solve", &HybridSolver_solve)
 
         .add_property ("errorThreshold",
