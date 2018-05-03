@@ -22,6 +22,7 @@
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
+#include <hpp/core/problem.hh>
 #include <hpp/core/path-optimization/linear-constraint.hh>
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 
@@ -48,6 +49,10 @@ namespace pyhpp {
           typedef typename Base::Reports_t Reports_t;
           typedef typename Base::SplineOptimizationData SplineOptimizationData;
           typedef typename Base::SplineOptimizationDatas_t SplineOptimizationDatas_t;
+
+          // using Base::Base;
+          SGBWrapper (const Problem& p) : Base (p) {}
+          virtual ~SGBWrapper() {}
 
           void appendEquivalentSpline (const PathVectorPtr_t& pv, Splines_t& ss) const
           {
@@ -81,12 +86,12 @@ namespace pyhpp {
             return buildPathVector (splines);
           }
 
-          PathVectorPtr_t optimize (const PathVectorPtr_t& path) const
+          PathVectorPtr_t optimize (const PathVectorPtr_t& path)
           {
             override f = this->get_override("optimize");
             if (!f)
               throw std::runtime_error ("optimize not implemented in child class");
-            return f (path);
+            return f (path).as<PathVectorPtr_t>();
           }
       };
 
@@ -102,7 +107,7 @@ namespace pyhpp {
         typedef typename SGBW_t::SplineOptimizationDatas_t SplineOptimizationDatas_t;
 
         scope s =
-          class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, no_init)
+          class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, init<const Problem&>())
           PYHPP_DEFINE_METHOD (SGBW_t, appendEquivalentSpline)
           PYHPP_DEFINE_METHOD (SGBW_t, initializePathValidation)
           PYHPP_DEFINE_METHOD (SGBW_t, validatePath)
