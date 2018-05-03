@@ -1,4 +1,4 @@
-from pyhpp.pinocchio import Device, urdf
+from pyhpp.pinocchio import Device, urdf, LiegroupElement
 
 robot = Device.create('ur3')
 urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
@@ -16,12 +16,19 @@ Id = SE3.Identity()
 pc = Position.create ("position", robot,
         robot.model().getJointId("wrist_3_joint"),
         Id, Id, m)
-print pc.inputSize
+print pc
 
-qa = np.zeros((6, 1))
+qa = np.zeros((pc.ni,1))
 
+# C++ API
+v = LiegroupElement (pc.outputSpace())
+pc.value(v, qa)
+print v.space().name(), ':',  v.vector().T
+
+J  = np.zeros((pc.ndo,pc.ndi))
+pc.jacobian (J, q)
+print J[:,0:4]
+
+# Pythonic API
 v = pc(qa)
-print v.space().name(), ':',  v.vector()
-
-J = pc.jacobian (q)
-print J
+J = pc.J (q)

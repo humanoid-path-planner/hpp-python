@@ -38,6 +38,7 @@ namespace pyhpp {
         .def ("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
         ;
       class_<LiegroupElement> ("LiegroupElement", init<const vector_t&, const LiegroupSpacePtr_t&>())
+        .def (init <const LiegroupSpacePtr_t&>())
         .def ("vector", static_cast <const vector_t& (LiegroupElement::*) () const> (&LiegroupElement::vector), return_value_policy<return_by_value>())
         .def ("space", &LiegroupElement::space, return_value_policy<return_by_value>())
         ;

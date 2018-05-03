@@ -14,7 +14,7 @@ pc = Position.create ("position", robot,
         robot.model().getJointId("wrist_3_joint"),
         Id, Id, m)
 
-solver = HybridSolver (6,6)
+solver = HybridSolver (robot.model().nq,robot.model().nv)
 solver.add (pc, 0)
 cts = ComparisonTypes ()
 cts[:] = (ComparisonType.EqualToZero, ComparisonType.EqualToZero, ComparisonType.Equality)
@@ -24,8 +24,8 @@ print solver
 print solver.explicitSolver()
 
 # This only tests the call to add.
-# The inputs are not valid so the solver
-# will not be able to solve anything.
+# The inputs are not valid so the solver
+# will not be able to solve anything.
 solver.explicitSolver().add (pc,
         [ (0,2), ], [ (2,4), ],
         [ (0,2), ], [ (2,4), ],
