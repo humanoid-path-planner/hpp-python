@@ -43,7 +43,12 @@ MACRO(ADD_PYTHON_LIBRARY LIBNAME MODULE)
     DESTINATION ${PYTHON_SITELIB}/${MODULE})
 ENDMACRO()
 
-PYTHON_INSTALL_ON_SITE(pyhpp __init__.py)
+ADD_PYTHON_LIBRARY(
+  pyhpp
+  pyhpp
+  FILES
+  pyhpp/bindings.cc
+  )
 
 ADD_PYTHON_LIBRARY(
   pyhpppinocchio

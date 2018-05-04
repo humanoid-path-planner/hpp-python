@@ -72,8 +72,6 @@ namespace pyhpp {
 
     void exposeExplicitSolver ()
     {
-      py_pair<size_type,size_type>();
-
       class_<ExplicitSolver> ("ExplicitSolver", init<std::size_t, std::size_t>())
         .def ("__str__", &to_str<ExplicitSolver>)
         .def ("add", &ExplicitSolver_add)
