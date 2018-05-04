@@ -20,6 +20,7 @@
 #include <pyhpp/core/path/fwd.hh>
 
 #include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 #include <hpp/core/path-vector.hh>
 
@@ -44,6 +45,12 @@ namespace pyhpp {
           PYHPP_DEFINE_METHOD (PathVector, appendPath)
           // PYHPP_DEFINE_METHOD (PathVector, concatenate)
           PYHPP_DEFINE_METHOD (PathVector, flatten)
+          ;
+
+
+        class_ <PathVectors_t> ("PathVectors")
+          .def (vector_indexing_suite <PathVectors_t> ())
+          .def ("get", VectorOfPtr<PathVector>::get_item, return_internal_reference<>())
           ;
       }
     }
