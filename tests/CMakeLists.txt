@@ -18,10 +18,11 @@
 # <http://www.gnu.org/licenses/>.
 
 SET(PYTHON_UNIT_TESTS
-  "imports"
-  "load_ur3"
-  "solver"
-  "differentiable-function"
+  imports
+  load_ur3
+  solver
+  differentiable-function
+  problem-solver
   )
 
 FOREACH(UNIT_TEST ${PYTHON_UNIT_TESTS})
