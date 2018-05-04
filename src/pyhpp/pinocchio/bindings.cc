@@ -21,11 +21,10 @@
 
 #include <pyhpp/pinocchio/fwd.hh>
 
-using namespace boost::python;
-
 BOOST_PYTHON_MODULE(pyhpppinocchio)
 {
-  import ("pinocchio");
+  boost::python::import ("pinocchio");
+
   pyhpp::pinocchio::exposeDevice();
   pyhpp::pinocchio::exposeLiegroup();
 }

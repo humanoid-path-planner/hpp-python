@@ -24,9 +24,14 @@
 
 BOOST_PYTHON_MODULE(pyhppcore)
 {
+  boost::python::import ("pyhpp.constraints");
+
   pyhpp::core::exposeProblemSolver();
 
   // Expose main abstract classes
   pyhpp::core::exposePath();
   pyhpp::core::exposePathOptimizer();
+
+  boost::python::import ("pyhpp.core.path");
+  boost::python::import ("pyhpp.core.pathoptimization");
 }

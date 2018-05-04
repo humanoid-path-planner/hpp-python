@@ -23,6 +23,8 @@
 
 BOOST_PYTHON_MODULE(pyhppconstraints)
 {
+  boost::python::import ("pyhpp.pinocchio");
+
   pyhpp::constraints::exposeDifferentiableFunction();
   pyhpp::constraints::exposeGenericTransformations();
 
