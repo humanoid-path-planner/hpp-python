@@ -22,12 +22,14 @@
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
+#include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/path-optimization/linear-constraint.hh>
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 
+#include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
-#include <pyhpp/vector_indexing_suite.hh>
+#include <pyhpp/vector-indexing-suite.hh>
 
 using namespace boost::python;
 
@@ -105,7 +107,6 @@ namespace pyhpp {
         typedef SGBWrapper <_PolynomeBasis, _Order> SGBW_t;
         typedef boost::shared_ptr<SGBW_t> Ptr_t;
         typedef typename SGB_t::Splines_t Splines_t;
-        typedef typename SGBW_t::Reports_t Reports_t;
         typedef typename SGBW_t::SplineOptimizationData SplineOptimizationData;
         typedef typename SGBW_t::SplineOptimizationDatas_t SplineOptimizationDatas_t;
 
@@ -121,12 +122,6 @@ namespace pyhpp {
 
         class_ <Splines_t> ("Splines")
           .def (cpp_like_vector_indexing_suite <Splines_t, true> ())
-          ;
-
-        // TODO this triggers a warning because Reports_t does not depend
-        // on any template parameter so some converter are defined twice.
-        class_ <Reports_t> ("Reports")
-          .def (cpp_like_vector_indexing_suite <Reports_t> ())
           ;
 
         class_ <SplineOptimizationData> ("SplineOptimizationData", init<>())
@@ -152,11 +147,25 @@ namespace pyhpp {
           ;
       }
 
+      void exposeNonTemplated ()
+      {
+        using namespace hpp::core::path;
+
+        typedef SGBWrapper <BernsteinBasis, 1> SGBW_t;
+        typedef typename SGBW_t::Reports_t Reports_t;
+
+        stl_pair <Reports_t::value_type::first_type, Reports_t::value_type::second_type> ("Report");
+        class_ <Reports_t> ("Reports")
+          .def (cpp_like_vector_indexing_suite <Reports_t> ())
+          ;
+      }
+
       BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(LC_reduceConstraint_overload, reduceConstraint, 2, 3)
 
       void exposeSplineGradientBasedAbstracts()
       {
         using namespace hpp::core::path;
+        exposeNonTemplated ();
         exposeSplineGradientBasedAbstract<BernsteinBasis, 1> ("SplineGradientBasedAbstractB1");
         exposeSplineGradientBasedAbstract<BernsteinBasis, 3> ("SplineGradientBasedAbstractB3");
 

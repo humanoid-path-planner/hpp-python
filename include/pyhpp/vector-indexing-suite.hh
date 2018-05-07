@@ -38,8 +38,15 @@ namespace pyhpp {
 
           cl
             .def("size", &base_type::size)
+            .def("empty", &empty)
             .def("push_back", &base_type::append)
             ;
+        }
+
+        static bool 
+        empty(Container const& container)
+        { 
+            return container.empty();
         }
   };
 }
