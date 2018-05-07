@@ -29,6 +29,8 @@ BOOST_PYTHON_MODULE(pyhppcore)
   pyhpp::core::exposeProblem();
   pyhpp::core::exposeProblemSolver();
 
+  pyhpp::core::exposeReports();
+
   // Expose main abstract classes
   pyhpp::core::exposePath();
   pyhpp::core::exposePathOptimizer();
