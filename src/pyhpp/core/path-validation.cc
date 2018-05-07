@@ -18,7 +18,7 @@
 
 #include <boost/python.hpp>
 
-#include <hpp/core/configuration-shooter.hh>
+#include <hpp/core/path-validation.hh>
 
 #include <pyhpp/util.hh>
 
@@ -28,15 +28,34 @@ namespace pyhpp {
   namespace core {
     using namespace hpp::core;
 
-    struct CSWrapper {
-      static vector_t shoot (const ConfigurationShooter* cs) { return vector_t(*cs->shoot()); }
+    struct PVWrapper {
+      static bool validate (PathValidation* pv,
+          const PathPtr_t path,
+          bool reverse,
+          PathPtr_t& validPart,
+          PathValidationReportPtr_t& report)
+      {
+        return pv->validate (path, reverse, validPart, report);
+      }
+
+      static tuple py_validate (PathValidation* pv,
+          const PathPtr_t path,
+          bool reverse = false)
+      {
+        PathPtr_t validPart;
+        PathValidationReportPtr_t report;
+        bool res = pv->validate (path, reverse, validPart, report);
+        return boost::python::make_tuple (res, validPart, report);
+      }
     };
 
-    void exposeConfigurationShooter ()
+    void exposePathValidation ()
     {
-      class_ <ConfigurationShooter, ConfigurationShooterPtr_t, boost::noncopyable>
-        ("ConfigurationShooter", no_init)
-        .def ("shoot", &CSWrapper::shoot)
+      class_ <PathValidation, PathValidationPtr_t, boost::noncopyable>
+        ("PathValidation", no_init)
+        .def ("validate", &PVWrapper::validate)
+
+        .def ("validate", &PVWrapper::py_validate)
         ;
     }
   }

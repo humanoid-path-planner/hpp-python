@@ -18,7 +18,7 @@
 
 #include <boost/python.hpp>
 
-#include <hpp/core/configuration-shooter.hh>
+#include <hpp/core/steering-method.hh>
 
 #include <pyhpp/util.hh>
 
@@ -28,15 +28,19 @@ namespace pyhpp {
   namespace core {
     using namespace hpp::core;
 
-    struct CSWrapper {
-      static vector_t shoot (const ConfigurationShooter* cs) { return vector_t(*cs->shoot()); }
+    struct SMWrapper {
+      static PathPtr_t operator_call (const SteeringMethod& sm,
+          const vector_t& q1, const vector_t& q2)
+      {
+        return sm (q1, q2);
+      }
     };
 
-    void exposeConfigurationShooter ()
+    void exposeSteeringMethod()
     {
-      class_ <ConfigurationShooter, ConfigurationShooterPtr_t, boost::noncopyable>
-        ("ConfigurationShooter", no_init)
-        .def ("shoot", &CSWrapper::shoot)
+      class_ <SteeringMethod, SteeringMethodPtr_t, boost::noncopyable>
+        ("SteeringMethod", no_init)
+        .def ("__call__", &SMWrapper::operator_call)
         ;
     }
   }

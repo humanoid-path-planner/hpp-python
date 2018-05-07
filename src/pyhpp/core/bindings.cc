@@ -31,10 +31,12 @@ BOOST_PYTHON_MODULE(pyhppcore)
 
   pyhpp::core::exposeConfigurationShooter();
   pyhpp::core::exposeReports();
+  pyhpp::core::exposeSteeringMethod();
 
   // Expose main abstract classes
   pyhpp::core::exposePath();
   pyhpp::core::exposePathOptimizer();
+  pyhpp::core::exposePathValidation();
 
   boost::python::import ("pyhpp.core.path");
   boost::python::import ("pyhpp.core.pathoptimization");

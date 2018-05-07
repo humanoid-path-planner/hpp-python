@@ -26,9 +26,11 @@ namespace pyhpp {
 
     void exposeReports();
 
+    void exposeSteeringMethod();
+
     void exposePath();
     void exposePathOptimizer();
-
+    void exposePathValidation();
     void exposeProblem();
     void exposeProblemSolver();
   }
