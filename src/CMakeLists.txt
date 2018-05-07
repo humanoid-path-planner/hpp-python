@@ -89,6 +89,7 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/core/path.cc
   pyhpp/core/path-optimizer.cc
+  pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc
   )

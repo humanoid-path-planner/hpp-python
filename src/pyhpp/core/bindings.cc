@@ -26,6 +26,7 @@ BOOST_PYTHON_MODULE(pyhppcore)
 {
   boost::python::import ("pyhpp.constraints");
 
+  pyhpp::core::exposeProblem();
   pyhpp::core::exposeProblemSolver();
 
   // Expose main abstract classes
