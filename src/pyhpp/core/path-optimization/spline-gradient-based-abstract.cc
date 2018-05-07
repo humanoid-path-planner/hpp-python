@@ -27,6 +27,7 @@
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 
 #include <pyhpp/util.hh>
+#include <pyhpp/vector_indexing_suite.hh>
 
 using namespace boost::python;
 
@@ -119,13 +120,13 @@ namespace pyhpp {
           ;
 
         class_ <Splines_t> ("Splines")
-          .def (vector_indexing_suite <Splines_t> ())
+          .def (cpp_like_vector_indexing_suite <Splines_t, true> ())
           ;
 
         // TODO this triggers a warning because Reports_t does not depend
         // on any template parameter so some converter are defined twice.
         class_ <Reports_t> ("Reports")
-          .def (vector_indexing_suite <Reports_t> ())
+          .def (cpp_like_vector_indexing_suite <Reports_t> ())
           ;
 
         class_ <SplineOptimizationData> ("SplineOptimizationData", init<>())
