@@ -23,6 +23,9 @@
 namespace pyhpp {
   namespace core {
     void exposeConfigurationShooter();
+    void exposeConstraint();
+
+    void exposeEquation();
 
     void exposeReports();
 

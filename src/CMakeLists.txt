@@ -88,6 +88,8 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core
   FILES
   pyhpp/core/configuration-shooter.cc
+  pyhpp/core/constraint.cc
+  pyhpp/core/equation.cc
   pyhpp/core/reports.cc
   pyhpp/core/steering-method.cc
   pyhpp/core/path.cc

@@ -30,6 +30,8 @@ BOOST_PYTHON_MODULE(pyhppcore)
   pyhpp::core::exposeProblemSolver();
 
   pyhpp::core::exposeConfigurationShooter();
+  pyhpp::core::exposeConstraint();
+  pyhpp::core::exposeEquation();
   pyhpp::core::exposeReports();
   pyhpp::core::exposeSteeringMethod();
 
