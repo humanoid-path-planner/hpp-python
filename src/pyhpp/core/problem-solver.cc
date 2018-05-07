@@ -26,6 +26,8 @@
 
 #include <hpp/pinocchio/device.hh>
 #include <hpp/core/path-vector.hh>
+#include <hpp/core/path-optimizer.hh>
+#include <hpp/core/problem.hh>
 #include <hpp/core/problem-solver.hh>
 
 #include <pyhpp/util.hh>
@@ -71,28 +73,59 @@ namespace pyhpp {
       }
     };
 
-    template <typename T>
-    void exposeContainer (const char* name)
-    {
-      typedef Container<T> C_t;
-      class_ <C_t> (name, no_init)
-        PYHPP_DEFINE_METHOD (C_t, erase)
-        PYHPP_DEFINE_METHOD (C_t, clear)
-        PYHPP_DEFINE_METHOD (C_t, add)
-        PYHPP_DEFINE_METHOD (C_t, has)
-        // PYHPP_DEFINE_METHOD (C_t, get)
-        .def ("__getitem__", static_cast<const T& (C_t::*) (const typename C_t::key_type&) const> (&C_t::get), return_internal_reference<>())
-        // PYHPP_DEFINE_METHOD (C_t, getKeys)
-        .def ("keys", &C_t::template getKeys< std::vector<std::string> >)
-        ;
-    }
+    template <typename Type, typename TypePtr_t = boost::shared_ptr<Type> >
+    struct Builder {
+      Builder (PyObject* _callable) : callable (_callable) { incref (callable); }
+
+      ~Builder () { decref (callable); }
+
+      static TypePtr_t call2 (PyObject* c, const Problem& p)
+      {
+        object obj = call<object> (c, p);
+        TypePtr_t ptr = extract <TypePtr_t> (obj);
+        return ptr;
+      }
+
+      template <typename T>
+      static void add_to_container (Container<T>& c, const std::string& key, PyObject* callable)
+      {
+        // TODO check if incref is needed
+        // incref (callable);
+        c.add (key, T(boost::bind (&Builder<Type>::call2, callable, _1)));
+      }
+
+      PyObject* callable;
+    };
+
+    struct NotABuilder {
+      template <typename T> static void add_to_container (Container<T>& c, const std::string& key, const T& value) { c.add(key, value); }
+    };
+
+    /// \tparam Builder_t void means not a Builder.
+    template <typename T, typename Builder_t = NotABuilder >
+    struct exposeContainer {
+      static void run (const char* name)
+      {
+        typedef Container<T> C_t;
+        class_ <C_t> (name, no_init)
+          PYHPP_DEFINE_METHOD (C_t, erase)
+          PYHPP_DEFINE_METHOD (C_t, clear)
+          .def ("add", &Builder_t::template add_to_container<T>)
+          PYHPP_DEFINE_METHOD (C_t, has)
+          // PYHPP_DEFINE_METHOD (C_t, get)
+          .def ("__getitem__", static_cast<const T& (C_t::*) (const typename C_t::key_type&) const> (&C_t::get), return_internal_reference<>())
+          // PYHPP_DEFINE_METHOD (C_t, getKeys)
+          .def ("keys", &C_t::template getKeys< std::vector<std::string> >)
+          ;
+      }
+    };
 
     void exposeProblemSolver()
     {
       class_<ProblemSolver> ("ProblemSolver", no_init)
         .def("create", &ProblemSolver::create, return_value_policy<manage_new_object>())
         .staticmethod("create")
-        // PYHPP_DEFINE_METHOD (ProblemSolver, problem)
+        .def ("problem", static_cast<ProblemPtr_t (ProblemSolver::*) ()> (&ProblemSolver::problem), return_internal_reference<>())
         // .def ("initConfig", static_cast<const ConfigurationPtr_t& (ProblemSolver::*) () const>(&ProblemSolver::initConfig), return_internal_reference<>())
         // .def ("initConfig", static_cast<void (ProblemSolver::*) (const ConfigurationPtr_t&)  >(&ProblemSolver::initConfig))
         .def ("initConfig", &PSWrapper::setInitConfig)
@@ -153,8 +186,9 @@ namespace pyhpp {
         ;
 
       // exposeContainer<RobotBuilder_t>();
-      exposeContainer<PathPlannerBuilder_t  >("PathPlannerContainer");
-      exposeContainer<PathOptimizerBuilder_t>("PathOptimizerContainer");
+      exposeContainer<PathPlannerBuilder_t  >::run("PathPlannerContainer");
+      exposeContainer<PathOptimizerBuilder_t, Builder<PathOptimizer> >::run("PathOptimizerContainer");
+      class_ <Builder<PathOptimizerBuilder_t> > ("PathOptimizerBuilder", init<PyObject*>());
     }
   }
 }
