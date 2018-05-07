@@ -28,6 +28,8 @@
 
 #include <hpp/pinocchio/device.hh>
 
+#include <pyhpp/util.hh>
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -58,6 +60,8 @@ namespace pyhpp {
         .def ("data",      static_cast<Data     & (Device::*) ()> (&Device::data     ), return_internal_reference<>())
         .def ("geomData",  static_cast<GeomData & (Device::*) ()> (&Device::geomData ), return_internal_reference<>())
         .def ("geomModel", static_cast<GeomModel& (Device::*) ()> (&Device::geomModel), return_internal_reference<>())
+        PYHPP_DEFINE_METHOD (Device, configSize)
+        PYHPP_DEFINE_METHOD (Device, numberDof)
 
         .def ("currentConfiguration", static_cast<const Configuration_t& (Device::*) () const> (&Device::currentConfiguration), return_value_policy<return_by_value>())
         .def ("currentConfiguration", Device_currentConfiguration)

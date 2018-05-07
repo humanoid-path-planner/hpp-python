@@ -30,8 +30,10 @@
 
 using namespace boost::python;
 
-// bool operator== (const hpp::core::pathOptimization::SplineGradientBasedAbstract<1, 1>::SplineOptimizationData&, const hpp::core::pathOptimization::SplineGradientBasedAbstract<1, 1>::SplineOptimizationData&)
-// { return false; }
+#define ADD_DATA_PROPERTY_READONLY_BYVALUE(TYPE,NAME,DOC)                      \
+      add_property(#NAME,                                                      \
+      make_getter(&TYPE::NAME,return_value_policy<return_by_value>()), DOC)
+      
 
 namespace pyhpp {
   namespace core {
@@ -149,6 +151,8 @@ namespace pyhpp {
           ;
       }
 
+      BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(LC_reduceConstraint_overload, reduceConstraint, 2, 3)
+
       void exposeSplineGradientBasedAbstracts()
       {
         using namespace hpp::core::path;
@@ -159,16 +163,17 @@ namespace pyhpp {
           PYHPP_DEFINE_METHOD (LinearConstraint, concatenate)
           PYHPP_DEFINE_METHOD (LinearConstraint, decompose)
           PYHPP_DEFINE_METHOD (LinearConstraint, computeRank)
-          PYHPP_DEFINE_METHOD (LinearConstraint, reduceConstraint)
+          .def ("reduceConstraint", &LinearConstraint::reduceConstraint,
+              LC_reduceConstraint_overload (args ("toReduce", "reduced", "computeRank")))
           PYHPP_DEFINE_METHOD (LinearConstraint, computeSolution)
           PYHPP_DEFINE_METHOD (LinearConstraint, isSatisfied)
           PYHPP_DEFINE_METHOD (LinearConstraint, addRows)
-          .def_readwrite ("J",     &LinearConstraint::J)
-          .def_readwrite ("b",     &LinearConstraint::b)
-          .def_readwrite ("rank",  &LinearConstraint::rank)
-          .def_readwrite ("PK",    &LinearConstraint::PK)
-          .def_readwrite ("xStar", &LinearConstraint::xStar)
-          .def_readwrite ("xSol",  &LinearConstraint::xSol)
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, J    , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, b    , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, rank , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, PK   , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, xStar, "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, xSol , "")
           ;
       }
     }

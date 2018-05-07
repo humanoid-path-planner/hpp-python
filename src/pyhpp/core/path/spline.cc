@@ -40,7 +40,15 @@ namespace pyhpp {
         typedef Spline<_PolynomeBasis, _Order> S_t;
         typedef typename S_t::Ptr_t Ptr_t;
 
-        class_ <S_t, Ptr_t, bases<Path>, boost::noncopyable> (name, no_init)
+        scope s =
+          class_ <S_t, Ptr_t, bases<Path>, boost::noncopyable> (name, no_init)
+          ;
+
+        enum_ <int> ("")
+          .value ("PolynomeBasis", S_t::PolynomeBasis)
+          .value ("Order", S_t::Order)
+          .value ("NbCoeffs", S_t::NbCoeffs)
+          .export_values()
           ;
       }
 
