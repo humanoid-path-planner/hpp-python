@@ -63,6 +63,7 @@ namespace pyhpp {
 
       class_ <CollisionPathValidationReport, CollisionPathValidationReportPtr_t, bases<CollisionValidationReport> >
         ("CollisionPathValidationReport", no_init)
+        .def ("__str__", &to_str<CollisionPathValidationReport>)
         ;
     }
   }
