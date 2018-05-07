@@ -22,6 +22,8 @@
 
 namespace pyhpp {
   namespace core {
+    void exposeConfigurationShooter();
+
     void exposeReports();
 
     void exposePath();

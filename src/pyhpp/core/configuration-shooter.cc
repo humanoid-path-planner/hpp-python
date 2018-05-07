@@ -18,7 +18,6 @@
 
 #include <boost/python.hpp>
 
-#include <hpp/core/problem.hh>
 #include <hpp/core/configuration-shooter.hh>
 
 #include <pyhpp/util.hh>
@@ -29,12 +28,11 @@ namespace pyhpp {
   namespace core {
     using namespace hpp::core;
 
-    void exposeProblem ()
+    void exposeConfigurationShooter ()
     {
-      class_ <Problem> ("Problem", no_init)
-        // PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const DevicePtr_t&)
-        .def ("robot", static_cast<const DevicePtr_t& (Problem::*) () const> (&Problem::robot), return_value_policy<return_by_value>())
-        .def ("configurationShooter", static_cast<ConfigurationShooterPtr_t (Problem::*) () const> (&Problem::configurationShooter))
+      class_ <ConfigurationShooter, ConfigurationShooterPtr_t, boost::noncopyable>
+        ("ConfigurationShooter", no_init)
+        .def ("shoot", pure_virtual (&ConfigurationShooter::shoot))
         ;
     }
   }

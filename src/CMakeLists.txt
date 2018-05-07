@@ -87,6 +87,7 @@ ADD_PYTHON_LIBRARY(
   pyhppcore
   pyhpp/core
   FILES
+  pyhpp/core/configuration-shooter.cc
   pyhpp/core/reports.cc
   pyhpp/core/path.cc
   pyhpp/core/path-optimizer.cc

@@ -29,6 +29,7 @@ BOOST_PYTHON_MODULE(pyhppcore)
   pyhpp::core::exposeProblem();
   pyhpp::core::exposeProblemSolver();
 
+  pyhpp::core::exposeConfigurationShooter();
   pyhpp::core::exposeReports();
 
   // Expose main abstract classes
