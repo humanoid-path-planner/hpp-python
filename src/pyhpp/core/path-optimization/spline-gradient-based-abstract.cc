@@ -59,6 +59,16 @@ namespace pyhpp {
           SGBWrapper (const Problem& p) : Base (p) {}
           virtual ~SGBWrapper() {}
 
+          PathVectorPtr_t optimize (const PathVectorPtr_t& path)
+          {
+            override f = this->get_override("optimize");
+            if (!f)
+              throw std::runtime_error ("optimize not implemented in child class");
+            return f (path).as<PathVectorPtr_t>();
+          }
+
+          // The following functions are protected methods of SplineGradientBasedAbstract.
+          // These wrappers are needed to make them accessible.
           void appendEquivalentSpline (const PathVectorPtr_t& pv, Splines_t& ss) const
           {
             Base::appendEquivalentSpline (pv, ss);
@@ -88,15 +98,7 @@ namespace pyhpp {
 
           PathVectorPtr_t buildPathVector (const Splines_t& splines) const
           {
-            return buildPathVector (splines);
-          }
-
-          PathVectorPtr_t optimize (const PathVectorPtr_t& path)
-          {
-            override f = this->get_override("optimize");
-            if (!f)
-              throw std::runtime_error ("optimize not implemented in child class");
-            return f (path).as<PathVectorPtr_t>();
+            return Base::buildPathVector (splines);
           }
       };
 
