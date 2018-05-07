@@ -47,7 +47,6 @@ namespace pyhpp {
           PYHPP_DEFINE_METHOD (PathVector, flatten)
           ;
 
-
         class_ <PathVectors_t> ("Vectors")
           .def (vector_indexing_suite <PathVectors_t, true> ())
           ;
