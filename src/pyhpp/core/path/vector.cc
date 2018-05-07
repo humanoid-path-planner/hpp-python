@@ -48,9 +48,8 @@ namespace pyhpp {
           ;
 
 
-        class_ <PathVectors_t> ("PathVectors")
-          .def (vector_indexing_suite <PathVectors_t> ())
-          .def ("get", VectorOfPtr<PathVector>::get_item, return_internal_reference<>())
+        class_ <PathVectors_t> ("Vectors")
+          .def (vector_indexing_suite <PathVectors_t, true> ())
           ;
       }
     }

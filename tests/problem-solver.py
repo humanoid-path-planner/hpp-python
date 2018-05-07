@@ -18,7 +18,7 @@ ps.addGoalConfig (qgoal)
 ps.solve ()
 
 paths = ps.paths()
-path = paths.get(0)
+path = paths[0]
 
 assert (path.initial() == qinit).all()
 
