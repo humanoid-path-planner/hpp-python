@@ -114,6 +114,9 @@ namespace pyhpp {
 
         scope s =
           class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, init<const Problem&>())
+          PYHPP_DEFINE_METHOD (SGB_t, copy         ).staticmethod ("copy")
+          PYHPP_DEFINE_METHOD (SGB_t, updateSplines).staticmethod ("updateSplines")
+          PYHPP_DEFINE_METHOD (SGB_t, interpolate  ).staticmethod ("interpolate")
           PYHPP_DEFINE_METHOD (SGBW_t, appendEquivalentSpline)
           PYHPP_DEFINE_METHOD (SGBW_t, initializePathValidation)
           PYHPP_DEFINE_METHOD (SGBW_t, validatePath)
