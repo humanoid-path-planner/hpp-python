@@ -70,7 +70,7 @@ namespace pyhpp {
         }
 
         static void squaredNormBasisFunctionIntegral (const S_t& s,
-            const size_type order, matrixRef_t& res)
+            const size_type order, matrixRef_t res)
         {
           matrix_t _res (res);
           s.squaredNormBasisFunctionIntegral (order, _res);
