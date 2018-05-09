@@ -25,6 +25,7 @@
 #include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/path-optimization/linear-constraint.hh>
+#include <hpp/core/path-optimization/quadratic-program.hh>
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 
 #include <pyhpp/stl-pair.hh>
@@ -33,10 +34,12 @@
 
 using namespace boost::python;
 
+#define ADD_DATA_PROPERTY_READWRITE(TYPE,NAME,DOC)                            \
+      def_readwrite (#NAME, &TYPE::NAME, DOC)
+
 #define ADD_DATA_PROPERTY_READONLY_BYVALUE(TYPE,NAME,DOC)                      \
       add_property(#NAME,                                                      \
       make_getter(&TYPE::NAME,return_value_policy<return_by_value>()), DOC)
-      
 
 namespace pyhpp {
   namespace core {
@@ -115,7 +118,7 @@ namespace pyhpp {
         scope s =
           class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, init<const Problem&>())
           PYHPP_DEFINE_METHOD (SGB_t, copy         ).staticmethod ("copy")
-          PYHPP_DEFINE_METHOD (SGB_t, updateSplines).staticmethod ("updateSplines")
+          PYHPP_DEFINE_METHOD (SGB_t, updateSplines)
           PYHPP_DEFINE_METHOD (SGB_t, interpolate  ).staticmethod ("interpolate")
           PYHPP_DEFINE_METHOD (SGBW_t, appendEquivalentSpline)
           PYHPP_DEFINE_METHOD (SGBW_t, initializePathValidation)
@@ -173,7 +176,10 @@ namespace pyhpp {
         exposeNonTemplated ();
         exposeSplineGradientBasedAbstract<BernsteinBasis, 1> ("SplineGradientBasedAbstractB1");
         exposeSplineGradientBasedAbstract<BernsteinBasis, 3> ("SplineGradientBasedAbstractB3");
+      }
 
+      void exposeLinearConstraint()
+      {
         class_ <LinearConstraint> ("LinearConstraint", init<size_type, size_type>())
           PYHPP_DEFINE_METHOD (LinearConstraint, concatenate)
           PYHPP_DEFINE_METHOD (LinearConstraint, decompose)
@@ -189,6 +195,45 @@ namespace pyhpp {
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, PK   , "")
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, xStar, "")
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, xSol , "")
+          ;
+      }
+
+      struct QPWrapper {
+        static void setH (QuadraticProgram& qp, const matrix_t& H) { qp.H = H; }
+        static void setb (QuadraticProgram& qp, const vector_t& b) { qp.b = b; }
+      };
+
+      void exposeQuadraticProblem()
+      {
+        class_ <QuadraticProgram> ("QuadraticProgram", init<size_type>())
+          .def (init<const QuadraticProgram&, const LinearConstraint&>())
+          PYHPP_DEFINE_METHOD (QuadraticProgram, addRows)
+          PYHPP_DEFINE_METHOD (QuadraticProgram, reduced)
+          PYHPP_DEFINE_METHOD (QuadraticProgram, decompose)
+          .def ("solve", static_cast<void (QuadraticProgram::*) ()>
+              (&QuadraticProgram::solve))
+
+          PYHPP_DEFINE_METHOD (QuadraticProgram, computeLLT)
+          .def ("solve", static_cast<double (QuadraticProgram::*) (const LinearConstraint&,const LinearConstraint&)>
+              (&QuadraticProgram::solve))
+
+          .add_property ("H",
+              make_getter (&QuadraticProgram::H, return_value_policy<return_by_value>()),
+              &QPWrapper::setH, 
+              "")
+          .add_property ("b",
+              make_getter (&QuadraticProgram::b, return_value_policy<return_by_value>()),
+              &QPWrapper::setb, 
+              "")
+          .ADD_DATA_PROPERTY_READWRITE (QuadraticProgram, bIsZero         , "")
+
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, llt             , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, trace           , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, activeConstraint, "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, activeSetSize   , "")
+
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, dec  , "")
+          .ADD_DATA_PROPERTY_READONLY_BYVALUE (QuadraticProgram, xStar, "")
           ;
       }
     }

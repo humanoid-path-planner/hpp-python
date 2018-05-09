@@ -23,6 +23,8 @@
 namespace pyhpp {
   namespace core {
     namespace pathOptimization {
+      void exposeLinearConstraint();
+      void exposeQuadraticProblem();
       void exposeSplineGradientBasedAbstracts();
     }
   }

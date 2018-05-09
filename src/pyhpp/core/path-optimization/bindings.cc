@@ -23,5 +23,7 @@
 
 BOOST_PYTHON_MODULE(pyhppcorepathoptimization)
 {
+  pyhpp::core::pathOptimization::exposeLinearConstraint();
+  pyhpp::core::pathOptimization::exposeQuadraticProblem();
   pyhpp::core::pathOptimization::exposeSplineGradientBasedAbstracts();
 }
