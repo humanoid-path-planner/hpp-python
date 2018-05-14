@@ -77,6 +77,8 @@ namespace pyhpp {
           res = _res;
         }
 
+        static vector_t rowParameters (const S_t& s) { return vector_t(s.rowParameters()); }
+
         static void expose (const char* name)
         {
           scope s =
@@ -88,6 +90,7 @@ namespace pyhpp {
             PYHPP_DEFINE_METHOD (SplineWrapper, squaredNormIntegralDerivative)
             PYHPP_DEFINE_METHOD (SplineWrapper, basisFunctionDerivative)
             PYHPP_DEFINE_METHOD (SplineWrapper, squaredNormBasisFunctionIntegral)
+            PYHPP_DEFINE_METHOD (SplineWrapper, rowParameters)
             ;
 
           enum_ <int> ("")
