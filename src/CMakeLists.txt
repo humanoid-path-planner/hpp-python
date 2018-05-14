@@ -31,9 +31,10 @@ MACRO(ADD_PYTHON_LIBRARY LIBNAME MODULE)
   PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "eigenpy")
   PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "pinocchio")
   PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-util")
+  PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-pinocchio")
   PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-constraints")
   PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-core")
-  PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-pinocchio")
+  PKG_CONFIG_USE_DEPENDENCY (${LIBNAME} "hpp-corbaserver")
   TARGET_LINK_LIBRARIES(${LIBNAME} ${Boost_LIBRARIES})
 
   INSTALL(TARGETS ${LIBNAME}
@@ -115,4 +116,12 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/core/path-optimization/spline-gradient-based-abstract.cc
   pyhpp/core/path-optimization/bindings.cc
+  )
+
+ADD_PYTHON_LIBRARY(
+  pyhppcorbaserver
+  pyhpp/corbaserver
+  FILES
+  pyhpp/corbaserver/server.cc
+  pyhpp/corbaserver/bindings.cc
   )
