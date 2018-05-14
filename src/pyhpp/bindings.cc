@@ -55,7 +55,7 @@ template<typename T1, typename T2>
     PythonToPairConverter<T1, T2> fromPy;
   };
 
-BOOST_PYTHON_MODULE(pyhpp)
+BOOST_PYTHON_MODULE(bindings)
 {
   using namespace hpp::pinocchio;
   py_pair<size_type,size_type>();

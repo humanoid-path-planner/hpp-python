@@ -22,7 +22,7 @@
 #include <pyhpp/util.hh>
 #include <pyhpp/core/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppcore)
+BOOST_PYTHON_MODULE(bindings)
 {
   boost::python::import ("pyhpp.constraints");
 

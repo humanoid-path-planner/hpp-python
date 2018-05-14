@@ -22,7 +22,7 @@
 #include <pyhpp/util.hh>
 #include <pyhpp/corbaserver/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppcorbaserver)
+BOOST_PYTHON_MODULE(bindings)
 {
   boost::python::import ("pyhpp.core");
 

@@ -21,7 +21,7 @@
 
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhpppinocchiourdf)
+BOOST_PYTHON_MODULE(bindings)
 {
   pyhpp::pinocchio::urdf::exposeUtil();
 }

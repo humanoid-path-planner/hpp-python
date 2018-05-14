@@ -21,7 +21,7 @@
 
 #include <pyhpp/core/path/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppcorepath)
+BOOST_PYTHON_MODULE(bindings)
 {
   pyhpp::core::path::exposeSplines();
   pyhpp::core::path::exposeVector();

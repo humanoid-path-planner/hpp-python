@@ -21,7 +21,7 @@
 
 #include <pyhpp/constraints/fwd.hh>
 
-BOOST_PYTHON_MODULE(pyhppconstraints)
+BOOST_PYTHON_MODULE(bindings)
 {
   boost::python::import ("pyhpp.pinocchio");
 
