@@ -34,9 +34,14 @@
 
 using namespace boost::python;
 
-#define PYHPP_PROBLEMSOLVER_SELECT_TYPE(type) \
-  .def (#type "Type", static_cast<const std::string& (ProblemSolver::*) () const>(&ProblemSolver:: type ## Type), return_value_policy<return_by_value>()) \
-  .def (#type "Type", static_cast<void (ProblemSolver::*) (const std::string& ) >(&ProblemSolver:: type ## Type))
+#define PYHPP_PROBLEMSOLVER_SELECT_TYPE(type)                                  \
+  .def (#type "Type",                                                          \
+      static_cast<const std::string& (ProblemSolver::*) () const>(             \
+        &ProblemSolver:: type ## Type),                                        \
+      return_value_policy<return_by_value>())                                  \
+  .def (#type "Type",                                                          \
+      static_cast<void (ProblemSolver::*) (const std::string& ) >(             \
+        &ProblemSolver:: type ## Type))                                        \
 
 #define PYHPP_PROBLEMSOLVER_CONTAINER(name) \
   .def_readwrite (#name, &ProblemSolver::name)
@@ -188,7 +193,6 @@ namespace pyhpp {
       // exposeContainer<RobotBuilder_t>();
       exposeContainer<PathPlannerBuilder_t  >::run("PathPlannerContainer");
       exposeContainer<PathOptimizerBuilder_t, Builder<PathOptimizer> >::run("PathOptimizerContainer");
-      class_ <Builder<PathOptimizerBuilder_t> > ("PathOptimizerBuilder", init<PyObject*>());
     }
   }
 }

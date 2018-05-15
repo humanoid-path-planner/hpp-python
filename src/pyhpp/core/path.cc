@@ -64,6 +64,7 @@ namespace pyhpp {
         PYHPP_DEFINE_METHOD (Path, reverse)
         // PYHPP_DEFINE_METHOD (Path, timeRange)
         .def ("timeRange", static_cast<const interval_t& (Path::*) () const> (&Path::timeRange), return_internal_reference<>())
+        PYHPP_DEFINE_METHOD_INTERNAL_REF (Path, paramRange)
         PYHPP_DEFINE_METHOD (Path, length)
         PYHPP_DEFINE_METHOD (Path, initial)
         PYHPP_DEFINE_METHOD (Path, end)

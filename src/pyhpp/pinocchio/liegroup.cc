@@ -26,6 +26,7 @@
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <hpp/pinocchio/liegroup-element.hh>
 
+#include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
@@ -42,6 +43,27 @@ namespace pyhpp {
       static LiegroupSpacePtr_t times (LiegroupSpacePtr_t l, const LiegroupSpacePtr_t& r)
       {
         return l * r;
+      }
+      static void Jintegrate (const LiegroupSpace& ls,
+          const vector_t& q, matrixRef_t J)
+      {
+        matrix_t _J (J);
+        ls.Jintegrate (q, _J);
+        J = _J;
+      }
+      static void Jdifference (const LiegroupSpace& ls,
+          bool applyOnTheLeft,
+          const vector_t& q0, const vector_t& q1,
+          matrixRef_t     J0, matrixRef_t     J1)
+      {
+        matrix_t _J0 (J0);
+        matrix_t _J1 (J1);
+        if (applyOnTheLeft)
+          ls.Jdifference <true > (q0, q1, _J0, _J1);
+        else
+          ls.Jdifference <false> (q0, q1, _J0, _J1);
+        J0 = _J0;
+        J1 = _J1;
       }
     };
     struct LgEWrapper {
@@ -64,6 +86,8 @@ namespace pyhpp {
         PYHPP_DEFINE_METHOD (LiegroupSpace, R3xSO3).staticmethod ("R3xSO3")
         PYHPP_DEFINE_METHOD (LiegroupSpace, empty ).staticmethod ("empty")
         PYHPP_DEFINE_METHOD (LiegroupSpace, mergeVectorSpaces)
+        PYHPP_DEFINE_METHOD (LgSWrapper   , Jintegrate)
+        PYHPP_DEFINE_METHOD (LgSWrapper   , Jdifference)
         .def (self == self)
         .def (self != self)
         // Operation on shared pointers...
