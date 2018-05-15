@@ -19,6 +19,7 @@
 
 SET(PYTHON_UNIT_TESTS
   imports
+  liegroup
   load_ur3
   solver
   differentiable-function

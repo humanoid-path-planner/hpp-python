@@ -63,6 +63,7 @@ namespace pyhpp {
         .def ("rightHandSide", &EWrapper::getRightHandSide)
         .def ("rightHandSide", &EWrapper::setRightHandSide)
         PYHPP_DEFINE_METHOD (Equation, copy)
+        .def (self == self) // equivalent to .def ("__eq__", &Equation::operator==)
         ;
 
       class_ <NumericalConstraint, NumericalConstraintPtr_t, boost::noncopyable, bases<Equation> >

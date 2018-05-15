@@ -34,6 +34,16 @@ namespace pyhpp {
   namespace pinocchio {
     using namespace hpp::pinocchio;
 
+    struct LgSWrapper {
+      static LiegroupSpacePtr_t itimes (LiegroupSpacePtr_t l, const LiegroupSpacePtr_t& r)
+      {
+        return *l *= r;
+      }
+      static LiegroupSpacePtr_t times (LiegroupSpacePtr_t l, const LiegroupSpacePtr_t& r)
+      {
+        return l * r;
+      }
+    };
     struct LgEWrapper {
       static vector_t vector_wrap_read (const LiegroupElement& lge) { return lge.vector(); }
       static void vector_wrap_write (LiegroupElement& lge, const vector_t& v) { lge.vector() = v; }
@@ -44,7 +54,23 @@ namespace pyhpp {
       class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable> ("LiegroupSpace", no_init)
         .def ("__str__", &to_str_from_operator<LiegroupSpace>)
         .def ("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
+        PYHPP_DEFINE_METHOD (LiegroupSpace, Rn    ).staticmethod ("Rn")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, R1    ).staticmethod ("R1")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, R2    ).staticmethod ("R2")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, R3    ).staticmethod ("R3")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, SE2   ).staticmethod ("SE2")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, SE3   ).staticmethod ("SE3")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, R2xSO2).staticmethod ("R2xSO2")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, R3xSO3).staticmethod ("R3xSO3")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, empty ).staticmethod ("empty")
+        PYHPP_DEFINE_METHOD (LiegroupSpace, mergeVectorSpaces)
+        .def (self == self)
+        .def (self != self)
+        // Operation on shared pointers...
+        .def ("__imul__", &LgSWrapper::itimes)
+        .def ("__mul__", &LgSWrapper::times)
         ;
+
       class_<LiegroupElement> ("LiegroupElement", init<const vector_t&, const LiegroupSpacePtr_t&>())
         .def (init <const LiegroupSpacePtr_t&>())
         // Pythonic API
@@ -56,6 +82,8 @@ namespace pyhpp {
         // C++ API
         .def ("vector", static_cast <const vector_t& (LiegroupElement::*) () const> (&LiegroupElement::vector), return_value_policy<return_by_value>())
         .def ("space", &LiegroupElement::space, return_value_policy<return_by_value>())
+        .def (self - self)
+        .def (self + vector_t())
         ;
     }
   }

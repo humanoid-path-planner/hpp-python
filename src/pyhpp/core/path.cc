@@ -48,6 +48,7 @@ namespace pyhpp {
         q = qq;
         return success;
       }
+      static ConstraintSetPtr_t constraints (const Path& p) { return p.constraints(); }
     };
 
     void exposePath()
@@ -66,7 +67,7 @@ namespace pyhpp {
         PYHPP_DEFINE_METHOD (Path, length)
         PYHPP_DEFINE_METHOD (Path, initial)
         PYHPP_DEFINE_METHOD (Path, end)
-        // PYHPP_DEFINE_METHOD (Path, constraints)
+        PYHPP_DEFINE_METHOD (PWrapper, constraints)
         ;
     }
   }
