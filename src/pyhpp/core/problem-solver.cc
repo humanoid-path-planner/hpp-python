@@ -76,6 +76,18 @@ namespace pyhpp {
         if (i > ps.paths().size()) throw std::invalid_argument ("Out of range");
         return ps.paths()[i];
       }
+      static tuple pathValidationType (const ProblemSolver& ps)
+      {
+        value_type tol;
+        std::string type = ps.pathValidationType (tol);
+        return make_tuple (type, tol);
+      }
+      static tuple pathProjectorType (const ProblemSolver& ps)
+      {
+        value_type tol;
+        std::string type = ps.pathProjectorType (tol);
+        return make_tuple (type, tol);
+      }
     };
 
     template <typename Type, typename TypePtr_t = boost::shared_ptr<Type> >
@@ -166,9 +178,9 @@ namespace pyhpp {
         PYHPP_PROBLEMSOLVER_SELECT_TYPE (distance)
         PYHPP_PROBLEMSOLVER_SELECT_TYPE (steeringMethod)
         PYHPP_PROBLEMSOLVER_SELECT_TYPE (configurationShooter)
-        .def ("pathValidationType", static_cast<const std::string& (ProblemSolver::*) (value_type&) /*const*/   >(&ProblemSolver::pathValidationType), return_internal_reference<>()) \
+        PYHPP_DEFINE_METHOD (PSWrapper, pathValidationType)
         .def ("pathValidationType", static_cast<void (ProblemSolver::*) (const std::string&, const value_type&) >(&ProblemSolver::pathValidationType))
-        .def ("pathProjectorType", static_cast<const std::string& (ProblemSolver::*) (value_type&) const       >(&ProblemSolver::pathProjectorType), return_internal_reference<>()) \
+        PYHPP_DEFINE_METHOD (PSWrapper, pathProjectorType)
         .def ("pathProjectorType", static_cast<void (ProblemSolver::*) (const std::string&, const value_type&) >(&ProblemSolver::pathProjectorType))
 
         PYHPP_DEFINE_METHOD (ProblemSolver, addConfigValidation)

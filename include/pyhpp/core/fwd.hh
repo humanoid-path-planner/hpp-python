@@ -33,6 +33,7 @@ namespace pyhpp {
 
     void exposePath();
     void exposePathOptimizer();
+    void exposePathProjector();
     void exposePathValidation();
     void exposeProblem();
     void exposeProblemSolver();

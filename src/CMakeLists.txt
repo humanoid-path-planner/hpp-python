@@ -101,6 +101,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/steering-method.cc
   pyhpp/core/path.cc
   pyhpp/core/path-optimizer.cc
+  pyhpp/core/path-projector.cc
   pyhpp/core/path-validation.cc
   pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc

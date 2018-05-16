@@ -21,8 +21,9 @@
 #include <hpp/core/problem.hh>
 
 #include <hpp/core/configuration-shooter.hh>
-#include <hpp/core/steering-method.hh>
+#include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
+#include <hpp/core/steering-method.hh>
 
 #include <pyhpp/util.hh>
 
@@ -41,7 +42,7 @@ namespace pyhpp {
         .def ("steeringMethod", static_cast<SteeringMethodPtr_t (Problem::*) () const> (&Problem::steeringMethod))
         // .def ("configValidation", static_cast<const ConfigValidationsPtr_t& (Problem::*) () const> (&Problem::configValidations), return_value_policy<return_by_value>())
         .def ("pathValidation", static_cast<PathValidationPtr_t (Problem::*) () const> (&Problem::pathValidation))
-        // .def ("pathProjector", static_cast<PathProjectorPtr_t (Problem::*) () const> (&Problem::pathProjector))
+        .def ("pathProjector", static_cast<PathProjectorPtr_t (Problem::*) () const> (&Problem::pathProjector))
         ;
     }
   }

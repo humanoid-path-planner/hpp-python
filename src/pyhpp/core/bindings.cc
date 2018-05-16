@@ -38,6 +38,7 @@ BOOST_PYTHON_MODULE(bindings)
   // Expose main abstract classes
   pyhpp::core::exposePath();
   pyhpp::core::exposePathOptimizer();
+  pyhpp::core::exposePathProjector();
   pyhpp::core::exposePathValidation();
 
   boost::python::import ("pyhpp.core.path");
