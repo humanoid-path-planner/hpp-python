@@ -94,6 +94,7 @@ LIST(APPEND DEPENDENCIES "hpp-core")
 ADD_PYTHON_LIBRARY(
   pyhpp/core
   FILES
+  pyhpp/core/config-validation.cc
   pyhpp/core/configuration-shooter.cc
   pyhpp/core/constraint.cc
   pyhpp/core/equation.cc

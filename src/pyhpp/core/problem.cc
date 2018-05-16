@@ -20,6 +20,8 @@
 
 #include <hpp/core/problem.hh>
 
+#include <hpp/core/config-validation.hh>
+#include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
@@ -40,7 +42,7 @@ namespace pyhpp {
         .def ("robot", static_cast<const DevicePtr_t& (Problem::*) () const> (&Problem::robot), return_value_policy<return_by_value>())
         .def ("configurationShooter", static_cast<ConfigurationShooterPtr_t (Problem::*) () const> (&Problem::configurationShooter))
         .def ("steeringMethod", static_cast<SteeringMethodPtr_t (Problem::*) () const> (&Problem::steeringMethod))
-        // .def ("configValidation", static_cast<const ConfigValidationsPtr_t& (Problem::*) () const> (&Problem::configValidations), return_value_policy<return_by_value>())
+        .def ("configValidation", static_cast<const ConfigValidationsPtr_t& (Problem::*) () const> (&Problem::configValidations), return_value_policy<return_by_value>())
         .def ("pathValidation", static_cast<PathValidationPtr_t (Problem::*) () const> (&Problem::pathValidation))
         .def ("pathProjector", static_cast<PathProjectorPtr_t (Problem::*) () const> (&Problem::pathProjector))
         ;

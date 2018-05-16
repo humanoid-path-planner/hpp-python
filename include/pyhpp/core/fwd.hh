@@ -22,6 +22,7 @@
 
 namespace pyhpp {
   namespace core {
+    void exposeConfigValidation();
     void exposeConfigurationShooter();
     void exposeConstraint();
 
