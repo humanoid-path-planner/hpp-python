@@ -68,13 +68,13 @@ namespace pyhpp {
 
       class_ <NumericalConstraint, NumericalConstraintPtr_t, boost::noncopyable, bases<Equation> >
         ("NumericalConstraint", no_init)
-        PYHPP_DEFINE_METHOD_INTERNAL_REF (NumericalConstraint, functionPtr)
+        PYHPP_DEFINE_METHOD_INTERNAL_REF (NumericalConstraint, function)
         PYHPP_DEFINE_METHOD_INTERNAL_REF (NumericalConstraint, value)
         PYHPP_DEFINE_METHOD_INTERNAL_REF (NumericalConstraint, jacobian)
         ;
 
       class_ <NumericalConstraints_t> ("NumericalConstraints")
-        .def (cpp_like_vector_indexing_suite <NumericalConstraints_t> ())
+        .def (cpp_like_vector_indexing_suite <NumericalConstraints_t, true> ())
         ;
 
       class_ <ExplicitNumericalConstraint, ExplicitNumericalConstraintPtr_t, boost::noncopyable, bases<NumericalConstraint> >

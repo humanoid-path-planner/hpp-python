@@ -3,7 +3,7 @@ from pyhpp.pinocchio import Device, urdf
 robot = Device.create('ur3')
 urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
 
-from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, HybridSolver
+from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, HybridSolver, segment
 from pinocchio import SE3, StdVec_Bool as Mask
 import numpy as np
 
@@ -27,7 +27,7 @@ print solver.explicitSolver()
 # The inputs are not valid so the solver
 # will not be able to solve anything.
 solver.explicitSolver().add (pc,
-        [ (0,2), ], [ (2,4), ],
-        [ (0,2), ], [ (2,4), ],
+        [ segment(0,2), ], [ segment(2,4), ],
+        [ segment(0,2), ], [ segment(2,4), ],
         cts)
 solver.explicitSolverHasChanged()

@@ -19,14 +19,19 @@
 
 #include <boost/python.hpp>
 
+#include <hpp/constraints/fwd.hh>
+
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
+#include <pyhpp/stl-pair.hh>
 
 BOOST_PYTHON_MODULE(bindings)
 {
   INIT_PYHPP_MODULE;
 
   boost::python::import ("pyhpp.pinocchio");
+
+  pyhpp::stl_pair<hpp::constraints::size_type, hpp::constraints::size_type>("segment");
 
   pyhpp::constraints::exposeDifferentiableFunction();
   pyhpp::constraints::exposeGenericTransformations();

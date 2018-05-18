@@ -79,10 +79,20 @@ namespace pyhpp {
 
         static vector_t rowParameters (const S_t& s) { return vector_t(s.rowParameters()); }
 
+        static vector_t py_parameterDerivativeCoefficients (const S_t& s,
+            const value_type& t)
+        {
+          typename S_t::BasisFunctionVector_t res;
+          s.parameterDerivativeCoefficients(res, t);
+          return res;
+        }
+
         static void expose (const char* name)
         {
           scope s =
             class_ <S_t, Ptr_t, bases<Path>, boost::noncopyable> (name, no_init)
+            .def ("parameterDerivativeCoefficients", &SplineWrapper::py_parameterDerivativeCoefficients)
+
             PYHPP_DEFINE_METHOD (S_t, parameterSize)
             PYHPP_DEFINE_METHOD (SplineWrapper, parameterDerivativeCoefficients)
             PYHPP_DEFINE_METHOD (SplineWrapper, parameterIntegrate)

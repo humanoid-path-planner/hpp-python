@@ -70,11 +70,7 @@ ENDMACRO()
 
 LIST(APPEND DEPENDENCIES "eigenpy" "pinocchio" "hpp-util" "hpp-pinocchio")
 
-ADD_PYTHON_LIBRARY(
-  pyhpp
-  FILES
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
-  )
+PYTHON_INSTALL_ON_SITE(pyhpp __init__.py)
 
 ADD_PYTHON_LIBRARY(
   pyhpp/pinocchio

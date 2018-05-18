@@ -19,14 +19,19 @@
 
 #include <boost/python.hpp>
 
+#include <hpp/core/fwd.hh>
+
 #include <pyhpp/util.hh>
 #include <pyhpp/core/fwd.hh>
+#include <pyhpp/stl-pair.hh>
 
 BOOST_PYTHON_MODULE(bindings)
 {
   INIT_PYHPP_MODULE;
 
   boost::python::import ("pyhpp.constraints");
+
+  pyhpp::stl_pair<hpp::core::value_type,hpp::core::value_type>("interval");
 
   pyhpp::core::exposeProblem();
   pyhpp::core::exposeProblemSolver();
