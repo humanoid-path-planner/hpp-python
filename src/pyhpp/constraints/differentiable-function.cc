@@ -28,6 +28,8 @@
 
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -101,6 +103,7 @@ namespace pyhpp {
 
     void exposeDifferentiableFunction ()
     {
+      // DocClass (DifferentiableFunction)
       // class_<DifferentiableFunction, DifferentiableFunctionPtr_t, boost::noncopyable>
       class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable>
           ("DifferentiableFunction", no_init)
@@ -115,15 +118,15 @@ namespace pyhpp {
         .add_property ("ndo", &DifferentiableFunction::outputDerivativeSize)
 
         // C++ API
-        .def ("value",    &DFWrapper::value_wrap)
-        .def ("jacobian", &DFWrapper::jacobian_wrap)
+        .def ("value",    &DFWrapper::value_wrap,    DocClassMethod(value))
+        .def ("jacobian", &DFWrapper::jacobian_wrap, DocClassMethod(jacobian))
 
-        .def ("outputSpace", &DifferentiableFunction::outputSpace)
+        .def ("outputSpace", &DifferentiableFunction::outputSpace, DocClassMethod(outputSpace))
 
-        .def ("inputSize",  &DifferentiableFunction::inputSize)
-        .def ("outputSize", &DifferentiableFunction::outputSize)
-        .def ("inputDerivativeSize",  &DifferentiableFunction::inputDerivativeSize)
-        .def ("outputDerivativeSize", &DifferentiableFunction::outputDerivativeSize)
+        .def ("inputSize",  &DifferentiableFunction::inputSize,  DocClassMethod(inputSize))
+        .def ("outputSize", &DifferentiableFunction::outputSize, DocClassMethod(outputSize))
+        .def ("inputDerivativeSize",  &DifferentiableFunction::inputDerivativeSize,  DocClassMethod(inputDerivativeSize))
+        .def ("outputDerivativeSize", &DifferentiableFunction::outputDerivativeSize, DocClassMethod(outputDerivativeSize))
 
         .def (init <size_type, size_type, size_type, std::string>())
         .def ("impl_compute" , pure_virtual(&DFWrapper::impl_compute))

@@ -25,6 +25,8 @@
 
 using namespace boost::python;
 
+// DocNamespace(hpp::core)
+
 namespace pyhpp {
   namespace core {
     using namespace hpp::core;
@@ -48,19 +50,21 @@ namespace pyhpp {
 
     void exposeConfigValidation ()
     {
+      // DocClass (ConfigValidation)
       class_ <ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>
         ("ConfigValidation", no_init)
-        PYHPP_DEFINE_METHOD (ConfigValidation, validate)
+        PYHPP_DEFINE_METHOD2 (ConfigValidation, validate, DocClassMethod(validate))
 
         .def ("validate", &CVWrapper::py_validate)
         ;
 
+      // DocClass (ConfigValidations)
       class_ <ConfigValidations, ConfigValidationsPtr_t,
              bases<ConfigValidation>, boost::noncopyable>
         ("ConfigValidations", no_init)
-        PYHPP_DEFINE_METHOD (ConfigValidations, add)
-        PYHPP_DEFINE_METHOD (ConfigValidations, numberConfigValidations)
-        PYHPP_DEFINE_METHOD (ConfigValidations, clear)
+        PYHPP_DEFINE_METHOD2 (ConfigValidations, add,                     DocClassMethod(add))
+        PYHPP_DEFINE_METHOD2 (ConfigValidations, numberConfigValidations, DocClassMethod(numberConfigValidations))
+        PYHPP_DEFINE_METHOD2 (ConfigValidations, clear,                   DocClassMethod(clear))
         ;
 
     }

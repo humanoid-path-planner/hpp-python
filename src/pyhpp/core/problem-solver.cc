@@ -32,6 +32,8 @@
 
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 #define PYHPP_PROBLEMSOLVER_SELECT_TYPE(type)                                  \
@@ -139,38 +141,38 @@ namespace pyhpp {
 
     void exposeProblemSolver()
     {
+      // DocClass (ProblemSolver)
       class_<ProblemSolver> ("ProblemSolver", no_init)
-        .def("create", &ProblemSolver::create, return_value_policy<manage_new_object>())
+        .def("create", &ProblemSolver::create, return_value_policy<manage_new_object>(), DocClassMethod(create))
         .staticmethod("create")
         .def ("problem", static_cast<ProblemPtr_t (ProblemSolver::*) ()> (&ProblemSolver::problem), return_internal_reference<>())
         // .def ("initConfig", static_cast<const ConfigurationPtr_t& (ProblemSolver::*) () const>(&ProblemSolver::initConfig), return_internal_reference<>())
         // .def ("initConfig", static_cast<void (ProblemSolver::*) (const ConfigurationPtr_t&)  >(&ProblemSolver::initConfig))
         .def ("initConfig", &PSWrapper::setInitConfig)
         .def ("initConfig", &PSWrapper::getInitConfig)
-        PYHPP_DEFINE_METHOD (PSWrapper    , goalConfigs)
-        PYHPP_DEFINE_METHOD (PSWrapper    , addGoalConfig)
-        PYHPP_DEFINE_METHOD (ProblemSolver, resetGoalConfigs)
+        PYHPP_DEFINE_METHOD2 (PSWrapper    , goalConfigs     , DocClassMethod(goalConfigs     ))
+        PYHPP_DEFINE_METHOD2 (PSWrapper    , addGoalConfig   , DocClassMethod(addGoalConfig   ))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, resetGoalConfigs, DocClassMethod(resetGoalConfigs))
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, resetProblem)
-        PYHPP_DEFINE_METHOD (ProblemSolver, resetRoadmap)
-        PYHPP_DEFINE_METHOD (ProblemSolver, createPathOptimizers)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, resetProblem,         DocClassMethod(resetProblem))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, resetRoadmap,         DocClassMethod(resetRoadmap))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, createPathOptimizers, DocClassMethod(createPathOptimizers))
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, prepareSolveStepByStep)
-        PYHPP_DEFINE_METHOD (ProblemSolver, executeOneStep)
-        PYHPP_DEFINE_METHOD (ProblemSolver, finishSolveStepByStep)
-        PYHPP_DEFINE_METHOD (ProblemSolver, solve)
-        PYHPP_DEFINE_METHOD (ProblemSolver, optimizePath)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, prepareSolveStepByStep, DocClassMethod(prepareSolveStepByStep))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, executeOneStep,         DocClassMethod(executeOneStep))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, finishSolveStepByStep,  DocClassMethod(finishSolveStepByStep))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, solve,                  DocClassMethod(solve))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, optimizePath,           DocClassMethod(optimizePath))
 
         // PYHPP_DEFINE_METHOD (ProblemSolver, directPath)
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, addPath)
-        PYHPP_DEFINE_METHOD (ProblemSolver, erasePath)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, addPath, DocClassMethod(addPath))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, erasePath, DocClassMethod(erasePath))
         PYHPP_DEFINE_METHOD_INTERNAL_REF (ProblemSolver, paths)
-        PYHPP_DEFINE_METHOD (PSWrapper    , path)
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, createRobot)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, createRobot, DocClassMethod(createRobot))
         PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (ProblemSolver, robot, const DevicePtr_t&)
-        .def ("addObstacle", static_cast<void (ProblemSolver::*) (const DevicePtr_t&, bool, bool) >(&ProblemSolver::addObstacle))
+        .def ("addObstacle", static_cast<void (ProblemSolver::*) (const DevicePtr_t&, bool, bool) >(&ProblemSolver::addObstacle), DocClassMethod(addObstacle))
 
         PYHPP_PROBLEMSOLVER_SELECT_TYPE (robot)
         PYHPP_PROBLEMSOLVER_SELECT_TYPE (pathPlanner)
@@ -183,12 +185,12 @@ namespace pyhpp {
         PYHPP_DEFINE_METHOD (PSWrapper, pathProjectorType)
         .def ("pathProjectorType", static_cast<void (ProblemSolver::*) (const std::string&, const value_type&) >(&ProblemSolver::pathProjectorType))
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, addConfigValidation)
-        PYHPP_DEFINE_METHOD (ProblemSolver, configValidationTypes)
-        PYHPP_DEFINE_METHOD (ProblemSolver, clearConfigValidations)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, addConfigValidation   , DocClassMethod(addConfigValidation   ))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, configValidationTypes , DocClassMethod(configValidationTypes ))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, clearConfigValidations, DocClassMethod(clearConfigValidations))
 
-        PYHPP_DEFINE_METHOD (ProblemSolver, addPathOptimizer)
-        PYHPP_DEFINE_METHOD (ProblemSolver, clearPathOptimizers)
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, addPathOptimizer   , DocClassMethod(addPathOptimizer   ))
+        PYHPP_DEFINE_METHOD2 (ProblemSolver, clearPathOptimizers, DocClassMethod(clearPathOptimizers))
         PYHPP_DEFINE_METHOD_INTERNAL_REF (ProblemSolver, pathOptimizer)
 
         // PYHPP_PROBLEMSOLVER_CONTAINER(robots)
