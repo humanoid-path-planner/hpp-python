@@ -20,9 +20,12 @@
 #include <boost/python.hpp>
 
 #include <pyhpp/core/path/fwd.hh>
+#include <pyhpp/util.hh>
 
 BOOST_PYTHON_MODULE(bindings)
 {
+  INIT_PYHPP_MODULE;
+
   pyhpp::core::path::exposeSplines();
   pyhpp::core::path::exposeVector();
 }

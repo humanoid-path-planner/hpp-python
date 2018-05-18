@@ -21,8 +21,12 @@
 
 #include <pyhpp/core/path-optimization/fwd.hh>
 
+#include <pyhpp/util.hh>
+
 BOOST_PYTHON_MODULE(bindings)
 {
+  INIT_PYHPP_MODULE;
+
   pyhpp::core::pathOptimization::exposeLinearConstraint();
   pyhpp::core::pathOptimization::exposeQuadraticProblem();
   pyhpp::core::pathOptimization::exposeSplineGradientBasedAbstracts();

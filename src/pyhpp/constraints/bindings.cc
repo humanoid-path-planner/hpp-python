@@ -20,9 +20,12 @@
 #include <boost/python.hpp>
 
 #include <pyhpp/constraints/fwd.hh>
+#include <pyhpp/util.hh>
 
 BOOST_PYTHON_MODULE(bindings)
 {
+  INIT_PYHPP_MODULE;
+
   boost::python::import ("pyhpp.pinocchio");
 
   pyhpp::constraints::exposeDifferentiableFunction();

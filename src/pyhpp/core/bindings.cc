@@ -24,6 +24,8 @@
 
 BOOST_PYTHON_MODULE(bindings)
 {
+  INIT_PYHPP_MODULE;
+
   boost::python::import ("pyhpp.constraints");
 
   pyhpp::core::exposeProblem();

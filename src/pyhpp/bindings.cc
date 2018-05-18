@@ -18,7 +18,10 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
+
 #include <hpp/pinocchio/fwd.hh>
+
+#include <pyhpp/util.hh>
 
 template<typename T1, typename T2>
   struct PairToPythonConverter {
@@ -57,6 +60,8 @@ template<typename T1, typename T2>
 
 BOOST_PYTHON_MODULE(bindings)
 {
+  INIT_PYHPP_MODULE;
+
   using namespace hpp::pinocchio;
   py_pair<size_type,size_type>();
   py_pair<value_type,value_type>();
