@@ -43,8 +43,7 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
 
   STRING(REGEX REPLACE "[/-]" "_" TARGET_NAME "${MODULE}")
   SET(LIBNAME "bindings")
-  ADD_LIBRARY(${TARGET_NAME} SHARED ${GENERATED_FILES}
-      ${MODULE}/bindings.cc)
+  ADD_LIBRARY(${TARGET_NAME} SHARED ${GENERATED_FILES})
   SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES
     PREFIX ""
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}
@@ -77,6 +76,7 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/pinocchio/device.cc
   pyhpp/pinocchio/liegroup.cc
+  pyhpp/pinocchio/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
@@ -84,6 +84,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/pinocchio/urdf
   FILES
   pyhpp/pinocchio/urdf/util.cc
+  pyhpp/pinocchio/urdf/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
@@ -96,6 +97,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/constraints/generic-transformation.cc
   pyhpp/constraints/iterative-solver.cc
   pyhpp/constraints/hybrid-solver.cc
+  pyhpp/constraints/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
@@ -115,6 +117,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/path-validation.cc
   pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc
+  pyhpp/core/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
@@ -123,13 +126,15 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/core/path/spline.cc
   pyhpp/core/path/vector.cc
+  pyhpp/core/path/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
 ADD_PYTHON_LIBRARY(
-  pyhpp/core/path-optimization
+  pyhpp/core/pathoptimization
   FILES
   pyhpp/core/path-optimization/spline-gradient-based-abstract.cc
+  pyhpp/core/path-optimization/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 
