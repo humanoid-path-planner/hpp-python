@@ -67,7 +67,12 @@ namespace pyhpp {
             override f = this->get_override("optimize");
             if (!f)
               throw std::runtime_error ("optimize not implemented in child class");
+            // try {
             return f (path).as<PathVectorPtr_t>();
+            // } catch (...) {
+              // handle_exception();
+              // return PathVectorPtr_t();
+            // }
           }
 
           // The following functions are protected methods of SplineGradientBasedAbstract.
