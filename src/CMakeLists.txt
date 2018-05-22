@@ -25,7 +25,7 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
   set(oneValueArgs )
   SET(multiValueArgs FILES PKG_CONFIG_DEPENDENCIES)
   CMAKE_PARSE_ARGUMENTS(ADD_PYTHON_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  
+
   FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE})
 
   SET(GENERATED_FILES)
@@ -146,3 +146,14 @@ ADD_PYTHON_LIBRARY(
   pyhpp/corbaserver/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
+
+IF(BIND_HPP_WHOLEBODY_STEP)
+  LIST(APPEND DEPENDENCIES "hpp-wholebody-step-corba")
+  ADD_PYTHON_LIBRARY(
+    pyhpp/corbaserver/wholebodyStep
+    FILES
+    pyhpp/corbaserver/wholebodyStep/server.cc
+    pyhpp/corbaserver/wholebodyStep/bindings.cc
+    PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+    )
+ENDIF()

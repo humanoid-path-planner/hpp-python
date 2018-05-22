@@ -17,17 +17,16 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef PYHPP_CORBASERVER_FWD_HH
-#define PYHPP_CORBASERVER_FWD_HH
+#include <boost/python.hpp>
 
-namespace pyhpp {
-  namespace corbaserver {
-    void exposeServer();
-    // void exposeProblemSolverMap();
-    namespace wholebodyStep {
-      void exposeServer();
-    }
-  }
+#include <pyhpp/util.hh>
+#include <pyhpp/corbaserver/fwd.hh>
+
+BOOST_PYTHON_MODULE(bindings)
+{
+  INIT_PYHPP_MODULE;
+
+  boost::python::import ("pyhpp.corbaserver");
+
+  pyhpp::corbaserver::wholebodyStep::exposeServer();
 }
-
-#endif // PYHPP_CORBASERVER_FWD_HH

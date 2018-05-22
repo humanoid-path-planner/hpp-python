@@ -22,6 +22,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 # SET(CXX_DISABLE_WERROR TRUE)
 SET(INSTALL_DOCUMENTATION OFF)
 
+OPTION(BIND_HPP_WHOLEBODY_STEP "Compile Python bindings for hpp-wholebody-step" OFF)
+
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/python.cmake)
 INCLUDE(cmake/boost.cmake)
@@ -62,6 +64,9 @@ ADD_REQUIRED_DEPENDENCY("hpp-pinocchio >= 4")
 ADD_REQUIRED_DEPENDENCY("hpp-constraints >= 4")
 ADD_REQUIRED_DEPENDENCY("hpp-core >= 4")
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 4")
+IF(BIND_HPP_WHOLEBODY_STEP)
+ADD_REQUIRED_DEPENDENCY("hpp-wholebody-step-corba >= 4")
+ENDIF()
 
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(tests)
