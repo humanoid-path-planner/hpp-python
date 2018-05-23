@@ -19,7 +19,7 @@
 
 #include <boost/python.hpp>
 
-#include <pyhpp/core/path-optimization/fwd.hh>
+#include <pyhpp/core/pathOptimization/fwd.hh>
 
 #include <pyhpp/util.hh>
 

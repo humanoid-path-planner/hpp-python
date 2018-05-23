@@ -50,5 +50,5 @@ BOOST_PYTHON_MODULE(bindings)
   pyhpp::core::exposePathValidation();
 
   boost::python::import ("pyhpp.core.path");
-  boost::python::import ("pyhpp.core.pathoptimization");
+  boost::python::import ("pyhpp.core.pathOptimization");
 }

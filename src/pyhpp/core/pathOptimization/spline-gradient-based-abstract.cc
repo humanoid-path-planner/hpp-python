@@ -17,7 +17,7 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/path-optimization/fwd.hh>
+#include <pyhpp/core/pathOptimization/fwd.hh>
 
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>

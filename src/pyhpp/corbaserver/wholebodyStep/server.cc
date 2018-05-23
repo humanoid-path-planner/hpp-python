@@ -31,7 +31,7 @@ namespace pyhpp {
   namespace corbaserver {
     namespace wholebodyStep {
       typedef hpp::corbaServer::Server CorbaServer;
-      typedef wholebodyStep::Server WholebodyServer;
+      typedef hpp::wholebodyStep::Server WholebodyServer;
 
       struct SWrapper {
         static WholebodyServer* init (CorbaServer* server, bool multithread = false)
