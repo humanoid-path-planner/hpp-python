@@ -36,7 +36,7 @@ BOOST_PYTHON_MODULE(bindings)
   pyhpp::constraints::exposeDifferentiableFunction();
   pyhpp::constraints::exposeGenericTransformations();
 
-  pyhpp::constraints::exposeExplicitSolver ();
+  pyhpp::constraints::exposeExplicitConstraintSet ();
   pyhpp::constraints::exposeHierarchicalIterativeSolver();
   pyhpp::constraints::exposeHybridSolver();
 }

@@ -22,7 +22,7 @@
 #include <boost/python.hpp>
 
 #include <pyhpp/util.hh>
-#include <hpp/constraints/explicit-solver.hh>
+#include <hpp/constraints/explicit-constraint-set.hh>
 
 using namespace boost::python;
 
@@ -46,7 +46,7 @@ namespace pyhpp {
       return out;
     }
 
-    size_type ExplicitSolver_add (ExplicitSolver& es,
+    size_type ExplicitConstraintSet_add (ExplicitConstraintSet& es,
         const DifferentiableFunctionPtr_t& f,
         // const Eigen::BlockIndex::segments_t& inArg,
         // const Eigen::BlockIndex::segments_t& outArg,
@@ -70,11 +70,11 @@ namespace pyhpp {
           comp);
     }
 
-    void exposeExplicitSolver ()
+    void exposeExplicitConstraintSet ()
     {
-      class_<ExplicitSolver> ("ExplicitSolver", init<std::size_t, std::size_t>())
-        .def ("__str__", &to_str<ExplicitSolver>)
-        .def ("add", &ExplicitSolver_add)
+      class_<ExplicitConstraintSet> ("ExplicitConstraintSet", init<std::size_t, std::size_t>())
+        .def ("__str__", &to_str<ExplicitConstraintSet>)
+        .def ("add", &ExplicitConstraintSet_add)
         ;
     }
   }

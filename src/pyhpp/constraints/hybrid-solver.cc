@@ -39,7 +39,7 @@ namespace pyhpp {
     void exposeHybridSolver ()
     {
       class_<HybridSolver, bases<HierarchicalIterativeSolver> > ("HybridSolver", init<LiegroupSpacePtr_t>())
-        .def ("explicitSolver", static_cast <ExplicitSolver& (HybridSolver::*) ()> (&HybridSolver::explicitSolver),
+        .def ("explicitSolver", static_cast <ExplicitConstraintSet& (HybridSolver::*) ()> (&HybridSolver::explicitSolver),
             return_internal_reference<>())
         .def ("explicitSolverHasChanged", &HybridSolver::explicitSolverHasChanged)
         .def ("solve", &HybridSolver_solve)
