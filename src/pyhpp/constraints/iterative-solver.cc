@@ -44,7 +44,7 @@ namespace pyhpp {
         .def (vector_indexing_suite <ComparisonTypes_t> ())
         ;
 
-      class_<HierarchicalIterativeSolver> ("HierarchicalIterativeSolver", init<std::size_t, std::size_t>())
+      class_<HierarchicalIterativeSolver> ("HierarchicalIterativeSolver", init<LiegroupSpacePtr_t>())
         .def ("__str__", &to_str<HierarchicalIterativeSolver>)
         .def ("add",
             static_cast <void (HierarchicalIterativeSolver::*) (const DifferentiableFunctionPtr_t&, const std::size_t&)>
