@@ -33,16 +33,16 @@ namespace pyhpp {
     tuple BySubstitution_solve (const BySubstitution& hs, const vector_t& q)
     {
       vector_t qout (q);
-      HierarchicalIterativeSolver::Status s = hs.solve(qout);
+      HierarchicalIterative::Status s = hs.solve(qout);
       return make_tuple (qout, s);
     }
 
     void exposeBySubstitution ()
     {
-      class_<BySubstitution, bases<HierarchicalIterativeSolver> > ("BySubstitution", init<LiegroupSpacePtr_t>())
-        .def ("explicitSolver", static_cast <ExplicitConstraintSet& (BySubstitution::*) ()> (&BySubstitution::explicitSolver),
+      class_<BySubstitution, bases<HierarchicalIterative> > ("BySubstitution", init<LiegroupSpacePtr_t>())
+        .def ("explicitConstraintSet", static_cast <ExplicitConstraintSet& (BySubstitution::*) ()> (&BySubstitution::explicitConstraintSet),
             return_internal_reference<>())
-        .def ("explicitSolverHasChanged", &BySubstitution::explicitSolverHasChanged)
+        .def ("explicitConstraintSetHasChanged", &BySubstitution::explicitConstraintSetHasChanged)
         .def ("solve", &BySubstitution_solve)
 
         .add_property ("errorThreshold",

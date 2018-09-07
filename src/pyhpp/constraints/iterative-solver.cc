@@ -22,7 +22,7 @@
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
-#include <hpp/constraints/iterative-solver.hh>
+#include <hpp/constraints/solver/hierarchical-iterative.hh>
 
 #include <pyhpp/util.hh>
 
@@ -31,6 +31,7 @@ using namespace boost::python;
 namespace pyhpp {
   namespace constraints {
     using namespace hpp::constraints;
+    using namespace hpp::constraints::solver;
 
     void exposeHierarchicalIterativeSolver ()
     {
@@ -44,21 +45,21 @@ namespace pyhpp {
         .def (vector_indexing_suite <ComparisonTypes_t> ())
         ;
 
-      class_<HierarchicalIterativeSolver> ("HierarchicalIterativeSolver", init<LiegroupSpacePtr_t>())
-        .def ("__str__", &to_str<HierarchicalIterativeSolver>)
+      class_<HierarchicalIterative> ("HierarchicalIterative", init<LiegroupSpacePtr_t>())
+        .def ("__str__", &to_str<HierarchicalIterative>)
         .def ("add",
-            static_cast <void (HierarchicalIterativeSolver::*) (const DifferentiableFunctionPtr_t&, const std::size_t&)>
-            (&HierarchicalIterativeSolver::add))
+            static_cast <void (HierarchicalIterative::*) (const DifferentiableFunctionPtr_t&, const std::size_t&)>
+            (&HierarchicalIterative::add))
         .def ("add",
-            static_cast <void (HierarchicalIterativeSolver::*) (const DifferentiableFunctionPtr_t&, const std::size_t&, const ComparisonTypes_t&)>
-            (&HierarchicalIterativeSolver::add))
+            static_cast <void (HierarchicalIterative::*) (const DifferentiableFunctionPtr_t&, const std::size_t&, const ComparisonTypes_t&)>
+            (&HierarchicalIterative::add))
 
         .add_property ("errorThreshold",
-            static_cast <value_type (HierarchicalIterativeSolver::*) () const     > (&HierarchicalIterativeSolver::errorThreshold),
-            static_cast <void (HierarchicalIterativeSolver::*) (const value_type&)> (&HierarchicalIterativeSolver::errorThreshold))
+            static_cast <value_type (HierarchicalIterative::*) () const     > (&HierarchicalIterative::errorThreshold),
+            static_cast <void (HierarchicalIterative::*) (const value_type&)> (&HierarchicalIterative::errorThreshold))
         .add_property ("maxIterations",
-            static_cast <size_type (HierarchicalIterativeSolver::*) () const> (&HierarchicalIterativeSolver::maxIterations),
-            static_cast <void (HierarchicalIterativeSolver::*) (size_type)  > (&HierarchicalIterativeSolver::maxIterations))
+            static_cast <size_type (HierarchicalIterative::*) () const> (&HierarchicalIterative::maxIterations),
+            static_cast <void (HierarchicalIterative::*) (size_type)  > (&HierarchicalIterative::maxIterations))
         ;
     }
   }
