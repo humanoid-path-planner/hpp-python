@@ -27,7 +27,7 @@ namespace pyhpp {
 
     void exposeExplicitConstraintSet ();
     void exposeHierarchicalIterativeSolver ();
-    void exposeHybridSolver ();
+    void exposeBySubstitution ();
   }
 }
 

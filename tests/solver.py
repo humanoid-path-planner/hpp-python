@@ -3,7 +3,7 @@ from pyhpp.pinocchio import Device, urdf
 robot = Device.create('ur3')
 urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
 
-from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, HybridSolver, segment
+from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, BySubstitution, segment
 from pinocchio import SE3, StdVec_Bool as Mask
 import numpy as np
 
@@ -14,7 +14,7 @@ pc = Position.create ("position", robot,
         robot.model().getJointId("wrist_3_joint"),
         Id, Id, m)
 
-solver = HybridSolver (robot.model().nq,robot.model().nv)
+solver = BySubstitution (robot.model().nq,robot.model().nv)
 solver.add (pc, 0)
 cts = ComparisonTypes ()
 cts[:] = (ComparisonType.EqualToZero, ComparisonType.EqualToZero, ComparisonType.Equality)

@@ -21,32 +21,33 @@
 
 #include <boost/python.hpp>
 
-#include <hpp/constraints/hybrid-solver.hh>
+#include <hpp/constraints/solver/by-substitution.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
   namespace constraints {
     using namespace hpp::constraints;
+    using namespace hpp::constraints::solver;
 
-    tuple HybridSolver_solve (const HybridSolver& hs, const vector_t& q)
+    tuple BySubstitution_solve (const BySubstitution& hs, const vector_t& q)
     {
       vector_t qout (q);
       HierarchicalIterativeSolver::Status s = hs.solve(qout);
       return make_tuple (qout, s);
     }
 
-    void exposeHybridSolver ()
+    void exposeBySubstitution ()
     {
-      class_<HybridSolver, bases<HierarchicalIterativeSolver> > ("HybridSolver", init<LiegroupSpacePtr_t>())
-        .def ("explicitSolver", static_cast <ExplicitConstraintSet& (HybridSolver::*) ()> (&HybridSolver::explicitSolver),
+      class_<BySubstitution, bases<HierarchicalIterativeSolver> > ("BySubstitution", init<LiegroupSpacePtr_t>())
+        .def ("explicitSolver", static_cast <ExplicitConstraintSet& (BySubstitution::*) ()> (&BySubstitution::explicitSolver),
             return_internal_reference<>())
-        .def ("explicitSolverHasChanged", &HybridSolver::explicitSolverHasChanged)
-        .def ("solve", &HybridSolver_solve)
+        .def ("explicitSolverHasChanged", &BySubstitution::explicitSolverHasChanged)
+        .def ("solve", &BySubstitution_solve)
 
         .add_property ("errorThreshold",
-            static_cast <value_type (HybridSolver::*) () const     > (&HybridSolver::errorThreshold),
-            static_cast <void (HybridSolver::*) (const value_type&)> (&HybridSolver::errorThreshold))
+            static_cast <value_type (BySubstitution::*) () const     > (&BySubstitution::errorThreshold),
+            static_cast <void (BySubstitution::*) (const value_type&)> (&BySubstitution::errorThreshold))
         ;
     }
   }

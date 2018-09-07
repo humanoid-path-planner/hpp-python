@@ -96,7 +96,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/constraints/explicit-constraint-set.cc
   pyhpp/constraints/generic-transformation.cc
   pyhpp/constraints/iterative-solver.cc
-  pyhpp/constraints/hybrid-solver.cc
+  pyhpp/constraints/by-substitution.cc
   pyhpp/constraints/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
