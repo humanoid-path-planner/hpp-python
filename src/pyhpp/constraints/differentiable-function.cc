@@ -127,7 +127,10 @@ namespace pyhpp {
         .def ("outputSize", &DifferentiableFunction::outputSize, DocClassMethod(outputSize))
         .def ("inputDerivativeSize",  &DifferentiableFunction::inputDerivativeSize,  DocClassMethod(inputDerivativeSize))
         .def ("outputDerivativeSize", &DifferentiableFunction::outputDerivativeSize, DocClassMethod(outputDerivativeSize))
+        //;
 
+      //class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable, bases<DifferentiableFunction> >
+          //("DifferentiableFunctionBase", no_init)
         .def (init <size_type, size_type, size_type, std::string>())
         .def ("impl_compute" , pure_virtual(&DFWrapper::impl_compute))
         .def ("impl_jacobian", pure_virtual(&DFWrapper::impl_jacobian))

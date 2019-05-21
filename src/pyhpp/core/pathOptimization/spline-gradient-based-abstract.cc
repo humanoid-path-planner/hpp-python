@@ -30,6 +30,7 @@
 
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
+#include <pyhpp/ref.hh>
 #include <pyhpp/vector-indexing-suite.hh>
 
 using namespace boost::python;
@@ -108,6 +109,13 @@ namespace pyhpp {
           {
             return Base::buildPathVector (splines);
           }
+
+          void updateParameters (vectorRef_t param, const Splines_t& spline) const
+          {
+            vector_t _param (param);
+            Base::updateParameters (_param, spline);
+            param = _param;
+          }
       };
 
       template <int _PolynomeBasis, int _Order>
@@ -124,6 +132,7 @@ namespace pyhpp {
           class_ <SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable> (name, init<const Problem&>())
           PYHPP_DEFINE_METHOD (SGB_t, copy         ).staticmethod ("copy")
           PYHPP_DEFINE_METHOD (SGB_t, updateSplines)
+          PYHPP_DEFINE_METHOD (SGBW_t, updateParameters)
           PYHPP_DEFINE_METHOD (SGB_t, interpolate  ).staticmethod ("interpolate")
           PYHPP_DEFINE_METHOD (SGBW_t, appendEquivalentSpline)
           PYHPP_DEFINE_METHOD (SGBW_t, initializePathValidation)
@@ -183,6 +192,12 @@ namespace pyhpp {
         exposeSplineGradientBasedAbstract<BernsteinBasis, 3> ("SplineGradientBasedAbstractB3");
       }
 
+      struct LCWrapper
+      {
+        static void setJ (LinearConstraint& lc, const matrix_t& J) { lc.J = J; }
+        static void setb (LinearConstraint& lc, const vector_t& b) { lc.b = b; }
+      };
+
       void exposeLinearConstraint()
       {
         class_ <LinearConstraint> ("LinearConstraint", init<size_type, size_type>())
@@ -194,8 +209,14 @@ namespace pyhpp {
           PYHPP_DEFINE_METHOD (LinearConstraint, computeSolution)
           PYHPP_DEFINE_METHOD (LinearConstraint, isSatisfied)
           PYHPP_DEFINE_METHOD (LinearConstraint, addRows)
-          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, J    , "")
-          .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, b    , "")
+          .add_property ("J",
+              make_getter (&LinearConstraint::J, return_value_policy<return_by_value>()),
+              &LCWrapper::setJ, 
+              "")
+          .add_property ("b",
+              make_getter (&LinearConstraint::b, return_value_policy<return_by_value>()),
+              &LCWrapper::setb, 
+              "")
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, rank , "")
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, PK   , "")
           .ADD_DATA_PROPERTY_READONLY_BYVALUE (LinearConstraint, xStar, "")
@@ -203,7 +224,8 @@ namespace pyhpp {
           ;
       }
 
-      struct QPWrapper {
+      struct QPWrapper
+      {
         static void setH (QuadraticProgram& qp, const matrix_t& H) { qp.H = H; }
         static void setb (QuadraticProgram& qp, const vector_t& b) { qp.b = b; }
       };

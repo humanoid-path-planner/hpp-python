@@ -103,9 +103,8 @@ namespace pyhpp {
         PYHPP_DEFINE_METHOD (LockedJoint, outputVelocity)
         ;
 
-      // TODO LockedJoints_t is not a vector but a list...
       class_ <LockedJoints_t> ("LockedJoints")
-        .def (cpp_like_vector_indexing_suite <LockedJoints_t> ())
+        .def (cpp_like_vector_indexing_suite <LockedJoints_t, true> ())
         ;
     }
   }

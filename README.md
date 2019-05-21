@@ -32,3 +32,9 @@ ENDIF()
 ```
 
 File `doc/configure.py` contains a short documentation of how to document the bindings.
+
+### TODO
+
+- Use doxygen to generate XML documentation of the headers included by a file.
+  Then use the generated XML doc to update the documentation of the files in `src/pyhpp`.
+  Doxygen configuration variables `INCLUDE_PATH` and `SEARCH_INCLUDES` might be helpful.
