@@ -20,35 +20,29 @@
 #ifndef PYHPP_VECTOR_INDEXING_SUITE_HH
 #define PYHPP_VECTOR_INDEXING_SUITE_HH
 
-# include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 namespace pyhpp {
-  template <class Container,
-           bool NoProxy = false>
-  class cpp_like_vector_indexing_suite
-  : public boost::python::vector_indexing_suite <Container, NoProxy, cpp_like_vector_indexing_suite<Container, NoProxy> >
-  {
-    public:
-      typedef boost::python::vector_indexing_suite <Container, NoProxy, cpp_like_vector_indexing_suite> base_type;
-      template <class Class>
-        static void 
-        extension_def(Class& cl)
-        {
-          base_type::extension_def (cl);
+template <class Container, bool NoProxy = false>
+class cpp_like_vector_indexing_suite
+    : public boost::python::vector_indexing_suite<
+          Container, NoProxy,
+          cpp_like_vector_indexing_suite<Container, NoProxy> > {
+ public:
+  typedef boost::python::vector_indexing_suite<Container, NoProxy,
+                                               cpp_like_vector_indexing_suite>
+      base_type;
+  template <class Class>
+  static void extension_def(Class& cl) {
+    base_type::extension_def(cl);
 
-          cl
-            .def("size", &base_type::size)
-            .def("empty", &empty)
-            .def("push_back", &base_type::append)
-            ;
-        }
+    cl.def("size", &base_type::size)
+        .def("empty", &empty)
+        .def("push_back", &base_type::append);
+  }
 
-        static bool 
-        empty(Container const& container)
-        { 
-            return container.empty();
-        }
-  };
-}
+  static bool empty(Container const& container) { return container.empty(); }
+};
+}  // namespace pyhpp
 
-#endif // PYHPP_VECTOR_INDEXING_SUITE_HH
+#endif  // PYHPP_VECTOR_INDEXING_SUITE_HH

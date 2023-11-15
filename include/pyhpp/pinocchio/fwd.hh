@@ -21,10 +21,10 @@
 #define PYHPP_PINOCCHIO_FWD_HH
 
 namespace pyhpp {
-  namespace pinocchio {
-    void exposeDevice ();
-    void exposeLiegroup ();
-  }
-}
+namespace pinocchio {
+void exposeDevice();
+void exposeLiegroup();
+}  // namespace pinocchio
+}  // namespace pyhpp
 
-#endif // PYHPP_PINOCCHIO_FWD_HH
+#endif  // PYHPP_PINOCCHIO_FWD_HH

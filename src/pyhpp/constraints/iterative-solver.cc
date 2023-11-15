@@ -17,50 +17,49 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/constraints/fwd.hh>
-
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-
 #include <hpp/constraints/solver/hierarchical-iterative.hh>
-
+#include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace constraints {
-    using namespace hpp::constraints;
-    using namespace hpp::constraints::solver;
+namespace constraints {
+using namespace hpp::constraints;
+using namespace hpp::constraints::solver;
 
-    void exposeHierarchicalIterativeSolver ()
-    {
-      enum_ <ComparisonType> ("ComparisonType")
-        .value ("Equality"    , Equality   )
-        .value ("EqualToZero" , EqualToZero)
-        .value ("Superior"    , Superior   )
-        .value ("Inferior"    , Inferior   )
-        ;
-      class_< ComparisonTypes_t >("ComparisonTypes")
-        .def (vector_indexing_suite <ComparisonTypes_t> ())
-        ;
+void exposeHierarchicalIterativeSolver() {
+  enum_<ComparisonType>("ComparisonType")
+      .value("Equality", Equality)
+      .value("EqualToZero", EqualToZero)
+      .value("Superior", Superior)
+      .value("Inferior", Inferior);
+  class_<ComparisonTypes_t>("ComparisonTypes")
+      .def(vector_indexing_suite<ComparisonTypes_t>());
 
-      class_<HierarchicalIterative> ("HierarchicalIterative", init<LiegroupSpacePtr_t>())
-        .def ("__str__", &to_str<HierarchicalIterative>)
-        .def ("add",
-            static_cast <void (HierarchicalIterative::*) (const DifferentiableFunctionPtr_t&, const std::size_t&)>
-            (&HierarchicalIterative::add))
-        .def ("add",
-            static_cast <void (HierarchicalIterative::*) (const DifferentiableFunctionPtr_t&, const std::size_t&, const ComparisonTypes_t&)>
-            (&HierarchicalIterative::add))
+  class_<HierarchicalIterative>("HierarchicalIterative",
+                                init<LiegroupSpacePtr_t>())
+      .def("__str__", &to_str<HierarchicalIterative>)
+      .def("add", static_cast<void (HierarchicalIterative::*)(
+                      const DifferentiableFunctionPtr_t&, const std::size_t&)>(
+                      &HierarchicalIterative::add))
+      .def("add", static_cast<void (HierarchicalIterative::*)(
+                      const DifferentiableFunctionPtr_t&, const std::size_t&,
+                      const ComparisonTypes_t&)>(&HierarchicalIterative::add))
 
-        .add_property ("errorThreshold",
-            static_cast <value_type (HierarchicalIterative::*) () const     > (&HierarchicalIterative::errorThreshold),
-            static_cast <void (HierarchicalIterative::*) (const value_type&)> (&HierarchicalIterative::errorThreshold))
-        .add_property ("maxIterations",
-            static_cast <size_type (HierarchicalIterative::*) () const> (&HierarchicalIterative::maxIterations),
-            static_cast <void (HierarchicalIterative::*) (size_type)  > (&HierarchicalIterative::maxIterations))
-        ;
-    }
-  }
+      .add_property(
+          "errorThreshold",
+          static_cast<value_type (HierarchicalIterative::*)() const>(
+              &HierarchicalIterative::errorThreshold),
+          static_cast<void (HierarchicalIterative::*)(const value_type&)>(
+              &HierarchicalIterative::errorThreshold))
+      .add_property("maxIterations",
+                    static_cast<size_type (HierarchicalIterative::*)() const>(
+                        &HierarchicalIterative::maxIterations),
+                    static_cast<void (HierarchicalIterative::*)(size_type)>(
+                        &HierarchicalIterative::maxIterations));
 }
+}  // namespace constraints
+}  // namespace pyhpp

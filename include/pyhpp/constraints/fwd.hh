@@ -21,14 +21,14 @@
 #define PYHPP_CONSTRAINTS_FWD_HH
 
 namespace pyhpp {
-  namespace constraints {
-    void exposeDifferentiableFunction ();
-    void exposeGenericTransformations ();
+namespace constraints {
+void exposeDifferentiableFunction();
+void exposeGenericTransformations();
 
-    void exposeExplicitConstraintSet ();
-    void exposeHierarchicalIterativeSolver ();
-    void exposeBySubstitution ();
-  }
-}
+void exposeExplicitConstraintSet();
+void exposeHierarchicalIterativeSolver();
+void exposeBySubstitution();
+}  // namespace constraints
+}  // namespace pyhpp
 
-#endif // PYHPP_CONSTRAINTS_FWD_HH
+#endif  // PYHPP_CONSTRAINTS_FWD_HH

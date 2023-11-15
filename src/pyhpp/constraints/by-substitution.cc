@@ -17,38 +17,39 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/constraints/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <hpp/constraints/solver/by-substitution.hh>
+#include <pyhpp/constraints/fwd.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace constraints {
-    using namespace hpp::constraints;
-    using namespace hpp::constraints::solver;
+namespace constraints {
+using namespace hpp::constraints;
+using namespace hpp::constraints::solver;
 
-    tuple BySubstitution_solve (const BySubstitution& hs, const vector_t& q)
-    {
-      vector_t qout (q);
-      HierarchicalIterative::Status s = hs.solve(qout);
-      return make_tuple (qout, s);
-    }
-
-    void exposeBySubstitution ()
-    {
-      class_<BySubstitution, bases<HierarchicalIterative> > ("BySubstitution", init<LiegroupSpacePtr_t>())
-        .def ("explicitConstraintSet", static_cast <ExplicitConstraintSet& (BySubstitution::*) ()> (&BySubstitution::explicitConstraintSet),
-            return_internal_reference<>())
-        .def ("explicitConstraintSetHasChanged", &BySubstitution::explicitConstraintSetHasChanged)
-        .def ("solve", &BySubstitution_solve)
-
-        .add_property ("errorThreshold",
-            static_cast <value_type (BySubstitution::*) () const     > (&BySubstitution::errorThreshold),
-            static_cast <void (BySubstitution::*) (const value_type&)> (&BySubstitution::errorThreshold))
-        ;
-    }
-  }
+tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
+  vector_t qout(q);
+  HierarchicalIterative::Status s = hs.solve(qout);
+  return make_tuple(qout, s);
 }
+
+void exposeBySubstitution() {
+  class_<BySubstitution, bases<HierarchicalIterative> >(
+      "BySubstitution", init<LiegroupSpacePtr_t>())
+      .def("explicitConstraintSet",
+           static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
+               &BySubstitution::explicitConstraintSet),
+           return_internal_reference<>())
+      .def("explicitConstraintSetHasChanged",
+           &BySubstitution::explicitConstraintSetHasChanged)
+      .def("solve", &BySubstitution_solve)
+
+      .add_property("errorThreshold",
+                    static_cast<value_type (BySubstitution::*)() const>(
+                        &BySubstitution::errorThreshold),
+                    static_cast<void (BySubstitution::*)(const value_type&)>(
+                        &BySubstitution::errorThreshold));
+}
+}  // namespace constraints
+}  // namespace pyhpp

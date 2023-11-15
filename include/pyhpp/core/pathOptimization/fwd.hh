@@ -21,13 +21,13 @@
 #define PYHPP_CORE_PATH_OPTIMIZATION_FWD_HH
 
 namespace pyhpp {
-  namespace core {
-    namespace pathOptimization {
-      void exposeLinearConstraint();
-      void exposeQuadraticProblem();
-      void exposeSplineGradientBasedAbstracts();
-    }
-  }
-}
+namespace core {
+namespace pathOptimization {
+void exposeLinearConstraint();
+void exposeQuadraticProblem();
+void exposeSplineGradientBasedAbstracts();
+}  // namespace pathOptimization
+}  // namespace core
+}  // namespace pyhpp
 
-#endif // PYHPP_CORE_PATH_OPTIMIZATION_FWD_HH
+#endif  // PYHPP_CORE_PATH_OPTIMIZATION_FWD_HH

@@ -21,12 +21,12 @@
 #define PYHPP_CORE_PATH_FWD_HH
 
 namespace pyhpp {
-  namespace core {
-    namespace path {
-      void exposeSplines();
-      void exposeVector();
-    }
-  }
-}
+namespace core {
+namespace path {
+void exposeSplines();
+void exposeVector();
+}  // namespace path
+}  // namespace core
+}  // namespace pyhpp
 
-#endif // PYHPP_CORE_PATH_FWD_HH
+#endif  // PYHPP_CORE_PATH_FWD_HH

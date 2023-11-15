@@ -17,80 +17,69 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/constraints/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <hpp/constraints/generic-transformation.hh>
+#include <pyhpp/constraints/fwd.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace constraints {
-    using namespace hpp::constraints;
+namespace constraints {
+using namespace hpp::constraints;
 
-    template <typename GT_t> typename GT_t::Ptr_t 
-      AbsoluteGenericTransformation_create (
-              const std::string& name,
-              const DevicePtr_t& robot,
-              const se3::JointIndex& j2,
-              const Transform3f& frame2,
-              const Transform3f& frame1,
-              std::vector <bool> mask // TODO Add default argument
-          )
-    {
-      JointConstPtr_t joint2(new hpp::pinocchio::Joint (robot, j2));
-      return GT_t::create(name, robot, joint2, frame2, frame1, mask);
-    }
-
-    template <typename GT_t>
-    void exposeAbsoluteGenericTransformation (const char* name)
-    {
-      // BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(GT_t_create_overload, create, 5, 6)
-
-      class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t, boost::noncopyable> (name, no_init)
-        .def ("create", &AbsoluteGenericTransformation_create<GT_t>,
-              args("name", "device", "joint2", "frame2", "frame1", "mask")
-            )
-        .staticmethod ("create")
-        ;
-    }
-
-    template <typename GT_t> typename GT_t::Ptr_t 
-      RelativeGenericTransformation_create (
-              const std::string& name,
-              const DevicePtr_t& robot,
-              const se3::JointIndex& j1,
-              const se3::JointIndex& j2,
-              const Transform3f& frame1,
-              const Transform3f& frame2,
-              std::vector <bool> mask // TODO Add default argument
-          )
-    {
-      JointConstPtr_t joint1(new hpp::pinocchio::Joint (robot, j1));
-      JointConstPtr_t joint2(new hpp::pinocchio::Joint (robot, j2));
-      return GT_t::create(name, robot, joint1, joint2, frame1, frame2, mask);
-    }
-
-    template <typename GT_t>
-    void exposeRelativeGenericTransformation (const char* name)
-    {
-      class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t, boost::noncopyable> (name, no_init)
-        .def ("create", &RelativeGenericTransformation_create<GT_t>,
-              args("name", "device", "joint1", "joint2", "frame1", "frame2", "mask")
-            )
-        .staticmethod ("create")
-        ;
-    }
-
-    void exposeGenericTransformations ()
-    {
-      exposeAbsoluteGenericTransformation<Position      >("Position");
-      exposeAbsoluteGenericTransformation<Orientation   >("Orientation");
-      exposeAbsoluteGenericTransformation<Transformation>("Transformation");
-      exposeAbsoluteGenericTransformation<RelativePosition      >("RelativePosition");
-      exposeAbsoluteGenericTransformation<RelativeOrientation   >("RelativeOrientation");
-      exposeAbsoluteGenericTransformation<RelativeTransformation>("RelativeTransformation");
-    }
-  }
+template <typename GT_t>
+typename GT_t::Ptr_t AbsoluteGenericTransformation_create(
+    const std::string& name, const DevicePtr_t& robot,
+    const se3::JointIndex& j2, const Transform3f& frame2,
+    const Transform3f& frame1,
+    std::vector<bool> mask  // TODO Add default argument
+) {
+  JointConstPtr_t joint2(new hpp::pinocchio::Joint(robot, j2));
+  return GT_t::create(name, robot, joint2, frame2, frame1, mask);
 }
+
+template <typename GT_t>
+void exposeAbsoluteGenericTransformation(const char* name) {
+  // BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(GT_t_create_overload, create, 5, 6)
+
+  class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
+         boost::noncopyable>(name, no_init)
+      .def("create", &AbsoluteGenericTransformation_create<GT_t>,
+           args("name", "device", "joint2", "frame2", "frame1", "mask"))
+      .staticmethod("create");
+}
+
+template <typename GT_t>
+typename GT_t::Ptr_t RelativeGenericTransformation_create(
+    const std::string& name, const DevicePtr_t& robot,
+    const se3::JointIndex& j1, const se3::JointIndex& j2,
+    const Transform3f& frame1, const Transform3f& frame2,
+    std::vector<bool> mask  // TODO Add default argument
+) {
+  JointConstPtr_t joint1(new hpp::pinocchio::Joint(robot, j1));
+  JointConstPtr_t joint2(new hpp::pinocchio::Joint(robot, j2));
+  return GT_t::create(name, robot, joint1, joint2, frame1, frame2, mask);
+}
+
+template <typename GT_t>
+void exposeRelativeGenericTransformation(const char* name) {
+  class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
+         boost::noncopyable>(name, no_init)
+      .def("create", &RelativeGenericTransformation_create<GT_t>,
+           args("name", "device", "joint1", "joint2", "frame1", "frame2",
+                "mask"))
+      .staticmethod("create");
+}
+
+void exposeGenericTransformations() {
+  exposeAbsoluteGenericTransformation<Position>("Position");
+  exposeAbsoluteGenericTransformation<Orientation>("Orientation");
+  exposeAbsoluteGenericTransformation<Transformation>("Transformation");
+  exposeAbsoluteGenericTransformation<RelativePosition>("RelativePosition");
+  exposeAbsoluteGenericTransformation<RelativeOrientation>(
+      "RelativeOrientation");
+  exposeAbsoluteGenericTransformation<RelativeTransformation>(
+      "RelativeTransformation");
+}
+}  // namespace constraints
+}  // namespace pyhpp

@@ -17,40 +17,34 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/path/fwd.hh>
-
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-
 #include <hpp/core/path-vector.hh>
-
-#include <pyhpp/util.hh>
 #include <hpp/python/config.hh>
+#include <pyhpp/core/path/fwd.hh>
+#include <pyhpp/util.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace core {
-    namespace path {
-      using namespace hpp::core;
+namespace core {
+namespace path {
+using namespace hpp::core;
 
-      void exposeVector()
-      {
-        class_ <PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable> ("Vector", no_init)
-          .def ("create", &PathVector::create)
-          .staticmethod ("create")
-          PYHPP_DEFINE_METHOD (PathVector, numberPaths)
-          PYHPP_DEFINE_METHOD (PathVector, pathAtRank)
-          PYHPP_DEFINE_METHOD (PathVector, rankAtParam)
-          PYHPP_DEFINE_METHOD (PathVector, appendPath)
-          // PYHPP_DEFINE_METHOD (PathVector, concatenate)
-          PYHPP_DEFINE_METHOD (PathVector, flatten)
-          ;
+void exposeVector() {
+  class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
+                                                                       no_init)
+      .def("create", &PathVector::create)
+      .staticmethod("create") PYHPP_DEFINE_METHOD(PathVector, numberPaths)
+          PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
+              PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
+                  PYHPP_DEFINE_METHOD(PathVector, appendPath)
+      // PYHPP_DEFINE_METHOD (PathVector, concatenate)
+      PYHPP_DEFINE_METHOD(PathVector, flatten);
 
-        class_ <PathVectors_t> ("Vectors")
-          .def (vector_indexing_suite <PathVectors_t, true> ())
-          ;
-      }
-    }
-  }
+  class_<PathVectors_t>("Vectors").def(
+      vector_indexing_suite<PathVectors_t, true>());
 }
+}  // namespace path
+}  // namespace core
+}  // namespace pyhpp

@@ -21,13 +21,13 @@
 #define PYHPP_CORBASERVER_FWD_HH
 
 namespace pyhpp {
-  namespace corbaserver {
-    void exposeServer();
-    // void exposeProblemSolverMap();
-    namespace wholebodyStep {
-      void exposeServer();
-    }
-  }
+namespace corbaserver {
+void exposeServer();
+// void exposeProblemSolverMap();
+namespace wholebodyStep {
+void exposeServer();
 }
+}  // namespace corbaserver
+}  // namespace pyhpp
 
-#endif // PYHPP_CORBASERVER_FWD_HH
+#endif  // PYHPP_CORBASERVER_FWD_HH

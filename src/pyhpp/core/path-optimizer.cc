@@ -17,24 +17,22 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/fwd.hh>
-
 #include <boost/python.hpp>
-
-#include <hpp/core/problem.hh>
 #include <hpp/core/path-optimizer.hh>
+#include <hpp/core/problem.hh>
+#include <pyhpp/core/fwd.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace core {
-    using namespace hpp::core;
+namespace core {
+using namespace hpp::core;
 
-    void exposePathOptimizer()
-    {
-      class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable> ("PathOptimizer", no_init)
-        .def("problem", &PathOptimizer::problem, return_value_policy<reference_existing_object>())
-        ;
-    }
-  }
+void exposePathOptimizer() {
+  class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
+                                                                no_init)
+      .def("problem", &PathOptimizer::problem,
+           return_value_policy<reference_existing_object>());
 }
+}  // namespace core
+}  // namespace pyhpp

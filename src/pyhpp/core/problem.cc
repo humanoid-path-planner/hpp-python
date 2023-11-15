@@ -14,38 +14,47 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/fwd.hh>
-
 #include <boost/python.hpp>
-
-#include <hpp/core/problem.hh>
-
 #include <hpp/core/config-validation.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
+#include <hpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
-
+#include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace core {
-    using namespace hpp::core;
+namespace core {
+using namespace hpp::core;
 
-    void exposeProblem ()
-    {
-      class_ <Problem> ("Problem", no_init)
-        // PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const DevicePtr_t&)
-        .def ("robot", static_cast<const DevicePtr_t& (Problem::*) () const> (&Problem::robot), return_value_policy<return_by_value>())
-        .def ("configurationShooter", static_cast<ConfigurationShooterPtr_t (Problem::*) () const> (&Problem::configurationShooter))
-        .def ("steeringMethod", static_cast<SteeringMethodPtr_t (Problem::*) () const> (&Problem::steeringMethod))
-        .def ("configValidation", static_cast<const ConfigValidationsPtr_t& (Problem::*) () const> (&Problem::configValidations), return_value_policy<return_by_value>())
-        .def ("pathValidation", static_cast<PathValidationPtr_t (Problem::*) () const> (&Problem::pathValidation))
-        .def ("pathProjector", static_cast<PathProjectorPtr_t (Problem::*) () const> (&Problem::pathProjector))
-        ;
-    }
-  }
+void exposeProblem() {
+  class_<Problem>("Problem", no_init)
+      // PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const
+      // DevicePtr_t&)
+      .def(
+          "robot",
+          static_cast<const DevicePtr_t& (Problem::*)() const>(&Problem::robot),
+          return_value_policy<return_by_value>())
+      .def("configurationShooter",
+           static_cast<ConfigurationShooterPtr_t (Problem::*)() const>(
+               &Problem::configurationShooter))
+      .def("steeringMethod",
+           static_cast<SteeringMethodPtr_t (Problem::*)() const>(
+               &Problem::steeringMethod))
+      .def("configValidation",
+           static_cast<const ConfigValidationsPtr_t& (Problem::*)() const>(
+               &Problem::configValidations),
+           return_value_policy<return_by_value>())
+      .def("pathValidation",
+           static_cast<PathValidationPtr_t (Problem::*)() const>(
+               &Problem::pathValidation))
+      .def("pathProjector",
+           static_cast<PathProjectorPtr_t (Problem::*)() const>(
+               &Problem::pathProjector));
 }
+}  // namespace core
+}  // namespace pyhpp

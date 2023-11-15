@@ -17,31 +17,26 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/pinocchio/urdf/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <hpp/pinocchio/urdf/util.hh>
+#include <pyhpp/pinocchio/urdf/fwd.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace pinocchio {
-    namespace urdf {
-      using hpp::pinocchio::DevicePtr_t;
-      using namespace hpp::pinocchio::urdf;
+namespace pinocchio {
+namespace urdf {
+using hpp::pinocchio::DevicePtr_t;
+using namespace hpp::pinocchio::urdf;
 
-      void exposeUtil()
-      {
-        def ("loadRobotModel",
-            static_cast<void (*) (const DevicePtr_t& robot,
-                                  const std::string& rootJointType,
-                                  const std::string& package,
-                                  const std::string& modelName,
-                                  const std::string& urdfSuffix,
-                                  const std::string& srdfSuffix)>
-            (&loadRobotModel));
-      }
-    }
-  }
+void exposeUtil() {
+  def("loadRobotModel",
+      static_cast<void (*)(
+          const DevicePtr_t& robot, const std::string& rootJointType,
+          const std::string& package, const std::string& modelName,
+          const std::string& urdfSuffix, const std::string& srdfSuffix)>(
+          &loadRobotModel));
 }
+}  // namespace urdf
+}  // namespace pinocchio
+}  // namespace pyhpp

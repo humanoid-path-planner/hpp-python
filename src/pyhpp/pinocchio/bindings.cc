@@ -18,15 +18,13 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-
 #include <pyhpp/pinocchio/fwd.hh>
 #include <pyhpp/util.hh>
 
-BOOST_PYTHON_MODULE(bindings)
-{
+BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;
 
-  boost::python::import ("pinocchio");
+  boost::python::import("pinocchio");
 
   pyhpp::pinocchio::exposeDevice();
   pyhpp::pinocchio::exposeLiegroup();

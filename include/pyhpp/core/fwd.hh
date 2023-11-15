@@ -21,24 +21,24 @@
 #define PYHPP_CORE_FWD_HH
 
 namespace pyhpp {
-  namespace core {
-    void exposeConfigValidation();
-    void exposeConfigurationShooter();
-    void exposeConstraint();
+namespace core {
+void exposeConfigValidation();
+void exposeConfigurationShooter();
+void exposeConstraint();
 
-    void exposeEquation();
+void exposeEquation();
 
-    void exposeReports();
+void exposeReports();
 
-    void exposeSteeringMethod();
+void exposeSteeringMethod();
 
-    void exposePath();
-    void exposePathOptimizer();
-    void exposePathProjector();
-    void exposePathValidation();
-    void exposeProblem();
-    void exposeProblemSolver();
-  }
-}
+void exposePath();
+void exposePathOptimizer();
+void exposePathProjector();
+void exposePathValidation();
+void exposeProblem();
+void exposeProblemSolver();
+}  // namespace core
+}  // namespace pyhpp
 
-#endif // PYHPP_CORE_FWD_HH
+#endif  // PYHPP_CORE_FWD_HH

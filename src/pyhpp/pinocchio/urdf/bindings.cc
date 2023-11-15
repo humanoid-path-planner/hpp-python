@@ -18,12 +18,10 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 #include <pyhpp/util.hh>
 
-BOOST_PYTHON_MODULE(bindings)
-{
+BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;
 
   pyhpp::pinocchio::urdf::exposeUtil();

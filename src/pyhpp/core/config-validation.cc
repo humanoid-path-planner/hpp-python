@@ -14,13 +14,10 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <hpp/core/config-validation.hh>
 #include <hpp/core/config-validations.hh>
-
+#include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
@@ -28,46 +25,39 @@ using namespace boost::python;
 // DocNamespace(hpp::core)
 
 namespace pyhpp {
-  namespace core {
-    using namespace hpp::core;
+namespace core {
+using namespace hpp::core;
 
-    struct CVWrapper {
-      static bool validate (ConfigValidation* cv,
-          const Configuration_t& config,
-          ValidationReportPtr_t& report)
-      {
-        return cv->validate (config, report);
-      }
-
-      static tuple py_validate (ConfigValidation* cv,
-          const Configuration_t& config)
-      {
-        ValidationReportPtr_t report;
-        bool res = cv->validate (config, report);
-        return boost::python::make_tuple (res, report);
-      }
-    };
-
-    void exposeConfigValidation ()
-    {
-      // DocClass (ConfigValidation)
-      class_ <ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>
-        ("ConfigValidation", no_init)
-        PYHPP_DEFINE_METHOD2 (ConfigValidation, validate, DocClassMethod(validate))
-
-        .def ("validate", &CVWrapper::py_validate)
-        ;
-
-      // DocClass (ConfigValidations)
-      class_ <ConfigValidations, ConfigValidationsPtr_t,
-             bases<ConfigValidation>, boost::noncopyable>
-        ("ConfigValidations", no_init)
-        PYHPP_DEFINE_METHOD2 (ConfigValidations, add,                     DocClassMethod(add))
-        PYHPP_DEFINE_METHOD2 (ConfigValidations, numberConfigValidations, DocClassMethod(numberConfigValidations))
-        PYHPP_DEFINE_METHOD2 (ConfigValidations, clear,                   DocClassMethod(clear))
-        ;
-
-    }
+struct CVWrapper {
+  static bool validate(ConfigValidation* cv, const Configuration_t& config,
+                       ValidationReportPtr_t& report) {
+    return cv->validate(config, report);
   }
-}
 
+  static tuple py_validate(ConfigValidation* cv,
+                           const Configuration_t& config) {
+    ValidationReportPtr_t report;
+    bool res = cv->validate(config, report);
+    return boost::python::make_tuple(res, report);
+  }
+};
+
+void exposeConfigValidation() {
+  // DocClass (ConfigValidation)
+  class_<ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>(
+      "ConfigValidation", no_init)
+      PYHPP_DEFINE_METHOD2(ConfigValidation, validate, DocClassMethod(validate))
+
+          .def("validate", &CVWrapper::py_validate);
+
+  // DocClass (ConfigValidations)
+  class_<ConfigValidations, ConfigValidationsPtr_t, bases<ConfigValidation>,
+         boost::noncopyable>("ConfigValidations", no_init)
+      PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
+          PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
+                               DocClassMethod(numberConfigValidations))
+              PYHPP_DEFINE_METHOD2(ConfigValidations, clear,
+                                   DocClassMethod(clear));
+}
+}  // namespace core
+}  // namespace pyhpp

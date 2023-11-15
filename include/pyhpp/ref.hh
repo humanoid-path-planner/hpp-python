@@ -24,10 +24,10 @@
 #include <hpp/pinocchio/fwd.hh>
 
 namespace pyhpp {
-  typedef eigenpy::Ref<hpp::pinocchio::vector_t      > vectorRef_t;
-  typedef eigenpy::Ref<hpp::pinocchio::vector_t const> vectorConstRef_t;
-  typedef eigenpy::Ref<hpp::pinocchio::matrix_t      > matrixRef_t;
-  typedef eigenpy::Ref<hpp::pinocchio::matrix_t const> matrixConstRef_t;
-}
+typedef eigenpy::Ref<hpp::pinocchio::vector_t> vectorRef_t;
+typedef eigenpy::Ref<hpp::pinocchio::vector_t const> vectorConstRef_t;
+typedef eigenpy::Ref<hpp::pinocchio::matrix_t> matrixRef_t;
+typedef eigenpy::Ref<hpp::pinocchio::matrix_t const> matrixConstRef_t;
+}  // namespace pyhpp
 
-#endif // PYHPP_REF_HH
+#endif  // PYHPP_REF_HH

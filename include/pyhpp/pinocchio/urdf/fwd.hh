@@ -21,11 +21,11 @@
 #define PYHPP_PINOCCHIO_UTIL_FWD_HH
 
 namespace pyhpp {
-  namespace pinocchio {
-    namespace urdf {
-      void exposeUtil ();
-    }
-  }
+namespace pinocchio {
+namespace urdf {
+void exposeUtil();
 }
+}  // namespace pinocchio
+}  // namespace pyhpp
 
-#endif // PYHPP_PINOCCHIO_UTIL_FWD_HH
+#endif  // PYHPP_PINOCCHIO_UTIL_FWD_HH

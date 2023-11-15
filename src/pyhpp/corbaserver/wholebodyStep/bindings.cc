@@ -18,15 +18,13 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-
-#include <pyhpp/util.hh>
 #include <pyhpp/corbaserver/fwd.hh>
+#include <pyhpp/util.hh>
 
-BOOST_PYTHON_MODULE(bindings)
-{
+BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;
 
-  boost::python::import ("pyhpp.corbaserver");
+  boost::python::import("pyhpp.corbaserver");
 
   pyhpp::corbaserver::wholebodyStep::exposeServer();
 }

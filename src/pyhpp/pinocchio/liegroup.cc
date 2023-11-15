@@ -17,98 +17,98 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/pinocchio/urdf/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <eigenpy/eigenpy.hpp>
-
-#include <hpp/pinocchio/liegroup-space.hh>
 #include <hpp/pinocchio/liegroup-element.hh>
-
+#include <hpp/pinocchio/liegroup-space.hh>
+#include <pyhpp/pinocchio/urdf/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace pinocchio {
-    using namespace hpp::pinocchio;
+namespace pinocchio {
+using namespace hpp::pinocchio;
 
-    struct LgSWrapper {
-      static LiegroupSpacePtr_t itimes (LiegroupSpacePtr_t l, const LiegroupSpacePtr_t& r)
-      {
-        return *l *= r;
-      }
-      static LiegroupSpacePtr_t times (LiegroupSpacePtr_t l, const LiegroupSpacePtr_t& r)
-      {
-        return l * r;
-      }
-      static void Jintegrate (const LiegroupSpace& ls,
-          const vector_t& q, matrixRef_t J)
-      {
-        matrix_t _J (J);
-        ls.Jintegrate (q, _J);
-        J = _J;
-      }
-      static void Jdifference (const LiegroupSpace& ls,
-          bool applyOnTheLeft,
-          const vector_t& q0, const vector_t& q1,
-          matrixRef_t     J0, matrixRef_t     J1)
-      {
-        matrix_t _J0 (J0);
-        matrix_t _J1 (J1);
-        if (applyOnTheLeft)
-          ls.Jdifference <true > (q0, q1, _J0, _J1);
-        else
-          ls.Jdifference <false> (q0, q1, _J0, _J1);
-        J0 = _J0;
-        J1 = _J1;
-      }
-    };
-    struct LgEWrapper {
-      static vector_t vector_wrap_read (const LiegroupElement& lge) { return lge.vector(); }
-      static void vector_wrap_write (LiegroupElement& lge, const vector_t& v) { lge.vector() = v; }
-    };
-
-    void exposeLiegroup()
-    {
-      class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable> ("LiegroupSpace", no_init)
-        .def ("__str__", &to_str_from_operator<LiegroupSpace>)
-        .def ("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
-        PYHPP_DEFINE_METHOD (LiegroupSpace, Rn    ).staticmethod ("Rn")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, R1    ).staticmethod ("R1")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, R2    ).staticmethod ("R2")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, R3    ).staticmethod ("R3")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, SE2   ).staticmethod ("SE2")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, SE3   ).staticmethod ("SE3")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, R2xSO2).staticmethod ("R2xSO2")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, R3xSO3).staticmethod ("R3xSO3")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, empty ).staticmethod ("empty")
-        PYHPP_DEFINE_METHOD (LiegroupSpace, mergeVectorSpaces)
-        PYHPP_DEFINE_METHOD (LgSWrapper   , Jintegrate)
-        PYHPP_DEFINE_METHOD (LgSWrapper   , Jdifference)
-        .def (self == self)
-        .def (self != self)
-        // Operation on shared pointers...
-        .def ("__imul__", &LgSWrapper::itimes)
-        .def ("__mul__", &LgSWrapper::times)
-        ;
-
-      class_<LiegroupElement> ("LiegroupElement", init<const vector_t&, const LiegroupSpacePtr_t&>())
-        .def (init <const LiegroupSpacePtr_t&>())
-        // Pythonic API
-        .def ("__str__", &to_str_from_operator<LiegroupElement>)
-        .add_property ("v",
-            &LgEWrapper::vector_wrap_read,
-            &LgEWrapper::vector_wrap_write)
-
-        // C++ API
-        .def ("vector", static_cast <const vector_t& (LiegroupElement::*) () const> (&LiegroupElement::vector), return_value_policy<return_by_value>())
-        .def ("space", &LiegroupElement::space, return_value_policy<return_by_value>())
-        .def (self - self)
-        .def (self + vector_t())
-        ;
-    }
+struct LgSWrapper {
+  static LiegroupSpacePtr_t itimes(LiegroupSpacePtr_t l,
+                                   const LiegroupSpacePtr_t& r) {
+    return *l *= r;
   }
+  static LiegroupSpacePtr_t times(LiegroupSpacePtr_t l,
+                                  const LiegroupSpacePtr_t& r) {
+    return l * r;
+  }
+  static void Jintegrate(const LiegroupSpace& ls, const vector_t& q,
+                         matrixRef_t J) {
+    matrix_t _J(J);
+    ls.Jintegrate(q, _J);
+    J = _J;
+  }
+  static void Jdifference(const LiegroupSpace& ls, bool applyOnTheLeft,
+                          const vector_t& q0, const vector_t& q1,
+                          matrixRef_t J0, matrixRef_t J1) {
+    matrix_t _J0(J0);
+    matrix_t _J1(J1);
+    if (applyOnTheLeft)
+      ls.Jdifference<true>(q0, q1, _J0, _J1);
+    else
+      ls.Jdifference<false>(q0, q1, _J0, _J1);
+    J0 = _J0;
+    J1 = _J1;
+  }
+};
+struct LgEWrapper {
+  static vector_t vector_wrap_read(const LiegroupElement& lge) {
+    return lge.vector();
+  }
+  static void vector_wrap_write(LiegroupElement& lge, const vector_t& v) {
+    lge.vector() = v;
+  }
+};
+
+void exposeLiegroup() {
+  class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable>("LiegroupSpace",
+                                                                no_init)
+      .def("__str__", &to_str_from_operator<LiegroupSpace>)
+      .def("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
+          PYHPP_DEFINE_METHOD(LiegroupSpace, Rn)
+      .staticmethod("Rn") PYHPP_DEFINE_METHOD(LiegroupSpace, R1)
+      .staticmethod("R1") PYHPP_DEFINE_METHOD(LiegroupSpace, R2)
+      .staticmethod("R2") PYHPP_DEFINE_METHOD(LiegroupSpace, R3)
+      .staticmethod("R3") PYHPP_DEFINE_METHOD(LiegroupSpace, SE2)
+      .staticmethod("SE2") PYHPP_DEFINE_METHOD(LiegroupSpace, SE3)
+      .staticmethod("SE3") PYHPP_DEFINE_METHOD(LiegroupSpace, R2xSO2)
+      .staticmethod("R2xSO2") PYHPP_DEFINE_METHOD(LiegroupSpace, R3xSO3)
+      .staticmethod("R3xSO3") PYHPP_DEFINE_METHOD(LiegroupSpace, empty)
+      .staticmethod("empty")
+          PYHPP_DEFINE_METHOD(LiegroupSpace, mergeVectorSpaces)
+              PYHPP_DEFINE_METHOD(LgSWrapper, Jintegrate)
+                  PYHPP_DEFINE_METHOD(LgSWrapper, Jdifference)
+      .def(self == self)
+      .def(self != self)
+      // Operation on shared pointers...
+      .def("__imul__", &LgSWrapper::itimes)
+      .def("__mul__", &LgSWrapper::times);
+
+  class_<LiegroupElement>("LiegroupElement",
+                          init<const vector_t&, const LiegroupSpacePtr_t&>())
+      .def(init<const LiegroupSpacePtr_t&>())
+      // Pythonic API
+      .def("__str__", &to_str_from_operator<LiegroupElement>)
+      .add_property("v", &LgEWrapper::vector_wrap_read,
+                    &LgEWrapper::vector_wrap_write)
+
+      // C++ API
+      .def("vector",
+           static_cast<const vector_t& (LiegroupElement::*)() const>(
+               &LiegroupElement::vector),
+           return_value_policy<return_by_value>())
+      .def("space", &LiegroupElement::space,
+           return_value_policy<return_by_value>())
+      .def(self - self)
+      .def(self + vector_t());
 }
+}  // namespace pinocchio
+}  // namespace pyhpp

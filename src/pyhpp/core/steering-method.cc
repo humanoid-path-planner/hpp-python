@@ -14,34 +14,28 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <pyhpp/core/fwd.hh>
-
 #include <boost/python.hpp>
-
 #include <hpp/core/steering-method.hh>
-
+#include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
 using namespace boost::python;
 
 namespace pyhpp {
-  namespace core {
-    using namespace hpp::core;
+namespace core {
+using namespace hpp::core;
 
-    struct SMWrapper {
-      static PathPtr_t operator_call (const SteeringMethod& sm,
-          const vector_t& q1, const vector_t& q2)
-      {
-        return sm (q1, q2);
-      }
-    };
-
-    void exposeSteeringMethod()
-    {
-      class_ <SteeringMethod, SteeringMethodPtr_t, boost::noncopyable>
-        ("SteeringMethod", no_init)
-        .def ("__call__", &SMWrapper::operator_call)
-        ;
-    }
+struct SMWrapper {
+  static PathPtr_t operator_call(const SteeringMethod& sm, const vector_t& q1,
+                                 const vector_t& q2) {
+    return sm(q1, q2);
   }
+};
+
+void exposeSteeringMethod() {
+  class_<SteeringMethod, SteeringMethodPtr_t, boost::noncopyable>(
+      "SteeringMethod", no_init)
+      .def("__call__", &SMWrapper::operator_call);
 }
+}  // namespace core
+}  // namespace pyhpp
