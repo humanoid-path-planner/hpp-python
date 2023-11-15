@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023 CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -17,9 +17,9 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/constraints/generic-transformation.hh>
 #include <pyhpp/constraints/fwd.hh>
+#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -30,7 +30,7 @@ using namespace hpp::constraints;
 template <typename GT_t>
 typename GT_t::Ptr_t AbsoluteGenericTransformation_create(
     const std::string& name, const DevicePtr_t& robot,
-    const se3::JointIndex& j2, const Transform3f& frame2,
+    const pinocchio::JointIndex& j2, const Transform3f& frame2,
     const Transform3f& frame1,
     std::vector<bool> mask  // TODO Add default argument
 ) {
@@ -52,7 +52,7 @@ void exposeAbsoluteGenericTransformation(const char* name) {
 template <typename GT_t>
 typename GT_t::Ptr_t RelativeGenericTransformation_create(
     const std::string& name, const DevicePtr_t& robot,
-    const se3::JointIndex& j1, const se3::JointIndex& j2,
+    const pinocchio::JointIndex& j1, const pinocchio::JointIndex& j2,
     const Transform3f& frame1, const Transform3f& frame2,
     std::vector<bool> mask  // TODO Add default argument
 ) {

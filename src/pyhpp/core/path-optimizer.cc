@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -17,10 +17,11 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/core/path-optimizer.hh>
 #include <hpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
+
+#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -30,9 +31,7 @@ using namespace hpp::core;
 
 void exposePathOptimizer() {
   class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
-                                                                no_init)
-      .def("problem", &PathOptimizer::problem,
-           return_value_policy<reference_existing_object>());
+                                                                no_init);
 }
 }  // namespace core
 }  // namespace pyhpp

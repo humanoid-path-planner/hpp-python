@@ -14,11 +14,11 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/corbaserver/server.hh>
 #include <hpp/core/problem-solver.hh>
 #include <pyhpp/corbaserver/fwd.hh>
 #include <pyhpp/util.hh>
+#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -44,17 +44,13 @@ struct SWrapper {
 };
 
 void exposeServer() {
-  class_<Server>("Server", no_init)
-      // .def (init<hpp::core::ProblemSolverPtr_t, int, const char* [], bool>())
-      .def("__init__", make_constructor(&SWrapper::init1))
-      .def("__init__", make_constructor(&SWrapper::init2))
-      // .def (init<ProblemSolverMapPtr_t, int, const char* [], bool>)
-      PYHPP_DEFINE_METHOD(Server, startCorbaServer)
-          PYHPP_DEFINE_METHOD(Server, processRequest)
-              PYHPP_DEFINE_METHOD_INTERNAL_REF(Server, mainContextId)
-      // PYHPP_DEFINE_METHOD (Server, problemSolver)
-      // PYHPP_DEFINE_METHOD (Server, problemSolverMap)
-      ;
+  class_<Server, boost::noncopyable>("Server", init<ProblemSolverPtr_t, bool>())
+    .def("__init__", make_constructor(&SWrapper::init1))
+    .def("__init__", make_constructor(&SWrapper::init2))
+    .def("initialize", &Server::initialize)
+    PYHPP_DEFINE_METHOD(Server, startCorbaServer)
+    PYHPP_DEFINE_METHOD(Server, processRequest)
+    PYHPP_DEFINE_METHOD_INTERNAL_REF(Server, mainContextId);
 }
 }  // namespace corbaserver
 }  // namespace pyhpp

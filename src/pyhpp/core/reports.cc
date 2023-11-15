@@ -1,5 +1,6 @@
-// Copyright (c) 2018, Joseph Mirabel
-// Authors: Joseph Mirabel (joseph.mirabel@laas.fr)
+//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-core.
 // hpp-core is free software: you can redistribute it
@@ -14,7 +15,7 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
+#include <pinocchio/multibody/fwd.hpp>
 #include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/collision-validation-report.hh>
 #include <hpp/core/joint-bound-validation.hh>
@@ -22,6 +23,8 @@
 #include <hpp/core/validation-report.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
+
+#include <boost/python.hpp>
 
 using namespace boost::python;
 

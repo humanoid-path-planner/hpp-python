@@ -23,7 +23,7 @@
 MACRO(ADD_PYTHON_LIBRARY MODULE)
   set(options )
   set(oneValueArgs )
-  SET(multiValueArgs FILES PKG_CONFIG_DEPENDENCIES)
+  SET(multiValueArgs FILES PKG_CONFIG_DEPENDENCIES ADDITIONAL_LIBS)
   CMAKE_PARSE_ARGUMENTS(ADD_PYTHON_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE})
@@ -55,6 +55,10 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
   FOREACH (PKG_DEPENDENCY ${ADD_PYTHON_LIBRARY_PKG_CONFIG_DEPENDENCIES})
     PKG_CONFIG_USE_DEPENDENCY (${TARGET_NAME} ${PKG_DEPENDENCY})
   ENDFOREACH ()
+  FOREACH(LIB ${ADD_PYTHON_LIBRARY_ADDITIONAL_LIBS})
+    MESSAGE(STATUS "additional lib: ${LIB}")
+    TARGET_LINK_LIBRARIES(${TARGET_NAME} ${LIB})
+  ENDFOREACH()
   TARGET_LINK_LIBRARIES(${TARGET_NAME} ${Boost_LIBRARIES})
 
   INSTALL(TARGETS ${TARGET_NAME}
@@ -62,7 +66,7 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
 
   # Write __init__.py file
   FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
-    "from ${LIBNAME} import *")
+    "from .${LIBNAME} import *")
   INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
     DESTINATION ${PYTHON_SITELIB}/${MODULE})
 ENDMACRO()
@@ -93,8 +97,10 @@ ADD_PYTHON_LIBRARY(
   pyhpp/constraints
   FILES
   pyhpp/constraints/differentiable-function.cc
+  pyhpp/constraints/explicit.cc
   pyhpp/constraints/explicit-constraint-set.cc
   pyhpp/constraints/generic-transformation.cc
+  pyhpp/constraints/implicit.cc
   pyhpp/constraints/iterative-solver.cc
   pyhpp/constraints/by-substitution.cc
   pyhpp/constraints/bindings.cc
@@ -108,7 +114,6 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/config-validation.cc
   pyhpp/core/configuration-shooter.cc
   pyhpp/core/constraint.cc
-  pyhpp/core/equation.cc
   pyhpp/core/reports.cc
   pyhpp/core/steering-method.cc
   pyhpp/core/path.cc
@@ -136,24 +141,14 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
   pyhpp/core/path_optimization/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  ADDITIONAL_LIBS hpp-core-gpl
   )
 
 LIST(APPEND DEPENDENCIES "hpp-corbaserver")
 ADD_PYTHON_LIBRARY(
   pyhpp/corbaserver
   FILES
-  pyhpp/corbaserver/server.cc
   pyhpp/corbaserver/bindings.cc
+  pyhpp/corbaserver/server.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
-
-IF(BIND_HPP_WHOLEBODY_STEP)
-  LIST(APPEND DEPENDENCIES "hpp-wholebody-step-corba")
-  ADD_PYTHON_LIBRARY(
-    pyhpp/corbaserver/wholebodyStep
-    FILES
-    pyhpp/corbaserver/wholebodyStep/server.cc
-    pyhpp/corbaserver/wholebodyStep/bindings.cc
-    PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
-    )
-ENDIF()

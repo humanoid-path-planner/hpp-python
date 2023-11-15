@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,8 +16,7 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <pinocchio/multibody/fwd.hpp>
 #include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/path-optimization/linear-constraint.hh>
 #include <hpp/core/path-optimization/quadratic-program.hh>
@@ -29,6 +27,9 @@
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
 #include <pyhpp/vector-indexing-suite.hh>
+
+#include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -58,7 +59,7 @@ class SGBWrapper
   typedef typename Base::SplineOptimizationDatas_t SplineOptimizationDatas_t;
 
   // using Base::Base;
-  SGBWrapper(const Problem& p) : Base(p) {}
+  SGBWrapper(const ProblemConstPtr_t& p) : Base(p) {}
   virtual ~SGBWrapper() {}
 
   PathVectorPtr_t optimize(const PathVectorPtr_t& path) {
@@ -87,8 +88,9 @@ class SGBWrapper
       f(splines);
   }
 
-  Reports_t validatePath(const Splines_t& splines, bool stopAtFirst) const {
-    return Base::validatePath(splines, stopAtFirst);
+  Reports_t validatePath(const Splines_t& splines, std::vector<std::size_t>&
+                         reordering, bool stopAtFirst, bool reorder) const {
+    return Base::validatePath(splines, reordering, stopAtFirst, reorder);
   }
 
   void jointBoundConstraint(const Splines_t& splines,
@@ -118,21 +120,22 @@ template <int _PolynomeBasis, int _Order>
 void exposeSplineGradientBasedAbstract(const char* name) {
   typedef SplineGradientBasedAbstract<_PolynomeBasis, _Order> SGB_t;
   typedef SGBWrapper<_PolynomeBasis, _Order> SGBW_t;
-  typedef boost::shared_ptr<SGBW_t> Ptr_t;
+  typedef hpp::shared_ptr<SGBW_t> Ptr_t;
   typedef typename SGB_t::Splines_t Splines_t;
   typedef typename SGBW_t::SplineOptimizationData SplineOptimizationData;
   typedef typename SGBW_t::SplineOptimizationDatas_t SplineOptimizationDatas_t;
 
   scope s =
       class_<SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable>(
-          name, init<const Problem&>()) PYHPP_DEFINE_METHOD(SGB_t, copy)
+          name, init<const ProblemConstPtr_t&>())
+    PYHPP_DEFINE_METHOD(SGB_t, copy)
           .staticmethod("copy") PYHPP_DEFINE_METHOD(SGB_t, updateSplines)
               PYHPP_DEFINE_METHOD(SGBW_t, updateParameters)
                   PYHPP_DEFINE_METHOD(SGB_t, interpolate)
           .staticmethod("interpolate") PYHPP_DEFINE_METHOD(
               SGBW_t, appendEquivalentSpline)
               PYHPP_DEFINE_METHOD(SGBW_t, initializePathValidation)
-                  PYHPP_DEFINE_METHOD(SGBW_t, validatePath)
+    .def("validatePath", &SGBW_t::validatePath)
                       PYHPP_DEFINE_METHOD(SGBW_t, jointBoundConstraint)
                           PYHPP_DEFINE_METHOD(SGBW_t, addContinuityConstraints)
                               PYHPP_DEFINE_METHOD(SGBW_t, buildPathVector);

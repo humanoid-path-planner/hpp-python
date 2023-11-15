@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023 CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -17,12 +17,13 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include <eigenpy/eigenpy.hpp>
 #include <hpp/constraints/differentiable-function.hh>
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
+
+#include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <eigenpy/eigenpy.hpp>
 
 // DocNamespace(hpp::constraints)
 
@@ -33,14 +34,14 @@ namespace constraints {
 using namespace hpp::constraints;
 
 struct DFWrapper : DifferentiableFunction, wrapper<DifferentiableFunction> {
-  typedef boost::shared_ptr<DFWrapper> Ptr_t;
+  typedef hpp::shared_ptr<DFWrapper> Ptr_t;
 
   DFWrapper(size_type sizeInput, size_type sizeInputDerivative,
             size_type sizeOutput, std::string name)
       : DifferentiableFunction(sizeInput, sizeInputDerivative, sizeOutput,
                                name) {}
 
-  void impl_compute(LiegroupElement& result, vectorIn_t argument) const {
+  void impl_compute(LiegroupElementRef result, vectorIn_t argument) const {
     override f = this->get_override("impl_compute");
     if (!f)
       throw std::runtime_error("impl_compute not implemented in child class");
@@ -66,8 +67,7 @@ struct DFWrapper : DifferentiableFunction, wrapper<DifferentiableFunction> {
   // NOTE: eigenpy::Ref<const vector_t> is not binded so far. It is not very
   // useful since it cannot be used to return a value.
   static void jacobian_wrap(const DifferentiableFunction& f,
-                            eigenpy::Ref<matrix_t> J, const Configuration_t& q)
-  // const eigenpy::Ref<const vector_t>& q)
+                            matrixOut_t J, const Configuration_t& q)
   {
     J = py_jacobian(f, q);
     // f.jacobian(J, q);

@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023 CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -21,13 +21,13 @@
 #define PYHPP_REF_HH
 
 #include <eigenpy/eigenpy.hpp>
-#include <hpp/pinocchio/fwd.hh>
+#include <hpp/constraints/fwd.hh>
 
 namespace pyhpp {
-typedef eigenpy::Ref<hpp::pinocchio::vector_t> vectorRef_t;
-typedef eigenpy::Ref<hpp::pinocchio::vector_t const> vectorConstRef_t;
-typedef eigenpy::Ref<hpp::pinocchio::matrix_t> matrixRef_t;
-typedef eigenpy::Ref<hpp::pinocchio::matrix_t const> matrixConstRef_t;
+typedef hpp::constraints::vectorOut_t vectorRef_t;
+typedef hpp::constraints::vectorIn_t vectorConstRef_t;
+typedef hpp::constraints::matrixOut_t matrixRef_t;
+typedef hpp::constraints::matrixIn_t matrixConstRef_t;
 }  // namespace pyhpp
 
 #endif  // PYHPP_REF_HH

@@ -1,3 +1,3 @@
 from hpp.corbaserver import Client
 cl = Client()
-cl.problem.shutdown()
+cl._tools.shutdown()

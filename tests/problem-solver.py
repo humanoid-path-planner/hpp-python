@@ -6,7 +6,8 @@ import numpy as np
 
 ps = ProblemSolver.create()
 robot = ps.createRobot('ur3')
-urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
+urdf.loadRobotModel(robot, "anchor", "example-robot-data/robots/ur_description",
+                    "ur3", "_gripper", "_gripper")
 ps.robot(robot)
 
 qinit = np.zeros ((robot.model().nq, 1))

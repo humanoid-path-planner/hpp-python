@@ -1,5 +1,5 @@
 from pyhpp.core import ProblemSolver
-from pyhpp.core.pathoptimization import SplineGradientBasedAbstractB3
+from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 from pyhpp.corbaserver import Server
 
 from non_linear_spline_gradient_based import NonLinearSplineGradientBasedB3

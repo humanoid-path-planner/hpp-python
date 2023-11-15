@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,13 +16,15 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <eigenpy/eigenpy.hpp>
+#include <pinocchio/fwd.hpp>
 #include <hpp/pinocchio/liegroup-element.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
+
+#include <boost/python.hpp>
+#include <eigenpy/eigenpy.hpp>
 
 using namespace boost::python;
 
@@ -40,23 +41,88 @@ struct LgSWrapper {
                                   const LiegroupSpacePtr_t& r) {
     return l * r;
   }
-  static void Jintegrate(const LiegroupSpace& ls, const vector_t& q,
-                         matrixRef_t J) {
+  static void dIntegrate_dq(DerivativeProduct side, LiegroupElementConstRef q,
+                            const vector_t& v, matrixOut_t J) {
+    enum_<hpp::pinocchio::DerivativeProduct>("DerivativeProduct")
+        .value("DerivativeTimesInput", DerivativeTimesInput)
+        .value("InputTimesDerivative", InputTimesDerivative);
+
+    LiegroupSpacePtr_t ls(q.space());
     matrix_t _J(J);
-    ls.Jintegrate(q, _J);
+    switch (side) {
+      case DerivativeTimesInput:
+        ls->dIntegrate_dq<DerivativeTimesInput>(q, v, _J);
+        break;
+      case InputTimesDerivative:
+        ls->dIntegrate_dq<InputTimesDerivative>(q, v, _J);
+        break;
+      default:
+        abort();
+    }
     J = _J;
   }
-  static void Jdifference(const LiegroupSpace& ls, bool applyOnTheLeft,
-                          const vector_t& q0, const vector_t& q1,
-                          matrixRef_t J0, matrixRef_t J1) {
-    matrix_t _J0(J0);
-    matrix_t _J1(J1);
-    if (applyOnTheLeft)
-      ls.Jdifference<true>(q0, q1, _J0, _J1);
-    else
-      ls.Jdifference<false>(q0, q1, _J0, _J1);
-    J0 = _J0;
-    J1 = _J1;
+
+  static void dIntegrate_dv(DerivativeProduct side, LiegroupElementConstRef q,
+                            const vector_t& v, matrixOut_t J) {
+    enum_<hpp::pinocchio::DerivativeProduct>("DerivativeProduct")
+        .value("DerivativeTimesInput", DerivativeTimesInput)
+        .value("InputTimesDerivative", InputTimesDerivative);
+
+    LiegroupSpacePtr_t ls(q.space());
+    matrix_t _J(J);
+    switch (side) {
+      case DerivativeTimesInput:
+        ls->dIntegrate_dv<DerivativeTimesInput>(q, v, _J);
+        break;
+      case InputTimesDerivative:
+        ls->dIntegrate_dv<InputTimesDerivative>(q, v, _J);
+        break;
+      default:
+        abort();
+    }
+    J = _J;
+  }
+
+  static void dDifference_dq0(const LiegroupSpace& ls, DerivativeProduct side,
+                              const vector_t& q0, const vector_t& q1,
+                              matrixOut_t J) {
+    enum_<hpp::pinocchio::DerivativeProduct>("DerivativeProduct")
+        .value("DerivativeTimesInput", DerivativeTimesInput)
+        .value("InputTimesDerivative", InputTimesDerivative);
+
+    matrix_t _J(J);
+    switch (side) {
+      case DerivativeTimesInput:
+        ls.dDifference_dq0<DerivativeTimesInput>(q0, q1, _J);
+        break;
+      case InputTimesDerivative:
+        ls.dDifference_dq0<InputTimesDerivative>(q0, q1, _J);
+        break;
+      default:
+        abort();
+    }
+    J = _J;
+  }
+
+  static void dDifference_dq1(const LiegroupSpace& ls, DerivativeProduct side,
+                              const vector_t& q0, const vector_t& q1,
+                              matrixOut_t J) {
+    enum_<hpp::pinocchio::DerivativeProduct>("DerivativeProduct")
+        .value("DerivativeTimesInput", DerivativeTimesInput)
+        .value("InputTimesDerivative", InputTimesDerivative);
+
+    matrix_t _J(J);
+    switch (side) {
+      case DerivativeTimesInput:
+        ls.dDifference_dq1<DerivativeTimesInput>(q0, q1, _J);
+        break;
+      case InputTimesDerivative:
+        ls.dDifference_dq1<InputTimesDerivative>(q0, q1, _J);
+        break;
+      default:
+        abort();
+    }
+    J = _J;
   }
 };
 struct LgEWrapper {
@@ -64,6 +130,15 @@ struct LgEWrapper {
     return lge.vector();
   }
   static void vector_wrap_write(LiegroupElement& lge, const vector_t& v) {
+    lge.vector() = v;
+  }
+};
+
+struct LgERWrapper {
+  static vectorOut_t vector_wrap_read(const LiegroupElementRef& lge) {
+    return lge.vector();
+  }
+  static void vector_wrap_write(LiegroupElementRef& lge, const vector_t& v) {
     lge.vector() = v;
   }
 };
@@ -84,8 +159,10 @@ void exposeLiegroup() {
       .staticmethod("R3xSO3") PYHPP_DEFINE_METHOD(LiegroupSpace, empty)
       .staticmethod("empty")
           PYHPP_DEFINE_METHOD(LiegroupSpace, mergeVectorSpaces)
-              PYHPP_DEFINE_METHOD(LgSWrapper, Jintegrate)
-                  PYHPP_DEFINE_METHOD(LgSWrapper, Jdifference)
+              PYHPP_DEFINE_METHOD(LgSWrapper, dIntegrate_dq)
+                  PYHPP_DEFINE_METHOD(LgSWrapper, dIntegrate_dv)
+                      PYHPP_DEFINE_METHOD(LgSWrapper, dDifference_dq0)
+                          PYHPP_DEFINE_METHOD(LgSWrapper, dDifference_dq1)
       .def(self == self)
       .def(self != self)
       // Operation on shared pointers...
@@ -109,6 +186,23 @@ void exposeLiegroup() {
            return_value_policy<return_by_value>())
       .def(self - self)
       .def(self + vector_t());
+
+  class_<LiegroupElementRef>("LiegroupElementRef",
+                             init<vectorOut_t, LiegroupSpacePtr_t&>())
+    // Pythonic API
+    .def("__str__", &to_str_from_operator<LiegroupElementRef>)
+    .add_property("v", &LgERWrapper::vector_wrap_read,
+                  &LgERWrapper::vector_wrap_write)
+
+    // C++ API
+    .def("vector",
+         static_cast<const vectorOut_t& (LiegroupElementRef::*)() const>
+         (&LiegroupElementRef::vector),
+         return_value_policy<return_by_value>())
+    .def("space", &LiegroupElementRef::space,
+         return_value_policy<return_by_value>())
+    .def(self - self)
+    .def(self + vector_t());
 }
 }  // namespace pinocchio
 }  // namespace pyhpp

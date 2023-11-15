@@ -1,11 +1,13 @@
 from pyhpp.pinocchio import Device, urdf
 
-robot = Device.create('ur3')
-urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
-
-from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, BySubstitution, segment
+from pyhpp.constraints import Position, ComparisonTypes, ComparisonType, \
+    BySubstitution, segment, Implicit, Explicit
 from pinocchio import SE3, StdVec_Bool as Mask
 import numpy as np
+
+robot = Device.create('ur3')
+urdf.loadRobotModel(robot, "anchor", "example-robot-data/robots/ur_description",
+                    "ur3", "_gripper", "_gripper")
 
 m = Mask()
 m[:] = (True,)*3
@@ -14,20 +16,19 @@ pc = Position.create ("position", robot,
         robot.model().getJointId("wrist_3_joint"),
         Id, Id, m)
 
-solver = BySubstitution (robot.model().nq,robot.model().nv)
-solver.add (pc, 0)
+solver = BySubstitution (robot.configSpace())
 cts = ComparisonTypes ()
 cts[:] = (ComparisonType.EqualToZero, ComparisonType.EqualToZero, ComparisonType.Equality)
-solver.add (pc, 0, cts)
+solver.add(Implicit.create(pc, cts, [True, True, True]), 0)
 
-print solver
-print solver.explicitSolver()
+print(solver)
 
 # This only tests the call to add.
 # The inputs are not valid so the solver
 # will not be able to solve anything.
-solver.explicitSolver().add (pc,
-        [ segment(0,2), ], [ segment(2,4), ],
-        [ segment(0,2), ], [ segment(2,4), ],
-        cts)
-solver.explicitSolverHasChanged()
+solver.explicitConstraintSet().add(Explicit.create(robot.configSpace(), pc,
+    [ segment(0,2), ], [ segment(2,4), ], [ segment(0,2), ], [ segment(2,4), ],
+                                                   cts))
+solver.explicitConstraintSetHasChanged()
+
+print(solver)

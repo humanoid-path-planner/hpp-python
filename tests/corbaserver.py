@@ -4,8 +4,9 @@ from pyhpp.corbaserver import Server
 ps = ProblemSolver.create()
 
 for i in range(3):
-    print i
+    print(i)
     server = Server (ps, False)
+    server.initialize()
     server.startCorbaServer()
     server.processRequest (True)
     del server

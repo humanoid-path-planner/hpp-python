@@ -17,23 +17,24 @@
 # hpp-python  If not, see
 # <http://www.gnu.org/licenses/>.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-# SET(CXX_DISABLE_WERROR TRUE)
+SET(PROJECT_NAME hpp-python)
+SET(PROJECT_DESCRIPTION "python bindings for HPP, based on boost python")
+SET(PROJECT_URL "")
+
+SET(CXX_DISABLE_WERROR TRUE)
 SET(INSTALL_DOCUMENTATION OFF)
-
-OPTION(BIND_HPP_WHOLEBODY_STEP "Compile Python bindings for hpp-wholebody-step" OFF)
+#SET(PROJECT_USE_CMAKE_EXPORT TRUE)
 
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/python.cmake)
 INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/test.cmake)
 
-SET(PROJECT_NAME hpp-python)
-SET(PROJECT_DESCRIPTION "Python bindings for HPP.")
-SET(PROJECT_URL "")
-
-SETUP_PROJECT()
+compute_project_args(PROJECT_ARGS LANGUAGES CXX)
+project(${PROJECT_NAME} ${PROJECT_ARGS})
+check_minimal_cxx_standard(11 REQUIRED)
 
 # Activate hpp-util logging if requested
 SET (HPP_DEBUG FALSE CACHE BOOL "trigger hpp-util debug output")
@@ -53,7 +54,7 @@ SET(${PROJECT_NAME}_HEADERS
   include/pyhpp/core/fwd.hh
   )
 
-FINDPYTHON(2.7 EXACT REQUIRED)
+FINDPYTHON()
 SET(BOOST_COMPONENTS python)
 SEARCH_FOR_BOOST()
 

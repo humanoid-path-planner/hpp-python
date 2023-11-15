@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,12 +16,13 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <hpp/core/path-vector.hh>
 #include <hpp/python/config.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/util.hh>
+
+#include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -34,8 +34,10 @@ using namespace hpp::core;
 void exposeVector() {
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
                                                                        no_init)
-      .def("create", &PathVector::create)
-      .staticmethod("create") PYHPP_DEFINE_METHOD(PathVector, numberPaths)
+    .def("create", static_cast<PathVectorPtr_t (*)(size_type, size_type)>
+         (&PathVector::create))
+      .staticmethod("create")
+    PYHPP_DEFINE_METHOD(PathVector, numberPaths)
           PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
               PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
                   PYHPP_DEFINE_METHOD(PathVector, appendPath)

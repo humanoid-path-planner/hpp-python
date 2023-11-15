@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,9 +16,10 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/pinocchio/urdf/util.hh>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
+
+#include <boost/python.hpp>
 
 using namespace boost::python;
 

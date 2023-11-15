@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023 CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -17,9 +17,9 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/constraints/solver/by-substitution.hh>
 #include <pyhpp/constraints/fwd.hh>
+#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -37,14 +37,12 @@ tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
 void exposeBySubstitution() {
   class_<BySubstitution, bases<HierarchicalIterative> >(
       "BySubstitution", init<LiegroupSpacePtr_t>())
-      .def("explicitConstraintSet",
-           static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
-               &BySubstitution::explicitConstraintSet),
-           return_internal_reference<>())
       .def("explicitConstraintSetHasChanged",
            &BySubstitution::explicitConstraintSetHasChanged)
       .def("solve", &BySubstitution_solve)
-
+    .def("explicitConstraintSet", static_cast<ExplicitConstraintSet&
+         (BySubstitution::*)()>(&BySubstitution::explicitConstraintSet),
+         return_internal_reference<>())
       .add_property("errorThreshold",
                     static_cast<value_type (BySubstitution::*)() const>(
                         &BySubstitution::errorThreshold),

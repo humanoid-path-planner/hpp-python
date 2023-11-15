@@ -1,7 +1,10 @@
-from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
-import pyhpp.core.path
 import pinocchio, eigenpy
 import numpy as np
+from pyhpp.constraints import ComparisonType
+from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
+from pyhpp.core.path import SplineB3 as Spline
+from pyhpp.core.path_optimization import LinearConstraint, QuadraticProgram
+import pyhpp.core.path
 
 class CostFunction:
     def __init__ (self, robot, order):
@@ -35,18 +38,6 @@ class CostFunction:
                 for j in range (s.NbCoeffs):
                     jc = shift + j * paramSize
                     H[ic : ic + paramSize, jc : jc + paramSize] = Ic[i,j] * np.eye (paramSize)
-
-            # res1 = 0.5 * s.rowParameters().T.dot(
-                    # H[shift:shift+s.NbCoeffs*paramSize, shift:shift+s.NbCoeffs*paramSize].dot(
-                        # s.rowParameters()))
-
-            # res2 = s.squaredNormIntegral(self.order);
-
-            # diff = res1 - res2;
-
-            # if abs(diff) > 1e-5:
-                # print "Hessian seems wrong for spline ", k, ": ", res1, " - ", res2, " = ", res1 - res2
-                  # #<< H.block(shift, shift, Spline::NbCoeffs * paramSize_, Spline::NbCoeffs * paramSize_));
         return H
 
 class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
@@ -55,9 +46,7 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
         self.problem = problem
 
     def optimize (self, path):
-        from pyhpp.core.path import SplineB3 as Spline
-        from pyhpp.core.path_optimization import LinearConstraint, QuadraticProgram
-        print "NonLinearSplineGradientBasedB3::optimize"
+        print("NonLinearSplineGradientBasedB3::optimize")
         checkJointBound = True
 
         robot = self.problem.robot()
@@ -95,7 +84,6 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
         # self.computeValue    (value, splines, validations, parameterizations)
         # self.computeJacobian (jacobian, splines, validations, parameterizations)
         # self.computeLinearizedConstraint (linearizedConstraint, value, jacobian, splines, validations, parameterizations)
-        # print value.T
 
         # 3
         collision = LinearConstraint (nParameters * rDof, 0);
@@ -104,14 +92,10 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
         # 4
         # TODO: Initialize cost function.
         cost = CostFunction (robot, 1)
-        #print path.length()
-        print "Current", cost.value(splines)
-        #print cost.value(splines) / path.length()
-        #print cost.jacobian(splines)
-        #print cost.hessian(splines)
+        print("Current {cost.value(splines)}")
 
         # 5
-        feasible = constraint.decompose(True)
+        feasible = constraint.decompose(True, True)
 
         self.checkConstraint (splines, constraint, msg="continuity")
 
@@ -136,7 +120,7 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
         iter = 0
         while not ok:
             v = cost.value(splines)
-            print "Iter", iter, ", cost:", v
+            print("Iter {iter}, cost: {v}")
 
             # Compute linearized cost
             parameters = np.empty((nParameters * rDof,1))
@@ -147,47 +131,25 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
 
             # Compute decomposition.
             self.computeLinearizedConstraint (linearizedConstraint, value, jacobian, splines, validations, parameterizations)
-            print "Linearized constraints"
+            print("Linearized constraints")
             constraint.reduceConstraint (linearizedConstraint, lcReduced, True)
-            print "reduction"
-            lcReduced.decompose(True)
-            print "decompose"
+            print("reduction")
+            lcReduced.decompose(True, True)
+            print("decompose")
 
             lcReduced.reduceConstraint (clReduced, finalLinearProblem, False)
-            print "reduction"
-            finalLinearProblem.decompose(True) #TODO need only xStar, not PK
+            print("reduction")
+            finalLinearProblem.decompose(True, True) #TODO need only xStar, not PK
 
             # Compute descent direction.
             lcReduced.computeSolution(finalLinearProblem.xStar)
-            print "computeSolution"
+            print("computeSolution")
             constraint.computeSolution(lcReduced.xSol)
 
             self.integrate (splines, constraint.xSol)
 
             iter += 1
             if iter == 5: ok = True
-
-        # 6
-        # QP = QuadraticProgram (nParameters * rDof * splines.size())
-        # QP.H = cost.hessian (splines)
-
-        # QPc = QuadraticProgram (QP, constraint)
-        # QPc.computeLLT()
-        # QPc.solve(collisionReduced, boundConstraintReduced)
-
-        # Obtain optimum
-        # constraint.computeSolution(QPc.xStar);
-        # self.updateSplines (splines, constraint.xSol)
-        # print "Optimum", cost.value(splines)
-
-        # Collision checking
-        # reports = self.validatePath (splines, True)
-        # if reports.empty():
-            # print "No collision"
-        # else:
-            # for r in reports:
-                # print "At spline nb", r.second # The spline index
-                # print r.first # The collision report
 
         return self.buildPathVector(splines)
 
@@ -200,7 +162,6 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
             row+=n
 
     def createConstraints (self, splines):
-        from pyhpp.constraints import ComparisonType
         # Functions of the form f(v_k) == 0
         validations = [ [] for s in splines ]
         # Functions of the form g(v_k) == g(v_{k+1})
@@ -223,8 +184,8 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
                             parameterizations[k].append (nc)
                         else:
                             validations[k].append(nc)
-                else: print k, "no config projector"
-            else: print k, "no constraints"
+                else: print(f"{k} no config projector")
+            else: print(f"{k} no constraints")
         return validations, parameterizations
 
     def initValueAndJacobian (self, splines, validations, parameterizations):
@@ -311,10 +272,10 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
 
         constraint.b = J.dot(parameters) - value
         constraint.J = J
-        constraint.decompose(False)
+        constraint.decompose(False, False)
 
     def checkConstraint (self, splines, constraints, ineq=False, msg=""):
-        x = np.empty((0,1))
+        x = np.empty((0))
         for s in splines:
             x = np.concatenate((x, s.rowParameters()))
         res = constraints.J.dot (x) - constraints.b
@@ -322,10 +283,10 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
             ok = all(res >= 0)
         else:
             ok = (np.linalg.norm(res) < 1e-3)
-        if not ok: print "Constraint", msg, " not satisfied: ", res.T
+        if not ok: print(f"Constraint {msg} not satisfied: {res.T}")
         return ok, res
 
     @staticmethod
     def create (problem):
-        print "NonLinearSplineGradientBasedB3.create called!"
+        print("NonLinearSplineGradientBasedB3.create called!")
         return NonLinearSplineGradientBasedB3 (problem)

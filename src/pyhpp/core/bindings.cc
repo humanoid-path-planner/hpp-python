@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2018 - 2023 CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 //
 // This file is part of hpp-python
@@ -17,11 +17,11 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/core/fwd.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
+#include <boost/python.hpp>
 
 BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;
@@ -36,7 +36,6 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::core::exposeConfigValidation();
   pyhpp::core::exposeConfigurationShooter();
   pyhpp::core::exposeConstraint();
-  pyhpp::core::exposeEquation();
   pyhpp::core::exposeReports();
   pyhpp::core::exposeSteeringMethod();
 

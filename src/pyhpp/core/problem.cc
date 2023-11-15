@@ -1,5 +1,6 @@
-// Copyright (c) 2018, Joseph Mirabel
-// Authors: Joseph Mirabel (joseph.mirabel@laas.fr)
+//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-core.
 // hpp-core is free software: you can redistribute it
@@ -14,7 +15,6 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/core/config-validation.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
@@ -25,6 +25,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+#include <boost/python.hpp>
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -32,7 +34,9 @@ namespace core {
 using namespace hpp::core;
 
 void exposeProblem() {
-  class_<Problem>("Problem", no_init)
+  register_ptr_to_python<ProblemConstPtr_t>();
+  implicitly_convertible<ProblemPtr_t, ProblemConstPtr_t>();
+  class_<Problem, ProblemPtr_t, boost::noncopyable>("Problem", no_init)
       // PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const
       // DevicePtr_t&)
       .def(

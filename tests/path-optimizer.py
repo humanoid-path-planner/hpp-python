@@ -9,7 +9,7 @@ from non_linear_spline_gradient_based import NonLinearSplineGradientBasedB3
 
 ps = ProblemSolver.create()
 robot = ps.createRobot('ur3')
-urdf.loadRobotModel (robot, "anchor", "ur_description", "ur3", "_gripper", "_gripper")
+urdf.loadRobotModel (robot, "anchor", "example-robot-data/robots/ur_description", "ur3", "_gripper", "_gripper")
 ps.robot(robot)
 
 ps.pathOptimizers.add ("NonLinearSplineGradientBasedB3", NonLinearSplineGradientBasedB3.create)
@@ -47,6 +47,6 @@ for _ in range (10):
         pathVector = pyhpp.core.path.Vector.create (robot.configSize(), robot.numberDof())
         pathVector.appendPath (p1)
         pathVector.appendPath (p2)
-        print pathVector.numberPaths()
+        print(pathVector.numberPaths())
         po.optimize(pathVector)
 

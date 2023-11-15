@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018 CNRS
+// Copyright (c) 2018 - 2023 CNRS
 // Authors: Joseph Mirabel
 //
 //
@@ -20,6 +20,7 @@
 #ifndef PYHPP_FWD_HH
 #define PYHPP_FWD_HH
 
+#include <hpp/util/pointer.hh>
 #include <boost/python.hpp>
 #include <vector>
 
@@ -55,7 +56,7 @@ std::string to_str_from_operator(const ObjectWithPrintMethod& obj) {
   return oss.str();
 }
 
-template <typename T, typename _Vector = std::vector<boost::shared_ptr<T> > >
+template <typename T, typename _Vector = std::vector<hpp::shared_ptr<T> > >
 struct VectorOfPtr {
   typedef _Vector Vector;
   static T& get_item(Vector& v, std::size_t i) {

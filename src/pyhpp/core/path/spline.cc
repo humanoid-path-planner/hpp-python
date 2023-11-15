@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,12 +16,13 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
 #include <hpp/core/path/spline.hh>
 #include <hpp/python/config.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
+
+#include <boost/python.hpp>
 
 using namespace boost::python;
 
