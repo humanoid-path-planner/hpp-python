@@ -131,10 +131,10 @@ ADD_PYTHON_LIBRARY(
   )
 
 ADD_PYTHON_LIBRARY(
-  pyhpp/core/pathOptimization
+  pyhpp/core/path_optimization
   FILES
-  pyhpp/core/pathOptimization/spline-gradient-based-abstract.cc
-  pyhpp/core/pathOptimization/bindings.cc
+  pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
+  pyhpp/core/path_optimization/bindings.cc
   PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
   )
 

@@ -1,4 +1,4 @@
-from pyhpp.core.pathOptimization import SplineGradientBasedAbstractB3
+from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 import pyhpp.core.path
 import pinocchio, eigenpy
 import numpy as np
@@ -56,7 +56,7 @@ class NonLinearSplineGradientBasedB3 (SplineGradientBasedAbstractB3):
 
     def optimize (self, path):
         from pyhpp.core.path import SplineB3 as Spline
-        from pyhpp.core.pathOptimization import LinearConstraint, QuadraticProgram
+        from pyhpp.core.path_optimization import LinearConstraint, QuadraticProgram
         print "NonLinearSplineGradientBasedB3::optimize"
         checkJointBound = True
 

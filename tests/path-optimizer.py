@@ -1,6 +1,6 @@
 from pyhpp.pinocchio import urdf
 from pyhpp.core import ProblemSolver
-from pyhpp.core.pathoptimization import SplineGradientBasedAbstractB3
+from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 import pyhpp.core.path
 import pinocchio, eigenpy
 import numpy as np

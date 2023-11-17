@@ -1,5 +1,5 @@
 from pyhpp.core import ProblemSolver
-from pyhpp.core.pathOptimization import SplineGradientBasedAbstractB3
+from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 from pyhpp.corbaserver import Server
 from pyhpp.corbaserver.wholebodyStep import Server as WBServer
 
