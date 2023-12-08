@@ -36,6 +36,8 @@ void exposeUtil() {
           const std::string& package, const std::string& modelName,
           const std::string& urdfSuffix, const std::string& srdfSuffix)>(
           &loadRobotModel));
+  def("loadModel", &loadModel);
+  def("loadModelFromString", &loadModelFromString);
 }
 }  // namespace urdf
 }  // namespace pinocchio
