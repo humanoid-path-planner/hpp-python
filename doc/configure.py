@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 #
 # Copyright (c) 2018 CNRS
 # Authors: Joseph Mirabel
@@ -113,7 +113,7 @@ nsToPackage= {
     }
 
 def indexFromNamespace (ns):
-  if nsToPackage.has_key(ns):
+  if ns in nsToPackage:
     path = nsToPackage[ns]
     if isinstance(path, str):
         return Index (os.path.join (path, "index.xml"))
