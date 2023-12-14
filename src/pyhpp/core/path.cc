@@ -59,15 +59,15 @@ void exposePath() {
       .def("copy", static_cast<PathPtr_t (Path::*)() const>(&Path::copy))
     .def("extract" ,static_cast<PathPtr_t (Path::*)(const value_type&,
          const value_type&) const>(&Path::extract))
-      // PYHPP_DEFINE_METHOD (Path, timeRange)
+      // .PYHPP_DEFINE_METHOD (Path, timeRange)
       .def("timeRange",
            static_cast<const interval_t& (Path::*)() const>(&Path::timeRange),
            return_internal_reference<>())
-          PYHPP_DEFINE_METHOD_INTERNAL_REF(Path, paramRange)
-              PYHPP_DEFINE_METHOD(Path, length)
-                  PYHPP_DEFINE_METHOD(Path, initial)
-                      PYHPP_DEFINE_METHOD(Path, end)
-                          PYHPP_DEFINE_METHOD(PWrapper, constraints);
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Path, paramRange)
+      .PYHPP_DEFINE_METHOD(Path, length)
+      .PYHPP_DEFINE_METHOD(Path, initial)
+      .PYHPP_DEFINE_METHOD(Path, end)
+      .PYHPP_DEFINE_METHOD(PWrapper, constraints);
 }
 }  // namespace core
 }  // namespace pyhpp

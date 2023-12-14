@@ -37,12 +37,12 @@ void exposeVector() {
     .def("create", static_cast<PathVectorPtr_t (*)(size_type, size_type)>
          (&PathVector::create))
       .staticmethod("create")
-    PYHPP_DEFINE_METHOD(PathVector, numberPaths)
-          PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
-              PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
-                  PYHPP_DEFINE_METHOD(PathVector, appendPath)
-      // PYHPP_DEFINE_METHOD (PathVector, concatenate)
-      PYHPP_DEFINE_METHOD(PathVector, flatten);
+      .PYHPP_DEFINE_METHOD(PathVector, numberPaths)
+      .PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
+      .PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
+      .PYHPP_DEFINE_METHOD(PathVector, appendPath)
+      // .PYHPP_DEFINE_METHOD (PathVector, concatenate)
+      .PYHPP_DEFINE_METHOD(PathVector, flatten);
 
   class_<PathVectors_t>("Vectors").def(
       vector_indexing_suite<PathVectors_t, true>());

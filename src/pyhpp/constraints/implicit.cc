@@ -41,9 +41,9 @@ void exposeImplicit()
     .value("Inferior", Inferior);
   class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", no_init)
     .def("create", &Implicit::create).staticmethod("create")
-    PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(Implicit, comparisonType,
-                                            const ComparisonTypes_t&)
-    PYHPP_DEFINE_METHOD_INTERNAL_REF(Implicit, function)
+    .PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(Implicit, comparisonType,
+                                             const ComparisonTypes_t&)
+    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Implicit, function)
     .def("parameterSize", &Implicit::parameterSize)
     .def("rightHandSideSize", &Implicit::rightHandSideSize);
 }

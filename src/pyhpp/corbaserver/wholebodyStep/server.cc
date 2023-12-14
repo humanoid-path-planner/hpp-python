@@ -45,7 +45,7 @@ struct SWrapper {
 void exposeServer() {
   class_<WholebodyServer>("Server", no_init)
       .def("__init__", make_constructor(&SWrapper::init))
-          PYHPP_DEFINE_METHOD(SWrapper, startCorbaServer);
+          .PYHPP_DEFINE_METHOD(SWrapper, startCorbaServer);
 }
 }  // namespace wholebodyStep
 }  // namespace corbaserver

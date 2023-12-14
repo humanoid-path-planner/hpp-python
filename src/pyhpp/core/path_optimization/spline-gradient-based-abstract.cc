@@ -128,17 +128,17 @@ void exposeSplineGradientBasedAbstract(const char* name) {
   scope s =
       class_<SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable>(
           name, init<const ProblemConstPtr_t&>())
-    PYHPP_DEFINE_METHOD(SGB_t, copy)
-          .staticmethod("copy") PYHPP_DEFINE_METHOD(SGB_t, updateSplines)
-              PYHPP_DEFINE_METHOD(SGBW_t, updateParameters)
-                  PYHPP_DEFINE_METHOD(SGB_t, interpolate)
-          .staticmethod("interpolate") PYHPP_DEFINE_METHOD(
-              SGBW_t, appendEquivalentSpline)
-              PYHPP_DEFINE_METHOD(SGBW_t, initializePathValidation)
-    .def("validatePath", &SGBW_t::validatePath)
-                      PYHPP_DEFINE_METHOD(SGBW_t, jointBoundConstraint)
-                          PYHPP_DEFINE_METHOD(SGBW_t, addContinuityConstraints)
-                              PYHPP_DEFINE_METHOD(SGBW_t, buildPathVector);
+      .PYHPP_DEFINE_METHOD(SGB_t, copy)
+      .staticmethod("copy") .PYHPP_DEFINE_METHOD(SGB_t, updateSplines)
+      .PYHPP_DEFINE_METHOD(SGBW_t, updateParameters)
+      .PYHPP_DEFINE_METHOD(SGB_t, interpolate)
+      .staticmethod("interpolate") .PYHPP_DEFINE_METHOD(
+          SGBW_t, appendEquivalentSpline)
+      .PYHPP_DEFINE_METHOD(SGBW_t, initializePathValidation)
+      .def("validatePath", &SGBW_t::validatePath)
+      .PYHPP_DEFINE_METHOD(SGBW_t, jointBoundConstraint)
+      .PYHPP_DEFINE_METHOD(SGBW_t, addContinuityConstraints)
+      .PYHPP_DEFINE_METHOD(SGBW_t, buildPathVector);
 
   class_<Splines_t>("Splines").def(
       cpp_like_vector_indexing_suite<Splines_t, true>());
@@ -203,16 +203,16 @@ struct LCWrapper {
 
 void exposeLinearConstraint() {
   class_<LinearConstraint>("LinearConstraint", init<size_type, size_type>())
-      PYHPP_DEFINE_METHOD(LinearConstraint, concatenate)
-          PYHPP_DEFINE_METHOD(LinearConstraint, decompose) PYHPP_DEFINE_METHOD(
-              LinearConstraint, computeRank)
-              .def("reduceConstraint", &LinearConstraint::reduceConstraint,
-                   LC_reduceConstraint_overload(
-                       args("toReduce", "reduced", "computeRank")))
-                  PYHPP_DEFINE_METHOD(LinearConstraint, computeSolution)
-                      PYHPP_DEFINE_METHOD(LinearConstraint, isSatisfied)
-                          PYHPP_DEFINE_METHOD(LinearConstraint, addRows)
-              .add_property("J",
+    .PYHPP_DEFINE_METHOD(LinearConstraint, concatenate)
+    .PYHPP_DEFINE_METHOD(LinearConstraint, decompose) .PYHPP_DEFINE_METHOD(
+        LinearConstraint, computeRank)
+    .def("reduceConstraint", &LinearConstraint::reduceConstraint,
+        LC_reduceConstraint_overload(
+          args("toReduce", "reduced", "computeRank")))
+    .PYHPP_DEFINE_METHOD(LinearConstraint, computeSolution)
+    .PYHPP_DEFINE_METHOD(LinearConstraint, isSatisfied)
+    .PYHPP_DEFINE_METHOD(LinearConstraint, addRows)
+    .add_property("J",
                             make_getter(&LinearConstraint::J,
                                         return_value_policy<return_by_value>()),
                             &LCWrapper::setJ, "")
@@ -234,13 +234,13 @@ struct QPWrapper {
 void exposeQuadraticProblem() {
   class_<QuadraticProgram>("QuadraticProgram", init<size_type>())
       .def(init<const QuadraticProgram&, const LinearConstraint&>())
-          PYHPP_DEFINE_METHOD(QuadraticProgram, addRows)
-              PYHPP_DEFINE_METHOD(QuadraticProgram, reduced)
-                  PYHPP_DEFINE_METHOD(QuadraticProgram, decompose)
+      .PYHPP_DEFINE_METHOD(QuadraticProgram, addRows)
+      .PYHPP_DEFINE_METHOD(QuadraticProgram, reduced)
+      .PYHPP_DEFINE_METHOD(QuadraticProgram, decompose)
       .def("solve",
            static_cast<void (QuadraticProgram::*)()>(&QuadraticProgram::solve))
 
-          PYHPP_DEFINE_METHOD(QuadraticProgram, computeLLT)
+      .PYHPP_DEFINE_METHOD(QuadraticProgram, computeLLT)
       .def("solve", static_cast<double (QuadraticProgram::*)(
                         const LinearConstraint&, const LinearConstraint&)>(
                         &QuadraticProgram::solve))

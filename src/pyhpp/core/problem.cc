@@ -37,7 +37,7 @@ void exposeProblem() {
   register_ptr_to_python<ProblemConstPtr_t>();
   implicitly_convertible<ProblemPtr_t, ProblemConstPtr_t>();
   class_<Problem, ProblemPtr_t, boost::noncopyable>("Problem", no_init)
-      // PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const
+      // .PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const
       // DevicePtr_t&)
       .def(
           "robot",

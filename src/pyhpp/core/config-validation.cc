@@ -48,18 +48,17 @@ void exposeConfigValidation() {
   // DocClass (ConfigValidation)
   class_<ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>(
       "ConfigValidation", no_init)
-      PYHPP_DEFINE_METHOD2(ConfigValidation, validate, DocClassMethod(validate))
-
-          .def("validate", &CVWrapper::py_validate);
+    .PYHPP_DEFINE_METHOD2(ConfigValidation, validate, DocClassMethod(validate))
+    .def("validate", &CVWrapper::py_validate);
 
   // DocClass (ConfigValidations)
   class_<ConfigValidations, ConfigValidationsPtr_t, bases<ConfigValidation>,
          boost::noncopyable>("ConfigValidations", no_init)
-      PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
-          PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
-                               DocClassMethod(numberConfigValidations))
-              PYHPP_DEFINE_METHOD2(ConfigValidations, clear,
-                                   DocClassMethod(clear));
+      .PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
+      .PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
+          DocClassMethod(numberConfigValidations))
+      .PYHPP_DEFINE_METHOD2(ConfigValidations, clear,
+          DocClassMethod(clear));
 }
 }  // namespace core
 }  // namespace pyhpp
