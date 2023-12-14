@@ -150,8 +150,8 @@ void exposeDevice() {
       .def("geomModel",
            static_cast<GeomModel& (Device::*)()>(&Device::geomModel),
            return_internal_reference<>())
-          PYHPP_DEFINE_METHOD(Device, configSize)
-              PYHPP_DEFINE_METHOD(Device, numberDof)
+      .PYHPP_DEFINE_METHOD(Device, configSize)
+      .PYHPP_DEFINE_METHOD(Device, numberDof)
 
       .def("currentConfiguration",
            static_cast<const Configuration_t& (Device::*)() const>(

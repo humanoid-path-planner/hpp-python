@@ -54,33 +54,32 @@ struct CWrapper {
 void exposeConstraint() {
   class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
       .def("__str__", &to_str_from_operator<Constraint>)
-          PYHPP_DEFINE_METHOD_INTERNAL_REF(Constraint, name)
-              PYHPP_DEFINE_METHOD(CWrapper, apply)
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Constraint, name)
+      .PYHPP_DEFINE_METHOD(CWrapper, apply)
       .def("isSatisfied", &CWrapper::isSatisfied1)
       .def("isSatisfied", &CWrapper::isSatisfied2)
-          PYHPP_DEFINE_METHOD(CWrapper, copy);
+      .PYHPP_DEFINE_METHOD(CWrapper, copy);
 
   class_<ConstraintSet, ConstraintSetPtr_t, boost::noncopyable,
          bases<Constraint> >("ConstraintSet", no_init)
-      PYHPP_DEFINE_METHOD(ConstraintSet, addConstraint)
-          PYHPP_DEFINE_METHOD(ConstraintSet, configProjector);
+      .PYHPP_DEFINE_METHOD(ConstraintSet, addConstraint)
+      .PYHPP_DEFINE_METHOD(ConstraintSet, configProjector);
 
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
          bases<Constraint> >("ConfigProjector", no_init)
     .def("solver", static_cast<BySubstitution& (ConfigProjector::*)()>(&ConfigProjector::solver), return_internal_reference<>())
-          .def("add", &ConfigProjector::add)
-              PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, lastIsOptional, bool)
-                  PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, maxIterations,
-                                             size_type)
-          .def("errorThreshold",
-               static_cast<void (ConfigProjector::*)(const value_type&)>(
-                   &ConfigProjector::errorThreshold))
-          .def("errorThreshold",
-               static_cast<value_type (ConfigProjector::*)() const>(
-                   &ConfigProjector::errorThreshold))
-              PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
-          .def("sigma", &ConfigProjector::sigma,
-               return_value_policy<return_by_value>());
+    .def("add", &ConfigProjector::add)
+    .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, lastIsOptional, bool)
+    .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, maxIterations, size_type)
+    .def("errorThreshold",
+        static_cast<void (ConfigProjector::*)(const value_type&)>(
+          &ConfigProjector::errorThreshold))
+    .def("errorThreshold",
+        static_cast<value_type (ConfigProjector::*)() const>(
+          &ConfigProjector::errorThreshold))
+    .PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
+    .def("sigma", &ConfigProjector::sigma,
+        return_value_policy<return_by_value>());
 }
 }  // namespace core
 }  // namespace pyhpp

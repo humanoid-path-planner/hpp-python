@@ -87,19 +87,14 @@ struct SplineWrapper {
             .def("parameterDerivativeCoefficients",
                  &SplineWrapper::py_parameterDerivativeCoefficients)
 
-                PYHPP_DEFINE_METHOD(S_t, parameterSize) PYHPP_DEFINE_METHOD(
-                    SplineWrapper, parameterDerivativeCoefficients)
-                    PYHPP_DEFINE_METHOD(SplineWrapper, parameterIntegrate)
-                        PYHPP_DEFINE_METHOD(S_t, squaredNormIntegral)
-                            PYHPP_DEFINE_METHOD(SplineWrapper,
-                                                squaredNormIntegralDerivative)
-                                PYHPP_DEFINE_METHOD(SplineWrapper,
-                                                    basisFunctionDerivative)
-                                    PYHPP_DEFINE_METHOD(
-                                        SplineWrapper,
-                                        squaredNormBasisFunctionIntegral)
-                                        PYHPP_DEFINE_METHOD(SplineWrapper,
-                                                            rowParameters);
+            .PYHPP_DEFINE_METHOD(S_t, parameterSize) .PYHPP_DEFINE_METHOD(
+                SplineWrapper, parameterDerivativeCoefficients)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, parameterIntegrate)
+            .PYHPP_DEFINE_METHOD(S_t, squaredNormIntegral)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, squaredNormIntegralDerivative)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, basisFunctionDerivative)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, squaredNormBasisFunctionIntegral)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, rowParameters);
 
     enum_<int>("")
         .value("PolynomeBasis", S_t::PolynomeBasis)

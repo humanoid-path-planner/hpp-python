@@ -27,18 +27,18 @@
 #define INIT_PYHPP_MODULE \
   boost::python::docstring_options local_docstring_options(true, true, false)
 
-#define PYHPP_DEFINE_METHOD(CLASS, METHOD) .def(#METHOD, &CLASS::METHOD)
+#define PYHPP_DEFINE_METHOD(CLASS, METHOD) def(#METHOD, &CLASS::METHOD)
 #define PYHPP_DEFINE_METHOD1(CLASS, METHOD, ARG1) \
-  .def(#METHOD, &CLASS::METHOD, ARG1)
+  def(#METHOD, &CLASS::METHOD, ARG1)
 #define PYHPP_DEFINE_METHOD2(CLASS, METHOD, ARG1, ARG2) \
-  .def(#METHOD, &CLASS::METHOD, ARG1, ARG2)
+  def(#METHOD, &CLASS::METHOD, ARG1, ARG2)
 #define PYHPP_DEFINE_METHOD_INTERNAL_REF(CLASS, METHOD) \
-  .def(#METHOD, &CLASS::METHOD, return_internal_reference<>())
+  def(#METHOD, &CLASS::METHOD, return_internal_reference<>())
 #define PYHPP_DEFINE_GETTER_SETTER(CLASS, METHOD, TYPE)               \
-  .def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
+  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD))  \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
 #define PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(CLASS, METHOD, TYPE)  \
-  .def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD), \
+  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD),  \
        return_internal_reference<>())                                 \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
 

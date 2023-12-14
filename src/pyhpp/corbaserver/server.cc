@@ -48,9 +48,9 @@ void exposeServer() {
     .def("__init__", make_constructor(&SWrapper::init1))
     .def("__init__", make_constructor(&SWrapper::init2))
     .def("initialize", &Server::initialize)
-    PYHPP_DEFINE_METHOD(Server, startCorbaServer)
-    PYHPP_DEFINE_METHOD(Server, processRequest)
-    PYHPP_DEFINE_METHOD_INTERNAL_REF(Server, mainContextId);
+    .PYHPP_DEFINE_METHOD(Server, startCorbaServer)
+    .PYHPP_DEFINE_METHOD(Server, processRequest)
+    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Server, mainContextId);
 }
 }  // namespace corbaserver
 }  // namespace pyhpp
