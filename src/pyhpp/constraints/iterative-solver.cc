@@ -17,9 +17,12 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+// cland-format off
+#include <hpp/constraints/solver/hierarchical-iterative.hh>
+// cland-format on
+
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include <hpp/constraints/solver/hierarchical-iterative.hh>
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -42,12 +45,7 @@ void exposeHierarchicalIterativeSolver() {
   class_<HierarchicalIterative>("HierarchicalIterative",
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<HierarchicalIterative>)
-      .def("add", static_cast<void (HierarchicalIterative::*)(
-                      const DifferentiableFunctionPtr_t&, const std::size_t&)>(
-                      &HierarchicalIterative::add))
-      .def("add", static_cast<void (HierarchicalIterative::*)(
-                      const DifferentiableFunctionPtr_t&, const std::size_t&,
-                      const ComparisonTypes_t&)>(&HierarchicalIterative::add))
+      .def("add", &HierarchicalIterative::add)
 
       .add_property(
           "errorThreshold",

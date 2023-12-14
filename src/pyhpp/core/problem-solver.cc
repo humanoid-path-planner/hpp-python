@@ -136,7 +136,7 @@ using namespace hpp::core;
       // .def("initConfig", static_cast<const Configuration_t&
       //      (ProblemSolver::*) () const>(&ProblemSolver::initConfig),
       //      return_internal_reference<>())
-      .def("paths", paths)
+      .def("path", path)
       .def("initConfig", static_cast<const Configuration_t& (ProblemSolver::*)()
            const>(&ProblemSolver::initConfig), return_internal_reference<>())
       .def("initConfig", static_cast<void (ProblemSolver::*)(ConfigurationIn_t)>
