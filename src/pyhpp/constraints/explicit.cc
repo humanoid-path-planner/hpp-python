@@ -17,7 +17,7 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pinocchio/multibody.fwd.hpp>
+#include <pinocchio/multibody/fwd.hpp>
 #include <hpp/constraints/explicit.hh>
 #include <boost/python.hpp>
 
@@ -41,7 +41,7 @@ Eigen::BlockIndex::segments_t toSegments(const list& in) {
   return out;
 }
 
-size_type createExplicit(const LiegroupSpacePtr_t& configSpace,
+ExplicitPtr_t createExplicit(const LiegroupSpacePtr_t& configSpace,
                          const DifferentiableFunctionPtr_t& f,
                          const list& inArg, const list& outArg,
                          const list& inDer, const list& outDer,
@@ -52,7 +52,7 @@ size_type createExplicit(const LiegroupSpacePtr_t& configSpace,
 
 void exposeExplicit() {
   class_<Explicit, ExplicitPtr_t, boost::noncopyable>("Explicit", no_init)
-    .def("create", &createExplicit).staticmethod("create")
+    .def("create", &createExplicit).staticmethod("create");
   }
 }  // namespace constraints
 }  // namespace pyhpp
