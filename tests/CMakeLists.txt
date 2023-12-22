@@ -24,6 +24,7 @@ SET(PYTHON_UNIT_TESTS
   solver
   differentiable-function
   problem-solver
+  path
   )
 
 FOREACH(UNIT_TEST ${PYTHON_UNIT_TESTS})
