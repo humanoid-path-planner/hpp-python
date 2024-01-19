@@ -20,6 +20,8 @@
 #ifndef PYHPP_PINOCCHIO_FWD_HH
 #define PYHPP_PINOCCHIO_FWD_HH
 
+#include <pyhpp/util.hh>
+
 namespace pyhpp {
 namespace pinocchio {
 void exposeModel();
