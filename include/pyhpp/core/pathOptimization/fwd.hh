@@ -20,6 +20,8 @@
 #ifndef PYHPP_CORE_PATH_OPTIMIZATION_FWD_HH
 #define PYHPP_CORE_PATH_OPTIMIZATION_FWD_HH
 
+#include <pyhpp/util.hh>
+
 namespace pyhpp {
 namespace core {
 namespace pathOptimization {

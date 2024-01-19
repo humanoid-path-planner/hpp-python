@@ -22,6 +22,7 @@
 
 #include <hpp/util/pointer.hh>
 #include <boost/python.hpp>
+#include <eigenpy/eigenpy.hpp>
 #include <vector>
 
 #define INIT_PYHPP_MODULE \

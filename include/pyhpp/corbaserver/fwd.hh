@@ -20,6 +20,8 @@
 #ifndef PYHPP_CORBASERVER_FWD_HH
 #define PYHPP_CORBASERVER_FWD_HH
 
+#include <pyhpp/util.hh>
+
 namespace pyhpp {
 namespace corbaserver {
 void exposeServer();
