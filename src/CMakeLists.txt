@@ -19,11 +19,11 @@
 
 # ADD_PYTHON_LIBRARY ( module
 #   FILES file1.cc file2.cc ...
-#   PKG_CONFIG_DEPENDENCIES hpp-core ...)
+#   LINK_LIBRARIES hpp-core::hpp-core ...)
 MACRO(ADD_PYTHON_LIBRARY MODULE)
   set(options )
   set(oneValueArgs )
-  SET(multiValueArgs FILES PKG_CONFIG_DEPENDENCIES ADDITIONAL_LIBS)
+  SET(multiValueArgs FILES PY_FILES LINK_LIBRARIES)
   CMAKE_PARSE_ARGUMENTS(ADD_PYTHON_LIBRARY "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE})
@@ -50,16 +50,11 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
     LIBRARY_OUTPUT_NAME ${LIBNAME}
     )
 
-  INCLUDE_DIRECTORIES("${Boost_INCLUDE_DIRS}" ${PYTHON_INCLUDE_DIRS})
-  TARGET_LINK_BOOST_PYTHON(${TARGET_NAME})
-  FOREACH (PKG_DEPENDENCY ${ADD_PYTHON_LIBRARY_PKG_CONFIG_DEPENDENCIES})
-    PKG_CONFIG_USE_DEPENDENCY (${TARGET_NAME} ${PKG_DEPENDENCY})
-  ENDFOREACH ()
-  FOREACH(LIB ${ADD_PYTHON_LIBRARY_ADDITIONAL_LIBS})
-    MESSAGE(STATUS "additional lib: ${LIB}")
-    TARGET_LINK_LIBRARIES(${TARGET_NAME} ${LIB})
-  ENDFOREACH()
-  TARGET_LINK_LIBRARIES(${TARGET_NAME} ${Boost_LIBRARIES})
+  target_link_boost_python(${TARGET_NAME} PUBLIC)
+  target_link_libraries(${TARGET_NAME} PUBLIC
+    eigenpy::eigenpy
+    ${ADD_PYTHON_LIBRARY_LINK_LIBRARIES}
+  )
 
   INSTALL(TARGETS ${TARGET_NAME}
     DESTINATION ${PYTHON_SITELIB}/${MODULE})
@@ -71,8 +66,6 @@ MACRO(ADD_PYTHON_LIBRARY MODULE)
     DESTINATION ${PYTHON_SITELIB}/${MODULE})
 ENDMACRO()
 
-LIST(APPEND DEPENDENCIES "eigenpy" "pinocchio" "hpp-util" "hpp-pinocchio")
-
 PYTHON_INSTALL_ON_SITE(pyhpp __init__.py)
 
 ADD_PYTHON_LIBRARY(
@@ -81,7 +74,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/pinocchio/device.cc
   pyhpp/pinocchio/liegroup.cc
   pyhpp/pinocchio/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-pinocchio::hpp-pinocchio
   )
 
 ADD_PYTHON_LIBRARY(
@@ -89,10 +82,9 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/pinocchio/urdf/util.cc
   pyhpp/pinocchio/urdf/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-pinocchio::hpp-pinocchio
   )
 
-LIST(APPEND DEPENDENCIES "hpp-constraints")
 ADD_PYTHON_LIBRARY(
   pyhpp/constraints
   FILES
@@ -104,10 +96,9 @@ ADD_PYTHON_LIBRARY(
   pyhpp/constraints/iterative-solver.cc
   pyhpp/constraints/by-substitution.cc
   pyhpp/constraints/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-constraints::hpp-constraints
   )
 
-LIST(APPEND DEPENDENCIES "hpp-core")
 ADD_PYTHON_LIBRARY(
   pyhpp/core
   FILES
@@ -123,7 +114,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-core::hpp-core
   )
 
 ADD_PYTHON_LIBRARY(
@@ -132,7 +123,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/path/spline.cc
   pyhpp/core/path/vector.cc
   pyhpp/core/path/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-core::hpp-core
   )
 
 ADD_PYTHON_LIBRARY(
@@ -140,15 +131,13 @@ ADD_PYTHON_LIBRARY(
   FILES
   pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
   pyhpp/core/path_optimization/bindings.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
-  ADDITIONAL_LIBS hpp-core-gpl
+  LINK_LIBRARIES hpp-core::hpp-core hpp-core::hpp-core-gpl
   )
 
-LIST(APPEND DEPENDENCIES "hpp-corbaserver")
 ADD_PYTHON_LIBRARY(
   pyhpp/corbaserver
   FILES
   pyhpp/corbaserver/bindings.cc
   pyhpp/corbaserver/server.cc
-  PKG_CONFIG_DEPENDENCIES ${DEPENDENCIES}
+  LINK_LIBRARIES hpp-corbaserver::hpp-corbaserver
   )
