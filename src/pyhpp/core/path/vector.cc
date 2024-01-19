@@ -41,7 +41,7 @@ void exposeVector() {
       .PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
       .PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
       .PYHPP_DEFINE_METHOD(PathVector, appendPath)
-      // .PYHPP_DEFINE_METHOD (PathVector, concatenate)
+      .PYHPP_DEFINE_METHOD (PathVector, concatenate)
       .PYHPP_DEFINE_METHOD(PathVector, flatten);
 
   class_<PathVectors_t>("Vectors").def(

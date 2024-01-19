@@ -128,7 +128,7 @@ void exposePath() {
     .def("__call__", &PathWrap::py_call2)
     .def("eval", &PathWrap::py_call1)
     .def("eval", &PathWrap::py_call2)
-    .def("derivative", &PathWrap::derivative)
+    .PYHPP_DEFINE_METHOD(PathWrap, derivative)
 
     .def("copy", static_cast<PathPtr_t (Path::*)() const>(&Path::copy))
     .def("extract" ,static_cast<PathPtr_t (Path::*)(const value_type&,
@@ -143,6 +143,8 @@ void exposePath() {
     .PYHPP_DEFINE_METHOD(Path, initial)
     .PYHPP_DEFINE_METHOD(Path, end)
     .PYHPP_DEFINE_METHOD(PathWrap, constraints)
+    .PYHPP_DEFINE_METHOD(Path, outputSize)
+    .PYHPP_DEFINE_METHOD(Path, outputDerivativeSize)
   ;
 
   class_<PathWrap, bases<Path>, hpp::shared_ptr<PathWrap>, boost::noncopyable>("PathWrap", no_init)
