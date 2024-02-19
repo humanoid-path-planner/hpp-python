@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+ <package format='2'>
+ <name>hpp-python</name>
+ <version>0.0.1</version>
+ <description>Implement python bindings for HPP </description>
+
+ <maintainer email='hpp@laas.fr'>Joseph Mirabel</maintainer>
+ <license>BSD</license>
+
+ <author>Joseph Mirabel</author>
+ <author>Florent Lamiraux</author>
+
+ <build_depend>eigenpy</build_depend>
+ <exec_depend>eigenpy</exec_depend>
+ <build_export_depend>eigenpy</build_export_depend>
+ <build_depend>pinocchio</build_depend>
+ <exec_depend>pinocchio</exec_depend>
+ <build_export_depend>pinocchio</build_export_depend>
+ <build_depend>hpp-util</build_depend>
+ <exec_depend>hpp-util</exec_depend>
+ <build_export_depend>hpp-util</build_export_depend>
+ <build_depend>hpp-pinocchio</build_depend>
+ <exec_depend>hpp-pinocchio</exec_depend>
+ <build_export_depend>hpp-pinocchio</build_export_depend>
+ <build_depend>hpp-constraints</build_depend>
+ <exec_depend>hpp-constraints</exec_depend>
+ <build_export_depend>hpp-constraints</build_export_depend>
+ <build_depend>hpp-core</build_depend>
+ <exec_depend>hpp-core</exec_depend>
+ <build_export_depend>hpp-core</build_export_depend>
+ <build_depend>hpp-corbaserver</build_depend>
+ <exec_depend>hpp-corbaserver</exec_depend>
+ <build_export_depend>hpp-corbaserver</build_export_depend>
+ </package>
