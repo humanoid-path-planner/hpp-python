@@ -43,6 +43,8 @@ void exposeProblem() {
           "robot",
           static_cast<const DevicePtr_t& (Problem::*)() const>(&Problem::robot),
           return_value_policy<return_by_value>())
+      .def("setParameter", &Problem::setParameter)
+      .def("getParameter", &Problem::getParameter, return_value_policy<return_by_value>())
       .def("configurationShooter",
            static_cast<ConfigurationShooterPtr_t (Problem::*)() const>(
                &Problem::configurationShooter))

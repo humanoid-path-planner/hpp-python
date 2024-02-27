@@ -111,6 +111,7 @@ ADD_PYTHON_LIBRARY(
   pyhpp/core/path-optimizer.cc
   pyhpp/core/path-projector.cc
   pyhpp/core/path-validation.cc
+  pyhpp/core/parameter.cc
   pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc

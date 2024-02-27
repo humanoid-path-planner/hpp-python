@@ -30,6 +30,7 @@ BOOST_PYTHON_MODULE(bindings) {
 
   pyhpp::stl_pair<hpp::core::value_type, hpp::core::value_type>("interval");
 
+  pyhpp::core::exposeParameter();
   pyhpp::core::exposeProblem();
   pyhpp::core::exposeProblemSolver();
 

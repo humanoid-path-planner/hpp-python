@@ -38,6 +38,7 @@ void exposePath();
 void exposePathOptimizer();
 void exposePathProjector();
 void exposePathValidation();
+void exposeParameter();
 void exposeProblem();
 void exposeProblemSolver();
 }  // namespace core
