@@ -17,11 +17,10 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/constraints/explicit-constraint-set.hh>
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -33,7 +32,7 @@ void exposeExplicitConstraintSet() {
   class_<ExplicitConstraintSet>("ExplicitConstraintSet",
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<ExplicitConstraintSet>)
-    .def("add", &ExplicitConstraintSet::add);
+      .def("add", &ExplicitConstraintSet::add);
 }
 }  // namespace constraints
 }  // namespace pyhpp

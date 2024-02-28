@@ -1,77 +1,76 @@
 #
-# Copyright (c) 2018 CNRS
-# Authors: Joseph Mirabel
+# Copyright (c) 2018 CNRS Authors: Joseph Mirabel
 #
+# This file is part of hpp-python hpp-python is free software: you can
+# redistribute it and/or modify it under the terms of the GNU Lesser General
+# Public License as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
 #
-# This file is part of hpp-python
-# hpp-python is free software: you can redistribute it
-# and/or modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation, either version
-# 3 of the License, or (at your option) any later version.
-#
-# hpp-python is distributed in the hope that it will be
-# useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# General Lesser Public License for more details.  You should have
-# received a copy of the GNU Lesser General Public License along with
-# hpp-python  If not, see
-# <http://www.gnu.org/licenses/>.
+# hpp-python is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Lesser Public License for more
+# details.  You should have received a copy of the GNU Lesser General Public
+# License along with hpp-python  If not, see <http://www.gnu.org/licenses/>.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+cmake_minimum_required(VERSION 3.10)
 
-SET(PROJECT_NAME hpp-python)
-SET(PROJECT_DESCRIPTION "python bindings for HPP, based on boost python")
-SET(PROJECT_URL "")
+set(PROJECT_NAME hpp-python)
+set(PROJECT_DESCRIPTION "python bindings for HPP, based on boost python")
+set(PROJECT_URL "")
 
-SET(CXX_DISABLE_WERROR TRUE)
-SET(PROJECT_USE_CMAKE_EXPORT TRUE)
+set(CXX_DISABLE_WERROR TRUE)
+set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
-INCLUDE(cmake/base.cmake)
-INCLUDE(cmake/python.cmake)
-INCLUDE(cmake/boost.cmake)
-INCLUDE(cmake/test.cmake)
+include(cmake/base.cmake)
+include(cmake/python.cmake)
+include(cmake/boost.cmake)
+include(cmake/test.cmake)
 
 compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 check_minimal_cxx_standard(11 REQUIRED)
 
 # Activate hpp-util logging if requested
-SET (HPP_DEBUG FALSE CACHE BOOL "trigger hpp-util debug output")
-IF (HPP_DEBUG)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
-ENDIF()
+set(HPP_DEBUG
+    FALSE
+    CACHE BOOL "trigger hpp-util debug output")
+if(HPP_DEBUG)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
+endif()
 # Activate hpp-util logging if requested
-SET (HPP_BENCHMARK FALSE CACHE BOOL "trigger hpp-util benchmark output")
-IF (HPP_BENCHMARK)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_ENABLE_BENCHMARK")
-ENDIF()
+set(HPP_BENCHMARK
+    FALSE
+    CACHE BOOL "trigger hpp-util benchmark output")
+if(HPP_BENCHMARK)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_ENABLE_BENCHMARK")
+endif()
 # Ask Doxygen to create a tree view in html documentation
-SET(DOXYGEN_TREEVIEW "NO" CACHE STRING "Set to YES to generate a tree view in the html documentation")
+set(DOXYGEN_TREEVIEW
+    "NO"
+    CACHE STRING "Set to YES to generate a tree view in the html documentation")
 
 # Declare Headers
-SET(${PROJECT_NAME}_HEADERS
-  include/pyhpp/core/fwd.hh
-  )
+set(${PROJECT_NAME}_HEADERS include/pyhpp/core/fwd.hh)
 
-SET(PYTHON_COMPONENTS Interpreter Development NumPy)
-FINDPYTHON()
-SEARCH_FOR_BOOST_PYTHON()
+set(PYTHON_COMPONENTS Interpreter Development NumPy)
+findpython()
+search_for_boost_python()
 
-ADD_PROJECT_DEPENDENCY(eigenpy 3 REQUIRED)
-ADD_PROJECT_DEPENDENCY(pinocchio 2.6 REQUIRED)
-ADD_PROJECT_DEPENDENCY(hpp-util 4 REQUIRED)
-ADD_PROJECT_DEPENDENCY(hpp-pinocchio 4 REQUIRED)
-ADD_PROJECT_DEPENDENCY(hpp-constraints 4 REQUIRED)
-ADD_PROJECT_DEPENDENCY(hpp-core 4 REQUIRED)
-ADD_PROJECT_DEPENDENCY(hpp-corbaserver 4 REQUIRED)
+add_project_dependency(eigenpy 3 REQUIRED)
+add_project_dependency(pinocchio 2.6 REQUIRED)
+add_project_dependency(hpp-util 4 REQUIRED)
+add_project_dependency(hpp-pinocchio 4 REQUIRED)
+add_project_dependency(hpp-constraints 4 REQUIRED)
+add_project_dependency(hpp-core 4 REQUIRED)
+add_project_dependency(hpp-corbaserver 4 REQUIRED)
 
-ADD_LIBRARY(${PROJECT_NAME} INTERFACE)
-INSTALL(
+add_library(${PROJECT_NAME} INTERFACE)
+install(
   TARGETS ${PROJECT_NAME}
   EXPORT ${TARGETS_EXPORT_NAME}
   DESTINATION lib)
 
-ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(tests)
+add_subdirectory(src)
+add_subdirectory(tests)
 
-INSTALL(FILES package.xml DESTINATION share/${PROJECT_NAME})
+install(FILES package.xml DESTINATION share/${PROJECT_NAME})

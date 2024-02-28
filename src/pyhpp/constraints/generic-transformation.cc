@@ -17,9 +17,9 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/constraints/generic-transformation.hh>
 #include <pyhpp/constraints/fwd.hh>
-#include <boost/python.hpp>
 
 using namespace boost::python;
 

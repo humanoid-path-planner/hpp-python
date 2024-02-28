@@ -17,13 +17,12 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <hpp/constraints/differentiable-function.hh>
-#include <pyhpp/constraints/fwd.hh>
-#include <pyhpp/util.hh>
-
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
+#include <hpp/constraints/differentiable-function.hh>
+#include <pyhpp/constraints/fwd.hh>
+#include <pyhpp/util.hh>
 
 // DocNamespace(hpp::constraints)
 
@@ -66,9 +65,8 @@ struct DFWrapper : DifferentiableFunction, wrapper<DifferentiableFunction> {
 
   // NOTE: eigenpy::Ref<const vector_t> is not binded so far. It is not very
   // useful since it cannot be used to return a value.
-  static void jacobian_wrap(const DifferentiableFunction& f,
-                            matrixOut_t J, const Configuration_t& q)
-  {
+  static void jacobian_wrap(const DifferentiableFunction& f, matrixOut_t J,
+                            const Configuration_t& q) {
     J = py_jacobian(f, q);
     // f.jacobian(J, q);
   }

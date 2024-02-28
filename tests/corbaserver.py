@@ -5,8 +5,8 @@ ps = ProblemSolver.create()
 
 for i in range(3):
     print(i)
-    server = Server (ps, False)
+    server = Server(ps, False)
     server.initialize()
     server.startCorbaServer()
-    server.processRequest (True)
+    server.processRequest(True)
     del server

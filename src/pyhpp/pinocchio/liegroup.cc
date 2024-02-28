@@ -16,15 +16,14 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pinocchio/fwd.hpp>
+#include <boost/python.hpp>
+#include <eigenpy/eigenpy.hpp>
 #include <hpp/pinocchio/liegroup-element.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
+#include <pinocchio/fwd.hpp>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
-#include <eigenpy/eigenpy.hpp>
 
 using namespace boost::python;
 
@@ -149,14 +148,22 @@ void exposeLiegroup() {
       .def("__str__", &to_str_from_operator<LiegroupSpace>)
       .def("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
       .PYHPP_DEFINE_METHOD(LiegroupSpace, Rn)
-      .staticmethod("Rn") .PYHPP_DEFINE_METHOD(LiegroupSpace, R1)
-      .staticmethod("R1") .PYHPP_DEFINE_METHOD(LiegroupSpace, R2)
-      .staticmethod("R2") .PYHPP_DEFINE_METHOD(LiegroupSpace, R3)
-      .staticmethod("R3") .PYHPP_DEFINE_METHOD(LiegroupSpace, SE2)
-      .staticmethod("SE2") .PYHPP_DEFINE_METHOD(LiegroupSpace, SE3)
-      .staticmethod("SE3") .PYHPP_DEFINE_METHOD(LiegroupSpace, R2xSO2)
-      .staticmethod("R2xSO2") .PYHPP_DEFINE_METHOD(LiegroupSpace, R3xSO3)
-      .staticmethod("R3xSO3") .PYHPP_DEFINE_METHOD(LiegroupSpace, empty)
+      .staticmethod("Rn")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, R1)
+      .staticmethod("R1")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, R2)
+      .staticmethod("R2")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, R3)
+      .staticmethod("R3")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, SE2)
+      .staticmethod("SE2")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, SE3)
+      .staticmethod("SE3")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, R2xSO2)
+      .staticmethod("R2xSO2")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, R3xSO3)
+      .staticmethod("R3xSO3")
+      .PYHPP_DEFINE_METHOD(LiegroupSpace, empty)
       .staticmethod("empty")
       .PYHPP_DEFINE_METHOD(LiegroupSpace, mergeVectorSpaces)
       .PYHPP_DEFINE_METHOD(LgSWrapper, dIntegrate_dq)
@@ -189,20 +196,20 @@ void exposeLiegroup() {
 
   class_<LiegroupElementRef>("LiegroupElementRef",
                              init<vectorOut_t, LiegroupSpacePtr_t&>())
-    // Pythonic API
-    .def("__str__", &to_str_from_operator<LiegroupElementRef>)
-    .add_property("v", &LgERWrapper::vector_wrap_read,
-                  &LgERWrapper::vector_wrap_write)
+      // Pythonic API
+      .def("__str__", &to_str_from_operator<LiegroupElementRef>)
+      .add_property("v", &LgERWrapper::vector_wrap_read,
+                    &LgERWrapper::vector_wrap_write)
 
-    // C++ API
-    .def("vector",
-         static_cast<const vectorOut_t& (LiegroupElementRef::*)() const>
-         (&LiegroupElementRef::vector),
-         return_value_policy<return_by_value>())
-    .def("space", &LiegroupElementRef::space,
-         return_value_policy<return_by_value>())
-    .def(self - self)
-    .def(self + vector_t());
+      // C++ API
+      .def("vector",
+           static_cast<const vectorOut_t& (LiegroupElementRef::*)() const>(
+               &LiegroupElementRef::vector),
+           return_value_policy<return_by_value>())
+      .def("space", &LiegroupElementRef::space,
+           return_value_policy<return_by_value>())
+      .def(self - self)
+      .def(self + vector_t());
 }
 }  // namespace pinocchio
 }  // namespace pyhpp

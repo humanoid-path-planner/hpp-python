@@ -15,11 +15,10 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/core/configuration-shooter.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -28,9 +27,7 @@ namespace core {
 using namespace hpp::core;
 
 struct CSWrapper {
-  static vector_t shoot(const ConfigurationShooter* cs) {
-    return cs->shoot();
-  }
+  static vector_t shoot(const ConfigurationShooter* cs) { return cs->shoot(); }
 };
 
 void exposeConfigurationShooter() {

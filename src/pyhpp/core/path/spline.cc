@@ -16,13 +16,12 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/core/path/spline.hh>
 #include <hpp/python/config.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -87,13 +86,14 @@ struct SplineWrapper {
             .def("parameterDerivativeCoefficients",
                  &SplineWrapper::py_parameterDerivativeCoefficients)
 
-            .PYHPP_DEFINE_METHOD(S_t, parameterSize) .PYHPP_DEFINE_METHOD(
-                SplineWrapper, parameterDerivativeCoefficients)
+            .PYHPP_DEFINE_METHOD(S_t, parameterSize)
+            .PYHPP_DEFINE_METHOD(SplineWrapper, parameterDerivativeCoefficients)
             .PYHPP_DEFINE_METHOD(SplineWrapper, parameterIntegrate)
             .PYHPP_DEFINE_METHOD(S_t, squaredNormIntegral)
             .PYHPP_DEFINE_METHOD(SplineWrapper, squaredNormIntegralDerivative)
             .PYHPP_DEFINE_METHOD(SplineWrapper, basisFunctionDerivative)
-            .PYHPP_DEFINE_METHOD(SplineWrapper, squaredNormBasisFunctionIntegral)
+            .PYHPP_DEFINE_METHOD(SplineWrapper,
+                                 squaredNormBasisFunctionIntegral)
             .PYHPP_DEFINE_METHOD(SplineWrapper, rowParameters);
 
     enum_<int>("")
