@@ -15,11 +15,10 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 

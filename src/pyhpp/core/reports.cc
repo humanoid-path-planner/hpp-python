@@ -15,16 +15,15 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
-#include <pinocchio/multibody/fwd.hpp>
+#include <boost/python.hpp>
 #include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/collision-validation-report.hh>
 #include <hpp/core/joint-bound-validation.hh>
 #include <hpp/core/path-validation-report.hh>
 #include <hpp/core/validation-report.hh>
+#include <pinocchio/multibody/fwd.hpp>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 

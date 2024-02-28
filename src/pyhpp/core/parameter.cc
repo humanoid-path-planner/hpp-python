@@ -46,15 +46,15 @@ object parameter_as_python_object(Parameter* p) {
 }
 
 Parameter create(object param) {
-#define RETURN_AS(type, variable)                                   \
-  {                                                                 \
-    extract<type> get_as(variable);                         \
+#define RETURN_AS(type, variable)                   \
+  {                                                 \
+    extract<type> get_as(variable);                 \
     if (get_as.check()) return Parameter(get_as()); \
   }
 
   RETURN_AS(size_type, param);
   // In Python a boolean is an integer so it is not possible to differentiate.
-  //RETURN_AS(bool, param);
+  // RETURN_AS(bool, param);
   RETURN_AS(value_type, param);
   RETURN_AS(std::string, param);
   RETURN_AS(vector_t, param);
@@ -65,9 +65,7 @@ Parameter create(object param) {
 #undef RETURN_AS
 }
 
-Parameter createBool(bool param) {
-  return Parameter(param);
-}
+Parameter createBool(bool param) { return Parameter(param); }
 
 void exposeParameter() {
   class_<Parameter>("Parameter", no_init)

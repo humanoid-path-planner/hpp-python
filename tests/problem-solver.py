@@ -5,18 +5,24 @@ import pinocchio, eigenpy
 import numpy as np
 
 ps = ProblemSolver.create()
-robot = ps.createRobot('ur3')
-urdf.loadRobotModel(robot, "anchor", "example-robot-data/robots/ur_description",
-                    "ur3", "_gripper", "_gripper")
+robot = ps.createRobot("ur3")
+urdf.loadRobotModel(
+    robot,
+    "anchor",
+    "example-robot-data/robots/ur_description",
+    "ur3",
+    "_gripper",
+    "_gripper",
+)
 ps.robot(robot)
 
-qinit = np.zeros ((robot.model().nq, 1))
+qinit = np.zeros((robot.model().nq, 1))
 qgoal = qinit.copy()
-qgoal[0,0] = 1
+qgoal[0, 0] = 1
 
-ps.initConfig (qinit)
-ps.addGoalConfig (qgoal)
-ps.solve ()
+ps.initConfig(qinit)
+ps.addGoalConfig(qgoal)
+ps.solve()
 
 paths = ps.paths()
 path = paths[0]

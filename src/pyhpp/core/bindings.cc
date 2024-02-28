@@ -17,11 +17,11 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/core/fwd.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
-#include <boost/python.hpp>
 
 BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;

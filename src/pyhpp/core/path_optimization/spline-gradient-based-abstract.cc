@@ -16,20 +16,19 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pinocchio/multibody/fwd.hpp>
+#include <boost/python.hpp>
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <hpp/core/collision-path-validation-report.hh>
 #include <hpp/core/path-optimization/linear-constraint.hh>
 #include <hpp/core/path-optimization/quadratic-program.hh>
 #include <hpp/core/path-optimization/spline-gradient-based-abstract.hh>
 #include <hpp/core/problem.hh>
+#include <pinocchio/multibody/fwd.hpp>
 #include <pyhpp/core/pathOptimization/fwd.hh>
 #include <pyhpp/ref.hh>
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
 #include <pyhpp/vector-indexing-suite.hh>
-
-#include <boost/python.hpp>
-#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -88,8 +87,9 @@ class SGBWrapper
       f(splines);
   }
 
-  Reports_t validatePath(const Splines_t& splines, std::vector<std::size_t>&
-                         reordering, bool stopAtFirst, bool reorder) const {
+  Reports_t validatePath(const Splines_t& splines,
+                         std::vector<std::size_t>& reordering, bool stopAtFirst,
+                         bool reorder) const {
     return Base::validatePath(splines, reordering, stopAtFirst, reorder);
   }
 
@@ -125,20 +125,20 @@ void exposeSplineGradientBasedAbstract(const char* name) {
   typedef typename SGBW_t::SplineOptimizationData SplineOptimizationData;
   typedef typename SGBW_t::SplineOptimizationDatas_t SplineOptimizationDatas_t;
 
-  scope s =
-      class_<SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable>(
-          name, init<const ProblemConstPtr_t&>())
-      .PYHPP_DEFINE_METHOD(SGB_t, copy)
-      .staticmethod("copy") .PYHPP_DEFINE_METHOD(SGB_t, updateSplines)
-      .PYHPP_DEFINE_METHOD(SGBW_t, updateParameters)
-      .PYHPP_DEFINE_METHOD(SGB_t, interpolate)
-      .staticmethod("interpolate") .PYHPP_DEFINE_METHOD(
-          SGBW_t, appendEquivalentSpline)
-      .PYHPP_DEFINE_METHOD(SGBW_t, initializePathValidation)
-      .def("validatePath", &SGBW_t::validatePath)
-      .PYHPP_DEFINE_METHOD(SGBW_t, jointBoundConstraint)
-      .PYHPP_DEFINE_METHOD(SGBW_t, addContinuityConstraints)
-      .PYHPP_DEFINE_METHOD(SGBW_t, buildPathVector);
+  scope s = class_<SGBW_t, Ptr_t, bases<PathOptimizer>, boost::noncopyable>(
+                name, init<const ProblemConstPtr_t&>())
+                .PYHPP_DEFINE_METHOD(SGB_t, copy)
+                .staticmethod("copy")
+                .PYHPP_DEFINE_METHOD(SGB_t, updateSplines)
+                .PYHPP_DEFINE_METHOD(SGBW_t, updateParameters)
+                .PYHPP_DEFINE_METHOD(SGB_t, interpolate)
+                .staticmethod("interpolate")
+                .PYHPP_DEFINE_METHOD(SGBW_t, appendEquivalentSpline)
+                .PYHPP_DEFINE_METHOD(SGBW_t, initializePathValidation)
+                .def("validatePath", &SGBW_t::validatePath)
+                .PYHPP_DEFINE_METHOD(SGBW_t, jointBoundConstraint)
+                .PYHPP_DEFINE_METHOD(SGBW_t, addContinuityConstraints)
+                .PYHPP_DEFINE_METHOD(SGBW_t, buildPathVector);
 
   class_<Splines_t>("Splines").def(
       cpp_like_vector_indexing_suite<Splines_t, true>());
@@ -203,27 +203,27 @@ struct LCWrapper {
 
 void exposeLinearConstraint() {
   class_<LinearConstraint>("LinearConstraint", init<size_type, size_type>())
-    .PYHPP_DEFINE_METHOD(LinearConstraint, concatenate)
-    .PYHPP_DEFINE_METHOD(LinearConstraint, decompose) .PYHPP_DEFINE_METHOD(
-        LinearConstraint, computeRank)
-    .def("reduceConstraint", &LinearConstraint::reduceConstraint,
-        LC_reduceConstraint_overload(
-          args("toReduce", "reduced", "computeRank")))
-    .PYHPP_DEFINE_METHOD(LinearConstraint, computeSolution)
-    .PYHPP_DEFINE_METHOD(LinearConstraint, isSatisfied)
-    .PYHPP_DEFINE_METHOD(LinearConstraint, addRows)
-    .add_property("J",
-                            make_getter(&LinearConstraint::J,
-                                        return_value_policy<return_by_value>()),
-                            &LCWrapper::setJ, "")
-              .add_property("b",
-                            make_getter(&LinearConstraint::b,
-                                        return_value_policy<return_by_value>()),
-                            &LCWrapper::setb, "")
-              .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, rank, "")
-              .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, PK, "")
-              .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xStar, "")
-              .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xSol, "");
+      .PYHPP_DEFINE_METHOD(LinearConstraint, concatenate)
+      .PYHPP_DEFINE_METHOD(LinearConstraint, decompose)
+      .PYHPP_DEFINE_METHOD(LinearConstraint, computeRank)
+      .def("reduceConstraint", &LinearConstraint::reduceConstraint,
+           LC_reduceConstraint_overload(
+               args("toReduce", "reduced", "computeRank")))
+      .PYHPP_DEFINE_METHOD(LinearConstraint, computeSolution)
+      .PYHPP_DEFINE_METHOD(LinearConstraint, isSatisfied)
+      .PYHPP_DEFINE_METHOD(LinearConstraint, addRows)
+      .add_property("J",
+                    make_getter(&LinearConstraint::J,
+                                return_value_policy<return_by_value>()),
+                    &LCWrapper::setJ, "")
+      .add_property("b",
+                    make_getter(&LinearConstraint::b,
+                                return_value_policy<return_by_value>()),
+                    &LCWrapper::setb, "")
+      .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, rank, "")
+      .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, PK, "")
+      .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xStar, "")
+      .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xSol, "");
 }
 
 struct QPWrapper {

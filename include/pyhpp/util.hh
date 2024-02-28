@@ -20,9 +20,9 @@
 #ifndef PYHPP_FWD_HH
 #define PYHPP_FWD_HH
 
-#include <hpp/util/pointer.hh>
 #include <boost/python.hpp>
 #include <eigenpy/eigenpy.hpp>
+#include <hpp/util/pointer.hh>
 #include <vector>
 
 #define INIT_PYHPP_MODULE \
@@ -35,12 +35,12 @@
   def(#METHOD, &CLASS::METHOD, ARG1, ARG2)
 #define PYHPP_DEFINE_METHOD_INTERNAL_REF(CLASS, METHOD) \
   def(#METHOD, &CLASS::METHOD, return_internal_reference<>())
-#define PYHPP_DEFINE_GETTER_SETTER(CLASS, METHOD, TYPE)               \
-  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD))  \
+#define PYHPP_DEFINE_GETTER_SETTER(CLASS, METHOD, TYPE)              \
+  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
-#define PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(CLASS, METHOD, TYPE)  \
-  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD),  \
-       return_internal_reference<>())                                 \
+#define PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(CLASS, METHOD, TYPE) \
+  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD), \
+      return_internal_reference<>())                                 \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
 
 namespace pyhpp {

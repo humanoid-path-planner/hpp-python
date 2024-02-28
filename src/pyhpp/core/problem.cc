@@ -15,6 +15,7 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
 #include <hpp/core/config-validation.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
@@ -24,8 +25,6 @@
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -44,7 +43,8 @@ void exposeProblem() {
           static_cast<const DevicePtr_t& (Problem::*)() const>(&Problem::robot),
           return_value_policy<return_by_value>())
       .def("setParameter", &Problem::setParameter)
-      .def("getParameter", &Problem::getParameter, return_value_policy<return_by_value>())
+      .def("getParameter", &Problem::getParameter,
+           return_value_policy<return_by_value>())
       .def("configurationShooter",
            static_cast<ConfigurationShooterPtr_t (Problem::*)() const>(
                &Problem::configurationShooter))

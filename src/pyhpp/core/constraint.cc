@@ -15,15 +15,14 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
+#include <boost/python.hpp>
+#include <eigenpy/eigenpy.hpp>
 #include <hpp/constraints/solver/by-substitution.hh>
 #include <hpp/core/config-projector.hh>
 #include <hpp/core/constraint-set.hh>
 #include <hpp/core/constraint.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
-
-#include <eigenpy/eigenpy.hpp>
-#include <boost/python.hpp>
 
 using namespace boost::python;
 
@@ -67,19 +66,22 @@ void exposeConstraint() {
 
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
          bases<Constraint> >("ConfigProjector", no_init)
-    .def("solver", static_cast<BySubstitution& (ConfigProjector::*)()>(&ConfigProjector::solver), return_internal_reference<>())
-    .def("add", &ConfigProjector::add)
-    .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, lastIsOptional, bool)
-    .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, maxIterations, size_type)
-    .def("errorThreshold",
-        static_cast<void (ConfigProjector::*)(const value_type&)>(
-          &ConfigProjector::errorThreshold))
-    .def("errorThreshold",
-        static_cast<value_type (ConfigProjector::*)() const>(
-          &ConfigProjector::errorThreshold))
-    .PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
-    .def("sigma", &ConfigProjector::sigma,
-        return_value_policy<return_by_value>());
+      .def("solver",
+           static_cast<BySubstitution& (ConfigProjector::*)()>(
+               &ConfigProjector::solver),
+           return_internal_reference<>())
+      .def("add", &ConfigProjector::add)
+      .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, lastIsOptional, bool)
+      .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, maxIterations, size_type)
+      .def("errorThreshold",
+           static_cast<void (ConfigProjector::*)(const value_type&)>(
+               &ConfigProjector::errorThreshold))
+      .def("errorThreshold",
+           static_cast<value_type (ConfigProjector::*)() const>(
+               &ConfigProjector::errorThreshold))
+      .PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
+      .def("sigma", &ConfigProjector::sigma,
+           return_value_policy<return_by_value>());
 }
 }  // namespace core
 }  // namespace pyhpp
