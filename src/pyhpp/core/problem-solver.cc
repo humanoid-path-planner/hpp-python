@@ -86,7 +86,7 @@ struct Builder {
                                const std::string& key, PyObject* callable) {
     // TODO check if incref is needed
     // incref (callable);
-    c.add(key, T(boost::bind(&Builder<Type>::call2, callable, _1)));
+    c.add(key, T(boost::bind(&Builder<Type>::call2, callable, boost::placeholders::_1)));
   }
 
   PyObject* callable;
