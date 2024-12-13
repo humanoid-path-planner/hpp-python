@@ -30,8 +30,8 @@ using namespace hpp::constraints;
 template <typename GT_t>
 typename GT_t::Ptr_t AbsoluteGenericTransformation_create(
     const std::string& name, const DevicePtr_t& robot,
-    const pinocchio::JointIndex& j2, const Transform3f& frame2,
-    const Transform3f& frame1,
+    const pinocchio::JointIndex& j2, const Transform3s& frame2,
+    const Transform3s& frame1,
     std::vector<bool> mask  // TODO Add default argument
 ) {
   JointConstPtr_t joint2(new hpp::pinocchio::Joint(robot, j2));
@@ -53,7 +53,7 @@ template <typename GT_t>
 typename GT_t::Ptr_t RelativeGenericTransformation_create(
     const std::string& name, const DevicePtr_t& robot,
     const pinocchio::JointIndex& j1, const pinocchio::JointIndex& j2,
-    const Transform3f& frame1, const Transform3f& frame2,
+    const Transform3s& frame1, const Transform3s& frame2,
     std::vector<bool> mask  // TODO Add default argument
 ) {
   JointConstPtr_t joint1(new hpp::pinocchio::Joint(robot, j1));
