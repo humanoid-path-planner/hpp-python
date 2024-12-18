@@ -16,7 +16,7 @@ cmake_minimum_required(VERSION 3.10)
 
 set(PROJECT_NAME hpp-python)
 set(PROJECT_DESCRIPTION "python bindings for HPP, based on boost python")
-set(PROJECT_URL "")
+set(PROJECT_URL "https://github.com/humanoid-path-planner/${PROJECT_NAME}")
 
 set(CXX_DISABLE_WERROR TRUE)
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
