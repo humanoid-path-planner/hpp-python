@@ -1,10 +1,7 @@
-import pinocchio, eigenpy
 import numpy as np
 from pyhpp.constraints import ComparisonType
-from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 from pyhpp.core.path import SplineB3 as Spline
-from pyhpp.core.path_optimization import LinearConstraint, QuadraticProgram
-import pyhpp.core.path
+from pyhpp.core.path_optimization import LinearConstraint, SplineGradientBasedAbstractB3
 
 
 class CostFunction:
@@ -103,7 +100,7 @@ class NonLinearSplineGradientBasedB3(SplineGradientBasedAbstractB3):
         print("Current {cost.value(splines)}")
 
         # 5
-        feasible = constraint.decompose(True, True)
+        _feasible = constraint.decompose(True, True)
 
         self.checkConstraint(splines, constraint, msg="continuity")
 
@@ -248,7 +245,7 @@ class NonLinearSplineGradientBasedB3(SplineGradientBasedAbstractB3):
             qend = s.end()
 
             ps = s.parameterSize()
-            ec = ic + s.NbCoeffs * ps
+            _ec = ic + s.NbCoeffs * ps
             ics = [ic + i * ps for i in range(s.NbCoeffs + 1)]
 
             # Only the endpoints and not the other points ?
@@ -256,15 +253,15 @@ class NonLinearSplineGradientBasedB3(SplineGradientBasedAbstractB3):
                 er = ir + f.function().outputDerivativeSize()
                 Jfunction = f.function().J(qinit)
                 paramDerInit = s.parameterDerivativeCoefficients(s.paramRange().first)
-                for l in range(s.NbCoeffs):
-                    J[ir:er, ics[l] : ics[l + 1]] = Jfunction * paramDerInit[l, 0]
+                for c in range(s.NbCoeffs):
+                    J[ir:er, ics[c] : ics[c + 1]] = Jfunction * paramDerInit[c, 0]
                 ir = er
 
                 er = ir + f.function().outputDerivativeSize()
                 Jfunction = f.function().J(qend)
                 paramDerEnd = s.parameterDerivativeCoefficients(s.paramRange().second)
-                for l in range(s.NbCoeffs):
-                    J[ir:er, ics[l] : ics[l + 1]] = Jfunction * paramDerEnd[l, 0]
+                for c in range(s.NbCoeffs):
+                    J[ir:er, ics[c] : ics[c + 1]] = Jfunction * paramDerEnd[c, 0]
                 ir = er
 
             for f in p:
@@ -274,10 +271,10 @@ class NonLinearSplineGradientBasedB3(SplineGradientBasedAbstractB3):
                 paramDerInit = s.parameterDerivativeCoefficients(s.paramRange().first)
                 paramDerEnd = s.parameterDerivativeCoefficients(s.paramRange().second)
                 # J[ir:er, ics[0]:ics[1]] = f.function().J(s.end()) * s.parameterDerivativeCoefficients(s.paramRange().second)
-                for l in range(s.NbCoeffs):
-                    J[ir:er, ics[l] : ics[l + 1]] = (
-                        JfunctionInit * paramDerInit[l, 0]
-                        - JfunctionEnd * paramDerEnd[l, 0]
+                for c in range(s.NbCoeffs):
+                    J[ir:er, ics[c] : ics[c + 1]] = (
+                        JfunctionInit * paramDerInit[c, 0]
+                        - JfunctionEnd * paramDerEnd[c, 0]
                     )
                 ir = er
 

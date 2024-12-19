@@ -72,7 +72,9 @@
 ############# README ###############################
 
 from __future__ import print_function
-import re, os, sys
+import re
+import os
+import sys
 from doxygen_xml_parser import Index
 
 

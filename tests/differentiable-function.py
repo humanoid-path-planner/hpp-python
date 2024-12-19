@@ -1,4 +1,4 @@
-from pyhpp.pinocchio import LiegroupElement, LiegroupElementRef, LiegroupSpace
+from pyhpp.pinocchio import LiegroupElement
 
 from pyhpp.constraints import DifferentiableFunction
 import numpy as np

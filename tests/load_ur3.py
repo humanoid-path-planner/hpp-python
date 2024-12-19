@@ -1,5 +1,8 @@
-from pinocchio import Model
-from pyhpp.pinocchio import Device, urdf, LiegroupElement
+import numpy as np
+from pinocchio import SE3
+from pinocchio import StdVec_Bool as Mask
+from pyhpp.constraints import Position
+from pyhpp.pinocchio import Device, LiegroupElement, urdf
 
 robot = Device.create("ur3")
 urdf.loadRobotModel(
@@ -14,9 +17,6 @@ urdf.loadRobotModel(
 q = robot.currentConfiguration()
 robot.currentConfiguration(q)
 
-from pyhpp.constraints import Position
-from pinocchio import SE3, StdVec_Bool as Mask
-import numpy as np
 
 m = Mask()
 m[:] = (True,) * 3
