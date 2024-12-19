@@ -10,7 +10,6 @@ from pyhpp.constraints import (
     Explicit,
 )
 from pinocchio import SE3, StdVec_Bool as Mask
-import numpy as np
 
 robot = Device.create("ur3")
 urdf.loadRobotModel(

@@ -1,10 +1,8 @@
-import pinocchio, eigenpy
 import numpy as np
 from pyhpp.constraints import ComparisonType
 from pyhpp.core.path_optimization import SplineGradientBasedAbstractB3
 from pyhpp.core.path import SplineB3 as Spline
-from pyhpp.core.path_optimization import LinearConstraint, QuadraticProgram
-import pyhpp.core.path
+from pyhpp.core.path_optimization import LinearConstraint
 
 
 class CostFunction:

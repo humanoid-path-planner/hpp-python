@@ -1,4 +1,3 @@
-from pinocchio import Model
 from pyhpp.pinocchio import Device, urdf, LiegroupElement
 
 robot = Device.create("ur3")

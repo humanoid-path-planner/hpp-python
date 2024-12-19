@@ -1,7 +1,5 @@
 from pyhpp.pinocchio import urdf
 from pyhpp.core import ProblemSolver
-import pyhpp.core.path
-import pinocchio, eigenpy
 import numpy as np
 
 ps = ProblemSolver.create()
