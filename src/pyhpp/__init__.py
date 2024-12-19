@@ -1,1 +1,1 @@
-import eigenpy 
+import eigenpy  # noqa: F401

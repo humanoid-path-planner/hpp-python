@@ -107,7 +107,7 @@ def test_path_inheritance():
     pv.appendPath(path)
 
     path.clear_counter("copy")
-    path_0 = pv.pathAtRank(0)
+    _path_0 = pv.pathAtRank(0)
     path.assert_called("copy")
 
 
