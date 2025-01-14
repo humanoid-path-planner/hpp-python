@@ -20,7 +20,6 @@
 #include <eigenpy/eigenpy.hpp>
 #include <hpp/pinocchio/device-data.hh>
 #include <hpp/pinocchio/device.hh>
-#include <hpp/pinocchio/joint-collection.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
