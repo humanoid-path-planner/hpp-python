@@ -26,7 +26,6 @@ BOOST_PYTHON_MODULE(bindings) {
 
   boost::python::import("pinocchio");
 
-  pyhpp::pinocchio::exposeModel();
   pyhpp::pinocchio::exposeDevice();
   pyhpp::pinocchio::exposeLiegroup();
 }
