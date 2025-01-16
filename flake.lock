@@ -18,6 +18,54 @@
         "type": "github"
       }
     },
+    "hpp-core": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737041762,
+        "narHash": "sha256-hQcw4Z8q1DZmA7IbxJh84rCYjnyFicz2lbH3uES2tOY=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-core",
+        "rev": "e16b6bd38b1d2e9031ba7b395541cd569280c5b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "ref": "devel",
+        "repo": "hpp-core",
+        "type": "github"
+      }
+    },
+    "hpp-pinocchio": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737039837,
+        "narHash": "sha256-LOcTojRTjDLwHYZsszoNyfIbTr7Nl6Zb/kh9laXp59g=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-pinocchio",
+        "rev": "acccdc88414966ce6284792212cf3b4262a3dc8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "ref": "devel",
+        "repo": "hpp-pinocchio",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1734533323,
@@ -49,6 +97,8 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "hpp-core": "hpp-core",
+        "hpp-pinocchio": "hpp-pinocchio",
         "nixpkgs": "nixpkgs"
       }
     }
