@@ -17,9 +17,11 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
+#include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
 #include <hpp/pinocchio/device-data.hh>
 #include <hpp/pinocchio/device.hh>
+#include <hpp/pinocchio/gripper.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
@@ -44,8 +46,8 @@ using namespace hpp::pinocchio;
 namespace bp = boost::python;
 typedef hpp::pinocchio::Model Model;
 typedef hpp::pinocchio::ModelPtr_t ModelPtr_t;
-using boost::python::class_;
-using boost::python::no_init;
+using namespace boost::python;
+
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(getFrameId_overload, Model::getFrameId,
                                        1, 2)
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(existFrame_overload, Model::existFrame,
@@ -57,6 +59,20 @@ bool Device_currentConfiguration(Device& d, const Configuration_t& c) {
   return d.currentConfiguration(c);
 }
 
+Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper)
+{
+  Transform3s res(gripper->objectPositionInJoint());
+  return res;
+}
+
+void exposeGripper() {
+  class_<Gripper, GripperPtr_t>("Gripper", no_init)
+    .def("create", &Gripper::create)
+    .staticmethod("create")
+    .add_property("localPosition", &getObjectPositionInJoint);
+  class_< std::map<std::string, GripperPtr_t> >("GripperMap")
+    .def(boost::python::map_indexing_suite< std::map<std::string, GripperPtr_t>, true >());
+}
 void exposeDevice() {
   enum_<Computation_t>("ComputationFlag")
       .value("JOINT_POSITION", JOINT_POSITION)

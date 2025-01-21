@@ -26,6 +26,7 @@ namespace pyhpp {
 namespace pinocchio {
 void exposeModel();
 void exposeDevice();
+void exposeGripper();
 void exposeLiegroup();
 }  // namespace pinocchio
 }  // namespace pyhpp

@@ -4,15 +4,11 @@ from pinocchio import StdVec_Bool as Mask
 from pyhpp.constraints import Position
 from pyhpp.pinocchio import Device, LiegroupElement, urdf
 
+urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
+srdfFilename = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
+
 robot = Device.create("ur3")
-urdf.loadRobotModel(
-    robot,
-    "anchor",
-    "example-robot-data/robots/ur_description",
-    "ur3",
-    "_gripper",
-    "_gripper",
-)
+urdf.loadModel(robot, 0, "", "anchor", urdfFilename, srdfFilename, SE3.Identity())
 
 q = robot.currentConfiguration()
 robot.currentConfiguration(q)

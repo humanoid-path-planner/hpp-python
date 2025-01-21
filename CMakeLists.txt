@@ -94,6 +94,8 @@ add_project_dependency(hpp-pinocchio REQUIRED)
 add_project_dependency(hpp-constraints REQUIRED)
 add_project_dependency(hpp-core REQUIRED)
 add_project_dependency(hpp-corbaserver REQUIRED)
+add_project_dependency(hpp-manipulation REQUIRED)
+add_project_dependency(hpp-manipulation-urdf REQUIRED)
 
 add_library(${PROJECT_NAME} INTERFACE)
 install(

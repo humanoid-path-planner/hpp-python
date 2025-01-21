@@ -125,3 +125,21 @@ add_python_library(
 add_python_library(
   pyhpp/corbaserver FILES pyhpp/corbaserver/bindings.cc
   pyhpp/corbaserver/server.cc LINK_LIBRARIES hpp-corbaserver::hpp-corbaserver)
+
+add_python_library(
+  pyhpp/manipulation
+  FILES
+  pyhpp/manipulation/bindings.cc
+  pyhpp/manipulation/device.cc
+  LINK_LIBRARIES
+  hpp-manipulation::hpp-manipulation
+  )
+
+add_python_library(
+  pyhpp/manipulation/urdf
+  FILES
+  pyhpp/manipulation/urdf/util.cc
+  pyhpp/manipulation/urdf/bindings.cc
+  LINK_LIBRARIES
+  hpp-manipulation-urdf::hpp-manipulation-urdf
+  )
