@@ -1,6 +1,7 @@
 //
-// Copyright (c) 2018 - 2023, CNRS
-// Authors: Joseph Mirabel, Florent Lamiraux
+// Copyright (c) 2025 CNRS
+// Authors: Florent Lamiraux
+//
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,21 +18,11 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <hpp/pinocchio/urdf/util.hh>
-#include <pyhpp/pinocchio/urdf/fwd.hh>
+#include <pyhpp/manipulation/urdf/fwd.hh>
+#include <pyhpp/util.hh>
 
-using namespace boost::python;
+BOOST_PYTHON_MODULE(bindings) {
+  INIT_PYHPP_MODULE;
 
-namespace pyhpp {
-namespace pinocchio {
-namespace urdf {
-using hpp::pinocchio::DevicePtr_t;
-using namespace hpp::pinocchio::urdf;
-
-void exposeUtil() {
-  def("loadModel", &loadModel);
-  def("loadModelFromString", &loadModelFromString);
+  pyhpp::manipulation::urdf::exposeUtil();
 }
-}  // namespace urdf
-}  // namespace pinocchio
-}  // namespace pyhpp
