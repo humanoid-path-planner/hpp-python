@@ -34,11 +34,6 @@ using namespace hpp::constraints;
 using namespace hpp::constraints::solver;
 
 void exposeHierarchicalIterativeSolver() {
-  enum_<ComparisonType>("ComparisonType")
-      .value("Equality", Equality)
-      .value("EqualToZero", EqualToZero)
-      .value("Superior", Superior)
-      .value("Inferior", Inferior);
   class_<ComparisonTypes_t>("ComparisonTypes")
       .def(vector_indexing_suite<ComparisonTypes_t>());
 

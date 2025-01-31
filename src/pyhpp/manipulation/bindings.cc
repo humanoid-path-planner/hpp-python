@@ -24,6 +24,7 @@ BOOST_PYTHON_MODULE(bindings) {
   INIT_PYHPP_MODULE;
 
   boost::python::import("pyhpp.pinocchio");
+  boost::python::import("pyhpp.constraints");
   pyhpp::manipulation::exposeHandle();
   pyhpp::manipulation::exposeDevice();
 }
