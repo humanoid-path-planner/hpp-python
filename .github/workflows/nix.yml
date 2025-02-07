@@ -3,15 +3,16 @@ name: "CI - Nix"
 on:
   push:
     branches:
-    - master
-    - devel
+      - devel
+      - master
   pull_request:
     branches:
-    - master
-    - devel
+      - devel
+      - master
 
 jobs:
-  nix:
+  tests:
+    name: "Nix build on ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}-latest"
     strategy:
       matrix:
