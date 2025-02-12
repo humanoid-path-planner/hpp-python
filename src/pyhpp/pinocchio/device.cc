@@ -41,11 +41,24 @@ using namespace boost::python;
 
 namespace pyhpp {
 namespace pinocchio {
-using namespace hpp::pinocchio;
 
 namespace bp = boost::python;
 typedef hpp::pinocchio::Model Model;
+typedef hpp::pinocchio::Data Data;
 typedef hpp::pinocchio::ModelPtr_t ModelPtr_t;
+typedef hpp::pinocchio::GeomData GeomData;
+typedef hpp::pinocchio::LiegroupSpacePtr_t LiegroupSpacePtr_t;
+typedef hpp::pinocchio::GeomModel GeomModel;
+typedef hpp::pinocchio::Configuration_t Configuration_t;
+typedef hpp::pinocchio::ConfigurationIn_t ConfigurationIn_t;
+typedef hpp::pinocchio::size_type size_type;
+typedef hpp::pinocchio::Transform3s Transform3s;
+typedef hpp::pinocchio::Device Device;
+typedef hpp::pinocchio::DevicePtr_t DevicePtr_t;
+typedef hpp::pinocchio::GripperPtr_t GripperPtr_t;
+typedef hpp::pinocchio::Gripper Gripper;
+typedef hpp::pinocchio::Computation_t Computation_t;
+
 using namespace boost::python;
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(getFrameId_overload, Model::getFrameId,
@@ -75,12 +88,12 @@ void exposeGripper() {
 }
 void exposeDevice() {
   enum_<Computation_t>("ComputationFlag")
-      .value("JOINT_POSITION", JOINT_POSITION)
-      .value("JACOBIAN", JACOBIAN)
-      .value("VELOCITY", VELOCITY)
-      .value("ACCELERATION", ACCELERATION)
-      .value("COM", COM)
-      .value("COMPUTE_ALL", COMPUTE_ALL);
+      .value("JOINT_POSITION", hpp::pinocchio::JOINT_POSITION)
+      .value("JACOBIAN", hpp::pinocchio::JACOBIAN)
+      .value("VELOCITY", hpp::pinocchio::VELOCITY)
+      .value("ACCELERATION", hpp::pinocchio::ACCELERATION)
+      .value("COM", hpp::pinocchio::COM)
+      .value("COMPUTE_ALL", hpp::pinocchio::COMPUTE_ALL);
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
   class_<Device, DevicePtr_t, boost::noncopyable>("Device", no_init)
       .def("name", &Device::name, return_value_policy<return_by_value>())
