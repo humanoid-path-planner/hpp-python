@@ -22,6 +22,8 @@
 #include <hpp/manipulation/srdf/util.hh>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 
+#include <../src/pyhpp/manipulation/device.hh>
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -32,26 +34,26 @@ using ::pinocchio::FrameIndex;
 using ::pinocchio::SE3;
 
 // Redefine loadModel in order to parse the srdf file with hpp-manipulation-urdf
-void loadModel(const DevicePtr_t& robot, const FrameIndex& baseFrame,
+void loadModel(const Device& robot, const FrameIndex& baseFrame,
 	       const std::string& prefix, const std::string& rootType,
 	       const std::string& urdfPath, const std::string& srdfPath,
 	       const SE3& bMr)
 {
-  hpp::pinocchio::urdf::loadModel(robot, baseFrame, prefix, rootType, urdfPath, srdfPath, bMr);
+  hpp::pinocchio::urdf::loadModel(robot.obj, baseFrame, prefix, rootType, urdfPath, srdfPath, bMr);
   if (!std::string(srdfPath).empty()) {
-    hpp::manipulation::srdf::loadModelFromFile(robot, prefix, srdfPath);
+    hpp::manipulation::srdf::loadModelFromFile(robot.obj, prefix, srdfPath);
   }
 }
 
-void loadModelFromString(const DevicePtr_t& robot, const FrameIndex& baseFrame,
+void loadModelFromString(const Device& robot, const FrameIndex& baseFrame,
                          const std::string& prefix, const std::string& rootType,
                          const std::string& urdfString,
                          const std::string& srdfString,
                          const SE3& bMr)
 {
-  hpp::pinocchio::urdf::loadModelFromString(robot, baseFrame, prefix, rootType, urdfString,
+  hpp::pinocchio::urdf::loadModelFromString(robot.obj, baseFrame, prefix, rootType, urdfString,
 					    srdfString, bMr);
-  hpp::manipulation::srdf::loadModelFromXML(robot, prefix, srdfString);
+  hpp::manipulation::srdf::loadModelFromXML(robot.obj, prefix, srdfString);
 }
 
 void exposeUtil() {

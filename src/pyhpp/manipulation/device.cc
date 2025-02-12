@@ -18,24 +18,112 @@
 
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
-#include <pinocchio/spatial/se3.hpp>
-#include <hpp/constraints/implicit.hh>
-#include <hpp/manipulation/device.hh>
-#include <hpp/manipulation/handle.hh>
+#include <pyhpp/util.hh>
+
+#include <../src/pyhpp/manipulation/device.hh>
 
 namespace pyhpp {
 namespace manipulation {
 using namespace boost::python;
-using namespace hpp::manipulation;
 
-std::map<std::string, HandlePtr_t> getDeviceHandles(const DevicePtr_t& device)
+Device::Device(const hpp::manipulation::DevicePtr_t& object)
 {
-  return device->handles.map;
+  obj = object;
+}
+Device::Device(const std::string& name) : obj(hpp::manipulation::Device::create(name))
+{
+}
+// Methods from hpp::pinocchio::Device
+const std::string& Device::name() const
+{
+  return obj->name();
+}
+const LiegroupSpacePtr_t& Device::configSpace() const
+{
+  return obj->configSpace();
+}
+Model& Device::model()
+{
+  return obj->model();
+}
+Data& Device::data()
+{
+  return obj->data();
+}
+GeomData& Device::geomData()
+{
+  return obj->geomData();
+}
+GeomModel& Device::geomModel()
+{
+  return obj->geomModel();
+}
+size_type Device::configSize() const
+{
+  return obj->configSize();
+}
+size_type Device::numberDof() const
+{
+  return obj->numberDof();
+}
+const Configuration_t& Device::currentConfiguration() const
+{
+  return obj->currentConfiguration();
+}
+bool Device::currentConfiguration(ConfigurationIn_t configuration)
+{
+  return obj->currentConfiguration(configuration);
+}
+void Device::computeForwardKinematics(int flag) {
+  return obj->computeForwardKinematics(flag);
+}
+void Device::computeFramesForwardKinematics() {
+  return obj->computeFramesForwardKinematics();
+}
+void Device::updateGeometryPlacements() {
+  return obj->updateGeometryPlacements();
+}
+// Methods for hpp::manipulation::Device
+void Device::setRobotRootPosition(const std::string& robotName,
+                          const Transform3s& positionWRTParentJoint)
+{
+  return obj->setRobotRootPosition(robotName, positionWRTParentJoint);
 }
 
-std::map<std::string, GripperPtr_t> getDeviceGrippers(const DevicePtr_t& device)
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(getFrameId_overload, Model::getFrameId,
+                                       1, 2)
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(existFrame_overload, Model::existFrame,
+                                       1, 2)
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(addJointFrame_overload,
+                                       Model::addJointFrame, 1, 2)
+
+bool Device_currentConfiguration(Device& d, const Configuration_t& c) {
+  return d.currentConfiguration(c);
+}
+
+Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper)
 {
-  return device->grippers.map;
+  Transform3s res(gripper->objectPositionInJoint());
+  return res;
+}
+
+bool check(const Device& device)
+{
+  for (auto const& g: device.obj->grippers.map)
+  {
+    std::cout << g.first << std::endl;
+  }
+  return true;
+}
+
+std::map<std::string, HandlePtr_t> getDeviceHandles(const Device& device)
+{
+  return device.obj->handles.map;
+}
+
+std::map<std::string, GripperPtr_t> getDeviceGrippers(const Device& device)
+{
+  return device.obj->grippers.map;
 }
 
 std::string getHandleName(const HandlePtr_t& handle)
@@ -96,10 +184,32 @@ void exposeHandle() {
     .def(boost::python::map_indexing_suite< std::map<std::string, HandlePtr_t>, true >());
 }
 void exposeDevice() {
+  void (Device::*cfk)(int) = &Device::computeForwardKinematics;
   // Enable automatic conversion of std::map
-  class_<Device, DevicePtr_t, boost::noncopyable, bases<hpp::pinocchio::Device> >("Device", no_init)
-    .def("create", &Device::create)
-    .staticmethod("create")
+  class_<Device>("Device", init <const std::string&> ())
+    .def("name", &Device::name, return_value_policy<return_by_value>())
+    .def("configSpace", &Device::configSpace,
+	 return_value_policy<return_by_value>())
+    .def("model", static_cast<Model& (Device::*)()>(&Device::model),
+	 return_internal_reference<>())
+    .def("data", static_cast<Data& (Device::*)()>(&Device::data),
+	 return_internal_reference<>())
+    .def("geomData", static_cast<GeomData& (Device::*)()>(&Device::geomData),
+	 return_internal_reference<>())
+    .def("geomModel",
+	 static_cast<GeomModel& (Device::*)()>(&Device::geomModel),
+	 return_internal_reference<>())
+    .PYHPP_DEFINE_METHOD(Device, configSize)
+    .PYHPP_DEFINE_METHOD(Device, numberDof)
+    .def("currentConfiguration",
+	 static_cast<const Configuration_t& (Device::*)() const>(
+             &Device::currentConfiguration),
+	 return_value_policy<return_by_value>())
+    .def("currentConfiguration", Device_currentConfiguration)
+    .def("computeForwardKinematics", cfk)
+    .def("computeFramesForwardKinematics",
+	 &Device::computeFramesForwardKinematics)
+    .def("updateGeometryPlacements", &Device::updateGeometryPlacements)
     .def("setRobotRootPosition", &Device::setRobotRootPosition)
     .def("handles", &getDeviceHandles)
     .def("grippers", &getDeviceGrippers);
