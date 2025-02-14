@@ -131,6 +131,7 @@ add_python_library(
   FILES
   pyhpp/manipulation/bindings.cc
   pyhpp/manipulation/device.cc
+  pyhpp/manipulation/graph.cc
   LINK_LIBRARIES
   hpp-manipulation::hpp-manipulation
   )

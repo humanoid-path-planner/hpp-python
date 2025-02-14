@@ -44,9 +44,10 @@ typedef hpp::pinocchio::Computation_t Computation_t;
 typedef hpp::manipulation::HandlePtr_t HandlePtr_t;
 typedef hpp::manipulation::Handle Handle;
 
-// Create a class Device that wraps a hpp::manipulation::Device
-HPP_PREDEF_CLASS(Device);
-typedef std::shared_ptr<Device> DevicePtr_t;
+// Wrapper class to hpp::manipulation::Device
+//
+// Boost python does not correctly handle weak pointers. To overcome this limitation,
+// we create a wrapper class and bind this class with boost python instead of the original class.
 struct Device {
   hpp::manipulation::DevicePtr_t obj;
   Device(const hpp::manipulation::DevicePtr_t& object);
