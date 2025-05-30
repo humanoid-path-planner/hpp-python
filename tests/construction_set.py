@@ -2,21 +2,33 @@ from math import pi
 import numpy as np
 from pinocchio import SE3
 from pyhpp.manipulation import Device, urdf
+from pyhpp.gepetto import Viewer
+
+robot = Device("construction-set")
+
+#Create viewer
+viewer = Viewer("construction_set", robot)
 
 # Load two UR3 robots
 urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
 srdfFilename = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
 
 r0_pose = SE3(rotation = np.identity(3), translation = np.array([-0.25, 0, 0]))
-r1_pose = SE3(rotation = np.identity(3), translation = np.array([ 0.25, 0, 0]))
-robot = Device.create("construction-set")
-urdf.loadModel(robot, 0, "r0", "anchor", urdfFilename, srdfFilename, r0_pose)
-urdf.loadModel(robot, 0, "r1", "anchor", urdfFilename, srdfFilename, r1_pose)
+r1_pose = SE3(rotation = np.array([[-1, 0, 0], [0, -1, 0], [0, 0, 1]]), translation = np.array([ 0.25, 0, 0]))
+
+#urdf.loadModel(robot, 0, "r0", "anchor", urdfFilename, srdfFilename, r0_pose)
+#urdf.loadModel(robot, 0, "r1", "anchor", urdfFilename, srdfFilename, r1_pose)
+viewer.addURDFToScene(0, "r0", "anchor", urdfFilename, srdfFilename, r0_pose)
+viewer.addURDFToScene(0, "r1", "anchor", urdfFilename, srdfFilename, r1_pose)
 
 # Load environment
 urdfFilename = "package://hpp_environments/urdf/construction_set/ground.urdf"
 srdfFilename = "package://hpp_environments/srdf/construction_set/ground.srdf"
-urdf.loadModel(robot, 0, "ground", "anchor", urdfFilename, srdfFilename, SE3.Identity())
+#urdf.loadModel(robot, 0, "ground", "anchor", urdfFilename, srdfFilename, SE3.Identity())
+viewer.addURDFToScene(0, "ground", "anchor", urdfFilename, srdfFilename, SE3.Identity())
+
+q = np.array([pi/6, -pi/2, pi/2, 0, 0, 0,] + [pi/6, -pi/2, pi/2, 0, 0, 0,])
+viewer.applyConfiguration(q)
 
 # Load spheres
 nSphere = 2
@@ -26,15 +38,16 @@ objects = list ()
 urdfFilename = "package://hpp_environments/urdf/construction_set/sphere.urdf"
 srdfFilename = "package://hpp_environments/srdf/construction_set/sphere.srdf"
 for i in range (nSphere):
-    urdf.loadModel(robot, 0, f"sphere{i}", "freeflyer", urdfFilename, srdfFilename, SE3.Identity())
+    #urdf.loadModel(robot, 0, f"sphere{i}", "freeflyer", urdfFilename, srdfFilename, SE3.Identity())
+    viewer.addURDFToScene(0, f"sphere{i}", "freeflyer", urdfFilename, srdfFilename, SE3.Identity())
     objects.append (f"sphere{i}")
 
 # Load cylinders
 urdfFilename = "package://hpp_environments/urdf/construction_set/cylinder_08.urdf"
 srdfFilename = "package://hpp_environments/srdf/construction_set/cylinder_08.srdf"
 for i in range (nCylinder):
-    urdf.loadModel(robot, 0, f"cylinder{i}", "freeflyer", urdfFilename, srdfFilename,
-                   SE3.Identity())
+    #urdf.loadModel(robot, 0, f"cylinder{i}", "freeflyer", urdfFilename, srdfFilename,SE3.Identity())
+    viewer.addURDFToScene(0, f"cylinder{i}", "freeflyer", urdfFilename, srdfFilename,SE3.Identity())
     objects.append (f"cylinder{i}")
 
 # Set joint bounds
