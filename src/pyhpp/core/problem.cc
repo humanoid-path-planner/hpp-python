@@ -21,6 +21,7 @@
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
+#include <hpp/core/problem-target.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/fwd.hh>
@@ -38,6 +39,7 @@ void exposeProblem() {
   class_<Problem, ProblemPtr_t, boost::noncopyable>("Problem", no_init)
       // .PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF (Problem, robot, const
       // DevicePtr_t&)
+      .def("create", &Problem::create).staticmethod("create")
       .def(
           "robot",
           static_cast<const DevicePtr_t& (Problem::*)() const>(&Problem::robot),
@@ -60,7 +62,12 @@ void exposeProblem() {
                &Problem::pathValidation))
       .def("pathProjector",
            static_cast<PathProjectorPtr_t (Problem::*)() const>(
-               &Problem::pathProjector));
+               &Problem::pathProjector))
+      .def("target",
+            static_cast<const ProblemTargetPtr_t& (Problem::*)() const>(&Problem::target),
+             return_value_policy<return_by_value>())
+
+    ;
 }
 }  // namespace core
 }  // namespace pyhpp

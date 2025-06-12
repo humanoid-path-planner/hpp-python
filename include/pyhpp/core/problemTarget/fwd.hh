@@ -17,37 +17,17 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef PYHPP_CORE_FWD_HH
-#define PYHPP_CORE_FWD_HH
+#ifndef PYHPP_CORE_PROBLEM_TARGET_FWD_HH
+#define PYHPP_CORE_ROBLEM_TARGET_FWD_HH
 
 #include <pyhpp/util.hh>
 
 namespace pyhpp {
 namespace core {
-void exposeConfigValidation();
-void exposeConfigurationShooter();
-void exposeConstraint();
-
-void exposeEquation();
-
-void exposeReports();
-
-void exposeSteeringMethod();
-
-void exposeNode();
-void exposeDistance();
-void exposeConnectedComponent();
-void exposeRoadmap();
-void exposeProblemTarget();
-
-void exposePath();
-void exposePathOptimizer();
-void exposePathProjector();
-void exposePathValidation();
-void exposeParameter();
-void exposeProblem();
-void exposeProblemSolver();
+namespace problemTarget {
+  void exposeGoalConfigurations();
+}  // namespace problemTarget
 }  // namespace core
 }  // namespace pyhpp
 
-#endif  // PYHPP_CORE_FWD_HH
+#endif  // PYHPP_CORE_PROBLEM_TARGET_FWD_HH
