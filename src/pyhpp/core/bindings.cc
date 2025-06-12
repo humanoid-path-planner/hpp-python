@@ -39,6 +39,11 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::core::exposeConstraint();
   pyhpp::core::exposeReports();
   pyhpp::core::exposeSteeringMethod();
+  pyhpp::core::exposeNode();
+  pyhpp::core::exposeDistance();
+  pyhpp::core::exposeConnectedComponent();
+  pyhpp::core::exposeRoadmap();
+  pyhpp::core::exposeProblemTarget();
 
   // Expose main abstract classes
   pyhpp::core::exposePath();
@@ -48,4 +53,7 @@ BOOST_PYTHON_MODULE(bindings) {
 
   boost::python::import("pyhpp.core.path");
   boost::python::import("pyhpp.core.path_optimization");
+  
+  boost::python::import("pyhpp.core.problem_target");
+
 }

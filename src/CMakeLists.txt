@@ -88,6 +88,8 @@ add_python_library(
 add_python_library(
   pyhpp/core
   FILES
+  pyhpp/core/node.cc
+  pyhpp/core/roadmap.cc
   pyhpp/core/config-validation.cc
   pyhpp/core/configuration-shooter.cc
   pyhpp/core/constraint.cc
@@ -97,10 +99,21 @@ add_python_library(
   pyhpp/core/path-optimizer.cc
   pyhpp/core/path-projector.cc
   pyhpp/core/path-validation.cc
+  pyhpp/core/connected-component.cc
+  pyhpp/core/distance.cc
+  pyhpp/core/problem-target.cc
   pyhpp/core/parameter.cc
   pyhpp/core/problem.cc
   pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc
+  LINK_LIBRARIES
+  hpp-core::hpp-core)
+
+add_python_library(
+  pyhpp/core/problem_target
+  FILES
+  pyhpp/core/problem_target/goal-configurations.cc
+  pyhpp/core/problem_target/bindings.cc
   LINK_LIBRARIES
   hpp-core::hpp-core)
 

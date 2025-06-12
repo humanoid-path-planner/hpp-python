@@ -1,7 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
-//
+// Copyright (c) 2018 - 2023, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux
 //
 // This file is part of hpp-python
 // hpp-python is free software: you can redistribute it
@@ -17,37 +16,12 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#ifndef PYHPP_CORE_FWD_HH
-#define PYHPP_CORE_FWD_HH
-
+#include <boost/python.hpp>
+#include <pyhpp/core/problemTarget/fwd.hh>
 #include <pyhpp/util.hh>
 
-namespace pyhpp {
-namespace core {
-void exposeConfigValidation();
-void exposeConfigurationShooter();
-void exposeConstraint();
+BOOST_PYTHON_MODULE(bindings) {
+  INIT_PYHPP_MODULE;
 
-void exposeEquation();
-
-void exposeReports();
-
-void exposeSteeringMethod();
-
-void exposeNode();
-void exposeDistance();
-void exposeConnectedComponent();
-void exposeRoadmap();
-void exposeProblemTarget();
-
-void exposePath();
-void exposePathOptimizer();
-void exposePathProjector();
-void exposePathValidation();
-void exposeParameter();
-void exposeProblem();
-void exposeProblemSolver();
-}  // namespace core
-}  // namespace pyhpp
-
-#endif  // PYHPP_CORE_FWD_HH
+  pyhpp::core::problemTarget::exposeGoalConfigurations();
+}

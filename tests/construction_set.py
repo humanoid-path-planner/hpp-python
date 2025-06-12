@@ -1,10 +1,10 @@
 from math import pi
 import numpy as np
 from pinocchio import SE3
-from pyhpp.manipulation import Device, urdf
+from pyhpp.pinocchio import Device, urdf
 from pyhpp.gepetto import Viewer
 
-robot = Device("construction-set")
+robot = Device.create("construction_set")
 
 #Create viewer
 viewer = Viewer("construction_set", robot)
