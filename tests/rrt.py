@@ -24,7 +24,7 @@ qGoal = np.array([1.57, -1.57, -1.8, 0, 0.8, 0])
 viewer.applyConfiguration(qInit)
 
 # Setup problem and RRT components
-problem = Problem.create(robot)
+problem = Problem(robot)
 configurationShooter = problem.configurationShooter()
 steer = problem.steeringMethod()
 weighedDistance = WeighedDistance.create(robot)
