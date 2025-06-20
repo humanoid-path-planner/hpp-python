@@ -44,6 +44,8 @@ void exposePath();
 void exposePathOptimizer();
 void exposePathProjector();
 void exposePathValidation();
+void exposePathPlanner();
+
 void exposeParameter();
 void exposeProblem();
 void exposeProblemSolver();

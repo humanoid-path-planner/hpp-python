@@ -51,9 +51,11 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::core::exposePathProjector();
   pyhpp::core::exposePathValidation();
 
+  pyhpp::core::exposePathPlanner();
+
   boost::python::import("pyhpp.core.path");
   boost::python::import("pyhpp.core.path_optimization");
-  
+
   boost::python::import("pyhpp.core.problem_target");
 
 }

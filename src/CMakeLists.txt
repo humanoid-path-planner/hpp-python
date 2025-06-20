@@ -99,6 +99,7 @@ add_python_library(
   pyhpp/core/path-optimizer.cc
   pyhpp/core/path-projector.cc
   pyhpp/core/path-validation.cc
+  pyhpp/core/path-planner.cc
   pyhpp/core/connected-component.cc
   pyhpp/core/distance.cc
   pyhpp/core/problem-target.cc
