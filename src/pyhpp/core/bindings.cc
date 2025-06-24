@@ -57,5 +57,4 @@ BOOST_PYTHON_MODULE(bindings) {
   boost::python::import("pyhpp.core.path_optimization");
 
   boost::python::import("pyhpp.core.problem_target");
-
 }

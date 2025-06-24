@@ -35,12 +35,13 @@ struct DistanceWrapper {
 };
 
 void exposeDistance() {
-
   class_<Distance, DistancePtr_t, boost::noncopyable>("Distance", no_init);
-  class_<WeighedDistance, WeighedDistancePtr_t, boost::noncopyable>("WeighedDistance", no_init)
-    .def("create", &WeighedDistance::create).staticmethod("create")
-    .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t);
-;
+  class_<WeighedDistance, WeighedDistancePtr_t, boost::noncopyable>(
+      "WeighedDistance", no_init)
+      .def("create", &WeighedDistance::create)
+      .staticmethod("create")
+      .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t);
+  ;
 }
 }  // namespace core
 }  // namespace pyhpp

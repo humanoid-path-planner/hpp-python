@@ -35,7 +35,7 @@ struct Graph {
   // Pointer to the underlying object
   hpp::manipulation::graph::GraphPtr_t obj;
   // Map from name to id
-  std::map <std::string, std::size_t> id;
+  std::map<std::string, std::size_t> id;
   // Get shared pointer to object from name among (Graph, Node, Edge)
   template <typename T>
   std::shared_ptr<T> getComp(const std::string& name);
@@ -46,25 +46,30 @@ struct Graph {
   // Get name of the graph
   std::string name() const;
   // Create a state in the graph
-  std::size_t createState(const std::string& nodeName, bool waypoint, int priority);
+  std::size_t createState(const std::string& nodeName, bool waypoint,
+                          int priority);
   // Create a transition between two states in the graph
-  std::size_t createTransition(const std::string& nodeFrom, const std::string& nodeTo,
-			       const std::string& transitionName, int w,
-			       const std::string& isInState);
+  std::size_t createTransition(const std::string& nodeFrom,
+                               const std::string& nodeTo,
+                               const std::string& transitionName, int w,
+                               const std::string& isInState);
   // Add numerical constraints to a graph, a state or a transition
   void addNumericalConstraint(const std::string& name,
-			      const ImplicitPtr_t& constraint);
+                              const ImplicitPtr_t& constraint);
   // Get numerical constraints of a graph, a state or a transition
   NumericalConstraints_t getNumericalConstraints(const std::string& name);
   // Project a configuration on a state
-  std::tuple<bool, Configuration_t, value_type> applyStateConstraints
-  (const std::string& nodeName, ConfigurationIn_t input);
+  std::tuple<bool, Configuration_t, value_type> applyStateConstraints(
+      const std::string& nodeName, ConfigurationIn_t input);
   // Project configuration on the leaf of a transition
-  std::tuple<bool, Configuration_t, value_type> applyLeafConstraints
-  (const std::string& transitionName, ConfigurationIn_t q_rhs, ConfigurationIn_t input);
-  // Project configuration at intersection of a leaf and the goal state of a trnasition
-  std::tuple<bool, Configuration_t, value_type> generateTargetConfig
-  (const std::string& transitionName, ConfigurationIn_t q_rhs, ConfigurationIn_t input);
-}; // class Graph
-} // namespace manipulation
-} // namespace pyhpp
+  std::tuple<bool, Configuration_t, value_type> applyLeafConstraints(
+      const std::string& transitionName, ConfigurationIn_t q_rhs,
+      ConfigurationIn_t input);
+  // Project configuration at intersection of a leaf and the goal state of a
+  // trnasition
+  std::tuple<bool, Configuration_t, value_type> generateTargetConfig(
+      const std::string& transitionName, ConfigurationIn_t q_rhs,
+      ConfigurationIn_t input);
+};  // class Graph
+}  // namespace manipulation
+}  // namespace pyhpp

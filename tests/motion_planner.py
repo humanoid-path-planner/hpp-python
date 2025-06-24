@@ -23,7 +23,7 @@ class MotionPlanner:
             newEdges = list()
             q_rand = robot.shootRandomConfig()
             for i in range(ps.numberConnectedComponents()):
-                q_near, d = ps.getNearestConfig(q_rand,i)
+                q_near, d = ps.getNearestConfig(q_rand, i)
                 res, pid, msg = ps.directPath(q_near, q_rand, True)
                 if res:
                     q_new = q_rand
@@ -44,7 +44,7 @@ class MotionPlanner:
                         res, pid, msg = ps.directPath(q_new, q_near, True)
                         if res:
                             ps.addEdgeToRoadmap(q_new, q_near, pid, True)
-                            print('finished')
+                            print("finished")
                             break
             # RRT end
             # Check if the problem is solved.

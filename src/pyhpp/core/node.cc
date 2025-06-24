@@ -16,9 +16,9 @@
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <hpp/core/node.hh>
-#include <hpp/core/edge.hh>
 #include <hpp/core/connected-component.hh>
+#include <hpp/core/edge.hh>
+#include <hpp/core/node.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -30,23 +30,23 @@ namespace core {
 using namespace hpp::core;
 
 void exposeNode() {
-
   class_<Node, boost::shared_ptr<Node>, boost::noncopyable>("Node", no_init)
-    .def(init<ConfigurationIn_t>())
-    .def(init<ConfigurationIn_t, ConnectedComponentPtr_t>())
-    .PYHPP_DEFINE_METHOD(Node, addOutEdge)
-    .PYHPP_DEFINE_METHOD(Node, addInEdge)
-    .def("connectedComponent",
-      static_cast<ConnectedComponentPtr_t (Node::*)() const>(&Node::connectedComponent))
-    .def("connectedComponent",
-      static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(&Node::connectedComponent))
-    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, outEdges)
-    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, inEdges)
-    .PYHPP_DEFINE_METHOD(Node, isOutNeighbor)
-    .PYHPP_DEFINE_METHOD(Node, isInNeighbor)
-    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, configuration)
-    .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, print)
-;
+      .def(init<ConfigurationIn_t>())
+      .def(init<ConfigurationIn_t, ConnectedComponentPtr_t>())
+      .PYHPP_DEFINE_METHOD(Node, addOutEdge)
+      .PYHPP_DEFINE_METHOD(Node, addInEdge)
+      .def("connectedComponent",
+           static_cast<ConnectedComponentPtr_t (Node::*)() const>(
+               &Node::connectedComponent))
+      .def("connectedComponent",
+           static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(
+               &Node::connectedComponent))
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, outEdges)
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, inEdges)
+      .PYHPP_DEFINE_METHOD(Node, isOutNeighbor)
+      .PYHPP_DEFINE_METHOD(Node, isInNeighbor)
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, configuration)
+      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, print);
 }
 }  // namespace core
 }  // namespace pyhpp

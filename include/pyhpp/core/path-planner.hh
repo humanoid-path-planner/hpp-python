@@ -22,36 +22,37 @@
 #include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/roadmap.hh>
+
 #include "pyhpp/core/problem.hh"
 
 namespace pyhpp {
 namespace core {
-  typedef hpp::core::RoadmapPtr_t RoadmapPtr_t;
-  typedef hpp::core::ProblemConstPtr_t ProblemConstPtr_t;
-  typedef hpp::core::PathVectorPtr_t PathVectorPtr_t;
+typedef hpp::core::RoadmapPtr_t RoadmapPtr_t;
+typedef hpp::core::ProblemConstPtr_t ProblemConstPtr_t;
+typedef hpp::core::PathVectorPtr_t PathVectorPtr_t;
 
 struct PathPlanner {
-    hpp::core::PathPlannerPtr_t obj;
-    
-    // Methods from hpp::core::PathPlanner
-    const RoadmapPtr_t& roadmap() const;
-    ProblemConstPtr_t problem() const;
-    void startSolve();
-    PathVectorPtr_t solve();
-    void tryConnectInitAndGoals();
-    void oneStep();
-    PathVectorPtr_t finishSolve(const PathVectorPtr_t& path);
-    void interrupt();
-    void maxIterations(const unsigned long int& n);
-    unsigned long int maxIterations() const;
-    void timeOut(const double& timeOut);
-    double timeOut() const;
-    void stopWhenProblemIsSolved(bool enable);
-    PathVectorPtr_t computePath() const;
-    
-}; // struct PathPlanner
+  hpp::core::PathPlannerPtr_t obj;
 
-} // namespace core
-} // namespace pyhpp
+  // Methods from hpp::core::PathPlanner
+  const RoadmapPtr_t& roadmap() const;
+  ProblemConstPtr_t problem() const;
+  void startSolve();
+  PathVectorPtr_t solve();
+  void tryConnectInitAndGoals();
+  void oneStep();
+  PathVectorPtr_t finishSolve(const PathVectorPtr_t& path);
+  void interrupt();
+  void maxIterations(const unsigned long int& n);
+  unsigned long int maxIterations() const;
+  void timeOut(const double& timeOut);
+  double timeOut() const;
+  void stopWhenProblemIsSolved(bool enable);
+  PathVectorPtr_t computePath() const;
+
+};  // struct PathPlanner
+
+}  // namespace core
+}  // namespace pyhpp
 
 #endif

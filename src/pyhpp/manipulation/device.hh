@@ -16,13 +16,13 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#include <pinocchio/multibody/data.hpp>
-#include <pinocchio/multibody/geometry.hpp>
-#include <pinocchio/spatial/se3.hpp>
-#include <hpp/pinocchio/gripper.hh>
 #include <hpp/constraints/implicit.hh>
 #include <hpp/manipulation/device.hh>
 #include <hpp/manipulation/handle.hh>
+#include <hpp/pinocchio/gripper.hh>
+#include <pinocchio/multibody/data.hpp>
+#include <pinocchio/multibody/geometry.hpp>
+#include <pinocchio/spatial/se3.hpp>
 
 namespace pyhpp {
 namespace manipulation {
@@ -46,8 +46,9 @@ typedef hpp::manipulation::Handle Handle;
 
 // Wrapper class to hpp::manipulation::Device
 //
-// Boost python does not correctly handle weak pointers. To overcome this limitation,
-// we create a wrapper class and bind this class with boost python instead of the original class.
+// Boost python does not correctly handle weak pointers. To overcome this
+// limitation, we create a wrapper class and bind this class with boost python
+// instead of the original class.
 struct Device {
   hpp::manipulation::DevicePtr_t obj;
   Device(const hpp::manipulation::DevicePtr_t& object);
@@ -69,6 +70,6 @@ struct Device {
   // Methods for hpp::manipulation::Device
   void setRobotRootPosition(const std::string& robotName,
                             const Transform3s& positionWRTParentJoint);
-}; // struct Device
-} // namespace manipulation
-} // namespace pyhpp
+};  // struct Device
+}  // namespace manipulation
+}  // namespace pyhpp

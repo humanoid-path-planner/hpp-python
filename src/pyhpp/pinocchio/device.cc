@@ -72,19 +72,20 @@ bool Device_currentConfiguration(Device& d, const Configuration_t& c) {
   return d.currentConfiguration(c);
 }
 
-Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper)
-{
+Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper) {
   Transform3s res(gripper->objectPositionInJoint());
   return res;
 }
 
 void exposeGripper() {
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
-    .def("create", &Gripper::create)
-    .staticmethod("create")
-    .add_property("localPosition", &getObjectPositionInJoint);
-  class_< std::map<std::string, GripperPtr_t> >("GripperMap")
-    .def(boost::python::map_indexing_suite< std::map<std::string, GripperPtr_t>, true >());
+      .def("create", &Gripper::create)
+      .staticmethod("create")
+      .add_property("localPosition", &getObjectPositionInJoint);
+  class_<std::map<std::string, GripperPtr_t> >("GripperMap")
+      .def(
+          boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,
+                                            true>());
 }
 void exposeDevice() {
   enum_<Computation_t>("ComputationFlag")

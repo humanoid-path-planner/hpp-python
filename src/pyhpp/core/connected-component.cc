@@ -29,8 +29,8 @@ namespace core {
 using namespace hpp::core;
 
 void exposeConnectedComponent() {
-  class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>("ConnectedComponent",
-                                                                no_init);
+  class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
+      "ConnectedComponent", no_init);
 }
 }  // namespace core
 }  // namespace pyhpp

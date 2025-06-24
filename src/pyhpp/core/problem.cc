@@ -16,27 +16,20 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-python. If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-
 #include "pyhpp/core/problem.hh"
+
+#include <boost/python.hpp>
 
 namespace pyhpp {
 namespace core {
 
 using namespace boost::python;
 
+Problem::Problem(const hpp::core::ProblemPtr_t& object) { obj = object; }
+Problem::Problem(const DevicePtr_t& robot)
+    : obj(hpp::core::Problem::create(robot)) {}
 
-Problem::Problem(const hpp::core::ProblemPtr_t& object)
-{
-  obj = object;
-}
-Problem::Problem(const DevicePtr_t& robot) : obj(hpp::core::Problem::create(robot))
-{
-}
-
-const DevicePtr_t& Problem::robot() const {
-  return obj->robot();
-}
+const DevicePtr_t& Problem::robot() const { return obj->robot(); }
 
 void Problem::setParameter(const std::string& name, const Parameter& value) {
   obj->setParameter(name, value);
@@ -66,13 +59,9 @@ PathProjectorPtr_t Problem::pathProjector() const {
   return obj->pathProjector();
 }
 
-DistancePtr_t Problem::distance() const {
-  return obj->distance();
-}
+DistancePtr_t Problem::distance() const { return obj->distance(); }
 
-const ProblemTargetPtr_t& Problem::target() const {
-  return obj->target();
-}
+const ProblemTargetPtr_t& Problem::target() const { return obj->target(); }
 
 void Problem::initConfig(ConfigurationIn_t inConfig) {
   obj->initConfig(inConfig);
@@ -84,7 +73,7 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 
 // Python bindings
 void exposeProblem() {
-  class_<Problem>("Problem", init <const DevicePtr_t&> ())
+  class_<Problem>("Problem", init<const DevicePtr_t&>())
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
       .PYHPP_DEFINE_METHOD(Problem, setParameter)
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
@@ -96,9 +85,8 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, distance)
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, target)
       .PYHPP_DEFINE_METHOD(Problem, initConfig)
-      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
-      ;
+      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig);
 }
 
-} // namespace core
-} // namespace pyhpp
+}  // namespace core
+}  // namespace pyhpp

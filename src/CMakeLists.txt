@@ -111,12 +111,9 @@ add_python_library(
   hpp-core::hpp-core)
 
 add_python_library(
-  pyhpp/core/problem_target
-  FILES
+  pyhpp/core/problem_target FILES
   pyhpp/core/problem_target/goal-configurations.cc
-  pyhpp/core/problem_target/bindings.cc
-  LINK_LIBRARIES
-  hpp-core::hpp-core)
+  pyhpp/core/problem_target/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
 
 add_python_library(
   pyhpp/core/path
@@ -147,14 +144,9 @@ add_python_library(
   pyhpp/manipulation/device.cc
   pyhpp/manipulation/graph.cc
   LINK_LIBRARIES
-  hpp-manipulation::hpp-manipulation
-  )
+  hpp-manipulation::hpp-manipulation)
 
 add_python_library(
-  pyhpp/manipulation/urdf
-  FILES
-  pyhpp/manipulation/urdf/util.cc
-  pyhpp/manipulation/urdf/bindings.cc
-  LINK_LIBRARIES
-  hpp-manipulation-urdf::hpp-manipulation-urdf
-  )
+  pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
+  pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
+  hpp-manipulation-urdf::hpp-manipulation-urdf)
