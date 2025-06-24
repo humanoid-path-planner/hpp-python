@@ -16,6 +16,9 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#ifndef PYHPP_CORE_PATH_PLANNER_HH
+#define PYHPP_CORE_PATH_PLANNER_HH
+
 #include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/roadmap.hh>
@@ -50,3 +53,5 @@ struct PathPlanner {
 
 } // namespace core
 } // namespace pyhpp
+
+#endif
