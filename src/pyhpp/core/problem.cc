@@ -66,6 +66,10 @@ PathProjectorPtr_t Problem::pathProjector() const {
   return obj->pathProjector();
 }
 
+DistancePtr_t Problem::distance() const {
+  return obj->distance();
+}
+
 const ProblemTargetPtr_t& Problem::target() const {
   return obj->target();
 }
@@ -81,28 +85,19 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 // Python bindings
 void exposeProblem() {
   class_<Problem>("Problem", init <const DevicePtr_t&> ())
-      .def("robot",
-           static_cast<const DevicePtr_t& (Problem::*)() const>(&Problem::robot),
-           return_value_policy<return_by_value>())
-      .def("setParameter", &Problem::setParameter)
-      .def("getParameter", &Problem::getParameter,
-           return_value_policy<return_by_value>())
-      .def("configurationShooter",
-           &Problem::configurationShooter)
-      .def("steeringMethod",
-           &Problem::steeringMethod)
-      .def("configValidation",
-           static_cast<const ConfigValidationsPtr_t& (Problem::*)() const>(
-               &Problem::configValidation),
-           return_value_policy<return_by_value>())
-      .def("pathValidation", &Problem::pathValidation)
-      .def("pathProjector", &Problem::pathProjector)
-      .def("target",
-           static_cast<const ProblemTargetPtr_t& (Problem::*)() const>(
-               &Problem::target),
-           return_value_policy<return_by_value>())
-      .def("initConfig", &Problem::initConfig)
-      .def("addGoalConfig", &Problem::addGoalConfig);
+      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
+      .PYHPP_DEFINE_METHOD(Problem, setParameter)
+      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
+      .PYHPP_DEFINE_METHOD(Problem, configurationShooter)
+      .PYHPP_DEFINE_METHOD(Problem, steeringMethod)
+      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, configValidation)
+      .PYHPP_DEFINE_METHOD(Problem, pathValidation)
+      .PYHPP_DEFINE_METHOD(Problem, pathProjector)
+      .PYHPP_DEFINE_METHOD(Problem, distance)
+      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, target)
+      .PYHPP_DEFINE_METHOD(Problem, initConfig)
+      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
+      ;
 }
 
 } // namespace core

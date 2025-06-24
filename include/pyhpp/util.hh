@@ -35,6 +35,10 @@
   def(#METHOD, &CLASS::METHOD, ARG1, ARG2)
 #define PYHPP_DEFINE_METHOD_INTERNAL_REF(CLASS, METHOD) \
   def(#METHOD, &CLASS::METHOD, return_internal_reference<>())
+#define PYHPP_DEFINE_METHOD_CONST_REF(CLASS, METHOD) \
+  def(#METHOD, &CLASS::METHOD, return_value_policy<copy_const_reference>())
+#define PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(CLASS, METHOD) \
+  def(#METHOD, &CLASS::METHOD, return_value_policy<return_by_value>())
 #define PYHPP_DEFINE_GETTER_SETTER(CLASS, METHOD, TYPE)              \
   def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
@@ -42,6 +46,9 @@
   def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD), \
       return_internal_reference<>())                                 \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
+#define PYHPP_DEFINE_GETTER_SETTER_CONST_REF(CLASS, METHOD, TYPE) \
+  def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
+      .def(#METHOD, static_cast<void (CLASS::*)(const TYPE&)>(&CLASS::METHOD))
 
 namespace pyhpp {
 template <typename ObjectWithPrintMethod>
