@@ -27,10 +27,10 @@ namespace core {
 using namespace hpp::core;
 
 void exposeProblemTarget() {
+  class_<ProblemTarget, ProblemTargetPtr_t, boost::noncopyable>("ProblemTarget",
+                                                                no_init)
 
-  class_<ProblemTarget, ProblemTargetPtr_t, boost::noncopyable>("ProblemTarget", no_init)
-
-;
+      ;
 }
 }  // namespace core
 }  // namespace pyhpp

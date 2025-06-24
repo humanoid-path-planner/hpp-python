@@ -46,7 +46,7 @@
   def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD), \
       return_internal_reference<>())                                 \
       .def(#METHOD, static_cast<void (CLASS::*)(TYPE)>(&CLASS::METHOD))
-#define PYHPP_DEFINE_GETTER_SETTER_CONST_REF(CLASS, METHOD, TYPE) \
+#define PYHPP_DEFINE_GETTER_SETTER_CONST_REF(CLASS, METHOD, TYPE)    \
   def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
       .def(#METHOD, static_cast<void (CLASS::*)(const TYPE&)>(&CLASS::METHOD))
 

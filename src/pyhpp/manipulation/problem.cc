@@ -17,7 +17,6 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-
 #include <hpp/manipulation/problem.hh>
 
 using namespace boost::python;
@@ -32,9 +31,10 @@ typedef hpp::manipulation::ProblemConstPtr_t ProblemConstPtr_t;
 void exposeProblem() {
   register_ptr_to_python<ProblemConstPtr_t>();
   implicitly_convertible<ProblemPtr_t, ProblemConstPtr_t>();
-  class_<Problem, ProblemPtr_t, boost::noncopyable, bases <hpp::core::Problem> >
-    ("Problem", no_init).
-    def("create", &Problem::create).staticmethod("create");
+  class_<Problem, ProblemPtr_t, boost::noncopyable, bases<hpp::core::Problem> >(
+      "Problem", no_init)
+      .def("create", &Problem::create)
+      .staticmethod("create");
 }
-} // manipulation
-} // pyhpp
+}  // namespace manipulation
+}  // namespace pyhpp

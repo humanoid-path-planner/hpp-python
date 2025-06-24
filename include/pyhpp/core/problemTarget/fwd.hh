@@ -25,7 +25,7 @@
 namespace pyhpp {
 namespace core {
 namespace problemTarget {
-  void exposeGoalConfigurations();
+void exposeGoalConfigurations();
 }  // namespace problemTarget
 }  // namespace core
 }  // namespace pyhpp

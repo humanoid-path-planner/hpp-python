@@ -16,8 +16,8 @@
 // hpp-core. If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <hpp/core/problem-target/goal-configurations.hh>
 #include <hpp/core/path-vector.hh>
+#include <hpp/core/problem-target/goal-configurations.hh>
 #include <pyhpp/core/fwd.hh>
 
 using namespace boost::python;
@@ -28,14 +28,15 @@ namespace problemTarget {
 using namespace hpp::core::problemTarget;
 
 void exposeGoalConfigurations() {
+  class_<GoalConfigurations, GoalConfigurationsPtr_t,
+         bases<hpp::core::ProblemTarget>, boost::noncopyable>(
+      "GoalConfigurations", no_init)
+      .def("create", &GoalConfigurations::create)
+      .PYHPP_DEFINE_METHOD(GoalConfigurations, computePath)
+      .PYHPP_DEFINE_METHOD(GoalConfigurations, reached)
 
-  class_<GoalConfigurations, GoalConfigurationsPtr_t, bases<hpp::core::ProblemTarget>, boost::noncopyable>("GoalConfigurations", no_init)
-    .def("create", &GoalConfigurations::create)
-    .PYHPP_DEFINE_METHOD(GoalConfigurations, computePath)
-    .PYHPP_DEFINE_METHOD(GoalConfigurations, reached)
-
-;
+      ;
 }
-}  // namespace problemTarget;
+}  // namespace problemTarget
 }  // namespace core
 }  // namespace pyhpp

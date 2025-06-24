@@ -2,7 +2,14 @@ from pyhpp.gepetto import Viewer
 import numpy as np
 from pinocchio import SE3
 from pyhpp.pinocchio import Device
-from pyhpp.core import Problem, Roadmap, DiffusingPlanner, BiRRTPlanner, VisibilityPrmPlanner, BiRrtStar, kPrmStar, SearchInRoadmap, PlanAndOptimize 
+from pyhpp.core import (
+    Problem,
+    DiffusingPlanner,
+    BiRRTPlanner,
+    VisibilityPrmPlanner,
+    BiRrtStar,
+    kPrmStar,
+)
 
 urdfFilename = "package://example-robot-data/robots/pr2_description/urdf/pr2.urdf"
 srdfFilename = "package://example-robot-data/robots/pr2_description/srdf/pr2.srdf"
@@ -12,7 +19,9 @@ rootJointType = "planar"
 robot = Device.create("ur2")
 viewer = Viewer("tutorial_1", robot)
 
-viewer.addURDFToScene(0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity())
+viewer.addURDFToScene(
+    0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity()
+)
 
 # Define initial and goal configurations
 q_init = np.array(robot.currentConfiguration())
@@ -29,9 +38,9 @@ ij = model.getJointId("r0/root_joint")
 iq = model.idx_qs[ij]
 
 # Apply bounds (assuming first 2 DOF are x,y position)
-lowerLimit[iq]     = -4
-upperLimit[iq]     = -3
-lowerLimit[iq + 1] = -5  
+lowerLimit[iq] = -4
+upperLimit[iq] = -3
+lowerLimit[iq + 1] = -5
 upperLimit[iq + 1] = -3
 
 rankInConfiguration = dict()
@@ -40,7 +49,7 @@ for joint_id in range(1, model.njoints):
     joint_name = model.names[joint_id]
     joint = model.joints[joint_id]
     rankInConfiguration[joint_name[3:]] = current_rank
-    
+
     current_rank += joint.nq
 
 q_init[0:2] = [-3.2, -4]
@@ -57,7 +66,9 @@ q_goal[rank] = 0.5
 rank = rankInConfiguration["r_elbow_flex_joint"]
 q_goal[rank] = -0.5
 
-viewer.addURDFObstacleToScene("package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf", "kitchen")
+viewer.addURDFObstacleToScene(
+    "package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf", "kitchen"
+)
 
 viewer.applyConfiguration(q_goal)
 
@@ -88,13 +99,11 @@ print(diffusingPlanner.maxIterations())
 # path = kPrmStar_inst.solve()  infinite search
 # viewer.displayPath(path, 0.001, 50)
 
-# roadmap = Roadmap.create(problem.distance(), robot) 
+# roadmap = Roadmap.create(problem.distance(), robot)
 # roadmap.initNode(q_init)
 # roadmap.addGoalNode(q_goal)
 # searchInRoadmap = SearchInRoadmap(problem, roadmap)
 # searchInRoadmap.solve() SearchInRoadmap: no goal configuration in the connected componentof initial configuration. A* fails
 
-#planAndOptimize = PlanAndOptimize(diffusingPlanner)
-#viewer.displayPath(planAndOptimize.solve(), 0.001, 50)
-
-
+# planAndOptimize = PlanAndOptimize(diffusingPlanner)
+# viewer.displayPath(planAndOptimize.solve(), 0.001, 50)
