@@ -2,7 +2,7 @@ from pyhpp.gepetto import Viewer
 import numpy as np
 from pinocchio import SE3
 from pyhpp.pinocchio import Device
-from pyhpp.core import Problem, Roadmap, WeighedDistance, path
+from pyhpp.core import Problem, Roadmap, WeighedDistance
 
 # Robot configuration
 urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur5_joint_limited_robot.urdf"
