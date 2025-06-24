@@ -20,8 +20,14 @@
 #include <hpp/core/path-planner.hh>
 #include <hpp/core/path-planner/bi-rrt-star.hh>
 #include <hpp/core/diffusing-planner.hh>
-
+#include <hpp/core/bi-rrt-planner.hh>
+#include <hpp/core/plan-and-optimize.hh>
+#include <hpp/core/visibility-prm-planner.hh>
+#include <hpp/core/path-planner/search-in-roadmap.hh>
 #include <pyhpp/core/path-planner.hh>
+#include <hpp/core/roadmap.hh>
+#include <hpp/core/path-planner/k-prm-star.hh>
+#include <hpp/core/plan-and-optimize.hh>
 
 namespace pyhpp {
 namespace core {
@@ -30,22 +36,56 @@ using namespace boost::python;
 
 namespace pathPlanner {
 
-struct DiffusingPlanner : public pyhpp::core::PathPlanner {
-    DiffusingPlanner(const hpp::core::DiffusingPlannerPtr_t& object)
-    {
-      obj = object;
-    }
-    DiffusingPlanner(const pyhpp::core::Problem& problem)
-    {
-      obj = hpp::core::DiffusingPlanner::create(problem.obj);
-    }
-};
-
-void exposeDiffusingPlanner() {
-  class_<DiffusingPlanner, bases<pyhpp::core::PathPlanner>>("DiffusingPlanner",
-                                                             init <const pyhpp::core::Problem&> ());
+#define DEFINE_PLANNER_WRAPPER(WrapperName, PlannerType, PlannerPtr) \
+struct WrapperName : public pyhpp::core::PathPlanner { \
+    WrapperName(const pyhpp::core::Problem& problem) { \
+        obj = PlannerType::create(problem.obj); \
+    } \
+}; \
+void expose##WrapperName() { \
+    class_<WrapperName, bases<pyhpp::core::PathPlanner>>( \
+        #WrapperName, \
+        init<const pyhpp::core::Problem&>() \
+    ); \
 }
 
+DEFINE_PLANNER_WRAPPER(DiffusingPlanner, hpp::core::DiffusingPlanner, hpp::core::DiffusingPlannerPtr_t)
+DEFINE_PLANNER_WRAPPER(BiRRTPlanner, hpp::core::BiRRTPlanner, hpp::core::BiRRTPlannerPtr_t)
+DEFINE_PLANNER_WRAPPER(VisibilityPrmPlanner, hpp::core::VisibilityPrmPlanner, hpp::core::VisibilityPrmPlannerPtr_t)
+DEFINE_PLANNER_WRAPPER(BiRrtStar, hpp::core::pathPlanner::BiRrtStar, hpp::core::pathPlanner::BiRrtStarPtr_t)
+DEFINE_PLANNER_WRAPPER(kPrmStar, hpp::core::pathPlanner::kPrmStar, hpp::core::pathPlanner::kPrmStarPtr_t)
+
+struct SearchInRoadmap : public pyhpp::core::PathPlanner {
+  SearchInRoadmap(const pyhpp::core::Problem& problem, const RoadmapPtr_t &roadmap)
+  {  
+    obj = hpp::core::pathPlanner::SearchInRoadmap::createWithRoadmap(problem.obj, roadmap);
+  }
+};
+
+void exposeSearchInRoadmap() {
+  class_<SearchInRoadmap, bases<pyhpp::core::PathPlanner>>("SearchInRoadmap", init <const pyhpp::core::Problem&, const hpp::core::RoadmapPtr_t &> ());
+}
+
+struct PlanAndOptimize : public pyhpp::core::PathPlanner {
+  PlanAndOptimize(const pyhpp::core::PathPlanner& pathPlanner)
+  {  
+    obj = hpp::core::PlanAndOptimize::create(pathPlanner.obj);
+  }
+};
+
+void exposePlanAndOptimize() {
+  class_<PlanAndOptimize, bases<pyhpp::core::PathPlanner>>("PlanAndOptimize", init <const pyhpp::core::PathPlanner&> ());
+}
+
+void exposePathPlanners() {
+  pyhpp::core::pathPlanner::exposeDiffusingPlanner();
+  pyhpp::core::pathPlanner::exposeBiRRTPlanner();
+  pyhpp::core::pathPlanner::exposeVisibilityPrmPlanner();
+  pyhpp::core::pathPlanner::exposeBiRrtStar();
+  pyhpp::core::pathPlanner::exposeSearchInRoadmap();
+  pyhpp::core::pathPlanner::exposekPrmStar();
+  pyhpp::core::pathPlanner::exposePlanAndOptimize();
+}
 }  // namespace pathPlanner
 
 // Wrapper methods
@@ -107,37 +147,21 @@ PathVectorPtr_t PathPlanner::computePath() const {
 
 void exposePathPlanner() {
   class_<PathPlanner>("PathPlanner", no_init)
-      .def("roadmap", &PathPlanner::roadmap,
-           return_value_policy<copy_const_reference>(), "Get roadmap")
-      .def("problem", &PathPlanner::problem, "Get problem")
-      .def("startSolve", &PathPlanner::startSolve)
-      .def("solve", &PathPlanner::solve, "Solve the path planning problem")
-      .def("tryConnectInitAndGoals", &PathPlanner::tryConnectInitAndGoals)
-      .def("oneStep", &PathPlanner::oneStep)
-      .def("finishSolve", &PathPlanner::finishSolve,
-           "Post processing of the resulting path")
-      .def("interrupt", &PathPlanner::interrupt, "Interrupt path planning")
-      .def("maxIterations",
-           static_cast<void (PathPlanner::*)(const unsigned long int&)>(
-               &PathPlanner::maxIterations),
-           "Set maximal number of iterations")
-      .def("maxIterations",
-           static_cast<unsigned long int (PathPlanner::*)() const>(
-               &PathPlanner::maxIterations),
-           "Get maximal number of iterations")
-      .def("timeOut",
-           static_cast<void (PathPlanner::*)(const double&)>(
-               &PathPlanner::timeOut),
-           "Set time out (in seconds)")
-      .def("timeOut",
-           static_cast<double (PathPlanner::*)() const>(&PathPlanner::timeOut),
-           "Get time out")
-      .def("stopWhenProblemIsSolved", &PathPlanner::stopWhenProblemIsSolved,
-           "Enable/disable stopping when problem is solved")
-      .def("computePath", &PathPlanner::computePath,
-           "Find a path in the roadmap and transform it in trajectory");
+      .PYHPP_DEFINE_METHOD_CONST_REF(PathPlanner, roadmap)
+      .PYHPP_DEFINE_METHOD(PathPlanner, problem)
+      .PYHPP_DEFINE_METHOD(PathPlanner, startSolve)
+      .PYHPP_DEFINE_METHOD(PathPlanner, solve)
+      .PYHPP_DEFINE_METHOD(PathPlanner, tryConnectInitAndGoals)
+      .PYHPP_DEFINE_METHOD(PathPlanner, oneStep)
+      .PYHPP_DEFINE_METHOD(PathPlanner, finishSolve)
+      .PYHPP_DEFINE_METHOD(PathPlanner, interrupt)
+      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PathPlanner, maxIterations, unsigned long int)
+      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PathPlanner, timeOut, double)
+      .PYHPP_DEFINE_METHOD(PathPlanner, stopWhenProblemIsSolved)
+      .PYHPP_DEFINE_METHOD(PathPlanner, computePath)
+      ;
 
-  pyhpp::core::pathPlanner::exposeDiffusingPlanner();
+  pyhpp::core::pathPlanner::exposePathPlanners();
 }
 
 }  // namespace core
