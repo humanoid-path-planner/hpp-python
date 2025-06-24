@@ -27,6 +27,7 @@
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/problem-target.hh>
+#include <hpp/core/distance.hh>
 #include <hpp/util/pointer.hh>
 #include <pyhpp/core/fwd.hh>
 
@@ -44,6 +45,7 @@ namespace core {
   typedef hpp::core::PathValidationPtr_t    PathValidationPtr_t;
   typedef hpp::core::PathProjectorPtr_t     PathProjectorPtr_t;
   typedef hpp::core::ProblemTargetPtr_t     ProblemTargetPtr_t;
+  typedef hpp::core::DistancePtr_t          DistancePtr_t;
 
 // Wrapper class for hpp::core::Problem
 struct Problem {
@@ -61,6 +63,7 @@ struct Problem {
     const ConfigValidationsPtr_t& configValidation() const;
     PathValidationPtr_t pathValidation() const;
     PathProjectorPtr_t pathProjector() const;
+    DistancePtr_t distance() const;
     const ProblemTargetPtr_t& target() const;
     void initConfig(ConfigurationIn_t inConfig);
     void addGoalConfig(ConfigurationIn_t config);
