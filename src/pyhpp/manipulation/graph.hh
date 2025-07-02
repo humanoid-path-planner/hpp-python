@@ -16,6 +16,8 @@
 // hpp-python  If not, see
 // <http://www.gnu.org/licenses/>.
 
+#include <hpp/manipulation/graph/graph.hh>
+
 namespace pyhpp {
 namespace manipulation {
 
