@@ -15,14 +15,14 @@ viewer = Viewer("construction_set", robot)
 # Add robot and obstacles to scene
 viewer.addURDFToScene(0, "r0", "anchor", urdfFilename, srdfFilename, SE3.Identity())
 viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/table.urdf",
+    "package://hpp_environments/urdf/ur_benchmark/table.urdf",
     "table",
 )
 viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/wall.urdf", "wall"
+    "package://hpp_environments/urdf/ur_benchmark/wall.urdf", "wall"
 )
 viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/obstacles.urdf",
+    "package://hpp_environments/urdf/ur_benchmark/obstacles.urdf",
     "obstacles",
 )
 
