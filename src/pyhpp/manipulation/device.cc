@@ -78,6 +78,11 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(existFrame_overload, Model::existFrame,
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(addJointFrame_overload,
                                        Model::addJointFrame, 1, 2)
 
+PinDevicePtr_t Device::asPinDevice() {
+  hpp::pinocchio::DevicePtr_t pinDevice = std::dynamic_pointer_cast<hpp::pinocchio::Device>(obj);
+  return pinDevice;
+}
+
 bool Device_currentConfiguration(Device& d, const Configuration_t& c) {
   return d.currentConfiguration(c);
 }
@@ -182,7 +187,8 @@ void exposeDevice() {
       .def("updateGeometryPlacements", &Device::updateGeometryPlacements)
       .def("setRobotRootPosition", &Device::setRobotRootPosition)
       .def("handles", &getDeviceHandles)
-      .def("grippers", &getDeviceGrippers);
+      .def("grippers", &getDeviceGrippers)
+      .def("asPinDevice", &Device::asPinDevice);
 }
 }  // namespace manipulation
 }  // namespace pyhpp

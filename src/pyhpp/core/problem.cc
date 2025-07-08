@@ -37,7 +37,6 @@ namespace core {
 
 using namespace boost::python;
 
-Problem::Problem(const hpp::core::ProblemPtr_t& object) { obj = object; }
 Problem::Problem(const DevicePtr_t& robot)
     : obj(hpp::core::Problem::create(robot)) {}
 

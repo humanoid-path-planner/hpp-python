@@ -85,10 +85,10 @@ void exposeGenericTransformations() {
   exposeAbsoluteGenericTransformation<Position>("Position");
   exposeAbsoluteGenericTransformation<Orientation>("Orientation");
   exposeAbsoluteGenericTransformation<Transformation>("Transformation");
-  exposeAbsoluteGenericTransformation<RelativePosition>("RelativePosition");
-  exposeAbsoluteGenericTransformation<RelativeOrientation>(
+  exposeRelativeGenericTransformation<RelativePosition>("RelativePosition");
+  exposeRelativeGenericTransformation<RelativeOrientation>(
       "RelativeOrientation");
-  exposeAbsoluteGenericTransformation<RelativeTransformation>(
+  exposeRelativeGenericTransformation<RelativeTransformation>(
       "RelativeTransformation");
 }
 }  // namespace constraints

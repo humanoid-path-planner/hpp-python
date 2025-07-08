@@ -149,6 +149,7 @@ add_python_library(
   pyhpp/manipulation/bindings.cc
   pyhpp/manipulation/device.cc
   pyhpp/manipulation/graph.cc
+  pyhpp/manipulation/problem.cc
   LINK_LIBRARIES
   hpp-manipulation::hpp-manipulation)
 
@@ -156,3 +157,4 @@ add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
   hpp-manipulation-urdf::hpp-manipulation-urdf)
+
