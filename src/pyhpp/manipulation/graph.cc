@@ -40,6 +40,158 @@
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pinocchio/spatial/se3.hpp>
 
+namespace {
+
+    const char* DOC_CREATESTATE = 
+        "Create one or several states. "
+        "The order is important - the first should be the most restrictive one as a configuration "
+        "will be in the first state for which the constraints are satisfied.";
+
+    const char* DOC_CREATETRANSITION = 
+        "Create a transition. "
+        "The weights define the probability of selecting a transition among all the "
+        "outgoing transitions of a state. The probability of a transition is "
+        "w_i / sum(w_j), where each w_j corresponds to an outgoing transition from a given state. "
+        "To have a transition that cannot be selected by the M-RRT algorithm but is still "
+        "acceptable, set its weight to zero.";
+
+    const char* DOC_SETCONTAININGNODE = 
+        "Set in which state a transition is. "
+        "Paths satisfying the transition constraints satisfy the state constraints.";
+
+    const char* DOC_GETCONTAININGNODE = 
+        "Get the name of the state in which a transition is. "
+        "Paths satisfying the transition constraints satisfy the state constraints.";
+
+    const char* DOC_SETSHORT = 
+        "Set that a transition is short. "
+        "When a transition is tagged as short, extension along this transition is "
+        "done differently in RRT-like algorithms. Instead of projecting "
+        "a random configuration in the destination state, the "
+        "configuration to extend itself is projected in the destination "
+        "state. This makes the rate of success higher.";
+
+    const char* DOC_ISSHORT = 
+        "Check if a transition is short.";
+
+    const char* DOC_CREATEWAYPOINTTRANSITION = 
+        "Create a WaypointTransition. "
+        "See documentation of class hpp::manipulation::graph::WaypointEdge "
+        "for more information.";
+
+    const char* DOC_CREATELEVELSETTRANSITION = 
+        "Create a LevelSetTransition. "
+        "See documentation of class hpp::manipulation::graph::LevelSetEdge "
+        "for more information.";
+
+    const char* DOC_GETNODESCONNECTEDBYTRANSITION = 
+        "Get the names of the states connected by a transition.";
+
+    const char* DOC_GETWEIGHT = 
+        "Get weight of a transition.";
+
+    const char* DOC_SETWEIGHT = 
+        "Set weight of a transition. "
+        "You cannot set weight for waypoint transitions.";
+
+    const char* DOC_GETSTATE = 
+        "Get the name of the state corresponding to the configuration.";
+
+    const char* DOC_ADDNUMERICALCONSTRAINT = 
+        "Add a numerical constraint to a state.";
+
+    const char* DOC_ADDNUMERICALCONSTRAINTS = 
+        "Add numerical constraints to a state.";
+
+    const char* DOC_ADDNUMERICALCONSTRAINTSFORPATH = 
+        "Add numerical constraints for path to a state.";
+
+    const char* DOC_GETNUMERICALCONSTRAINTS = 
+        "Get numerical constraints of a state.";
+
+    const char* DOC_RESETCONSTRAINTS = 
+        "Reset constraints of a state.";
+
+    const char* DOC_REGISTERCONSTRAINTS = 
+        "Register constraints in the graph.";
+
+    const char* DOC_GETCONFIGERRORFORSTATE = 
+        "Get error of a config with respect to a state constraint. "
+        "Returns whether the configuration belongs to the state. "
+        "Calls core::ConstraintSet::isSatisfied for the state constraints.";
+
+    const char* DOC_GETCONFIGERRORFORTRANSITION = 
+        "Get error of a config with respect to a transition constraint. "
+        "Returns whether the configuration belongs to the transition. "
+        "Calls core::ConfigProjector::rightHandSideFromConfig with "
+        "the input configuration and then core::ConstraintSet::isSatisfied "
+        "on the transition constraints.";
+
+    const char* DOC_GETCONFIGERRORFORTRANSITIONLEAF = 
+        "Get error of a config with respect to a transition foliation leaf. "
+        "Returns whether config can be the end point of a path of the transition "
+        "starting at leafConfig.";
+
+    const char* DOC_GETCONFIGERRORFORTRANSITIONTARGET = 
+        "Get error of a config with respect to the target of a transition foliation leaf. "
+        "Returns whether config can be the end point of a path of the transition "
+        "starting at leafConfig.";
+
+    const char* DOC_APPLYSTATECONSTRAINTS = 
+        "Apply constraints to a configuration. "
+        "Returns ConstraintResult with success flag, output configuration, and error norm.";
+
+    const char* DOC_APPLYLEAFCONSTRAINTS = 
+        "Apply transition constraints to a configuration. "
+        "Returns ConstraintResult with success flag, output configuration, and error norm. "
+        "If success, the output configuration is reachable from q_rhs along the transition.";
+
+    const char* DOC_GENERATETARGETCONFIG = 
+        "Generate configuration in destination state on a given leaf. "
+        "Returns ConstraintResult with success flag, output configuration, and error norm. "
+        "Computes a configuration in the destination state of the transition, "
+        "reachable from q_rhs.";
+
+    const char* DOC_ADDLEVELSETFOLIATION = 
+        "Add the numerical constraints to a LevelSetTransition that create the foliation.";
+
+    const char* DOC_GETSECURITYMARGINMATRIXFORTRANSITION = 
+        "Get security margin matrix for a transition as list of lists.";
+
+    const char* DOC_SETSECURITYMARGINFORTRANSITION = 
+        "Set collision security margin for a pair of joints along a transition.";
+
+    const char* DOC_GETRELATIVEMOTIONMATRIX = 
+        "Get relative motion matrix for a transition as list of lists.";
+
+    const char* DOC_REMOVECOLLISIONPAIRFROMTRANSITION = 
+        "Remove collision pairs from a transition.";
+
+    const char* DOC_CREATESUBGRAPH = 
+        "Create a subgraph with guided state selection.";
+
+    const char* DOC_SETTARGETNODELIST = 
+        "Set the target state list for guided state selection.";
+
+    const char* DOC_DISPLAYSTATECONSTRAINTS = 
+        "Print set of constraints relative to a state in a string.";
+
+    const char* DOC_DISPLAYTRANSITIONCONSTRAINTS = 
+        "Print set of constraints relative to a transition in a string.";
+
+    const char* DOC_DISPLAYTRANSITIONTARGETCONSTRAINTS = 
+        "Print set of constraints relative to a transition in a string.";
+
+    const char* DOC_DISPLAY = 
+        "Display the current graph. "
+        "The graph is printed in DOT format.";
+
+    const char* DOC_INITIALIZE = 
+        "Initialize the graph. "
+        "Performs final initialization of the constraint graph.";
+
+}
+
 namespace pyhpp {
 namespace manipulation {
 
@@ -614,70 +766,70 @@ void exposeGraph() {
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init);
 
   class_<PyWGraph>("Graph", init<const std::string&, const PyWDevicePtr_t&,
-                                 const PyWProblemPtr_t&>())
+                                const PyWProblemPtr_t&>())
 
       // Configuration methods
       .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations, hpp::manipulation::size_type)
       .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PyWGraph, errorThreshold, hpp::manipulation::value_type)
 
       // Graph construction
-      .PYHPP_DEFINE_METHOD(PyWGraph, createState)
-      .PYHPP_DEFINE_METHOD(PyWGraph, createTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, createWaypointTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, createLevelSetTransition)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createState, DOC_CREATESTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createTransition, DOC_CREATETRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createWaypointTransition, DOC_CREATEWAYPOINTTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createLevelSetTransition, DOC_CREATELEVELSETTRANSITION)
 
       // Transition/State management
-      .PYHPP_DEFINE_METHOD(PyWGraph, setContainingNode)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getContainingNode)
-      .PYHPP_DEFINE_METHOD(PyWGraph, setShort)
-      .PYHPP_DEFINE_METHOD(PyWGraph, isShort)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getNodesConnectedByTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, setWeight)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getWeight)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setContainingNode, DOC_SETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getContainingNode, DOC_GETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setShort, DOC_SETSHORT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, isShort, DOC_ISSHORT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNodesConnectedByTransition, DOC_GETNODESCONNECTEDBYTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
 
       // State queries
-      .PYHPP_DEFINE_METHOD(PyWGraph, getState)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getState, DOC_GETSTATE)
 
       // Constraint management
-      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraint)
-      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraintsForPath)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getNumericalConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, resetConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, registerConstraints)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint, DOC_ADDNUMERICALCONSTRAINT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraints, DOC_ADDNUMERICALCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsForPath, DOC_ADDNUMERICALCONSTRAINTSFORPATH)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraints, DOC_GETNUMERICALCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints, DOC_RESETCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, registerConstraints, DOC_REGISTERCONSTRAINTS)
 
       // Configuration error checking
-      .PYHPP_DEFINE_METHOD(PyWGraph, getConfigErrorForState)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getConfigErrorForTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getConfigErrorForTransitionLeaf)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getConfigErrorForTransitionTarget)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState, DOC_GETCONFIGERRORFORSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransition, DOC_GETCONFIGERRORFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionLeaf, DOC_GETCONFIGERRORFORTRANSITIONLEAF)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionTarget, DOC_GETCONFIGERRORFORTRANSITIONTARGET)
 
       // Constraint application
-      .PYHPP_DEFINE_METHOD(PyWGraph, applyStateConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, applyLeafConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, generateTargetConfig)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, applyStateConstraints, DOC_APPLYSTATECONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, applyLeafConstraints, DOC_APPLYLEAFCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, generateTargetConfig, DOC_GENERATETARGETCONFIG)
 
-      // Level set edges
-      .PYHPP_DEFINE_METHOD(PyWGraph, addLevelSetFoliation)
+      // Level set transitions
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addLevelSetFoliation, DOC_ADDLEVELSETFOLIATION)
 
       // Security margins and collision
-      .PYHPP_DEFINE_METHOD(PyWGraph, getSecurityMarginMatrixForTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, setSecurityMarginForTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getRelativeMotionMatrix)
-      .PYHPP_DEFINE_METHOD(PyWGraph, removeCollisionPairFromTransition)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getSecurityMarginMatrixForTransition, DOC_GETSECURITYMARGINMATRIXFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setSecurityMarginForTransition, DOC_SETSECURITYMARGINFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getRelativeMotionMatrix, DOC_GETRELATIVEMOTIONMATRIX)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, removeCollisionPairFromTransition, DOC_REMOVECOLLISIONPAIRFROMTRANSITION)
 
       // Subgraph management
-      .PYHPP_DEFINE_METHOD(PyWGraph, createSubGraph)
-      .PYHPP_DEFINE_METHOD(PyWGraph, setTargetNodeList)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createSubGraph, DOC_CREATESUBGRAPH)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setTargetNodeList, DOC_SETTARGETNODELIST)
 
       // Display and debugging
-      .PYHPP_DEFINE_METHOD(PyWGraph, displayStateConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, displayTransitionConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, displayTransitionTargetConstraints)
-      .PYHPP_DEFINE_METHOD(PyWGraph, display)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayStateConstraints, DOC_DISPLAYSTATECONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionConstraints, DOC_DISPLAYTRANSITIONCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionTargetConstraints, DOC_DISPLAYTRANSITIONTARGETCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, display, DOC_DISPLAY)
 
       // Initialization
-      .PYHPP_DEFINE_METHOD(PyWGraph, initialize);
+      .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE);
 
   class_<ConstraintResult>("ConstraintResult")
       .def_readwrite("success", &ConstraintResult::success)
