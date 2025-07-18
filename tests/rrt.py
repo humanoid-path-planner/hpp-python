@@ -1,7 +1,6 @@
-from pyhpp.gepetto import Viewer
 import numpy as np
 from pinocchio import SE3
-from pyhpp.pinocchio import Device
+from pyhpp.pinocchio import Device, urdf
 from pyhpp.core import Problem, Roadmap, WeighedDistance
 
 # Robot configuration
@@ -10,26 +9,19 @@ srdfFilename = "package://example-robot-data/robots/ur_description/srdf/ur5_join
 
 # Initialize robot and viewer
 robot = Device.create("ur5")
-viewer = Viewer("construction_set", robot)
 
 # Add robot and obstacles to scene
-viewer.addURDFToScene(0, "r0", "anchor", urdfFilename, srdfFilename, SE3.Identity())
-viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/table.urdf",
-    "table",
-)
-viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/wall.urdf", "wall"
-)
-viewer.addURDFObstacleToScene(
-    "/home/psardin/devel/nix-hpp/src/hpp-practicals/urdf/ur_benchmark/obstacles.urdf",
-    "obstacles",
-)
+urdf.loadModel(robot, 0, "r0", "anchor", urdfFilename, srdfFilename, SE3.Identity())
+
+
+# urdf.loadModel(robot, 0, "table", "anchor", "package://hpp_environments/urdf/ur_benchmark/table.urdf", "", SE3.Identity())
+# urdf.loadModel(robot, 0, "wall", "anchor", "package://hpp_environments/urdf/ur_benchmark/wall.urdf", "", SE3.Identity())
+# urdf.loadModel(robot, 0, "obstacles", "anchor", "package://hpp_environments/urdf/ur_benchmark/obstacles.urdf", "", SE3.Identity())
+
 
 # Define initial and goal configurations
 qInit = np.array([0.2, -1.57, -1.8, 0, 0.8, 0])
 qGoal = np.array([1.57, -1.57, -1.8, 0, 0.8, 0])
-viewer.applyConfiguration(qInit)
 
 # Setup problem and RRT components
 problem = Problem(robot)
@@ -104,6 +96,6 @@ while not finished and iter < maxIter:
 # Compute and display final path
 if finished:
     path = problem.target().computePath(roadmap)
-    viewer.displayPath(path)
+    print(path)
 else:
     print(f"Maximum iterations ({maxIter}) reached without finding solution")
