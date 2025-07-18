@@ -1,7 +1,6 @@
-from pyhpp.gepetto import Viewer
 import numpy as np
 from pinocchio import SE3
-from pyhpp.pinocchio import Device
+from pyhpp.pinocchio import Device, urdf
 from pyhpp.core import (
     Problem,
     DiffusingPlanner,
@@ -17,11 +16,7 @@ rootJointType = "planar"
 
 # Initialize robot and viewer
 robot = Device.create("ur2")
-viewer = Viewer("tutorial_1", robot)
-
-viewer.addURDFToScene(
-    0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity()
-)
+urdf.loadModel(robot, 0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity())
 
 # Define initial and goal configurations
 q_init = np.array(robot.currentConfiguration())
@@ -66,11 +61,7 @@ q_goal[rank] = 0.5
 rank = rankInConfiguration["r_elbow_flex_joint"]
 q_goal[rank] = -0.5
 
-viewer.addURDFObstacleToScene(
-    "package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf", "kitchen"
-)
-
-viewer.applyConfiguration(q_goal)
+#urdf.loadModel(robot, 0, "kitchen", "anchor", "package://hpp_environments/urdf/kitchen_area_obstacle.urdf", "", SE3.Identity())
 
 problem = Problem(robot)
 problem.initConfig(q_init)
@@ -84,7 +75,7 @@ kPrmStar_inst = kPrmStar(problem)
 
 print(diffusingPlanner.maxIterations())
 
-# path = biRRTPlanner.solve()
+path = biRRTPlanner.solve()
 # viewer.displayPath(path, 0.001, 50)
 
 # path = diffusingPlanner.solve()

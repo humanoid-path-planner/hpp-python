@@ -16,9 +16,9 @@ set(PYTHON_UNIT_TESTS
     imports
     liegroup
     load_ur3
-    solver
     differentiable-function
-    problem-solver
+    path-planner
+    rrt
     path)
 
 foreach(UNIT_TEST ${PYTHON_UNIT_TESTS})
