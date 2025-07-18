@@ -16,7 +16,9 @@ rootJointType = "planar"
 
 # Initialize robot and viewer
 robot = Device.create("ur2")
-urdf.loadModel(robot, 0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity())
+urdf.loadModel(
+    robot, 0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity()
+)
 
 # Define initial and goal configurations
 q_init = np.array(robot.currentConfiguration())
@@ -61,7 +63,7 @@ q_goal[rank] = 0.5
 rank = rankInConfiguration["r_elbow_flex_joint"]
 q_goal[rank] = -0.5
 
-#urdf.loadModel(robot, 0, "kitchen", "anchor", "package://hpp_environments/urdf/kitchen_area_obstacle.urdf", "", SE3.Identity())
+# urdf.loadModel(robot, 0, "kitchen", "anchor", "package://hpp_environments/urdf/kitchen_area_obstacle.urdf", "", SE3.Identity())
 
 problem = Problem(robot)
 problem.initConfig(q_init)
