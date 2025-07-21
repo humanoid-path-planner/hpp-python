@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 from pyhpp.manipulation import Device, urdf, Graph, Problem
 from pyhpp.core import ConfigurationShooter  # noqa: F401
 import numpy as np
 from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
 
+=======
+
+from pyhpp.manipulation import Device, urdf, Graph, Problem
+
+import numpy as np
+from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
+
+from pyhpp.core import ConfigurationShooter
+>>>>>>> d836e1f (Modify and add graph test file to test list)
 
 from pyhpp.constraints import (
     RelativeTransformation,
@@ -29,9 +39,13 @@ r1_pose = SE3(rotation=np.identity(3), translation=np.array([1, 0, 0]))
 robot = Device("bot")
 
 urdf.loadModel(robot, 0, "ur5", "anchor", urdfFilename, srdfFilename, r0_pose)
+<<<<<<< HEAD
 urdf.loadModel(
     robot, 0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose
 )
+=======
+urdf.loadModel(robot, 0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose)
+>>>>>>> d836e1f (Modify and add graph test file to test list)
 
 
 robot.setJointBounds(
