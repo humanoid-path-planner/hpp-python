@@ -1,11 +1,9 @@
 
-from pyhpp.manipulation import Device, Graph, Problem
+from pyhpp.manipulation import Device, urdf, Graph, Problem
 
 import numpy as np
 from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
 
-    
-from pyhpp.gepetto import Viewer
 from pyhpp.core import ConfigurationShooter
 
 from pyhpp.constraints import (
@@ -27,12 +25,9 @@ r0_pose = SE3(rotation = np.identity(3), translation = np.array([-0.25, 0, 0]))
 r1_pose = SE3(rotation = np.identity(3), translation = np.array([1, 0, 0]))
 
 robot = Device("bot")
-viewer = Viewer("tutorial_1", robot.asPinDevice())
-viewer.addURDFToScene(0, "ur5", "anchor", urdfFilename, srdfFilename, r0_pose)
-viewer.addURDFToScene(0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose)
 
-#urdf.loadModel(robot, 0, "ur5", "anchor", urdfFilename, srdfFilename, r0_pose)
-#urdf.loadModel(robot, 0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose)
+urdf.loadModel(robot, 0, "ur5", "anchor", urdfFilename, srdfFilename, r0_pose)
+urdf.loadModel(robot, 0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose)
 
 model = robot.model()
 lowerLimit = model.lowerPositionLimit
@@ -140,6 +135,5 @@ for i in range(100):
     res = graph.applyStateConstraints (state_grasp, q)
     if res.success: break
 if (res.success):
-    viewer.applyConfiguration(res.configuration)
     print("after applying constraints: ",res.configuration)
 
