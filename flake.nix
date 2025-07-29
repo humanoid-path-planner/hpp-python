@@ -4,6 +4,7 @@
   inputs = {
     gepetto.url = "github:gepetto/nix";
     flake-parts.follows = "gepetto/flake-parts";
+    gazebo-sim-overlay.follows = "gepetto/gazebo-sim-overlay";
     nixpkgs.follows = "gepetto/nixpkgs";
     nix-ros-overlay.follows = "gepetto/nix-ros-overlay";
     systems.follows = "gepetto/systems";
@@ -31,11 +32,7 @@
           };
           packages = {
             default = self'.packages.hpp-python;
-            hpp-python = pkgs.python3Packages.hpp-python.overrideAttrs (super: {
-              propagatedBuildInputs = super.propagatedBuildInputs ++ [
-                pkgs.hpp-manipulation
-                pkgs.hpp-manipulation-urdf
-              ];
+            hpp-python = pkgs.python3Packages.hpp-python.overrideAttrs {
               src = lib.fileset.toSource {
                 root = ./.;
                 fileset = lib.fileset.unions [
@@ -47,8 +44,7 @@
                   ./tests
                 ];
               };
-              meta.platforms = lib.platforms.linux;
-            });
+            };
           };
         };
     };
