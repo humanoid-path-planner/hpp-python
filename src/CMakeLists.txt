@@ -91,6 +91,7 @@ add_python_library(
   pyhpp/constraints/implicit.cc
   pyhpp/constraints/iterative-solver.cc
   pyhpp/constraints/by-substitution.cc
+  pyhpp/constraints/locked-joint.cc
   pyhpp/constraints/bindings.cc
   LINK_LIBRARIES
   hpp-constraints::hpp-constraints)

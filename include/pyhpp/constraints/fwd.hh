@@ -39,6 +39,7 @@ void exposeGenericTransformations();
 void exposeImplicit();
 void exposeExplicitConstraintSet();
 void exposeExplicit();
+void exposeLockedJoint();
 void exposeHierarchicalIterativeSolver();
 void exposeBySubstitution();
 }  // namespace constraints
