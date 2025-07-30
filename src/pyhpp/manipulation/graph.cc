@@ -39,7 +39,9 @@
 #include <hpp/manipulation/graph/state.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pinocchio/spatial/se3.hpp>
-
+#include <hpp/constraints/differentiable-function.hh>
+#include <hpp/constraints/convex-shape-contact.hh>
+#include <hpp/constraints/explicit/convex-shape-contact.hh>
 namespace {
 
     const char* DOC_CREATESTATE = 
@@ -100,14 +102,21 @@ namespace {
     const char* DOC_ADDNUMERICALCONSTRAINT = 
         "Add a numerical constraint to a state.";
 
-    const char* DOC_ADDNUMERICALCONSTRAINTS = 
+    const char* DOC_ADDNUMERICALCONSTRAINTSTOSTATE = 
         "Add numerical constraints to a state.";
+        
+    const char* DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION = 
+        "Add numerical constraints to a TRANSITION.";
 
     const char* DOC_ADDNUMERICALCONSTRAINTSFORPATH = 
         "Add numerical constraints for path to a state.";
 
-    const char* DOC_GETNUMERICALCONSTRAINTS = 
+    const char* DOC_GETNUMERICALCONSTRAINTSFORSTATE = 
         "Get numerical constraints of a state.";
+    const char* DOC_GETNUMERICALCONSTRAINTSFOREDGE = 
+        "Get numerical constraints of an edge.";
+    const char* DOC_GETNUMERICALCONSTRAINTSFORGRAPH = 
+        "Get numerical constraints of the graph.";
 
     const char* DOC_RESETCONSTRAINTS = 
         "Reset constraints of a state.";
@@ -190,6 +199,19 @@ namespace {
         "Initialize the graph. "
         "Performs final initialization of the constraint graph.";
 
+
+    const char* DOC_SETWAYPOINT = 
+          "Set waypoint configuration for a waypoint transition. "
+          "Configures which edge and state to use at the specified waypoint index.";
+
+    const char* DOC_CREATEPLACEMENTCONSTRAINT = 
+      "Create placement constraint between object surfaces and environment surfaces. "
+      "Creates constraints that ensure proper contact between object and environment.";
+
+    const char* DOC_CREATEPREPLACEMENTCONSTRAINT = 
+      "Create pre-placement constraint with specified width margin. "
+      "Used for approaching placement configurations before final placement.";
+
 }
 
 namespace pyhpp {
@@ -228,7 +250,7 @@ PyWGraph::PyWGraph(const hpp::manipulation::graph::GraphPtr_t& object)
 
 PyWGraph::PyWGraph(const std::string& name, const PyWDevicePtr_t& d,
                    const PyWProblemPtr_t& problem)
-    : obj(hpp::manipulation::graph::Graph::create(name, d->obj, problem->obj)) {}
+    : obj(hpp::manipulation::graph::Graph::create(name, d->obj, problem->obj)), robot(d), problem(problem) {}
 
 // =============================================================================
 // Configuration methods
@@ -275,23 +297,46 @@ PyWEdgePtr_t PyWGraph::createTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t no
   return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
 }
 
+// Updated createWaypointTransition method
 PyWEdgePtr_t PyWGraph::createWaypointTransition(PyWStatePtr_t nodeFrom,
-                                           PyWStatePtr_t nodeTo,
-                                           const std::string& edgeName, int nb,
-                                           int w, PyWStatePtr_t isInState) {
-  try {
-    using namespace hpp::manipulation::graph;
-    EdgePtr_t edge_pc = nodeFrom->obj->linkTo(
-        edgeName, nodeTo->obj, w, (State::EdgeFactory)WaypointEdge::create);
-    edge_pc->state(isInState->obj);
+                                                PyWStatePtr_t nodeTo,
+                                                const std::string& edgeName, 
+                                                int nb,
+                                                int w, 
+                                                PyWStatePtr_t isInState,
+                                                bool automaticBuilder) {
+    try {
+        using namespace hpp::manipulation::graph;
+        EdgePtr_t edge_pc = nodeFrom->obj->linkTo(
+            edgeName, nodeTo->obj, w, (State::EdgeFactory)WaypointEdge::create);
+        edge_pc->state(isInState->obj);
 
-    auto waypoint_edge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, edge_pc);
-    waypoint_edge->nbWaypoints(nb);
+        auto waypoint_edge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, edge_pc);
+        waypoint_edge->nbWaypoints(nb);
 
-    return std::shared_ptr<PyWEdge>(new PyWEdge(edge_pc));
-  } catch (const std::exception& exc) {
-    throw std::logic_error(exc.what());
-  }
+        if (automaticBuilder) {
+            PyWStatePtr_t previous = nodeFrom;
+            
+            for (int i = 0; i < nb; ++i) {
+                std::string waypoint_state_name = edgeName + "_n" + std::to_string(i);
+                std::string waypoint_edge_name = edgeName + "_e" + std::to_string(i);
+                
+                PyWStatePtr_t waypoint_state = createState(waypoint_state_name, true, 0);
+                
+                PyWEdgePtr_t waypoint_individual_edge = createTransition(
+                    previous, waypoint_state, waypoint_edge_name, -1, isInState
+                );
+                
+                waypoint_edge->setWaypoint(i, waypoint_individual_edge->obj, waypoint_state->obj);
+                
+                previous = waypoint_state;
+            }
+        }
+        return std::shared_ptr<PyWEdge>(new PyWEdge(edge_pc));
+        
+    } catch (const std::exception& exc) {
+        throw std::logic_error(exc.what());
+    }
 }
 
 PyWEdgePtr_t PyWGraph::createLevelSetTransition(PyWStatePtr_t nodeFrom,
@@ -372,6 +417,31 @@ size_t PyWGraph::getWeight(PyWEdgePtr_t edge) {
   }
 }
 
+void PyWGraph::setWaypoint(PyWEdgePtr_t waypointEdge, int index, 
+                           PyWEdgePtr_t edge, PyWStatePtr_t state) {
+    try {
+        using namespace hpp::manipulation::graph;
+        
+        // Cast to WaypointEdge
+        auto waypoint_edge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, waypointEdge->obj);
+        if (!waypoint_edge) {
+            throw std::logic_error("Edge is not a WaypointEdge");
+        }
+        
+        // Validate index
+        if (index < 0 || static_cast<std::size_t>(index) > waypoint_edge->nbWaypoints()) {
+            throw std::logic_error("Invalid waypoint index");
+        }
+        
+        // Set the waypoint
+        waypoint_edge->setWaypoint(index, edge->obj, state->obj);
+        
+    } catch (const std::exception& exc) {
+        throw std::logic_error(exc.what());
+    }
+}
+
+
 // =============================================================================
 // State queries
 // =============================================================================
@@ -394,7 +464,7 @@ void PyWGraph::addNumericalConstraint(PyWStatePtr_t node,
   node->obj->addNumericalConstraint(constraint);
 }
 
-void PyWGraph::addNumericalConstraints(
+void PyWGraph::addNumericalConstraintsToState(
     PyWStatePtr_t component, const boost::python::list& py_constraints) {
   auto constraints =
       extract_vector<std::shared_ptr<hpp::constraints::Implicit>>(
@@ -403,6 +473,37 @@ void PyWGraph::addNumericalConstraints(
     try {
       for (size_t i = 0; i < constraints.size(); ++i) {
         component->obj->addNumericalConstraint(constraints[i]);
+      }
+    } catch (std::exception& err) {
+      throw std::logic_error(err.what());
+    }
+  }
+}
+
+void PyWGraph::addNumericalConstraintsToTransition(
+    PyWEdgePtr_t component, const boost::python::list& py_constraints) {
+  auto constraints =
+      extract_vector<std::shared_ptr<hpp::constraints::Implicit>>(
+          py_constraints);
+  if (constraints.size() > 0) {
+    try {
+      for (size_t i = 0; i < constraints.size(); ++i) {
+        component->obj->addNumericalConstraint(constraints[i]);
+      }
+    } catch (std::exception& err) {
+      throw std::logic_error(err.what());
+    }
+  }
+}
+
+void PyWGraph::addNumericalConstraintsToGraph(const boost::python::list& py_constraints) {
+  auto constraints =
+      extract_vector<std::shared_ptr<hpp::constraints::Implicit>>(
+          py_constraints);
+  if (constraints.size() > 0) {
+    try {
+      for (size_t i = 0; i < constraints.size(); ++i) {
+        obj->addNumericalConstraint(constraints[i]);
       }
     } catch (std::exception& err) {
       throw std::logic_error(err.what());
@@ -426,8 +527,14 @@ void PyWGraph::addNumericalConstraintsForPath(
   }
 }
 
-boost::python::list PyWGraph::getNumericalConstraints(PyWStatePtr_t component) {
+boost::python::list PyWGraph::getNumericalConstraintsForState(PyWStatePtr_t component) {
   return to_python_list(component->obj->numericalConstraints());
+}
+boost::python::list PyWGraph::getNumericalConstraintsForEdge(PyWEdgePtr_t component) {
+  return to_python_list(component->obj->numericalConstraints());
+}
+boost::python::list PyWGraph::getNumericalConstraintsForGraph() {
+  return to_python_list(obj->numericalConstraints());
 }
 
 void PyWGraph::resetConstraints(PyWStatePtr_t component) {
@@ -754,6 +861,162 @@ void PyWGraph::initialize() {
   }
 }
 
+typedef hpp::pinocchio::vector3_t vector3_t; 
+typedef std::vector<vector3_t> Shape_t;
+typedef std::pair<JointPtr_t, Shape_t> JointAndShape_t;
+typedef std::vector<JointAndShape_t> JointAndShapes_t;
+typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
+boost::python::tuple PyWGraph::createPlacementConstraint(const std::string& name,
+                                        const boost::python::list& py_surface1,
+                                        const boost::python::list& py_surface2,
+                                        const value_type& margin = 1e-4) {
+   try {
+       auto surface1 = extract_vector<std::string>(py_surface1);
+       auto surface2 = extract_vector<std::string>(py_surface2);
+
+       bool explicit_(true);
+       if (!robot->obj) throw std::runtime_error("No robot loaded");
+       JointAndShapes_t floorSurfaces, objectSurfaces, l;
+       
+       for (std::vector<std::string>::const_iterator it1 = surface1.begin(); it1 != surface1.end(); ++it1) {
+           if (!robot->obj->jointAndShapes.has(*it1))
+               throw std::runtime_error("First list of triangles not found.");
+           l = robot->obj->jointAndShapes.get(*it1);
+           objectSurfaces.insert(objectSurfaces.end(), l.begin(), l.end());
+           
+           for (auto js : l) {
+               JointPtr_t j(js.first);
+               if ((j->parentJoint()) ||
+                   ((*j->configurationSpace() != *hpp::pinocchio::LiegroupSpace::SE3()) &&
+                    (*j->configurationSpace() != *hpp::pinocchio::LiegroupSpace::R3xSO3()))) {
+                   explicit_ = false;
+               }
+           }
+       }
+
+       for (std::vector<std::string>::const_iterator it2 = surface2.begin(); it2 != surface2.end(); ++it2) {
+           if (robot->obj->jointAndShapes.has(*it2)) {
+               l = robot->obj->jointAndShapes.get(*it2);
+           }
+           else if (problem->jointAndShapes.has(*it2)) {
+               l = problem->jointAndShapes.get(*it2);
+           }
+           else {
+               throw std::runtime_error("Second list of triangles not found.");
+           }
+           floorSurfaces.insert(floorSurfaces.end(), l.begin(), l.end());
+       }
+
+       if (explicit_) {
+           typedef hpp::constraints::explicit_::ConvexShapeContact Constraint_t;
+           Constraint_t::Constraints_t constraints(
+               Constraint_t::createConstraintAndComplement(name, robot->obj, floorSurfaces,
+                                                           objectSurfaces, margin));
+           
+           assert(hpp::dynamic_pointer_cast<hpp::constraints::ConvexShapeContact>(
+               std::get<0>(constraints)->functionPtr()));
+           hpp::constraints::ConvexShapeContactPtr_t contactFunction(
+               hpp::static_pointer_cast<hpp::constraints::ConvexShapeContact>(
+                   std::get<0>(constraints)->functionPtr()));
+           contactFunction->setNormalMargin(margin);
+           
+           return boost::python::make_tuple(
+               std::get<0>(constraints),
+               std::get<1>(constraints),
+               std::get<2>(constraints)
+           );
+           
+       } else {
+           using hpp::constraints::ComparisonTypes_t;
+           using hpp::constraints::Equality;
+           using hpp::constraints::EqualToZero;
+           using hpp::constraints::Implicit;
+           
+           std::pair<hpp::constraints::ConvexShapeContactPtr_t,
+                     hpp::constraints::ConvexShapeContactComplementPtr_t>
+               functions(hpp::constraints::ConvexShapeContactComplement::createPair(
+                   name, robot->obj, floorSurfaces, objectSurfaces));
+           
+           functions.first->setNormalMargin(margin);
+
+           auto constraint = Implicit::create(functions.first, 5 * EqualToZero);
+           auto complement = Implicit::create(
+               functions.second,
+               ComparisonTypes_t(functions.second->outputSize(), Equality));
+           
+           return boost::python::make_tuple(constraint, complement, boost::python::object());
+       }
+       
+   } catch (const std::exception& exc) {
+       throw std::logic_error(exc.what());
+   }
+}
+
+boost::python::tuple PyWGraph::createPlacementConstraint1(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& margin) {
+    return createPlacementConstraint(name, py_surface1, py_surface2, margin);
+}
+boost::python::tuple PyWGraph::createPlacementConstraint2(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2) {
+    return createPlacementConstraint(name, py_surface1, py_surface2);
+}
+
+ImplicitPtr_t PyWGraph::createPrePlacementConstraint(const std::string& name,
+                                           const boost::python::list& py_surface1,
+                                           const boost::python::list& py_surface2,
+                                           const value_type& width,
+                                           const value_type& margin= 1e-4) {
+   try {
+       auto surface1 = extract_vector<std::string>(py_surface1);
+       auto surface2 = extract_vector<std::string>(py_surface2);
+
+       if (!robot->obj) throw std::runtime_error("No robot loaded");
+       JointAndShapes_t floorSurfaces, objectSurfaces, l;
+       
+       for (std::vector<std::string>::const_iterator it1 = surface1.begin(); it1 != surface1.end(); ++it1) {
+           if (!robot->obj->jointAndShapes.has(*it1))
+               throw std::runtime_error("First list of triangles not found.");
+           l = robot->obj->jointAndShapes.get(*it1);
+           objectSurfaces.insert(objectSurfaces.end(), l.begin(), l.end());
+       }
+
+       for (std::vector<std::string>::const_iterator it2 = surface2.begin(); it2 != surface2.end(); ++it2) {
+           if (robot->obj->jointAndShapes.has(*it2)) {
+               l = robot->obj->jointAndShapes.get(*it2);
+           }
+           else if (problem->jointAndShapes.has(*it2)) {
+               l = problem->jointAndShapes.get(*it2);
+           }
+           else {
+               throw std::runtime_error("Second list of triangles not found.");
+           }
+           floorSurfaces.insert(floorSurfaces.end(), l.begin(), l.end());
+       }
+
+       hpp::constraints::ConvexShapeContactPtr_t cvxShape(
+           hpp::constraints::ConvexShapeContact::create(name, robot->obj, floorSurfaces,
+                                                        objectSurfaces));
+       cvxShape->setNormalMargin(margin + width);
+       
+       return hpp::constraints::Implicit::create(cvxShape, 5 * hpp::constraints::EqualToZero);
+       
+   } catch (const std::exception& exc) {
+       throw std::logic_error(exc.what());
+   }
+}
+ImplicitPtr_t PyWGraph::createPrePlacementConstraint1(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& width, const value_type& margin) {
+    return createPrePlacementConstraint(name, py_surface1, py_surface2, width, margin);
+}
+ImplicitPtr_t PyWGraph::createPrePlacementConstraint2(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& width) {
+    return createPrePlacementConstraint(name, py_surface1, py_surface2, width);
+}
+
 // =============================================================================
 // Boost.Python bindings
 // =============================================================================
@@ -768,6 +1031,7 @@ void exposeGraph() {
   class_<PyWGraph>("Graph", init<const std::string&, const PyWDevicePtr_t&,
                                 const PyWProblemPtr_t&>())
 
+      .def_readwrite("robot", &PyWGraph::robot)
       // Configuration methods
       .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations, hpp::manipulation::size_type)
       .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PyWGraph, errorThreshold, hpp::manipulation::value_type)
@@ -786,17 +1050,27 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, getNodesConnectedByTransition, DOC_GETNODESCONNECTEDBYTRANSITION)
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
 
       // State queries
       .PYHPP_DEFINE_METHOD1(PyWGraph, getState, DOC_GETSTATE)
 
       // Constraint management
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint, DOC_ADDNUMERICALCONSTRAINT)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraints, DOC_ADDNUMERICALCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToState, DOC_ADDNUMERICALCONSTRAINTSTOSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToTransition, DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION)
+      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraintsToGraph)
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsForPath, DOC_ADDNUMERICALCONSTRAINTSFORPATH)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraints, DOC_GETNUMERICALCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForState, DOC_GETNUMERICALCONSTRAINTSFORSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForEdge, DOC_GETNUMERICALCONSTRAINTSFOREDGE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForGraph, DOC_GETNUMERICALCONSTRAINTSFORGRAPH)
       .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints, DOC_RESETCONSTRAINTS)
       .PYHPP_DEFINE_METHOD1(PyWGraph, registerConstraints, DOC_REGISTERCONSTRAINTS)
+
+      .def("createPlacementConstraint", &PyWGraph::createPlacementConstraint1, DOC_CREATEPLACEMENTCONSTRAINT)
+      .def("createPlacementConstraint", &PyWGraph::createPlacementConstraint2, DOC_CREATEPLACEMENTCONSTRAINT)
+      .def("createPrePlacementConstraint", &PyWGraph::createPrePlacementConstraint1, DOC_CREATEPREPLACEMENTCONSTRAINT)
+      .def("createPrePlacementConstraint", &PyWGraph::createPrePlacementConstraint2, DOC_CREATEPREPLACEMENTCONSTRAINT)
 
       // Configuration error checking
       .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState, DOC_GETCONFIGERRORFORSTATE)

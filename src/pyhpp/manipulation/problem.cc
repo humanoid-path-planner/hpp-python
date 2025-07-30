@@ -61,6 +61,13 @@ ConfigurationShooterPtr_t Problem::configurationShooter() const {
   return obj->configurationShooter();
 }
 
+void Problem::initConfig(ConfigurationIn_t inConfig) {
+  obj->initConfig(inConfig);
+}
+
+void Problem::addGoalConfig(ConfigurationIn_t config) {
+  obj->addGoalConfig(config);
+}
 
 // PathValidationPtr_t Problem::pathValidation() const {
 //     return obj->pathValidation();
@@ -99,6 +106,8 @@ void exposeProblem() {
   .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph, PyWGraphPtr_t)
   .PYHPP_DEFINE_METHOD(Problem, checkProblem)
   .PYHPP_DEFINE_METHOD(Problem, configurationShooter)
+  .PYHPP_DEFINE_METHOD(Problem, initConfig)
+  .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
   // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation, PathValidationPtr_t)
   // .PYHPP_DEFINE_METHOD(Problem, manipulationSteeringMethod)
   // .PYHPP_DEFINE_METHOD(Problem, pathValidationFactory)

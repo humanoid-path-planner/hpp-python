@@ -22,6 +22,7 @@
 #include <hpp/pinocchio/liegroup-element.hh>
 #include <hpp/constraints/fwd.hh>
 #include <hpp/pinocchio/device.hh>
+#include <hpp/constraints/comparison-types.hh>
 #include <pyhpp/constraints/fwd.hh>
 
 using namespace boost::python;
@@ -44,9 +45,27 @@ LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot,
   }
 }
 
+LockedJointPtr_t createLockedJointWithComp(const DevicePtr_t& robot,
+                                        const char* jointName,
+                                        const vector_t& config,
+                                        const ComparisonTypes_t& comp) {
+  try {
+    // Get robot in hppPlanner object.
+    JointPtr_t joint = robot->getJointByName(jointName);
+    LiegroupElement lge(config, joint->configurationSpace());
+    LockedJointPtr_t lockedJoint(LockedJoint::create(joint, lge));
+    lockedJoint->comparisonType(comp);
+    return lockedJoint;
+  } catch (const std::exception& exc) {
+    throw std::runtime_error(exc.what());
+  }
+}
+
 void exposeLockedJoint() {
   class_<LockedJoint, bases<Implicit>, LockedJointPtr_t, boost::noncopyable>("LockedJoint", no_init)
       .def("create", &createLockedJoint)
+      .staticmethod("create")
+      .def("createWithComp", &createLockedJointWithComp)
       .staticmethod("create");
 }
 }  // namespace constraints

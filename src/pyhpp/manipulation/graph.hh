@@ -76,6 +76,8 @@ struct PyWGraph {
 
   // Member variables
   GraphPtr_t obj;
+  PyWDevicePtr_t robot;
+  PyWProblemPtr_t problem;
 
   // Constructors
   PyWGraph(const GraphPtr_t& object);
@@ -96,7 +98,7 @@ struct PyWGraph {
                          PyWStatePtr_t isInState);
   PyWEdgePtr_t createWaypointTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t nodeTo,
                                  const std::string& edgeName, int nb, int w, 
-                                 PyWStatePtr_t isInState);
+                                 PyWStatePtr_t isInState, bool automaticBuilder);
   PyWEdgePtr_t createLevelSetTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t nodeTo,
                                  const std::string& edgeName, int w,
                                  PyWStatePtr_t isInState);
@@ -110,21 +112,50 @@ struct PyWGraph {
                               std::string& nodeTo);
   void setWeight(PyWEdgePtr_t edge, int weight);
   size_t getWeight(PyWEdgePtr_t edge);
-
+  void setWaypoint(PyWEdgePtr_t waypointEdge, int index, 
+                           PyWEdgePtr_t edge, PyWStatePtr_t state);
+  void addNumericalConstraintsToGraph(const boost::python::list& py_constraints);
   // State queries
   std::string getState(ConfigurationIn_t input);
 
   // Constraint management
   void addNumericalConstraint(PyWStatePtr_t node, const ImplicitPtr_t& constraint);
-  void addNumericalConstraints(PyWStatePtr_t component, 
+  void addNumericalConstraintsToState(PyWStatePtr_t component, 
+                              const boost::python::list& py_constraints);
+  void addNumericalConstraintsToTransition(PyWEdgePtr_t component, 
                               const boost::python::list& py_constraints);
   void addNumericalConstraintsForPath(PyWStatePtr_t component, 
                                      const boost::python::list& py_constraints);
-  boost::python::list getNumericalConstraints(PyWStatePtr_t component);
   void resetConstraints(PyWStatePtr_t component);
   void registerConstraints(const ImplicitPtr_t& constraint,
                           const ImplicitPtr_t& complement,
                           const ImplicitPtr_t& both);
+
+  boost::python::tuple createPlacementConstraint(const std::string& name,
+                                                 const boost::python::list& py_surface1,
+                                                 const boost::python::list& py_surface2,
+                                                 const value_type& margin);
+  ImplicitPtr_t createPrePlacementConstraint(const std::string& name,
+                                                 const boost::python::list& py_surface1,
+                                                 const boost::python::list& py_surface2,
+                                                 const value_type& width,
+                                                 const value_type& margin);
+  boost::python::tuple createPlacementConstraint1(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& margin);
+boost::python::tuple createPlacementConstraint2(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2);
+ImplicitPtr_t createPrePlacementConstraint1(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& width, const value_type& margin);
+ImplicitPtr_t createPrePlacementConstraint2(
+    const std::string& name, const boost::python::list& py_surface1,
+    const boost::python::list& py_surface2, const value_type& width);
+
+boost::python::list getNumericalConstraintsForState(PyWStatePtr_t component);
+boost::python::list getNumericalConstraintsForEdge(PyWEdgePtr_t component);
+boost::python::list getNumericalConstraintsForGraph();
 
   // Configuration error checking
   bool getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input, 

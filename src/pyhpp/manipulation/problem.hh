@@ -27,6 +27,9 @@
 
 typedef hpp::manipulation::ProblemPtr_t ProblemPtr_t;
 typedef hpp::core::ConfigurationShooterPtr_t ConfigurationShooterPtr_t;
+typedef hpp::constraints::JointAndShape_t JointAndShape_t;
+typedef hpp::constraints::JointAndShapes_t JointAndShapes_t;
+typedef hpp::core::ConfigurationIn_t ConfigurationIn_t;
 
 namespace pyhpp {
 namespace manipulation {
@@ -34,6 +37,7 @@ namespace manipulation {
 // Wrapper class for hpp::manipulation::Problem
 struct Problem {
   ProblemPtr_t obj;
+  hpp::core::Container<JointAndShapes_t> jointAndShapes;
 
   Problem(const PyWDevicePtr_t& robot);
   Problem(const hpp::manipulation::ProblemPtr_t& object);
@@ -42,6 +46,8 @@ struct Problem {
   PyWGraphPtr_t constraintGraph() const;
   virtual void checkProblem() const; 
   ConfigurationShooterPtr_t configurationShooter() const;
+  void initConfig(ConfigurationIn_t inConfig);
+  void addGoalConfig(ConfigurationIn_t config);
 
   // PathValidationPtr_t pathValidation() const; 
   // void pathValidation (const PathValidationPtr_t &pathValidation); 

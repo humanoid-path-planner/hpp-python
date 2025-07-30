@@ -29,27 +29,26 @@ robot = Device("bot")
 urdf.loadModel(robot, 0, "ur5", "anchor", urdfFilename, srdfFilename, r0_pose)
 urdf.loadModel(robot, 0, "pokeball", "freeflyer", urdfFilenameBall, srdfFilenameBall, r1_pose)
 
-model = robot.model()
-lowerLimit = model.lowerPositionLimit
-upperLimit = model.upperPositionLimit
 
-pokeball_bounds = [
-    [-0.4, 0.4],
-    [-0.4, 0.4],
-    [-0.1, 2.0],
-    [-1.0001, 1.0001],
-    [-1.0001, 1.0001],
-    [-1.0001, 1.0001],
-    [-1.0001, 1.0001],
-]
-
-ij = model.getJointId("pokeball/root_joint")
-iq = model.idx_qs[ij]
-
-for i, (lower, upper) in enumerate(pokeball_bounds):
-    lowerLimit[iq + i] = lower
-    upperLimit[iq + i] = upper
-
+robot.setJointBounds(
+    "pokeball/root_joint",
+    [
+        -0.4,
+        0.4,
+        -0.4,
+        0.4,
+        -0.1,
+        1.0,
+        -1.0001,
+        1.0001,
+        -1.0001,
+        1.0001,
+        -1.0001,
+        1.0001,
+        -1.0001,
+        1.0001,
+    ],
+)
 
 problem = Problem(robot)
 

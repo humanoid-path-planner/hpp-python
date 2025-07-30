@@ -32,6 +32,8 @@
 #include <hpp/manipulation/handle.hh>
 #include <hpp/pinocchio/gripper.hh>
 #include <hpp/pinocchio/device.hh>
+#include <hpp/pinocchio/frame.hh>
+#include <hpp/pinocchio/joint.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
 #include <pinocchio/spatial/se3.hpp>
@@ -58,6 +60,9 @@ typedef hpp::manipulation::HandlePtr_t HandlePtr_t;
 typedef hpp::manipulation::Handle Handle;
 typedef hpp::manipulation::DevicePtr_t DevicePtr_t;
 typedef hpp::pinocchio::DevicePtr_t PinDevicePtr_t;
+typedef hpp::pinocchio::Frame Frame;
+typedef hpp::pinocchio::Joint Joint;
+typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
 // Wrapper class to hpp::manipulation::Device
 //
@@ -86,6 +91,9 @@ struct Device {
   void setRobotRootPosition(const std::string& robotName,
                             const Transform3s& positionWRTParentJoint);
   PinDevicePtr_t asPinDevice();
+  boost::python::list getJointConfig(const char* jointName);
+  boost::python::list getJointNames();
+  void setJointBounds(const char* jointName, boost::python::list jointBounds);
 };  // struct Device
 }  // namespace manipulation
 }  // namespace pyhpp
