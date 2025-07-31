@@ -75,20 +75,16 @@ set(DOXYGEN_TREEVIEW
 # Declare Headers
 set(${PROJECT_NAME}_HEADERS
     include/pyhpp/constraints/fwd.hh
-
     include/pyhpp/core/fwd.hh
     include/pyhpp/core/path/fwd.hh
     include/pyhpp/core/path-planner.hh
     include/pyhpp/core/pathOptimization/fwd.hh
     include/pyhpp/core/problem.hh
     include/pyhpp/core/problemTarget/fwd.hh
-
     include/pyhpp/manipulation/fwd.hh
     include/pyhpp/manipulation/urdf/fwd.hh
-
     include/pyhpp/pinocchio/fwd.hh
     include/pyhpp/pinocchio/urdf/fwd.hh
-
     include/pyhpp/ref.hh
     include/pyhpp/stl-pair.hh
     include/pyhpp/util.hh
