@@ -45,7 +45,7 @@
                   ./tests
                 ];
               };
-              meta.platforms = lib.platforms.unix;
+              meta.platforms = lib.platforms.linux;
             });
           };
         };
