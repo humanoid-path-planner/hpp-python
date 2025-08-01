@@ -16,7 +16,7 @@ jobs:
     runs-on: "${{ matrix.os }}-latest"
     strategy:
       matrix:
-        os: [macos, ubuntu]
+        os: [ubuntu]
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
