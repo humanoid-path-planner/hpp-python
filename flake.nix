@@ -23,9 +23,11 @@
           ...
         }:
         {
-          apps.default = {
-            type = "app";
-            program = pkgs.python3.withPackages (_: [ self'.packages.default ]);
+          apps = lib.filterAttrs (_n: v: v.program.meta.available && !v.program.meta.broken) {
+            default = {
+              type = "app";
+              program = pkgs.python3.withPackages (_: [ self'.packages.default ]);
+            };
           };
           packages = {
             default = self'.packages.hpp-python;
