@@ -27,8 +27,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <pyhpp/manipulation/fwd.hh>
 #include <hpp/manipulation/graph/graph.hh>
+#include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
 namespace manipulation {
@@ -62,7 +62,7 @@ struct PyWState {
 };
 typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 
-/// Python wrapper for Edge  
+/// Python wrapper for Edge
 struct PyWEdge {
   EdgePtr_t obj;
   PyWEdge(const EdgePtr_t& object);
@@ -81,7 +81,7 @@ struct PyWGraph {
 
   // Constructors
   PyWGraph(const GraphPtr_t& object);
-  PyWGraph(const std::string& name, const PyWDevicePtr_t& d, 
+  PyWGraph(const std::string& name, const PyWDevicePtr_t& d,
            const PyWProblemPtr_t& problem);
 
   // Configuration methods
@@ -91,111 +91,116 @@ struct PyWGraph {
   value_type errorThreshold() const;
 
   // Graph construction
-  PyWStatePtr_t createState(const std::string& nodeName, bool waypoint, 
-                           int priority);
+  PyWStatePtr_t createState(const std::string& nodeName, bool waypoint,
+                            int priority);
   PyWEdgePtr_t createTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t nodeTo,
-                         const std::string& transitionName, int w,
-                         PyWStatePtr_t isInState);
-  PyWEdgePtr_t createWaypointTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t nodeTo,
-                                 const std::string& edgeName, int nb, int w, 
-                                 PyWStatePtr_t isInState, bool automaticBuilder);
-  PyWEdgePtr_t createLevelSetTransition(PyWStatePtr_t nodeFrom, PyWStatePtr_t nodeTo,
-                                 const std::string& edgeName, int w,
-                                 PyWStatePtr_t isInState);
+                                const std::string& transitionName, int w,
+                                PyWStatePtr_t isInState);
+  PyWEdgePtr_t createWaypointTransition(PyWStatePtr_t nodeFrom,
+                                        PyWStatePtr_t nodeTo,
+                                        const std::string& edgeName, int nb,
+                                        int w, PyWStatePtr_t isInState,
+                                        bool automaticBuilder);
+  PyWEdgePtr_t createLevelSetTransition(PyWStatePtr_t nodeFrom,
+                                        PyWStatePtr_t nodeTo,
+                                        const std::string& edgeName, int w,
+                                        PyWStatePtr_t isInState);
 
   // Edge/State management
   void setContainingNode(PyWEdgePtr_t edge, PyWStatePtr_t node);
   std::string getContainingNode(PyWEdgePtr_t edge);
   void setShort(PyWEdgePtr_t edge, bool isShort);
   bool isShort(PyWEdgePtr_t edge);
-  void getNodesConnectedByTransition(PyWEdgePtr_t edge, std::string& nodeFrom, 
-                              std::string& nodeTo);
+  void getNodesConnectedByTransition(PyWEdgePtr_t edge, std::string& nodeFrom,
+                                     std::string& nodeTo);
   void setWeight(PyWEdgePtr_t edge, int weight);
   size_t getWeight(PyWEdgePtr_t edge);
-  void setWaypoint(PyWEdgePtr_t waypointEdge, int index, 
-                           PyWEdgePtr_t edge, PyWStatePtr_t state);
-  void addNumericalConstraintsToGraph(const boost::python::list& py_constraints);
+  void setWaypoint(PyWEdgePtr_t waypointEdge, int index, PyWEdgePtr_t edge,
+                   PyWStatePtr_t state);
+  void addNumericalConstraintsToGraph(
+      const boost::python::list& py_constraints);
   // State queries
   std::string getState(ConfigurationIn_t input);
 
   // Constraint management
-  void addNumericalConstraint(PyWStatePtr_t node, const ImplicitPtr_t& constraint);
-  void addNumericalConstraintsToState(PyWStatePtr_t component, 
-                              const boost::python::list& py_constraints);
-  void addNumericalConstraintsToTransition(PyWEdgePtr_t component, 
-                              const boost::python::list& py_constraints);
-  void addNumericalConstraintsForPath(PyWStatePtr_t component, 
-                                     const boost::python::list& py_constraints);
+  void addNumericalConstraint(PyWStatePtr_t node,
+                              const ImplicitPtr_t& constraint);
+  void addNumericalConstraintsToState(
+      PyWStatePtr_t component, const boost::python::list& py_constraints);
+  void addNumericalConstraintsToTransition(
+      PyWEdgePtr_t component, const boost::python::list& py_constraints);
+  void addNumericalConstraintsForPath(
+      PyWStatePtr_t component, const boost::python::list& py_constraints);
   void resetConstraints(PyWStatePtr_t component);
   void registerConstraints(const ImplicitPtr_t& constraint,
-                          const ImplicitPtr_t& complement,
-                          const ImplicitPtr_t& both);
+                           const ImplicitPtr_t& complement,
+                           const ImplicitPtr_t& both);
 
-  boost::python::tuple createPlacementConstraint(const std::string& name,
-                                                 const boost::python::list& py_surface1,
-                                                 const boost::python::list& py_surface2,
-                                                 const value_type& margin);
-  ImplicitPtr_t createPrePlacementConstraint(const std::string& name,
-                                                 const boost::python::list& py_surface1,
-                                                 const boost::python::list& py_surface2,
-                                                 const value_type& width,
-                                                 const value_type& margin);
+  boost::python::tuple createPlacementConstraint(
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2, const value_type& margin);
+  ImplicitPtr_t createPrePlacementConstraint(
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2, const value_type& width,
+      const value_type& margin);
   boost::python::tuple createPlacementConstraint1(
-    const std::string& name, const boost::python::list& py_surface1,
-    const boost::python::list& py_surface2, const value_type& margin);
-boost::python::tuple createPlacementConstraint2(
-    const std::string& name, const boost::python::list& py_surface1,
-    const boost::python::list& py_surface2);
-ImplicitPtr_t createPrePlacementConstraint1(
-    const std::string& name, const boost::python::list& py_surface1,
-    const boost::python::list& py_surface2, const value_type& width, const value_type& margin);
-ImplicitPtr_t createPrePlacementConstraint2(
-    const std::string& name, const boost::python::list& py_surface1,
-    const boost::python::list& py_surface2, const value_type& width);
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2, const value_type& margin);
+  boost::python::tuple createPlacementConstraint2(
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2);
+  ImplicitPtr_t createPrePlacementConstraint1(
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2, const value_type& width,
+      const value_type& margin);
+  ImplicitPtr_t createPrePlacementConstraint2(
+      const std::string& name, const boost::python::list& py_surface1,
+      const boost::python::list& py_surface2, const value_type& width);
 
-boost::python::list getNumericalConstraintsForState(PyWStatePtr_t component);
-boost::python::list getNumericalConstraintsForEdge(PyWEdgePtr_t component);
-boost::python::list getNumericalConstraintsForGraph();
+  boost::python::list getNumericalConstraintsForState(PyWStatePtr_t component);
+  boost::python::list getNumericalConstraintsForEdge(PyWEdgePtr_t component);
+  boost::python::list getNumericalConstraintsForGraph();
 
   // Configuration error checking
-  bool getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input, 
-                             hpp::core::vector_t& error);
-  bool getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input, 
-                            hpp::core::vector_t& error);
-  bool getConfigErrorForTransitionLeaf(ConfigurationIn_t leafConfig, 
-                                ConfigurationIn_t config, 
-                                const PyWEdgePtr_t& edge, 
-                                hpp::core::vector_t& error) const;
-  bool getConfigErrorForTransitionTarget(ConfigurationIn_t leafConfig, 
-                                  ConfigurationIn_t config, 
-                                  const PyWEdgePtr_t& edge, 
-                                  hpp::core::vector_t& error) const;
+  bool getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input,
+                              hpp::core::vector_t& error);
+  bool getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input,
+                                   hpp::core::vector_t& error);
+  bool getConfigErrorForTransitionLeaf(ConfigurationIn_t leafConfig,
+                                       ConfigurationIn_t config,
+                                       const PyWEdgePtr_t& edge,
+                                       hpp::core::vector_t& error) const;
+  bool getConfigErrorForTransitionTarget(ConfigurationIn_t leafConfig,
+                                         ConfigurationIn_t config,
+                                         const PyWEdgePtr_t& edge,
+                                         hpp::core::vector_t& error) const;
 
   // Constraint application
-  ConstraintResult applyStateConstraints(PyWStatePtr_t state, 
+  ConstraintResult applyStateConstraints(PyWStatePtr_t state,
+                                         ConfigurationIn_t input);
+  ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition,
+                                        ConfigurationIn_t q_rhs,
                                         ConfigurationIn_t input);
-  ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition, 
-                                       ConfigurationIn_t q_rhs,
-                                       ConfigurationIn_t input);
-  ConstraintResult generateTargetConfig(PyWEdgePtr_t transition, 
-                                       ConfigurationIn_t q_rhs,
-                                       ConfigurationIn_t input);
+  ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
+                                        ConfigurationIn_t q_rhs,
+                                        ConfigurationIn_t input);
 
   // Level set edges
-  void addLevelSetFoliation(PyWEdgePtr_t edge, 
-                           const boost::python::list& condNC,
-                           const boost::python::list& paramNC);
+  void addLevelSetFoliation(PyWEdgePtr_t edge,
+                            const boost::python::list& condNC,
+                            const boost::python::list& paramNC);
 
   // Security margins and collision
   boost::python::list getSecurityMarginMatrixForTransition(PyWEdgePtr_t edge);
   void setSecurityMarginForTransition(PyWEdgePtr_t edge, const char* joint1,
-                               const char* joint2, double margin);
+                                      const char* joint2, double margin);
   boost::python::list getRelativeMotionMatrix(PyWEdgePtr_t edge);
-  void removeCollisionPairFromTransition(PyWEdgePtr_t edge, const char* joint1, 
-                                  const char* joint2);
+  void removeCollisionPairFromTransition(PyWEdgePtr_t edge, const char* joint1,
+                                         const char* joint2);
 
   // Subgraph management
-  void createSubGraph(const char* subgraphName, hpp::core::RoadmapPtr_t roadmap);
+  void createSubGraph(const char* subgraphName,
+                      hpp::core::RoadmapPtr_t roadmap);
   void setTargetNodeList(const boost::python::list& nodes);
 
   // Display and debugging

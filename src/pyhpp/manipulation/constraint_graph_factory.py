@@ -34,6 +34,7 @@ import sys
 import numpy as np
 from pyhpp.constraints import Implicit, LockedJoint
 
+
 class Constraints:
     """
     Container of numerical constraints
@@ -123,6 +124,7 @@ class Constraints:
         for c in self._numConstraints:
             res += c + ", "
         return res
+
 
 class PossibleGrasps:
     def __init__(self, grippers, handles, grasps):
@@ -678,7 +680,7 @@ class ConstraintFactory(ConstraintFactoryAbstract):
     gfields = ("grasp", "graspComplement", "preGrasp")
     pfields = ("placement", "placementComplement", "prePlacement")
 
-    def __init__(self, graphfactory, graph, constraints = dict()):
+    def __init__(self, graphfactory, graph, constraints=dict()):
         super().__init__(graphfactory)
         self.graph = graph
         self.available_constraints = dict()
@@ -704,8 +706,8 @@ class ConstraintFactory(ConstraintFactoryAbstract):
         graspAlreadyCreated = n in self.available_constraints
         pregraspAlreadyCreated = pn in self.available_constraints
         if not graspAlreadyCreated:
-            cname = n + "/complement";
-            bname = n + "/hold";
+            cname = n + "/complement"
+            bname = n + "/hold"
             gripper = self.graph.robot.grippers()[g]
             handle = self.graph.robot.handles()[h]
             constraint = handle.createGrasp(gripper, n)
@@ -773,7 +775,12 @@ class ConstraintFactory(ConstraintFactoryAbstract):
                 if n.startswith(o + "/"):
                     ljs.append(n)
                     q = self.graph.robot.getJointConfig(n)
-                    self.registerConstraint(LockedJoint.create(self.graph.robot.asPinDevice(), n, np.array(q)), n)
+                    self.registerConstraint(
+                        LockedJoint.create(
+                            self.graph.robot.asPinDevice(), n, np.array(q)
+                        ),
+                        n,
+                    )
             return dict(
                 list(
                     zip(
@@ -882,7 +889,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
     # See methods setPreplacementDistance and getPreplacementDistance
     preplaceDistance = dict()
 
-    def __init__(self, graph, constraints = dict()):
+    def __init__(self, graph, constraints=dict()):
         """
         \\param graph an instance of ConstraintGraph
         """
@@ -917,17 +924,17 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
         loop_edge = self.graph.createTransition(
             state.state_obj, state.state_obj, n, 0, state.state_obj
         )
-        self.edge_objects[n] = loop_edge 
+        self.edge_objects[n] = loop_edge
         self._add_constraints_to_transition(loop_edge, state.foliation)
 
     def makeTransition(self, stateFrom, stateTo, ig):
         """
         Make transition between two states using boost python API
-        
+
         \\param stateFrom initial state,
         \\param stateTo new state
         \\param ig index of gripper
-        
+
         stateTo grasps are the union of stateFrom grasps with a set containing
         a grasp by gripper of index ig in list <c>self.grippers</c> of a handle.
         The index of the newly grasped handle can be found by
@@ -946,7 +953,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
         gc = self.constraints.g(ig, ih, "grasp")
         gcc = self.constraints.g(ig, ih, "graspComplement")
         pgc = self.constraints.g(ig, ih, "preGrasp")
-        
+
         if noPlace:
             pc = Constraints()
             pcc = Constraints()
@@ -955,7 +962,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
             pc = self.constraints.p(self.objectFromHandle[ih], "placement")
             pcc = self.constraints.p(self.objectFromHandle[ih], "placementComplement")
             ppc = self.constraints.p(self.objectFromHandle[ih], "prePlacement")
-        
+
         manifold = sf.manifold - pc
 
         # The different cases:
@@ -987,25 +994,25 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
 
         wStates = [sf.name]
         wStateObjects = [sf.state_obj]
-        
+
         if pregrasp:
             pregrasp_name = names[0] + "_pregrasp"
             _createWaypointState(pregrasp_name, pc + pgc + manifold)
             wStates.append(pregrasp_name)
             wStateObjects.append(self.state_objects[pregrasp_name])
-            
+
         if intersec:
             intersec_name = names[0] + "_intersec"
             _createWaypointState(intersec_name, pc + gc + manifold)
             wStates.append(intersec_name)
             wStateObjects.append(self.state_objects[intersec_name])
-            
+
         if preplace:
             preplace_name = names[0] + "_preplace"
             _createWaypointState(preplace_name, ppc + gc + manifold)
             wStates.append(preplace_name)
             wStateObjects.append(self.state_objects[preplace_name])
-        
+
         wStates.append(st.name)
         wStateObjects.append(st.state_obj)
 
@@ -1016,32 +1023,44 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
             backward_edge = self.graph.createWaypointTransition(
                 st.state_obj, sf.state_obj, names[1], nWaypoints, 1, sf.state_obj, False
             )
-            
+
             self.edge_objects[names[0]] = forward_edge
             self.edge_objects[names[1]] = backward_edge
-            
+
             forward_ls_edge = None
             backward_ls_edge = None
-            
+
             if crossedFoliation:
                 forward_ls_edge = self.graph.createWaypointTransition(
-                    sf.state_obj, st.state_obj, names[0] + "_ls", nWaypoints, 10, sf.state_obj, False
+                    sf.state_obj,
+                    st.state_obj,
+                    names[0] + "_ls",
+                    nWaypoints,
+                    10,
+                    sf.state_obj,
+                    False,
                 )
                 self.edge_objects[names[0] + "_ls"] = forward_ls_edge
-                
+
                 if not noPlace:
                     backward_ls_edge = self.graph.createWaypointTransition(
-                        st.state_obj, sf.state_obj, names[1] + "_ls", nWaypoints, 10, sf.state_obj, False
+                        st.state_obj,
+                        sf.state_obj,
+                        names[1] + "_ls",
+                        nWaypoints,
+                        10,
+                        sf.state_obj,
+                        False,
                     )
                     self.edge_objects[names[1] + "_ls"] = backward_ls_edge
-            
+
             wTransitions = []
             wTransitionObjects = []
-            
+
             for i in range(nTransitions):
                 nf = f"{names[0]}_{i}{i + 1}"
                 nb = f"{names[1]}_{i + 1}{i}"
-                
+
                 forward_trans = self.graph.createTransition(
                     wStateObjects[i], wStateObjects[i + 1], nf, -1, wStateObjects[i]
                 )
@@ -1050,105 +1069,128 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 )
                 self.edge_objects[nf] = forward_trans
                 self.edge_objects[nb] = backward_trans
-                
+
                 nf_ls = nf
                 nb_ls = nb
-            
+
                 if crossedFoliation:
                     if i == 0:
                         edgeName = nf_ls = nf + "_ls"
-                        containingState = sf.state_obj  # containing state is always start state
+                        containingState = (
+                            sf.state_obj
+                        )  # containing state is always start state
                         level_set_edge_forward = self.graph.createLevelSetTransition(
-                            wStateObjects[i], wStateObjects[i + 1], edgeName, -1, containingState
+                            wStateObjects[i],
+                            wStateObjects[i + 1],
+                            edgeName,
+                            -1,
+                            containingState,
                         )
                         self.edge_objects[edgeName] = level_set_edge_forward
-                        
+
                         paramNC_constraints = self._get_constraint_objects(
                             (st.foliation - sf.foliation).numConstraints
                         )
                         condNC_constraints = self._get_constraint_objects(
                             (st.manifold - sf.manifold).numConstraints
                         )
-                        
+
                         self.graph.addLevelSetFoliation(
-                            level_set_edge_forward, condNC_constraints, paramNC_constraints
+                            level_set_edge_forward,
+                            condNC_constraints,
+                            paramNC_constraints,
                         )
-                        self._add_constraints_to_transition(level_set_edge_forward, sf.foliation)
-                    
+                        self._add_constraints_to_transition(
+                            level_set_edge_forward, sf.foliation
+                        )
+
                     if i == nTransitions - 1 and crossedFoliation:
                         edgeName = nb_ls = nb + "_ls"
                         # containing state is goal state if an object in placement is grasped, start state otherwise
                         if not noPlace:
                             containingState = st.state_obj
-                            level_set_edge_backward = self.graph.createLevelSetTransition(
-                                wStateObjects[i + 1], wStateObjects[i], edgeName, -1, containingState
+                            level_set_edge_backward = (
+                                self.graph.createLevelSetTransition(
+                                    wStateObjects[i + 1],
+                                    wStateObjects[i],
+                                    edgeName,
+                                    -1,
+                                    containingState,
+                                )
                             )
                             self.edge_objects[edgeName] = level_set_edge_backward
-                            
+
                             pNC_constraints = self._get_constraint_objects(
                                 (sf.foliation - st.foliation).numConstraints
                             )
                             cNC_constraints = self._get_constraint_objects(
                                 sf.manifold.numConstraints
                             )
-                            
+
                             self.graph.addLevelSetFoliation(
-                                level_set_edge_backward, cNC_constraints, pNC_constraints
+                                level_set_edge_backward,
+                                cNC_constraints,
+                                pNC_constraints,
                             )
-                            self._add_constraints_to_transition(level_set_edge_backward, st.foliation)
-                    
+                            self._add_constraints_to_transition(
+                                level_set_edge_backward, st.foliation
+                            )
+
                     if forward_ls_edge:
-                        edge_to_use_forward = self.edge_objects[nf_ls] if i == 0 else forward_trans
+                        edge_to_use_forward = (
+                            self.edge_objects[nf_ls] if i == 0 else forward_trans
+                        )
                         self.graph.setWaypoint(
                             forward_ls_edge,
                             i,
                             edge_to_use_forward,
-                            wStateObjects[i + 1]
+                            wStateObjects[i + 1],
                         )
 
                     if backward_ls_edge and not noPlace:
-                        edge_to_use_backward = self.edge_objects[nb_ls] if i == nTransitions - 1 else backward_trans
+                        edge_to_use_backward = (
+                            self.edge_objects[nb_ls]
+                            if i == nTransitions - 1
+                            else backward_trans
+                        )
                         self.graph.setWaypoint(
                             backward_ls_edge,
                             nTransitions - 1 - i,
                             edge_to_use_backward,
-                            wStateObjects[i]
+                            wStateObjects[i],
                         )
 
                 # Set waypoints for regular edges
                 self.graph.setWaypoint(
-                    forward_edge,
-                    i,
-                    forward_trans,
-                    wStateObjects[i + 1]
+                    forward_edge, i, forward_trans, wStateObjects[i + 1]
                 )
                 self.graph.setWaypoint(
                     backward_edge,
                     nTransitions - 1 - i,
                     backward_trans,
-                    wStateObjects[i]
+                    wStateObjects[i],
                 )
 
                 wTransitions.append((nf, nb))
                 wTransitionObjects.append((forward_trans, backward_trans))
 
             M = 0 if gc.empty() else 1 + pregrasp
-            
+
             for i in range(M):
                 forward_trans, backward_trans = wTransitionObjects[i]
-                
+
                 self.graph.setContainingNode(forward_trans, sf.state_obj)
                 self._add_constraints_to_transition(forward_trans, sf.foliation)
-                
+
                 self.graph.setContainingNode(backward_trans, sf.state_obj)
                 self._add_constraints_to_transition(backward_trans, sf.foliation)
-            
+
             for i in range(M, nTransitions):
                 forward_trans, backward_trans = wTransitionObjects[i]
-                
+
                 self.graph.setContainingNode(forward_trans, st.state_obj)
                 self._add_constraints_to_transition(forward_trans, st.foliation)
-                
+
                 self.graph.setContainingNode(backward_trans, st.state_obj)
                 self._add_constraints_to_transition(backward_trans, st.foliation)
 
@@ -1156,19 +1198,19 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 forward_trans, backward_trans = wTransitionObjects[1]
                 self._add_constraints_to_transition(forward_trans, gcc)
                 self._add_constraints_to_transition(backward_trans, gcc)
-            
+
             if intersec and preplace and self.preplaceGuide:
                 forward_trans, backward_trans = wTransitionObjects[pregrasp + intersec]
                 self._add_constraints_to_transition(forward_trans, pcc)
                 self._add_constraints_to_transition(backward_trans, pcc)
-            
+
             for i in range(nTransitions - 1):
                 forward_trans, backward_trans = wTransitionObjects[i + 1]
                 self.graph.setShort(forward_trans, True)
-                
+
                 forward_trans_back, backward_trans_back = wTransitionObjects[i]
                 self.graph.setShort(backward_trans_back, True)
-        
+
         else:
             raise NotImplementedError("This case has not been implemented")
 
@@ -1214,36 +1256,36 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
     def _add_constraints_to_state(self, state_obj, constraints):
         """Convert Constraints object to constraint objects and add to state"""
         constraint_objects = []
-        
+
         for constraint_name in constraints.numConstraints:
             if constraint_name in self.constraints.available_constraints:
                 constraint_obj = self.constraints.available_constraints[constraint_name]
                 constraint_objects.append(constraint_obj)
-        
-        # Handle grasps 
+
+        # Handle grasps
         for grasp_name in constraints.grasps:
             if grasp_name in self.constraints.available_constraints:
                 constraint_obj = self.constraints.available_constraints[grasp_name]
                 constraint_objects.append(constraint_obj)
-        
+
         # Handle pregrasps
         for pregrasp_name in constraints.pregrasps:
             if pregrasp_name in self.constraints.available_constraints:
                 constraint_obj = self.constraints.available_constraints[pregrasp_name]
                 constraint_objects.append(constraint_obj)
-        
+
         if constraint_objects:
             self.graph.addNumericalConstraintsToState(state_obj, constraint_objects)
 
     def _add_constraints_to_transition(self, edge_obj, constraints):
         """Convert Constraints object to constraint objects and add to transition"""
         constraint_objects = []
-        
+
         for constraint_name in constraints.numConstraints:
             if constraint_name in self.constraints.available_constraints:
                 constraint_obj = self.constraints.available_constraints[constraint_name]
                 constraint_objects.append(constraint_obj)
-        
+
         if constraint_objects:
             self.graph.addNumericalConstraintsToTransition(edge_obj, constraint_objects)
 
@@ -1254,8 +1296,6 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
             if name in self.constraints.available_constraints:
                 constraint_objects.append(self.constraints.available_constraints[name])
         return constraint_objects
-
-
 
 
 class Rule:

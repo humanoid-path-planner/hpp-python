@@ -18,11 +18,11 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <hpp/constraints/locked-joint.hh>
-#include <hpp/pinocchio/liegroup-element.hh>
-#include <hpp/constraints/fwd.hh>
-#include <hpp/pinocchio/device.hh>
 #include <hpp/constraints/comparison-types.hh>
+#include <hpp/constraints/fwd.hh>
+#include <hpp/constraints/locked-joint.hh>
+#include <hpp/pinocchio/device.hh>
+#include <hpp/pinocchio/liegroup-element.hh>
 #include <pyhpp/constraints/fwd.hh>
 
 using namespace boost::python;
@@ -32,8 +32,8 @@ namespace constraints {
 using namespace hpp::constraints;
 
 LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot,
-                                const char* jointName,
-                                const vector_t& config) {
+                                   const char* jointName,
+                                   const vector_t& config) {
   try {
     // Get robot in hppPlanner object.
     JointPtr_t joint = robot->getJointByName(jointName);
@@ -46,9 +46,9 @@ LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot,
 }
 
 LockedJointPtr_t createLockedJointWithComp(const DevicePtr_t& robot,
-                                        const char* jointName,
-                                        const vector_t& config,
-                                        const ComparisonTypes_t& comp) {
+                                           const char* jointName,
+                                           const vector_t& config,
+                                           const ComparisonTypes_t& comp) {
   try {
     // Get robot in hppPlanner object.
     JointPtr_t joint = robot->getJointByName(jointName);
@@ -62,7 +62,8 @@ LockedJointPtr_t createLockedJointWithComp(const DevicePtr_t& robot,
 }
 
 void exposeLockedJoint() {
-  class_<LockedJoint, bases<Implicit>, LockedJointPtr_t, boost::noncopyable>("LockedJoint", no_init)
+  class_<LockedJoint, bases<Implicit>, LockedJointPtr_t, boost::noncopyable>(
+      "LockedJoint", no_init)
       .def("create", &createLockedJoint)
       .staticmethod("create")
       .def("createWithComp", &createLockedJointWithComp)

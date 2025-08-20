@@ -27,10 +27,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <boost/python.hpp>
-#include <../src/pyhpp/manipulation/problem.hh>
 #include <../src/pyhpp/manipulation/device.hh>
 #include <../src/pyhpp/manipulation/graph.hh>
+#include <../src/pyhpp/manipulation/problem.hh>
+#include <boost/python.hpp>
 #include <hpp/core/problem.hh>
 
 using namespace boost::python;
@@ -39,23 +39,22 @@ namespace pyhpp {
 namespace manipulation {
 
 Problem::Problem(const PyWDevicePtr_t& robot)
-    : obj(hpp::manipulation::Problem::create(robot->obj)) {
-    }
+    : obj(hpp::manipulation::Problem::create(robot->obj)) {}
 
-Problem::Problem(const hpp::manipulation::ProblemPtr_t& object) { obj = object; }
+Problem::Problem(const hpp::manipulation::ProblemPtr_t& object) {
+  obj = object;
+}
 
-void Problem::constraintGraph(const PyWGraphPtr_t &graph) {
-    obj->constraintGraph(graph->obj);
+void Problem::constraintGraph(const PyWGraphPtr_t& graph) {
+  obj->constraintGraph(graph->obj);
 }
 
 PyWGraphPtr_t Problem::constraintGraph() const {
-    pyhpp::manipulation::PyWGraph* graph = new PyWGraph(obj->constraintGraph());
-    return std::shared_ptr<PyWGraph>(graph);
+  pyhpp::manipulation::PyWGraph* graph = new PyWGraph(obj->constraintGraph());
+  return std::shared_ptr<PyWGraph>(graph);
 }
 
-void Problem::checkProblem() const {
-    obj->checkProblem();
-}
+void Problem::checkProblem() const { obj->checkProblem(); }
 
 ConfigurationShooterPtr_t Problem::configurationShooter() const {
   return obj->configurationShooter();
@@ -85,7 +84,8 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 //     return obj->pathValidationFactory();
 // }
 
-// void Problem::setPathValidationFactory(const core::PathValidationBuilder_t &factory, const value_type &tol) {
+// void Problem::setPathValidationFactory(const core::PathValidationBuilder_t
+// &factory, const value_type &tol) {
 //     obj->setPathValidationFactory(factory, tol);
 // }
 
@@ -97,25 +97,28 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 //     return Problem::parameterDescriptions();
 // }
 
-// static const ParameterDescription & parameterDescription(const std::string &name) {
+// static const ParameterDescription & parameterDescription(const std::string
+// &name) {
 //     return Problem::parameterDescription(name);
 // }
 
 void exposeProblem() {
   class_<Problem>("Problem", init<const PyWDevicePtr_t&>())
-  .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph, PyWGraphPtr_t)
-  .PYHPP_DEFINE_METHOD(Problem, checkProblem)
-  .PYHPP_DEFINE_METHOD(Problem, configurationShooter)
-  .PYHPP_DEFINE_METHOD(Problem, initConfig)
-  .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
-  // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation, PathValidationPtr_t)
-  // .PYHPP_DEFINE_METHOD(Problem, manipulationSteeringMethod)
-  // .PYHPP_DEFINE_METHOD(Problem, pathValidationFactory)
-  // .PYHPP_DEFINE_METHOD(Problem, setPathValidationFactory)
-  // .PYHPP_DEFINE_METHOD_STATIC(Problem, declareParameter)
-  // .PYHPP_DEFINE_METHOD_STATIC(Problem, parameterDescriptions)
-  // .PYHPP_DEFINE_METHOD_STATIC(Problem, parameterDescription)
-  ;
+      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
+                                            PyWGraphPtr_t)
+      .PYHPP_DEFINE_METHOD(Problem, checkProblem)
+      .PYHPP_DEFINE_METHOD(Problem, configurationShooter)
+      .PYHPP_DEFINE_METHOD(Problem, initConfig)
+      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
+      // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
+      // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
+      // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,
+      // pathValidationFactory) .PYHPP_DEFINE_METHOD(Problem,
+      // setPathValidationFactory) .PYHPP_DEFINE_METHOD_STATIC(Problem,
+      // declareParameter) .PYHPP_DEFINE_METHOD_STATIC(Problem,
+      // parameterDescriptions) .PYHPP_DEFINE_METHOD_STATIC(Problem,
+      // parameterDescription)
+      ;
 }
 }  // namespace manipulation
 }  // namespace pyhpp

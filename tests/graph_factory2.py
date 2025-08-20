@@ -1,17 +1,16 @@
-
-from math import sqrt, pi
+from math import pi
 import numpy as np
 
-from pyhpp.manipulation.constraint_graph_factory import Rule, ConstraintGraphFactory
+from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.constraints import (RelativeTransformation,
+from pyhpp.constraints import (
     Transformation,
     ComparisonTypes,
     ComparisonType,
-    BySubstitution,
     Implicit,
-    LockedJoint)
-from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
+    LockedJoint,
+)
+from pinocchio import SE3, Quaternion
 
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
@@ -28,105 +27,185 @@ ur3_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(robot, 0, "ur3", "anchor", ur3_urdf, ur3_srdf, ur3_pose)
 
 # Load sphere to be manipulated
-objects = list ()
+objects = list()
 nSphere = 2
 sphere_pose = SE3(rotation=np.identity(3), translation=np.array([-2.5, -4, 0.746]))
-for i in range (nSphere):
-  urdf.loadModel(robot, 0, "sphere{0}".format (i), "freeflyer", sphere_urdf, sphere_srdf, sphere_pose)
-  robot.setJointBounds ('sphere{0}/root_joint'.format (i),
-                        [-1.,1.,-1.,1.,-.1,1.,-1.0001, 1.0001,-1.0001, 1.0001,
-                         -1.0001, 1.0001,-1.0001, 1.0001,])
-  objects.append ('sphere{0}'.format (i))
+for i in range(nSphere):
+    urdf.loadModel(
+        robot,
+        0,
+        "sphere{0}".format(i),
+        "freeflyer",
+        sphere_urdf,
+        sphere_srdf,
+        sphere_pose,
+    )
+    robot.setJointBounds(
+        "sphere{0}/root_joint".format(i),
+        [
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -0.1,
+            1.0,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+        ],
+    )
+    objects.append("sphere{0}".format(i))
 
 # Load kitchen environment
 kitchen_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
-urdf.loadModel(robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, kitchen_pose)
+urdf.loadModel(
+    robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, kitchen_pose
+)
 
 model = robot.model()
-robot.setJointBounds ('ur3/shoulder_pan_joint', [-pi, 4])
-robot.setJointBounds ('ur3/shoulder_lift_joint', [-pi, 0])
-robot.setJointBounds ('ur3/elbow_joint', [-2.6, 2.6])
+robot.setJointBounds("ur3/shoulder_pan_joint", [-pi, 4])
+robot.setJointBounds("ur3/shoulder_lift_joint", [-pi, 0])
+robot.setJointBounds("ur3/elbow_joint", [-2.6, 2.6])
 
 constraints = dict()
 
-for i in range (nSphere):
-  o = objects[i]
-  h = robot.handles()[o + '/handle']
-  h.mask = [True,True,True,False,True,True]
-  # placement constraint
-  placementName = "place_sphere{0}".format (i)
-  Id = SE3.Identity() 
-  q = Quaternion(0, 0, 0, 1) 
-  ballPlacement = SE3(q, np.array([0, 0, 0.02]))
-  joint = robot.model().getJointId("sphere{0}/root_joint".format (i))
-  pc = Transformation.create(placementName, robot.asPinDevice(), 
-                             joint,  
-                             ballPlacement, Id, 
-                             [True, True, False, False, False, True])
-  cts = ComparisonTypes()
-  cts[:] = (
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-      
-  )
-  implicit_mask = [True, True, True]
-  implicitPlacementConstraint = Implicit.create(pc, cts, implicit_mask)
-  constraints[placementName] = implicitPlacementConstraint
-  # placement complement constraint
-  pc = Transformation.create(placementName + '/complement', robot.asPinDevice(), 
-                             joint,  
-                             ballPlacement, Id, 
-                             [False, False, True, True, True, False])
-  cts[:] = (
-      ComparisonType.Equality,
-      ComparisonType.Equality,
-      ComparisonType.Equality,
-  )
-  implicit_mask = [True, True, True]
-  implicitPlacementComplementConstraint = Implicit.create(pc, cts, implicit_mask)
-  constraints[placementName + '/complement'] = implicitPlacementComplementConstraint
+for i in range(nSphere):
+    o = objects[i]
+    h = robot.handles()[o + "/handle"]
+    h.mask = [True, True, True, False, True, True]
+    # placement constraint
+    placementName = "place_sphere{0}".format(i)
+    Id = SE3.Identity()
+    q = Quaternion(0, 0, 0, 1)
+    ballPlacement = SE3(q, np.array([0, 0, 0.02]))
+    joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
+    pc = Transformation.create(
+        placementName,
+        robot.asPinDevice(),
+        joint,
+        ballPlacement,
+        Id,
+        [True, True, False, False, False, True],
+    )
+    cts = ComparisonTypes()
+    cts[:] = (
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+    )
+    implicit_mask = [True, True, True]
+    implicitPlacementConstraint = Implicit.create(pc, cts, implicit_mask)
+    constraints[placementName] = implicitPlacementConstraint
+    # placement complement constraint
+    pc = Transformation.create(
+        placementName + "/complement",
+        robot.asPinDevice(),
+        joint,
+        ballPlacement,
+        Id,
+        [False, False, True, True, True, False],
+    )
+    cts[:] = (
+        ComparisonType.Equality,
+        ComparisonType.Equality,
+        ComparisonType.Equality,
+    )
+    implicit_mask = [True, True, True]
+    implicitPlacementComplementConstraint = Implicit.create(pc, cts, implicit_mask)
+    constraints[placementName + "/complement"] = implicitPlacementComplementConstraint
 
-  # combination of placement and complement
-  cts[:] = (
-      ComparisonType.Equality,
-      ComparisonType.Equality,
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-      ComparisonType.Equality
-  )
-  ll = LockedJoint.createWithComp(robot.asPinDevice(), "sphere{0}/root_joint".format (i), np.array([0, 0, 0.02, 0, 0, 0, 1]), cts)
+    # combination of placement and complement
+    cts[:] = (
+        ComparisonType.Equality,
+        ComparisonType.Equality,
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+        ComparisonType.Equality,
+    )
+    ll = LockedJoint.createWithComp(
+        robot.asPinDevice(),
+        "sphere{0}/root_joint".format(i),
+        np.array([0, 0, 0.02, 0, 0, 0, 1]),
+        cts,
+    )
 
-  preplacementName = "preplace_sphere{0}".format (i)
-  Id = SE3.Identity() 
-  q = Quaternion(0, 0, 0, 1) 
-  ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
-  joint = robot.model().getJointId("sphere{0}/root_joint".format (i))
-  pc = Transformation.create(preplacementName, robot.asPinDevice(), 
-                             joint,  
-                             ballPrePlacement, Id, 
-                             [False, False, True, True, True, False])
-  cts[:] = (
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-      ComparisonType.EqualToZero,
-  )
-  implicit_mask = [True, True, True]
-  implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
-  constraints[preplacementName] = implicitPrePlacementConstraint
+    preplacementName = "preplace_sphere{0}".format(i)
+    Id = SE3.Identity()
+    q = Quaternion(0, 0, 0, 1)
+    ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
+    joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
+    pc = Transformation.create(
+        preplacementName,
+        robot.asPinDevice(),
+        joint,
+        ballPrePlacement,
+        Id,
+        [False, False, True, True, True, False],
+    )
+    cts[:] = (
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+        ComparisonType.EqualToZero,
+    )
+    implicit_mask = [True, True, True]
+    implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
+    constraints[preplacementName] = implicitPrePlacementConstraint
 
-q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.2, 0, 0.02, 0, 0, 0, 1,
-          0.3, 0, 0.02, 0, 0, 0, 1,]
-q_goal = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.3, 0, 0.02, 0, 0, 0, 1,
-          0.2, 0, 0.02, 0, 0, 0, 1,]
+q_init = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
+q_goal = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
 
 problem = Problem(robot)
 
 grippers = ["ur3/gripper"]
-handlesPerObject  = [['sphere{0}/handle'.format (i)] for i in range (nSphere)]
+handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
 contactsPerObject = [[] for i in range(nSphere)]
 
 cg = Graph("graph", robot, problem)
@@ -139,10 +218,8 @@ factory.setObjects(objects, handlesPerObject, contactsPerObject)
 factory.generate()
 
 cg.initialize()
-#cg.display("./temp.dot")
+# cg.display("./temp.dot")
 # problem.initConfig(q_init)
 # problem.addGoalConfig(q_goal)
 
 print("Script completed!")
-
-

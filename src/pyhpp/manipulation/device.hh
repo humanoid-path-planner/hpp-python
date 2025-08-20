@@ -30,9 +30,9 @@
 #include <hpp/constraints/implicit.hh>
 #include <hpp/manipulation/device.hh>
 #include <hpp/manipulation/handle.hh>
-#include <hpp/pinocchio/gripper.hh>
 #include <hpp/pinocchio/device.hh>
 #include <hpp/pinocchio/frame.hh>
+#include <hpp/pinocchio/gripper.hh>
 #include <hpp/pinocchio/joint.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>

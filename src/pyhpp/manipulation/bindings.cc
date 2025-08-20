@@ -40,5 +40,4 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::manipulation::exposeProblem();
   pyhpp::manipulation::exposeDevice();
   pyhpp::manipulation::exposeGraph();
-
 }

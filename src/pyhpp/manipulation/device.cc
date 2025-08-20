@@ -79,36 +79,38 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(addJointFrame_overload,
                                        Model::addJointFrame, 1, 2)
 
 PinDevicePtr_t Device::asPinDevice() {
-  hpp::pinocchio::DevicePtr_t pinDevice = std::dynamic_pointer_cast<hpp::pinocchio::Device>(obj);
+  hpp::pinocchio::DevicePtr_t pinDevice =
+      std::dynamic_pointer_cast<hpp::pinocchio::Device>(obj);
   return pinDevice;
 }
 
-void Device::setJointBounds(const char* jointName, boost::python::list py_jointBounds) {
-    Frame frame = obj->getFrameByName(jointName);
-    JointPtr_t joint = frame.joint();
-    auto jointBounds = extract_vector<value_type>(py_jointBounds);
-    
-    static const value_type inf = std::numeric_limits<value_type>::infinity();
-    
-    if (jointBounds.size() % 2 == 1) {
-        throw std::logic_error("Expect a vector of even size");
+void Device::setJointBounds(const char* jointName,
+                            boost::python::list py_jointBounds) {
+  Frame frame = obj->getFrameByName(jointName);
+  JointPtr_t joint = frame.joint();
+  auto jointBounds = extract_vector<value_type>(py_jointBounds);
+
+  static const value_type inf = std::numeric_limits<value_type>::infinity();
+
+  if (jointBounds.size() % 2 == 1) {
+    throw std::logic_error("Expect a vector of even size");
+  }
+
+  std::size_t numDofPairs = jointBounds.size() / 2;
+
+  for (std::size_t i = 0; i < numDofPairs; i++) {
+    value_type vMin = jointBounds[2 * i];
+    value_type vMax = jointBounds[2 * i + 1];
+
+    if (vMin > vMax) {
+      vMin = -inf;
+      vMax = inf;
     }
-    
-    std::size_t numDofPairs = jointBounds.size() / 2;
-    
-    for (std::size_t i = 0; i < numDofPairs; i++) {
-        value_type vMin = jointBounds[2 * i];
-        value_type vMax = jointBounds[2 * i + 1];
-        
-        if (vMin > vMax) {
-            vMin = -inf;
-            vMax = inf;
-        }
-        
-        // Set bounds for individual DOF using the old API
-        joint->lowerBound(i, vMin);  // Set lower bound for DOF i
-        joint->upperBound(i, vMax);  // Set upper bound for DOF i
-    }
+
+    // Set bounds for individual DOF using the old API
+    joint->lowerBound(i, vMin);  // Set lower bound for DOF i
+    joint->upperBound(i, vMax);  // Set upper bound for DOF i
+  }
 }
 boost::python::list Device::getJointConfig(const char* jointName) {
   try {
@@ -245,8 +247,7 @@ void exposeDevice() {
       .def("asPinDevice", &Device::asPinDevice)
       .def("getJointNames", &Device::getJointNames)
       .def("getJointConfig", &Device::getJointConfig)
-      .def("setJointBounds", &Device::setJointBounds)
-      ;
+      .def("setJointBounds", &Device::setJointBounds);
 }
 }  // namespace manipulation
 }  // namespace pyhpp

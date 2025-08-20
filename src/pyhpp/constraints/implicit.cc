@@ -43,7 +43,7 @@ namespace pyhpp {
 namespace constraints {
 using namespace hpp::constraints;
 
-static size_type getFunctionOutputSize(const ImplicitPtr_t& constraint){
+static size_type getFunctionOutputSize(const ImplicitPtr_t& constraint) {
   return constraint->function().outputSize();
 }
 
@@ -61,10 +61,8 @@ void exposeImplicit() {
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(Implicit, function)
       .def("parameterSize", &Implicit::parameterSize)
       .def("rightHandSideSize", &Implicit::rightHandSideSize)
-      .def("getFunctionOutputSize", &getFunctionOutputSize).staticmethod(
-          "getFunctionOutputSize")
-      ;
-
+      .def("getFunctionOutputSize", &getFunctionOutputSize)
+      .staticmethod("getFunctionOutputSize");
 }
 }  // namespace constraints
 }  // namespace pyhpp

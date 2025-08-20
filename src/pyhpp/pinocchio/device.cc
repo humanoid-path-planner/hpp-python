@@ -97,7 +97,8 @@ void exposeGripper() {
       .add_property(
           "clearance",
           static_cast<value_type (Gripper::*)() const>(&Gripper::clearance),
-          static_cast<void (Gripper::*)(const value_type&)>(&Gripper::clearance));
+          static_cast<void (Gripper::*)(const value_type&)>(
+              &Gripper::clearance));
   class_<std::map<std::string, GripperPtr_t> >("GripperMap")
       .def(
           boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,

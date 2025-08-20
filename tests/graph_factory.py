@@ -1,15 +1,16 @@
-
 from math import sqrt
 import numpy as np
 
 from pyhpp.manipulation.constraint_graph_factory import Rule, ConstraintGraphFactory
 from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.constraints import Implicit, LockedJoint
-from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
+from pyhpp.constraints import LockedJoint
+from pinocchio import SE3
 
 # Robot and environment file paths
 pr2_urdf = "package://example-robot-data/robots/pr2_description/urdf/pr2.urdf"
-pr2_srdf = "package://example-robot-data/robots/pr2_description/srdf/pr2_manipulation.srdf"
+pr2_srdf = (
+    "package://example-robot-data/robots/pr2_description/srdf/pr2_manipulation.srdf"
+)
 box_urdf = "package://hpp_tutorial/urdf/box.urdf"
 box_srdf = "package://hpp_tutorial/srdf/box.srdf"
 kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area.urdf"
@@ -27,7 +28,9 @@ urdf.loadModel(robot, 0, "box", "freeflyer", box_urdf, box_srdf, box_pose)
 
 # Load kitchen environment
 kitchen_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
-urdf.loadModel(robot, 0, "kitchen_area", "anchor", kitchen_urdf, kitchen_srdf, kitchen_pose)
+urdf.loadModel(
+    robot, 0, "kitchen_area", "anchor", kitchen_urdf, kitchen_srdf, kitchen_pose
+)
 
 model = robot.model()
 
@@ -65,8 +68,12 @@ rank = rankInConfiguration["box/root_joint"]
 q_goal[rank : rank + 3] = [-2.5, -4.5, 0.746]
 
 # Create constraints
-ll = LockedJoint.create(robot.asPinDevice(), "pr2/l_gripper_l_finger_joint", np.array([0.5]))
-lr = LockedJoint.create(robot.asPinDevice(), "pr2/l_gripper_r_finger_joint", np.array([0.5]))
+ll = LockedJoint.create(
+    robot.asPinDevice(), "pr2/l_gripper_l_finger_joint", np.array([0.5])
+)
+lr = LockedJoint.create(
+    robot.asPinDevice(), "pr2/l_gripper_r_finger_joint", np.array([0.5])
+)
 
 # Create the constraint graph
 grippers = ["pr2/l_gripper"]
@@ -95,5 +102,3 @@ problem.initConfig(q_init)
 problem.addGoalConfig(q_goal)
 
 print("Script completed!")
-
-

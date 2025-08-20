@@ -33,7 +33,6 @@
 #include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/roadmap.hh>
-
 #include <pyhpp/core/problem.hh>
 
 namespace pyhpp {

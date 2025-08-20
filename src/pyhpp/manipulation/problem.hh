@@ -19,11 +19,11 @@
 #ifndef PYHPP_MANIPULATION_PROBLEM_HH
 #define PYHPP_MANIPULATION_PROBLEM_HH
 
-#include <pyhpp/core/fwd.hh>
-#include <pyhpp/manipulation/fwd.hh>
-#include <hpp/manipulation/problem.hh>
-#include <pyhpp/core/problem.hh>
 #include <hpp/core/configuration-shooter.hh>
+#include <hpp/manipulation/problem.hh>
+#include <pyhpp/core/fwd.hh>
+#include <pyhpp/core/problem.hh>
+#include <pyhpp/manipulation/fwd.hh>
 
 typedef hpp::manipulation::ProblemPtr_t ProblemPtr_t;
 typedef hpp::core::ConfigurationShooterPtr_t ConfigurationShooterPtr_t;
@@ -42,18 +42,19 @@ struct Problem {
   Problem(const PyWDevicePtr_t& robot);
   Problem(const hpp::manipulation::ProblemPtr_t& object);
 
-  void constraintGraph (const PyWGraphPtr_t &graph);
+  void constraintGraph(const PyWGraphPtr_t& graph);
   PyWGraphPtr_t constraintGraph() const;
-  virtual void checkProblem() const; 
+  virtual void checkProblem() const;
   ConfigurationShooterPtr_t configurationShooter() const;
   void initConfig(ConfigurationIn_t inConfig);
   void addGoalConfig(ConfigurationIn_t config);
 
-  // PathValidationPtr_t pathValidation() const; 
-  // void pathValidation (const PathValidationPtr_t &pathValidation); 
+  // PathValidationPtr_t pathValidation() const;
+  // void pathValidation (const PathValidationPtr_t &pathValidation);
   // SteeringMethodPtr_t manipulationSteeringMethod() const;
   // PathValidationPtr_t pathValidationFactory() const;
-  // void 	setPathValidationFactory (const core::PathValidationBuilder_t &factory, const value_type &tol);
+  // void 	setPathValidationFactory (const core::PathValidationBuilder_t
+  // &factory, const value_type &tol);
 };
 
 }  // namespace manipulation

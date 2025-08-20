@@ -160,4 +160,3 @@ add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
   hpp-manipulation-urdf::hpp-manipulation-urdf)
-
