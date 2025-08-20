@@ -12,7 +12,7 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, Quaternion
 
-# based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
+#based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
 
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
@@ -140,11 +140,8 @@ for i in range(nSphere):
         cts,
     )
     constraints[placementName + "/hold"] = ll
-    cg.registerConstraints(
-        constraints[placementName],
-        constraints[placementName + "/complement"],
-        constraints[placementName + "/hold"],
-    )
+    cg.registerConstraints(constraints[placementName], constraints[placementName + "/complement"],
+                         constraints[placementName + "/hold"])
 
     preplacementName = "preplace_sphere{0}".format(i)
     Id = SE3.Identity()
