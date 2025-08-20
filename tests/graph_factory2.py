@@ -12,6 +12,8 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, Quaternion
 
+#based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
+
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
 ur3_srdf = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
@@ -71,6 +73,9 @@ model = robot.model()
 robot.setJointBounds("ur3/shoulder_pan_joint", [-pi, 4])
 robot.setJointBounds("ur3/shoulder_lift_joint", [-pi, 0])
 robot.setJointBounds("ur3/elbow_joint", [-2.6, 2.6])
+
+problem = Problem(robot)
+cg = Graph("graph", robot, problem)
 
 constraints = dict()
 
@@ -134,6 +139,9 @@ for i in range(nSphere):
         np.array([0, 0, 0.02, 0, 0, 0, 1]),
         cts,
     )
+    constraints[placementName + "/hold"] = ll
+    cg.registerConstraints(constraints[placementName], constraints[placementName + "/complement"],
+                         constraints[placementName + "/hold"])
 
     preplacementName = "preplace_sphere{0}".format(i)
     Id = SE3.Identity()
@@ -202,13 +210,11 @@ q_goal = [
     1,
 ]
 
-problem = Problem(robot)
 
 grippers = ["ur3/gripper"]
 handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
 contactsPerObject = [[] for i in range(nSphere)]
 
-cg = Graph("graph", robot, problem)
 cg.maxIterations(100)
 cg.errorThreshold(0.0001)
 factory = ConstraintGraphFactory(cg, constraints)

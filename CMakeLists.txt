@@ -104,6 +104,11 @@ add_project_dependency(hpp-corbaserver REQUIRED)
 add_project_dependency(hpp-manipulation REQUIRED)
 add_project_dependency(hpp-manipulation-urdf REQUIRED)
 
+if(BUILD_TESTING)
+  add_project_dependency(hpp-environments REQUIRED)
+  add_project_dependency(hpp_tutorial REQUIRED)
+endif()
+
 add_library(${PROJECT_NAME} INTERFACE)
 install(
   TARGETS ${PROJECT_NAME}
