@@ -21,7 +21,6 @@ set(PYTHON_UNIT_TESTS
     rrt
     path
     constraint_graph
-    graph_factory
     graph_factory2)
 
 foreach(UNIT_TEST ${PYTHON_UNIT_TESTS})
