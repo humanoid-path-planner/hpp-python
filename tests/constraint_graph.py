@@ -7,7 +7,6 @@ from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
 =======
 
 from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.core import ConfigurationShooter
 import numpy as np
 from pinocchio import SE3, StdVec_Bool as Mask, Quaternion
 
