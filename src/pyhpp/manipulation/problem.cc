@@ -32,6 +32,8 @@
 #include <../src/pyhpp/manipulation/problem.hh>
 #include <boost/python.hpp>
 #include <hpp/core/problem.hh>
+#include <pyhpp/core/steering-method.hh>
+#include <hpp/manipulation/steering-method/graph.hh>
 
 using namespace boost::python;
 
@@ -56,6 +58,19 @@ PyWGraphPtr_t Problem::constraintGraph() const {
 
 void Problem::checkProblem() const { asManipulationProblem()->checkProblem(); }
 
+void Problem::steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod) {
+    if (steeringMethod && steeringMethod->obj) {
+        auto manipSM = hpp::manipulation::steeringMethod::Graph::create(
+            obj);
+        obj->steeringMethod(steeringMethod->obj);
+    }
+}
+
+pyhpp::core::PyWSteeringMethodPtr_t Problem::steeringMethod() const {
+    auto steeringMethod = new pyhpp::core::SteeringMethod();
+    steeringMethod->obj = asManipulationProblem()->steeringMethod();
+    return std::shared_ptr<pyhpp::core::SteeringMethod>(steeringMethod);
+}
 // PathValidationPtr_t Problem::pathValidation() const {
 //     return obj->pathValidation();
 // }
@@ -96,6 +111,10 @@ void exposeProblem() {
       .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
                                             PyWGraphPtr_t)
       .PYHPP_DEFINE_METHOD(Problem, checkProblem)
+      .def("steeringMethod", 
+            static_cast<pyhpp::core::PyWSteeringMethodPtr_t(Problem::*)() const>(&Problem::steeringMethod))
+      .def("steeringMethod",
+            static_cast<void(Problem::*)(const pyhpp::core::PyWSteeringMethodPtr_t&)>(&Problem::steeringMethod))
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,

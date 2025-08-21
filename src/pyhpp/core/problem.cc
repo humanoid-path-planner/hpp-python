@@ -30,6 +30,16 @@
 
 #include "pyhpp/core/problem.hh"
 
+#include <hpp/core/config-validations.hh>
+#include <hpp/core/configuration-shooter.hh>
+#include <hpp/core/distance.hh>
+#include <hpp/core/path-projector.hh>
+#include <hpp/core/path-validation.hh>
+#include <hpp/core/problem-target.hh>
+#include <hpp/core/problem.hh>
+#include <hpp/core/steering-method.hh>
+#include <pyhpp/core/steering-method.hh>
+
 #include <boost/python.hpp>
 
 namespace pyhpp {
@@ -54,8 +64,10 @@ ConfigurationShooterPtr_t Problem::configurationShooter() const {
     return obj->configurationShooter();
 }
 
-SteeringMethodPtr_t Problem::steeringMethod() const {
-  return obj->steeringMethod();
+PyWSteeringMethodPtr_t Problem::steeringMethod() const {
+  auto wrapper = std::make_shared<pyhpp::core::SteeringMethod>();
+  wrapper->obj = obj->steeringMethod();
+  return wrapper;
 }
 
 const ConfigValidationsPtr_t& Problem::configValidation() const {
@@ -78,9 +90,8 @@ void Problem::configurationShooter(const ConfigurationShooterPtr_t& cs) {
     obj->configurationShooter(cs);
 }
 
-
-void Problem::steeringMethod(const SteeringMethodPtr_t& sm) {
-    obj->steeringMethod(sm);
+void Problem::steeringMethod(const PyWSteeringMethodPtr_t& steeringMethod) {
+  obj->steeringMethod(steeringMethod->obj);
 }
 
 void Problem::configValidation(const ConfigValidationsPtr_t& cv) {
@@ -111,8 +122,8 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
   obj->addGoalConfig(config);
 }
 
-typedef SteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
-typedef void (Problem::*SetSteeringMethod)(const SteeringMethodPtr_t&);
+typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
+typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 
 typedef const ConfigValidationsPtr_t& (Problem::*GetConfigValidation)() const;
 typedef void (Problem::*SetConfigValidation)(const ConfigValidationsPtr_t&);
@@ -187,12 +198,9 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
       .PYHPP_DEFINE_METHOD(Problem, setParameter)
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
-      .def("steeringMethod", 
-          static_cast<GetSteeringMethod>(&Problem::steeringMethod))
-      .def("steeringMethod", 
-          static_cast<SetSteeringMethod>(&Problem::steeringMethod),
-          (arg("steeringMethod")))
-      
+      .def("steeringMethod", static_cast<PyWSteeringMethodPtr_t(Problem::*)() const>(&Problem::steeringMethod))
+      .def("steeringMethod", static_cast<void(Problem::*)(const PyWSteeringMethodPtr_t&)>(&Problem::steeringMethod))
+
       .def("configValidation", 
           static_cast<GetConfigValidation>(&Problem::configValidation),
           return_value_policy<copy_const_reference>())
