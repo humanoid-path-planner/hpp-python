@@ -29,6 +29,10 @@
 
 #include <boost/python.hpp>
 #include <hpp/core/path-projector.hh>
+#include <hpp/core/path-projector/progressive.hh>
+#include <hpp/core/path-projector/dichotomy.hh>
+#include <hpp/core/path-projector/global.hh>
+#include <hpp/core/path-projector/recursive-hermite.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -57,6 +61,60 @@ void exposePathProjector() {
       .def("apply", &PPWrapper::apply)
 
       .def("apply", &PPWrapper::py_apply);
+
+  class_<pathProjector::Progressive, 
+        bases<PathProjector>, 
+        hpp::core::pathProjector::ProgressivePtr_t,
+        boost::noncopyable>(
+      "ProgressiveProjector", no_init);
+
+  class_<pathProjector::Dichotomy, 
+        bases<PathProjector>, 
+        hpp::core::pathProjector::DichotomyPtr_t,
+        boost::noncopyable>(
+      "DichotomyProjector", no_init);
+
+  class_<pathProjector::Global, 
+        bases<PathProjector>, 
+        hpp::core::pathProjector::GlobalPtr_t,
+        boost::noncopyable>(
+      "GlobalProjector", no_init);
+
+  class_<pathProjector::RecursiveHermite, 
+        bases<PathProjector>, 
+        hpp::core::pathProjector::RecursiveHermitePtr_t,
+        boost::noncopyable>(
+      "RecursiveHermiteProjector", no_init);
+
+  def("createNoneProjector", 
+      +[](const ProblemConstPtr_t&, const value_type&) -> PathProjectorPtr_t {
+          return PathProjectorPtr_t();
+      },
+      (arg("problem"), arg("value")));
+
+  def("createProgressiveProjector", 
+      +[](const ProblemConstPtr_t& p, const value_type& v) {
+          return pathProjector::Progressive::create(p, v);
+      },
+      (arg("problem"), arg("value")));
+
+  def("createDichotomyProjector", 
+      +[](const ProblemConstPtr_t& p, const value_type& v) {
+          return pathProjector::Dichotomy::create(p, v);
+      },
+      (arg("problem"), arg("value")));
+
+  def("createGlobalProjector", 
+      +[](const ProblemConstPtr_t& p, const value_type& v) {
+          return pathProjector::Global::create(p, v);
+      },
+      (arg("problem"), arg("value")));
+
+  def("createRecursiveHermiteProjector", 
+      +[](const ProblemConstPtr_t& p, const value_type& v) {
+          return pathProjector::RecursiveHermite::create(p, v);
+      },
+      (arg("problem"), arg("value")));
 }
 }  // namespace core
 }  // namespace pyhpp

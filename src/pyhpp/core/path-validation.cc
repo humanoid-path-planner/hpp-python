@@ -29,6 +29,14 @@
 
 #include <boost/python.hpp>
 #include <hpp/core/path-validation.hh>
+#include <hpp/core/path-validation/discretized.hh>
+#include <hpp/core/path-validation/discretized-collision-checking.hh>
+#include <hpp/core/path-validation/discretized-joint-bound.hh>
+#include <hpp/core/continuous-validation/progressive.hh>
+#include <hpp/core/continuous-validation/dichotomy.hh>
+#include <hpp/core/joint-bound-validation.hh>
+#include <hpp/core/collision-validation.hh>
+#include <pyhpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -52,14 +60,55 @@ struct PVWrapper {
     bool res = pv->validate(path, reverse, validPart, report);
     return boost::python::make_tuple(res, validPart, report);
   }
+
+  static pathValidation::DiscretizedPtr_t
+  createDiscretizedJointBoundAndCollisionChecking(const DevicePtr_t& robot,
+                                                  const value_type& stepSize) {
+    using namespace pathValidation;
+    return Discretized::create(stepSize, {
+                                            JointBoundValidation::create(robot),
+                                            CollisionValidation::create(robot),
+                                        });
+}
+
 };
 
 void exposePathValidation() {
-  class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
-      "PathValidation", no_init)
-      .def("validate", &PVWrapper::validate)
+    class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
+        "PathValidation", no_init)
+        .def("validate", &PVWrapper::validate)
+        .def("validate", &PVWrapper::py_validate);
 
-      .def("validate", &PVWrapper::py_validate);
+    class_<pathValidation::Discretized, 
+        bases<PathValidation>, 
+        hpp::core::pathValidation::DiscretizedPtr_t,
+        boost::noncopyable>(
+        "Discretized", no_init);
+
+    class_<continuousValidation::Progressive, 
+        bases<PathValidation>, 
+        hpp::core::continuousValidation::ProgressivePtr_t,
+        boost::noncopyable>(
+        "Progressive", no_init);
+
+    class_<continuousValidation::Dichotomy, 
+        bases<PathValidation>, 
+        hpp::core::continuousValidation::DichotomyPtr_t,
+        boost::noncopyable>(
+        "Dichotomy", no_init);
+
+    def("createDiscretized", &pathValidation::createDiscretizedCollisionChecking,
+        (arg("robot"), arg("stepSize")));
+    def("createDiscretizedCollision", &pathValidation::createDiscretizedCollisionChecking,
+        (arg("robot"), arg("stepSize")));
+    def("createDiscretizedJointBound", &pathValidation::createDiscretizedJointBound,
+        (arg("robot"), arg("stepSize")));
+    def("createDiscretizedCollisionAndJointBound", &PVWrapper::createDiscretizedJointBoundAndCollisionChecking,
+        (arg("robot"), arg("stepSize")));
+    def("createProgressive", &continuousValidation::Progressive::create,
+        (arg("robot"), arg("tolerance")));
+    def("createDichotomy", &continuousValidation::Dichotomy::create,
+        (arg("robot"), arg("tolerance")));
 }
 }  // namespace core
 }  // namespace pyhpp
