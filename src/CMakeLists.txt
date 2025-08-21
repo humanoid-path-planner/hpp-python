@@ -68,6 +68,8 @@ endmacro()
 
 python_install_on_site(pyhpp __init__.py)
 
+python_install_on_site(pyhpp/manipulation constraint_graph_factory.py)
+
 add_python_library(
   pyhpp/pinocchio
   FILES
@@ -91,6 +93,7 @@ add_python_library(
   pyhpp/constraints/implicit.cc
   pyhpp/constraints/iterative-solver.cc
   pyhpp/constraints/by-substitution.cc
+  pyhpp/constraints/locked-joint.cc
   pyhpp/constraints/bindings.cc
   LINK_LIBRARIES
   hpp-constraints::hpp-constraints)
@@ -135,9 +138,13 @@ add_python_library(
   hpp-core::hpp-core)
 
 add_python_library(
-  pyhpp/core/path_optimization FILES
+  pyhpp/core/path_optimization
+  FILES
   pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
-  pyhpp/core/path_optimization/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
+  pyhpp/core/path_optimization/bindings.cc
+  LINK_LIBRARIES
+  hpp-core::hpp-core
+  hpp-core::hpp-core-gpl)
 
 add_python_library(
   pyhpp/corbaserver FILES pyhpp/corbaserver/bindings.cc
@@ -149,6 +156,7 @@ add_python_library(
   pyhpp/manipulation/bindings.cc
   pyhpp/manipulation/device.cc
   pyhpp/manipulation/graph.cc
+  pyhpp/manipulation/problem.cc
   LINK_LIBRARIES
   hpp-manipulation::hpp-manipulation)
 

@@ -36,6 +36,13 @@
                 pkgs.hpp-manipulation
                 pkgs.hpp-manipulation-urdf
               ];
+              installCheckInputs = super.installCheckInputs ++ [
+                pkgs.hpp-environments
+              ];
+              preInstallCheck = ''
+                export ROS_PACKAGE_PATH=${pkgs.example-robot-data}/share:${pkgs.hpp-environments}/share
+                make test
+              '';
               src = lib.fileset.toSource {
                 root = ./.;
                 fileset = lib.fileset.unions [

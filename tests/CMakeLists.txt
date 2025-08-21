@@ -19,7 +19,9 @@ set(PYTHON_UNIT_TESTS
     differentiable-function
     path-planner
     rrt
-    path)
+    path
+    constraint_graph
+    graph_factory2)
 
 foreach(UNIT_TEST ${PYTHON_UNIT_TESTS})
   add_python_unit_test(${UNIT_TEST} tests/${UNIT_TEST}.py)

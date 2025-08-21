@@ -34,8 +34,21 @@
 
 namespace pyhpp {
 namespace manipulation {
+
+struct Device;
+struct Problem;
+struct PyWGraph;
+
+// Shared pointer typedefs
+typedef std::shared_ptr<Device> PyWDevicePtr_t;
+typedef std::shared_ptr<Problem> PyWProblemPtr_t;
+typedef std::shared_ptr<PyWGraph> PyWGraphPtr_t;
+
 void exposeDevice();
 void exposeHandle();
+void exposeGraph();
+void exposeProblem();
+
 }  // namespace manipulation
 }  // namespace pyhpp
 

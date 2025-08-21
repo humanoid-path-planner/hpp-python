@@ -69,6 +69,7 @@ typedef hpp::pinocchio::DevicePtr_t DevicePtr_t;
 typedef hpp::pinocchio::GripperPtr_t GripperPtr_t;
 typedef hpp::pinocchio::Gripper Gripper;
 typedef hpp::pinocchio::Computation_t Computation_t;
+typedef hpp::pinocchio::value_type value_type;
 
 using namespace boost::python;
 
@@ -92,7 +93,12 @@ void exposeGripper() {
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
       .def("create", &Gripper::create)
       .staticmethod("create")
-      .add_property("localPosition", &getObjectPositionInJoint);
+      .add_property("localPosition", &getObjectPositionInJoint)
+      .add_property(
+          "clearance",
+          static_cast<value_type (Gripper::*)() const>(&Gripper::clearance),
+          static_cast<void (Gripper::*)(const value_type&)>(
+              &Gripper::clearance));
   class_<std::map<std::string, GripperPtr_t> >("GripperMap")
       .def(
           boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,

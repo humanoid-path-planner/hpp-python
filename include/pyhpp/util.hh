@@ -60,6 +60,8 @@
 #define PYHPP_DEFINE_GETTER_SETTER_CONST_REF(CLASS, METHOD, TYPE)    \
   def(#METHOD, static_cast<TYPE (CLASS::*)() const>(&CLASS::METHOD)) \
       .def(#METHOD, static_cast<void (CLASS::*)(const TYPE&)>(&CLASS::METHOD))
+#define PYHPP_DEFINE_METHOD_STATIC(CLASS, METHOD) \
+  def(#METHOD, &CLASS::METHOD).staticmethod(#METHOD)
 
 namespace pyhpp {
 template <typename ObjectWithPrintMethod>
@@ -84,6 +86,21 @@ struct VectorOfPtr {
     return *v[i];
   }
 };
+
+template <typename T>
+std::vector<T> extract_vector(boost::python::list py_list) {
+  return std::vector<T>(boost::python::stl_input_iterator<T>(py_list),
+                        boost::python::stl_input_iterator<T>());
+}
+template <typename T>
+boost::python::list to_python_list(const std::vector<T>& vec) {
+  boost::python::list py_list;
+  for (const auto& item : vec) {
+    py_list.append(item);
+  }
+  return py_list;
+}
+
 }  // namespace pyhpp
 
 #endif  // PYHPP_FWD_HH
