@@ -258,7 +258,7 @@ PyWGraph::PyWGraph(const hpp::manipulation::graph::GraphPtr_t& object)
 
 PyWGraph::PyWGraph(const std::string& name, const PyWDevicePtr_t& d,
                    const PyWProblemPtr_t& problem)
-    : obj(hpp::manipulation::graph::Graph::create(name, d->obj, problem->obj)),
+    : obj(hpp::manipulation::graph::Graph::create(name, d->obj, problem->asManipulationProblem())),
       robot(d),
       problem(problem) {}
 

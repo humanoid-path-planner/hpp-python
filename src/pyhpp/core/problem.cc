@@ -132,8 +132,57 @@ typedef void (Problem::*SetTarget)(const ProblemTargetPtr_t&);
 typedef ConfigurationShooterPtr_t (Problem::*GetConfigurationShooter)() const;
 typedef void (Problem::*SetConfigurationShooter)(const ConfigurationShooterPtr_t&);
 
+struct ProblemWrapperConverter {
+    static void* convertible(PyObject* obj_ptr) {
+        boost::python::object obj(boost::python::borrowed(obj_ptr));
+        boost::python::extract<Problem> extractor(obj);
+        return extractor.check() ? obj_ptr : nullptr;
+    }
+    
+    // Converter for std::shared_ptr<hpp::core::Problem>
+    static void construct_shared_ptr(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+        boost::python::object obj(boost::python::borrowed(obj_ptr));
+        boost::python::extract<Problem> extractor(obj);
+        
+        const Problem& wrapper = extractor();
+        void* storage = ((boost::python::converter::rvalue_from_python_storage<ProblemPtr_t>*)data)->storage.bytes;
+        new (storage) ProblemPtr_t(wrapper.obj);
+        data->convertible = storage;
+    }
+    
+    // Converter for std::shared_ptr<hpp::core::Problem const>
+    static void construct_const_shared_ptr(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+        boost::python::object obj(boost::python::borrowed(obj_ptr));
+        boost::python::extract<Problem> extractor(obj);
+        
+        const Problem& wrapper = extractor();
+        typedef std::shared_ptr<hpp::core::Problem const> ConstProblemPtr_t;
+        void* storage = ((boost::python::converter::rvalue_from_python_storage<ConstProblemPtr_t>*)data)->storage.bytes;
+        new (storage) ConstProblemPtr_t(wrapper.obj);
+        data->convertible = storage;
+    }
+};
+
+void register_problem_converters() {
+    // Register converter for std::shared_ptr<hpp::core::Problem>
+    boost::python::converter::registry::push_back(
+        &ProblemWrapperConverter::convertible,
+        &ProblemWrapperConverter::construct_shared_ptr,
+        boost::python::type_id<ProblemPtr_t>()
+    );
+    
+    // Register converter for std::shared_ptr<hpp::core::Problem const>
+    boost::python::converter::registry::push_back(
+        &ProblemWrapperConverter::convertible,
+        &ProblemWrapperConverter::construct_const_shared_ptr,
+        boost::python::type_id<std::shared_ptr<hpp::core::Problem const>>()
+    );
+}
+
 // Python bindings
 void exposeProblem() {
+  class_<hpp::core::Problem, boost::noncopyable>("CppCoreProblem", no_init);
+
   class_<Problem>("Problem", init<const DevicePtr_t&>())
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
       .PYHPP_DEFINE_METHOD(Problem, setParameter)
@@ -182,6 +231,8 @@ void exposeProblem() {
      (arg("configurationShooter")))
       .PYHPP_DEFINE_METHOD(Problem, initConfig)
       .PYHPP_DEFINE_METHOD(Problem, addGoalConfig);
+  register_problem_converters();
+
 }
 
 }  // namespace core
