@@ -41,6 +41,7 @@
 #include <hpp/core/steering-method.hh>
 #include <hpp/pinocchio/device.hh>
 #include <hpp/util/pointer.hh>
+#include <hpp/manipulation/problem.hh>
 #include <pyhpp/core/fwd.hh>
 
 namespace pyhpp {
@@ -64,7 +65,8 @@ struct Problem {
   hpp::core::ProblemPtr_t obj;
 
   Problem(const DevicePtr_t& robot);
-
+  Problem(hpp::core::ProblemPtr_t problemPtr) : obj(problemPtr) {}
+  
   // wrapped methods
   const DevicePtr_t& robot() const;
   void setParameter(const std::string& name, const Parameter& value);
@@ -85,6 +87,18 @@ struct Problem {
   void configurationShooter(const ConfigurationShooterPtr_t& configurationShooter);
   void initConfig(ConfigurationIn_t inConfig);
   void addGoalConfig(ConfigurationIn_t config);
+
+  hpp::manipulation::ProblemPtr_t asManipulationProblem() const {
+      auto manipProb = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, obj);
+      if (!manipProb) {
+          throw std::runtime_error("Not a manipulation problem");
+      }
+      return manipProb;
+  }
+    
+  bool isManipulationProblem() const {
+      return bool(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, obj));
+  }
 };
 
 }  // namespace core
