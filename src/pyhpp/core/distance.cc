@@ -45,10 +45,12 @@ struct DistanceWrapper {
     return dist.clone();
   }
   static value_type compute(WeighedDistance* dist, ConfigurationIn_t q1,
-                            ConfigurationIn_t q2) {
+			    ConfigurationIn_t q2) {
     return dist->compute(q1, q2);
   }
-  static vector_t getWeights(WeighedDistance* dist) { return dist->weights(); }
+  static vector_t getWeights(WeighedDistance* dist) {
+    return dist->weights();
+  }
   static void setWeights(WeighedDistance* dist, const vector_t& weights) {
     return dist->weights(weights);
   }
@@ -57,13 +59,14 @@ struct DistanceWrapper {
 void exposeDistance() {
   class_<Distance, DistancePtr_t, boost::noncopyable>("Distance", no_init)
       .def("compute", &DistanceWrapper::compute);
-  class_<WeighedDistance, bases<Distance>, WeighedDistancePtr_t,
-         boost::noncopyable>("WeighedDistance", no_init)
+  class_<WeighedDistance, bases<Distance>, WeighedDistancePtr_t, boost::noncopyable>(
+      "WeighedDistance", no_init)
       .def("create", &WeighedDistance::create)
       .staticmethod("create")
       .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t)
       .def("getWeights", &DistanceWrapper::getWeights)
-      .def("setWeights", &DistanceWrapper::setWeights);
+      .def("setWeights", &DistanceWrapper::setWeights)
+  ;
 }
 }  // namespace core
 }  // namespace pyhpp
