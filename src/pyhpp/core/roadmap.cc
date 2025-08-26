@@ -116,7 +116,7 @@ struct RWrapper {
   static NodePtr_t initNode2(Roadmap& roadmap) { return roadmap.initNode(); }
 
   static int numberConnectedComponents(Roadmap& roadmap) {
-    return (int)roadmap.connectedComponents().size();
+    return (int) roadmap.connectedComponents().size();
   }
 
   static ConnectedComponentPtr_t getConnectedComponent(
@@ -128,9 +128,8 @@ struct RWrapper {
   }
 
   static boost::python::list connectedComponents(Roadmap& roadmap) {
-    std::vector<ConnectedComponentPtr_t> res(
-        roadmap.connectedComponents().begin(),
-        roadmap.connectedComponents().end());
+    std::vector<ConnectedComponentPtr_t> res(roadmap.connectedComponents().begin(),
+					     roadmap.connectedComponents().end());
     return to_python_list(res);
   }
   static boost::python::list nodes(Roadmap& roadmap) {
