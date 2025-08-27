@@ -29,9 +29,11 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
+#include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <hpp/core/connected-component.hh>
 #include <hpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
+#include <pyhpp/util.hh>
 
 using namespace boost::python;
 
@@ -39,9 +41,19 @@ namespace pyhpp {
 namespace core {
 using namespace hpp::core;
 
+struct CCWrapper {
+  static boost::python::list nodes(ConnectedComponent& cc) {
+    Configurations_t res;
+    for (const auto& n : cc.nodes()) {
+      res.push_back(n->configuration());
+    }
+    return to_python_list(res);
+  }
+};
 void exposeConnectedComponent() {
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
-      "ConnectedComponent", no_init);
+      "ConnectedComponent", no_init)
+    .def("nodes", &CCWrapper::nodes);
 }
 }  // namespace core
 }  // namespace pyhpp

@@ -39,6 +39,11 @@ namespace core {
 
 using namespace hpp::core;
 
+// struct CCWrapper {
+//   static Nodes_t nodes(const ConnectedComponent& cc) {
+//     return cc.nodes();
+//   }
+// };
 struct RWrapper {
   static void addNodeAndEdges(Roadmap& roadmap, const ConfigurationIn_t from,
                               ConfigurationIn_t to, const PathPtr_t path) {
@@ -111,7 +116,7 @@ struct RWrapper {
   static NodePtr_t initNode2(Roadmap& roadmap) { return roadmap.initNode(); }
 
   static int numberConnectedComponents(Roadmap& roadmap) {
-    return roadmap.connectedComponents().size();
+    return (int) roadmap.connectedComponents().size();
   }
 
   static ConnectedComponentPtr_t getConnectedComponent(
@@ -122,13 +127,18 @@ struct RWrapper {
     return *itcc;
   }
 
-  // static void cost1(Roadmap& roadmap, const path::CostPtr_t &cost) {
-  //   roadmap.cost(cost);
-  //   return;
-  // }
-  // static path::CostPtr_t cost2(Roadmap& roadmap) {
-  //   return roadmap.cost();
-  // }
+  static boost::python::list connectedComponents(Roadmap& roadmap) {
+    std::vector<ConnectedComponentPtr_t> res(roadmap.connectedComponents().begin(),
+					     roadmap.connectedComponents().end());
+    return to_python_list(res);
+  }
+  static boost::python::list nodes(Roadmap& roadmap) {
+    Configurations_t res;
+    for (const auto& n : roadmap.nodes()) {
+      res.push_back(n->configuration());
+    }
+    return to_python_list(res);
+  }
 };
 
 void exposeRoadmap() {
@@ -159,12 +169,12 @@ void exposeRoadmap() {
                             return_value_policy<reference_existing_object>())
       .PYHPP_DEFINE_METHOD(Roadmap, resetGoalNodes)
       .PYHPP_DEFINE_METHOD(Roadmap, pathExists)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, nodes)
+      .def("nodes", &RWrapper::nodes)
       .def("initNode", &RWrapper::initNode1)
       .def("initNode", &RWrapper::initNode2,
            return_value_policy<reference_existing_object>())
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, goalNodes)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, connectedComponents)
+      .def("connectedComponents", &RWrapper::connectedComponents)
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, distance)
       .def("numberConnectedComponents", &RWrapper::numberConnectedComponents)
       .def("getConnectedComponent", &RWrapper::getConnectedComponent)

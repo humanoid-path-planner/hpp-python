@@ -60,6 +60,11 @@ struct PVWrapper {
     bool res = pv->validate(path, reverse, validPart, report);
     return boost::python::make_tuple(res, validPart, report);
   }
+  static tuple validateConfiguration(PathValidation* pv, ConfigurationIn_t q) {
+    ValidationReportPtr_t report;
+    bool res = pv->validate(q, report);
+    return boost::python::make_tuple(res, report);
+  }
 
   static pathValidation::DiscretizedPtr_t
   createDiscretizedJointBoundAndCollisionChecking(const DevicePtr_t& robot,
@@ -77,7 +82,8 @@ void exposePathValidation() {
     class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
         "PathValidation", no_init)
         .def("validate", &PVWrapper::validate)
-        .def("validate", &PVWrapper::py_validate);
+        .def("validate", &PVWrapper::py_validate)
+        .def("validateConfiguration", &PVWrapper::validateConfiguration);
 
     class_<pathValidation::Discretized, 
         bases<PathValidation>, 
