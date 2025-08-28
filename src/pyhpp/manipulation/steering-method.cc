@@ -27,23 +27,27 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <boost/python.hpp>
 #include <../src/pyhpp/manipulation/steering-method.hh>
+#include <boost/python.hpp>
 #include <pyhpp/core/steering-method.hh>
 
 namespace pyhpp {
 namespace manipulation {
 
-  GraphSteeringMethod::GraphSteeringMethod(const PyWSteeringMethodPtr_t& steeringMethodWrapper)
-  {
-    hpp::manipulation::steeringMethod::GraphPtr_t graph = hpp::manipulation::steeringMethod::Graph::create(steeringMethodWrapper->obj->problem());
-    graph->innerSteeringMethod(steeringMethodWrapper->obj);
-    obj = graph;
-  }
-
-void exposeGraphSteeringMethod() {
-  class_<GraphSteeringMethod>("GraphSteeringMethod", boost::python::init<const PyWSteeringMethodPtr_t&>());
+GraphSteeringMethod::GraphSteeringMethod(
+    const PyWSteeringMethodPtr_t& steeringMethodWrapper) {
+  hpp::manipulation::steeringMethod::GraphPtr_t graph =
+      hpp::manipulation::steeringMethod::Graph::create(
+          steeringMethodWrapper->obj->problem());
+  graph->innerSteeringMethod(steeringMethodWrapper->obj);
+  obj = graph;
 }
 
-} // namespace manipulation
-} // namespace pyhpp
+void exposeGraphSteeringMethod() {
+  class_<GraphSteeringMethod>(
+      "GraphSteeringMethod",
+      boost::python::init<const PyWSteeringMethodPtr_t&>());
+}
+
+}  // namespace manipulation
+}  // namespace pyhpp

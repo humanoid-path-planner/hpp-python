@@ -53,7 +53,7 @@ struct CCWrapper {
 void exposeConnectedComponent() {
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
       "ConnectedComponent", no_init)
-    .def("nodes", &CCWrapper::nodes);
+      .def("nodes", &CCWrapper::nodes);
 }
 }  // namespace core
 }  // namespace pyhpp
