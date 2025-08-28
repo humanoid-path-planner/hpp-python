@@ -46,6 +46,8 @@ typedef hpp::core::ProblemConstPtr_t ProblemConstPtr_t;
 struct SteeringMethod {
   hpp::core::SteeringMethodPtr_t obj;
 
+  SteeringMethod(hpp::core::SteeringMethodPtr_t obj) : obj(obj) {}
+
   // Methods from hpp::core::SteeringMethod
   PathPtr_t operator()(ConfigurationIn_t q1, ConfigurationIn_t q2) const;
   PathPtr_t steer(ConfigurationIn_t q1, ConfigurationIn_t q2) const;

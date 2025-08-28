@@ -65,11 +65,9 @@ ConfigurationShooterPtr_t Problem::configurationShooter() const {
 }
 
 PyWSteeringMethodPtr_t Problem::steeringMethod() const {
-  auto wrapper = std::make_shared<pyhpp::core::SteeringMethod>();
-  wrapper->obj = obj->steeringMethod();
+  auto wrapper = std::make_shared<pyhpp::core::SteeringMethod>(obj->steeringMethod());
   return wrapper;
 }
-
 const ConfigValidationsPtr_t& Problem::configValidation() const {
   return obj->configValidations();
 }

@@ -38,16 +38,20 @@ namespace manipulation {
 struct Device;
 struct Problem;
 struct PyWGraph;
+struct GraphSteeringMethod;
 
 // Shared pointer typedefs
 typedef std::shared_ptr<Device> PyWDevicePtr_t;
 typedef std::shared_ptr<Problem> PyWProblemPtr_t;
 typedef std::shared_ptr<PyWGraph> PyWGraphPtr_t;
+typedef std::shared_ptr<GraphSteeringMethod> PyWGraphSteeringMethodPtr_t;
 
 void exposeDevice();
 void exposeHandle();
 void exposeGraph();
 void exposeProblem();
+void exposePathProjector();
+void exposeGraphSteeringMethod();
 
 }  // namespace manipulation
 }  // namespace pyhpp

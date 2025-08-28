@@ -49,9 +49,8 @@ namespace steeringMethod {
 // Macro for standard steering methods with create()
 #define DEFINE_STEERING_WRAPPER(WrapperName, SteeringType) \
   struct WrapperName : public pyhpp::core::SteeringMethod { \
-    WrapperName(const pyhpp::core::Problem& problem) {      \
-      obj = SteeringType::create(problem.obj);              \
-    }                                                       \
+    WrapperName(const pyhpp::core::Problem& problem)      \
+        : pyhpp::core::SteeringMethod(SteeringType::create(problem.obj)) {} \
   };                                                        \
   void expose##WrapperName() {                              \
     class_<WrapperName, bases<pyhpp::core::SteeringMethod>>( \
@@ -61,9 +60,8 @@ namespace steeringMethod {
 // Macro for steering methods with createWithGuess()
 #define DEFINE_STEERING_GUESS_WRAPPER(WrapperName, SteeringType) \
   struct WrapperName : public pyhpp::core::SteeringMethod {      \
-    WrapperName(const pyhpp::core::Problem& problem) {           \
-      obj = SteeringType::createWithGuess(problem.obj);          \
-    }                                                            \
+    WrapperName(const pyhpp::core::Problem& problem)           \
+        : pyhpp::core::SteeringMethod(SteeringType::createWithGuess(problem.obj)) {} \
   };                                                             \
   void expose##WrapperName() {                                   \
     class_<WrapperName, bases<pyhpp::core::SteeringMethod>>(     \
@@ -82,9 +80,8 @@ DEFINE_STEERING_GUESS_WRAPPER(Snibud, hpp::core::steeringMethod::Snibud)
 
 // Special case for templated Spline classes
 struct SplineBezier3 : public pyhpp::core::SteeringMethod {
-  SplineBezier3(const pyhpp::core::Problem& problem) {
-    obj = hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 3>::create(problem.obj);
-  }
+  SplineBezier3(const pyhpp::core::Problem& problem) 
+      : pyhpp::core::SteeringMethod(hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 3>::create(problem.obj)) {}
 };
 
 void exposeSplineBezier3() {
@@ -93,9 +90,8 @@ void exposeSplineBezier3() {
 }
 
 struct SplineBezier5 : public pyhpp::core::SteeringMethod {
-  SplineBezier5(const pyhpp::core::Problem& problem) {
-    obj = hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 5>::create(problem.obj);
-  }
+  SplineBezier5(const pyhpp::core::Problem& problem) 
+      : pyhpp::core::SteeringMethod(hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 5>::create(problem.obj)) {}
 };
 
 void exposeSplineBezier5() {
