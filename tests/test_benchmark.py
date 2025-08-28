@@ -3,7 +3,8 @@ import numpy as np
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.core import createDichotomy, createProgressiveProjector, Straight
+from pyhpp.core import createDichotomy, Straight
+from pyhpp.manipulation import createProgressiveProjector, GraphSteeringMethod
 
 from pyhpp.constraints import (
     Transformation,
@@ -179,11 +180,12 @@ problem.addGoalConfig(np.array(q_goal))
 #   e = 'ur3/gripper < sphere{}/handle | 0-{}_32'.format(i,i)
 #   cg.addTransitionConstraints(e, constraints["place_sphere{}/complement".format(i)])
   
-# steeringMethod = Straight(problem)
-# problem.steeringMethod(steeringMethod)
 
+steeringMethod = Straight(problem)
+graphSteeringMethod = GraphSteeringMethod(steeringMethod)
+problem.steeringMethod(graphSteeringMethod)
 problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
-problem.pathProjector = createProgressiveProjector(problem, 0.01)
+problem.pathProjector = createProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.01)
 
 cg.initialize()
 

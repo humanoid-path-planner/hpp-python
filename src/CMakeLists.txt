@@ -157,6 +157,8 @@ add_python_library(
   pyhpp/manipulation/device.cc
   pyhpp/manipulation/graph.cc
   pyhpp/manipulation/problem.cc
+  pyhpp/manipulation/path-projector.cc
+  pyhpp/manipulation/steering-method.cc
   LINK_LIBRARIES
   hpp-manipulation::hpp-manipulation)
 

@@ -27,14 +27,15 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <boost/python.hpp>
+#include <hpp/core/distance.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-projector/progressive.hh>
 #include <hpp/core/path-projector/dichotomy.hh>
 #include <hpp/core/path-projector/global.hh>
 #include <hpp/core/path-projector/recursive-hermite.hh>
-#include <pyhpp/core/fwd.hh>
-#include <pyhpp/util.hh>
+#include <pyhpp/core/steering-method.hh>
+#include <boost/python.hpp>
+
 
 using namespace boost::python;
 
@@ -56,65 +57,65 @@ struct PPWrapper {
 };
 
 void exposePathProjector() {
-  class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>("PathProjector",
-                                                                no_init)
-      .def("apply", &PPWrapper::apply)
+    class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>("PathProjector",
+    no_init)
+    .def("apply", &PPWrapper::apply)
+    .def("apply", &PPWrapper::py_apply);
 
-      .def("apply", &PPWrapper::py_apply);
-
-  class_<pathProjector::Progressive, 
-        bases<PathProjector>, 
+    class_<pathProjector::Progressive,
+        bases<PathProjector>,
         hpp::core::pathProjector::ProgressivePtr_t,
         boost::noncopyable>(
-      "ProgressiveProjector", no_init);
+        "ProgressiveProjector", no_init);
 
-  class_<pathProjector::Dichotomy, 
-        bases<PathProjector>, 
+    class_<pathProjector::Dichotomy,
+        bases<PathProjector>,
         hpp::core::pathProjector::DichotomyPtr_t,
         boost::noncopyable>(
-      "DichotomyProjector", no_init);
+        "DichotomyProjector", no_init);
 
-  class_<pathProjector::Global, 
-        bases<PathProjector>, 
+    class_<pathProjector::Global,
+        bases<PathProjector>,
         hpp::core::pathProjector::GlobalPtr_t,
         boost::noncopyable>(
-      "GlobalProjector", no_init);
+        "GlobalProjector", no_init);
 
-  class_<pathProjector::RecursiveHermite, 
-        bases<PathProjector>, 
+    class_<pathProjector::RecursiveHermite,
+        bases<PathProjector>,
         hpp::core::pathProjector::RecursiveHermitePtr_t,
         boost::noncopyable>(
-      "RecursiveHermiteProjector", no_init);
+        "RecursiveHermiteProjector", no_init);
 
-  def("createNoneProjector", 
-      +[](const ProblemConstPtr_t&, const value_type&) -> PathProjectorPtr_t {
-          return PathProjectorPtr_t();
-      },
-      (arg("problem"), arg("value")));
+    def("createNoneProjector",
+        +[](const DistancePtr_t&, const PyWSteeringMethodPtr_t&, const value_type&) -> PathProjectorPtr_t {
+            return PathProjectorPtr_t();
+        },
+        (arg("distance"), arg("steeringMethod"), arg("step")));
 
-  def("createProgressiveProjector", 
-      +[](const ProblemConstPtr_t& p, const value_type& v) {
-          return pathProjector::Progressive::create(p, v);
-      },
-      (arg("problem"), arg("value")));
+    def("createProgressiveProjector",
+        +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
+            return pathProjector::Progressive::create(distance, steeringMethodWrapper->obj, step);
+        },
+        (arg("distance"), arg("steeringMethod"), arg("step")));
 
-  def("createDichotomyProjector", 
-      +[](const ProblemConstPtr_t& p, const value_type& v) {
-          return pathProjector::Dichotomy::create(p, v);
-      },
-      (arg("problem"), arg("value")));
+    def("createDichotomyProjector",
+        +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
+            return pathProjector::Dichotomy::create(distance, steeringMethodWrapper->obj, step);
+        },
+        (arg("distance"), arg("steeringMethod"), arg("step")));
 
-  def("createGlobalProjector", 
-      +[](const ProblemConstPtr_t& p, const value_type& v) {
-          return pathProjector::Global::create(p, v);
-      },
-      (arg("problem"), arg("value")));
+    def("createGlobalProjector",
+        +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
+            return pathProjector::Global::create(distance, steeringMethodWrapper->obj, step);
+        },
+        (arg("distance"), arg("steeringMethod"), arg("step")));
 
-  def("createRecursiveHermiteProjector", 
-      +[](const ProblemConstPtr_t& p, const value_type& v) {
-          return pathProjector::RecursiveHermite::create(p, v);
-      },
-      (arg("problem"), arg("value")));
+    def("createRecursiveHermiteProjector",
+        +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
+            return pathProjector::RecursiveHermite::create(distance, steeringMethodWrapper->obj, step);
+        },
+        (arg("distance"), arg("steeringMethod"), arg("step")));
+        
 }
 }  // namespace core
 }  // namespace pyhpp

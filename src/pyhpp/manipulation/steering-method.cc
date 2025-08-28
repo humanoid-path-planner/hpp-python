@@ -1,6 +1,6 @@
 //
 // Copyright (c) 2025, CNRS
-// Authors: Florent Lamiraux
+// Authors: Paul Sardin
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -28,18 +28,22 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
-#include <pyhpp/manipulation/fwd.hh>
-#include <pyhpp/util.hh>
+#include <../src/pyhpp/manipulation/steering-method.hh>
+#include <pyhpp/core/steering-method.hh>
 
-BOOST_PYTHON_MODULE(bindings) {
-  INIT_PYHPP_MODULE;
+namespace pyhpp {
+namespace manipulation {
 
-  boost::python::import("pyhpp.pinocchio");
-  boost::python::import("pyhpp.constraints");
-  pyhpp::manipulation::exposeHandle();
-  pyhpp::manipulation::exposeProblem();
-  pyhpp::manipulation::exposeDevice();
-  pyhpp::manipulation::exposeGraph();
-  pyhpp::manipulation::exposePathProjector();
-  pyhpp::manipulation::exposeGraphSteeringMethod();
+  GraphSteeringMethod::GraphSteeringMethod(const PyWSteeringMethodPtr_t& steeringMethodWrapper)
+  {
+    hpp::manipulation::steeringMethod::GraphPtr_t graph = hpp::manipulation::steeringMethod::Graph::create(steeringMethodWrapper->obj->problem());
+    graph->innerSteeringMethod(steeringMethodWrapper->obj);
+    obj = graph;
+  }
+
+void exposeGraphSteeringMethod() {
+  class_<GraphSteeringMethod>("GraphSteeringMethod", boost::python::init<const PyWSteeringMethodPtr_t&>());
 }
+
+} // namespace manipulation
+} // namespace pyhpp
