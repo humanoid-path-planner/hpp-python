@@ -19,14 +19,13 @@
 #ifndef PYHPP_MANIPULATION_PROBLEM_HH
 #define PYHPP_MANIPULATION_PROBLEM_HH
 
-#include <hpp/core/configuration-shooter.hh>
-#include <hpp/core/steering-method.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/distance.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
+#include <hpp/core/steering-method.hh>
 #include <hpp/manipulation/problem.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/core/problem.hh>
@@ -57,7 +56,8 @@ struct Problem : public pyhpp::core::Problem {
   void constraintGraph(const PyWGraphPtr_t& graph);
   PyWGraphPtr_t constraintGraph() const;
   virtual void checkProblem() const;
-  void steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod);
+  void steeringMethod(
+      const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod);
   pyhpp::core::PyWSteeringMethodPtr_t steeringMethod() const;
   void graphSteeringMethod(const PyWGraphSteeringMethodPtr_t& steeringMethod);
   // PathValidationPtr_t pathValidation() const;

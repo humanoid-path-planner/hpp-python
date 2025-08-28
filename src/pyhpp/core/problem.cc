@@ -30,6 +30,7 @@
 
 #include "pyhpp/core/problem.hh"
 
+#include <boost/python.hpp>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/distance.hh>
@@ -39,8 +40,6 @@
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/steering-method.hh>
-
-#include <boost/python.hpp>
 
 namespace pyhpp {
 namespace core {
@@ -61,11 +60,12 @@ const Parameter& Problem::getParameter(const std::string& name) const {
 }
 
 ConfigurationShooterPtr_t Problem::configurationShooter() const {
-    return obj->configurationShooter();
+  return obj->configurationShooter();
 }
 
 PyWSteeringMethodPtr_t Problem::steeringMethod() const {
-  auto wrapper = std::make_shared<pyhpp::core::SteeringMethod>(obj->steeringMethod());
+  auto wrapper =
+      std::make_shared<pyhpp::core::SteeringMethod>(obj->steeringMethod());
   return wrapper;
 }
 const ConfigValidationsPtr_t& Problem::configValidation() const {
@@ -85,7 +85,7 @@ DistancePtr_t Problem::distance() const { return obj->distance(); }
 const ProblemTargetPtr_t& Problem::target() const { return obj->target(); }
 
 void Problem::configurationShooter(const ConfigurationShooterPtr_t& cs) {
-    obj->configurationShooter(cs);
+  obj->configurationShooter(cs);
 }
 
 void Problem::steeringMethod(const PyWSteeringMethodPtr_t& steeringMethod) {
@@ -93,24 +93,20 @@ void Problem::steeringMethod(const PyWSteeringMethodPtr_t& steeringMethod) {
 }
 
 void Problem::configValidation(const ConfigValidationsPtr_t& cv) {
-    obj->configValidation(cv);
+  obj->configValidation(cv);
 }
 
 void Problem::pathValidation(const PathValidationPtr_t& pv) {
-    obj->pathValidation(pv);
+  obj->pathValidation(pv);
 }
 
 void Problem::pathProjector(const PathProjectorPtr_t& pp) {
-    obj->pathProjector(pp);
+  obj->pathProjector(pp);
 }
 
-void Problem::distance(const DistancePtr_t& d) {
-    obj->distance(d);
-}
+void Problem::distance(const DistancePtr_t& d) { obj->distance(d); }
 
-void Problem::target(const ProblemTargetPtr_t& t) {
-    obj->target(t);
-}
+void Problem::target(const ProblemTargetPtr_t& t) { obj->target(t); }
 
 void Problem::initConfig(ConfigurationIn_t inConfig) {
   obj->initConfig(inConfig);
@@ -139,53 +135,61 @@ typedef const ProblemTargetPtr_t& (Problem::*GetTarget)() const;
 typedef void (Problem::*SetTarget)(const ProblemTargetPtr_t&);
 
 typedef ConfigurationShooterPtr_t (Problem::*GetConfigurationShooter)() const;
-typedef void (Problem::*SetConfigurationShooter)(const ConfigurationShooterPtr_t&);
+typedef void (Problem::*SetConfigurationShooter)(
+    const ConfigurationShooterPtr_t&);
 
 struct ProblemWrapperConverter {
-    static void* convertible(PyObject* obj_ptr) {
-        boost::python::object obj(boost::python::borrowed(obj_ptr));
-        boost::python::extract<Problem> extractor(obj);
-        return extractor.check() ? obj_ptr : nullptr;
-    }
-    
-    // Converter for std::shared_ptr<hpp::core::Problem>
-    static void construct_shared_ptr(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-        boost::python::object obj(boost::python::borrowed(obj_ptr));
-        boost::python::extract<Problem> extractor(obj);
-        
-        const Problem& wrapper = extractor();
-        void* storage = ((boost::python::converter::rvalue_from_python_storage<ProblemPtr_t>*)data)->storage.bytes;
-        new (storage) ProblemPtr_t(wrapper.obj);
-        data->convertible = storage;
-    }
-    
-    // Converter for std::shared_ptr<hpp::core::Problem const>
-    static void construct_const_shared_ptr(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-        boost::python::object obj(boost::python::borrowed(obj_ptr));
-        boost::python::extract<Problem> extractor(obj);
-        
-        const Problem& wrapper = extractor();
-        typedef std::shared_ptr<hpp::core::Problem const> ConstProblemPtr_t;
-        void* storage = ((boost::python::converter::rvalue_from_python_storage<ConstProblemPtr_t>*)data)->storage.bytes;
-        new (storage) ConstProblemPtr_t(wrapper.obj);
-        data->convertible = storage;
-    }
+  static void* convertible(PyObject* obj_ptr) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Problem> extractor(obj);
+    return extractor.check() ? obj_ptr : nullptr;
+  }
+
+  // Converter for std::shared_ptr<hpp::core::Problem>
+  static void construct_shared_ptr(
+      PyObject* obj_ptr,
+      boost::python::converter::rvalue_from_python_stage1_data* data) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Problem> extractor(obj);
+
+    const Problem& wrapper = extractor();
+    void* storage =
+        ((boost::python::converter::rvalue_from_python_storage<ProblemPtr_t>*)
+             data)
+            ->storage.bytes;
+    new (storage) ProblemPtr_t(wrapper.obj);
+    data->convertible = storage;
+  }
+
+  // Converter for std::shared_ptr<hpp::core::Problem const>
+  static void construct_const_shared_ptr(
+      PyObject* obj_ptr,
+      boost::python::converter::rvalue_from_python_stage1_data* data) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Problem> extractor(obj);
+
+    const Problem& wrapper = extractor();
+    typedef std::shared_ptr<hpp::core::Problem const> ConstProblemPtr_t;
+    void* storage = ((boost::python::converter::rvalue_from_python_storage<
+                         ConstProblemPtr_t>*)data)
+                        ->storage.bytes;
+    new (storage) ConstProblemPtr_t(wrapper.obj);
+    data->convertible = storage;
+  }
 };
 
 void register_problem_converters() {
-    // Register converter for std::shared_ptr<hpp::core::Problem>
-    boost::python::converter::registry::push_back(
-        &ProblemWrapperConverter::convertible,
-        &ProblemWrapperConverter::construct_shared_ptr,
-        boost::python::type_id<ProblemPtr_t>()
-    );
-    
-    // Register converter for std::shared_ptr<hpp::core::Problem const>
-    boost::python::converter::registry::push_back(
-        &ProblemWrapperConverter::convertible,
-        &ProblemWrapperConverter::construct_const_shared_ptr,
-        boost::python::type_id<std::shared_ptr<hpp::core::Problem const>>()
-    );
+  // Register converter for std::shared_ptr<hpp::core::Problem>
+  boost::python::converter::registry::push_back(
+      &ProblemWrapperConverter::convertible,
+      &ProblemWrapperConverter::construct_shared_ptr,
+      boost::python::type_id<ProblemPtr_t>());
+
+  // Register converter for std::shared_ptr<hpp::core::Problem const>
+  boost::python::converter::registry::push_back(
+      &ProblemWrapperConverter::convertible,
+      &ProblemWrapperConverter::construct_const_shared_ptr,
+      boost::python::type_id<std::shared_ptr<hpp::core::Problem const>>());
 }
 
 // Python bindings
@@ -196,49 +200,47 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
       .PYHPP_DEFINE_METHOD(Problem, setParameter)
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
-      .def("steeringMethod", static_cast<PyWSteeringMethodPtr_t(Problem::*)() const>(&Problem::steeringMethod))
-      .def("steeringMethod", static_cast<void(Problem::*)(const PyWSteeringMethodPtr_t&)>(&Problem::steeringMethod))
+      .def("steeringMethod",
+           static_cast<PyWSteeringMethodPtr_t (Problem::*)() const>(
+               &Problem::steeringMethod))
+      .def("steeringMethod",
+           static_cast<void (Problem::*)(const PyWSteeringMethodPtr_t&)>(
+               &Problem::steeringMethod))
 
-      .def("configValidation", 
-          static_cast<GetConfigValidation>(&Problem::configValidation),
-          return_value_policy<copy_const_reference>())
-      .def("configValidation", 
-          static_cast<SetConfigValidation>(&Problem::configValidation),
-          (arg("configValidation")))
-      
-      .def("pathValidation", 
-          static_cast<GetPathValidation>(&Problem::pathValidation))
-      .def("pathValidation", 
-          static_cast<SetPathValidation>(&Problem::pathValidation),
-          (arg("pathValidation")))
-      
-      .def("pathProjector", 
-          static_cast<GetPathProjector>(&Problem::pathProjector))
-      .def("pathProjector", 
-          static_cast<SetPathProjector>(&Problem::pathProjector),
-          (arg("pathProjector")))
-      
-      .def("distance", 
-          static_cast<GetDistance>(&Problem::distance))
-      .def("distance", 
-          static_cast<SetDistance>(&Problem::distance),
-          (arg("distance")))
-      
-      .def("target", 
-          static_cast<GetTarget>(&Problem::target), 
-        return_value_policy<copy_const_reference>())
-      .def("target", 
-          static_cast<SetTarget>(&Problem::target),
-          (arg("target")))
-      .def("configurationShooter", 
-          static_cast<GetConfigurationShooter>(&Problem::configurationShooter))
-      .def("configurationShooter", 
-          static_cast<SetConfigurationShooter>(&Problem::configurationShooter),
-     (arg("configurationShooter")))
+      .def("configValidation",
+           static_cast<GetConfigValidation>(&Problem::configValidation),
+           return_value_policy<copy_const_reference>())
+      .def("configValidation",
+           static_cast<SetConfigValidation>(&Problem::configValidation),
+           (arg("configValidation")))
+
+      .def("pathValidation",
+           static_cast<GetPathValidation>(&Problem::pathValidation))
+      .def("pathValidation",
+           static_cast<SetPathValidation>(&Problem::pathValidation),
+           (arg("pathValidation")))
+
+      .def("pathProjector",
+           static_cast<GetPathProjector>(&Problem::pathProjector))
+      .def("pathProjector",
+           static_cast<SetPathProjector>(&Problem::pathProjector),
+           (arg("pathProjector")))
+
+      .def("distance", static_cast<GetDistance>(&Problem::distance))
+      .def("distance", static_cast<SetDistance>(&Problem::distance),
+           (arg("distance")))
+
+      .def("target", static_cast<GetTarget>(&Problem::target),
+           return_value_policy<copy_const_reference>())
+      .def("target", static_cast<SetTarget>(&Problem::target), (arg("target")))
+      .def("configurationShooter",
+           static_cast<GetConfigurationShooter>(&Problem::configurationShooter))
+      .def("configurationShooter",
+           static_cast<SetConfigurationShooter>(&Problem::configurationShooter),
+           (arg("configurationShooter")))
       .PYHPP_DEFINE_METHOD(Problem, initConfig)
       .PYHPP_DEFINE_METHOD(Problem, addGoalConfig);
   register_problem_converters();
-
 }
 
 }  // namespace core

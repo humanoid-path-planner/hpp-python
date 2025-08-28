@@ -27,18 +27,17 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <../src/pyhpp/manipulation/steering-method.hh>
+#include <boost/python.hpp>
 #include <hpp/core/distance.hh>
 #include <hpp/core/path-projector.hh>
-#include <hpp/core/path-projector/progressive.hh>
 #include <hpp/core/path-projector/dichotomy.hh>
 #include <hpp/core/path-projector/global.hh>
+#include <hpp/core/path-projector/progressive.hh>
 #include <hpp/core/path-projector/recursive-hermite.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pyhpp/core/steering-method.hh>
-#include <boost/python.hpp>
 #include <pyhpp/manipulation/fwd.hh>
-#include <../src/pyhpp/manipulation/steering-method.hh>
-
 
 using namespace boost::python;
 
@@ -49,55 +48,85 @@ typedef pyhpp::core::PyWSteeringMethodPtr_t PyWSteeringMethodPtr_t;
 
 using namespace boost::python;
 void exposePathProjector() {
+  def(
+      "createNoneProjector",
+      +[]() -> PathProjectorPtr_t { return PathProjectorPtr_t(); });
 
-def("createNoneProjector",
-    +[]() -> PathProjectorPtr_t {
-        return PathProjectorPtr_t();
-    });
+  def(
+      "createProgressiveProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Progressive::create(
+            distance, steeringMethodWrapper->obj, step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createProgressiveProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Progressive::create(
+            distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
 
-def("createProgressiveProjector",
-    +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Progressive::create(distance, steeringMethodWrapper->obj, step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
-def("createProgressiveProjector",
-    +[](const DistancePtr_t& distance, const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Progressive::create(distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createDichotomyProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Dichotomy::create(
+            distance, steeringMethodWrapper->obj, step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createDichotomyProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Dichotomy::create(
+            distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
 
-def("createDichotomyProjector",
-    +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Dichotomy::create(distance, steeringMethodWrapper->obj, step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
-def("createDichotomyProjector",
-    +[](const DistancePtr_t& distance, const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Dichotomy::create(distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createGlobalProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Global::create(distance,
+                                             steeringMethodWrapper->obj, step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createGlobalProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::Global::create(
+            distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
 
-def("createGlobalProjector",
-    +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Global::create(distance, steeringMethodWrapper->obj, step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
-def("createGlobalProjector",
-    +[](const DistancePtr_t& distance, const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::Global::create(distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
-
-def("createRecursiveHermiteProjector",
-    +[](const DistancePtr_t& distance, const PyWSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::RecursiveHermite::create(distance, steeringMethodWrapper->obj, step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
-def("createRecursiveHermiteProjector",
-    +[](const DistancePtr_t& distance, const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper, const value_type& step) {
-        return pathProjector::RecursiveHermite::create(distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
-    },
-    (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createRecursiveHermiteProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::RecursiveHermite::create(
+            distance, steeringMethodWrapper->obj, step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
+  def(
+      "createRecursiveHermiteProjector",
+      +[](const DistancePtr_t& distance,
+          const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
+          const value_type& step) {
+        return pathProjector::RecursiveHermite::create(
+            distance, steeringMethodWrapper->obj->innerSteeringMethod(), step);
+      },
+      (arg("distance"), arg("steeringMethod"), arg("step")));
 }
 }  // namespace manipulation
 }  // namespace pyhpp

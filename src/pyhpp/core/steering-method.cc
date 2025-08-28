@@ -29,15 +29,15 @@
 
 #include <boost/python.hpp>
 #include <hpp/core/steering-method.hh>
-#include <hpp/core/steering-method/straight.hh>
-#include <hpp/core/steering-method/reeds-shepp.hh>
-#include <hpp/core/steering-method/steering-kinodynamic.hh>
 #include <hpp/core/steering-method/dubins.hh>
-#include <hpp/core/steering-method/snibud.hh>
 #include <hpp/core/steering-method/hermite.hh>
+#include <hpp/core/steering-method/reeds-shepp.hh>
+#include <hpp/core/steering-method/snibud.hh>
 #include <hpp/core/steering-method/spline.hh>
-#include <pyhpp/core/steering-method.hh>
+#include <hpp/core/steering-method/steering-kinodynamic.hh>
+#include <hpp/core/steering-method/straight.hh>
 #include <pyhpp/core/problem.hh>
+#include <pyhpp/core/steering-method.hh>
 
 namespace pyhpp {
 namespace core {
@@ -47,21 +47,22 @@ using namespace boost::python;
 namespace steeringMethod {
 
 // Macro for standard steering methods with create()
-#define DEFINE_STEERING_WRAPPER(WrapperName, SteeringType) \
-  struct WrapperName : public pyhpp::core::SteeringMethod { \
-    WrapperName(const pyhpp::core::Problem& problem)      \
+#define DEFINE_STEERING_WRAPPER(WrapperName, SteeringType)                  \
+  struct WrapperName : public pyhpp::core::SteeringMethod {                 \
+    WrapperName(const pyhpp::core::Problem& problem)                        \
         : pyhpp::core::SteeringMethod(SteeringType::create(problem.obj)) {} \
-  };                                                        \
-  void expose##WrapperName() {                              \
-    class_<WrapperName, bases<pyhpp::core::SteeringMethod>>( \
-        #WrapperName, init<const pyhpp::core::Problem&>());  \
+  };                                                                        \
+  void expose##WrapperName() {                                              \
+    class_<WrapperName, bases<pyhpp::core::SteeringMethod>>(                \
+        #WrapperName, init<const pyhpp::core::Problem&>());                 \
   }
 
 // Macro for steering methods with createWithGuess()
 #define DEFINE_STEERING_GUESS_WRAPPER(WrapperName, SteeringType) \
   struct WrapperName : public pyhpp::core::SteeringMethod {      \
-    WrapperName(const pyhpp::core::Problem& problem)           \
-        : pyhpp::core::SteeringMethod(SteeringType::createWithGuess(problem.obj)) {} \
+    WrapperName(const pyhpp::core::Problem& problem)             \
+        : pyhpp::core::SteeringMethod(                           \
+              SteeringType::createWithGuess(problem.obj)) {}     \
   };                                                             \
   void expose##WrapperName() {                                   \
     class_<WrapperName, bases<pyhpp::core::SteeringMethod>>(     \
@@ -80,8 +81,10 @@ DEFINE_STEERING_GUESS_WRAPPER(Snibud, hpp::core::steeringMethod::Snibud)
 
 // Special case for templated Spline classes
 struct SplineBezier3 : public pyhpp::core::SteeringMethod {
-  SplineBezier3(const pyhpp::core::Problem& problem) 
-      : pyhpp::core::SteeringMethod(hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 3>::create(problem.obj)) {}
+  SplineBezier3(const pyhpp::core::Problem& problem)
+      : pyhpp::core::SteeringMethod(
+            hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis,
+                                              3>::create(problem.obj)) {}
 };
 
 void exposeSplineBezier3() {
@@ -90,8 +93,10 @@ void exposeSplineBezier3() {
 }
 
 struct SplineBezier5 : public pyhpp::core::SteeringMethod {
-  SplineBezier5(const pyhpp::core::Problem& problem) 
-      : pyhpp::core::SteeringMethod(hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis, 5>::create(problem.obj)) {}
+  SplineBezier5(const pyhpp::core::Problem& problem)
+      : pyhpp::core::SteeringMethod(
+            hpp::core::steeringMethod::Spline<hpp::core::path::BernsteinBasis,
+                                              5>::create(problem.obj)) {}
 };
 
 void exposeSplineBezier5() {
@@ -110,20 +115,20 @@ void exposeSteeringMethods() {
   pyhpp::core::steeringMethod::exposeSplineBezier5();
 }
 
-} // namespace steeringMethod
+}  // namespace steeringMethod
 
 // Wrapper methods
-PathPtr_t SteeringMethod::operator()(ConfigurationIn_t q1, ConfigurationIn_t q2) const {
+PathPtr_t SteeringMethod::operator()(ConfigurationIn_t q1,
+                                     ConfigurationIn_t q2) const {
   return (*obj)(q1, q2);
 }
 
-PathPtr_t SteeringMethod::steer(ConfigurationIn_t q1, ConfigurationIn_t q2) const {
+PathPtr_t SteeringMethod::steer(ConfigurationIn_t q1,
+                                ConfigurationIn_t q2) const {
   return obj->steer(q1, q2);
 }
 
-ProblemConstPtr_t SteeringMethod::problem() const {
-  return obj->problem();
-}
+ProblemConstPtr_t SteeringMethod::problem() const { return obj->problem(); }
 
 void SteeringMethod::constraints(const ConstraintSetPtr_t& constraints) {
   obj->constraints(constraints);
@@ -139,12 +144,16 @@ void exposeSteeringMethod() {
       .def("__call__", &SteeringMethod::operator())
       .def("steer", &SteeringMethod::steer)
       .def("problem", &SteeringMethod::problem)
-      .def("constraints", static_cast<void(SteeringMethod::*)(const ConstraintSetPtr_t&)>(&SteeringMethod::constraints))
-      .def("constraints", static_cast<const ConstraintSetPtr_t&(SteeringMethod::*)() const>(&SteeringMethod::constraints), 
+      .def("constraints",
+           static_cast<void (SteeringMethod::*)(const ConstraintSetPtr_t&)>(
+               &SteeringMethod::constraints))
+      .def("constraints",
+           static_cast<const ConstraintSetPtr_t& (SteeringMethod::*)() const>(
+               &SteeringMethod::constraints),
            return_value_policy<copy_const_reference>());
 
   pyhpp::core::steeringMethod::exposeSteeringMethods();
 }
 
-} // namespace core
-} // namespace pyhpp
+}  // namespace core
+}  // namespace pyhpp

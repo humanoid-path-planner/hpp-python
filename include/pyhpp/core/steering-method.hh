@@ -30,9 +30,9 @@
 #ifndef PYHPP_CORE_STEERING_METHOD_HH
 #define PYHPP_CORE_STEERING_METHOD_HH
 
-#include <hpp/core/steering-method.hh>
-#include <hpp/core/path.hh>
 #include <hpp/core/config.hh>
+#include <hpp/core/path.hh>
+#include <hpp/core/steering-method.hh>
 #include <pyhpp/core/problem.hh>
 
 namespace pyhpp {
@@ -55,9 +55,9 @@ struct SteeringMethod {
   void constraints(const ConstraintSetPtr_t& constraints);
   const ConstraintSetPtr_t& constraints() const;
 
-}; // struct SteeringMethod
+};  // struct SteeringMethod
 
-} // namespace core
-} // namespace pyhpp
+}  // namespace core
+}  // namespace pyhpp
 
 #endif

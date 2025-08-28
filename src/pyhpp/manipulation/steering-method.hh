@@ -19,9 +19,9 @@
 #ifndef PYHPP_STEERING_METHOD_HH
 #define PYHPP_STEERING_METHOD_HH
 
-#include <pyhpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
+#include <pyhpp/core/problem.hh>
 
 namespace pyhpp {
 namespace manipulation {
@@ -29,13 +29,11 @@ namespace manipulation {
 using namespace boost::python;
 typedef pyhpp::core::PyWSteeringMethodPtr_t PyWSteeringMethodPtr_t;
 
-
 struct GraphSteeringMethod {
   hpp::manipulation::steeringMethod::GraphPtr_t obj;
 
   GraphSteeringMethod(const PyWSteeringMethodPtr_t& steeringMethodWrapper);
 };
-
 
 }  // namespace manipulation
 }  // namespace pyhpp

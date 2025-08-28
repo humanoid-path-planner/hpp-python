@@ -15,7 +15,7 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, Quaternion
 
-#based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
+# based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
 
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
@@ -45,9 +45,25 @@ for i in range(nSphere):
         sphere_srdf,
         sphere_pose,
     )
-    robot.setJointBounds ('sphere{0}/root_joint'.format (i),
-                        [-1.,1.,-1.,1.,-.1,1.,-1.0001, 1.0001,-1.0001, 1.0001,
-                         -1.0001, 1.0001,-1.0001, 1.0001,])
+    robot.setJointBounds(
+        "sphere{0}/root_joint".format(i),
+        [
+            -1.0,
+            1.0,
+            -1.0,
+            1.0,
+            -0.1,
+            1.0,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+            -1.0001,
+            1.0001,
+        ],
+    )
     objects.append("sphere{0}".format(i))
 
 # Load kitchen environment
@@ -127,8 +143,11 @@ for i in range(nSphere):
         cts,
     )
     constraints[placementName + "/hold"] = ll
-    cg.registerConstraints(constraints[placementName], constraints[placementName + "/complement"],
-                         constraints[placementName + "/hold"])
+    cg.registerConstraints(
+        constraints[placementName],
+        constraints[placementName + "/complement"],
+        constraints[placementName + "/hold"],
+    )
 
     preplacementName = "preplace_sphere{0}".format(i)
     Id = SE3.Identity()
@@ -152,12 +171,50 @@ for i in range(nSphere):
     implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
 
-q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.2, 0, 0.02, 0, 0, 0, 1,
-          0.3, 0, 0.02, 0, 0, 0, 1,]
-q_goal = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.3, 0, 0.02, 0, 0, 0, 1,
-          0.2, 0, 0.02, 0, 0, 0, 1,]
+q_init = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
+q_goal = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
 
 grippers = ["ur3/gripper"]
 handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
@@ -179,13 +236,15 @@ problem.addGoalConfig(np.array(q_goal))
 #   cg.addTransitionConstraints(e, constraints["place_sphere{}/complement".format(i)])
 #   e = 'ur3/gripper < sphere{}/handle | 0-{}_32'.format(i,i)
 #   cg.addTransitionConstraints(e, constraints["place_sphere{}/complement".format(i)])
-  
+
 
 steeringMethod = Straight(problem)
 graphSteeringMethod = GraphSteeringMethod(steeringMethod)
 problem.steeringMethod(graphSteeringMethod)
 problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
-problem.pathProjector = createProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.01)
+problem.pathProjector = createProgressiveProjector(
+    problem.distance(), problem.steeringMethod(), 0.01
+)
 
 cg.initialize()
 
