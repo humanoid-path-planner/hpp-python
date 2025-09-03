@@ -29,6 +29,7 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
+#include <hpp/util/debug.hh>
 #include <hpp/core/fwd.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/stl-pair.hh>
@@ -68,4 +69,8 @@ BOOST_PYTHON_MODULE(bindings) {
   boost::python::import("pyhpp.core.path_optimization");
 
   boost::python::import("pyhpp.core.problem_target");
+
+  // Bind method that sets verbosity level
+  boost::python::def("setVerbosityLevel", &::hpp::debug::setVerbosityLevel);
+  boost::python::def("getVerbosityLevel", &::hpp::debug::getVerbosityLevel);
 }
