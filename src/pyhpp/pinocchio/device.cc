@@ -128,6 +128,9 @@ void exposeDevice() {
       .def("geomModel",
            static_cast<GeomModel& (Device::*)()>(&Device::geomModel),
            return_internal_reference<>())
+      .def("visualModel",
+           static_cast<GeomModel& (Device::*)()>(&Device::visualModel),
+           return_internal_reference<>())
       .PYHPP_DEFINE_METHOD(Device, configSize)
       .PYHPP_DEFINE_METHOD(Device, numberDof)
 
