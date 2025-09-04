@@ -138,12 +138,9 @@ add_python_library(
   hpp-core::hpp-core)
 
 add_python_library(
-  pyhpp/core/path_optimization
-  FILES
+  pyhpp/core/path_optimization FILES
   pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
-  pyhpp/core/path_optimization/bindings.cc
-  LINK_LIBRARIES
-  hpp-core::hpp-core)
+  pyhpp/core/path_optimization/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
 
 add_python_library(
   pyhpp/corbaserver FILES pyhpp/corbaserver/bindings.cc

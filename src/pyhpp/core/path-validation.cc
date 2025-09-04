@@ -79,11 +79,11 @@ struct PVWrapper {
 };
 
 void exposePathValidation() {
-    class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
-        "PathValidation", no_init)
-        .def("validate", &PVWrapper::validate)
-        .def("validate", &PVWrapper::py_validate)
-        .def("validateConfiguration", &PVWrapper::validateConfiguration);
+  class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
+      "PathValidation", no_init)
+      .def("validate", &PVWrapper::validate)
+      .def("validate", &PVWrapper::py_validate)
+      .def("validateConfiguration", &PVWrapper::validateConfiguration);
 
   class_<pathValidation::Discretized, bases<PathValidation>,
          hpp::core::pathValidation::DiscretizedPtr_t, boost::noncopyable>(
