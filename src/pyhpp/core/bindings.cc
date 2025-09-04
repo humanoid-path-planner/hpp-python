@@ -29,8 +29,8 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
-#include <hpp/util/debug.hh>
 #include <hpp/core/fwd.hh>
+#include <hpp/util/debug.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/stl-pair.hh>
 #include <pyhpp/util.hh>
