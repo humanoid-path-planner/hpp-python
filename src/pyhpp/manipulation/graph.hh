@@ -77,7 +77,7 @@ struct PyWGraph {
   typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
   typedef hpp::constraints::NumericalConstraints_t NumericalConstraints_t;
 
-  std::map<std::string, std::size_t> id;
+  std::map <std::string, std::size_t> id;
 
   // Member variables
   GraphPtr_t obj;
@@ -126,6 +126,7 @@ struct PyWGraph {
       const boost::python::list& py_constraints);
   PyWEdgePtr_t getTransition(const std::string& edgeName);
   PyWStatePtr_t getState(const std::string& stateName);
+  
   boost::python::list getTransitions();
   boost::python::list getStates();
   boost::python::list getTransitionNames();
@@ -195,7 +196,8 @@ struct PyWGraph {
                                         ConfigurationIn_t input);
   ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
                                         ConfigurationIn_t q_rhs,
-                                        ConfigurationIn_t input);
+                                        ConfigurationIn_t input,
+                                        hpp::core::RoadmapPtr_t roadmap);
 
   // Level set edges
   void addLevelSetFoliation(PyWEdgePtr_t edge,
