@@ -31,6 +31,7 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/problem.hh>
 #include <boost/python.hpp>
+#include <hpp/core/roadmap.hh>
 #include <hpp/constraints/convex-shape-contact.hh>
 #include <hpp/constraints/differentiable-function.hh>
 #include <hpp/constraints/explicit/convex-shape-contact.hh>
@@ -735,18 +736,27 @@ ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
 
 ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
                                                 ConfigurationIn_t q_rhs,
-                                                ConfigurationIn_t input) {
+                                                ConfigurationIn_t input,
+                                                hpp::core::RoadmapPtr_t roadmap) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
   Configuration_t output(input);
   bool success(true);
 
-  if (constraint->configProjector()) {
-    constraint->configProjector()->rightHandSideFromConfig(q_rhs);
-    success = constraint->apply(output);
-    residualError = constraint->configProjector()->residualError();
+  value_type dist = 0;
+  hpp::core::NodePtr_t nNode = roadmap->nearestNode(q_rhs, dist);
+  if (dist < 1e-8)
+    success = transition->obj->generateTargetConfig(nNode, output);
+  else
+    success = transition->obj->generateTargetConfig(q_rhs, output);
+
+  hpp::core::ConfigProjectorPtr_t configProjector(
+      transition->obj->targetConstraint()->configProjector());
+  if (configProjector) {
+    residualError = configProjector->residualError();
   }
+
   return ConstraintResult(success, output, residualError);
 }
 
