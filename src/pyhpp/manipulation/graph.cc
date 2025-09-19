@@ -477,8 +477,7 @@ boost::python::list PyWGraph::getTransitions() {
   try {
     using namespace hpp::manipulation::graph;
     boost::python::list transitions;
-    for (auto const& [name, cid] : id)
-    {
+    for (auto const& [name, cid] : id) {
       GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
       EdgePtr_t edge = HPP_DYNAMIC_PTR_CAST(Edge, comp);
       if (edge) {
@@ -495,8 +494,7 @@ boost::python::list PyWGraph::getStates() {
   try {
     using namespace hpp::manipulation::graph;
     boost::python::list states;
-    for (auto const& [name, cid] : id)
-    {
+    for (auto const& [name, cid] : id) {
       GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
       StatePtr_t state = HPP_DYNAMIC_PTR_CAST(State, comp);
       if (state) {
@@ -513,8 +511,7 @@ boost::python::list PyWGraph::getTransitionNames() {
   try {
     using namespace hpp::manipulation::graph;
     boost::python::list transitions;
-    for (auto const& [name, cid] : id)
-    {
+    for (auto const& [name, cid] : id) {
       GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
       EdgePtr_t edge = HPP_DYNAMIC_PTR_CAST(Edge, comp);
       if (edge) {
@@ -531,8 +528,7 @@ boost::python::list PyWGraph::getStateNames() {
   try {
     using namespace hpp::manipulation::graph;
     boost::python::list states;
-    for (auto const& [name, cid] : id)
-    {
+    for (auto const& [name, cid] : id) {
       GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
       StatePtr_t state = HPP_DYNAMIC_PTR_CAST(State, comp);
       if (state) {
@@ -544,7 +540,6 @@ boost::python::list PyWGraph::getStateNames() {
     throw std::logic_error(exc.what());
   }
 }
-
 
 // =============================================================================
 // State queries
