@@ -77,7 +77,7 @@ struct PyWGraph {
   typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
   typedef hpp::constraints::NumericalConstraints_t NumericalConstraints_t;
 
-  std::map<std::string, std::size_t> id;
+  std::map <std::string, std::size_t> id;
 
   // Member variables
   GraphPtr_t obj;
