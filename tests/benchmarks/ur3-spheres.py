@@ -1,5 +1,6 @@
 from math import pi
 import numpy as np
+import datetime as dt
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf
@@ -256,7 +257,6 @@ diffusingPlanner.maxIterations(100000)
 
 # Run benchmark
 #
-import datetime as dt
 
 totalTime = dt.timedelta(0)
 totalNumberNodes = 0
