@@ -31,10 +31,10 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/problem.hh>
 #include <boost/python.hpp>
-#include <hpp/core/roadmap.hh>
 #include <hpp/constraints/convex-shape-contact.hh>
 #include <hpp/constraints/differentiable-function.hh>
 #include <hpp/constraints/explicit/convex-shape-contact.hh>
+#include <hpp/core/roadmap.hh>
 #include <hpp/manipulation/graph/edge.hh>
 #include <hpp/manipulation/graph/graph.hh>
 #include <hpp/manipulation/graph/guided-state-selector.hh>
@@ -734,10 +734,9 @@ ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
   return ConstraintResult(success, output, residualError);
 }
 
-ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
-                                                ConfigurationIn_t q_rhs,
-                                                ConfigurationIn_t input,
-                                                hpp::core::RoadmapPtr_t roadmap) {
+ConstraintResult PyWGraph::generateTargetConfig(
+    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input,
+    hpp::core::RoadmapPtr_t roadmap) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
