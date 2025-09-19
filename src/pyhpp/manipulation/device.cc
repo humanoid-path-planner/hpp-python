@@ -48,6 +48,8 @@ Model& Device::model() { return obj->model(); }
 Data& Device::data() { return obj->data(); }
 GeomData& Device::geomData() { return obj->geomData(); }
 GeomModel& Device::geomModel() { return obj->geomModel(); }
+GeomModel& Device::visualModel() { return obj->visualModel(); }
+
 size_type Device::configSize() const { return obj->configSize(); }
 size_type Device::numberDof() const { return obj->numberDof(); }
 const Configuration_t& Device::currentConfiguration() const {
@@ -229,6 +231,9 @@ void exposeDevice() {
            return_internal_reference<>())
       .def("geomModel",
            static_cast<GeomModel& (Device::*)()>(&Device::geomModel),
+           return_internal_reference<>())
+      .def("visualModel",
+           static_cast<GeomModel& (Device::*)()>(&Device::visualModel),
            return_internal_reference<>())
       .PYHPP_DEFINE_METHOD(Device, configSize)
       .PYHPP_DEFINE_METHOD(Device, numberDof)

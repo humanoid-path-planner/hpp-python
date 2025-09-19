@@ -27,6 +27,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef PYHPP_MANIPULATION_DEVICE_HH
+#define PYHPP_MANIPULATION_DEVICE_HH
+
 #include <hpp/constraints/implicit.hh>
 #include <hpp/manipulation/device.hh>
 #include <hpp/manipulation/handle.hh>
@@ -80,6 +83,7 @@ struct Device {
   Data& data();
   GeomData& geomData();
   GeomModel& geomModel();
+  GeomModel& visualModel();
   size_type configSize() const;
   size_type numberDof() const;
   const Configuration_t& currentConfiguration() const;
@@ -97,3 +101,4 @@ struct Device {
 };  // struct Device
 }  // namespace manipulation
 }  // namespace pyhpp
+#endif  // PYHPP_MANIPULATION_DEVICE_HH
