@@ -27,6 +27,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef PYHPP_GRAPH_HH
+#define PYHPP_GRAPH_HH
+
 #include <hpp/manipulation/graph/graph.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
@@ -74,6 +77,8 @@ struct PyWGraph {
   typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
   typedef hpp::constraints::NumericalConstraints_t NumericalConstraints_t;
 
+  std::map <std::string, std::size_t> id;
+
   // Member variables
   GraphPtr_t obj;
   PyWDevicePtr_t robot;
@@ -119,8 +124,11 @@ struct PyWGraph {
                    PyWStatePtr_t state);
   void addNumericalConstraintsToGraph(
       const boost::python::list& py_constraints);
+  PyWEdgePtr_t getTransition(const std::string& edgeName);
+  PyWStatePtr_t getState(const std::string& stateName);
+
   // State queries
-  std::string getState(ConfigurationIn_t input);
+  std::string getStateFromConfiguration(ConfigurationIn_t input);
 
   // Constraint management
   void addNumericalConstraint(PyWStatePtr_t node,
@@ -215,3 +223,4 @@ struct PyWGraph {
 
 }  // namespace manipulation
 }  // namespace pyhpp
+#endif  // PYHPP_GRAPH_HH

@@ -2,9 +2,8 @@ from math import pi
 import numpy as np
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.core import createDichotomy, Straight
-from pyhpp.manipulation import createProgressiveProjector, GraphSteeringMethod
+from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf
+from pyhpp.core import createDichotomy, DiffusingPlanner, Straight
 
 from pyhpp.constraints import (
     Transformation,
@@ -16,7 +15,10 @@ from pyhpp.constraints import (
 from pinocchio import SE3, Quaternion
 
 # based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
-
+from argparse import ArgumentParser
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+args = parser.parse_args()
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
 ur3_srdf = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
@@ -98,7 +100,7 @@ for i in range(nSphere):
         joint,
         ballPlacement,
         Id,
-        [True, True, False, False, False, True],
+        [False, False, True, True, True, False],
     )
     cts = ComparisonTypes()
     cts[:] = (
@@ -116,7 +118,7 @@ for i in range(nSphere):
         joint,
         ballPlacement,
         Id,
-        [False, False, True, True, True, False],
+        [True, True, False, False, False, True],
     )
     cts[:] = (
         ComparisonType.Equality,
@@ -228,27 +230,51 @@ factory.setGrippers(grippers)
 factory.setObjects(objects, handlesPerObject, contactsPerObject)
 factory.generate()
 
-problem.initConfig(np.array(q_init))
-problem.addGoalConfig(np.array(q_goal))
+for i in range(nSphere):
+  e = cg.getTransition('ur3/gripper > sphere{}/handle | f_23'.format(i))
+  cg.addNumericalConstraintsToTransition(e, [constraints["place_sphere{}/complement".format(i)]])
+  e = cg.getTransition('ur3/gripper < sphere{}/handle | 0-{}_32'.format(i,i))
+  cg.addNumericalConstraintsToTransition(e, [constraints["place_sphere{}/complement".format(i)]])
 
-# for i in range(nSphere):
-#   e = 'ur3/gripper > sphere{}/handle | f_23'.format(i)
-#   cg.addTransitionConstraints(e, constraints["place_sphere{}/complement".format(i)])
-#   e = 'ur3/gripper < sphere{}/handle | 0-{}_32'.format(i,i)
-#   cg.addTransitionConstraints(e, constraints["place_sphere{}/complement".format(i)])
-
-
-steeringMethod = Straight(problem)
-graphSteeringMethod = GraphSteeringMethod(steeringMethod)
-problem.steeringMethod(graphSteeringMethod)
+problem.steeringMethod = Straight(problem)
 problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
 problem.pathProjector = createProgressiveProjector(
-    problem.distance(), problem.steeringMethod(), 0.01
+    problem.distance(), problem.steeringMethod, 0.01
 )
 
 cg.initialize()
+problem.initConfig(np.array(q_init))
+problem.addGoalConfig(np.array(q_goal))
+problem.constraintGraph(cg)
+diffusingPlanner = DiffusingPlanner(problem)
+diffusingPlanner.maxIterations(100000)
 
-
-# cg.display("./temp.dot")
-
-print("Script completed!")
+# Run benchmark
+#
+import datetime as dt
+totalTime = dt.timedelta (0)
+totalNumberNodes = 0
+success = 0
+for i in range (args.N):
+  try:
+    t1 = dt.datetime.now ()
+    diffusingPlanner.solve ()
+    t2 = dt.datetime.now ()
+  except Exception as e:
+    print (f"Failed to plan path: {e}")
+    break;
+  else:
+    success += 1
+    totalTime += t2 - t1
+    print (t2-t1)
+    n = len(diffusingPlanner.roadmap().nodes())
+    totalNumberNodes += n
+    print ("Number nodes: " + str(n))
+if args.N != 0:
+  print ("#" * 20)
+  print (f"Number of rounds: {args.N}")
+  print (f"Number of successes: {success}")
+  print (f"Success rate: {success/ args.N * 100}%")
+  if success > 0:
+    print (f"Average time per success: {totalTime.total_seconds()/success}")
+    print (f"Average number nodes per success: {totalNumberNodes/success}")

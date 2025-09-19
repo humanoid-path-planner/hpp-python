@@ -288,6 +288,7 @@ PyWStatePtr_t PyWGraph::createState(const std::string& nodeName, bool waypoint,
   if (obj->stateSelector()) {
     hpp::manipulation::graph::StatePtr_t state =
         obj->stateSelector()->createState(nodeName, waypoint, priority);
+    id[nodeName] = state->id();
     return std::shared_ptr<PyWState>(new PyWState(state));
   } else {
     throw std::logic_error("Graph has no state selector.");
@@ -302,6 +303,7 @@ PyWEdgePtr_t PyWGraph::createTransition(PyWStatePtr_t nodeFrom,
   EdgePtr_t edge = nodeFrom->obj->linkTo(transitionName, nodeTo->obj, w,
                                          (State::EdgeFactory)Edge::create);
   edge->state(isInState->obj);
+  id[transitionName] = edge->id();
   return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
 }
 
@@ -354,6 +356,7 @@ PyWEdgePtr_t PyWGraph::createLevelSetTransition(PyWStatePtr_t nodeFrom,
     EdgePtr_t edge = nodeFrom->obj->linkTo(
         edgeName, nodeTo->obj, w, (State::EdgeFactory)LevelSetEdge::create);
     edge->state(isInState->obj);
+    id[edgeName] = edge->id();
     return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
@@ -448,11 +451,35 @@ void PyWGraph::setWaypoint(PyWEdgePtr_t waypointEdge, int index,
   }
 }
 
+PyWEdgePtr_t PyWGraph::getTransition(const std::string& edgeName) {
+  try {
+    using namespace hpp::manipulation::graph;
+    GraphComponentPtr_t component = obj->get(id[edgeName]).lock();
+    EdgePtr_t edge = std::dynamic_pointer_cast<Edge>(component);
+    return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+PyWStatePtr_t PyWGraph::getState(const std::string& stateName) {
+  try {
+    using namespace hpp::manipulation::graph;
+    GraphComponentPtr_t component = obj->get(id[stateName]).lock();
+    StatePtr_t state = std::dynamic_pointer_cast<State>(component);
+    return std::shared_ptr<PyWState>(new PyWState(state));
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+
+
 // =============================================================================
 // State queries
 // =============================================================================
 
-std::string PyWGraph::getState(ConfigurationIn_t input) {
+std::string PyWGraph::getStateFromConfiguration(ConfigurationIn_t input) {
   try {
     hpp::manipulation::graph::StatePtr_t state = obj->getState(input);
     return state->name();
@@ -1069,8 +1096,11 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
 
+      .PYHPP_DEFINE_METHOD(PyWGraph, getState)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
+
       // State queries
-      .PYHPP_DEFINE_METHOD1(PyWGraph, getState, DOC_GETSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration, DOC_GETSTATE)
 
       // Constraint management
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint,
