@@ -473,6 +473,79 @@ PyWStatePtr_t PyWGraph::getState(const std::string& stateName) {
   }
 }
 
+boost::python::list PyWGraph::getTransitions() {
+  try {
+    using namespace hpp::manipulation::graph;
+    boost::python::list transitions;
+    for (auto const& [name, cid] : id)
+    {
+      GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
+      EdgePtr_t edge = HPP_DYNAMIC_PTR_CAST(Edge, comp);
+      if (edge) {
+        transitions.append(std::shared_ptr<PyWEdge>(new PyWEdge(edge)));
+      }
+    }
+    return transitions;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+boost::python::list PyWGraph::getStates() {
+  try {
+    using namespace hpp::manipulation::graph;
+    boost::python::list states;
+    for (auto const& [name, cid] : id)
+    {
+      GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
+      StatePtr_t state = HPP_DYNAMIC_PTR_CAST(State, comp);
+      if (state) {
+        states.append(std::shared_ptr<PyWState>(new PyWState(state)));
+      }
+    }
+    return states;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+boost::python::list PyWGraph::getTransitionNames() {
+  try {
+    using namespace hpp::manipulation::graph;
+    boost::python::list transitions;
+    for (auto const& [name, cid] : id)
+    {
+      GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
+      EdgePtr_t edge = HPP_DYNAMIC_PTR_CAST(Edge, comp);
+      if (edge) {
+        transitions.append(name);
+      }
+    }
+    return transitions;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+boost::python::list PyWGraph::getStateNames() {
+  try {
+    using namespace hpp::manipulation::graph;
+    boost::python::list states;
+    for (auto const& [name, cid] : id)
+    {
+      GraphComponentPtr_t comp = obj->get((size_t)cid).lock();
+      StatePtr_t state = HPP_DYNAMIC_PTR_CAST(State, comp);
+      if (state) {
+        states.append(name);
+      }
+    }
+    return states;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+
 // =============================================================================
 // State queries
 // =============================================================================
@@ -1096,6 +1169,10 @@ void exposeGraph() {
 
       .PYHPP_DEFINE_METHOD(PyWGraph, getState)
       .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getStates)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitions)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getStateNames)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitionNames)
 
       // State queries
       .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration, DOC_GETSTATE)

@@ -126,6 +126,10 @@ struct PyWGraph {
       const boost::python::list& py_constraints);
   PyWEdgePtr_t getTransition(const std::string& edgeName);
   PyWStatePtr_t getState(const std::string& stateName);
+  boost::python::list getTransitions();
+  boost::python::list getStates();
+  boost::python::list getTransitionNames();
+  boost::python::list getStateNames();
 
   // State queries
   std::string getStateFromConfiguration(ConfigurationIn_t input);
