@@ -16,8 +16,9 @@ from pinocchio import SE3, Quaternion
 
 # based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
 from argparse import ArgumentParser
+
 parser = ArgumentParser()
-parser.add_argument('-N', default=20, type=int)
+parser.add_argument("-N", default=20, type=int)
 args = parser.parse_args()
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
@@ -231,10 +232,14 @@ factory.setObjects(objects, handlesPerObject, contactsPerObject)
 factory.generate()
 
 for i in range(nSphere):
-  e = cg.getTransition('ur3/gripper > sphere{}/handle | f_23'.format(i))
-  cg.addNumericalConstraintsToTransition(e, [constraints["place_sphere{}/complement".format(i)]])
-  e = cg.getTransition('ur3/gripper < sphere{}/handle | 0-{}_32'.format(i,i))
-  cg.addNumericalConstraintsToTransition(e, [constraints["place_sphere{}/complement".format(i)]])
+    e = cg.getTransition("ur3/gripper > sphere{}/handle | f_23".format(i))
+    cg.addNumericalConstraintsToTransition(
+        e, [constraints["place_sphere{}/complement".format(i)]]
+    )
+    e = cg.getTransition("ur3/gripper < sphere{}/handle | 0-{}_32".format(i, i))
+    cg.addNumericalConstraintsToTransition(
+        e, [constraints["place_sphere{}/complement".format(i)]]
+    )
 
 problem.steeringMethod = Straight(problem)
 problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
@@ -252,29 +257,30 @@ diffusingPlanner.maxIterations(100000)
 # Run benchmark
 #
 import datetime as dt
-totalTime = dt.timedelta (0)
+
+totalTime = dt.timedelta(0)
 totalNumberNodes = 0
 success = 0
-for i in range (args.N):
-  try:
-    t1 = dt.datetime.now ()
-    diffusingPlanner.solve ()
-    t2 = dt.datetime.now ()
-  except Exception as e:
-    print (f"Failed to plan path: {e}")
-    break;
-  else:
-    success += 1
-    totalTime += t2 - t1
-    print (t2-t1)
-    n = len(diffusingPlanner.roadmap().nodes())
-    totalNumberNodes += n
-    print ("Number nodes: " + str(n))
+for i in range(args.N):
+    try:
+        t1 = dt.datetime.now()
+        diffusingPlanner.solve()
+        t2 = dt.datetime.now()
+    except Exception as e:
+        print(f"Failed to plan path: {e}")
+        break
+    else:
+        success += 1
+        totalTime += t2 - t1
+        print(t2 - t1)
+        n = len(diffusingPlanner.roadmap().nodes())
+        totalNumberNodes += n
+        print("Number nodes: " + str(n))
 if args.N != 0:
-  print ("#" * 20)
-  print (f"Number of rounds: {args.N}")
-  print (f"Number of successes: {success}")
-  print (f"Success rate: {success/ args.N * 100}%")
-  if success > 0:
-    print (f"Average time per success: {totalTime.total_seconds()/success}")
-    print (f"Average number nodes per success: {totalNumberNodes/success}")
+    print("#" * 20)
+    print(f"Number of rounds: {args.N}")
+    print(f"Number of successes: {success}")
+    print(f"Success rate: {success / args.N * 100}%")
+    if success > 0:
+        print(f"Average time per success: {totalTime.total_seconds() / success}")
+        print(f"Average number nodes per success: {totalNumberNodes / success}")
