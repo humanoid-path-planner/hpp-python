@@ -166,4 +166,3 @@ for i in range(100):
     if res.success:
         print("after applying constraints: ", res.configuration)
         break
-

@@ -1148,12 +1148,10 @@ using namespace boost::python;
 
 void exposeGraph() {
   class_<PyWState, PyWStatePtr_t>("State", no_init)
-    .def("name", &PyWState::name)
-  ;
+      .def("name", &PyWState::name);
 
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
-    .def("name", &PyWEdge::name)
-  ;
+      .def("name", &PyWEdge::name);
 
   class_<PyWGraph>(
       "Graph",
