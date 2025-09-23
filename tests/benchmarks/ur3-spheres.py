@@ -258,11 +258,11 @@ diffusingPlanner.maxIterations(5000)
 
 def apply_constraints(graph, configurationShooter, state):
     for i in range(100):
-      q = configurationShooter.shoot()
-      res = graph.applyStateConstraints(state, q)
-      if res.success:
-        print("Found configuration satisfying constraints")
-        return
+        q = configurationShooter.shoot()
+        res = graph.applyStateConstraints(state, q)
+        if res.success:
+            print("Found configuration satisfying constraints")
+            return
     print("FAILED")
 
 
