@@ -62,6 +62,7 @@ struct ConstraintResult {
 struct PyWState {
   StatePtr_t obj;
   PyWState(const StatePtr_t& object);
+  std::string name() const;
 };
 typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 
@@ -69,6 +70,7 @@ typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 struct PyWEdge {
   EdgePtr_t obj;
   PyWEdge(const EdgePtr_t& object);
+  std::string name() const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
 
@@ -196,8 +198,7 @@ struct PyWGraph {
                                         ConfigurationIn_t input);
   ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
                                         ConfigurationIn_t q_rhs,
-                                        ConfigurationIn_t input,
-                                        hpp::core::RoadmapPtr_t roadmap);
+                                        ConfigurationIn_t input);
 
   // Level set edges
   void addLevelSetFoliation(PyWEdgePtr_t edge,

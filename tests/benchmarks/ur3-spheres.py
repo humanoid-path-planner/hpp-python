@@ -38,7 +38,7 @@ urdf.loadModel(robot, 0, "ur3", "anchor", ur3_urdf, ur3_srdf, ur3_pose)
 # Load sphere to be manipulated
 objects = list()
 nSphere = 2
-sphere_pose = SE3(rotation=np.identity(3), translation=np.array([-2.5, -4, 0.746]))
+sphere_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 for i in range(nSphere):
     urdf.loadModel(
         robot,
@@ -100,8 +100,8 @@ for i in range(nSphere):
         placementName,
         robot.asPinDevice(),
         joint,
-        ballPlacement,
         Id,
+        ballPlacement,
         [False, False, True, True, True, False],
     )
     cts = ComparisonTypes()
@@ -118,8 +118,8 @@ for i in range(nSphere):
         placementName + "/complement",
         robot.asPinDevice(),
         joint,
-        ballPlacement,
         Id,
+        ballPlacement,
         [True, True, False, False, False, True],
     )
     cts[:] = (
@@ -162,8 +162,8 @@ for i in range(nSphere):
         preplacementName,
         robot.asPinDevice(),
         joint,
-        ballPrePlacement,
         Id,
+        ballPrePlacement,
         [False, False, True, True, True, False],
     )
     cts[:] = (
@@ -253,7 +253,21 @@ problem.initConfig(np.array(q_init))
 problem.addGoalConfig(np.array(q_goal))
 problem.constraintGraph(cg)
 diffusingPlanner = DiffusingPlanner(problem)
-diffusingPlanner.maxIterations(100000)
+diffusingPlanner.maxIterations(5000)
+
+
+def apply_constraints(graph, configurationShooter, state):
+    for i in range(100):
+      q = configurationShooter.shoot()
+      res = graph.applyStateConstraints(state, q)
+      if res.success:
+        print("Found configuration satisfying constraints")
+        return
+    print("FAILED")
+
+
+for s in cg.getStates():
+    apply_constraints(cg, problem.configurationShooter(), s)
 
 # Run benchmark
 #

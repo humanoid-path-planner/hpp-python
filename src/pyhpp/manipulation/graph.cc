@@ -251,8 +251,10 @@ std::vector<std::vector<int>> matrixToVectorVector(
 // =============================================================================
 
 PyWState::PyWState(const StatePtr_t& state) : obj(state) {}
+std::string PyWState::name() const { return obj->name(); }
 
 PyWEdge::PyWEdge(const EdgePtr_t& edge) : obj(edge) {}
+std::string PyWEdge::name() const { return obj->name(); }
 
 PyWGraph::PyWGraph(const hpp::manipulation::graph::GraphPtr_t& object)
     : obj(object) {}
@@ -746,9 +748,9 @@ ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
   return ConstraintResult(success, output, residualError);
 }
 
-ConstraintResult PyWGraph::generateTargetConfig(
-    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input,
-    hpp::core::RoadmapPtr_t roadmap) {
+ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
+                                                ConfigurationIn_t q_rhs,
+                                                ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
@@ -756,11 +758,7 @@ ConstraintResult PyWGraph::generateTargetConfig(
   bool success(true);
 
   value_type dist = 0;
-  hpp::core::NodePtr_t nNode = roadmap->nearestNode(q_rhs, dist);
-  if (dist < 1e-8)
-    success = transition->obj->generateTargetConfig(nNode, output);
-  else
-    success = transition->obj->generateTargetConfig(q_rhs, output);
+  success = transition->obj->generateTargetConfig(q_rhs, output);
 
   hpp::core::ConfigProjectorPtr_t configProjector(
       transition->obj->targetConstraint()->configProjector());
@@ -1149,9 +1147,13 @@ ImplicitPtr_t PyWGraph::createPrePlacementConstraint2(
 using namespace boost::python;
 
 void exposeGraph() {
-  class_<PyWState, PyWStatePtr_t>("State", no_init);
+  class_<PyWState, PyWStatePtr_t>("State", no_init)
+    .def("name", &PyWState::name)
+  ;
 
-  class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init);
+  class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
+    .def("name", &PyWEdge::name)
+  ;
 
   class_<PyWGraph>(
       "Graph",
