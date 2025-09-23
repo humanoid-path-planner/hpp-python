@@ -117,7 +117,7 @@ m = [
 q = Quaternion(0, 0, 0, 1)
 ballGround = SE3(q, np.array([0, 0, 0.15]))
 pc = Transformation.create(
-    "placementConstraint", robot.asPinDevice(), joint2, ballGround, Id, m
+    "placementConstraint", robot.asPinDevice(), joint2, Id, ballGround, m
 )
 cts = ComparisonTypes()
 cts[:] = (
@@ -162,8 +162,8 @@ solver = BySubstitution(robot.configSpace())
 
 for i in range(100):
     q = configurationShooter.shoot()
-    res = graph.applyStateConstraints(state_grasp, q)
+    res = graph.applyStateConstraints(state_placement, q)
     if res.success:
+        print("after applying constraints: ", res.configuration)
         break
-if res.success:
-    print("after applying constraints: ", res.configuration)
+
