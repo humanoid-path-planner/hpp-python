@@ -457,7 +457,13 @@ PyWEdgePtr_t PyWGraph::getTransition(const std::string& edgeName) {
     using namespace hpp::manipulation::graph;
     GraphComponentPtr_t component = obj->get(id[edgeName]).lock();
     EdgePtr_t edge = std::dynamic_pointer_cast<Edge>(component);
-    return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
+    if (edge) {
+      return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
+    } else {
+      std::ostringstream os;
+      os << "No transition with name " << edgeName;
+      throw std::logic_error(os.str().c_str());
+    }
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
@@ -468,7 +474,13 @@ PyWStatePtr_t PyWGraph::getState(const std::string& stateName) {
     using namespace hpp::manipulation::graph;
     GraphComponentPtr_t component = obj->get(id[stateName]).lock();
     StatePtr_t state = std::dynamic_pointer_cast<State>(component);
-    return std::shared_ptr<PyWState>(new PyWState(state));
+    if (state) {
+      return std::shared_ptr<PyWState>(new PyWState(state));
+    } else {
+      std::ostringstream os;
+      os << "No state with name " << stateName;
+      throw std::logic_error(os.str().c_str());
+    }
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
