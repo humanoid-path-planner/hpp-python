@@ -42,7 +42,7 @@ typedef hpp::core::PathOptimizerPtr_t PathOptimizerPtr_t;
 typedef hpp::core::PathProjectorPtr_t PathProjectorPtr_t;
 typedef hpp::core::PathPtr_t PathPtr_t;
 typedef hpp::core::PathVectorPtr_t PathVectorPtr_t;
-typedef hpp::core::RoadmapPtr_t  RoadmapPtr_t ;
+typedef hpp::core::RoadmapPtr_t RoadmapPtr_t;
 typedef hpp::manipulation::matrixIn_t matrixIn_t;
 
 struct TransitionPlanner : public pyhpp::core::PathPlanner {
@@ -53,9 +53,8 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
   void innerPlanner(const pyhpp::core::PathPlanner& planner);
   pyhpp::core::Problem innerProblem() const;
   PathVectorPtr_t planPath(ConfigurationIn_t qInit, matrixIn_t qGoals,
-			   bool resetRoadmap);
-  tuple directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
-			  bool validate);
+                           bool resetRoadmap);
+  tuple directPath(ConfigurationIn_t q1, ConfigurationIn_t q2, bool validate);
   tuple validateConfiguration(ConfigurationIn_t q, std::size_t id) const;
   PathVectorPtr_t optimizePath(const PathPtr_t& path);
   PathVectorPtr_t timeParameterization(const PathVectorPtr_t& path);
@@ -64,7 +63,7 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
   void pathProjector(const PathProjectorPtr_t pathProjector);
   void clearPathOptimizers();
   void addPathOptimizer(const PathOptimizerPtr_t& pathOptimizer);
-}; // struct TransitionPlanner
+};  // struct TransitionPlanner
 }  // namespace manipulation
 }  // namespace pyhpp
-#endif // PYHPP_MANIPULATION_PATH_PLANNER_HH
+#endif  // PYHPP_MANIPULATION_PATH_PLANNER_HH
