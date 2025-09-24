@@ -708,20 +708,13 @@ class ConstraintFactory(ConstraintFactoryAbstract):
         if not graspAlreadyCreated:
             cname = n + "/complement"
             bname = n + "/hold"
-            gripper = self.graph.robot.grippers()[g]
-            handle = self.graph.robot.handles()[h]
-            constraint = handle.createGrasp(gripper, n)
-            complement = handle.createGraspComplement(gripper, cname)
-            both = handle.createGraspAndComplement(gripper, bname)
-            self.registerConstraint(constraint, n)
-            self.registerConstraint(complement, cname)
-            self.registerConstraint(both, bname)
+            constraints = self.graph.createGraspConstraint(n, g, h)
+            self.registerConstraint(constraints[0], n)
+            self.registerConstraint(constraints[1], cname)
+            self.registerConstraint(constraints[2], bname)
         if not pregraspAlreadyCreated:
-            gripper = self.graph.robot.grippers()[g]
-            handle = self.graph.robot.handles()[h]
-            c = handle.clearance + gripper.clearance
-            pregrasp = handle.createPreGrasp(gripper, c, pn)
-            self.registerConstraint(pregrasp, pn)
+            constraint = self.graph.createPreGraspConstraint(pn, g, h)
+            self.registerConstraint(constraint, pn)
         return dict(
             list(
                 zip(
@@ -1070,10 +1063,11 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 self.edge_objects[nf] = forward_trans
                 self.edge_objects[nb] = backward_trans
 
-                nf_ls = nf
-                nb_ls = nb
 
                 if crossedFoliation:
+
+                    nf_ls = nf
+                    nb_ls = nb
                     if i == 0:
                         edgeName = nf_ls = nf + "_ls"
                         containingState = (

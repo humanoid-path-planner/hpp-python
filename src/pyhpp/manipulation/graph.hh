@@ -48,6 +48,8 @@ typedef hpp::manipulation::graph::EdgePtr_t EdgePtr_t;
 typedef hpp::manipulation::graph::State State;
 typedef hpp::manipulation::graph::StatePtr_t StatePtr_t;
 typedef hpp::manipulation::graph::GraphPtr_t GraphPtr_t;
+typedef hpp::manipulation::ConstraintsAndComplements_t ConstraintsAndComplements_t;
+typedef hpp::manipulation::ConstraintAndComplement_t ConstraintAndComplement_t;
 
 /// Result structure for constraint operations
 struct ConstraintResult {
@@ -87,6 +89,8 @@ struct PyWGraph {
   GraphPtr_t obj;
   PyWDevicePtr_t robot;
   PyWProblemPtr_t problem;
+
+  ConstraintsAndComplements_t constraintsAndComplements;
 
   // Constructors
   PyWGraph(const GraphPtr_t& object);
@@ -174,6 +178,12 @@ struct PyWGraph {
       const std::string& name, const boost::python::list& py_surface1,
       const boost::python::list& py_surface2, const value_type& width);
 
+  boost::python::list createGraspConstraint(const std::string& name,
+                                          const std::string& gripper,
+                                          const std::string& handle);
+  ImplicitPtr_t createPreGraspConstraint(const std::string& name,
+                                             const std::string& gripper,
+                                             const std::string& handle);
   boost::python::list getNumericalConstraintsForState(PyWStatePtr_t component);
   boost::python::list getNumericalConstraintsForEdge(PyWEdgePtr_t component);
   boost::python::list getNumericalConstraintsForGraph();
