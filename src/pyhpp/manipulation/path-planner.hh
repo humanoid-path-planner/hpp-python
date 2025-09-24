@@ -46,7 +46,8 @@ typedef hpp::core::RoadmapPtr_t  RoadmapPtr_t ;
 typedef hpp::manipulation::matrixIn_t matrixIn_t;
 
 struct TransitionPlanner : public pyhpp::core::PathPlanner {
-  hpp::manipulation::pathPlanner::TransitionPlannerPtr_t obj;
+  // Dynamic cast pointer into TransitionPlanner
+  hpp::manipulation::pathPlanner::TransitionPlannerPtr_t trObj() const;
   TransitionPlanner(const pyhpp::core::Problem& problem);
   pyhpp::core::PathPlanner innerPlanner() const;
   void innerPlanner(const pyhpp::core::PathPlanner& planner);
