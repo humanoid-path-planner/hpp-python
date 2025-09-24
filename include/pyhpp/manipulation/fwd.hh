@@ -50,6 +50,7 @@ typedef std::shared_ptr<GraphSteeringMethod> PyWGraphSteeringMethodPtr_t;
 void exposeDevice();
 void exposeHandle();
 void exposeGraph();
+void exposePathPlanners();
 void exposeProblem();
 void exposePathProjector();
 void exposeGraphSteeringMethod();

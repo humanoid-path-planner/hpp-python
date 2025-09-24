@@ -42,4 +42,5 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::manipulation::exposeGraph();
   pyhpp::manipulation::exposePathProjector();
   pyhpp::manipulation::exposeGraphSteeringMethod();
+  pyhpp::manipulation::exposePathPlanners();
 }
