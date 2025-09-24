@@ -36,6 +36,8 @@
 namespace pyhpp {
 namespace manipulation {
 
+typedef hpp::manipulation::Configuration_t Configuration_t;
+typedef hpp::manipulation::ConfigurationIn_t ConfigurationIn_t;
 typedef hpp::manipulation::size_type size_type;
 typedef hpp::manipulation::value_type value_type;
 typedef hpp::manipulation::graph::GraphComponent GraphComponent;
