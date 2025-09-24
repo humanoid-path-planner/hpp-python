@@ -64,64 +64,70 @@ TransitionPlanner::TransitionPlanner(const pyhpp::core::Problem& problem)
   );
 }
 
+hpp::manipulation::pathPlanner::TransitionPlannerPtr_t TransitionPlanner::trObj() const
+{
+  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner, obj));
+  return HPP_STATIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner, obj);
+}
+
 pyhpp::core::PathPlanner TransitionPlanner::innerPlanner() const {
   pyhpp::core::PathPlanner pathPlanner;
-  pathPlanner.obj = obj->innerPlanner();
+  pathPlanner.obj = trObj()->innerPlanner();
   return pathPlanner;
 }
 
 void TransitionPlanner::innerPlanner(const pyhpp::core::PathPlanner& planner) {
-  obj->innerPlanner(planner.obj);
+  trObj()->innerPlanner(planner.obj);
 }
 pyhpp::core::Problem TransitionPlanner::innerProblem() const {
-  return pyhpp::core::Problem(obj->innerProblem());
+  return pyhpp::core::Problem(trObj()->innerProblem());
 }
 
 PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit, matrixIn_t qGoals,
 					    bool resetRoadmap) {
-  return obj->planPath(qInit, qGoals, resetRoadmap);
+  return trObj()->planPath(qInit, qGoals, resetRoadmap);
 }
 
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
 		 bool validate) {
   bool success;
   std::string status;
-  PathPtr_t path = obj->directPath(q1, q2, validate, success, status);
+  PathPtr_t path = trObj()->directPath(q1, q2, validate, success, status);
   return boost::python::make_tuple(success, path, status);
 }
 
 tuple TransitionPlanner::validateConfiguration(ConfigurationIn_t q, std::size_t id) const {
   hpp::core::ValidationReportPtr_t report;
-  bool res = obj->validateConfiguration(q, id, report);
+  bool res = trObj()->validateConfiguration(q, id, report);
   return boost::python::make_tuple(res, report);
 }
 
 PathVectorPtr_t TransitionPlanner::optimizePath(const PathPtr_t& path) {
-  return obj->optimizePath(path);
+  return trObj()->optimizePath(path);
 }
 
 PathVectorPtr_t TransitionPlanner::timeParameterization(const PathVectorPtr_t& path) {
-  return obj->timeParameterization(path);
+  return trObj()->timeParameterization(path);
 }
 
 void TransitionPlanner::setEdge(const PyWEdge& transition) {
-  obj->setEdge(transition.obj);
+  trObj()->setEdge(transition.obj);
 }
 
 void TransitionPlanner::setReedsAndSheppSteeringMethod(double turningRadius) {
-  obj->setReedsAndSheppSteeringMethod(turningRadius);
+  trObj()->setReedsAndSheppSteeringMethod(turningRadius);
 }
 
 void TransitionPlanner::pathProjector(const PathProjectorPtr_t pathProjector) {
-  obj->pathProjector(pathProjector);
+  trObj()->pathProjector(pathProjector);
 }
 
 void TransitionPlanner::clearPathOptimizers() {
-  obj->clearPathOptimizers();
+  trObj()->clearPathOptimizers();
 }
 
 void TransitionPlanner::addPathOptimizer(const PathOptimizerPtr_t& pathOptimizer) {
-  obj->addPathOptimizer(pathOptimizer);
+  trObj()->addPathOptimizer(pathOptimizer);
 }
 
 }  // namespace manipulation
