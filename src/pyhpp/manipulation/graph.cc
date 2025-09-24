@@ -757,7 +757,6 @@ ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
   Configuration_t output(input);
   bool success(true);
 
-  value_type dist = 0;
   success = transition->obj->generateTargetConfig(q_rhs, output);
 
   hpp::core::ConfigProjectorPtr_t configProjector(
