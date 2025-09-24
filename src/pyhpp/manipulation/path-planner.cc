@@ -38,37 +38,41 @@ namespace pyhpp {
 namespace manipulation {
 
 void exposePathPlanners() {
-  boost::python::class_<TransitionPlanner, boost::python::bases<pyhpp::core::PathPlanner> > (
+  boost::python::class_<TransitionPlanner,
+                        boost::python::bases<pyhpp::core::PathPlanner> >(
       "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
-    .def("innerPlanner", static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*) () const> (
-        &TransitionPlanner::innerPlanner))
-    .def("innerPlanner", static_cast<void (TransitionPlanner::*)(const pyhpp::core::PathPlanner&)> (
-	&TransitionPlanner::innerPlanner))
-    .def("innerProblem", &TransitionPlanner::innerProblem)
-    .def("planPath", &TransitionPlanner::planPath)
-    .def("directPath", &TransitionPlanner::directPath)
-    .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
-    .def("optimizePath", &TransitionPlanner::optimizePath)
-    .def("timeParameterization", &TransitionPlanner::timeParameterization)
-    .def("setEdge", &TransitionPlanner::setEdge)
-    .def("setReedsAndSheppSteeringMethod", &TransitionPlanner::setReedsAndSheppSteeringMethod)
-    .def("pathProjector", &TransitionPlanner::pathProjector)
-    .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
-    .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
-	
+      .def("innerPlanner",
+           static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
+               &TransitionPlanner::innerPlanner))
+      .def("innerPlanner", static_cast<void (TransitionPlanner::*)(
+                               const pyhpp::core::PathPlanner&)>(
+                               &TransitionPlanner::innerPlanner))
+      .def("innerProblem", &TransitionPlanner::innerProblem)
+      .def("planPath", &TransitionPlanner::planPath)
+      .def("directPath", &TransitionPlanner::directPath)
+      .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
+      .def("optimizePath", &TransitionPlanner::optimizePath)
+      .def("timeParameterization", &TransitionPlanner::timeParameterization)
+      .def("setEdge", &TransitionPlanner::setEdge)
+      .def("setReedsAndSheppSteeringMethod",
+           &TransitionPlanner::setReedsAndSheppSteeringMethod)
+      .def("pathProjector", &TransitionPlanner::pathProjector)
+      .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
+      .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
 }
 
-TransitionPlanner::TransitionPlanner(const pyhpp::core::Problem& problem)
-{
+TransitionPlanner::TransitionPlanner(const pyhpp::core::Problem& problem) {
   obj = hpp::manipulation::pathPlanner::TransitionPlanner::createWithRoadmap(
-      problem.obj, hpp::core::Roadmap::create(problem.obj->distance(), problem.obj->robot())
-  );
+      problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
+                                              problem.obj->robot()));
 }
 
-hpp::manipulation::pathPlanner::TransitionPlannerPtr_t TransitionPlanner::trObj() const
-{
-  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner, obj));
-  return HPP_STATIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner, obj);
+hpp::manipulation::pathPlanner::TransitionPlannerPtr_t
+TransitionPlanner::trObj() const {
+  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner,
+                              obj));
+  return HPP_STATIC_PTR_CAST(hpp::manipulation::pathPlanner::TransitionPlanner,
+                             obj);
 }
 
 pyhpp::core::PathPlanner TransitionPlanner::innerPlanner() const {
@@ -84,13 +88,14 @@ pyhpp::core::Problem TransitionPlanner::innerProblem() const {
   return pyhpp::core::Problem(trObj()->innerProblem());
 }
 
-PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit, matrixIn_t qGoals,
-					    bool resetRoadmap) {
+PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
+                                            matrixIn_t qGoals,
+                                            bool resetRoadmap) {
   // Check sizes of initial and goal configurations
   if (qInit.rows() != obj->problem()->robot()->configSize()) {
     std::ostringstream os;
-    os << "qInit = " << hpp::pinocchio::displayConfig(qInit) << "should be of size "
-       << obj->problem()->robot()->configSize() << ".";
+    os << "qInit = " << hpp::pinocchio::displayConfig(qInit)
+       << "should be of size " << obj->problem()->robot()->configSize() << ".";
     throw std::logic_error(os.str().c_str());
   }
   if (qGoals.cols() != obj->problem()->robot()->configSize()) {
@@ -108,7 +113,7 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit, matrixIn_t 
 }
 
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
-		 bool validate) {
+                                    bool validate) {
   // Check sizes of initial and goal configurations
   if (q1.rows() != obj->problem()->robot()->configSize()) {
     std::ostringstream os;
@@ -128,7 +133,8 @@ tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
   return boost::python::make_tuple(success, path, status);
 }
 
-tuple TransitionPlanner::validateConfiguration(ConfigurationIn_t q, std::size_t id) const {
+tuple TransitionPlanner::validateConfiguration(ConfigurationIn_t q,
+                                               std::size_t id) const {
   hpp::core::ValidationReportPtr_t report;
   bool res = trObj()->validateConfiguration(q, id, report);
   return boost::python::make_tuple(res, report);
@@ -138,7 +144,8 @@ PathVectorPtr_t TransitionPlanner::optimizePath(const PathPtr_t& path) {
   return trObj()->optimizePath(path);
 }
 
-PathVectorPtr_t TransitionPlanner::timeParameterization(const PathVectorPtr_t& path) {
+PathVectorPtr_t TransitionPlanner::timeParameterization(
+    const PathVectorPtr_t& path) {
   return trObj()->timeParameterization(path);
 }
 
@@ -158,10 +165,10 @@ void TransitionPlanner::clearPathOptimizers() {
   trObj()->clearPathOptimizers();
 }
 
-void TransitionPlanner::addPathOptimizer(const PathOptimizerPtr_t& pathOptimizer) {
+void TransitionPlanner::addPathOptimizer(
+    const PathOptimizerPtr_t& pathOptimizer) {
   trObj()->addPathOptimizer(pathOptimizer);
 }
 
 }  // namespace manipulation
 }  // namespace pyhpp
-
