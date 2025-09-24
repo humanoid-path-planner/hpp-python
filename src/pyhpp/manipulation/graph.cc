@@ -42,6 +42,8 @@
 #include <hpp/manipulation/graph/state.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pinocchio/spatial/se3.hpp>
+#include "hpp/manipulation/constraint-set.hh"
+
 namespace {
 
 const char* DOC_CREATESTATE =
@@ -662,7 +664,8 @@ void PyWGraph::registerConstraints(const ImplicitPtr_t& constraint,
                                    const ImplicitPtr_t& complement,
                                    const ImplicitPtr_t& both) {
   try {
-    obj->registerConstraints(constraint, complement, both);
+    constraintsAndComplements.push_back(
+        ConstraintAndComplement_t(constraint, complement, both));
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
@@ -975,6 +978,11 @@ void PyWGraph::display(const char* filename) {
 
 void PyWGraph::initialize() {
   try {
+    obj->clearConstraintsAndComplement();
+    for (std::size_t i = 0; i < constraintsAndComplements.size(); ++i) {
+      const ConstraintAndComplement_t& c = constraintsAndComplements[i];
+      obj->registerConstraints(c.constraint, c.complement, c.both);
+    }
     obj->initialize();
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
@@ -1040,6 +1048,10 @@ boost::python::tuple PyWGraph::createPlacementConstraint(
           hpp::static_pointer_cast<hpp::constraints::ConvexShapeContact>(
               std::get<0>(constraints)->functionPtr()));
       contactFunction->setNormalMargin(margin);
+
+      constraintsAndComplements.push_back(ConstraintAndComplement_t(
+        std::get<0>(constraints), std::get<1>(constraints),
+        std::get<2>(constraints)));
 
       return boost::python::make_tuple(std::get<0>(constraints),
                                        std::get<1>(constraints),
@@ -1139,6 +1151,44 @@ ImplicitPtr_t PyWGraph::createPrePlacementConstraint2(
   return createPrePlacementConstraint(name, py_surface1, py_surface2, width);
 }
 
+boost::python::list PyWGraph::createGraspConstraint(const std::string& name,
+                                          const std::string& gripper,
+                                          const std::string& handle) {
+
+  boost::python::list result;
+
+  GripperPtr_t g = robot->obj->grippers.get(gripper, GripperPtr_t());
+  if (!g) throw std::runtime_error("No gripper with name " + gripper + ".");
+  HandlePtr_t h = robot->obj->handles.get(handle, HandlePtr_t());
+  if (!h) throw std::runtime_error("No handle with name " + handle + ".");
+  const std::string cname = name + "/complement";
+  const std::string bname = name + "/hold";
+  ImplicitPtr_t constraint(h->createGrasp(g, name));
+  ImplicitPtr_t complement(h->createGraspComplement(g, cname));
+  ImplicitPtr_t both(h->createGraspAndComplement(g, bname));
+  
+  result.append(constraint);
+  result.append(complement);
+  result.append(both);
+
+  constraintsAndComplements.push_back(
+      ConstraintAndComplement_t(constraint, complement, both));
+  
+  return result;
+}
+
+ImplicitPtr_t PyWGraph::createPreGraspConstraint(const std::string& name,
+                                             const std::string& gripper,
+                                             const std::string& handle) {
+  GripperPtr_t g = robot->obj->grippers.get(gripper, GripperPtr_t());
+  if (!g) throw std::runtime_error("No gripper with name " + gripper + ".");
+  HandlePtr_t h = robot->obj->handles.get(handle, HandlePtr_t());
+  if (!h) throw std::runtime_error("No handle with name " + handle + ".");
+
+  value_type c = h->clearance() + g->clearance();
+  ImplicitPtr_t constraint = h->createPreGrasp(g, c, name);
+  return constraint;
+}
 // =============================================================================
 // Boost.Python bindings
 // =============================================================================
@@ -1222,7 +1272,8 @@ void exposeGraph() {
       .def("createPrePlacementConstraint",
            &PyWGraph::createPrePlacementConstraint2,
            DOC_CREATEPREPLACEMENTCONSTRAINT)
-
+      .def("createGraspConstraint", &PyWGraph::createGraspConstraint)
+      .def("createPreGraspConstraint", &PyWGraph::createPreGraspConstraint)
       // Configuration error checking
       .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState,
                             DOC_GETCONFIGERRORFORSTATE)
