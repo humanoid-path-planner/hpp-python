@@ -16,8 +16,8 @@
 // received a copy of the GNU Lesser General Public License along with
 // hpp-python. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef PYHPP_STEERING_METHOD_HH
-#define PYHPP_STEERING_METHOD_HH
+#ifndef PYHPP_MANIPULATION_STEERING_METHOD_HH
+#define PYHPP_MANIPULATION_STEERING_METHOD_HH
 
 #include <hpp/core/steering-method.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
@@ -38,4 +38,4 @@ struct GraphSteeringMethod {
 }  // namespace manipulation
 }  // namespace pyhpp
 
-#endif  // PYHPP_STEERING_METHOD_HH
+#endif  // PYHPP_MANIPULATION_STEERING_METHOD_HH
