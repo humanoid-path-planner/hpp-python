@@ -37,6 +37,7 @@ namespace manipulation {
 
 struct Device;
 struct Problem;
+struct PyWEdge;
 struct PyWGraph;
 struct GraphSteeringMethod;
 
