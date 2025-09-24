@@ -30,6 +30,7 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/path-planner.hh>
 #include <hpp/manipulation/path-planner/transition-planner.hh>
+#include <hpp/pinocchio/configuration.hh>
 #include <pyhpp/core/path-planner.hh>
 #include <pyhpp/core/problem.hh>
 
@@ -85,11 +86,42 @@ pyhpp::core::Problem TransitionPlanner::innerProblem() const {
 
 PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit, matrixIn_t qGoals,
 					    bool resetRoadmap) {
+  // Check sizes of initial and goal configurations
+  if (qInit.rows() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "qInit = " << hpp::pinocchio::displayConfig(qInit) << "should be of size "
+       << obj->problem()->robot()->configSize() << ".";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (qGoals.cols() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "qGoals = " << qGoals << "should have "
+       << obj->problem()->robot()->configSize() << " columns.";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (qGoals.rows() < 1) {
+    std::ostringstream os;
+    os << "qGoals = " << qGoals << "should have at least one line.";
+    throw std::logic_error(os.str().c_str());
+  }
   return trObj()->planPath(qInit, qGoals, resetRoadmap);
 }
 
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
 		 bool validate) {
+  // Check sizes of initial and goal configurations
+  if (q1.rows() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "q1 = " << hpp::pinocchio::displayConfig(q1) << "should be of size "
+       << obj->problem()->robot()->configSize() << ".";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (q2.rows() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "q2 = " << hpp::pinocchio::displayConfig(q2) << "should be of size "
+       << obj->problem()->robot()->configSize() << ".";
+    throw std::logic_error(os.str().c_str());
+  }
   bool success;
   std::string status;
   PathPtr_t path = trObj()->directPath(q1, q2, validate, success, status);
