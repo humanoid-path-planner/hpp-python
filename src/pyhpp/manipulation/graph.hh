@@ -189,18 +189,14 @@ struct PyWGraph {
   boost::python::list getNumericalConstraintsForGraph();
 
   // Configuration error checking
-  bool getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input,
-                              hpp::core::vector_t& error);
-  bool getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input,
-                                   hpp::core::vector_t& error);
-  bool getConfigErrorForTransitionLeaf(ConfigurationIn_t leafConfig,
+  boost::python::tuple getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input);
+  boost::python::tuple getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input);
+  boost::python::tuple getConfigErrorForTransitionLeaf(ConfigurationIn_t leafConfig,
                                        ConfigurationIn_t config,
-                                       const PyWEdgePtr_t& edge,
-                                       hpp::core::vector_t& error) const;
-  bool getConfigErrorForTransitionTarget(ConfigurationIn_t leafConfig,
+                                       const PyWEdgePtr_t& edge) const;
+  boost::python::tuple getConfigErrorForTransitionTarget(ConfigurationIn_t leafConfig,
                                          ConfigurationIn_t config,
-                                         const PyWEdgePtr_t& edge,
-                                         hpp::core::vector_t& error) const;
+                                         const PyWEdgePtr_t& edge) const;
 
   // Constraint application
   ConstraintResult applyStateConstraints(PyWStatePtr_t state,
