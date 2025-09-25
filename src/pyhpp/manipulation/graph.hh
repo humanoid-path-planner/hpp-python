@@ -191,12 +191,10 @@ struct PyWGraph {
   // Configuration error checking
   boost::python::tuple getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input);
   boost::python::tuple getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input);
-  boost::python::tuple getConfigErrorForTransitionLeaf(ConfigurationIn_t leafConfig,
-                                       ConfigurationIn_t config,
-                                       const PyWEdgePtr_t& edge) const;
-  boost::python::tuple getConfigErrorForTransitionTarget(ConfigurationIn_t leafConfig,
-                                         ConfigurationIn_t config,
-                                         const PyWEdgePtr_t& edge) const;
+  boost::python::tuple getConfigErrorForTransitionLeaf(const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+                                       ConfigurationIn_t config) const;
+  boost::python::tuple getConfigErrorForTransitionTarget(const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+                                         ConfigurationIn_t config) const;
 
   // Constraint application
   ConstraintResult applyStateConstraints(PyWStatePtr_t state,
