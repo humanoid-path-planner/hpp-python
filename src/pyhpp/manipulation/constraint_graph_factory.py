@@ -1063,9 +1063,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 self.edge_objects[nf] = forward_trans
                 self.edge_objects[nb] = backward_trans
 
-
                 if crossedFoliation:
-
                     nf_ls = nf
                     nb_ls = nb
                     if i == 0:
