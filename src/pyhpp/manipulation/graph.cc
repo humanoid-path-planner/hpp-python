@@ -675,19 +675,19 @@ void PyWGraph::registerConstraints(const ImplicitPtr_t& constraint,
 // Configuration error checking
 // =============================================================================
 
-bool PyWGraph::getConfigErrorForState(PyWStatePtr_t component,
-                                      ConfigurationIn_t input,
-                                      hpp::core::vector_t& error) {
+boost::python::tuple PyWGraph::getConfigErrorForState(PyWStatePtr_t component,
+                                      ConfigurationIn_t input) {
   try {
-    return obj->getConfigErrorForState(input, component->obj, error);
+    hpp::core::vector_t error;
+    bool res = obj->getConfigErrorForState(input, component->obj, error);
+    return boost::python::make_tuple(error, res);
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
 }
 
-bool PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
-                                           ConfigurationIn_t input,
-                                           hpp::core::vector_t& error) {
+boost::python::tuple PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
+                                           ConfigurationIn_t input) {
   try {
     // Check if steering method is properly initialized
     if (!edge->obj->parentGraph()->problem()->manipulationSteeringMethod() ||
@@ -697,22 +697,28 @@ bool PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
              ->innerSteeringMethod()) {
       throw std::logic_error("Could not initialize the steering method.");
     }
-    return obj->getConfigErrorForEdge(input, edge->obj, error);
+    hpp::core::vector_t error;
+    bool res = obj->getConfigErrorForEdge(input, edge->obj, error);
+    return boost::python::make_tuple(error, res);
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
 }
 
-bool PyWGraph::getConfigErrorForTransitionLeaf(
+boost::python::tuple PyWGraph::getConfigErrorForTransitionLeaf(
     ConfigurationIn_t leafConfig, ConfigurationIn_t config,
-    const PyWEdgePtr_t& edge, hpp::core::vector_t& error) const {
-  return obj->getConfigErrorForEdgeLeaf(leafConfig, config, edge->obj, error);
+    const PyWEdgePtr_t& edge) const {
+  hpp::core::vector_t error;
+  bool res = obj->getConfigErrorForEdgeLeaf(leafConfig, config, edge->obj, error);
+  return boost::python::make_tuple(error, res);
 }
 
-bool PyWGraph::getConfigErrorForTransitionTarget(
+boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
     ConfigurationIn_t leafConfig, ConfigurationIn_t config,
-    const PyWEdgePtr_t& edge, hpp::core::vector_t& error) const {
-  return obj->getConfigErrorForEdgeTarget(leafConfig, config, edge->obj, error);
+    const PyWEdgePtr_t& edge) const {
+  hpp::core::vector_t error;
+  bool res = obj->getConfigErrorForEdgeTarget(leafConfig, config, edge->obj, error);
+  return boost::python::make_tuple(error, res);
 }
 
 // =============================================================================
