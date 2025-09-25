@@ -69,16 +69,6 @@ static PathVectorPtr_t path(ProblemSolver& ps, const std::size_t& i) {
   if (i > ps.paths().size()) throw std::invalid_argument("Out of range");
   return ps.paths()[i];
 }
-static tuple pathValidationType(const ProblemSolver& ps) {
-  value_type tol;
-  std::string type = ps.pathValidationType(tol);
-  return boost::python::make_tuple(type, tol);
-}
-static tuple pathProjectorType(const ProblemSolver& ps) {
-  value_type tol;
-  std::string type = ps.pathProjectorType(tol);
-  return boost::python::make_tuple(type, tol);
-}
 
 template <typename Type, typename TypePtr_t = hpp::shared_ptr<Type> >
 struct Builder {
