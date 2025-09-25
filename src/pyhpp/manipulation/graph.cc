@@ -705,17 +705,15 @@ boost::python::tuple PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
   }
 }
 
-boost::python::tuple PyWGraph::getConfigErrorForTransitionLeaf(
-    ConfigurationIn_t leafConfig, ConfigurationIn_t config,
-    const PyWEdgePtr_t& edge) const {
+boost::python::tuple PyWGraph::getConfigErrorForTransitionLeaf( const PyWEdgePtr_t& edge,
+    ConfigurationIn_t leafConfig, ConfigurationIn_t config) const {
   hpp::core::vector_t error;
   bool res = obj->getConfigErrorForEdgeLeaf(leafConfig, config, edge->obj, error);
   return boost::python::make_tuple(error, res);
 }
 
-boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
-    ConfigurationIn_t leafConfig, ConfigurationIn_t config,
-    const PyWEdgePtr_t& edge) const {
+boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(const PyWEdgePtr_t& edge,
+    ConfigurationIn_t leafConfig, ConfigurationIn_t config) const {
   hpp::core::vector_t error;
   bool res = obj->getConfigErrorForEdgeTarget(leafConfig, config, edge->obj, error);
   return boost::python::make_tuple(error, res);
