@@ -48,7 +48,8 @@ typedef hpp::manipulation::graph::EdgePtr_t EdgePtr_t;
 typedef hpp::manipulation::graph::State State;
 typedef hpp::manipulation::graph::StatePtr_t StatePtr_t;
 typedef hpp::manipulation::graph::GraphPtr_t GraphPtr_t;
-typedef hpp::manipulation::ConstraintsAndComplements_t ConstraintsAndComplements_t;
+typedef hpp::manipulation::ConstraintsAndComplements_t
+    ConstraintsAndComplements_t;
 typedef hpp::manipulation::ConstraintAndComplement_t ConstraintAndComplement_t;
 
 /// Result structure for constraint operations
@@ -179,22 +180,26 @@ struct PyWGraph {
       const boost::python::list& py_surface2, const value_type& width);
 
   boost::python::list createGraspConstraint(const std::string& name,
-                                          const std::string& gripper,
-                                          const std::string& handle);
+                                            const std::string& gripper,
+                                            const std::string& handle);
   ImplicitPtr_t createPreGraspConstraint(const std::string& name,
-                                             const std::string& gripper,
-                                             const std::string& handle);
+                                         const std::string& gripper,
+                                         const std::string& handle);
   boost::python::list getNumericalConstraintsForState(PyWStatePtr_t component);
   boost::python::list getNumericalConstraintsForEdge(PyWEdgePtr_t component);
   boost::python::list getNumericalConstraintsForGraph();
 
   // Configuration error checking
-  boost::python::tuple getConfigErrorForState(PyWStatePtr_t component, ConfigurationIn_t input);
-  boost::python::tuple getConfigErrorForTransition(PyWEdgePtr_t edge, ConfigurationIn_t input);
-  boost::python::tuple getConfigErrorForTransitionLeaf(const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
-                                       ConfigurationIn_t config) const;
-  boost::python::tuple getConfigErrorForTransitionTarget(const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
-                                         ConfigurationIn_t config) const;
+  boost::python::tuple getConfigErrorForState(PyWStatePtr_t component,
+                                              ConfigurationIn_t input);
+  boost::python::tuple getConfigErrorForTransition(PyWEdgePtr_t edge,
+                                                   ConfigurationIn_t input);
+  boost::python::tuple getConfigErrorForTransitionLeaf(
+      const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+      ConfigurationIn_t config) const;
+  boost::python::tuple getConfigErrorForTransitionTarget(
+      const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+      ConfigurationIn_t config) const;
 
   // Constraint application
   ConstraintResult applyStateConstraints(PyWStatePtr_t state,

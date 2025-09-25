@@ -42,6 +42,7 @@
 #include <hpp/manipulation/graph/state.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pinocchio/spatial/se3.hpp>
+
 #include "hpp/manipulation/constraint-set.hh"
 
 namespace {
@@ -676,7 +677,7 @@ void PyWGraph::registerConstraints(const ImplicitPtr_t& constraint,
 // =============================================================================
 
 boost::python::tuple PyWGraph::getConfigErrorForState(PyWStatePtr_t component,
-                                      ConfigurationIn_t input) {
+                                                      ConfigurationIn_t input) {
   try {
     hpp::core::vector_t error;
     bool res = obj->getConfigErrorForState(input, component->obj, error);
@@ -686,8 +687,8 @@ boost::python::tuple PyWGraph::getConfigErrorForState(PyWStatePtr_t component,
   }
 }
 
-boost::python::tuple PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
-                                           ConfigurationIn_t input) {
+boost::python::tuple PyWGraph::getConfigErrorForTransition(
+    PyWEdgePtr_t edge, ConfigurationIn_t input) {
   try {
     // Check if steering method is properly initialized
     if (!edge->obj->parentGraph()->problem()->manipulationSteeringMethod() ||
@@ -705,17 +706,21 @@ boost::python::tuple PyWGraph::getConfigErrorForTransition(PyWEdgePtr_t edge,
   }
 }
 
-boost::python::tuple PyWGraph::getConfigErrorForTransitionLeaf( const PyWEdgePtr_t& edge,
-    ConfigurationIn_t leafConfig, ConfigurationIn_t config) const {
+boost::python::tuple PyWGraph::getConfigErrorForTransitionLeaf(
+    const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+    ConfigurationIn_t config) const {
   hpp::core::vector_t error;
-  bool res = obj->getConfigErrorForEdgeLeaf(leafConfig, config, edge->obj, error);
+  bool res =
+      obj->getConfigErrorForEdgeLeaf(leafConfig, config, edge->obj, error);
   return boost::python::make_tuple(error, res);
 }
 
-boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(const PyWEdgePtr_t& edge,
-    ConfigurationIn_t leafConfig, ConfigurationIn_t config) const {
+boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
+    const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
+    ConfigurationIn_t config) const {
   hpp::core::vector_t error;
-  bool res = obj->getConfigErrorForEdgeTarget(leafConfig, config, edge->obj, error);
+  bool res =
+      obj->getConfigErrorForEdgeTarget(leafConfig, config, edge->obj, error);
   return boost::python::make_tuple(error, res);
 }
 
@@ -1054,8 +1059,8 @@ boost::python::tuple PyWGraph::createPlacementConstraint(
       contactFunction->setNormalMargin(margin);
 
       constraintsAndComplements.push_back(ConstraintAndComplement_t(
-        std::get<0>(constraints), std::get<1>(constraints),
-        std::get<2>(constraints)));
+          std::get<0>(constraints), std::get<1>(constraints),
+          std::get<2>(constraints)));
 
       return boost::python::make_tuple(std::get<0>(constraints),
                                        std::get<1>(constraints),
@@ -1156,9 +1161,8 @@ ImplicitPtr_t PyWGraph::createPrePlacementConstraint2(
 }
 
 boost::python::list PyWGraph::createGraspConstraint(const std::string& name,
-                                          const std::string& gripper,
-                                          const std::string& handle) {
-
+                                                    const std::string& gripper,
+                                                    const std::string& handle) {
   boost::python::list result;
 
   GripperPtr_t g = robot->obj->grippers.get(gripper, GripperPtr_t());
@@ -1170,20 +1174,20 @@ boost::python::list PyWGraph::createGraspConstraint(const std::string& name,
   ImplicitPtr_t constraint(h->createGrasp(g, name));
   ImplicitPtr_t complement(h->createGraspComplement(g, cname));
   ImplicitPtr_t both(h->createGraspAndComplement(g, bname));
-  
+
   result.append(constraint);
   result.append(complement);
   result.append(both);
 
   constraintsAndComplements.push_back(
       ConstraintAndComplement_t(constraint, complement, both));
-  
+
   return result;
 }
 
 ImplicitPtr_t PyWGraph::createPreGraspConstraint(const std::string& name,
-                                             const std::string& gripper,
-                                             const std::string& handle) {
+                                                 const std::string& gripper,
+                                                 const std::string& handle) {
   GripperPtr_t g = robot->obj->grippers.get(gripper, GripperPtr_t());
   if (!g) throw std::runtime_error("No gripper with name " + gripper + ".");
   HandlePtr_t h = robot->obj->handles.get(handle, HandlePtr_t());
