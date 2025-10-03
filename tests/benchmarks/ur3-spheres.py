@@ -3,8 +3,8 @@ import numpy as np
 import datetime as dt
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf
-from pyhpp.core import createDichotomy, DiffusingPlanner, Straight
+from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf, ManipulationPlanner
+from pyhpp.core import createDichotomy, Straight
 
 from pyhpp.constraints import (
     Transformation,
@@ -70,10 +70,8 @@ for i in range(nSphere):
     )
     objects.append("sphere{0}".format(i))
 
-# Load kitchen environment
-kitchen_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(
-    robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, kitchen_pose
+    robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 )
 
 model = robot.model()
@@ -93,7 +91,7 @@ for i in range(nSphere):
     # placement constraint
     placementName = "place_sphere{0}".format(i)
     Id = SE3.Identity()
-    q = Quaternion(0, 0, 0, 1)
+    q = Quaternion(1, 0, 0, 0)
     ballPlacement = SE3(q, np.array([0, 0, 0.02]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation.create(
@@ -155,7 +153,7 @@ for i in range(nSphere):
 
     preplacementName = "preplace_sphere{0}".format(i)
     Id = SE3.Identity()
-    q = Quaternion(0, 0, 0, 1)
+    q = Quaternion(1, 0, 0, 0)
     ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation.create(
@@ -174,57 +172,19 @@ for i in range(nSphere):
     implicit_mask = [True, True, True]
     implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
-
-q_init = [
-    pi / 6,
-    -pi / 2,
-    pi / 2,
-    0,
-    0,
-    0,
-    0.2,
-    0,
-    0.02,
-    0,
-    0,
-    0,
-    1,
-    0.3,
-    0,
-    0.02,
-    0,
-    0,
-    0,
-    1,
-]
-q_goal = [
-    pi / 6,
-    -pi / 2,
-    pi / 2,
-    0,
-    0,
-    0,
-    0.3,
-    0,
-    0.02,
-    0,
-    0,
-    0,
-    1,
-    0.2,
-    0,
-    0.02,
-    0,
-    0,
-    0,
-    1,
-]
+    
+q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
+          0.2, 0, 0.02, 0, 0, 0, 1,
+          0.3, 0, 0.02, 0, 0, 0, 1,]
+q_goal = [pi/6, -pi/2, pi/2, 0, 0, 0,
+          0.3, 0, 0.02, 0, 0, 0, 1,
+          0.2, 0, 0.02, 0, 0, 0, 1,]
 
 grippers = ["ur3/gripper"]
 handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
 contactsPerObject = [[] for i in range(nSphere)]
 
-cg.maxIterations(100)
+cg.maxIterations(40)
 cg.errorThreshold(0.0001)
 factory = ConstraintGraphFactory(cg, constraints)
 
@@ -249,25 +209,12 @@ problem.pathProjector = createProgressiveProjector(
 )
 
 cg.initialize()
+
 problem.initConfig(np.array(q_init))
 problem.addGoalConfig(np.array(q_goal))
 problem.constraintGraph(cg)
-diffusingPlanner = DiffusingPlanner(problem)
-diffusingPlanner.maxIterations(5000)
-
-
-def apply_constraints(graph, configurationShooter, state):
-    for i in range(100):
-        q = configurationShooter.shoot()
-        res = graph.applyStateConstraints(state, q)
-        if res.success:
-            print("Found configuration satisfying constraints")
-            return
-    print("FAILED")
-
-
-for s in cg.getStates():
-    apply_constraints(cg, problem.configurationShooter(), s)
+manipulationPlanner = ManipulationPlanner(problem)
+manipulationPlanner.maxIterations(5000)
 
 # Run benchmark
 #
@@ -277,8 +224,9 @@ totalNumberNodes = 0
 success = 0
 for i in range(args.N):
     try:
+        manipulationPlanner.roadmap().clear()
         t1 = dt.datetime.now()
-        diffusingPlanner.solve()
+        manipulationPlanner.solve()
         t2 = dt.datetime.now()
     except Exception as e:
         print(f"Failed to plan path: {e}")
@@ -287,7 +235,7 @@ for i in range(args.N):
         success += 1
         totalTime += t2 - t1
         print(t2 - t1)
-        n = len(diffusingPlanner.roadmap().nodes())
+        n = len(manipulationPlanner.roadmap().nodes())
         totalNumberNodes += n
         print("Number nodes: " + str(n))
 if args.N != 0:
