@@ -185,7 +185,7 @@ for i in range(nSphere):
     implicit_mask = [True, True, True]
     implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
-    
+
 q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
           0.2, 0, 0.02, 0, 0, 0, 1,
           0.3, 0, 0.02, 0, 0, 0, 1,]
