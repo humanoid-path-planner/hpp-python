@@ -3,7 +3,14 @@ import numpy as np
 import datetime as dt
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf, ManipulationPlanner
+from pyhpp.manipulation import (
+    Device,
+    Graph,
+    Problem,
+    createProgressiveProjector,
+    urdf,
+    ManipulationPlanner,
+)
 from pyhpp.core import createDichotomy, Straight
 
 from pyhpp.constraints import (
@@ -71,7 +78,13 @@ for i in range(nSphere):
     objects.append("sphere{0}".format(i))
 
 urdf.loadModel(
-    robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
+    robot,
+    0,
+    "kitchen_area",
+    "anchor",
+    ground_urdf,
+    ground_srdf,
+    SE3(rotation=np.identity(3), translation=np.array([0, 0, 0])),
 )
 
 model = robot.model()
@@ -173,12 +186,50 @@ for i in range(nSphere):
     implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
 
-q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.2, 0, 0.02, 0, 0, 0, 1,
-          0.3, 0, 0.02, 0, 0, 0, 1,]
-q_goal = [pi/6, -pi/2, pi/2, 0, 0, 0,
-          0.3, 0, 0.02, 0, 0, 0, 1,
-          0.2, 0, 0.02, 0, 0, 0, 1,]
+q_init = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
+q_goal = [
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+]
 
 grippers = ["ur3/gripper"]
 handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
