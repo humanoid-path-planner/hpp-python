@@ -172,7 +172,7 @@ for i in range(nSphere):
     implicit_mask = [True, True, True]
     implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
-    
+
 q_init = [pi/6, -pi/2, pi/2, 0, 0, 0,
           0.2, 0, 0.02, 0, 0, 0, 1,
           0.3, 0, 0.02, 0, 0, 0, 1,]
@@ -191,6 +191,14 @@ factory = ConstraintGraphFactory(cg, constraints)
 factory.setGrippers(grippers)
 factory.setObjects(objects, handlesPerObject, contactsPerObject)
 factory.generate()
+
+# Uncomment to help M-RRT pathplanner
+# for e in ['ur3/gripper > sphere0/handle | f_ls',
+#           'ur3/gripper > sphere1/handle | f_ls'] :
+#  cg.setWeight(cg.getTransition(e), 100)
+# for e in ['ur3/gripper < sphere0/handle | 0-0_ls',
+#          'ur3/gripper < sphere1/handle | 0-1_ls'] :
+#  cg.setWeight(cg.getTransition(e), 100)
 
 for i in range(nSphere):
     e = cg.getTransition("ur3/gripper > sphere{}/handle | f_23".format(i))
