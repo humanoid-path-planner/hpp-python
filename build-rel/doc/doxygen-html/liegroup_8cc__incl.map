@@ -1,0 +1,30 @@
+<map id="src/pyhpp/pinocchio/liegroup.cc" name="src/pyhpp/pinocchio/liegroup.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="344,5,494,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="126,359,261,387"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="343,34,256,40,161,51,78,71,48,84,28,100,17,116,11,132,10,166,22,201,44,236,73,269,104,300,164,348,160,352,101,304,69,273,40,239,17,203,5,167,6,131,12,113,24,96,45,79,77,66,160,46,256,34,343,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="763,359,918,387"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="495,34,656,57,731,74,761,85,783,96,808,115,826,134,840,154,849,175,858,223,864,283,864,311,855,345,849,344,859,311,859,283,853,224,844,177,835,156,822,137,804,119,780,100,759,89,729,79,655,62,494,39"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="55,98,223,143"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="353,53,221,95,220,90,351,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="247,98,415,143"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="400,52,364,89,360,85,396,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="439,106,577,134"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="442,48,487,93,483,97,438,52"/>
+<area shape="rect" id="Node000007" href="$pinocchio_2urdf_2fwd_8hh.html" title=" " alt="" coords="204,191,362,235"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="344,34,261,41,171,53,93,72,64,85,45,100,35,119,36,135,47,150,67,163,124,183,190,197,188,203,122,188,65,167,44,153,31,137,29,118,41,96,61,80,91,67,170,47,260,35,343,29"/>
+<area shape="rect" id="Node000008" href="$util_8hh.html" title=" " alt="" coords="544,283,651,311"/>
+<area shape="poly" id="edge16_Node000001_Node000008" title=" " alt="" coords="495,38,548,59,572,75,592,96,603,117,611,140,617,187,614,231,608,268,603,268,609,231,612,187,606,141,599,119,587,100,569,79,546,63,493,43"/>
+<area shape="rect" id="Node000011" href="$ref_8hh.html" title=" " alt="" coords="668,106,770,134"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="492,48,661,99,660,104,490,53"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="363,232,533,276,532,282,361,237"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="544,311,277,359,276,354,543,306"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="642,309,783,351,781,357,640,314"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="457,359,597,387"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="587,313,552,350,548,346,583,310"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="621,359,683,387"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="610,310,636,345,631,348,605,313"/>
+<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="750,132,786,155,803,171,817,189,834,229,843,271,846,310,846,344,840,344,841,311,838,271,829,230,813,192,799,175,782,159,747,137"/>
+<area shape="rect" id="Node000012" href="$constraints_2fwd_8hh.html" title=" " alt="" coords="635,199,803,227"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="722,135,722,184,716,184,716,135"/>
+<area shape="poly" id="edge15_Node000012_Node000008" title=" " alt="" coords="701,230,631,277,628,272,698,225"/>
+</map>

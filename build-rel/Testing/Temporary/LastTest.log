@@ -1,0 +1,198 @@
+Start testing: Oct 03 07:51 CEST
+----------------------------------------------------------
+1/9 Testing: imports
+1/9 Test: imports
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/imports.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"imports" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"imports" end time: Oct 03 07:51 CEST
+"imports" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/9 Testing: liegroup
+2/9 Test: liegroup
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/liegroup.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"liegroup" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+el1
+->Lie group element in R^3 represented by vector (0 1 2)
+el2
+->Lie group element in R^3 represented by vector (1 2 3)
+v = el2 - el1
+->[1. 1. 1.]
+el3 = el1 + v
+->Lie group element in R^3 represented by vector (1 2 3)
+<end of output>
+Test time =   0.24 sec
+----------------------------------------------------------
+Test Passed.
+"liegroup" end time: Oct 03 07:51 CEST
+"liegroup" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/9 Testing: load_ur3
+3/9 Test: load_ur3
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/load_ur3.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"load_ur3" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+Position: position, active dof: [ 0, 6], 
+  Joint1: World
+  Frame in joint 1
+    R =   1, 0, 0
+          0, 1, 0
+          0, 0, 1  
+    p = 0, 0, 0
+  Joint2: wrist_3_joint
+  Frame in joint 2
+    R =   1, 0, 0
+          0, 1, 0
+          0, 0, 1  
+    p = 0, 0, 0
+  mask: 1, 1, 1, 
+R^3: [0.4569  0.11235 0.06655]
+[[-1.12350000e-01 -8.53499992e-02 -8.53499996e-02 -8.53500000e-02]
+ [ 4.56900000e-01  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00 -4.56900000e-01 -2.13250000e-01 -3.06388859e-10]]
+<end of output>
+Test time =   0.38 sec
+----------------------------------------------------------
+Test Passed.
+"load_ur3" end time: Oct 03 07:51 CEST
+"load_ur3" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/9 Testing: differentiable-function
+4/9 Test: differentiable-function
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/differentiable-function.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"differentiable-function" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+Differentiable function: Test
+Lie group element in R^2 represented by vector (2 2)
+[[2. 0.]
+ [0. 2.]]
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Passed.
+"differentiable-function" end time: Oct 03 07:51 CEST
+"differentiable-function" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/9 Testing: path-planner
+5/9 Test: path-planner
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path-planner.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"path-planner" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<frozen importlib._bootstrap>:488: RuntimeWarning: to-Python converter for int already registered; second conversion method ignored.
+0
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"path-planner" end time: Oct 03 07:51 CEST
+"path-planner" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/9 Testing: rrt
+6/9 Test: rrt
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/rrt.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"rrt" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<frozen importlib._bootstrap>:488: RuntimeWarning: to-Python converter for int already registered; second conversion method ignored.
+Problem solved!
+PathVector:time in [ 0, 6.37943 ]
+
+  StraightPath:time in [ 0, 2.90558 ]
+  
+    initial configuration:   0.2, -1.57,  -1.8,     0,   0.8,     0
+    final configuration:    -1.03533,   1.68534,  -1.39628,  0.339103, -0.142019,   0.80972
+  
+  StraightPath:time in [ 0, 3.47385 ]
+  
+    initial configuration:  -1.03533,   1.68534,  -1.39628,  0.339103, -0.142019,   0.80972
+    final configuration:    1.57, -1.57,  -1.8,     0,   0.8,     0
+  
+  
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"rrt" end time: Oct 03 07:51 CEST
+"rrt" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/9 Testing: path
+7/9 Test: path
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"path" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<frozen importlib._bootstrap>:488: RuntimeWarning: to-Python converter for int already registered; second conversion method ignored.
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Passed.
+"path" end time: Oct 03 07:51 CEST
+"path" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/9 Testing: constraint_graph
+8/9 Test: constraint_graph
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/constraint_graph.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"constraint_graph" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<frozen importlib._bootstrap>:488: RuntimeWarning: to-Python converter for int already registered; second conversion method ignored.
+after applying constraints:  [ 2.13746246e+00 -6.63611642e-01  1.77876488e+00  1.87515403e+00
+  2.58645663e+00 -1.90034079e+00 -1.23523115e-01  2.23171920e-01
+  1.50000137e-01 -1.77011048e-06 -1.44294868e-06 -9.91270661e-01
+  1.31842622e-01]
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Passed.
+"constraint_graph" end time: Oct 03 07:51 CEST
+"constraint_graph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/9 Testing: graph_factory2
+9/9 Test: graph_factory2
+Command: "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/graph_factory2.py"
+Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+"graph_factory2" start time: Oct 03 07:51 CEST
+Output:
+----------------------------------------------------------
+<frozen importlib._bootstrap>:488: RuntimeWarning: to-Python converter for int already registered; second conversion method ignored.
+Script completed!
+<end of output>
+Test time =   0.33 sec
+----------------------------------------------------------
+Test Passed.
+"graph_factory2" end time: Oct 03 07:51 CEST
+"graph_factory2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 03 07:51 CEST

@@ -1,0 +1,922 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      The system is: Linux - 6.8.0-84-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/3.31.5/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8ddb4/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8ddb4.dir/build.make CMakeFiles/cmTC_8ddb4.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD'
+        Building CXX object CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -v -o CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/bin/g++
+        Target: x86_64-unknown-linux-gnu
+        Configured with: ../gcc-14-20241116/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.3.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116/include/c++/14-20241116/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c,c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 14.2.1 20241116 (GCC) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/'
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/cc1plus -quiet -v -D_GNU_SOURCE -U _FORTIFY_SOURCE -U _FORTIFY_SOURCE -D _FORTIFY_SOURCE=3 -idirafter /nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include -idirafter /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed -isystem /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include -isystem /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include -isystem /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include -isystem /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include -isystem /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include -isystem /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include -isystem /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include -isystem /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include -isystem /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include -isystem /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include -isystem /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include -isystem /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include -isystem /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include -isystem /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include -isystem /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include -isystem /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include -isystem /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include -isystem /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include -isystem /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include -isystem /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include -isystem /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include -isystem /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include -isystem /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include -isystem /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include -isystem /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include -isystem /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include -isystem /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include -isystem /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include -isystem /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include -isystem /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include -isystem /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include -isystem /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include -isystem /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include -isystem /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include -isystem /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include -isystem /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include -isystem /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include -isystem /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include -isystem /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include -isystem /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include -isystem /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include -isystem /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include -isystem /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include -isystem /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_79f71.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -O2 -Wformat=1 -Wformat-security -Werror=format-security -version -fdiagnostics-color=always -fPIC -fstack-clash-protection -fzero-call-used-regs=used-gpr -fstack-protector-strong -fno-strict-overflow -frandom-seed=pqs7mpr8ny --param=ssp-buffer-size=4 -o /tmp/nix-shell.QEIkMQ/ccV1W5Ia.s
+        GNU C++17 (GCC) version 14.2.1 20241116 (x86_64-unknown-linux-gnu)
+        	compiled by GNU C version 14.2.1 20241116, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.20-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include"
+        ignoring duplicate directory "/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include"
+        ignoring duplicate directory "/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include"
+        ignoring duplicate directory "/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include"
+        ignoring duplicate directory "/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include"
+        ignoring duplicate directory "/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include"
+        ignoring duplicate directory "/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include"
+        ignoring duplicate directory "/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include"
+        ignoring duplicate directory "/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include"
+        ignoring duplicate directory "/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include"
+        ignoring duplicate directory "/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include"
+        ignoring duplicate directory "/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include"
+        ignoring duplicate directory "/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include"
+        ignoring duplicate directory "/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include"
+        ignoring duplicate directory "/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include"
+        ignoring duplicate directory "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include"
+        ignoring duplicate directory "/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include"
+        ignoring duplicate directory "/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include"
+        ignoring duplicate directory "/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include"
+        ignoring duplicate directory "/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include"
+        ignoring duplicate directory "/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include"
+        ignoring duplicate directory "/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include"
+        ignoring nonexistent directory "/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../../x86_64-unknown-linux-gnu/include"
+        ignoring duplicate directory "/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include"
+        ignoring duplicate directory "/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include
+         /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include
+         /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include
+         /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include
+         /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include
+         /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include
+         /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include
+         /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include
+         /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include
+         /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include
+         /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include
+         /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include
+         /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include
+         /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include
+         /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include
+         /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include
+         /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include
+         /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include
+         /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include
+         /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include
+         /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include
+         /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//x86_64-unknown-linux-gnu
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//backward
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed
+         /nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include
+        End of search list.
+        Compiler executable checksum: 05d1c2c35714ddc5c516e37c8e31d33e
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/'
+         /nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/as -v --64 -o CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o /tmp/nix-shell.QEIkMQ/ccV1W5Ia.s
+        GNU assembler version 2.43.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.43.1
+        COMPILER_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/
+        LIBRARY_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_8ddb4
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ddb4.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/bin/g++
+        COLLECT_LTO_WRAPPER=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper
+        Target: x86_64-unknown-linux-gnu
+        Configured with: ../gcc-14-20241116/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.3.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116/include/c++/14-20241116/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c,c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 14.2.1 20241116 (GCC) 
+        COMPILER_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/
+        LIBRARY_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../
+        COLLECT_GCC_OPTIONS='-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-o' 'cmTC_8ddb4' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=6syrdxirla' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib' '-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8ddb4.'
+         /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/collect2 -plugin /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/nix-shell.s7EZ3R/cchJDIDR.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib64/ld-linux-x86-64.so.2 -o cmTC_8ddb4 /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116 -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1 -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../.. -dynamic-linker=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -rpath /home/psardin/devel/nix-hpp/outputs/out/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o
+        collect2 version 14.2.1 20241116
+        /nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/ld -plugin /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/nix-shell.s7EZ3R/cchJDIDR.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib64/ld-linux-x86-64.so.2 -o cmTC_8ddb4 /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116 -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1 -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../.. -dynamic-linker=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -rpath /home/psardin/devel/nix-hpp/outputs/out/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o
+        GNU ld (GNU Binutils) 2.43.1
+        COLLECT_GCC_OPTIONS='-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-o' 'cmTC_8ddb4' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=6syrdxirla' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib' '-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8ddb4.'
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -v -Wl,-v CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_8ddb4
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include]
+          add: [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include]
+          add: [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include]
+          add: [/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include]
+          add: [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include]
+          add: [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include]
+          add: [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include]
+          add: [/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include]
+          add: [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include]
+          add: [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include]
+          add: [/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include]
+          add: [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include]
+          add: [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include]
+          add: [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include]
+          add: [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include]
+          add: [/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include]
+          add: [/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include]
+          add: [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include]
+          add: [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include]
+          add: [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include]
+          add: [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include]
+          add: [/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//x86_64-unknown-linux-gnu]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//backward]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include]
+          add: [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed]
+          add: [/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include]
+        end of search list found
+        collapse include dir [/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include] ==> [/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include]
+        collapse include dir [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include] ==> [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include]
+        collapse include dir [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include] ==> [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include]
+        collapse include dir [/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include] ==> [/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include]
+        collapse include dir [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include] ==> [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include]
+        collapse include dir [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include] ==> [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include]
+        collapse include dir [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include] ==> [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include]
+        collapse include dir [/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include] ==> [/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include]
+        collapse include dir [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include] ==> [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include]
+        collapse include dir [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include] ==> [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include]
+        collapse include dir [/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include] ==> [/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include]
+        collapse include dir [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include] ==> [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include]
+        collapse include dir [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include] ==> [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include]
+        collapse include dir [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include] ==> [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include]
+        collapse include dir [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include] ==> [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include]
+        collapse include dir [/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include] ==> [/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include]
+        collapse include dir [/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include] ==> [/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include]
+        collapse include dir [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include] ==> [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include]
+        collapse include dir [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include] ==> [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include]
+        collapse include dir [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include] ==> [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include]
+        collapse include dir [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include] ==> [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include]
+        collapse include dir [/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include] ==> [/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//x86_64-unknown-linux-gnu] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/x86_64-unknown-linux-gnu]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//backward] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/backward]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include]
+        collapse include dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed]
+        collapse include dir [/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include] ==> [/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include]
+        implicit include dirs: [/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include;/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include;/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include;/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include;/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include;/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include;/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include;/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include;/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include;/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include;/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include;/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include;/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include;/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include;/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include;/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include;/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include;/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include;/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include;/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include;/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include;/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/x86_64-unknown-linux-gnu;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/backward;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed;/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD']
+        ignore line: []
+        ignore line: [Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8ddb4/fast]
+        ignore line: [gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD']
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_8ddb4.dir/build.make CMakeFiles/cmTC_8ddb4.dir/build]
+        ignore line: [gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-ig98uD']
+        ignore line: [Building CXX object CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -v -o CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/bin/g++]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Configured with: ../gcc-14-20241116/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.3.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116/include/c++/14-20241116/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 14.2.1 20241116 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/']
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/cc1plus -quiet -v -D_GNU_SOURCE -U _FORTIFY_SOURCE -U _FORTIFY_SOURCE -D _FORTIFY_SOURCE=3 -idirafter /nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include -idirafter /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed -isystem /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include -isystem /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include -isystem /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include -isystem /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include -isystem /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include -isystem /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include -isystem /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include -isystem /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include -isystem /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include -isystem /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include -isystem /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include -isystem /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include -isystem /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include -isystem /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include -isystem /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include -isystem /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include -isystem /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include -isystem /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include -isystem /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include -isystem /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include -isystem /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include -isystem /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include -isystem /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include -isystem /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include -isystem /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include -isystem /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include -isystem /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include -isystem /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include -isystem /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include -isystem /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include -isystem /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include -isystem /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include -isystem /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include -isystem /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include -isystem /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include -isystem /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include -isystem /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include -isystem /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include -isystem /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include -isystem /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include -isystem /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include -isystem /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include -isystem /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include -isystem /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_79f71.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -O2 -Wformat=1 -Wformat-security -Werror=format-security -version -fdiagnostics-color=always -fPIC -fstack-clash-protection -fzero-call-used-regs=used-gpr -fstack-protector-strong -fno-strict-overflow -frandom-seed=pqs7mpr8ny --param=ssp-buffer-size=4 -o /tmp/nix-shell.QEIkMQ/ccV1W5Ia.s]
+        ignore line: [GNU C++17 (GCC) version 14.2.1 20241116 (x86_64-unknown-linux-gnu)]
+        ignore line: [	compiled by GNU C version 14.2.1 20241116  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.20-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include"]
+        ignore line: [ignoring nonexistent directory "/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../../x86_64-unknown-linux-gnu/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include]
+        ignore line: [ /nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include]
+        ignore line: [ /nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include]
+        ignore line: [ /nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include]
+        ignore line: [ /nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include]
+        ignore line: [ /nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include]
+        ignore line: [ /nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include]
+        ignore line: [ /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include]
+        ignore line: [ /nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include]
+        ignore line: [ /nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include]
+        ignore line: [ /nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include]
+        ignore line: [ /nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include]
+        ignore line: [ /nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include]
+        ignore line: [ /nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include]
+        ignore line: [ /nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include]
+        ignore line: [ /nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include]
+        ignore line: [ /nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include]
+        ignore line: [ /nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include]
+        ignore line: [ /nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include]
+        ignore line: [ /nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include]
+        ignore line: [ /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include]
+        ignore line: [ /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116/]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//x86_64-unknown-linux-gnu]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include/c++/14-20241116//backward]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/include]
+        ignore line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed]
+        ignore line: [ /nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 05d1c2c35714ddc5c516e37c8e31d33e]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/']
+        ignore line: [ /nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/as -v --64 -o CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o /tmp/nix-shell.QEIkMQ/ccV1W5Ia.s]
+        ignore line: [GNU assembler version 2.43.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.43.1]
+        ignore line: [COMPILER_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-c' '-o' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.o' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=pqs7mpr8ny' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_79f71.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_8ddb4]
+        ignore line: [/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ddb4.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Configured with: ../gcc-14-20241116/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.1/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.3.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.40-66-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-14-20241116/include/c++/14-20241116/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 14.2.1 20241116 (GCC) ]
+        ignore line: [COMPILER_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/:/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib/:/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/:/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fPIC' '-fstack-clash-protection' '-O2' '-U' '_FORTIFY_SOURCE' '-Wformat=1' '-Wformat-security' '-Werror=format-security' '-fzero-call-used-regs=used-gpr' '-fstack-protector-strong' '--param=ssp-buffer-size=4' '-fno-strict-overflow' '-v' '-o' 'cmTC_8ddb4' '-U' '_FORTIFY_SOURCE' '-D' '_FORTIFY_SOURCE=3' '-B' '/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/' '-idirafter' '/nix/store/71xyq87gpb2qrwn314p0sf2n002lgd91-glibc-2.40-66-dev/include' '-idirafter' '/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/include-fixed' '-B' '/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-B' '/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/' '-frandom-seed=6syrdxirla' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-isystem' '/nix/store/6wl404y9r4gvds9qzwdvs7500iscj48z-assimp-5.4.3-dev/include' '-isystem' '/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/include' '-isystem' '/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/include' '-isystem' '/nix/store/h1ryid6kgb2s8nbghn4wg750z5jl27nk-zlib-1.3.1-dev/include' '-isystem' '/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/include' '-isystem' '/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/include' '-isystem' '/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/include' '-isystem' '/nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include' '-isystem' '/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/include' '-isystem' '/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/include' '-isystem' '/nix/store/s38jf0la3gdx1v2gr6317fjc2czlhf2q-libglvnd-1.7.0-dev/include' '-isystem' '/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/include' '-isystem' '/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/include' '-isystem' '/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/include' '-isystem' '/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/include' '-isystem' '/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/include' '-isystem' '/nix/store/m0cqla82zsrmydcj59gf14jk4b6kq3j5-boost-1.87.0-dev/include' '-isystem' '/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/include' '-isystem' '/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/include' '-isystem' '/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/include' '-isystem' '/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include' '-isystem' '/nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib' '-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib' '-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib' '-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib' '-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib' '-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib' '-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib' '-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib' '-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib' '-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib' '-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib' '-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib' '-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib' '-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib' '-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib' '-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib' '-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib' '-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib' '-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib' '-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib' '-L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib' '-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_8ddb4.']
+        link line: [ /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/collect2 -plugin /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/nix-shell.s7EZ3R/cchJDIDR.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib64/ld-linux-x86-64.so.2 -o cmTC_8ddb4 /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116 -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1 -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../.. -dynamic-linker=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -rpath /home/psardin/devel/nix-hpp/outputs/out/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o]
+          arg [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/nix-shell.s7EZ3R/cchJDIDR.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_8ddb4] ==> ignore
+          arg [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o] ==> obj [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o]
+          arg [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o] ==> obj [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o]
+          arg [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o] ==> obj [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o]
+          arg [-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib] ==> dir [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib]
+          arg [-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib] ==> dir [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib]
+          arg [-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib] ==> dir [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib]
+          arg [-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib] ==> dir [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib]
+          arg [-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib] ==> dir [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib]
+          arg [-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib] ==> dir [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib]
+          arg [-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib] ==> dir [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib]
+          arg [-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib] ==> dir [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib]
+          arg [-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib] ==> dir [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib]
+          arg [-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib] ==> dir [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib]
+          arg [-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib] ==> dir [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib]
+          arg [-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib] ==> dir [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib]
+          arg [-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib] ==> dir [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib]
+          arg [-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib] ==> dir [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib]
+          arg [-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib] ==> dir [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib]
+          arg [-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib] ==> dir [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib]
+          arg [-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib] ==> dir [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib]
+          arg [-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib] ==> dir [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib]
+          arg [-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib] ==> dir [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib]
+          arg [-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib] ==> dir [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib]
+          arg [-L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib] ==> dir [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib]
+          arg [-L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib] ==> dir [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib]
+          arg [-L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib] ==> dir [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib]
+          arg [-L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib] ==> dir [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib]
+          arg [-L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib] ==> dir [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib]
+          arg [-L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib] ==> dir [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib]
+          arg [-L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib] ==> dir [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib]
+          arg [-L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib] ==> dir [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib]
+          arg [-L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib] ==> dir [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib]
+          arg [-L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib] ==> dir [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib]
+          arg [-L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib] ==> dir [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib]
+          arg [-L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib] ==> dir [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib]
+          arg [-L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib] ==> dir [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib]
+          arg [-L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib] ==> dir [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib]
+          arg [-L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib] ==> dir [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib]
+          arg [-L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib] ==> dir [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib]
+          arg [-L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib] ==> dir [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib]
+          arg [-L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib] ==> dir [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib]
+          arg [-L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib] ==> dir [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib]
+          arg [-L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib] ==> dir [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib]
+          arg [-L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib] ==> dir [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib]
+          arg [-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116] ==> dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116]
+          arg [-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+          arg [-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+          arg [-L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib] ==> dir [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib]
+          arg [-L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+          arg [-L/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin] ==> dir [/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin]
+          arg [-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1] ==> dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1]
+          arg [-L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../..] ==> dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../..]
+          arg [-dynamic-linker=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/ld-linux-x86-64.so.2] ==> ignore
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/home/psardin/devel/nix-hpp/outputs/out/lib] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o] ==> obj [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o]
+          arg [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o] ==> obj [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o]
+        ignore line: [collect2 version 14.2.1 20241116]
+        ignore line: [/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/ld -plugin /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/liblto_plugin.so -plugin-opt=/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/libexec/gcc/x86_64-unknown-linux-gnu/14.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/nix-shell.s7EZ3R/cchJDIDR.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib64/ld-linux-x86-64.so.2 -o cmTC_8ddb4 /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib -L/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib -L/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib -L/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib -L/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib -L/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib -L/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib -L/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib -L/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib -L/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib -L/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib -L/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib -L/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib -L/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib -L/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib -L/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib -L/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib -L/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib -L/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib -L/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116 -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib -L/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib -L/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1 -L/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../.. -dynamic-linker=/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_8ddb4.dir/CMakeCXXCompilerABI.cpp.o -rpath /home/psardin/devel/nix-hpp/outputs/out/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o /nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o]
+        linker tool for 'CXX': /nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/ld
+        collapse library dir [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib] ==> [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib]
+        collapse library dir [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib] ==> [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib]
+        collapse library dir [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib] ==> [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib]
+        collapse library dir [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib] ==> [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib]
+        collapse library dir [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib] ==> [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib]
+        collapse library dir [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib] ==> [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib]
+        collapse library dir [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib] ==> [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib]
+        collapse library dir [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib] ==> [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib]
+        collapse library dir [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib] ==> [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib]
+        collapse library dir [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib] ==> [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib]
+        collapse library dir [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib] ==> [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib]
+        collapse library dir [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib] ==> [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib]
+        collapse library dir [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib] ==> [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib]
+        collapse library dir [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib] ==> [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib]
+        collapse library dir [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib] ==> [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib]
+        collapse library dir [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib] ==> [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib]
+        collapse library dir [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib] ==> [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib]
+        collapse library dir [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib] ==> [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib]
+        collapse library dir [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib] ==> [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib]
+        collapse library dir [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib] ==> [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib]
+        collapse library dir [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib] ==> [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib]
+        collapse library dir [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib] ==> [/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib]
+        collapse library dir [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib] ==> [/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib]
+        collapse library dir [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib] ==> [/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib]
+        collapse library dir [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib] ==> [/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib]
+        collapse library dir [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib] ==> [/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib]
+        collapse library dir [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib] ==> [/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib]
+        collapse library dir [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib] ==> [/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib]
+        collapse library dir [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib] ==> [/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib]
+        collapse library dir [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib] ==> [/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib]
+        collapse library dir [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib] ==> [/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib]
+        collapse library dir [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib] ==> [/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib]
+        collapse library dir [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib] ==> [/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib]
+        collapse library dir [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib] ==> [/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib]
+        collapse library dir [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib] ==> [/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib]
+        collapse library dir [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib] ==> [/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib]
+        collapse library dir [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib] ==> [/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib]
+        collapse library dir [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib] ==> [/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib]
+        collapse library dir [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib] ==> [/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib]
+        collapse library dir [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib] ==> [/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib]
+        collapse library dir [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib] ==> [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib]
+        collapse library dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116]
+        collapse library dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+        collapse library dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+        collapse library dir [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib] ==> [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib]
+        collapse library dir [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib] ==> [/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib]
+        collapse library dir [/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin] ==> [/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin]
+        collapse library dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1]
+        collapse library dir [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/../../..] ==> [/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crt1.o;/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crti.o;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtbegin.o;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1/crtend.o;/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib/crtn.o]
+        implicit dirs: [/nix/store/hxyq9rr50yrs0k9mylbcnz0xws5yl788-assimp-5.4.3-lib/lib;/nix/store/0i70gg9infigyqw2pj86kp8fq9h2pqwd-cddlib-0.94m/lib;/nix/store/32s0mplybqp7ws7ar5f8w6hqfnjlzcap-clp-1.17.10/lib;/nix/store/xijpnhg8mg0g4lahwrxdwylpcq7249gc-zlib-1.3.1/lib;/nix/store/faay87wr9qy8if8p6y9wmp4jjrn1axgm-coinutils-2.11.10/lib;/nix/store/acsgr2b2mmjcph94hm9r8p9m8ic2xbrn-osi-0.108.11/lib;/nix/store/q6g3m5pgp6fwbgqf4dbbyd0j42a0xyby-console-bridge-1.0.2/lib;/nix/store/aflhmmw7aw9xcbww4fswilmacxxd5535-glpk-5.0/lib;/nix/store/199jxrl2dwd5afi6njmj7wvaz9ni79kz-graphviz-12.2.1/lib;/nix/store/ylzpk54f82kc888pr4325ynshk48la6i-libglvnd-1.7.0/lib;/nix/store/dgzl0xsghbwkhg3m209vim9ck7c6c4wp-qt-full-5.15.16/lib;/nix/store/6654qkfn7ncs7hx0zqfm7glyj7i9k1gw-octomap-1.10.0/lib;/nix/store/m9zqw718flrg7d2j095ccykc8i140fyp-openscenegraph-3.6.5/lib;/nix/store/l1zy8pcyd594jg00iqvd5f1cxsasj8xq-osgQt-3.5.7/lib;/nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib;/nix/store/s2ychb3mn79da1y6yyjk569sfi2w6lyn-boost-1.87.0/lib;/nix/store/61ar4i1g41q5ijn317glp21n83kvzvxs-qhull-2020.2/lib;/nix/store/jz1gni3knais7fjg351xvn379asqmnbr-qpoases-3.2.1/lib;/nix/store/xr8ylsrsglb9cy7c3l792bhvysrnd03a-tinyxml2-11.0.0/lib;/nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/lib;/nix/store/rmy663w9p7xb202rcln4jjzmvivznmz8-glibc-2.40-66/lib;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14-20241116;/nix/store/ik84lbv5jvjm1xxvdl8mhg52ry3xycvm-gcc-14-20241116-lib/lib;/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib/gcc/x86_64-unknown-linux-gnu/14.2.1;/nix/store/2agih0y5ns3sgbviw2xhivdgg59b41g9-gcc-14-20241116/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:53 (project)"
+    message: |
+      Running the CXX compiler's linker: "/nix/store/r8gajll0yb0c08hd734lyj3jmqav3p9a-binutils-wrapper-2.43.1/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.43.1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-pedantic"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-pedantic"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a9b41/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a9b41.dir/build.make CMakeFiles/cmTC_a9b41.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq'
+        Building CXX object CMakeFiles/cmTC_a9b41.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-pedantic -pedantic -o CMakeFiles/cmTC_a9b41.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_a9b41
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9b41.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_a9b41.dir/src.cxx.o -o cmTC_a9b41
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-uoNIUq'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wno-long-long"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wno-long-long"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_aaae7/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_aaae7.dir/build.make CMakeFiles/cmTC_aaae7.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV'
+        Building CXX object CMakeFiles/cmTC_aaae7.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wno-long-long -Wno-long-long -o CMakeFiles/cmTC_aaae7.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_aaae7
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aaae7.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_aaae7.dir/src.cxx.o -o cmTC_aaae7
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4Ij6KV'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wall"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wall"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5caea/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5caea.dir/build.make CMakeFiles/cmTC_5caea.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV'
+        Building CXX object CMakeFiles/cmTC_5caea.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wall -Wall -o CMakeFiles/cmTC_5caea.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_5caea
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5caea.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_5caea.dir/src.cxx.o -o cmTC_5caea
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-KvvGdV'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wextra"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wextra"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4ea6b/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_4ea6b.dir/build.make CMakeFiles/cmTC_4ea6b.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e'
+        Building CXX object CMakeFiles/cmTC_4ea6b.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wextra -Wextra -o CMakeFiles/cmTC_4ea6b.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_4ea6b
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ea6b.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_4ea6b.dir/src.cxx.o -o cmTC_4ea6b
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-y9eY5e'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wcast-align"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wcast-align"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_087dc/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_087dc.dir/build.make CMakeFiles/cmTC_087dc.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8'
+        Building CXX object CMakeFiles/cmTC_087dc.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wcast-align -Wcast-align -o CMakeFiles/cmTC_087dc.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_087dc
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_087dc.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_087dc.dir/src.cxx.o -o cmTC_087dc
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-SpmgY8'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wcast-qual"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wcast-qual"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2d4b6/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2d4b6.dir/build.make CMakeFiles/cmTC_2d4b6.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud'
+        Building CXX object CMakeFiles/cmTC_2d4b6.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wcast-qual -Wcast-qual -o CMakeFiles/cmTC_2d4b6.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_2d4b6
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2d4b6.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_2d4b6.dir/src.cxx.o -o cmTC_2d4b6
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-trqiud'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wformat"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wformat"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ce3c9/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ce3c9.dir/build.make CMakeFiles/cmTC_ce3c9.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk'
+        Building CXX object CMakeFiles/cmTC_ce3c9.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wformat -Wformat -o CMakeFiles/cmTC_ce3c9.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_ce3c9
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ce3c9.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_ce3c9.dir/src.cxx.o -o cmTC_ce3c9
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-4yauqk'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wwrite-strings"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wwrite-strings"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_df821/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_df821.dir/build.make CMakeFiles/cmTC_df821.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj'
+        Building CXX object CMakeFiles/cmTC_df821.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wwrite-strings -Wwrite-strings -o CMakeFiles/cmTC_df821.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_df821
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_df821.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_df821.dir/src.cxx.o -o cmTC_df821
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-5roSvj'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "cmake/compiler.cmake:162 (check_cxx_compiler_flag)"
+      - "cmake/compiler.cmake:62 (cxx_flags_by_compiler_frontend)"
+      - "cmake/post-project.cmake:62 (_setup_project_warnings)"
+      - "CMakeLists.txt:53 (project)"
+    checks:
+      - "Performing Test res_-Wconversion"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "res_-Wconversion"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_14b60/fast
+        gmake[1]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_14b60.dir/build.make CMakeFiles/cmTC_14b60.dir/build
+        gmake[2]: Entering directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35'
+        Building CXX object CMakeFiles/cmTC_14b60.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -Dres_-Wconversion -Wconversion -o CMakeFiles/cmTC_14b60.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35/src.cxx
+        <command-line>: warning: ISO C++11 requires whitespace after the macro name
+        Linking CXX executable cmTC_14b60
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_14b60.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ CMakeFiles/cmTC_14b60.dir/src.cxx.o -o cmTC_14b60
+        gmake[2]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35'
+        gmake[1]: Leaving directory '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-tQKn35'
+        
+      exitCode: 0
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "cmake/cxx-standard.cmake:62 (try_run)"
+      - "CMakeLists.txt:54 (check_minimal_cxx_standard)"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion "
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "_cxx_standard_build_status"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f193f/fast
+        gmake[1] : on entre dans le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp »
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f193f.dir/build.make CMakeFiles/cmTC_f193f.dir/build
+        gmake[2] : on entre dans le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp »
+        Building CXX object CMakeFiles/cmTC_f193f.dir/tmp-cxx-standard.cpp.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++   -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion   -o CMakeFiles/cmTC_f193f.dir/tmp-cxx-standard.cpp.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/cmake/tmp-cxx-standard.cpp
+        Linking CXX executable cmTC_f193f
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f193f.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion   "CMakeFiles/cmTC_f193f.dir/tmp-cxx-standard.cpp.o" -o cmTC_f193f
+        gmake[2] : on quitte le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp »
+        gmake[1] : on quitte le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeTmp »
+        
+      exitCode: 0
+    runResult:
+      variable: "_cxx_standard_run_status"
+      cached: true
+      stdout: |
+        201703
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/FindBoost.cmake:2174 (find_package)"
+      - "/nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/home/psardin/devel/nix-hpp/install/lib/cmake/hpp-pinocchio/hpp-pinocchioConfig.cmake:150 (find_dependency)"
+      - "cmake/package-config.cmake:130 (find_package)"
+      - "CMakeLists.txt:100 (add_project_dependency)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG"
+      binary: "/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion "
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/psardin/devel/nix-hpp/install/lib/cmake/hpp-util/find-external/TinyXML"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG'
+        
+        Run Build Command(s): /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_40357/fast
+        gmake[1] : on entre dans le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG »
+        /usr/bin/gmake  -f CMakeFiles/cmTC_40357.dir/build.make CMakeFiles/cmTC_40357.dir/build
+        gmake[2] : on entre dans le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG »
+        Building CXX object CMakeFiles/cmTC_40357.dir/src.cxx.o
+        ccache /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ -DCMAKE_HAVE_LIBC_PTHREAD  -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion   -o CMakeFiles/cmTC_40357.dir/src.cxx.o -c /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG/src.cxx
+        Linking CXX executable cmTC_40357
+        /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_40357.dir/link.txt --verbose=1
+        /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++ -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion   CMakeFiles/cmTC_40357.dir/src.cxx.o -o cmTC_40357
+        gmake[2] : on quitte le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG »
+        gmake[1] : on quitte le répertoire « /home/psardin/devel/nix-hpp/src/hpp-python/build/CMakeFiles/CMakeScratch/TryCompile-PDZKxG »
+        
+      exitCode: 0
+...

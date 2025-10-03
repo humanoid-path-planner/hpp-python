@@ -1,0 +1,22 @@
+<map id="src/pyhpp/core/bindings.cc" name="src/pyhpp/core/bindings.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="127,5,320,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="15,232,150,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,34,197,102,176,145,150,186,113,224,109,221,146,183,171,142,192,100,217,32"/>
+<area shape="rect" id="Node000003" href="$core_2fwd_8hh.html" title=" " alt="" coords="419,81,543,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="271,31,421,74,420,79,269,36"/>
+<area shape="rect" id="Node000004" href="$util_8hh.html" title=" " alt="" coords="291,157,397,184"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="227,33,234,68,241,89,251,107,274,130,301,147,298,152,271,134,247,110,236,91,229,70,222,34"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="261,81,395,109"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="244,31,299,70,296,74,241,36"/>
+<area shape="rect" id="Node000009" href="$stl-pair_8hh.html" title=" " alt="" coords="5,157,136,184"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="210,36,156,83,94,147,90,143,153,79,206,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="458,112,383,152,380,147,455,107"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="298,187,145,230,143,225,296,182"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="174,232,330,260"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="329,187,281,225,278,221,326,183"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="354,232,494,260"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="360,183,400,220,397,224,356,187"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="518,232,580,260"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="381,182,504,226,502,231,380,187"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="75,184,81,217,75,217,70,185"/>
+</map>

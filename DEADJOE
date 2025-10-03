@@ -1,0 +1,89 @@
+
+*** These modified files were found in JOE when it aborted on Thu Jul 17 11:02:36 2025
+*** JOE was aborted by UNIX signal 1
+
+*** Fichier '(Sans nom)'
+psardin@pippudake:~/devel/nix-hpp/src/hpp-python/build-rel$   git config --global --edit
+
+*** Fichier '* Grep Log *'
+
+JOE: cd /home/psardin/devel/nix-hpp/src/hpp-python
+
+/bin/sh: 3: psardin@pippudake:~/devel/nix-hpp/src/hpp-python/build-rel$: not found
+
+JOE: [31mFAIL[0m (exit status = 127)
+
+uggeson : en attente de la fermeture du fichier par votre éditeur de texte… 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^[  I    ~/.gitconfig (Modifié)(ini)                                          Row 5    Col 40  
+# Ceci est le fichier de configuration personnel de Git.
+[user]
+# Veuillez adapter et décommenter les lignes suivantes :
+#       name = Paul Sardin
+#       email = paulsardin123@gmail.com
+
+
+*** Fichier '(Sans nom)'
+/home/psardin/.gitconfig
+* Grep Log *
+
+*** Fichier '/home/psardin/.gitconfig'
+# Ceci est le fichier de configuration personnel de Git.
+[user]
+# Veuillez adapter et décommenter les lignes suivantes :
+#	name = Paul Sardin
+#	email = paulsardin123@gmail.com
+*** Fichier '* Startup Log *'
+Traitement de '/etc/joe/editorrc'...Traitement de '/etc/joe/ftyperc'...Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
+
+*** These modified files were found in JOE when it aborted on Thu Jul 17 11:10:12 2025
+*** JOE was aborted because the terminal closed
+
+*** Fichier '(Sans nom)'
+/home/psardin/devel/nix-hpp/src/hpp-python/.git/COMMIT_EDITMSG
+
+*** Fichier '/home/psardin/devel/nix-hpp/src/hpp-python/.git/COMMIT_EDITMSG'
+Revert "Add hpp-manipulation include in flake.n
+This reverts commit 7b4b41dd76a65333ff56f33f8d3917f4b749347b.
+
+# Veuillez saisir le message de validation pour vos modifications. Les lignes
+# commençant par '#' seront ignorées, et un message vide abandonne la validation.
+#
+# Sur la branche graph-wip
+# Votre branche est en avance sur 'paul_hppy-py/graph-wip' de 1 commit.
+#   (utilisez "git push" pour publier vos commits locaux)
+#
+# Modifications qui seront validées :
+#	modifié :         flake.nix
+#
+# Fichiers non suivis:
+#	DEADJOE
+#	build-rel/
+#	doc/__pycache__/
+#	tests/conv.py
+#
+
+*** Fichier '* Startup Log *'
+Traitement de '/etc/joe/editorrc'...Traitement de '/etc/joe/ftyperc'...Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc

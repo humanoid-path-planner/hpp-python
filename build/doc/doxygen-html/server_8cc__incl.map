@@ -1,0 +1,21 @@
+<map id="src/pyhpp/corbaserver/server.cc" name="src/pyhpp/corbaserver/server.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="260,5,425,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="39,249,174,277"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,38,190,46,118,58,57,76,34,87,19,100,10,117,8,134,13,153,22,172,49,208,80,237,76,241,45,211,17,175,8,155,3,135,5,115,15,96,31,83,55,71,117,53,189,40,259,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="29,98,219,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,53,174,95,172,90,284,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="243,98,442,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,50,345,82,340,82,340,50"/>
+<area shape="rect" id="Node000005" href="$corbaserver_2fwd_8hh.html" title=" " alt="" coords="467,98,656,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="402,48,513,90,511,95,400,53"/>
+<area shape="rect" id="Node000006" href="$util_8hh.html" title=" " alt="" coords="508,174,614,201"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="426,32,496,40,568,53,630,71,654,83,670,96,676,108,677,119,665,139,642,156,615,170,613,165,640,151,661,135,672,118,671,109,666,100,651,87,629,76,567,58,495,46,425,38"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="564,126,564,158,559,158,559,126"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="508,200,190,251,189,246,507,195"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="312,249,467,277"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="532,204,435,245,433,240,529,199"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="492,249,631,277"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="564,202,564,234,559,234,559,202"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="655,249,718,277"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="585,200,653,239,650,244,582,204"/>
+</map>

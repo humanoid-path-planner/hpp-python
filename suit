@@ -1,0 +1,249 @@
+* [33m5a262b8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mgraph-wip[m[33m)[m Bind the rest of hpp::manipulation::Graph class, and update manipulation problem and device accordingly. Also add a python test file
+* [33meaf70fb[m[33m ([m[1;31mpaul_hppy-py/graph-wip[m[33m)[m wip graph tests
+* [33md9d1ac0[m Add State and Transition python wrapper classes
+* [33m5dbf7c0[m wip2 graph
+* [33mdcefb0d[m wip on adding graph bindings
+* [33m7b4b41d[m[33m ([m[1;31mpaul_hppy-py/devel[m[33m)[m Add hpp-manipulation include in flake.nix
+* [33m02dcacc[m fix absolute path error in example rrt file
+[31m|[m * [33m08512e2[m[33m ([m[1;31morigin/dependabot/github_actions/cachix/install-nix-action-31[m[33m)[m Bump cachix/install-nix-action from 27 to 31
+[31m|[m[31m/[m  
+[31m|[m * [33m0fea035[m[33m ([m[1;31morigin/dependabot/github_actions/cachix/cachix-action-16[m[33m)[m Bump cachix/cachix-action from 15 to 16
+[31m|[m[31m/[m  
+[31m|[m * [33m13dc51a[m[33m ([m[1;31morigin/pre-commit-ci-update-config[m[33m)[m [pre-commit.ci] pre-commit autoupdate
+[31m|[m[31m/[m  
+* [33m0e1b191[m[33m ([m[1;31morigin/devel[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevel[m[33m)[m fix include in graph.hh
+* [33mdb0da46[m fix unused path import causing multiple variable definition
+* [33m48740b4[m [pre-commit.ci] auto fixes from pre-commit.com hooks
+* [33m45820ed[m Add PathPlanner child classes
+* [33ma70a174[m Add some useful bindings macros and use them in Problem class
+* [33mc8b67ad[m Wrap ProblemPtr_t in an ad hoc class to overcome boost.python limitations
+* [33m5d6d008[m Add PathPlanner and DiffusingPlanner python binding, using wrappers to overcome weak_ptr limitations
+* [33md8fd1df[m Bind Roadmap and add up-to-date example using an RRT algorithm
+* [33m37df5b8[m Use pyhpp viewer in hpp-python test file
+* [33m3cf875c[m Wrap GraphPtr_t in an ad hoc class to overcome boost.python limitations.
+* [33m709d122[m Wrap DevicePtr_t in an ad hoc class to overcome boost.python limitations.
+* [33m6a9edec[m [constraints] Fix multiple definition.
+* [33md4c65a8[m Bind hpp-manipulation
+[34m|[m * [33m3fa5949[m[33m ([m[1;31mpaul_hppy-py/pre-commit-ci-update-config[m[33m)[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m[34m/[m  
+*   [33mfbe32fa[m Merge pull request #35 from humanoid-path-planner/pre-commit-ci-update-config
+[36m|[m[1;31m\[m  
+[36m|[m * [33m65a7df0[m [pre-commit.ci] pre-commit autoupdate
+[36m|[m[36m/[m  
+*   [33md0634ef[m Merge pull request #32 from humanoid-path-planner/pre-commit-ci-update-config
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m9302e85[m [pre-commit.ci] pre-commit autoupdate
+[1;32m|[m[1;32m/[m  
+*   [33m9136b50[m Merge pull request #31 from humanoid-path-planner/pre-commit-ci-update-config
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m0b81088[m [pre-commit.ci] pre-commit autoupdate
+[1;34m|[m[1;34m/[m  
+*   [33me1641be[m Merge pull request #30 from humanoid-path-planner/pre-commit-ci-update-config
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m0e0e28e[m [pre-commit.ci] pre-commit autoupdate
+[1;36m|[m[1;36m/[m  
+*   [33m6ff260d[m Merge pull request #29 from humanoid-path-planner/ci
+[32m|[m[33m\[m  
+[32m|[m * [33mef3014a[m add gitlab CI
+[32m|[m[32m/[m  
+*   [33m48a6ddb[m Merge pull request #28 from humanoid-path-planner/hrp2
+[34m|[m[35m\[m  
+[34m|[m * [33m6707162[m update-flake-lock: hrp2-14
+[34m|[m[34m/[m  
+*   [33m996132c[m Merge pull request #27 from humanoid-path-planner/pre-commit-ci-update-config
+[36m|[m[1;31m\[m  
+[36m|[m * [33m2203e52[m [pre-commit.ci] pre-commit autoupdate
+[36m|[m[36m/[m  
+*   [33m24d4f1c[m Merge pull request #26 from humanoid-path-planner/pre-commit-ci-update-config
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m47ac964[m [pre-commit.ci] pre-commit autoupdate
+[1;32m|[m[1;32m/[m  
+*   [33m171196d[m Merge pull request #25 from humanoid-path-planner/pre-commit-ci-update-config
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33mf5f9848[m [pre-commit.ci] pre-commit autoupdate
+[1;34m|[m[1;34m/[m  
+* [33m0d29e0e[m flake: Use pinocchio default joint collection
+* [33ma6e634a[m [pinocchio] Do not expose model anymore.
+* [33m4494764[m Use pinocchio joint collection instead of defining one
+*   [33mb88a4b0[m Merge pull request #23 from humanoid-path-planner/pre-commit-ci-update-config
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m2c5cb7d[m [pre-commit.ci] pre-commit autoupdate
+[1;36m|[m[1;36m/[m  
+*   [33m2e19b9f[m Merge pull request #22 from humanoid-path-planner/pre-commit-ci-update-config
+[32m|[m[33m\[m  
+[32m|[m * [33m3719caa[m [pre-commit.ci] pre-commit autoupdate
+[32m|[m[32m/[m  
+[32m|[m *   [33me3f5b8a[m[33m ([m[1;31mpaul_hppy-py/master[m[33m, [m[1;31morigin/master[m[33m)[m Merge pull request #34 from humanoid-path-planner/dependabot/github_actions/cachix/cachix-action-16
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33m8dae3b3[m Bump cachix/cachix-action from 15 to 16
+[32m|[m [34m|[m[34m/[m  
+[32m|[m *   [33m86266f5[m Merge pull request #33 from humanoid-path-planner/dependabot/github_actions/cachix/install-nix-action-31
+[32m|[m [36m|[m[1;31m\[m  
+[32m|[m [36m|[m * [33ma81806b[m Bump cachix/install-nix-action from 30 to 31
+[32m|[m [36m|[m[36m/[m  
+[32m|[m * [33m484dc88[m Merge pull request #21 from humanoid-path-planner/dependabot/github_actions/cachix/install-nix-action-30
+[32m|[m[32m/[m[1;33m|[m 
+[32m|[m * [33mdf26405[m Bump cachix/install-nix-action from 27 to 30
+[32m|[m[32m/[m  
+* [33m76ac692[m[33m ([m[1;33mtag: [m[1;33mv6.0.0[m[33m)[m release: Update package.xml version to 6.0.0
+* [33mb9e93ba[m tests: drop pytest dependency
+* [33mced5dd6[m pre-commit autoupdate
+* [33m0ec4a71[m sync submodule
+*   [33m9512290[m Merge pull request #20 from nim65s/ruff
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33md29a7b6[m manual ruff fixes
+[1;34m|[m * [33m86a9c51[m pre-commit run -a
+[1;34m|[m * [33mb91d422[m black -> ruff
+[1;34m|[m[1;34m/[m  
+*   [33m51b298e[m Merge pull request #18 from humanoid-path-planner/pre-commit-ci-update-config
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m9bde031[m [pre-commit.ci] pre-commit autoupdate
+[1;36m|[m[1;36m/[m  
+* [33mfb74b36[m setup mergify
+*   [33m6121853[m Merge pull request #19 from humanoid-path-planner/nix
+[32m|[m[33m\[m  
+[32m|[m * [33m115bd04[m ci: only on ubuntu
+[32m|[m * [33m17f11f8[m setup github actions
+[32m|[m * [33m401d96d[m nix: initial packaging
+[32m|[m[32m/[m  
+*   [33m4b9fe0b[m Merge branch 'devel'
+[34m|[m[35m\[m  
+[34m|[m *   [33mc8ac717[m Merge pull request #17 from humanoid-path-planner/coal
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m * [33md328ead[m update for coal v3
+[34m|[m [36m|[m[36m/[m  
+[34m|[m *   [33m1088ece[m Merge pull request #16 from humanoid-path-planner/pre-commit-ci-update-config
+[34m|[m [1;32m|[m[1;33m\[m  
+[34m|[m [1;32m|[m * [33mcfa719b[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m [1;32m|[m[1;32m/[m  
+[34m|[m *   [33ma16d6db[m Merge pull request #15 from humanoid-path-planner/pre-commit-ci-update-config
+[34m|[m [1;34m|[m[1;35m\[m  
+[34m|[m [1;34m|[m * [33m18bfcf1[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m [1;34m|[m[1;34m/[m  
+[34m|[m *   [33m914c6dc[m Merge pull request #14 from humanoid-path-planner/pre-commit-ci-update-config
+[34m|[m [1;36m|[m[31m\[m  
+[34m|[m [1;36m|[m * [33m0f0ccfb[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m [1;36m|[m[1;36m/[m  
+[34m|[m *   [33me333f07[m Merge pull request #13 from humanoid-path-planner/pre-commit-ci-update-config
+[34m|[m [32m|[m[33m\[m  
+[34m|[m [32m|[m * [33mdfc81b7[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m [32m|[m[32m/[m  
+[34m|[m *   [33mb869fc1[m Merge pull request #12 from humanoid-path-planner/pre-commit-ci-update-config
+[34m|[m [34m|[m[35m\[m  
+[34m|[m [34m|[m * [33m97f4778[m [pre-commit.ci] pre-commit autoupdate
+[34m|[m [34m|[m[34m/[m  
+* [34m|[m [33m9a52f0d[m Merge pull request #11 from humanoid-path-planner/devel
+[36m|[m[34m\[m[34m|[m 
+[36m|[m *   [33mfa18ffc[m Merge pull request #10 from humanoid-path-planner/pre-commit-ci-update-config
+[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m [1;32m|[m * [33mc71f87b[m [pre-commit.ci] pre-commit autoupdate
+[36m|[m [1;32m|[m[1;32m/[m  
+[36m|[m *   [33mf3f68c1[m Merge pull request #9 from humanoid-path-planner/boost-placeholders
+[36m|[m [1;34m|[m[1;35m\[m  
+[36m|[m [1;34m|[m * [33m2a94afb[m pre-commit autoupdate
+[36m|[m [1;34m|[m * [33madbee2a[m pre-commit-sort
+[36m|[m [1;34m|[m * [33m3eae34c[m pre-commit: drop failing flake8
+[36m|[m [1;34m|[m * [33mb5b0e6f[m [pre-commit.ci] auto fixes from pre-commit.com hooks
+[36m|[m [1;34m|[m * [33m457b8b3[m fix boost placeholders
+[36m|[m [1;34m|[m * [33meb4ffd5[m CMake: allow use of installed jrl-cmakemodules
+[36m|[m [1;34m|[m[1;34m/[m  
+[36m|[m *   [33m64733b8[m Merge branch 'master' into devel
+[36m|[m [1;36m|[m[36m\[m  
+[36m|[m [1;36m|[m[36m/[m  
+[36m|[m[36m/[m[1;36m|[m   
+* [1;36m|[m   [33m2e5e44c[m Merge pull request #7 from humanoid-path-planner/submodule
+[32m|[m[33m\[m [1;36m\[m  
+[32m|[m * [1;36m|[m [33m2b74a9b[m fix submodule url
+[32m|[m[32m/[m [1;36m/[m  
+[32m|[m * [33mb8066c8[m Merge pull request #6 from humanoid-path-planner/pre-commit-ci-update-config
+[32m|[m[32m/[m[35m|[m 
+[32m|[m * [33m836e960[m [pre-commit.ci] pre-commit autoupdate
+[32m|[m[32m/[m  
+* [33m417dfcf[m [cmake] Synchronize submodule.
+* [33mac7fc8d[m [cmake] Do not specify versions of dependencies.
+* [33mcc43658[m [pre-commit.ci] auto fixes from pre-commit.com hooks
+* [33ma184ded[m [CI] Add config file.
+* [33m47e5329[m [cmake] Allow dependencies on this package.
+* [33m9293639[m [cmake] Synchronize submodule.
+* [33m1a9c6d4[m Expose hpp::core::Parameter
+* [33m9ffefeb[m expose more Path methods.
+* [33m163426c[m make sure eigenpy is always included.
+* [33m6ab42a8[m Update usage of cmake submodule
+* [33m926c7ac[m fix exposition of Path
+* [33m49731bd[m Make Path implementable in Python
+* [33m3c17ee0[m remove initial . in PYHPP_* macros
+* [33m6917d78[m fix unit tests
+* [33m8c087ca[m Fix some compilation issues.
+* [33me280e01[m add loadUrdfModel from hpp-pinocchio
+* [33m9ba5c5f[m Update doc generation to python3
+* [33mf4d4c48[m Upgrade code to recent versions HPP and eigenpy.
+* [33m2af8ff4[m PathOptimization -> path_optimization.
+* [33md18a894[m Apply clang-format before updating.
+* [33m43bc9d8[m Synchrosnize cmake submodule.
+* [33m287146e[m Add some examples.
+* [33md48d3db[m Add latest changes
+* [33m65d61a7[m HierarchicalIterativeSolver -> HierarchicalIterative
+* [33m27b0e8c[m HybridSolver -> BySubstitution
+* [33m11d0aba[m ExplicitSolver -> ExplicitConstraintSet
+* [33m30ee9e1[m Fix compilation errors other than deprecated error.
+* [33m763a3de[m Fix bugs introduced by the two previous commits.
+* [33m56486e9[m Add bindings for hpp-wholebody-step-corba
+* [33m4ca5d8b[m Fix name of python package (remove '-')
+* [33mcc90513[m Fix wrong python module name
+* [33mee33205[m Fix bindings of stl pairs.
+* [33maa18d4a[m Add some documentation of doc/configure.py and a README.md
+* [33mc78dc0b[m Update documentation
+* [33m3d0ebb3[m LockedJoints_t is now a vector and not a list.
+* [33mb06a9e6[m Synchronise CMake module
+* [33mf3a1bd8[m Generate documentation from doxygen-xml folder.
+* [33mf60eb7c[m Add macro INIT_PYHPP_MODULE
+* [33m1a1c8e0[m [CMake] Clean cmake and do not install doc,
+* [33m8c4bd4e[m Bind ConfigValidation
+* [33m8336d60[m Bind PathProjector
+* [33m907a7fd[m Update bindings of LiegroupSpace + minor code cleaning
+* [33m0d61a1b[m Update Liegroup bindings
+* [33m19a8275[m Update tests/corbaserver.py
+* [33m7a7b5c4[m Bind Spline::rowParameters
+* [33ma01ea8d[m Simplify CMakeLists.txt
+* [33m489a2b6[m Bind hpp::corbaServer::Server
+* [33m9a9d9ab[m Fix bindings of Spline::squaredNormBasisFunctionIntegral
+* [33m508b968[m Add bindings for QuadraticProgram
+* [33mbcfb8c1[m Update Spline and SplineGradientBasedAbstract
+* [33m616811a[m Add bindings of Equation and Constraint
+* [33m76d4ffb[m Fix issue with __str__ of validation report
+* [33m71dee9e[m Bind PathValidation and SteeringMethod
+* [33m33eb9c6[m Fix some bugs
+* [33meb3600e[m Homogenize file namings.
+* [33m9823ca8[m Bind ConfigurationShooter
+* [33mff74d5e[m Bind validation reports
+* [33mf1cfd48[m Enable implementation of PathOptimizer in Python
+* [33m3a7b655[m Add cpp_like_vector_indexing_suite
+* [33m3417665[m Improve bindings of hpp-core
+* [33m5fe6914[m Cosmetic change
+* [33m89e5a11[m Bind hpp::core::Problem
+* [33m71e5088[m Reorganize CMakeLists.txt
+* [33md16ae86[m Fix pyhpp.core.path.Vectors
+* [33m72b4bc7[m Update unit tests
+* [33m52a6fcc[m Improve bindings of hpp-core.
+* [33m0b3a6e6[m Fix dependencies
+* [33mf81fb43[m Move py_pair
+* [33mb9cfc6e[m Make SplineGradientBasedAbstract derivable in Python
+* [33m7633d69[m Bind more method in ProblemSolver
+* [33mda09452[m Update SplineGradientBasedAbstract
+* [33m7620702[m Make SplineGradientBasedAbstract reimplementable
+* [33m3da1ae8[m Add some bindings in hpp-core
+* [33m3894f15[m Add HybridSolver::explicitSolverHasChanged
+* [33mc4edbfd[m Add unit tests
+* [33m5688532[m Update DifferentiableFunction bindings (enable Python inheritance)
+* [33m9238329[m Update LiegroupElement bindings
+* [33m7fb9501[m Add wrapper for GenericTransformation constructor
+* [33mb5297fd[m Update DifferentiableFunction
+* [33m22ddae2[m [Minor] Fix CMakeLists.txt
+* [33m70803d9[m Add some bindings of the solvers in hpp-constraints
+* [33m1e0b023[m Update tests
+* [33m0cde85d[m Add some bindings of hpp-constraints
+* [33mcda5681[m Fix Device
+* [33m03ea65e[m Add minimal bindings for Liegroup space and element
+* [33m68700a2[m Add first bindings
+* [33me8b379d[m Initial commit
+* [33ma3b1254[m Initial commit

@@ -1,0 +1,17 @@
+<map id="src/pyhpp/core/path/bindings.cc" name="src/pyhpp/core/path/bindings.cc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="122,5,271,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,249,140,277"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,53,124,73,100,99,85,133,77,169,73,234,68,233,71,168,80,131,96,97,120,69,149,48"/>
+<area shape="rect" id="Node000003" href="$core_2path_2fwd_8hh.html" title=" " alt="" coords="110,98,283,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,50,199,82,194,82,194,50"/>
+<area shape="rect" id="Node000004" href="$util_8hh.html" title=" " alt="" coords="227,174,334,201"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="247,48,275,69,298,97,303,113,303,129,296,160,291,159,298,129,297,114,293,99,272,73,244,53"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="213,124,256,161,252,165,210,128"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="244,204,125,246,123,241,242,199"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="164,249,320,277"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="276,203,258,237,253,234,271,201"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="344,249,484,277"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="306,200,379,240,376,244,303,204"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="508,249,570,277"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="328,199,493,246,492,251,326,204"/>
+</map>
