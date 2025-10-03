@@ -30,12 +30,24 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/path-planner.hh>
 #include <hpp/manipulation/path-planner/transition-planner.hh>
+#include <hpp/manipulation/manipulation-planner.hh>
+#include <hpp/manipulation/roadmap.hh>
 #include <hpp/pinocchio/configuration.hh>
 #include <pyhpp/core/path-planner.hh>
 #include <pyhpp/core/problem.hh>
 
 namespace pyhpp {
 namespace manipulation {
+
+struct ManipulationPlanner : public pyhpp::core::PathPlanner {
+  ManipulationPlanner(const pyhpp::core::Problem& problem) {
+    hpp::manipulation::RoadmapPtr_t roadmap = hpp::manipulation::Roadmap::create(
+            problem.obj->distance(), problem.obj->robot());
+    obj = hpp::manipulation::ManipulationPlanner::create(
+        problem.obj, roadmap);
+    roadmap->constraintGraph(problem.asManipulationProblem()->constraintGraph());
+  }
+};
 
 void exposePathPlanners() {
   boost::python::class_<TransitionPlanner,
@@ -59,6 +71,10 @@ void exposePathPlanners() {
       .def("pathProjector", &TransitionPlanner::pathProjector)
       .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
       .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
+  
+    boost::python::class_<ManipulationPlanner, boost::python::bases<pyhpp::core::PathPlanner>>(
+      "ManipulationPlanner",
+      boost::python::init<const pyhpp::core::Problem&>());
 }
 
 TransitionPlanner::TransitionPlanner(const pyhpp::core::Problem& problem) {

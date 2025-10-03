@@ -321,6 +321,7 @@ PyWEdgePtr_t PyWGraph::createWaypointTransition(
     using namespace hpp::manipulation::graph;
     EdgePtr_t edge_pc = nodeFrom->obj->linkTo(
         edgeName, nodeTo->obj, w, (State::EdgeFactory)WaypointEdge::create);
+    id[edgeName] = edge_pc->id();
     edge_pc->state(isInState->obj);
 
     auto waypoint_edge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, edge_pc);
