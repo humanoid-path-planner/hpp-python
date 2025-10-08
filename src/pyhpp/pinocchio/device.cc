@@ -32,6 +32,8 @@
 #include <eigenpy/eigenpy.hpp>
 #include <hpp/pinocchio/device-data.hh>
 #include <hpp/pinocchio/device.hh>
+#include <hpp/pinocchio/frame.hh>
+#include <hpp/pinocchio/joint.hh>
 #include <hpp/pinocchio/gripper.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pinocchio/multibody/data.hpp>
@@ -89,6 +91,37 @@ Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper) {
   return res;
 }
 
+typedef hpp::pinocchio::Frame Frame;
+typedef hpp::pinocchio::JointPtr_t JointPtr_t;
+
+static void setJointBounds(Device& device, const char* jointName,
+                            boost::python::list py_jointBounds) {
+  Frame frame = device.getFrameByName(jointName);
+  JointPtr_t joint = frame.joint();
+  auto jointBounds = extract_vector<value_type>(py_jointBounds);
+
+  static const value_type inf = std::numeric_limits<value_type>::infinity();
+
+  if (jointBounds.size() % 2 == 1) {
+    throw std::logic_error("Expect a vector of even size");
+  }
+
+  std::size_t numDofPairs = jointBounds.size() / 2;
+
+  for (std::size_t i = 0; i < numDofPairs; i++) {
+    value_type vMin = jointBounds[2 * i];
+    value_type vMax = jointBounds[2 * i + 1];
+
+    if (vMin > vMax) {
+      vMin = -inf;
+      vMax = inf;
+    }
+
+    joint->lowerBound(i, vMin);
+    joint->upperBound(i, vMax);
+  }
+}
+
 void exposeGripper() {
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
       .def("create", &Gripper::create)
@@ -143,7 +176,9 @@ void exposeDevice() {
       .def("computeForwardKinematics", cfk)
       .def("computeFramesForwardKinematics",
            &Device::computeFramesForwardKinematics)
-      .def("updateGeometryPlacements", &Device::updateGeometryPlacements);
+      .def("updateGeometryPlacements", &Device::updateGeometryPlacements)
+      .def("setJointBounds", &setJointBounds);
+
 }
 }  // namespace pinocchio
 }  // namespace pyhpp
