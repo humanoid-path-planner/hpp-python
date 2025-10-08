@@ -38,9 +38,11 @@
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
 #include <hpp/core/problem.hh>
+#include <hpp/core/collision-validation.hh>
+#include <hpp/core/joint-bound-validation.hh>
+
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/steering-method.hh>
-
 namespace pyhpp {
 namespace core {
 
@@ -53,6 +55,30 @@ const DevicePtr_t& Problem::robot() const { return obj->robot(); }
 
 void Problem::setParameter(const std::string& name, const Parameter& value) {
   obj->setParameter(name, value);
+}
+
+void Problem::setParameterFloat(const std::string& name, value_type value) {
+  Parameter param = Parameter(value);
+  obj->setParameter(name, param);
+}
+
+void Problem::setParameterInt(const std::string& name, size_type value) {
+  Parameter param = Parameter(value);
+  obj->setParameter(name, param);
+}
+
+
+void Problem::addConfigValidation(const std::string& type) {
+  hpp::core::ConfigValidationPtr_t validation;
+  if (type == "CollisionValidation")
+    validation = hpp::core::CollisionValidation::create(robot());
+  else if (type == "JointBoundValidation")
+    validation = hpp::core::JointBoundValidation::create(robot());
+  obj->addConfigValidation(validation);
+}
+
+void Problem::clearConfigValidations() {
+  obj->clearConfigValidations();
 }
 
 const Parameter& Problem::getParameter(const std::string& name) const {
@@ -114,6 +140,10 @@ void Problem::initConfig(ConfigurationIn_t inConfig) {
 
 void Problem::addGoalConfig(ConfigurationIn_t config) {
   obj->addGoalConfig(config);
+}
+
+void Problem::resetGoalConfigs() {
+  obj->resetGoalConfigs();
 }
 
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
@@ -199,6 +229,8 @@ void exposeProblem() {
   class_<Problem>("Problem", init<const DevicePtr_t&>())
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
       .PYHPP_DEFINE_METHOD(Problem, setParameter)
+      .def("setParameter", &Problem::setParameterFloat)
+      .def("setParameter", &Problem::setParameterInt)
       .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
       .def("steeringMethod",
            static_cast<PyWSteeringMethodPtr_t (Problem::*)() const>(
@@ -213,6 +245,9 @@ void exposeProblem() {
       .def("configValidation",
            static_cast<SetConfigValidation>(&Problem::configValidation),
            (arg("configValidation")))
+
+      .def("addConfigValidation", &Problem::addConfigValidation)
+      .def("clearConfigValidations", &Problem::clearConfigValidations)
 
       .def("pathValidation",
            static_cast<GetPathValidation>(&Problem::pathValidation))
@@ -239,7 +274,8 @@ void exposeProblem() {
            static_cast<SetConfigurationShooter>(&Problem::configurationShooter),
            (arg("configurationShooter")))
       .PYHPP_DEFINE_METHOD(Problem, initConfig)
-      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig);
+      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
+      .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs);
   register_problem_converters();
 }
 

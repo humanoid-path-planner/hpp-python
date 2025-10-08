@@ -54,6 +54,8 @@ typedef hpp::core::PathValidationPtr_t PathValidationPtr_t;
 typedef hpp::core::PathProjectorPtr_t PathProjectorPtr_t;
 typedef hpp::core::ProblemTargetPtr_t ProblemTargetPtr_t;
 typedef hpp::core::DistancePtr_t DistancePtr_t;
+typedef hpp::core::value_type value_type;
+typedef hpp::core::size_type size_type;
 
 // Wrapper class for hpp::core::Problem
 struct Problem {
@@ -65,6 +67,8 @@ struct Problem {
   // wrapped methods
   const DevicePtr_t& robot() const;
   void setParameter(const std::string& name, const Parameter& value);
+  void setParameterFloat(const std::string& name, value_type value);
+  void setParameterInt(const std::string& name, size_type value);
   const Parameter& getParameter(const std::string& name) const;
   PyWSteeringMethodPtr_t steeringMethod() const;
   const ConfigValidationsPtr_t& configValidation() const;
@@ -75,6 +79,7 @@ struct Problem {
   ConfigurationShooterPtr_t configurationShooter() const;
   void steeringMethod(const PyWSteeringMethodPtr_t& steeringMethod);
   void configValidation(const ConfigValidationsPtr_t& cv);
+  void clearConfigValidations();
   void pathValidation(const PathValidationPtr_t& pv);
   void pathProjector(const PathProjectorPtr_t& pp);
   void distance(const DistancePtr_t& d);
@@ -83,6 +88,8 @@ struct Problem {
       const ConfigurationShooterPtr_t& configurationShooter);
   void initConfig(ConfigurationIn_t inConfig);
   void addGoalConfig(ConfigurationIn_t config);
+  void addConfigValidation(const std::string& type);
+  void resetGoalConfigs();
 
   hpp::manipulation::ProblemPtr_t asManipulationProblem() const {
     auto manipProb = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, obj);
