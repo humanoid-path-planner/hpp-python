@@ -1,18 +1,77 @@
-var classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper =
-[
-    [ "Base", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a9db3865e470b4025456a0efaea91274e", null ],
-    [ "Reports_t", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af9518bd16e2666233faefc73ef7b6def", null ],
-    [ "SplineOptimizationData", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf4c6b9959d77124ef855b933f84ba20", null ],
-    [ "SplineOptimizationDatas_t", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aab227adb136c906a7464179556279437", null ],
-    [ "Splines_t", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#ad4c4ec78df0d9c95d58a5bca6456e392", null ],
-    [ "SGBWrapper", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387", null ],
-    [ "~SGBWrapper", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af3a4cdd38e04524cb3fdbe1e95314d7d", null ],
-    [ "addContinuityConstraints", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a09aafceda22098f9f3f2a9d2740110ca", null ],
-    [ "appendEquivalentSpline", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aedfa1bb6dc65ceb3d74048701a59aa46", null ],
-    [ "buildPathVector", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf36cb278a48a29c7578f59b4a0800df", null ],
-    [ "initializePathValidation", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a8b173e914127fb7b40984f0d79f9c305", null ],
-    [ "jointBoundConstraint", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af3f5558fda2555a44108d3bc9767d29c", null ],
-    [ "optimize", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abce6784a3dd4dde0a34a768bb9b6493f", null ],
-    [ "updateParameters", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a7612246fe96e1d74ea6fe9824da97d4a", null ],
-    [ "validatePath", "classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aaef1272af8831ca5c9b2c3bccca57617", null ]
+var classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper = [
+  [
+    'Base',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a9db3865e470b4025456a0efaea91274e',
+    null
+  ],
+  [
+    'Reports_t',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af9518bd16e2666233faefc73ef7b6def',
+    null
+  ],
+  [
+    'SplineOptimizationData',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf4c6b9959d77124ef855b933f84ba20',
+    null
+  ],
+  [
+    'SplineOptimizationDatas_t',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aab227adb136c906a7464179556279437',
+    null
+  ],
+  [
+    'Splines_t',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#ad4c4ec78df0d9c95d58a5bca6456e392',
+    null
+  ],
+  [
+    'SGBWrapper',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387',
+    null
+  ],
+  [
+    '~SGBWrapper',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af3a4cdd38e04524cb3fdbe1e95314d7d',
+    null
+  ],
+  [
+    'addContinuityConstraints',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a09aafceda22098f9f3f2a9d2740110ca',
+    null
+  ],
+  [
+    'appendEquivalentSpline',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aedfa1bb6dc65ceb3d74048701a59aa46',
+    null
+  ],
+  [
+    'buildPathVector',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf36cb278a48a29c7578f59b4a0800df',
+    null
+  ],
+  [
+    'initializePathValidation',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a8b173e914127fb7b40984f0d79f9c305',
+    null
+  ],
+  [
+    'jointBoundConstraint',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#af3f5558fda2555a44108d3bc9767d29c',
+    null
+  ],
+  [
+    'optimize',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abce6784a3dd4dde0a34a768bb9b6493f',
+    null
+  ],
+  [
+    'updateParameters',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a7612246fe96e1d74ea6fe9824da97d4a',
+    null
+  ],
+  [
+    'validatePath',
+    'classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aaef1272af8831ca5c9b2c3bccca57617',
+    null
+  ]
 ];

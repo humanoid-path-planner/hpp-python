@@ -13,7 +13,7 @@ JOE: cd /home/psardin/devel/nix-hpp/src/hpp-python
 
 JOE: [31mFAIL[0m (exit status = 127)
 
-uggeson : en attente de la fermeture du fichier par votre éditeur de texte… 
+uggeson : en attente de la fermeture du fichier par votre éditeur de texte…
 
 
 
@@ -35,7 +35,7 @@ uggeson : en attente de la fermeture du fichier par votre éditeur de texte…
 
 
 
-^[  I    ~/.gitconfig (Modifié)(ini)                                          Row 5    Col 40  
+^[  I    ~/.gitconfig (Modifié)(ini)                                          Row 5    Col 40
 # Ceci est le fichier de configuration personnel de Git.
 [user]
 # Veuillez adapter et décommenter les lignes suivantes :

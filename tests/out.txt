@@ -4,20 +4,20 @@ Constraint set Set (Loop | 0-0), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge Loop | 0-0
 Constraint set Set (Loop | 0-1), contains
   Config projector: proj_(Loop | 0-1), contains BySubstitution
@@ -25,20 +25,20 @@ Constraint set Set (Loop | 0-1), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge Loop | 0-1
 Constraint set Set (Loop | f), contains
   Config projector: proj_(Loop | f), contains BySubstitution
@@ -46,20 +46,20 @@ Constraint set Set (Loop | f), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge Loop | f
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0), contains BySubstitution
@@ -67,47 +67,47 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper < sphere0/handle | 0-0
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_10), contains
@@ -116,20 +116,20 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_10), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere0/handle | 0-0_10
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_21), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0_21), contains BySubstitution
@@ -137,40 +137,40 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_21), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 1
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere0/handle/complement, active dof: [ 0, 13], 
+        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere0/handle/complement, active dof: [ 0, 13],
             Joint1: ur3/wrist_3_joint
             Frame in joint 1
               R =   0, 1, 0
                              1,          0, 1.7949e-09
-                    1.7949e-09,          0,         -1  
+                    1.7949e-09,          0,         -1
               p =           0,      0.1373, 9.87193e-11
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   2.22045e-16,           0,           1
                     0, 1, 0
-                             -1,           0, 2.22045e-16  
+                             -1,           0, 2.22045e-16
               p = 0, 0, 0
-            mask: 1, 1, 1, 1, 1, 1, 
+            mask: 1, 1, 1, 1, 1, 1,
           Rhs: 0, 0, 0, 0, 0, 0, 1
-          active rows: [ 3, 1], 
-      Equality idx: Rows: [ 0, 6], 
-      Active rows: Rows: [ 3, 1], 
-      Cols: [ 0, 6], 
+          active rows: [ 3, 1],
+      Equality idx: Rows: [ 0, 6],
+      Active rows: Rows: [ 3, 1],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere0/handle | 0-0_21
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_32), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0_32), contains BySubstitution
@@ -178,40 +178,40 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_32), contains
     max iter: 40, error threshold: 5e-05
     dimension 3
     reduced dimension 3
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 3],Transformation: place_sphere0/complement, active dof: [ 6, 7], 
+        0: [0, 3],Transformation: place_sphere0/complement, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 1, 1, 0, 0, 0, 1, 
+            mask: 1, 1, 0, 0, 0, 1,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: [ 0, 3], 
-      Active rows: Rows: [ 0, 3], 
-      Cols: [ 0, 6], 
+          active rows: [ 0, 3],
+      Equality idx: Rows: [ 0, 3],
+      Active rows: Rows: [ 0, 3],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere0/handle | 0-0_32
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_43), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0_43), contains BySubstitution
@@ -219,20 +219,20 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_43), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere0/handle | 0-0_43
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_43_ls), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0_43_ls), contains BySubstitution
@@ -240,20 +240,20 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_43_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere0/handle | 0-0_43_ls
 Constraint set Set (ur3/gripper < sphere0/handle | 0-0_ls), contains
   Config projector: proj_(ur3/gripper < sphere0/handle | 0-0_ls), contains BySubstitution
@@ -261,47 +261,47 @@ Constraint set Set (ur3/gripper < sphere0/handle | 0-0_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper < sphere0/handle | 0-0_ls
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1), contains
@@ -310,47 +310,47 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper < sphere1/handle | 0-1
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_10), contains
@@ -359,20 +359,20 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_10), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere1/handle | 0-1_10
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_21), contains
   Config projector: proj_(ur3/gripper < sphere1/handle | 0-1_21), contains BySubstitution
@@ -380,40 +380,40 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_21), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 1
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere1/handle/complement, active dof: [ 0, 6], [ 13, 7], 
+        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere1/handle/complement, active dof: [ 0, 6], [ 13, 7],
             Joint1: ur3/wrist_3_joint
             Frame in joint 1
               R =   0, 1, 0
                              1,          0, 1.7949e-09
-                    1.7949e-09,          0,         -1  
+                    1.7949e-09,          0,         -1
               p =           0,      0.1373, 9.87193e-11
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   2.22045e-16,           0,           1
                     0, 1, 0
-                             -1,           0, 2.22045e-16  
+                             -1,           0, 2.22045e-16
               p = 0, 0, 0
-            mask: 1, 1, 1, 1, 1, 1, 
+            mask: 1, 1, 1, 1, 1, 1,
           Rhs: 0, 0, 0, 0, 0, 0, 1
-          active rows: [ 3, 1], 
-      Equality idx: Rows: [ 0, 6], 
-      Active rows: Rows: [ 3, 1], 
-      Cols: [ 0, 6], 
+          active rows: [ 3, 1],
+      Equality idx: Rows: [ 0, 6],
+      Active rows: Rows: [ 3, 1],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper < sphere1/handle | 0-1_21
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_32), contains
   Config projector: proj_(ur3/gripper < sphere1/handle | 0-1_32), contains BySubstitution
@@ -421,40 +421,40 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_32), contains
     max iter: 40, error threshold: 5e-05
     dimension 3
     reduced dimension 3
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 3],Transformation: place_sphere1/complement, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1/complement, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 1, 1, 0, 0, 0, 1, 
+            mask: 1, 1, 0, 0, 0, 1,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: [ 0, 3], 
-      Active rows: Rows: [ 0, 3], 
-      Cols: [ 0, 6], 
+          active rows: [ 0, 3],
+      Equality idx: Rows: [ 0, 3],
+      Active rows: Rows: [ 0, 3],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge ur3/gripper < sphere1/handle | 0-1_32
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_43), contains
   Config projector: proj_(ur3/gripper < sphere1/handle | 0-1_43), contains BySubstitution
@@ -462,20 +462,20 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_43), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge ur3/gripper < sphere1/handle | 0-1_43
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_43_ls), contains
   Config projector: proj_(ur3/gripper < sphere1/handle | 0-1_43_ls), contains BySubstitution
@@ -483,20 +483,20 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_43_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge ur3/gripper < sphere1/handle | 0-1_43_ls
 Constraint set Set (ur3/gripper < sphere1/handle | 0-1_ls), contains
   Config projector: proj_(ur3/gripper < sphere1/handle | 0-1_ls), contains BySubstitution
@@ -504,47 +504,47 @@ Constraint set Set (ur3/gripper < sphere1/handle | 0-1_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper < sphere1/handle | 0-1_ls
 Constraint set Set (ur3/gripper > sphere0/handle | f), contains
@@ -553,47 +553,47 @@ Constraint set Set (ur3/gripper > sphere0/handle | f), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper > sphere0/handle | f
 Constraint set Set (ur3/gripper > sphere0/handle | f_01), contains
@@ -602,20 +602,20 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_01), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere0/handle | f_01
 Constraint set Set (ur3/gripper > sphere0/handle | f_01_ls), contains
   Config projector: proj_(ur3/gripper > sphere0/handle | f_01_ls), contains BySubstitution
@@ -623,20 +623,20 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_01_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere0/handle | f_01_ls
 Constraint set Set (ur3/gripper > sphere0/handle | f_12), contains
   Config projector: proj_(ur3/gripper > sphere0/handle | f_12), contains BySubstitution
@@ -644,40 +644,40 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_12), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 1
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere0/handle/complement, active dof: [ 0, 13], 
+        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere0/handle/complement, active dof: [ 0, 13],
             Joint1: ur3/wrist_3_joint
             Frame in joint 1
               R =   0, 1, 0
                              1,          0, 1.7949e-09
-                    1.7949e-09,          0,         -1  
+                    1.7949e-09,          0,         -1
               p =           0,      0.1373, 9.87193e-11
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   2.22045e-16,           0,           1
                     0, 1, 0
-                             -1,           0, 2.22045e-16  
+                             -1,           0, 2.22045e-16
               p = 0, 0, 0
-            mask: 1, 1, 1, 1, 1, 1, 
+            mask: 1, 1, 1, 1, 1, 1,
           Rhs: 0, 0, 0, 0, 0, 0, 1
-          active rows: [ 3, 1], 
-      Equality idx: Rows: [ 0, 6], 
-      Active rows: Rows: [ 3, 1], 
-      Cols: [ 0, 6], 
+          active rows: [ 3, 1],
+      Equality idx: Rows: [ 0, 6],
+      Active rows: Rows: [ 3, 1],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere0/handle | f_12
 Constraint set Set (ur3/gripper > sphere0/handle | f_23), contains
   Config projector: proj_(ur3/gripper > sphere0/handle | f_23), contains BySubstitution
@@ -685,40 +685,40 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_23), contains
     max iter: 40, error threshold: 5e-05
     dimension 3
     reduced dimension 3
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 3],Transformation: place_sphere0/complement, active dof: [ 6, 7], 
+        0: [0, 3],Transformation: place_sphere0/complement, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 1, 1, 0, 0, 0, 1, 
+            mask: 1, 1, 0, 0, 0, 1,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: [ 0, 3], 
-      Active rows: Rows: [ 0, 3], 
-      Cols: [ 0, 6], 
+          active rows: [ 0, 3],
+      Equality idx: Rows: [ 0, 3],
+      Active rows: Rows: [ 0, 3],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere0/handle | f_23
 Constraint set Set (ur3/gripper > sphere0/handle | f_34), contains
   Config projector: proj_(ur3/gripper > sphere0/handle | f_34), contains BySubstitution
@@ -726,20 +726,20 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_34), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows: [ 0, 6],  -> Rows: [ 6, 7], 
+        0: Rows: [ 0, 6],  -> Rows: [ 6, 7],
           Differentiable function: ur3/gripper grasps sphere0/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 3, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere0/handle | f_34
 Constraint set Set (ur3/gripper > sphere0/handle | f_ls), contains
   Config projector: proj_(ur3/gripper > sphere0/handle | f_ls), contains BySubstitution
@@ -747,47 +747,47 @@ Constraint set Set (ur3/gripper > sphere0/handle | f_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper > sphere0/handle | f_ls
 Constraint set Set (ur3/gripper > sphere1/handle | f), contains
@@ -796,47 +796,47 @@ Constraint set Set (ur3/gripper > sphere1/handle | f), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper > sphere1/handle | f
 Constraint set Set (ur3/gripper > sphere1/handle | f_01), contains
@@ -845,20 +845,20 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_01), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere1/handle | f_01
 Constraint set Set (ur3/gripper > sphere1/handle | f_01_ls), contains
   Config projector: proj_(ur3/gripper > sphere1/handle | f_01_ls), contains BySubstitution
@@ -866,20 +866,20 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_01_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere1/handle | f_01_ls
 Constraint set Set (ur3/gripper > sphere1/handle | f_12), contains
   Config projector: proj_(ur3/gripper > sphere1/handle | f_12), contains BySubstitution
@@ -887,40 +887,40 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_12), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 1
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere1/handle/complement, active dof: [ 0, 6], [ 13, 7], 
+        0: [0, 6],RelativeTransformation: ur3/gripper grasps sphere1/handle/complement, active dof: [ 0, 6], [ 13, 7],
             Joint1: ur3/wrist_3_joint
             Frame in joint 1
               R =   0, 1, 0
                              1,          0, 1.7949e-09
-                    1.7949e-09,          0,         -1  
+                    1.7949e-09,          0,         -1
               p =           0,      0.1373, 9.87193e-11
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   2.22045e-16,           0,           1
                     0, 1, 0
-                             -1,           0, 2.22045e-16  
+                             -1,           0, 2.22045e-16
               p = 0, 0, 0
-            mask: 1, 1, 1, 1, 1, 1, 
+            mask: 1, 1, 1, 1, 1, 1,
           Rhs: 0, 0, 0, 0, 0, 0, 1
-          active rows: [ 3, 1], 
-      Equality idx: Rows: [ 0, 6], 
-      Active rows: Rows: [ 3, 1], 
-      Cols: [ 0, 6], 
+          active rows: [ 3, 1],
+      Equality idx: Rows: [ 0, 6],
+      Active rows: Rows: [ 3, 1],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows:  -> Rows: [ 6, 14], 
-      Dofs: Cols:  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows:  -> Rows: [ 6, 14],
+      Dofs: Cols:  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows:  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows:  -> Rows: [ 13, 7],
           Differentiable function: LockedJoint sphere1/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
 Built by edge ur3/gripper > sphere1/handle | f_12
 Constraint set Set (ur3/gripper > sphere1/handle | f_23), contains
   Config projector: proj_(ur3/gripper > sphere1/handle | f_23), contains BySubstitution
@@ -928,40 +928,40 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_23), contains
     max iter: 40, error threshold: 5e-05
     dimension 3
     reduced dimension 3
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
       Level 0: Stack of 1 functions
-        0: [0, 3],Transformation: place_sphere1/complement, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1/complement, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 1, 1, 0, 0, 0, 1, 
+            mask: 1, 1, 0, 0, 0, 1,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: [ 0, 3], 
-      Active rows: Rows: [ 0, 3], 
-      Cols: [ 0, 6], 
+          active rows: [ 0, 3],
+      Equality idx: Rows: [ 0, 3],
+      Active rows: Rows: [ 0, 3],
+      Cols: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge ur3/gripper > sphere1/handle | f_23
 Constraint set Set (ur3/gripper > sphere1/handle | f_34), contains
   Config projector: proj_(ur3/gripper > sphere1/handle | f_34), contains BySubstitution
@@ -969,20 +969,20 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_34), contains
     max iter: 40, error threshold: 5e-05
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 0, 6], 
+    free variables: Rows: [ 0, 6],
     ExplicitConstraintSet, 2 functions.
-      Other args: Rows: [ 0, 6], 
-      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14], 
-      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12], 
+      Other args: Rows: [ 0, 6],
+      Params: Rows: [ 0, 6],  -> Rows: [ 6, 14],
+      Dofs: Cols: [ 0, 6],  -> Rows: [ 6, 12],
       Functions
-        0: Rows:  -> Rows: [ 6, 7], 
+        0: Rows:  -> Rows: [ 6, 7],
           Differentiable function: LockedJoint sphere0/root_joint    0    0 0.02    0    0    0    1
           Rhs implicit: 0, 0, 0, 0, 0, 0
-          Equality: Rows: [ 0, 2], [ 5, 1], 
-        1: Rows: [ 0, 6],  -> Rows: [ 13, 7], 
+          Equality: Rows: [ 0, 2], [ 5, 1],
+        1: Rows: [ 0, 6],  -> Rows: [ 13, 7],
           Differentiable function: ur3/gripper grasps sphere1/handle/hold
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: [ 3, 1], 
+          Equality: Rows: [ 3, 1],
 Built by edge ur3/gripper > sphere1/handle | f_34
 Constraint set Set (ur3/gripper > sphere1/handle | f_ls), contains
   Config projector: proj_(ur3/gripper > sphere1/handle | f_ls), contains BySubstitution
@@ -990,46 +990,46 @@ Constraint set Set (ur3/gripper > sphere1/handle | f_ls), contains
     max iter: 40, error threshold: 5e-05
     dimension 6
     reduced dimension 6
-    free variables: Rows: [ 0, 18], 
+    free variables: Rows: [ 0, 18],
       Level 0: Stack of 2 functions
-        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7], 
+        0: [0, 3],Transformation: place_sphere1, active dof: [ 13, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere1/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7], 
+          active rows: [ 0, 3],
+        1: [3, 3],Transformation: place_sphere0, active dof: [ 6, 7],
             Joint1: World
             Frame in joint 1
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p =    0,    0, 0.02
             Joint2: sphere0/root_joint
             Frame in joint 2
               R =   1, 0, 0
                     0, 1, 0
-                    0, 0, 1  
+                    0, 0, 1
               p = 0, 0, 0
-            mask: 0, 0, 1, 1, 1, 0, 
+            mask: 0, 0, 1, 1, 1, 0,
           Rhs: 0, 0, 0
-          active rows: [ 0, 3], 
-      Equality idx: Rows: 
-      Active rows: Rows: [ 0, 6], 
-      Cols: [ 0, 18], 
+          active rows: [ 0, 3],
+      Equality idx: Rows:
+      Active rows: Rows: [ 0, 6],
+      Cols: [ 0, 18],
     ExplicitConstraintSet, 0 functions.
-      Other args: Rows: [ 0, 20], 
-      Params: Rows:  -> Rows: 
-      Dofs: Cols:  -> Rows: 
+      Other args: Rows: [ 0, 20],
+      Params: Rows:  -> Rows:
+      Dofs: Cols:  -> Rows:
       Functions
 Built by edge ur3/gripper > sphere1/handle | f_ls

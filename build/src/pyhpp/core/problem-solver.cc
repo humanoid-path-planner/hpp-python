@@ -128,7 +128,10 @@ void exposeProblemSolver() {
   using namespace hpp::core;
   class_<ProblemSolver>("ProblemSolver", no_init)
       .def("create", &ProblemSolver::create,
-           return_value_policy<manage_new_object>(), "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::create is not documented\n", "")
+           return_value_policy<manage_new_object>(),
+           "Cannot find doxygen-xml for package hpp-core. "
+           "hpp::core::ProblemSolver::create is not documented\n",
+           "")
       .staticmethod("create")
       .def("problem",
            static_cast<ProblemPtr_t (ProblemSolver::*)()>(
@@ -146,39 +149,85 @@ void exposeProblemSolver() {
            static_cast<void (ProblemSolver::*)(ConfigurationIn_t)>(
                &ProblemSolver::initConfig))
       // .PYHPP_DEFINE_METHOD2(ProblemSolver, goalConfigs,
-      //                      "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::goalConfigs is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, addGoalConfig,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::addGoalConfig is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, resetGoalConfigs,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::resetGoalConfigs is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, resetProblem,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::resetProblem is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, resetRoadmap,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::resetRoadmap is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, createPathOptimizers,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::createPathOptimizers is not documented\n", "")
+      //                      "Cannot find doxygen-xml for package hpp-core.
+      //                      hpp::core::ProblemSolver::goalConfigs is not
+      //                      documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, addGoalConfig,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::addGoalConfig is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, resetGoalConfigs,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::resetGoalConfigs is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, resetProblem,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::resetProblem is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, resetRoadmap,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::resetRoadmap is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, createPathOptimizers,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::createPathOptimizers is not documented\n",
+          "")
       .PYHPP_DEFINE_METHOD2(ProblemSolver, prepareSolveStepByStep,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::prepareSolveStepByStep is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, executeOneStep,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::executeOneStep is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, finishSolveStepByStep,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::finishSolveStepByStep is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, solve, "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::solve is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, optimizePath,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::optimizePath is not documented\n", "")
+                            "Cannot find doxygen-xml for package hpp-core. "
+                            "hpp::core::ProblemSolver::prepareSolveStepByStep "
+                            "is not documented\n",
+                            "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, executeOneStep,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::executeOneStep is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, finishSolveStepByStep,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::finishSolveStepByStep is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, solve,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::solve is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, optimizePath,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::optimizePath is not documented\n",
+          "")
 
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, addPath, "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::addPath is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, erasePath, "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::erasePath is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, addPath,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::addPath is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, erasePath,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::erasePath is not documented\n",
+          "")
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(ProblemSolver, paths)
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, createRobot,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::createRobot is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, createRobot,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::createRobot is not documented\n",
+          "")
       .PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(ProblemSolver, robot,
                                                const DevicePtr_t&)
       .def("addObstacle",
            static_cast<void (ProblemSolver::*)(
                const hpp::pinocchio::DevicePtr_t&, bool, bool)>(
                &ProblemSolver::addObstacle),
-           "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::addObstacle is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-core. "
+           "hpp::core::ProblemSolver::addObstacle is not documented\n",
+           "")
 
       .PYHPP_PROBLEMSOLVER_SELECT_TYPE(robot)
       .PYHPP_PROBLEMSOLVER_SELECT_TYPE(pathPlanner)
@@ -193,17 +242,32 @@ void exposeProblemSolver() {
                                     const std::string&, const value_type&)>(
                                     &ProblemSolver::pathProjectorType))
 
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, addConfigValidation,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::addConfigValidation is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, configValidationTypes,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::configValidationTypes is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, addConfigValidation,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::addConfigValidation is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, configValidationTypes,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::configValidationTypes is not documented\n",
+          "")
       .PYHPP_DEFINE_METHOD2(ProblemSolver, clearConfigValidations,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::clearConfigValidations is not documented\n", "")
+                            "Cannot find doxygen-xml for package hpp-core. "
+                            "hpp::core::ProblemSolver::clearConfigValidations "
+                            "is not documented\n",
+                            "")
 
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, addPathOptimizer,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::addPathOptimizer is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ProblemSolver, clearPathOptimizers,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ProblemSolver::clearPathOptimizers is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, addPathOptimizer,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::addPathOptimizer is not documented\n",
+          "")
+      .PYHPP_DEFINE_METHOD2(
+          ProblemSolver, clearPathOptimizers,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ProblemSolver::clearPathOptimizers is not documented\n",
+          "")
       //.PYHPP_DEFINE_METHOD_INTERNAL_REF(ProblemSolver,
       //                                 pathOptimizer)
 

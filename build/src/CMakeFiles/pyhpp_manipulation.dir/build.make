@@ -275,4 +275,3 @@ src/CMakeFiles/pyhpp_manipulation.dir/depend: src/pyhpp/manipulation/problem.cc
 src/CMakeFiles/pyhpp_manipulation.dir/depend: src/pyhpp/manipulation/steering-method.cc
 	cd /home/psardin/devel/nix-hpp/src/hpp-python/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/psardin/devel/nix-hpp/src/hpp-python /home/psardin/devel/nix-hpp/src/hpp-python/src /home/psardin/devel/nix-hpp/src/hpp-python/build /home/psardin/devel/nix-hpp/src/hpp-python/build/src /home/psardin/devel/nix-hpp/src/hpp-python/build/src/CMakeFiles/pyhpp_manipulation.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/CMakeFiles/pyhpp_manipulation.dir/depend
-

@@ -11,12 +11,12 @@ from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
 from pyhpp.constraints import (
     LockedJoint,
 )
-from pinocchio import SE3, Quaternion
+from pinocchio import SE3
 
 parser = ArgumentParser()
-parser.add_argument('-N', default=20, type=int)
-parser.add_argument('--display', action='store_true')
-parser.add_argument('--run', action='store_true')
+parser.add_argument("-N", default=20, type=int)
+parser.add_argument("--display", action="store_true")
+parser.add_argument("--run", action="store_true")
 args = parser.parse_args()
 
 # Robot and object file paths
@@ -59,8 +59,7 @@ for i in range(K):
         box_pose,
     )
     robot.setJointBounds(
-        boxes[i] + '/root_joint',
-        [-1, 0.5, -1, 2, 0.6, 1.9, -1, 1, -1, 1, -1, 1, -1, 1]
+        boxes[i] + "/root_joint", [-1, 0.5, -1, 2, 0.6, 1.9, -1, 1, -1, 1, -1, 1, -1, 1]
     )
 
 model = robot.model()
@@ -77,47 +76,48 @@ q_init = robot.currentConfiguration()
 # Calculate box positions
 rankB = list()
 for i in range(K):
-    joint_id = robot.model().getJointId(boxes[i] + '/root_joint')
-    rankB.append (robot.model().idx_qs[joint_id])
+    joint_id = robot.model().getJointId(boxes[i] + "/root_joint")
+    rankB.append(robot.model().idx_qs[joint_id])
 
-bb = [0.7, 0.8, 0., 0.1]
+bb = [0.7, 0.8, 0.0, 0.1]
 c = sqrt(2) / 2
 xstep = (bb[1] - bb[0]) / (nBoxPerLine - 1) if nBoxPerLine > 1 else (bb[1] - bb[0])
-nbCols = int(K * 1. / nBoxPerLine + 0.5)
+nbCols = int(K * 1.0 / nBoxPerLine + 0.5)
 ystep = (bb[3] - bb[2]) / (nbCols - 1) if nbCols > 1 else (bb[3] - bb[2])
 for i in range(K):
     iL = i % nBoxPerLine
     iC = (i - iL) / nBoxPerLine
     x = bb[0] + xstep * iL
     y = bb[2] + xstep * iC
-    q_init[rankB[i]:rankB[i]+7] = [x, y, 0.746, 0, -c, 0, c]
+    q_init[rankB[i] : rankB[i] + 7] = [x, y, 0.746, 0, -c, 0, c]
 
 q_goal = q_init[::].copy()
 for i in range(K):
     r = rankB[i]
     rn = rankB[goal[i]]
-    q_goal[r:r+7] = q_init[rn:rn+7]
+    q_goal[r : r + 7] = q_init[rn : rn + 7]
 
 constraints = dict()
 graphConstraints = dict()
 
 jointNames = dict()
-jointNames['all'] = robot.model().names
-jointNames['baxterRightSide'] = list()
-jointNames['baxterLeftSide'] = list()
+jointNames["all"] = robot.model().names
+jointNames["baxterRightSide"] = list()
+jointNames["baxterLeftSide"] = list()
 
-for n in jointNames['all']:
+for n in jointNames["all"]:
     if n.startswith("baxter"):
         if n.startswith("baxter/left_"):
-            jointNames['baxterLeftSide'].append(n)
+            jointNames["baxterLeftSide"].append(n)
         if n.startswith("baxter/right_"):
-            jointNames['baxterRightSide'].append(n)
+            jointNames["baxterRightSide"].append(n)
 # Lock finger joints
-lockFingers = ["r_gripper_l_finger",
-               "r_gripper_r_finger",
-               "l_gripper_l_finger",
-               "l_gripper_r_finger",
-        ]
+lockFingers = [
+    "r_gripper_l_finger",
+    "r_gripper_r_finger",
+    "l_gripper_l_finger",
+    "l_gripper_r_finger",
+]
 for side in ["r", "l"]:
     joint_name = "baxter/" + side + "_gripper_r_finger_joint"
     cs = LockedJoint.create(robot.asPinDevice(), joint_name, np.array([-0.02]))
@@ -130,18 +130,20 @@ for side in ["r", "l"]:
 
 
 # Lock head
-lockHead = 'head_pan'
-joint_name = 'baxter/head_pan'
+lockHead = "head_pan"
+joint_name = "baxter/head_pan"
 joint_id = robot.model().getJointId(joint_name)
-cs = LockedJoint.create(robot.asPinDevice(), joint_name, np.array([q_init[robot.model().idx_qs[joint_id]]]))
+cs = LockedJoint.create(
+    robot.asPinDevice(), joint_name, np.array([q_init[robot.model().idx_qs[joint_id]]])
+)
 constraints[lockHead] = cs
 graphConstraints[lockHead] = cs
 for n in jointNames["baxterRightSide"]:
-    cs = LockedJoint.create(robot.asPinDevice(), n, np.array([0.]))
+    cs = LockedJoint.create(robot.asPinDevice(), n, np.array([0.0]))
     constraints[n] = cs
 
 for n in jointNames["baxterLeftSide"]:
-    cs = LockedJoint.create(robot.asPinDevice(), n, np.array([0.]))
+    cs = LockedJoint.create(robot.asPinDevice(), n, np.array([0.0]))
     constraints[n] = cs
 
 # Define handles and contact surfaces
@@ -157,21 +159,21 @@ rules = [Rule([".*"], [".*"], True)]
 
 factory = ConstraintGraphFactory(cg, constraints)
 factory.setGrippers(grippers)
-factory.environmentContacts(['table/pancake_table_table_top'])
+factory.environmentContacts(["table/pancake_table_table_top"])
 factory.setObjects(boxes, handlesPerObject, objContactSurfaces)
 factory.setRules(rules)
 factory.generate()
-cg.addNumericalConstraintsToGraph( list(graphConstraints.values()))
+cg.addNumericalConstraintsToGraph(list(graphConstraints.values()))
 cg.initialize()
 
-res = cg.applyStateConstraints(cg.getState('free'), q_init)
+res = cg.applyStateConstraints(cg.getState("free"), q_init)
 if not res.success:
-    raise Exception('Init configuration could not be projected.')
+    raise Exception("Init configuration could not be projected.")
 q_init_proj = res.configuration
 
-res = cg.applyStateConstraints(cg.getState('free'), q_goal)
+res = cg.applyStateConstraints(cg.getState("free"), q_goal)
 if not res.success:
-    raise Exception('Goal configuration could not be projected.')
+    raise Exception("Goal configuration could not be projected.")
 q_goal_proj = res.configuration
 
 problem.initConfig(q_init_proj)
@@ -183,8 +185,13 @@ manipulationPlanner = ManipulationPlanner(problem)
 problem.clearConfigValidations()
 problem.addConfigValidation("CollisionValidation")
 
-optimizers = ['Graph-PartialShortcut', 'Graph-RandomShortcut', 'PartialShortcut', 
-              'RandomShortcut', 'SimpleShortcut']
+optimizers = [
+    "Graph-PartialShortcut",
+    "Graph-RandomShortcut",
+    "PartialShortcut",
+    "RandomShortcut",
+    "SimpleShortcut",
+]
 iOpt = 0
 
 # Run benchmark
@@ -197,7 +204,7 @@ for i in range(args.N):
     # ps.addPathOptimizer(optimizers[iOpt])
     # iOpt += 1
     # if iOpt == len(optimizers): iOpt = 0
-    
+
     try:
         manipulationPlanner.roadmap().clear()
         problem.resetGoalConfigs()
@@ -222,4 +229,3 @@ if args.N != 0:
     if success > 0:
         print(f"Average time per success: {totalTime.total_seconds() / success}")
         print(f"Average number nodes per success: {totalNumberNodes / success}")
-

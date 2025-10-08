@@ -1,25 +1,230 @@
-var searchData=
-[
-  ['absolutegenerictransformation_5fcreate_0',['AbsoluteGenericTransformation_create',['../namespacepyhpp_1_1constraints.html#a36c36409fbc65c42d177145784cb7a07',1,'pyhpp::constraints']]],
-  ['add_5fto_5fcontainer_1',['add_to_container',['../structpyhpp_1_1core_1_1Builder.html#ab94b50e5665472b6728bd4e23fe8c0a9',1,'pyhpp::core::Builder::add_to_container()'],['../structpyhpp_1_1core_1_1NotABuilder.html#a6cde88325e5a92ba2540f7136d4cb533',1,'pyhpp::core::NotABuilder::add_to_container()']]],
-  ['addcontinuityconstraints_2',['addContinuityConstraints',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a09aafceda22098f9f3f2a9d2740110ca',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['addedge_3',['addEdge',['../structpyhpp_1_1core_1_1RWrapper.html#a2435920ce84a4fd971acef5ab06344ca',1,'pyhpp::core::RWrapper']]],
-  ['addgoalconfig_4',['addGoalConfig',['../structpyhpp_1_1core_1_1Problem.html#afc83248c7b3ca9c040acb57b84b8b237',1,'pyhpp::core::Problem']]],
-  ['addlevelsetfoliation_5',['addLevelSetFoliation',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a8315d634de140d49c048c52ca030caa0',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addnode_6',['addNode',['../structpyhpp_1_1core_1_1RWrapper.html#a44ae4bca0d29450a20697f5c014bf8e3',1,'pyhpp::core::RWrapper']]],
-  ['addnodeandedge_7',['addNodeAndEdge',['../structpyhpp_1_1core_1_1RWrapper.html#a71da9ef15ef81e75e937de3a1cfdce87',1,'pyhpp::core::RWrapper']]],
-  ['addnodeandedges_8',['addNodeAndEdges',['../structpyhpp_1_1core_1_1RWrapper.html#a3f0c363701f4578a6155cf99176076be',1,'pyhpp::core::RWrapper']]],
-  ['addnumericalconstraint_9',['addNumericalConstraint',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#aee6ccb5f06940ef81e4c503dd0fead01',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addnumericalconstraintsforpath_10',['addNumericalConstraintsForPath',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#aa5dd20d8619b4402c192d21ba729296f',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addnumericalconstraintstograph_11',['addNumericalConstraintsToGraph',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ae1be9f319d9076fe3d31d318d064793c',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addnumericalconstraintstostate_12',['addNumericalConstraintsToState',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#af2fef0a76a61082b7187d3927db19be6',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addnumericalconstraintstotransition_13',['addNumericalConstraintsToTransition',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad9bab34249bb1dd33131c03194d8019d',1,'pyhpp::manipulation::PyWGraph']]],
-  ['addpathoptimizer_14',['addPathOptimizer',['../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a452808ed533c54b2d8dbddc630c6add9',1,'pyhpp::manipulation::TransitionPlanner']]],
-  ['appendequivalentspline_15',['appendEquivalentSpline',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aedfa1bb6dc65ceb3d74048701a59aa46',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['apply_16',['apply',['../structpyhpp_1_1core_1_1CWrapper.html#ad6a19325619ff4511d53d30204e35063',1,'pyhpp::core::CWrapper::apply()'],['../structpyhpp_1_1core_1_1PPWrapper.html#af1caa8c34c5d7333f2ce1544c0a03994',1,'pyhpp::core::PPWrapper::apply()']]],
-  ['applyleafconstraints_17',['applyLeafConstraints',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a194eb29e8704c1cd9b349a3b8a680f7b',1,'pyhpp::manipulation::PyWGraph']]],
-  ['applystateconstraints_18',['applyStateConstraints',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a4bb973b84a46da33d6fc5c93e72d4cc6',1,'pyhpp::manipulation::PyWGraph']]],
-  ['asdistanceptr_5ft_19',['AsDistancePtr_t',['../structpyhpp_1_1core_1_1DistanceWrapper.html#abd7bfeb80835e37d23605dbce67186a3',1,'pyhpp::core::DistanceWrapper']]],
-  ['asmanipulationproblem_20',['asManipulationProblem',['../structpyhpp_1_1core_1_1Problem.html#a4c2a67959ba2fc9497b1500a65cda2f8',1,'pyhpp::core::Problem']]],
-  ['aspindevice_21',['asPinDevice',['../structpyhpp_1_1manipulation_1_1Device.html#ad43a47e7ff4592bc153a1d10f952e785',1,'pyhpp::manipulation::Device']]]
+var searchData = [
+  [
+    'absolutegenerictransformation_5fcreate_0',
+    [
+      'AbsoluteGenericTransformation_create',
+      [
+        '../namespacepyhpp_1_1constraints.html#a36c36409fbc65c42d177145784cb7a07',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'add_5fto_5fcontainer_1',
+    [
+      'add_to_container',
+      [
+        '../structpyhpp_1_1core_1_1Builder.html#ab94b50e5665472b6728bd4e23fe8c0a9',
+        1, 'pyhpp::core::Builder::add_to_container()'
+      ],
+      [
+        '../structpyhpp_1_1core_1_1NotABuilder.html#a6cde88325e5a92ba2540f7136d4cb533',
+        1, 'pyhpp::core::NotABuilder::add_to_container()'
+      ]
+    ]
+  ],
+  [
+    'addcontinuityconstraints_2',
+    [
+      'addContinuityConstraints',
+      [
+        '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a09aafceda22098f9f3f2a9d2740110ca',
+        1, 'pyhpp::core::pathOptimization::SGBWrapper'
+      ]
+    ]
+  ],
+  [
+    'addedge_3',
+    [
+      'addEdge',
+      [
+        '../structpyhpp_1_1core_1_1RWrapper.html#a2435920ce84a4fd971acef5ab06344ca',
+        1, 'pyhpp::core::RWrapper'
+      ]
+    ]
+  ],
+  [
+    'addgoalconfig_4',
+    [
+      'addGoalConfig',
+      [
+        '../structpyhpp_1_1core_1_1Problem.html#afc83248c7b3ca9c040acb57b84b8b237',
+        1, 'pyhpp::core::Problem'
+      ]
+    ]
+  ],
+  [
+    'addlevelsetfoliation_5',
+    [
+      'addLevelSetFoliation',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a8315d634de140d49c048c52ca030caa0',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addnode_6',
+    [
+      'addNode',
+      [
+        '../structpyhpp_1_1core_1_1RWrapper.html#a44ae4bca0d29450a20697f5c014bf8e3',
+        1, 'pyhpp::core::RWrapper'
+      ]
+    ]
+  ],
+  [
+    'addnodeandedge_7',
+    [
+      'addNodeAndEdge',
+      [
+        '../structpyhpp_1_1core_1_1RWrapper.html#a71da9ef15ef81e75e937de3a1cfdce87',
+        1, 'pyhpp::core::RWrapper'
+      ]
+    ]
+  ],
+  [
+    'addnodeandedges_8',
+    [
+      'addNodeAndEdges',
+      [
+        '../structpyhpp_1_1core_1_1RWrapper.html#a3f0c363701f4578a6155cf99176076be',
+        1, 'pyhpp::core::RWrapper'
+      ]
+    ]
+  ],
+  [
+    'addnumericalconstraint_9',
+    [
+      'addNumericalConstraint',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#aee6ccb5f06940ef81e4c503dd0fead01',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addnumericalconstraintsforpath_10',
+    [
+      'addNumericalConstraintsForPath',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#aa5dd20d8619b4402c192d21ba729296f',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addnumericalconstraintstograph_11',
+    [
+      'addNumericalConstraintsToGraph',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ae1be9f319d9076fe3d31d318d064793c',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addnumericalconstraintstostate_12',
+    [
+      'addNumericalConstraintsToState',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#af2fef0a76a61082b7187d3927db19be6',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addnumericalconstraintstotransition_13',
+    [
+      'addNumericalConstraintsToTransition',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad9bab34249bb1dd33131c03194d8019d',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'addpathoptimizer_14',
+    [
+      'addPathOptimizer',
+      [
+        '../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a452808ed533c54b2d8dbddc630c6add9',
+        1, 'pyhpp::manipulation::TransitionPlanner'
+      ]
+    ]
+  ],
+  [
+    'appendequivalentspline_15',
+    [
+      'appendEquivalentSpline',
+      [
+        '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aedfa1bb6dc65ceb3d74048701a59aa46',
+        1, 'pyhpp::core::pathOptimization::SGBWrapper'
+      ]
+    ]
+  ],
+  [
+    'apply_16',
+    [
+      'apply',
+      [
+        '../structpyhpp_1_1core_1_1CWrapper.html#ad6a19325619ff4511d53d30204e35063',
+        1, 'pyhpp::core::CWrapper::apply()'
+      ],
+      [
+        '../structpyhpp_1_1core_1_1PPWrapper.html#af1caa8c34c5d7333f2ce1544c0a03994',
+        1, 'pyhpp::core::PPWrapper::apply()'
+      ]
+    ]
+  ],
+  [
+    'applyleafconstraints_17',
+    [
+      'applyLeafConstraints',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a194eb29e8704c1cd9b349a3b8a680f7b',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'applystateconstraints_18',
+    [
+      'applyStateConstraints',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a4bb973b84a46da33d6fc5c93e72d4cc6',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'asdistanceptr_5ft_19',
+    [
+      'AsDistancePtr_t',
+      [
+        '../structpyhpp_1_1core_1_1DistanceWrapper.html#abd7bfeb80835e37d23605dbce67186a3',
+        1, 'pyhpp::core::DistanceWrapper'
+      ]
+    ]
+  ],
+  [
+    'asmanipulationproblem_20',
+    [
+      'asManipulationProblem',
+      [
+        '../structpyhpp_1_1core_1_1Problem.html#a4c2a67959ba2fc9497b1500a65cda2f8',
+        1, 'pyhpp::core::Problem'
+      ]
+    ]
+  ],
+  [
+    'aspindevice_21',
+    [
+      'asPinDevice',
+      [
+        '../structpyhpp_1_1manipulation_1_1Device.html#ad43a47e7ff4592bc153a1d10f952e785',
+        1, 'pyhpp::manipulation::Device'
+      ]
+    ]
+  ]
 ];

@@ -7,4 +7,3 @@ CXX_DEFINES = -DBOOST_MPL_LIMIT_LIST_SIZE=30 -DBOOST_MPL_LIMIT_VECTOR_SIZE=30 -D
 CXX_INCLUDES = -I/home/psardin/devel/nix-hpp/src/hpp-python/build -I/home/psardin/devel/nix-hpp/src/hpp-python/build/include -I/home/psardin/devel/nix-hpp/src/hpp-python/include -isystem /home/psardin/devel/nix-hpp/install/include -isystem /nix/store/623qbh4hgqxzhnlvrv4r5jnlkrj54xnj-eigen-3.4.0-unstable-2022-05-19/include/eigen3 -isystem /nix/store/v3rlxxh45vbynjc9gfwlp3z93klap26g-python3-3.12.9-env/lib/python3.12/site-packages/numpy/_core/include -isystem /nix/store/f2krmq3iv5nibcvn4rw7nrnrciqprdkh-python3-3.12.9/include/python3.12 -isystem /nix/store/rc9zhmw5vpl8rnih9n87paygnqh65nwj-urdfdom-4.0.0/include/urdfdom -isystem /nix/store/fih5ph3qm3gnmwn8lzd9h344y4wjx2yq-urdfdom-headers-1.1.1/include/urdfdom_headers
 
 CXX_FLAGS = -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion  -g -fPIC
-

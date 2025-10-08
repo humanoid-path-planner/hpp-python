@@ -1,4 +1,5 @@
-file(REMOVE_RECURSE
+file(
+  REMOVE_RECURSE
   "CMakeFiles/pyhpp_core_path.dir/link.d"
   "pyhpp/__init__.pyc"
   "pyhpp/manipulation/constraint_graph_factory.pyc"
@@ -12,8 +13,7 @@ file(REMOVE_RECURSE
   "pyhpp/core/path/bindings.pdb"
   "pyhpp/core/path/bindings.so"
   "pyhpp/core/path/spline.cc"
-  "pyhpp/core/path/vector.cc"
-)
+  "pyhpp/core/path/vector.cc")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang CXX)

@@ -27,9 +27,10 @@ namespace pyhpp {
 namespace constraints {
 using namespace hpp::constraints;
 
-LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot, const char* lockedJointName,
-                                const char* jointName,
-                                const vector_t& config) {
+LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot,
+                                   const char* lockedJointName,
+                                   const char* jointName,
+                                   const vector_t& config) {
   try {
     // Get robot in hppPlanner object.
     JointPtr_t joint = robot->getJointByName(jointName);
@@ -42,7 +43,8 @@ LockedJointPtr_t createLockedJoint(const DevicePtr_t& robot, const char* lockedJ
 }
 
 void exposeLockedJoint() {
-  class_<LockedJoint, LockedJointPtr_t, boost::noncopyable>("LockedJoint", no_init)
+  class_<LockedJoint, LockedJointPtr_t, boost::noncopyable>("LockedJoint",
+                                                            no_init)
       .def("create", &createLockedJoint)
       .staticmethod("create");
 }

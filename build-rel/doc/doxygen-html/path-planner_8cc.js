@@ -1,11 +1,40 @@
-var path_planner_8cc =
-[
-    [ "pyhpp::core::pathPlanner::PlanAndOptimize", "structpyhpp_1_1core_1_1pathPlanner_1_1PlanAndOptimize.html", "structpyhpp_1_1core_1_1pathPlanner_1_1PlanAndOptimize" ],
-    [ "DEFINE_PLANNER_WRAPPER", "path-planner_8cc.html#aabaf471ee02bd1daa9b68439916d7e15", null ],
-    [ "pyhpp::core::pathPlanner::DEFINE_PLANNER_WRAPPER", "namespacepyhpp_1_1core_1_1pathPlanner.html#a0d107d8e3b530236978c1077d1356da5", null ],
-    [ "pyhpp::core::pathPlanner::DEFINE_PLANNER_WRAPPER", "namespacepyhpp_1_1core_1_1pathPlanner.html#a631745e432aacf907315c791a00f8cff", null ],
-    [ "pyhpp::core::exposePathPlanner", "namespacepyhpp_1_1core.html#a98c6d51f16bcfa02b63ce2ba7eff4b76", null ],
-    [ "pyhpp::core::pathPlanner::exposePathPlanners", "namespacepyhpp_1_1core_1_1pathPlanner.html#a1e35bf746c98e558846c766730e258da", null ],
-    [ "pyhpp::core::pathPlanner::exposePlanAndOptimize", "namespacepyhpp_1_1core_1_1pathPlanner.html#ad735ad028b9a2c23c1961467edf8f092", null ],
-    [ "pyhpp::core::pathPlanner::exposeSearchInRoadmap", "namespacepyhpp_1_1core_1_1pathPlanner.html#ad623677f8651cdfe098680fd0f2f7689", null ]
+var path_planner_8cc = [
+  [
+    'pyhpp::core::pathPlanner::PlanAndOptimize',
+    'structpyhpp_1_1core_1_1pathPlanner_1_1PlanAndOptimize.html',
+    'structpyhpp_1_1core_1_1pathPlanner_1_1PlanAndOptimize'
+  ],
+  [
+    'DEFINE_PLANNER_WRAPPER',
+    'path-planner_8cc.html#aabaf471ee02bd1daa9b68439916d7e15', null
+  ],
+  [
+    'pyhpp::core::pathPlanner::DEFINE_PLANNER_WRAPPER',
+    'namespacepyhpp_1_1core_1_1pathPlanner.html#a0d107d8e3b530236978c1077d1356da5',
+    null
+  ],
+  [
+    'pyhpp::core::pathPlanner::DEFINE_PLANNER_WRAPPER',
+    'namespacepyhpp_1_1core_1_1pathPlanner.html#a631745e432aacf907315c791a00f8cff',
+    null
+  ],
+  [
+    'pyhpp::core::exposePathPlanner',
+    'namespacepyhpp_1_1core.html#a98c6d51f16bcfa02b63ce2ba7eff4b76', null
+  ],
+  [
+    'pyhpp::core::pathPlanner::exposePathPlanners',
+    'namespacepyhpp_1_1core_1_1pathPlanner.html#a1e35bf746c98e558846c766730e258da',
+    null
+  ],
+  [
+    'pyhpp::core::pathPlanner::exposePlanAndOptimize',
+    'namespacepyhpp_1_1core_1_1pathPlanner.html#ad735ad028b9a2c23c1961467edf8f092',
+    null
+  ],
+  [
+    'pyhpp::core::pathPlanner::exposeSearchInRoadmap',
+    'namespacepyhpp_1_1core_1_1pathPlanner.html#ad623677f8651cdfe098680fd0f2f7689',
+    null
+  ]
 ];

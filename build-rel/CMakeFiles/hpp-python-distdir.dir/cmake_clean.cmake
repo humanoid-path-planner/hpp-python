@@ -1,9 +1,5 @@
-file(REMOVE_RECURSE
-  "doc/doxygen-html"
-  "doc/doxygen.log"
-  "doc/hpp-python.doxytag"
-  "CMakeFiles/hpp-python-distdir"
-)
+file(REMOVE_RECURSE "doc/doxygen-html" "doc/doxygen.log"
+     "doc/hpp-python.doxytag" "CMakeFiles/hpp-python-distdir")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang )

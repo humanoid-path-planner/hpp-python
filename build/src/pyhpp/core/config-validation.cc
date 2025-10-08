@@ -59,17 +59,31 @@ void exposeConfigValidation() {
   // DocClass (ConfigValidation)
   class_<ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>(
       "ConfigValidation", no_init)
-      .PYHPP_DEFINE_METHOD2(ConfigValidation, validate,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ConfigValidation::validate is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ConfigValidation, validate,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ConfigValidation::validate is not documented\n",
+          "")
       .def("validate", &CVWrapper::py_validate);
 
   // DocClass (ConfigValidations)
   class_<ConfigValidations, ConfigValidationsPtr_t, bases<ConfigValidation>,
          boost::noncopyable>("ConfigValidations", no_init)
-      .PYHPP_DEFINE_METHOD2(ConfigValidations, add, "Cannot find doxygen-xml for package hpp-core. hpp::core::ConfigValidations::add is not documented\n", "")
+      .PYHPP_DEFINE_METHOD2(
+          ConfigValidations, add,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ConfigValidations::add is not documented\n",
+          "")
       .PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
-                            "Cannot find doxygen-xml for package hpp-core. hpp::core::ConfigValidations::numberConfigValidations is not documented\n", "")
-      .PYHPP_DEFINE_METHOD2(ConfigValidations, clear, "Cannot find doxygen-xml for package hpp-core. hpp::core::ConfigValidations::clear is not documented\n", "");
+                            "Cannot find doxygen-xml for package hpp-core. "
+                            "hpp::core::ConfigValidations::"
+                            "numberConfigValidations is not documented\n",
+                            "")
+      .PYHPP_DEFINE_METHOD2(
+          ConfigValidations, clear,
+          "Cannot find doxygen-xml for package hpp-core. "
+          "hpp::core::ConfigValidations::clear is not documented\n",
+          "");
 }
 }  // namespace core
 }  // namespace pyhpp

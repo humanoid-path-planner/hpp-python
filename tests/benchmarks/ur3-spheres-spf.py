@@ -11,7 +11,14 @@ import datetime as dt
 from argparse import ArgumentParser
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf, StatesPathFinder
+from pyhpp.manipulation import (
+    Device,
+    Graph,
+    Problem,
+    createProgressiveProjector,
+    urdf,
+    StatesPathFinder,
+)
 from pyhpp.core import createDichotomy, Straight
 
 from pyhpp.constraints import (
@@ -24,7 +31,7 @@ from pyhpp.constraints import (
 from pinocchio import SE3, Quaternion
 
 parser = ArgumentParser()
-parser.add_argument('-N', default=20, type=int)
+parser.add_argument("-N", default=20, type=int)
 args = parser.parse_args()
 
 # Robot and environment file paths
@@ -50,8 +57,13 @@ robot.setJointBounds("ur3/elbow_joint", [-2.6, 2.6])
 
 # Load ground
 urdf.loadModel(
-    robot, 0, "ground", "anchor", ground_urdf, ground_srdf, 
-    SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
+    robot,
+    0,
+    "ground",
+    "anchor",
+    ground_urdf,
+    ground_srdf,
+    SE3(rotation=np.identity(3), translation=np.array([0, 0, 0])),
 )
 
 # Load spheres to be manipulated
@@ -111,7 +123,7 @@ for i in range(nSphere):
     o = objects[i]
     h = robot.handles()[o + "/handle"]
     h.mask = [True, True, True, False, True, True]
-    
+
     # placement constraint
     placementName = "place_sphere{0}".format(i)
     Id = SE3.Identity()
@@ -135,7 +147,7 @@ for i in range(nSphere):
     implicit_mask = [True, True, True]
     implicitPlacementConstraint = Implicit.create(pc, cts, implicit_mask)
     constraints[placementName] = implicitPlacementConstraint
-    
+
     # placement complement constraint
     pc = Transformation.create(
         placementName + "/complement",
@@ -200,14 +212,48 @@ for i in range(nSphere):
     constraints[preplacementName] = implicitPrePlacementConstraint
 
 q_init = [
-    pi / 6, -pi / 2, pi / 2, 0, 0, 0,
-    0.2, 0, 0.02, 0, 0, 0, 1,
-    0.3, 0, 0.02, 0, 0, 0, 1,
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
 ]
 q_goal = [
-    pi / 6, -pi / 2, pi / 2, 0, 0, 0,
-    0.3, 0, 0.02, 0, 0, 0, 1,
-    0.2, 0, 0.02, 0, 0, 0, 1,
+    pi / 6,
+    -pi / 2,
+    pi / 2,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    0,
+    0.02,
+    0,
+    0,
+    0,
+    1,
 ]
 
 factory = ConstraintGraphFactory(cg, constraints)

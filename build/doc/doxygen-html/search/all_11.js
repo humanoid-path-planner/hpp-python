@@ -1,103 +1,1046 @@
-var searchData=
-[
-  ['s_5ft_0',['S_t',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#aaf690255be3c1957be5b4443bfbbcba3',1,'pyhpp::core::path::SplineWrapper']]],
-  ['scalar_5fname_1',['scalar_name',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name.html',1,'eigenpy']]],
-  ['scalar_5fname_3c_20double_20_3e_2',['scalar_name&lt; double &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01double_01_4.html',1,'eigenpy']]],
-  ['scalar_5fname_3c_20float_20_3e_3',['scalar_name&lt; float &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01float_01_4.html',1,'eigenpy']]],
-  ['scalar_5fname_3c_20long_20double_20_3e_4',['scalar_name&lt; long double &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01long_01double_01_4.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_5',['scipy_allocator_impl',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_3c_20const_20mattype_20_26_2c_20const_20eigen_3a_3asparsematrixbase_3c_20mattype_20_3e_20_3e_6',['scipy_allocator_impl&lt; const MatType &amp;, const Eigen::SparseMatrixBase&lt; MatType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01const_01MatType_01_6_00_01const_01Eigen_1_1SparseMatrixBase_3_01MatType_01_4_01_4.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_3c_20const_20mattype_2c_20const_20eigen_3a_3asparsematrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_7',['scipy_allocator_impl&lt; const MatType, const Eigen::SparseMatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01const_01MatType_00_01const_01Eigen_1_1SparseMatrixBafbe2a4213be5af504bc0462a745d5f0f.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_3c_20eigentype_2c_20basetype_20_3e_8',['scipy_allocator_impl&lt; EigenType, BaseType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_3c_20mattype_2c_20eigen_3a_3asparsematrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_9',['scipy_allocator_impl&lt; MatType, Eigen::SparseMatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01MatType_00_01Eigen_1_1SparseMatrixBase_3_01typename_470e1325fe411061dba513d9549238f1.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_5fsparse_5fmatrix_10',['scipy_allocator_impl_sparse_matrix',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20const_20mattype_20_26_20_3e_11',['scipy_allocator_impl_sparse_matrix&lt; const MatType &amp; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20const_20mattype_20_3e_12',['scipy_allocator_impl_sparse_matrix&lt; const MatType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',1,'eigenpy']]],
-  ['scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20mattype_20_3e_13',['scipy_allocator_impl_sparse_matrix&lt; MatType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',1,'eigenpy']]],
-  ['scipyallocator_14',['ScipyAllocator',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1ScipyAllocator.html',1,'eigenpy']]],
-  ['scipytype_15',['ScipyType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1ScipyType.html',1,'eigenpy']]],
-  ['selfadjointeigensolvervisitor_16',['SelfAdjointEigenSolverVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SelfAdjointEigenSolverVisitor.html',1,'eigenpy']]],
-  ['server_2ecc_17',['server.cc',['../server_8cc.html',1,'(Global Namespace)'],['../wholebodyStep_2server_8cc.html',1,'(Global Namespace)']]],
-  ['setb_18',['setb',['../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#a75e71e630835cb21b40d85223dfa922e',1,'pyhpp::core::pathOptimization::LCWrapper::setb()'],['../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#aba35a1d74bd8064240a8f6fc5be8b10e',1,'pyhpp::core::pathOptimization::QPWrapper::setb()']]],
-  ['setconfigurationshooter_19',['SetConfigurationShooter',['../namespacepyhpp_1_1core.html#afc33b97946bb2035eac8432a713f53ff',1,'pyhpp::core']]],
-  ['setconfigvalidation_20',['SetConfigValidation',['../namespacepyhpp_1_1core.html#adf7a81cdea6a5f3d967f4c7a3f78e783',1,'pyhpp::core']]],
-  ['setcontainingnode_21',['setContainingNode',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a41b305946103e18a4786e873d1cf1e63',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setdistance_22',['SetDistance',['../namespacepyhpp_1_1core.html#a7988c4f98831399ace1fe2c871acacd9',1,'pyhpp::core']]],
-  ['setedge_23',['setEdge',['../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a4f5d9a8021a5fd5bbc85f17c8516668c',1,'pyhpp::manipulation::TransitionPlanner']]],
-  ['seth_24',['setH',['../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#a14306dbd6688b30c964342da8a1e9b5a',1,'pyhpp::core::pathOptimization::QPWrapper']]],
-  ['sethandlelocalposition_25',['setHandleLocalPosition',['../namespacepyhpp_1_1manipulation.html#a90a0eb1ff6d894f199f08488f28b16cf',1,'pyhpp::manipulation']]],
-  ['sethandlemask_26',['setHandleMask',['../namespacepyhpp_1_1manipulation.html#a4cade342bdd3e0ac329521f99a549cdb',1,'pyhpp::manipulation']]],
-  ['sethandlemaskcomp_27',['setHandleMaskComp',['../namespacepyhpp_1_1manipulation.html#abcdaed0c0f81fc2fb066ef256981a5d8',1,'pyhpp::manipulation']]],
-  ['sethandlename_28',['setHandleName',['../namespacepyhpp_1_1manipulation.html#aa79c3050e405140b900ab968876dc157',1,'pyhpp::manipulation']]],
-  ['setj_29',['setJ',['../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#ae11d29acb502d873d1d5c2f96698b9d5',1,'pyhpp::core::pathOptimization::LCWrapper']]],
-  ['setjointbounds_30',['setJointBounds',['../structpyhpp_1_1manipulation_1_1Device.html#aa4d4c335d2537e47de9a1ac13952773b',1,'pyhpp::manipulation::Device']]],
-  ['setparameter_31',['setParameter',['../structpyhpp_1_1core_1_1Problem.html#a199e1ab3029e68757207078dee033284',1,'pyhpp::core::Problem']]],
-  ['setpathprojector_32',['SetPathProjector',['../namespacepyhpp_1_1core.html#af9f5683c3d167a35d7df2e76ae6ff537',1,'pyhpp::core']]],
-  ['setpathvalidation_33',['SetPathValidation',['../namespacepyhpp_1_1core.html#a116d4327f0b4b4d9c02f62cf6e19a137',1,'pyhpp::core']]],
-  ['setreedsandsheppsteeringmethod_34',['setReedsAndSheppSteeringMethod',['../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a1033a9d49bfd1f6326c596534daf2608',1,'pyhpp::manipulation::TransitionPlanner']]],
-  ['setrobotrootposition_35',['setRobotRootPosition',['../structpyhpp_1_1manipulation_1_1Device.html#aff9db4e076a4a3b8569aa1b6b5bf53ca',1,'pyhpp::manipulation::Device']]],
-  ['setsecuritymarginfortransition_36',['setSecurityMarginForTransition',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ac21a3873ea1fcddba3d991b8e98fb4f4',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setshort_37',['setShort',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a0db56c6990f80d0d8edc8f41701dd6b0',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setsteeringmethod_38',['SetSteeringMethod',['../namespacepyhpp_1_1core.html#a81b0e34076405d7ba842e923d4f4cf19',1,'pyhpp::core']]],
-  ['settarget_39',['SetTarget',['../namespacepyhpp_1_1core.html#a38ef13b11e9d99d60aa0522460f888cd',1,'pyhpp::core']]],
-  ['settargetnodelist_40',['setTargetNodeList',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad546b05dd5b3bf805417eb4f616f7c97',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setwaypoint_41',['setWaypoint',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a78a9a7612727d21a8a85036973adf34a',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setweight_42',['setWeight',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#af7112e28a9a67d703470ad2fe6bdf31e',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setweights_43',['setWeights',['../structpyhpp_1_1core_1_1DistanceWrapper.html#abe01123bf3e8a6bddb0f653399b39f57',1,'pyhpp::core::DistanceWrapper']]],
-  ['sgbwrapper_44',['SGBWrapper',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html',1,'pyhpp::core::pathOptimization::SGBWrapper&lt; _PolynomeBasis, _Order &gt;'],['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387',1,'pyhpp::core::pathOptimization::SGBWrapper::SGBWrapper()']]],
-  ['shape_5ft_45',['Shape_t',['../namespacepyhpp_1_1manipulation.html#a74d9fb33a8ad6910e5caebd2f8fc76fe',1,'pyhpp::manipulation']]],
-  ['shoot_46',['shoot',['../structpyhpp_1_1core_1_1CSWrapper.html#a287ea3aa04d93197d4164fd6a870f7a8',1,'pyhpp::core::CSWrapper']]],
-  ['simplicialcholeskyvisitor_47',['SimplicialCholeskyVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialCholeskyVisitor.html',1,'eigenpy']]],
-  ['simplicialldltvisitor_48',['SimplicialLDLTVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialLDLTVisitor.html',1,'eigenpy']]],
-  ['simpliciallltvisitor_49',['SimplicialLLTVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialLLTVisitor.html',1,'eigenpy']]],
-  ['size_5ftype_50',['size_type',['../namespacepyhpp_1_1manipulation.html#afc4211c474ae722a5ae2b3decb3b3015',1,'pyhpp::manipulation::size_type'],['../namespacepyhpp_1_1pinocchio.html#a35031004dc10db2881466e0db7fa9408',1,'pyhpp::pinocchio::size_type']]],
-  ['solve_51',['solve',['../structpyhpp_1_1core_1_1PathPlanner.html#ad0e63b5bc00a6a78fac73402de2d95e1',1,'pyhpp::core::PathPlanner']]],
-  ['solversscope_52',['SolversScope',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SolversScope.html',1,'eigenpy']]],
-  ['sparselumatrixlreturntypevisitor_53',['SparseLUMatrixLReturnTypeVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUMatrixLReturnTypeVisitor.html',1,'eigenpy']]],
-  ['sparselumatrixureturntypevisitor_54',['SparseLUMatrixUReturnTypeVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUMatrixUReturnTypeVisitor.html',1,'eigenpy']]],
-  ['sparseluvisitor_55',['SparseLUVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUVisitor.html',1,'eigenpy']]],
-  ['sparseqrmatrixqreturntypevisitor_56',['SparseQRMatrixQReturnTypeVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRMatrixQReturnTypeVisitor.html',1,'eigenpy']]],
-  ['sparseqrmatrixqtransposereturntypevisitor_57',['SparseQRMatrixQTransposeReturnTypeVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRMatrixQTransposeReturnTypeVisitor.html',1,'eigenpy']]],
-  ['sparseqrvisitor_58',['SparseQRVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRVisitor.html',1,'eigenpy']]],
-  ['sparsesolverbasevisitor_59',['SparseSolverBaseVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseSolverBaseVisitor.html',1,'eigenpy']]],
-  ['sparsesolvervisitor_60',['SparseSolverVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseSolverVisitor.html',1,'eigenpy']]],
-  ['spline_2dgradient_2dbased_2dabstract_2ecc_61',['spline-gradient-based-abstract.cc',['../spline-gradient-based-abstract_8cc.html',1,'']]],
-  ['spline_2ecc_62',['spline.cc',['../spline_8cc.html',1,'']]],
-  ['splinebezier3_63',['SplineBezier3',['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html',1,'pyhpp::core::steeringMethod::SplineBezier3'],['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html#a2b2b778a6397a69155106f25bd16e0a5',1,'pyhpp::core::steeringMethod::SplineBezier3::SplineBezier3()']]],
-  ['splinebezier5_64',['SplineBezier5',['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html',1,'pyhpp::core::steeringMethod::SplineBezier5'],['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html#a67379419ed11863b503c630f83372949',1,'pyhpp::core::steeringMethod::SplineBezier5::SplineBezier5()']]],
-  ['splineoptimizationdata_65',['SplineOptimizationData',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf4c6b9959d77124ef855b933f84ba20',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['splineoptimizationdatas_5ft_66',['SplineOptimizationDatas_t',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aab227adb136c906a7464179556279437',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['splines_5ft_67',['Splines_t',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#ad4c4ec78df0d9c95d58a5bca6456e392',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['splinewrapper_68',['SplineWrapper',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html',1,'pyhpp::core::path']]],
-  ['squarednormbasisfunctionintegral_69',['squaredNormBasisFunctionIntegral',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a5da250282d0cadb79727ce55fc62aac7',1,'pyhpp::core::path::SplineWrapper']]],
-  ['squarednormintegralderivative_70',['squaredNormIntegralDerivative',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a7b008c85f47198e209d35ff77d1e1533',1,'pyhpp::core::path::SplineWrapper']]],
-  ['startcorbaserver_71',['startCorbaServer',['../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html#a338f5b4643262f91cb3b4d16139ec91d',1,'pyhpp::corbaserver::wholebodyStep::SWrapper']]],
-  ['startsolve_72',['startSolve',['../structpyhpp_1_1core_1_1PathPlanner.html#a004ba3c59729834671f342668da1dcc6',1,'pyhpp::core::PathPlanner']]],
-  ['state_73',['State',['../namespacepyhpp_1_1manipulation.html#a3e3bd3389ff3d6de6b30179494523288',1,'pyhpp::manipulation']]],
-  ['stateptr_5ft_74',['StatePtr_t',['../namespacepyhpp_1_1manipulation.html#a1f12b84662d06937318ee8da32573d46',1,'pyhpp::manipulation']]],
-  ['stdarraypythonvisitor_75',['StdArrayPythonVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdArrayPythonVisitor.html',1,'eigenpy']]],
-  ['stdcontainerfrompythonlist_76',['StdContainerFromPythonList',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdContainerFromPythonList.html',1,'eigenpy::StdContainerFromPythonList&lt; typename vector_type, bool NoProxy &gt;'],['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structStdContainerFromPythonList.html',1,'StdContainerFromPythonList']]],
-  ['stdmappythonvisitor_77',['StdMapPythonVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1python_1_1StdMapPythonVisitor.html',1,'eigenpy::python::StdMapPythonVisitor&lt; class Key, class T, class Compare, class Allocator, bool NoProxy &gt;'],['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdMapPythonVisitor.html',1,'eigenpy::StdMapPythonVisitor&lt; class Key, class T, class Compare, class Allocator, bool NoProxy &gt;']]],
-  ['stdpairconverter_78',['StdPairConverter',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdPairConverter.html',1,'eigenpy']]],
-  ['stduniqueptrcallpolicies_79',['StdUniquePtrCallPolicies',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdUniquePtrCallPolicies.html',1,'eigenpy']]],
-  ['stduniqueptrresultconverter_80',['StdUniquePtrResultConverter',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1StdUniquePtrResultConverter.html',1,'eigenpy::details']]],
-  ['stdvectorpythonvisitor_81',['StdVectorPythonVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdVectorPythonVisitor.html',1,'eigenpy']]],
-  ['steer_82',['steer',['../structpyhpp_1_1core_1_1SteeringMethod.html#a1b9395c0c814b001939c4b524152d437',1,'pyhpp::core::SteeringMethod']]],
-  ['steering_2dmethod_2ecc_83',['steering-method.cc',['../core_2steering-method_8cc.html',1,'(Global Namespace)'],['../manipulation_2steering-method_8cc.html',1,'(Global Namespace)']]],
-  ['steering_2dmethod_2ehh_84',['steering-method.hh',['../include_2pyhpp_2core_2steering-method_8hh.html',1,'(Global Namespace)'],['../src_2pyhpp_2manipulation_2steering-method_8hh.html',1,'(Global Namespace)']]],
-  ['steeringmethod_85',['SteeringMethod',['../structpyhpp_1_1core_1_1SteeringMethod.html',1,'pyhpp::core::SteeringMethod'],['../structpyhpp_1_1core_1_1SteeringMethod.html#a497f443939444ec6d9174c92ac1898d5',1,'pyhpp::core::SteeringMethod::SteeringMethod()']]],
-  ['steeringmethod_86',['steeringMethod',['../structpyhpp_1_1core_1_1Problem.html#aa0bfafead17c994baaa4045849d90af6',1,'pyhpp::core::Problem::steeringMethod() const'],['../structpyhpp_1_1core_1_1Problem.html#a2dd705429a3773be6daf3609f1504f58',1,'pyhpp::core::Problem::steeringMethod(const PyWSteeringMethodPtr_t &amp;steeringMethod)'],['../structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532',1,'pyhpp::manipulation::Problem::steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t &amp;steeringMethod)'],['../structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c',1,'pyhpp::manipulation::Problem::steeringMethod() const']]],
-  ['steeringmethodptr_5ft_87',['SteeringMethodPtr_t',['../namespacepyhpp_1_1core.html#a5e824694d1b54c0b09f38b273233c65b',1,'pyhpp::core']]],
-  ['stl_2dpair_2ehh_88',['stl-pair.hh',['../stl-pair_8hh.html',1,'']]],
-  ['stl_5fpair_89',['stl_pair',['../structpyhpp_1_1stl__pair.html',1,'pyhpp::stl_pair&lt; T1, T2 &gt;'],['../structpyhpp_1_1stl__pair.html#a94c059f7480d8c2308ba5223c6c58289',1,'pyhpp::stl_pair::stl_pair()']]],
-  ['stopwhenproblemissolved_90',['stopWhenProblemIsSolved',['../structpyhpp_1_1core_1_1PathPlanner.html#a032b8696418d7a8f6a36684f5cc87090',1,'pyhpp::core::PathPlanner']]],
-  ['stride_5ftype_91',['stride_type',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type.html',1,'eigenpy']]],
-  ['stride_5ftype_3c_20const_20matrixtype_2c_20innerstride_2c_20outerstride_2c_20const_20eigen_3a_3amatrixbase_3c_20matrixtype_20_3e_20_3e_92',['stride_type&lt; const MatrixType, InnerStride, OuterStride, const Eigen::MatrixBase&lt; MatrixType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type_3_01const_01MatrixType_00_01InnerStride_00_01OuterStride_00_01cons525413ac149f984be283abb565752021.html',1,'eigenpy']]],
-  ['stride_5ftype_3c_20matrixtype_2c_20innerstride_2c_20outerstride_2c_20eigen_3a_3amatrixbase_3c_20matrixtype_20_3e_20_3e_93',['stride_type&lt; MatrixType, InnerStride, OuterStride, Eigen::MatrixBase&lt; MatrixType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type_3_01MatrixType_00_01InnerStride_00_01OuterStride_00_01Eigen_1_1Mat92587ab22df5c833799aa87c89533042.html',1,'eigenpy']]],
-  ['stride_5ftype_5fmatrix_94',['stride_type_matrix',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type__matrix.html',1,'eigenpy']]],
-  ['stride_5ftype_5fmatrix_3c_20mattype_2c_20innerstride_2c_20outerstride_2c_20true_20_3e_95',['stride_type_matrix&lt; MatType, InnerStride, OuterStride, true &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type__matrix_3_01MatType_00_01InnerStride_00_01OuterStride_00_01true_01_4.html',1,'eigenpy']]],
-  ['stridetype_96',['StrideType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StrideType.html',1,'eigenpy']]],
-  ['success_97',['success',['../structpyhpp_1_1manipulation_1_1ConstraintResult.html#a6012d8e400130498d0ed963e6655ffb3',1,'pyhpp::manipulation::ConstraintResult']]],
-  ['svdbasevisitor_98',['SVDBaseVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SVDBaseVisitor.html',1,'eigenpy']]],
-  ['swrapper_99',['SWrapper',['../structpyhpp_1_1corbaserver_1_1SWrapper.html',1,'pyhpp::corbaserver::SWrapper'],['../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html',1,'pyhpp::corbaserver::wholebodyStep::SWrapper']]]
-];
+var
+    searchData =
+        [
+          [
+            's_5ft_0',
+            [
+              'S_t',
+              [
+                '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#aaf690255be3c1957be5b4443bfbbcba3',
+                1, 'pyhpp::core::path::SplineWrapper'
+              ]
+            ]
+          ],
+          [
+            'scalar_5fname_1',
+            [
+              'scalar_name',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scalar_5fname_3c_20double_20_3e_2',
+            [
+              'scalar_name&lt; double &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01double_01_4.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scalar_5fname_3c_20float_20_3e_3',
+            [
+              'scalar_name&lt; float &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01float_01_4.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scalar_5fname_3c_20long_20double_20_3e_4',
+            [
+              'scalar_name&lt; long double &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scalar__name_3_01long_01double_01_4.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_5',
+            [
+              'scipy_allocator_impl',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_3c_20const_20mattype_20_26_2c_20const_20eigen_3a_3asparsematrixbase_3c_20mattype_20_3e_20_3e_6',
+            [
+              'scipy_allocator_impl&lt; const MatType &amp;, const Eigen::SparseMatrixBase&lt; MatType &gt; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01const_01MatType_01_6_00_01const_01Eigen_1_1SparseMatrixBase_3_01MatType_01_4_01_4.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_3c_20const_20mattype_2c_20const_20eigen_3a_3asparsematrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_7',
+            [
+              'scipy_allocator_impl&lt; const MatType, const Eigen::SparseMatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01const_01MatType_00_01const_01Eigen_1_1SparseMatrixBafbe2a4213be5af504bc0462a745d5f0f.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_3c_20eigentype_2c_20basetype_20_3e_8',
+            [
+              'scipy_allocator_impl&lt; EigenType, BaseType &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_3c_20mattype_2c_20eigen_3a_3asparsematrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_9',
+            [
+              'scipy_allocator_impl&lt; MatType, Eigen::SparseMatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl_3_01MatType_00_01Eigen_1_1SparseMatrixBase_3_01typename_470e1325fe411061dba513d9549238f1.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_5fsparse_5fmatrix_10',
+            [
+              'scipy_allocator_impl_sparse_matrix',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20const_20mattype_20_26_20_3e_11',
+            [
+              'scipy_allocator_impl_sparse_matrix&lt; const MatType &amp; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20const_20mattype_20_3e_12',
+            [
+              'scipy_allocator_impl_sparse_matrix&lt; const MatType &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipy_5fallocator_5fimpl_5fsparse_5fmatrix_3c_20mattype_20_3e_13',
+            [
+              'scipy_allocator_impl_sparse_matrix&lt; MatType &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1scipy__allocator__impl__sparse__matrix.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipyallocator_14',
+            [
+              'ScipyAllocator',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1ScipyAllocator.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'scipytype_15',
+            [
+              'ScipyType',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1ScipyType.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'selfadjointeigensolvervisitor_16',
+            [
+              'SelfAdjointEigenSolverVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SelfAdjointEigenSolverVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'server_2ecc_17',
+            [
+              'server.cc', ['../server_8cc.html', 1, '(Global Namespace)'],
+              ['../wholebodyStep_2server_8cc.html', 1, '(Global Namespace)']
+            ]
+          ],
+          [
+            'setb_18',
+            [
+              'setb',
+              [
+                '../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#a75e71e630835cb21b40d85223dfa922e',
+                1, 'pyhpp::core::pathOptimization::LCWrapper::setb()'
+              ],
+              [
+                '../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#aba35a1d74bd8064240a8f6fc5be8b10e',
+                1, 'pyhpp::core::pathOptimization::QPWrapper::setb()'
+              ]
+            ]
+          ],
+          [
+            'setconfigurationshooter_19',
+            [
+              'SetConfigurationShooter',
+              [
+                '../namespacepyhpp_1_1core.html#afc33b97946bb2035eac8432a713f53ff',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'setconfigvalidation_20',
+            [
+              'SetConfigValidation',
+              [
+                '../namespacepyhpp_1_1core.html#adf7a81cdea6a5f3d967f4c7a3f78e783',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'setcontainingnode_21',
+            [
+              'setContainingNode',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a41b305946103e18a4786e873d1cf1e63',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setdistance_22',
+            [
+              'SetDistance',
+              [
+                '../namespacepyhpp_1_1core.html#a7988c4f98831399ace1fe2c871acacd9',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'setedge_23',
+            [
+              'setEdge',
+              [
+                '../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a4f5d9a8021a5fd5bbc85f17c8516668c',
+                1, 'pyhpp::manipulation::TransitionPlanner'
+              ]
+            ]
+          ],
+          [
+            'seth_24',
+            [
+              'setH',
+              [
+                '../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#a14306dbd6688b30c964342da8a1e9b5a',
+                1, 'pyhpp::core::pathOptimization::QPWrapper'
+              ]
+            ]
+          ],
+          [
+            'sethandlelocalposition_25',
+            [
+              'setHandleLocalPosition',
+              [
+                '../namespacepyhpp_1_1manipulation.html#a90a0eb1ff6d894f199f08488f28b16cf',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'sethandlemask_26',
+            [
+              'setHandleMask',
+              [
+                '../namespacepyhpp_1_1manipulation.html#a4cade342bdd3e0ac329521f99a549cdb',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'sethandlemaskcomp_27',
+            [
+              'setHandleMaskComp',
+              [
+                '../namespacepyhpp_1_1manipulation.html#abcdaed0c0f81fc2fb066ef256981a5d8',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'sethandlename_28',
+            [
+              'setHandleName',
+              [
+                '../namespacepyhpp_1_1manipulation.html#aa79c3050e405140b900ab968876dc157',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'setj_29',
+            [
+              'setJ',
+              [
+                '../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#ae11d29acb502d873d1d5c2f96698b9d5',
+                1, 'pyhpp::core::pathOptimization::LCWrapper'
+              ]
+            ]
+          ],
+          [
+            'setjointbounds_30',
+            [
+              'setJointBounds',
+              [
+                '../structpyhpp_1_1manipulation_1_1Device.html#aa4d4c335d2537e47de9a1ac13952773b',
+                1, 'pyhpp::manipulation::Device'
+              ]
+            ]
+          ],
+          [
+            'setparameter_31',
+            [
+              'setParameter',
+              [
+                '../structpyhpp_1_1core_1_1Problem.html#a199e1ab3029e68757207078dee033284',
+                1, 'pyhpp::core::Problem'
+              ]
+            ]
+          ],
+          [
+            'setpathprojector_32',
+            [
+              'SetPathProjector',
+              [
+                '../namespacepyhpp_1_1core.html#af9f5683c3d167a35d7df2e76ae6ff537',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'setpathvalidation_33',
+            [
+              'SetPathValidation',
+              [
+                '../namespacepyhpp_1_1core.html#a116d4327f0b4b4d9c02f62cf6e19a137',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'setreedsandsheppsteeringmethod_34',
+            [
+              'setReedsAndSheppSteeringMethod',
+              [
+                '../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a1033a9d49bfd1f6326c596534daf2608',
+                1, 'pyhpp::manipulation::TransitionPlanner'
+              ]
+            ]
+          ],
+          [
+            'setrobotrootposition_35',
+            [
+              'setRobotRootPosition',
+              [
+                '../structpyhpp_1_1manipulation_1_1Device.html#aff9db4e076a4a3b8569aa1b6b5bf53ca',
+                1, 'pyhpp::manipulation::Device'
+              ]
+            ]
+          ],
+          [
+            'setsecuritymarginfortransition_36',
+            [
+              'setSecurityMarginForTransition',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ac21a3873ea1fcddba3d991b8e98fb4f4',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setshort_37',
+            [
+              'setShort',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a0db56c6990f80d0d8edc8f41701dd6b0',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setsteeringmethod_38',
+            [
+              'SetSteeringMethod',
+              [
+                '../namespacepyhpp_1_1core.html#a81b0e34076405d7ba842e923d4f4cf19',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'settarget_39',
+            [
+              'SetTarget',
+              [
+                '../namespacepyhpp_1_1core.html#a38ef13b11e9d99d60aa0522460f888cd',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'settargetnodelist_40',
+            [
+              'setTargetNodeList',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad546b05dd5b3bf805417eb4f616f7c97',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setwaypoint_41',
+            [
+              'setWaypoint',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a78a9a7612727d21a8a85036973adf34a',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setweight_42',
+            [
+              'setWeight',
+              [
+                '../structpyhpp_1_1manipulation_1_1PyWGraph.html#af7112e28a9a67d703470ad2fe6bdf31e',
+                1, 'pyhpp::manipulation::PyWGraph'
+              ]
+            ]
+          ],
+          [
+            'setweights_43',
+            [
+              'setWeights',
+              [
+                '../structpyhpp_1_1core_1_1DistanceWrapper.html#abe01123bf3e8a6bddb0f653399b39f57',
+                1, 'pyhpp::core::DistanceWrapper'
+              ]
+            ]
+          ],
+          [
+            'sgbwrapper_44',
+            [
+              'SGBWrapper',
+              [
+                '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html',
+                1,
+                'pyhpp::core::pathOptimization::SGBWrapper&lt; _PolynomeBasis, _Order &gt;'
+              ],
+              [
+                '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387',
+                1, 'pyhpp::core::pathOptimization::SGBWrapper::SGBWrapper()'
+              ]
+            ]
+          ],
+          [
+            'shape_5ft_45',
+            [
+              'Shape_t',
+              [
+                '../namespacepyhpp_1_1manipulation.html#a74d9fb33a8ad6910e5caebd2f8fc76fe',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'shoot_46',
+            [
+              'shoot',
+              [
+                '../structpyhpp_1_1core_1_1CSWrapper.html#a287ea3aa04d93197d4164fd6a870f7a8',
+                1, 'pyhpp::core::CSWrapper'
+              ]
+            ]
+          ],
+          [
+            'simplicialcholeskyvisitor_47',
+            [
+              'SimplicialCholeskyVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialCholeskyVisitor.html', 1,
+                'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'simplicialldltvisitor_48',
+            [
+              'SimplicialLDLTVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialLDLTVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'simpliciallltvisitor_49',
+            [
+              'SimplicialLLTVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SimplicialLLTVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'size_5ftype_50',
+            [
+              'size_type',
+              [
+                '../namespacepyhpp_1_1manipulation.html#afc4211c474ae722a5ae2b3decb3b3015',
+                1, 'pyhpp::manipulation::size_type'
+              ],
+              [
+                '../namespacepyhpp_1_1pinocchio.html#a35031004dc10db2881466e0db7fa9408',
+                1, 'pyhpp::pinocchio::size_type'
+              ]
+            ]
+          ],
+          [
+            'solve_51',
+            [
+              'solve',
+              [
+                '../structpyhpp_1_1core_1_1PathPlanner.html#ad0e63b5bc00a6a78fac73402de2d95e1',
+                1, 'pyhpp::core::PathPlanner'
+              ]
+            ]
+          ],
+          [
+            'solversscope_52',
+            [
+              'SolversScope',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SolversScope.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparselumatrixlreturntypevisitor_53',
+            [
+              'SparseLUMatrixLReturnTypeVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUMatrixLReturnTypeVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparselumatrixureturntypevisitor_54',
+            [
+              'SparseLUMatrixUReturnTypeVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUMatrixUReturnTypeVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparseluvisitor_55',
+            [
+              'SparseLUVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseLUVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparseqrmatrixqreturntypevisitor_56',
+            [
+              'SparseQRMatrixQReturnTypeVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRMatrixQReturnTypeVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparseqrmatrixqtransposereturntypevisitor_57',
+            [
+              'SparseQRMatrixQTransposeReturnTypeVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRMatrixQTransposeReturnTypeVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparseqrvisitor_58',
+            [
+              'SparseQRVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseQRVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparsesolverbasevisitor_59',
+            [
+              'SparseSolverBaseVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseSolverBaseVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'sparsesolvervisitor_60',
+            [
+              'SparseSolverVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SparseSolverVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'spline_2dgradient_2dbased_2dabstract_2ecc_61',
+            [
+              'spline-gradient-based-abstract.cc',
+              ['../spline-gradient-based-abstract_8cc.html', 1, '']
+            ]
+          ],
+          ['spline_2ecc_62', ['spline.cc', ['../spline_8cc.html', 1, '']]],
+          [
+            'splinebezier3_63',
+            [
+              'SplineBezier3',
+              [
+                '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html',
+                1, 'pyhpp::core::steeringMethod::SplineBezier3'
+              ],
+              [
+                '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html#a2b2b778a6397a69155106f25bd16e0a5',
+                1, 'pyhpp::core::steeringMethod::SplineBezier3::SplineBezier3()'
+              ]
+            ]
+          ],
+          [
+            'splinebezier5_64',
+            [
+              'SplineBezier5',
+              [
+                '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html',
+                1, 'pyhpp::core::steeringMethod::SplineBezier5'
+              ],
+              [
+                '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html#a67379419ed11863b503c630f83372949',
+                1, 'pyhpp::core::steeringMethod::SplineBezier5::SplineBezier5()'
+              ]
+            ]
+          ],
+          [
+            'splineoptimizationdata_65',
+            [
+              'SplineOptimizationData',
+              [
+                '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#abf4c6b9959d77124ef855b933f84ba20',
+                1, 'pyhpp::core::pathOptimization::SGBWrapper'
+              ]
+            ]
+          ],
+          [
+            'splineoptimizationdatas_5ft_66',
+            [
+              'SplineOptimizationDatas_t',
+              [
+                '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#aab227adb136c906a7464179556279437',
+                1, 'pyhpp::core::pathOptimization::SGBWrapper'
+              ]
+            ]
+          ],
+          [
+            'splines_5ft_67',
+            [
+              'Splines_t',
+              [
+                '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#ad4c4ec78df0d9c95d58a5bca6456e392',
+                1, 'pyhpp::core::pathOptimization::SGBWrapper'
+              ]
+            ]
+          ],
+          [
+            'splinewrapper_68',
+            [
+              'SplineWrapper',
+              [
+                '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html', 1,
+                'pyhpp::core::path'
+              ]
+            ]
+          ],
+          [
+            'squarednormbasisfunctionintegral_69',
+            [
+              'squaredNormBasisFunctionIntegral',
+              [
+                '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a5da250282d0cadb79727ce55fc62aac7',
+                1, 'pyhpp::core::path::SplineWrapper'
+              ]
+            ]
+          ],
+          [
+            'squarednormintegralderivative_70',
+            [
+              'squaredNormIntegralDerivative',
+              [
+                '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a7b008c85f47198e209d35ff77d1e1533',
+                1, 'pyhpp::core::path::SplineWrapper'
+              ]
+            ]
+          ],
+          [
+            'startcorbaserver_71',
+            [
+              'startCorbaServer',
+              [
+                '../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html#a338f5b4643262f91cb3b4d16139ec91d',
+                1, 'pyhpp::corbaserver::wholebodyStep::SWrapper'
+              ]
+            ]
+          ],
+          [
+            'startsolve_72',
+            [
+              'startSolve',
+              [
+                '../structpyhpp_1_1core_1_1PathPlanner.html#a004ba3c59729834671f342668da1dcc6',
+                1, 'pyhpp::core::PathPlanner'
+              ]
+            ]
+          ],
+          [
+            'state_73',
+            [
+              'State',
+              [
+                '../namespacepyhpp_1_1manipulation.html#a3e3bd3389ff3d6de6b30179494523288',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'stateptr_5ft_74',
+            [
+              'StatePtr_t',
+              [
+                '../namespacepyhpp_1_1manipulation.html#a1f12b84662d06937318ee8da32573d46',
+                1, 'pyhpp::manipulation'
+              ]
+            ]
+          ],
+          [
+            'stdarraypythonvisitor_75',
+            [
+              'StdArrayPythonVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdArrayPythonVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stdcontainerfrompythonlist_76',
+            [
+              'StdContainerFromPythonList',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdContainerFromPythonList.html',
+                1,
+                'eigenpy::StdContainerFromPythonList&lt; typename vector_type, bool NoProxy &gt;'
+              ],
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structStdContainerFromPythonList.html',
+                1, 'StdContainerFromPythonList'
+              ]
+            ]
+          ],
+          [
+            'stdmappythonvisitor_77',
+            [
+              'StdMapPythonVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1python_1_1StdMapPythonVisitor.html',
+                1,
+                'eigenpy::python::StdMapPythonVisitor&lt; class Key, class T, class Compare, class Allocator, bool NoProxy &gt;'
+              ],
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdMapPythonVisitor.html',
+                1,
+                'eigenpy::StdMapPythonVisitor&lt; class Key, class T, class Compare, class Allocator, bool NoProxy &gt;'
+              ]
+            ]
+          ],
+          [
+            'stdpairconverter_78',
+            [
+              'StdPairConverter',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdPairConverter.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stduniqueptrcallpolicies_79',
+            [
+              'StdUniquePtrCallPolicies',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdUniquePtrCallPolicies.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stduniqueptrresultconverter_80',
+            [
+              'StdUniquePtrResultConverter',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1StdUniquePtrResultConverter.html',
+                1, 'eigenpy::details'
+              ]
+            ]
+          ],
+          [
+            'stdvectorpythonvisitor_81',
+            [
+              'StdVectorPythonVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StdVectorPythonVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'steer_82',
+            [
+              'steer',
+              [
+                '../structpyhpp_1_1core_1_1SteeringMethod.html#a1b9395c0c814b001939c4b524152d437',
+                1, 'pyhpp::core::SteeringMethod'
+              ]
+            ]
+          ],
+          [
+            'steering_2dmethod_2ecc_83',
+            [
+              'steering-method.cc',
+              ['../core_2steering-method_8cc.html', 1, '(Global Namespace)'],
+              [
+                '../manipulation_2steering-method_8cc.html', 1,
+                '(Global Namespace)'
+              ]
+            ]
+          ],
+          [
+            'steering_2dmethod_2ehh_84',
+            [
+              'steering-method.hh',
+              [
+                '../include_2pyhpp_2core_2steering-method_8hh.html', 1,
+                '(Global Namespace)'
+              ],
+              [
+                '../src_2pyhpp_2manipulation_2steering-method_8hh.html', 1,
+                '(Global Namespace)'
+              ]
+            ]
+          ],
+          [
+            'steeringmethod_85',
+            [
+              'SteeringMethod',
+              [
+                '../structpyhpp_1_1core_1_1SteeringMethod.html', 1,
+                'pyhpp::core::SteeringMethod'
+              ],
+              [
+                '../structpyhpp_1_1core_1_1SteeringMethod.html#a497f443939444ec6d9174c92ac1898d5',
+                1, 'pyhpp::core::SteeringMethod::SteeringMethod()'
+              ]
+            ]
+          ],
+          [
+            'steeringmethod_86',
+            [
+              'steeringMethod',
+              [
+                '../structpyhpp_1_1core_1_1Problem.html#aa0bfafead17c994baaa4045849d90af6',
+                1, 'pyhpp::core::Problem::steeringMethod() const'
+              ],
+              [
+                '../structpyhpp_1_1core_1_1Problem.html#a2dd705429a3773be6daf3609f1504f58',
+                1,
+                'pyhpp::core::Problem::steeringMethod(const PyWSteeringMethodPtr_t &amp;steeringMethod)'
+              ],
+              [
+                '../structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532',
+                1,
+                'pyhpp::manipulation::Problem::steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t &amp;steeringMethod)'
+              ],
+              [
+                '../structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c',
+                1, 'pyhpp::manipulation::Problem::steeringMethod() const'
+              ]
+            ]
+          ],
+          [
+            'steeringmethodptr_5ft_87',
+            [
+              'SteeringMethodPtr_t',
+              [
+                '../namespacepyhpp_1_1core.html#a5e824694d1b54c0b09f38b273233c65b',
+                1, 'pyhpp::core'
+              ]
+            ]
+          ],
+          [
+            'stl_2dpair_2ehh_88',
+            ['stl-pair.hh', ['../stl-pair_8hh.html', 1, '']]
+          ],
+          [
+            'stl_5fpair_89',
+            [
+              'stl_pair',
+              [
+                '../structpyhpp_1_1stl__pair.html', 1,
+                'pyhpp::stl_pair&lt; T1, T2 &gt;'
+              ],
+              [
+                '../structpyhpp_1_1stl__pair.html#a94c059f7480d8c2308ba5223c6c58289',
+                1, 'pyhpp::stl_pair::stl_pair()'
+              ]
+            ]
+          ],
+          [
+            'stopwhenproblemissolved_90',
+            [
+              'stopWhenProblemIsSolved',
+              [
+                '../structpyhpp_1_1core_1_1PathPlanner.html#a032b8696418d7a8f6a36684f5cc87090',
+                1, 'pyhpp::core::PathPlanner'
+              ]
+            ]
+          ],
+          [
+            'stride_5ftype_91',
+            [
+              'stride_type',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stride_5ftype_3c_20const_20matrixtype_2c_20innerstride_2c_20outerstride_2c_20const_20eigen_3a_3amatrixbase_3c_20matrixtype_20_3e_20_3e_92',
+            [
+              'stride_type&lt; const MatrixType, InnerStride, OuterStride, const Eigen::MatrixBase&lt; MatrixType &gt; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type_3_01const_01MatrixType_00_01InnerStride_00_01OuterStride_00_01cons525413ac149f984be283abb565752021.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stride_5ftype_3c_20matrixtype_2c_20innerstride_2c_20outerstride_2c_20eigen_3a_3amatrixbase_3c_20matrixtype_20_3e_20_3e_93',
+            [
+              'stride_type&lt; MatrixType, InnerStride, OuterStride, Eigen::MatrixBase&lt; MatrixType &gt; &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type_3_01MatrixType_00_01InnerStride_00_01OuterStride_00_01Eigen_1_1Mat92587ab22df5c833799aa87c89533042.html', 1,
+                'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stride_5ftype_5fmatrix_94',
+            [
+              'stride_type_matrix',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type__matrix.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stride_5ftype_5fmatrix_3c_20mattype_2c_20innerstride_2c_20outerstride_2c_20true_20_3e_95',
+            [
+              'stride_type_matrix&lt; MatType, InnerStride, OuterStride, true &gt;',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1stride__type__matrix_3_01MatType_00_01InnerStride_00_01OuterStride_00_01true_01_4.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'stridetype_96',
+            [
+              'StrideType',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1StrideType.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'success_97',
+            [
+              'success',
+              [
+                '../structpyhpp_1_1manipulation_1_1ConstraintResult.html#a6012d8e400130498d0ed963e6655ffb3',
+                1, 'pyhpp::manipulation::ConstraintResult'
+              ]
+            ]
+          ],
+          [
+            'svdbasevisitor_98',
+            [
+              'SVDBaseVisitor',
+              [
+                '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1SVDBaseVisitor.html',
+                1, 'eigenpy'
+              ]
+            ]
+          ],
+          [
+            'swrapper_99',
+            [
+              'SWrapper',
+              [
+                '../structpyhpp_1_1corbaserver_1_1SWrapper.html', 1,
+                'pyhpp::corbaserver::SWrapper'
+              ],
+              [
+                '../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html',
+                1, 'pyhpp::corbaserver::wholebodyStep::SWrapper'
+              ]
+            ]
+          ]
+        ];

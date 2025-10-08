@@ -1,32 +1,24 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import time
 import datetime as dt
 import numpy as np
-from math import pi
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
-from pyhpp.core import Straight
 
-from pyhpp.constraints import (
-    Transformation,
-    ComparisonTypes,
-    ComparisonType,
-    Implicit,
-    LockedJoint,
-)
-from pinocchio import SE3, Quaternion
+from pinocchio import SE3
 
 parser = ArgumentParser()
-parser.add_argument('-N', default=20, type=int)
-parser.add_argument('--display', action='store_true')
-parser.add_argument('--run', action='store_true')
+parser.add_argument("-N", default=20, type=int)
+parser.add_argument("--display", action="store_true")
+parser.add_argument("--run", action="store_true")
 args = parser.parse_args()
 
 romeo_urdf = "package://example-robot-data/robots/romeo_description/urdf/romeo.urdf"
-romeo_srdf = "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+romeo_srdf = (
+    "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+)
 
 placard_urdf = "package://hpp_environments/urdf/placard.urdf"
 placard_srdf = "package://hpp_environments/srdf/placard.srdf"
@@ -38,7 +30,9 @@ romeo_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(robot, 0, "romeo", "anchor", romeo_urdf, romeo_srdf, romeo_pose)
 for name in robot.model().names:
     print(name)
-robot.setJointBounds("romeo/root_joint", [-1, 1, -1, 1, 0, 2, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2])
+robot.setJointBounds(
+    "romeo/root_joint", [-1, 1, -1, 1, 0, 2, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2]
+)
 
 # Load placard object
 placard_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
@@ -52,7 +46,9 @@ urdf.loadModel(
     placard_pose,
 )
 
-robot.setJointBounds("placard/root_joint", [-1, 1, -1, 1, 0, 1.5, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2])
+robot.setJointBounds(
+    "placard/root_joint", [-1, 1, -1, 1, 0, 1.5, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2]
+)
 
 problem = Problem(robot)
 cg = Graph("graph", robot, problem)
@@ -87,9 +83,9 @@ lockHands = lockrhand + locklhand
 
 # Placeholder for balance constraints names
 balanceConstraints = [
-    'balance/pose-left-foot',
-    'balance/pose-right-foot', 
-    'balance/relative-com',
+    "balance/pose-left-foot",
+    "balance/pose-right-foot",
+    "balance/relative-com",
 ]
 
 # TODO: Actually create these constraints using the new API
@@ -105,26 +101,85 @@ r = robot.model().getJointId("placard/root_joint")
 # In old API: placard.rank = vf.robot.rankInConfiguration[name + '/root_joint']
 # May need to use robot.model().idx_qs[joint_id]
 
-q_init = [-0.003429678026293006, 7.761615492429529e-05, 0.8333148411182841, -0.08000440760954532, 
-          0.06905332841243099, -0.09070086400314036, 0.9902546570793265, 0.2097693637044623, 
-          0.19739743868699455, -0.6079135018296973, 0.8508704420155889, -0.39897628829947995, 
-          -0.05274298289004072, 0.20772797293264825, 0.1846394290733244, -0.49824886682709824, 
-          0.5042013065348324, -0.16158420369261683, -0.039828502509861335, -0.3827070014985058, 
-          -0.24118425356319423, 1.0157846623463191, 0.5637424355124602, -1.3378817283780955, 
-          -1.3151786907256797, -0.392409481224193, 0.11332560818107676, 1.06, 1.06, 1.06, 1.06, 
-          1.06, 1.06, 1.0, 1.06, 1.06, -1.06, 1.06, 1.06, 0.35936687035487364, -0.32595302056157444, 
-          -0.33115291290191723, 0.20387672048126043, 0.9007626913161502, -0.39038645767349395, 
-          0.31725226129015516, 1.5475253831101246, -0.0104572058777634, 0.32681856374063933, 
-          0.24476959944940427, 1.06, 1.06, 1.06, 1.06, 1.06, 1.06, 1.0, 1.06, 1.06, -1.06, 
-          1.06, 1.06, 0.412075621240969, 0.020809907186176854, 1.056724788359247, 0.0, 0.0, 0.0, 1.0]
+q_init = [
+    -0.003429678026293006,
+    7.761615492429529e-05,
+    0.8333148411182841,
+    -0.08000440760954532,
+    0.06905332841243099,
+    -0.09070086400314036,
+    0.9902546570793265,
+    0.2097693637044623,
+    0.19739743868699455,
+    -0.6079135018296973,
+    0.8508704420155889,
+    -0.39897628829947995,
+    -0.05274298289004072,
+    0.20772797293264825,
+    0.1846394290733244,
+    -0.49824886682709824,
+    0.5042013065348324,
+    -0.16158420369261683,
+    -0.039828502509861335,
+    -0.3827070014985058,
+    -0.24118425356319423,
+    1.0157846623463191,
+    0.5637424355124602,
+    -1.3378817283780955,
+    -1.3151786907256797,
+    -0.392409481224193,
+    0.11332560818107676,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.0,
+    1.06,
+    1.06,
+    -1.06,
+    1.06,
+    1.06,
+    0.35936687035487364,
+    -0.32595302056157444,
+    -0.33115291290191723,
+    0.20387672048126043,
+    0.9007626913161502,
+    -0.39038645767349395,
+    0.31725226129015516,
+    1.5475253831101246,
+    -0.0104572058777634,
+    0.32681856374063933,
+    0.24476959944940427,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.06,
+    1.0,
+    1.06,
+    1.06,
+    -1.06,
+    1.06,
+    1.06,
+    0.412075621240969,
+    0.020809907186176854,
+    1.056724788359247,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+]
 
 q_goal = q_init[::]
 # TODO: Adjust goal configuration for placard position
 # q_goal[r+3:r+7] = [0, 0, 1, 0]
 
 # Define grippers and handles
-grippers = ['romeo/r_hand', 'romeo/l_hand']
-handlesPerObjects = [['placard/low', 'placard/high']]
+grippers = ["romeo/r_hand", "romeo/l_hand"]
+handlesPerObjects = [["placard/low", "placard/high"]]
 contactsPerObjects = [[]]
 
 # TODO: In the old API, there were Rules to define valid grasping combinations
@@ -135,7 +190,7 @@ contactsPerObjects = [[]]
 
 factory = ConstraintGraphFactory(cg, constraints)
 factory.setGrippers(grippers)
-factory.setObjects(['placard'], handlesPerObjects, contactsPerObjects)
+factory.setObjects(["placard"], handlesPerObjects, contactsPerObjects)
 
 # TODO: Check if factory.setRules() exists in new API
 # factory.setRules(rules)

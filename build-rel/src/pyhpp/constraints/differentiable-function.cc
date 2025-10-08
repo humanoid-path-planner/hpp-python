@@ -111,21 +111,44 @@ void exposeDifferentiableFunction() {
       .add_property("ndo", &DifferentiableFunction::outputDerivativeSize)
 
       // C++ API
-      .def("value", &DFWrapper::value_wrap, "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::value is not documented\n", "")
-      .def("jacobian", &DFWrapper::jacobian_wrap, "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::jacobian is not documented\n", "")
+      .def(
+          "value", &DFWrapper::value_wrap,
+          "Cannot find doxygen-xml for package hpp-constraints. "
+          "hpp::constraints::DifferentiableFunction::value is not documented\n",
+          "")
+      .def("jacobian", &DFWrapper::jacobian_wrap,
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::jacobian is not "
+           "documented\n",
+           "")
 
       .def("outputSpace", &DifferentiableFunction::outputSpace,
-           "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::outputSpace is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::outputSpace is not "
+           "documented\n",
+           "")
 
       .def("inputSize", &DifferentiableFunction::inputSize,
-           "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::inputSize is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::inputSize is not "
+           "documented\n",
+           "")
       .def("outputSize", &DifferentiableFunction::outputSize,
-           "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::outputSize is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::outputSize is not "
+           "documented\n",
+           "")
       .def("inputDerivativeSize", &DifferentiableFunction::inputDerivativeSize,
-           "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::inputDerivativeSize is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::inputDerivativeSize is "
+           "not documented\n",
+           "")
       .def("outputDerivativeSize",
            &DifferentiableFunction::outputDerivativeSize,
-           "Cannot find doxygen-xml for package hpp-constraints. hpp::constraints::DifferentiableFunction::outputDerivativeSize is not documented\n", "")
+           "Cannot find doxygen-xml for package hpp-constraints. "
+           "hpp::constraints::DifferentiableFunction::outputDerivativeSize is "
+           "not documented\n",
+           "")
       //;
 
       // class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable,

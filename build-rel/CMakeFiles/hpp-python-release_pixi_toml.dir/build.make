@@ -91,4 +91,3 @@ CMakeFiles/hpp-python-release_pixi_toml.dir/clean:
 CMakeFiles/hpp-python-release_pixi_toml.dir/depend:
 	cd /home/psardin/devel/nix-hpp/src/hpp-python/build-rel && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/psardin/devel/nix-hpp/src/hpp-python /home/psardin/devel/nix-hpp/src/hpp-python /home/psardin/devel/nix-hpp/src/hpp-python/build-rel /home/psardin/devel/nix-hpp/src/hpp-python/build-rel /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/CMakeFiles/hpp-python-release_pixi_toml.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/hpp-python-release_pixi_toml.dir/depend
-

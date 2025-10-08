@@ -14,9 +14,7 @@ Description: python bindings for HPP, based on boost python
 URL: https://github.com/humanoid-path-planner/hpp-python
 Version: 6.0.0
 Requires: omniORB4, omniORB4 >= 4.1.4, omniDynamic4 >= 4.1.4
-Conflicts: 
-Libs: -L${libdir} 
-Libs.private: 
+Conflicts:
+Libs: -L${libdir}
+Libs.private:
 Cflags:  -I${includedir}
-
-

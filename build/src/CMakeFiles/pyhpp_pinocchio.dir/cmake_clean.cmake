@@ -1,4 +1,5 @@
-file(REMOVE_RECURSE
+file(
+  REMOVE_RECURSE
   "CMakeFiles/pyhpp_pinocchio.dir/link.d"
   "pyhpp/__init__.pyc"
   "pyhpp/manipulation/constraint_graph_factory.pyc"
@@ -12,8 +13,7 @@ file(REMOVE_RECURSE
   "pyhpp/pinocchio/bindings.pdb"
   "pyhpp/pinocchio/bindings.so"
   "pyhpp/pinocchio/device.cc"
-  "pyhpp/pinocchio/liegroup.cc"
-)
+  "pyhpp/pinocchio/liegroup.cc")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang CXX)

@@ -1,4 +1,5 @@
-file(REMOVE_RECURSE
+file(
+  REMOVE_RECURSE
   "CMakeFiles/pyhpp_constraints.dir/link.d"
   "pyhpp/__init__.pyc"
   "pyhpp/manipulation/constraint_graph_factory.pyc"
@@ -30,8 +31,7 @@ file(REMOVE_RECURSE
   "pyhpp/constraints/generic-transformation.cc"
   "pyhpp/constraints/implicit.cc"
   "pyhpp/constraints/iterative-solver.cc"
-  "pyhpp/constraints/locked-joint.cc"
-)
+  "pyhpp/constraints/locked-joint.cc")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang CXX)

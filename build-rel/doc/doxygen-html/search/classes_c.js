@@ -1,45 +1,419 @@
-var searchData=
-[
-  ['nonetopython_0',['NoneToPython',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1NoneToPython.html',1,'eigenpy::detail']]],
-  ['notabuilder_1',['NotABuilder',['../structpyhpp_1_1core_1_1NotABuilder.html',1,'pyhpp::core']]],
-  ['nullopt_5fhelper_2',['nullopt_helper',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1nullopt__helper.html',1,'eigenpy::detail']]],
-  ['nullopt_5fhelper_3c_20boost_3a_3aoptional_20_3e_3',['nullopt_helper&lt; boost::optional &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1nullopt__helper_3_01boost_1_1optional_01_4.html',1,'eigenpy::detail']]],
-  ['numericconvertible_4',['NumericConvertible',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1NumericConvertible.html',1,'eigenpy::details']]],
-  ['numericconvertibleimpl_5',['NumericConvertibleImpl',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1NumericConvertibleImpl.html',1,'eigenpy::details']]],
-  ['numpy_5fallocator_5fimpl_6',['numpy_allocator_impl',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_3c_20const_20mattype_20_26_2c_20const_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_7',['numpy_allocator_impl&lt; const MatType &amp;, const Eigen::MatrixBase&lt; MatType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01const_01MatType_01_6_00_01const_01Eigen_1_1MatrixBase_3_01MatType_01_4_01_4.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_3c_20const_20mattype_2c_20const_20eigen_3a_3amatrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_8',['numpy_allocator_impl&lt; const MatType, const Eigen::MatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01const_01MatType_00_01const_01Eigen_1_1MatrixBase_3_02cb3aa93e8183c6b278fe3387c4f72e4.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_3c_20eigentype_2c_20basetype_20_3e_9',['numpy_allocator_impl&lt; EigenType, BaseType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_3c_20mattype_2c_20eigen_3a_3amatrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_10',['numpy_allocator_impl&lt; MatType, Eigen::MatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01MatType_00_01Eigen_1_1MatrixBase_3_01typename_01remo00722063a56cc930dd5ddeda94aea0b5.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_5fmatrix_11',['numpy_allocator_impl_matrix',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_5fmatrix_3c_20const_20mattype_20_26_20_3e_12',['numpy_allocator_impl_matrix&lt; const MatType &amp; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix_3_01const_01MatType_01_6_01_4.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_5fmatrix_3c_20const_20mattype_20_3e_13',['numpy_allocator_impl_matrix&lt; const MatType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_5fmatrix_3c_20mattype_20_26_20_3e_14',['numpy_allocator_impl_matrix&lt; MatType &amp; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix_3_01MatType_01_6_01_4.html',1,'eigenpy']]],
-  ['numpy_5fallocator_5fimpl_5fmatrix_3c_20mattype_20_3e_15',['numpy_allocator_impl_matrix&lt; MatType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_16',['numpy_map_impl',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_3c_20const_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20const_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_17',['numpy_map_impl&lt; const MatType, InputScalar, AlignmentValue, Stride, const Eigen::MatrixBase&lt; MatType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl_3_01const_01MatType_00_01InputScalar_00_01AlignmentValue_00_012c2e10549a8882822eb59090e058b914.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_3c_20eigentype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20basetype_20_3e_18',['numpy_map_impl&lt; EigenType, InputScalar, AlignmentValue, Stride, BaseType &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_19',['numpy_map_impl&lt; MatType, InputScalar, AlignmentValue, Stride, Eigen::MatrixBase&lt; MatType &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_01decbe704b6bcb19014f098e7ae324dc.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_5fmatrix_20',['numpy_map_impl_matrix',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_5fmatrix_3c_20const_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_20_3e_21',['numpy_map_impl_matrix&lt; const MatType, InputScalar, AlignmentValue, Stride &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20false_20_3e_22',['numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, false &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_00_01false_01_4.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20isvector_20_3e_23',['numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, IsVector &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',1,'eigenpy']]],
-  ['numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20true_20_3e_24',['numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, true &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_00_01true_01_4.html',1,'eigenpy']]],
-  ['numpyallocator_25',['NumpyAllocator',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyAllocator.html',1,'eigenpy']]],
-  ['numpyequivalenttype_26',['NumpyEquivalentType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20bool_20_3e_27',['NumpyEquivalentType&lt; bool &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01bool_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20char_20_3e_28',['NumpyEquivalentType&lt; char &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01char_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20double_20_3e_29',['NumpyEquivalentType&lt; double &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01double_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20float_20_3e_30',['NumpyEquivalentType&lt; float &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01float_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20int16_5ft_20_3e_31',['NumpyEquivalentType&lt; int16_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int16__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20int32_5ft_20_3e_32',['NumpyEquivalentType&lt; int32_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int32__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20int64_5ft_20_3e_33',['NumpyEquivalentType&lt; int64_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int64__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20int8_5ft_20_3e_34',['NumpyEquivalentType&lt; int8_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int8__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20long_20double_20_3e_35',['NumpyEquivalentType&lt; long double &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01long_01double_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20uint16_5ft_20_3e_36',['NumpyEquivalentType&lt; uint16_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint16__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20uint32_5ft_20_3e_37',['NumpyEquivalentType&lt; uint32_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint32__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20uint64_5ft_20_3e_38',['NumpyEquivalentType&lt; uint64_t &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint64__t_01_4.html',1,'eigenpy']]],
-  ['numpyequivalenttype_3c_20unsigned_20char_20_3e_39',['NumpyEquivalentType&lt; unsigned char &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01unsigned_01char_01_4.html',1,'eigenpy']]],
-  ['numpymap_40',['NumpyMap',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyMap.html',1,'eigenpy']]],
-  ['numpytype_41',['NumpyType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyType.html',1,'eigenpy']]]
+var searchData = [
+  [
+    'nonetopython_0',
+    [
+      'NoneToPython',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1NoneToPython.html',
+        1, 'eigenpy::detail'
+      ]
+    ]
+  ],
+  [
+    'notabuilder_1',
+    [
+      'NotABuilder',
+      ['../structpyhpp_1_1core_1_1NotABuilder.html', 1, 'pyhpp::core']
+    ]
+  ],
+  [
+    'nullopt_5fhelper_2',
+    [
+      'nullopt_helper',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1nullopt__helper.html',
+        1, 'eigenpy::detail'
+      ]
+    ]
+  ],
+  [
+    'nullopt_5fhelper_3c_20boost_3a_3aoptional_20_3e_3',
+    [
+      'nullopt_helper&lt; boost::optional &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1detail_1_1nullopt__helper_3_01boost_1_1optional_01_4.html',
+        1, 'eigenpy::detail'
+      ]
+    ]
+  ],
+  [
+    'numericconvertible_4',
+    [
+      'NumericConvertible',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1NumericConvertible.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'numericconvertibleimpl_5',
+    [
+      'NumericConvertibleImpl',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1NumericConvertibleImpl.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_6',
+    [
+      'numpy_allocator_impl',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_3c_20const_20mattype_20_26_2c_20const_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_7',
+    [
+      'numpy_allocator_impl&lt; const MatType &amp;, const Eigen::MatrixBase&lt; MatType &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01const_01MatType_01_6_00_01const_01Eigen_1_1MatrixBase_3_01MatType_01_4_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_3c_20const_20mattype_2c_20const_20eigen_3a_3amatrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_8',
+    [
+      'numpy_allocator_impl&lt; const MatType, const Eigen::MatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01const_01MatType_00_01const_01Eigen_1_1MatrixBase_3_02cb3aa93e8183c6b278fe3387c4f72e4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_3c_20eigentype_2c_20basetype_20_3e_9',
+    [
+      'numpy_allocator_impl&lt; EigenType, BaseType &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_3c_20mattype_2c_20eigen_3a_3amatrixbase_3c_20typename_20remove_5fconst_5freference_3c_20mattype_20_3e_3a_3atype_20_3e_20_3e_10',
+    [
+      'numpy_allocator_impl&lt; MatType, Eigen::MatrixBase&lt; typename remove_const_reference&lt; MatType &gt;::type &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl_3_01MatType_00_01Eigen_1_1MatrixBase_3_01typename_01remo00722063a56cc930dd5ddeda94aea0b5.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_5fmatrix_11',
+    [
+      'numpy_allocator_impl_matrix',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_5fmatrix_3c_20const_20mattype_20_26_20_3e_12',
+    [
+      'numpy_allocator_impl_matrix&lt; const MatType &amp; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix_3_01const_01MatType_01_6_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_5fmatrix_3c_20const_20mattype_20_3e_13',
+    [
+      'numpy_allocator_impl_matrix&lt; const MatType &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_5fmatrix_3c_20mattype_20_26_20_3e_14',
+    [
+      'numpy_allocator_impl_matrix&lt; MatType &amp; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix_3_01MatType_01_6_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fallocator_5fimpl_5fmatrix_3c_20mattype_20_3e_15',
+    [
+      'numpy_allocator_impl_matrix&lt; MatType &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__allocator__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_16',
+    [
+      'numpy_map_impl',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_3c_20const_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20const_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_17',
+    [
+      'numpy_map_impl&lt; const MatType, InputScalar, AlignmentValue, Stride, const Eigen::MatrixBase&lt; MatType &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl_3_01const_01MatType_00_01InputScalar_00_01AlignmentValue_00_012c2e10549a8882822eb59090e058b914.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_3c_20eigentype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20basetype_20_3e_18',
+    [
+      'numpy_map_impl&lt; EigenType, InputScalar, AlignmentValue, Stride, BaseType &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20eigen_3a_3amatrixbase_3c_20mattype_20_3e_20_3e_19',
+    [
+      'numpy_map_impl&lt; MatType, InputScalar, AlignmentValue, Stride, Eigen::MatrixBase&lt; MatType &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_01decbe704b6bcb19014f098e7ae324dc.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_5fmatrix_20',
+    [
+      'numpy_map_impl_matrix',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_5fmatrix_3c_20const_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_20_3e_21',
+    [
+      'numpy_map_impl_matrix&lt; const MatType, InputScalar, AlignmentValue, Stride &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20false_20_3e_22',
+    [
+      'numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, false &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_00_01false_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20isvector_20_3e_23',
+    [
+      'numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, IsVector &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpy_5fmap_5fimpl_5fmatrix_3c_20mattype_2c_20inputscalar_2c_20alignmentvalue_2c_20stride_2c_20true_20_3e_24',
+    [
+      'numpy_map_impl_matrix&lt; MatType, InputScalar, AlignmentValue, Stride, true &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1numpy__map__impl__matrix_3_01MatType_00_01InputScalar_00_01AlignmentValue_00_01Stride_00_01true_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyallocator_25',
+    [
+      'NumpyAllocator',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyAllocator.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_26',
+    [
+      'NumpyEquivalentType',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20bool_20_3e_27',
+    [
+      'NumpyEquivalentType&lt; bool &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01bool_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20char_20_3e_28',
+    [
+      'NumpyEquivalentType&lt; char &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01char_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20double_20_3e_29',
+    [
+      'NumpyEquivalentType&lt; double &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01double_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20float_20_3e_30',
+    [
+      'NumpyEquivalentType&lt; float &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01float_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20int16_5ft_20_3e_31',
+    [
+      'NumpyEquivalentType&lt; int16_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int16__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20int32_5ft_20_3e_32',
+    [
+      'NumpyEquivalentType&lt; int32_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int32__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20int64_5ft_20_3e_33',
+    [
+      'NumpyEquivalentType&lt; int64_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int64__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20int8_5ft_20_3e_34',
+    [
+      'NumpyEquivalentType&lt; int8_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01int8__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20long_20double_20_3e_35',
+    [
+      'NumpyEquivalentType&lt; long double &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01long_01double_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20uint16_5ft_20_3e_36',
+    [
+      'NumpyEquivalentType&lt; uint16_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint16__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20uint32_5ft_20_3e_37',
+    [
+      'NumpyEquivalentType&lt; uint32_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint32__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20uint64_5ft_20_3e_38',
+    [
+      'NumpyEquivalentType&lt; uint64_t &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01uint64__t_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpyequivalenttype_3c_20unsigned_20char_20_3e_39',
+    [
+      'NumpyEquivalentType&lt; unsigned char &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyEquivalentType_3_01unsigned_01char_01_4.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpymap_40',
+    [
+      'NumpyMap',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyMap.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'numpytype_41',
+    [
+      'NumpyType',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1NumpyType.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ]
 ];

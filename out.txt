@@ -4,9 +4,9 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_intersec), contains
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -32,54 +32,54 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_pregrasp), contains
   Config projector: proj (baxter/l_gripper > box0/handle2 | 0-1_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 11
     reduced dimension 11
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -105,66 +105,66 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 6],RelativeTransformation: baxter/l_gripper pregrasps box0/handle2, active dof: [ 1, 7], [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 6],RelativeTransformation: baxter/l_gripper pregrasps box0/handle2, active dof: [ 1, 7], [ 19, 7],
               Joint1: baxter/left_w2
               Frame in joint 1
                 R =   2.22045e-16,           0,          -1
                       0, 1, 0
-                                1,           0, 2.22045e-16  
+                                1,           0, 2.22045e-16
                 p = 1.11022e-17,           0,     0.31625
               Joint2: box0/root_joint
               Frame in joint 2
                 R =   -1,  0,  0
                                 0, 2.22045e-16,           1
-                                0,           1, 2.22045e-16  
+                                0,           1, 2.22045e-16
                 p = 0, 0, 0
-              mask: 1, 1, 1, 1, 1, 1, 
+              mask: 1, 1, 1, 1, 1, 1,
             Rhs: 0, 0, 0, 0, 0, 0, 1
-            active rows: [ 0, 6], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 11], 
-        Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+            active rows: [ 0, 6],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 11],
+        Cols: [ 1, 7], [ 10, 7], [ 19, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_preplace), contains
   Config projector: proj (baxter/l_gripper > box0/handle2 | 0-1_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -190,54 +190,54 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | 0-1_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box0/handle2 | f_intersec), contains
   Config projector: proj (baxter/l_gripper > box0/handle2 | f_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -263,10 +263,10 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -292,50 +292,50 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 25, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
               Differentiable function: baxter/l_gripper grasps box0/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/l_gripper > box0/handle2 | f_pregrasp), contains
   Config projector: proj (baxter/l_gripper > box0/handle2 | f_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 16
     reduced dimension 16
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12],
       Level 0: Stack of 3 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -361,10 +361,10 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -390,62 +390,62 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-            2: [10, 6],RelativeTransformation: baxter/l_gripper pregrasps box0/handle2, active dof: [ 1, 7], [ 19, 7], 
+              active rows: [ 0, 5],
+            2: [10, 6],RelativeTransformation: baxter/l_gripper pregrasps box0/handle2, active dof: [ 1, 7], [ 19, 7],
                 Joint1: baxter/left_w2
                 Frame in joint 1
                   R =   2.22045e-16,           0,          -1
                         0, 1, 0
-                                  1,           0, 2.22045e-16  
+                                  1,           0, 2.22045e-16
                   p = 1.11022e-17,           0,     0.31625
                 Joint2: box0/root_joint
                 Frame in joint 2
                   R =   -1,  0,  0
                                   0, 2.22045e-16,           1
-                                  0,           1, 2.22045e-16  
+                                  0,           1, 2.22045e-16
                   p = 0, 0, 0
-                mask: 1, 1, 1, 1, 1, 1, 
+                mask: 1, 1, 1, 1, 1, 1,
               Rhs: 0, 0, 0, 0, 0, 0, 1
-              active rows: [ 0, 6], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 16], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 12], 
+              active rows: [ 0, 6],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 16],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 12],
         ExplicitConstraintSet, 5 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14], 
-          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
-          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14],
+          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
+          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
 Constraint set Set (baxter/l_gripper > box0/handle2 | f_preplace), contains
   Config projector: proj (baxter/l_gripper > box0/handle2 | f_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -471,10 +471,10 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -500,50 +500,50 @@ Constraint set Set (baxter/l_gripper > box0/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 25, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
               Differentiable function: baxter/l_gripper grasps box0/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_intersec), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | 0-0_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -569,54 +569,54 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_pregrasp), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | 0-0_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 11
     reduced dimension 11
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -642,66 +642,66 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 6],RelativeTransformation: baxter/l_gripper pregrasps box1/handle2, active dof: [ 1, 7], [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 6],RelativeTransformation: baxter/l_gripper pregrasps box1/handle2, active dof: [ 1, 7], [ 26, 7],
               Joint1: baxter/left_w2
               Frame in joint 1
                 R =   2.22045e-16,           0,          -1
                       0, 1, 0
-                                1,           0, 2.22045e-16  
+                                1,           0, 2.22045e-16
                 p = 1.11022e-17,           0,     0.31625
               Joint2: box1/root_joint
               Frame in joint 2
                 R =   -1,  0,  0
                                 0, 2.22045e-16,           1
-                                0,           1, 2.22045e-16  
+                                0,           1, 2.22045e-16
                 p = 0, 0, 0
-              mask: 1, 1, 1, 1, 1, 1, 
+              mask: 1, 1, 1, 1, 1, 1,
             Rhs: 0, 0, 0, 0, 0, 0, 1
-            active rows: [ 0, 6], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 11], 
-        Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+            active rows: [ 0, 6],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 11],
+        Cols: [ 1, 7], [ 10, 7], [ 25, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_preplace), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | 0-0_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -727,54 +727,54 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | 0-0_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper > box1/handle2 | f_intersec), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | f_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -800,10 +800,10 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
               Object shapes:
                 object on box0/root_joint
                 position in joint:
@@ -829,50 +829,50 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
               Differentiable function: baxter/l_gripper grasps box1/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/l_gripper > box1/handle2 | f_pregrasp), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | f_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 16
     reduced dimension 16
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12],
       Level 0: Stack of 3 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -898,10 +898,10 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
               Object shapes:
                 object on box0/root_joint
                 position in joint:
@@ -927,62 +927,62 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-            2: [10, 6],RelativeTransformation: baxter/l_gripper pregrasps box1/handle2, active dof: [ 1, 7], [ 26, 7], 
+              active rows: [ 0, 5],
+            2: [10, 6],RelativeTransformation: baxter/l_gripper pregrasps box1/handle2, active dof: [ 1, 7], [ 26, 7],
                 Joint1: baxter/left_w2
                 Frame in joint 1
                   R =   2.22045e-16,           0,          -1
                         0, 1, 0
-                                  1,           0, 2.22045e-16  
+                                  1,           0, 2.22045e-16
                   p = 1.11022e-17,           0,     0.31625
                 Joint2: box1/root_joint
                 Frame in joint 2
                   R =   -1,  0,  0
                                   0, 2.22045e-16,           1
-                                  0,           1, 2.22045e-16  
+                                  0,           1, 2.22045e-16
                   p = 0, 0, 0
-                mask: 1, 1, 1, 1, 1, 1, 
+                mask: 1, 1, 1, 1, 1, 1,
               Rhs: 0, 0, 0, 0, 0, 0, 1
-              active rows: [ 0, 6], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 16], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 12], 
+              active rows: [ 0, 6],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 16],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 12],
         ExplicitConstraintSet, 5 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14], 
-          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
-          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14],
+          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
+          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
 Constraint set Set (baxter/l_gripper > box1/handle2 | f_preplace), contains
   Config projector: proj (baxter/l_gripper > box1/handle2 | f_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1008,10 +1008,10 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -1037,50 +1037,50 @@ Constraint set Set (baxter/l_gripper > box1/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+          Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+          Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
               Differentiable function: baxter/l_gripper grasps box1/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/l_gripper grasps box0/handle2), contains
   Config projector: proj (baxter/l_gripper grasps box0/handle2), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -1106,50 +1106,50 @@ Constraint set Set (baxter/l_gripper grasps box0/handle2), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7], [ 25, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/l_gripper grasps box1/handle2), contains
   Config projector: proj (baxter/l_gripper grasps box1/handle2), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1175,50 +1175,50 @@ Constraint set Set (baxter/l_gripper grasps box1/handle2), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7], [ 19, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_intersec), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | 1-1_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1244,54 +1244,54 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_pregrasp), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | 1-1_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 11
     reduced dimension 11
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1317,66 +1317,66 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box0/handle2, active dof: [ 10, 7], [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box0/handle2, active dof: [ 10, 7], [ 19, 7],
               Joint1: baxter/right_w2
               Frame in joint 1
                 R =   2.22045e-16,           0,          -1
                       0, 1, 0
-                                1,           0, 2.22045e-16  
+                                1,           0, 2.22045e-16
                 p = 1.11022e-17,           0,     0.31625
               Joint2: box0/root_joint
               Frame in joint 2
                 R =   -1,  0,  0
                                 0, 2.22045e-16,           1
-                                0,           1, 2.22045e-16  
+                                0,           1, 2.22045e-16
                 p = 0, 0, 0
-              mask: 1, 1, 1, 1, 1, 1, 
+              mask: 1, 1, 1, 1, 1, 1,
             Rhs: 0, 0, 0, 0, 0, 0, 1
-            active rows: [ 0, 6], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 11], 
-        Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+            active rows: [ 0, 6],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 11],
+        Cols: [ 1, 7], [ 10, 7], [ 19, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_preplace), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | 1-1_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1402,54 +1402,54 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | 1-1_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/l_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box0/handle2 | f_intersec), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | f_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1475,10 +1475,10 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -1504,50 +1504,50 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 25, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 10, 7],  -> Rows: [ 19, 7],
               Differentiable function: baxter/r_gripper grasps box0/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/r_gripper > box0/handle2 | f_pregrasp), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | f_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 16
     reduced dimension 16
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12],
       Level 0: Stack of 3 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1573,10 +1573,10 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -1602,62 +1602,62 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-            2: [10, 6],RelativeTransformation: baxter/r_gripper pregrasps box0/handle2, active dof: [ 10, 7], [ 19, 7], 
+              active rows: [ 0, 5],
+            2: [10, 6],RelativeTransformation: baxter/r_gripper pregrasps box0/handle2, active dof: [ 10, 7], [ 19, 7],
                 Joint1: baxter/right_w2
                 Frame in joint 1
                   R =   2.22045e-16,           0,          -1
                         0, 1, 0
-                                  1,           0, 2.22045e-16  
+                                  1,           0, 2.22045e-16
                   p = 1.11022e-17,           0,     0.31625
                 Joint2: box0/root_joint
                 Frame in joint 2
                   R =   -1,  0,  0
                                   0, 2.22045e-16,           1
-                                  0,           1, 2.22045e-16  
+                                  0,           1, 2.22045e-16
                   p = 0, 0, 0
-                mask: 1, 1, 1, 1, 1, 1, 
+                mask: 1, 1, 1, 1, 1, 1,
               Rhs: 0, 0, 0, 0, 0, 0, 1
-              active rows: [ 0, 6], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 16], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 12], 
+              active rows: [ 0, 6],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 16],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 12],
         ExplicitConstraintSet, 5 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14], 
-          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
-          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14],
+          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
+          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
 Constraint set Set (baxter/r_gripper > box0/handle2 | f_preplace), contains
   Config projector: proj (baxter/r_gripper > box0/handle2 | f_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -1683,10 +1683,10 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -1712,50 +1712,50 @@ Constraint set Set (baxter/r_gripper > box0/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 25, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 10, 7],  -> Rows: [ 19, 7],
               Differentiable function: baxter/r_gripper grasps box0/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_intersec), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | 1-0_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -1781,54 +1781,54 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows:
+          6: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_pregrasp), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | 1-0_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 11
     reduced dimension 11
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -1854,66 +1854,66 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box1/handle2, active dof: [ 10, 7], [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box1/handle2, active dof: [ 10, 7], [ 26, 7],
               Joint1: baxter/right_w2
               Frame in joint 1
                 R =   2.22045e-16,           0,          -1
                       0, 1, 0
-                                1,           0, 2.22045e-16  
+                                1,           0, 2.22045e-16
                 p = 1.11022e-17,           0,     0.31625
               Joint2: box1/root_joint
               Frame in joint 2
                 R =   -1,  0,  0
                                 0, 2.22045e-16,           1
-                                0,           1, 2.22045e-16  
+                                0,           1, 2.22045e-16
                 p = 0, 0, 0
-              mask: 1, 1, 1, 1, 1, 1, 
+              mask: 1, 1, 1, 1, 1, 1,
             Rhs: 0, 0, 0, 0, 0, 0, 1
-            active rows: [ 0, 6], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 11], 
-        Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+            active rows: [ 0, 6],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 11],
+        Cols: [ 1, 7], [ 10, 7], [ 25, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+        Params: Rows: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+        Dofs: Cols: [ 1, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_preplace), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | 1-0_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -1939,54 +1939,54 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | 1-0_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7],
       ExplicitConstraintSet, 7 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], 
-        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+        Other args: Rows: [ 1, 7], [ 10, 7],
+        Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+        Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
-          6: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows:
+          6: Rows: [ 1, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/l_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper > box1/handle2 | f_intersec), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | f_intersec), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -2012,10 +2012,10 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
               Object shapes:
                 object on box0/root_joint
                 position in joint:
@@ -2041,50 +2041,50 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_intersec), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
               Differentiable function: baxter/r_gripper grasps box1/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/r_gripper > box1/handle2 | f_pregrasp), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | f_pregrasp), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 16
     reduced dimension 16
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12],
       Level 0: Stack of 3 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -2110,26 +2110,26 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box1/handle2, active dof: [ 10, 7], [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 6],RelativeTransformation: baxter/r_gripper pregrasps box1/handle2, active dof: [ 10, 7], [ 26, 7],
               Joint1: baxter/right_w2
               Frame in joint 1
                 R =   2.22045e-16,           0,          -1
                       0, 1, 0
-                                1,           0, 2.22045e-16  
+                                1,           0, 2.22045e-16
                 p = 1.11022e-17,           0,     0.31625
               Joint2: box1/root_joint
               Frame in joint 2
                 R =   -1,  0,  0
                                 0, 2.22045e-16,           1
-                                0,           1, 2.22045e-16  
+                                0,           1, 2.22045e-16
                 p = 0, 0, 0
-              mask: 1, 1, 1, 1, 1, 1, 
+              mask: 1, 1, 1, 1, 1, 1,
             Rhs: 0, 0, 0, 0, 0, 0, 1
-            active rows: [ 0, 6], 
-          2: [11, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+            active rows: [ 0, 6],
+          2: [11, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
               Object shapes:
                 object on box0/root_joint
                 position in joint:
@@ -2155,46 +2155,46 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_pregrasp), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 16], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 12], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 16],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 12],
         ExplicitConstraintSet, 5 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14], 
-          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
-          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14],
+          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
+          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
 Constraint set Set (baxter/r_gripper > box1/handle2 | f_preplace), contains
   Config projector: proj (baxter/r_gripper > box1/handle2 | f_preplace), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: preplace_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -2220,10 +2220,10 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
               Object shapes:
                 object on box0/root_joint
                 position in joint:
@@ -2249,50 +2249,50 @@ Constraint set Set (baxter/r_gripper > box1/handle2 | f_preplace), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 6],
         ExplicitConstraintSet, 6 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+          Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+          Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+              Equality: Rows: [ 0, 1],
+            5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
               Differentiable function: baxter/r_gripper grasps box1/handle2
               Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-              Equality: Rows: 
+              Equality: Rows:
 Constraint set Set (baxter/r_gripper grasps box0/handle2), contains
   Config projector: proj (baxter/r_gripper grasps box0/handle2), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 25, 6],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+        0: [0, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
             Object shapes:
               object on box1/root_joint
               position in joint:
@@ -2318,90 +2318,90 @@ Constraint set Set (baxter/r_gripper grasps box0/handle2), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], [ 25, 6], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7], [ 25, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7], 
-        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9], 
-        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 26, 7],
+        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 9],
+        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 8],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 10, 7],  -> Rows: [ 19, 7],
             Differentiable function: baxter/r_gripper grasps box0/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper grasps box0/handle2 : baxter/l_gripper grasps box1/handle2), contains
   Config projector: proj (baxter/r_gripper grasps box0/handle2 : baxter/l_gripper grasps box1/handle2), contains BySubstitution
     HierarchicalIterative, 0 level.
     max iter: 40, error threshold: 0.001
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
     ExplicitConstraintSet, 7 functions.
-      Other args: Rows: [ 1, 7], [ 10, 7], 
-      Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-      Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+      Other args: Rows: [ 1, 7], [ 10, 7],
+      Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+      Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
       Functions
-        0: Rows:  -> Rows: [ 17, 1], 
+        0: Rows:  -> Rows: [ 17, 1],
           Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        1: Rows:  -> Rows: [ 18, 1], 
+          Equality: Rows: [ 0, 1],
+        1: Rows:  -> Rows: [ 18, 1],
           Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        2: Rows:  -> Rows: [ 8, 1], 
+          Equality: Rows: [ 0, 1],
+        2: Rows:  -> Rows: [ 8, 1],
           Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        3: Rows:  -> Rows: [ 9, 1], 
+          Equality: Rows: [ 0, 1],
+        3: Rows:  -> Rows: [ 9, 1],
           Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        4: Rows:  -> Rows: [ 0, 1], 
+          Equality: Rows: [ 0, 1],
+        4: Rows:  -> Rows: [ 0, 1],
           Differentiable function: LockedJoint baxter/head_pan 0
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        5: Rows: [ 1, 7],  -> Rows: [ 26, 7], 
+          Equality: Rows: [ 0, 1],
+        5: Rows: [ 1, 7],  -> Rows: [ 26, 7],
           Differentiable function: baxter/l_gripper grasps box1/handle2
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: 
-        6: Rows: [ 10, 7],  -> Rows: [ 19, 7], 
+          Equality: Rows:
+        6: Rows: [ 10, 7],  -> Rows: [ 19, 7],
           Differentiable function: baxter/r_gripper grasps box0/handle2
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: 
+          Equality: Rows:
 Constraint set Set (baxter/r_gripper grasps box1/handle2), contains
   Config projector: proj (baxter/r_gripper grasps box1/handle2), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 5
     reduced dimension 5
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 6],
       Level 0: Stack of 1 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -2427,90 +2427,90 @@ Constraint set Set (baxter/r_gripper grasps box1/handle2), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-        Equality idx: Rows: 
-        Active rows: Rows: [ 0, 5], 
-        Cols: [ 1, 7], [ 10, 7], [ 19, 6], 
+            active rows: [ 0, 5],
+        Equality idx: Rows:
+        Active rows: Rows: [ 0, 5],
+        Cols: [ 1, 7], [ 10, 7], [ 19, 6],
       ExplicitConstraintSet, 6 functions.
-        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7], 
-        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7], 
-        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6], 
+        Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 7],
+        Params: Rows: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 26, 7],
+        Dofs: Cols: [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], [ 25, 6],
         Functions
-          0: Rows:  -> Rows: [ 17, 1], 
+          0: Rows:  -> Rows: [ 17, 1],
             Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          1: Rows:  -> Rows: [ 18, 1], 
+            Equality: Rows: [ 0, 1],
+          1: Rows:  -> Rows: [ 18, 1],
             Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          2: Rows:  -> Rows: [ 8, 1], 
+            Equality: Rows: [ 0, 1],
+          2: Rows:  -> Rows: [ 8, 1],
             Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          3: Rows:  -> Rows: [ 9, 1], 
+            Equality: Rows: [ 0, 1],
+          3: Rows:  -> Rows: [ 9, 1],
             Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          4: Rows:  -> Rows: [ 0, 1], 
+            Equality: Rows: [ 0, 1],
+          4: Rows:  -> Rows: [ 0, 1],
             Differentiable function: LockedJoint baxter/head_pan 0
             Rhs implicit: 0
-            Equality: Rows: [ 0, 1], 
-          5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+            Equality: Rows: [ 0, 1],
+          5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
             Differentiable function: baxter/r_gripper grasps box1/handle2
             Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-            Equality: Rows: 
+            Equality: Rows:
 Constraint set Set (baxter/r_gripper grasps box1/handle2 : baxter/l_gripper grasps box0/handle2), contains
   Config projector: proj (baxter/r_gripper grasps box1/handle2 : baxter/l_gripper grasps box0/handle2), contains BySubstitution
     HierarchicalIterative, 0 level.
     max iter: 40, error threshold: 0.001
     dimension 0
     reduced dimension 0
-    free variables: Rows: [ 1, 7], [ 10, 7], 
+    free variables: Rows: [ 1, 7], [ 10, 7],
     ExplicitConstraintSet, 7 functions.
-      Other args: Rows: [ 1, 7], [ 10, 7], 
-      Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16], 
-      Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14], 
+      Other args: Rows: [ 1, 7], [ 10, 7],
+      Params: Rows: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 16],
+      Dofs: Cols: [ 1, 7], [ 10, 7],  -> Rows: [ 0, 1], [ 8, 2], [ 17, 14],
       Functions
-        0: Rows:  -> Rows: [ 17, 1], 
+        0: Rows:  -> Rows: [ 17, 1],
           Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        1: Rows:  -> Rows: [ 18, 1], 
+          Equality: Rows: [ 0, 1],
+        1: Rows:  -> Rows: [ 18, 1],
           Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        2: Rows:  -> Rows: [ 8, 1], 
+          Equality: Rows: [ 0, 1],
+        2: Rows:  -> Rows: [ 8, 1],
           Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        3: Rows:  -> Rows: [ 9, 1], 
+          Equality: Rows: [ 0, 1],
+        3: Rows:  -> Rows: [ 9, 1],
           Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        4: Rows:  -> Rows: [ 0, 1], 
+          Equality: Rows: [ 0, 1],
+        4: Rows:  -> Rows: [ 0, 1],
           Differentiable function: LockedJoint baxter/head_pan 0
           Rhs implicit: 0
-          Equality: Rows: [ 0, 1], 
-        5: Rows: [ 10, 7],  -> Rows: [ 26, 7], 
+          Equality: Rows: [ 0, 1],
+        5: Rows: [ 10, 7],  -> Rows: [ 26, 7],
           Differentiable function: baxter/r_gripper grasps box1/handle2
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: 
-        6: Rows: [ 1, 7],  -> Rows: [ 19, 7], 
+          Equality: Rows:
+        6: Rows: [ 1, 7],  -> Rows: [ 19, 7],
           Differentiable function: baxter/l_gripper grasps box0/handle2
           Rhs implicit: 0, 0, 0, 0, 0, 0, 1
-          Equality: Rows: 
+          Equality: Rows:
 Constraint set Set (free), contains
   Config projector: proj (free), contains BySubstitution
     HierarchicalIterative, 1 level.
     max iter: 40, error threshold: 0.001
     dimension 10
     reduced dimension 10
-    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12], 
+    free variables: Rows: [ 1, 7], [ 10, 7], [ 19, 12],
       Level 0: Stack of 2 functions
-        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7], 
+        0: [0, 5],ConvexShapeContact: place_box0, active dof [ 19, 7],
             Object shapes:
               object on box0/root_joint
               position in joint:
@@ -2536,10 +2536,10 @@ Constraint set Set (free), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-              
+
             Rhs: 0, 0, 0, 0, 0
-            active rows: [ 0, 5], 
-          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7], 
+            active rows: [ 0, 5],
+          1: [5, 5],ConvexShapeContact: place_box1, active dof [ 26, 7],
               Object shapes:
                 object on box1/root_joint
                 position in joint:
@@ -2565,34 +2565,34 @@ Constraint set Set (free), contains
           -1           -0            0
   p =  0.8    0 0.73
 
-                
+
               Rhs: 0, 0, 0, 0, 0
-              active rows: [ 0, 5], 
-          Equality idx: Rows: 
-          Active rows: Rows: [ 0, 10], 
-          Cols: [ 1, 7], [ 10, 7], [ 19, 12], 
+              active rows: [ 0, 5],
+          Equality idx: Rows:
+          Active rows: Rows: [ 0, 10],
+          Cols: [ 1, 7], [ 10, 7], [ 19, 12],
         ExplicitConstraintSet, 5 functions.
-          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14], 
-          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
-          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2], 
+          Other args: Rows: [ 1, 7], [ 10, 7], [ 19, 14],
+          Params: Rows:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
+          Dofs: Cols:  -> Rows: [ 0, 1], [ 8, 2], [ 17, 2],
           Functions
-            0: Rows:  -> Rows: [ 17, 1], 
+            0: Rows:  -> Rows: [ 17, 1],
               Differentiable function: LockedJoint baxter/r_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            1: Rows:  -> Rows: [ 18, 1], 
+              Equality: Rows: [ 0, 1],
+            1: Rows:  -> Rows: [ 18, 1],
               Differentiable function: LockedJoint baxter/r_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            2: Rows:  -> Rows: [ 8, 1], 
+              Equality: Rows: [ 0, 1],
+            2: Rows:  -> Rows: [ 8, 1],
               Differentiable function: LockedJoint baxter/l_gripper_l_finger_joint 0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            3: Rows:  -> Rows: [ 9, 1], 
+              Equality: Rows: [ 0, 1],
+            3: Rows:  -> Rows: [ 9, 1],
               Differentiable function: LockedJoint baxter/l_gripper_r_finger_joint -0.02
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
-            4: Rows:  -> Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],
+            4: Rows:  -> Rows: [ 0, 1],
               Differentiable function: LockedJoint baxter/head_pan 0
               Rhs implicit: 0
-              Equality: Rows: [ 0, 1], 
+              Equality: Rows: [ 0, 1],

@@ -6,11 +6,11 @@
 * [33m7b4b41d[m[33m ([m[1;31mpaul_hppy-py/devel[m[33m)[m Add hpp-manipulation include in flake.nix
 * [33m02dcacc[m fix absolute path error in example rrt file
 [31m|[m * [33m08512e2[m[33m ([m[1;31morigin/dependabot/github_actions/cachix/install-nix-action-31[m[33m)[m Bump cachix/install-nix-action from 27 to 31
-[31m|[m[31m/[m  
+[31m|[m[31m/[m
 [31m|[m * [33m0fea035[m[33m ([m[1;31morigin/dependabot/github_actions/cachix/cachix-action-16[m[33m)[m Bump cachix/cachix-action from 15 to 16
-[31m|[m[31m/[m  
+[31m|[m[31m/[m
 [31m|[m * [33m13dc51a[m[33m ([m[1;31morigin/pre-commit-ci-update-config[m[33m)[m [pre-commit.ci] pre-commit autoupdate
-[31m|[m[31m/[m  
+[31m|[m[31m/[m
 * [33m0e1b191[m[33m ([m[1;31morigin/devel[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevel[m[33m)[m fix include in graph.hh
 * [33mdb0da46[m fix unused path import causing multiple variable definition
 * [33m48740b4[m [pre-commit.ci] auto fixes from pre-commit.com hooks
@@ -25,140 +25,140 @@
 * [33m6a9edec[m [constraints] Fix multiple definition.
 * [33md4c65a8[m Bind hpp-manipulation
 [34m|[m * [33m3fa5949[m[33m ([m[1;31mpaul_hppy-py/pre-commit-ci-update-config[m[33m)[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m[34m/[m  
+[34m|[m[34m/[m
 *   [33mfbe32fa[m Merge pull request #35 from humanoid-path-planner/pre-commit-ci-update-config
-[36m|[m[1;31m\[m  
+[36m|[m[1;31m\[m
 [36m|[m * [33m65a7df0[m [pre-commit.ci] pre-commit autoupdate
-[36m|[m[36m/[m  
+[36m|[m[36m/[m
 *   [33md0634ef[m Merge pull request #32 from humanoid-path-planner/pre-commit-ci-update-config
-[1;32m|[m[1;33m\[m  
+[1;32m|[m[1;33m\[m
 [1;32m|[m * [33m9302e85[m [pre-commit.ci] pre-commit autoupdate
-[1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m
 *   [33m9136b50[m Merge pull request #31 from humanoid-path-planner/pre-commit-ci-update-config
-[1;34m|[m[1;35m\[m  
+[1;34m|[m[1;35m\[m
 [1;34m|[m * [33m0b81088[m [pre-commit.ci] pre-commit autoupdate
-[1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m
 *   [33me1641be[m Merge pull request #30 from humanoid-path-planner/pre-commit-ci-update-config
-[1;36m|[m[31m\[m  
+[1;36m|[m[31m\[m
 [1;36m|[m * [33m0e0e28e[m [pre-commit.ci] pre-commit autoupdate
-[1;36m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m
 *   [33m6ff260d[m Merge pull request #29 from humanoid-path-planner/ci
-[32m|[m[33m\[m  
+[32m|[m[33m\[m
 [32m|[m * [33mef3014a[m add gitlab CI
-[32m|[m[32m/[m  
+[32m|[m[32m/[m
 *   [33m48a6ddb[m Merge pull request #28 from humanoid-path-planner/hrp2
-[34m|[m[35m\[m  
+[34m|[m[35m\[m
 [34m|[m * [33m6707162[m update-flake-lock: hrp2-14
-[34m|[m[34m/[m  
+[34m|[m[34m/[m
 *   [33m996132c[m Merge pull request #27 from humanoid-path-planner/pre-commit-ci-update-config
-[36m|[m[1;31m\[m  
+[36m|[m[1;31m\[m
 [36m|[m * [33m2203e52[m [pre-commit.ci] pre-commit autoupdate
-[36m|[m[36m/[m  
+[36m|[m[36m/[m
 *   [33m24d4f1c[m Merge pull request #26 from humanoid-path-planner/pre-commit-ci-update-config
-[1;32m|[m[1;33m\[m  
+[1;32m|[m[1;33m\[m
 [1;32m|[m * [33m47ac964[m [pre-commit.ci] pre-commit autoupdate
-[1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m
 *   [33m171196d[m Merge pull request #25 from humanoid-path-planner/pre-commit-ci-update-config
-[1;34m|[m[1;35m\[m  
+[1;34m|[m[1;35m\[m
 [1;34m|[m * [33mf5f9848[m [pre-commit.ci] pre-commit autoupdate
-[1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m
 * [33m0d29e0e[m flake: Use pinocchio default joint collection
 * [33ma6e634a[m [pinocchio] Do not expose model anymore.
 * [33m4494764[m Use pinocchio joint collection instead of defining one
 *   [33mb88a4b0[m Merge pull request #23 from humanoid-path-planner/pre-commit-ci-update-config
-[1;36m|[m[31m\[m  
+[1;36m|[m[31m\[m
 [1;36m|[m * [33m2c5cb7d[m [pre-commit.ci] pre-commit autoupdate
-[1;36m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m
 *   [33m2e19b9f[m Merge pull request #22 from humanoid-path-planner/pre-commit-ci-update-config
-[32m|[m[33m\[m  
+[32m|[m[33m\[m
 [32m|[m * [33m3719caa[m [pre-commit.ci] pre-commit autoupdate
-[32m|[m[32m/[m  
+[32m|[m[32m/[m
 [32m|[m *   [33me3f5b8a[m[33m ([m[1;31mpaul_hppy-py/master[m[33m, [m[1;31morigin/master[m[33m)[m Merge pull request #34 from humanoid-path-planner/dependabot/github_actions/cachix/cachix-action-16
-[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m[35m\[m
 [32m|[m [34m|[m * [33m8dae3b3[m Bump cachix/cachix-action from 15 to 16
-[32m|[m [34m|[m[34m/[m  
+[32m|[m [34m|[m[34m/[m
 [32m|[m *   [33m86266f5[m Merge pull request #33 from humanoid-path-planner/dependabot/github_actions/cachix/install-nix-action-31
-[32m|[m [36m|[m[1;31m\[m  
+[32m|[m [36m|[m[1;31m\[m
 [32m|[m [36m|[m * [33ma81806b[m Bump cachix/install-nix-action from 30 to 31
-[32m|[m [36m|[m[36m/[m  
+[32m|[m [36m|[m[36m/[m
 [32m|[m * [33m484dc88[m Merge pull request #21 from humanoid-path-planner/dependabot/github_actions/cachix/install-nix-action-30
-[32m|[m[32m/[m[1;33m|[m 
+[32m|[m[32m/[m[1;33m|[m
 [32m|[m * [33mdf26405[m Bump cachix/install-nix-action from 27 to 30
-[32m|[m[32m/[m  
+[32m|[m[32m/[m
 * [33m76ac692[m[33m ([m[1;33mtag: [m[1;33mv6.0.0[m[33m)[m release: Update package.xml version to 6.0.0
 * [33mb9e93ba[m tests: drop pytest dependency
 * [33mced5dd6[m pre-commit autoupdate
 * [33m0ec4a71[m sync submodule
 *   [33m9512290[m Merge pull request #20 from nim65s/ruff
-[1;34m|[m[1;35m\[m  
+[1;34m|[m[1;35m\[m
 [1;34m|[m * [33md29a7b6[m manual ruff fixes
 [1;34m|[m * [33m86a9c51[m pre-commit run -a
 [1;34m|[m * [33mb91d422[m black -> ruff
-[1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m
 *   [33m51b298e[m Merge pull request #18 from humanoid-path-planner/pre-commit-ci-update-config
-[1;36m|[m[31m\[m  
+[1;36m|[m[31m\[m
 [1;36m|[m * [33m9bde031[m [pre-commit.ci] pre-commit autoupdate
-[1;36m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m
 * [33mfb74b36[m setup mergify
 *   [33m6121853[m Merge pull request #19 from humanoid-path-planner/nix
-[32m|[m[33m\[m  
+[32m|[m[33m\[m
 [32m|[m * [33m115bd04[m ci: only on ubuntu
 [32m|[m * [33m17f11f8[m setup github actions
 [32m|[m * [33m401d96d[m nix: initial packaging
-[32m|[m[32m/[m  
+[32m|[m[32m/[m
 *   [33m4b9fe0b[m Merge branch 'devel'
-[34m|[m[35m\[m  
+[34m|[m[35m\[m
 [34m|[m *   [33mc8ac717[m Merge pull request #17 from humanoid-path-planner/coal
-[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m[1;31m\[m
 [34m|[m [36m|[m * [33md328ead[m update for coal v3
-[34m|[m [36m|[m[36m/[m  
+[34m|[m [36m|[m[36m/[m
 [34m|[m *   [33m1088ece[m Merge pull request #16 from humanoid-path-planner/pre-commit-ci-update-config
-[34m|[m [1;32m|[m[1;33m\[m  
+[34m|[m [1;32m|[m[1;33m\[m
 [34m|[m [1;32m|[m * [33mcfa719b[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m [1;32m|[m[1;32m/[m  
+[34m|[m [1;32m|[m[1;32m/[m
 [34m|[m *   [33ma16d6db[m Merge pull request #15 from humanoid-path-planner/pre-commit-ci-update-config
-[34m|[m [1;34m|[m[1;35m\[m  
+[34m|[m [1;34m|[m[1;35m\[m
 [34m|[m [1;34m|[m * [33m18bfcf1[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m [1;34m|[m[1;34m/[m  
+[34m|[m [1;34m|[m[1;34m/[m
 [34m|[m *   [33m914c6dc[m Merge pull request #14 from humanoid-path-planner/pre-commit-ci-update-config
-[34m|[m [1;36m|[m[31m\[m  
+[34m|[m [1;36m|[m[31m\[m
 [34m|[m [1;36m|[m * [33m0f0ccfb[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m [1;36m|[m[1;36m/[m  
+[34m|[m [1;36m|[m[1;36m/[m
 [34m|[m *   [33me333f07[m Merge pull request #13 from humanoid-path-planner/pre-commit-ci-update-config
-[34m|[m [32m|[m[33m\[m  
+[34m|[m [32m|[m[33m\[m
 [34m|[m [32m|[m * [33mdfc81b7[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m [32m|[m[32m/[m  
+[34m|[m [32m|[m[32m/[m
 [34m|[m *   [33mb869fc1[m Merge pull request #12 from humanoid-path-planner/pre-commit-ci-update-config
-[34m|[m [34m|[m[35m\[m  
+[34m|[m [34m|[m[35m\[m
 [34m|[m [34m|[m * [33m97f4778[m [pre-commit.ci] pre-commit autoupdate
-[34m|[m [34m|[m[34m/[m  
+[34m|[m [34m|[m[34m/[m
 * [34m|[m [33m9a52f0d[m Merge pull request #11 from humanoid-path-planner/devel
-[36m|[m[34m\[m[34m|[m 
+[36m|[m[34m\[m[34m|[m
 [36m|[m *   [33mfa18ffc[m Merge pull request #10 from humanoid-path-planner/pre-commit-ci-update-config
-[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m [1;32m|[m[1;33m\[m
 [36m|[m [1;32m|[m * [33mc71f87b[m [pre-commit.ci] pre-commit autoupdate
-[36m|[m [1;32m|[m[1;32m/[m  
+[36m|[m [1;32m|[m[1;32m/[m
 [36m|[m *   [33mf3f68c1[m Merge pull request #9 from humanoid-path-planner/boost-placeholders
-[36m|[m [1;34m|[m[1;35m\[m  
+[36m|[m [1;34m|[m[1;35m\[m
 [36m|[m [1;34m|[m * [33m2a94afb[m pre-commit autoupdate
 [36m|[m [1;34m|[m * [33madbee2a[m pre-commit-sort
 [36m|[m [1;34m|[m * [33m3eae34c[m pre-commit: drop failing flake8
 [36m|[m [1;34m|[m * [33mb5b0e6f[m [pre-commit.ci] auto fixes from pre-commit.com hooks
 [36m|[m [1;34m|[m * [33m457b8b3[m fix boost placeholders
 [36m|[m [1;34m|[m * [33meb4ffd5[m CMake: allow use of installed jrl-cmakemodules
-[36m|[m [1;34m|[m[1;34m/[m  
+[36m|[m [1;34m|[m[1;34m/[m
 [36m|[m *   [33m64733b8[m Merge branch 'master' into devel
-[36m|[m [1;36m|[m[36m\[m  
-[36m|[m [1;36m|[m[36m/[m  
-[36m|[m[36m/[m[1;36m|[m   
+[36m|[m [1;36m|[m[36m\[m
+[36m|[m [1;36m|[m[36m/[m
+[36m|[m[36m/[m[1;36m|[m
 * [1;36m|[m   [33m2e5e44c[m Merge pull request #7 from humanoid-path-planner/submodule
-[32m|[m[33m\[m [1;36m\[m  
+[32m|[m[33m\[m [1;36m\[m
 [32m|[m * [1;36m|[m [33m2b74a9b[m fix submodule url
-[32m|[m[32m/[m [1;36m/[m  
+[32m|[m[32m/[m [1;36m/[m
 [32m|[m * [33mb8066c8[m Merge pull request #6 from humanoid-path-planner/pre-commit-ci-update-config
-[32m|[m[32m/[m[35m|[m 
+[32m|[m[32m/[m[35m|[m
 [32m|[m * [33m836e960[m [pre-commit.ci] pre-commit autoupdate
-[32m|[m[32m/[m  
+[32m|[m[32m/[m
 * [33m417dfcf[m [cmake] Synchronize submodule.
 * [33mac7fc8d[m [cmake] Do not specify versions of dependencies.
 * [33mcc43658[m [pre-commit.ci] auto fixes from pre-commit.com hooks

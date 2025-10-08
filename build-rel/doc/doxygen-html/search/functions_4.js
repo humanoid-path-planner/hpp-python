@@ -1,64 +1,642 @@
-var searchData=
-[
-  ['empty_0',['empty',['../classpyhpp_1_1cpp__like__vector__indexing__suite.html#afa27a770cc40b4dc9911bd08c6cfb9e6',1,'pyhpp::cpp_like_vector_indexing_suite']]],
-  ['end_1',['end',['../structpyhpp_1_1core_1_1PathWrap.html#a809591d94c77427d9c5b92ca77d193ab',1,'pyhpp::core::PathWrap']]],
-  ['errorthreshold_2',['errorThreshold',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a8dfb6a0bc2f89b045eb1dd079c67513f',1,'pyhpp::manipulation::PyWGraph::errorThreshold(const value_type &amp;threshold)'],['../structpyhpp_1_1manipulation_1_1PyWGraph.html#aa07c9124d3669ca33f4f499eed3596c9',1,'pyhpp::manipulation::PyWGraph::errorThreshold() const']]],
-  ['expose_3',['expose',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#acbde50b2fb9b8b9f867111dc55b4008a',1,'pyhpp::core::path::SplineWrapper::expose()'],['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a104fc63fea80d6c29b0a54d91b6d8110',1,'eigenpy::expose()']]],
-  ['exposeabsolutegenerictransformation_4',['exposeAbsoluteGenericTransformation',['../namespacepyhpp_1_1constraints.html#a5338d67a58f3a529cdb8160e3337bda7',1,'pyhpp::constraints']]],
-  ['exposebysubstitution_5',['exposeBySubstitution',['../namespacepyhpp_1_1constraints.html#a1be12e4891570cb11518a2b25836a728',1,'pyhpp::constraints']]],
-  ['exposeconfigurationshooter_6',['exposeConfigurationShooter',['../namespacepyhpp_1_1core.html#ac9ce80d9d8f115a1e6e632e5e5f6bdd5',1,'pyhpp::core']]],
-  ['exposeconfigvalidation_7',['exposeConfigValidation',['../namespacepyhpp_1_1core.html#a5091887f4dedc545dede9e10321e3b6f',1,'pyhpp::core']]],
-  ['exposeconnectedcomponent_8',['exposeConnectedComponent',['../namespacepyhpp_1_1core.html#ab56e959ff3c3ed424358d82281deeef5',1,'pyhpp::core']]],
-  ['exposeconstraint_9',['exposeConstraint',['../namespacepyhpp_1_1core.html#a95917c5eec82fdb7ec29aad685e84fde',1,'pyhpp::core']]],
-  ['exposedevice_10',['exposeDevice',['../namespacepyhpp_1_1manipulation.html#acd150525ca1fed2dfd3ad7bc9e23658f',1,'pyhpp::manipulation::exposeDevice()'],['../namespacepyhpp_1_1pinocchio.html#ae554d0a8bc68cdabae34c566f4c1fc43',1,'pyhpp::pinocchio::exposeDevice()']]],
-  ['exposedifferentiablefunction_11',['exposeDifferentiableFunction',['../namespacepyhpp_1_1constraints.html#a410ccde1ff849a470d64c70ecafcf864',1,'pyhpp::constraints']]],
-  ['exposedistance_12',['exposeDistance',['../namespacepyhpp_1_1core.html#a81c5c3860039d9c38d5cbd247c58b33a',1,'pyhpp::core']]],
-  ['exposeequation_13',['exposeEquation',['../namespacepyhpp_1_1core.html#ae7934ba24883fef2d0328cb9219df651',1,'pyhpp::core']]],
-  ['exposeexplicit_14',['exposeExplicit',['../namespacepyhpp_1_1constraints.html#a39f5d637c8364c30a62488cfec947602',1,'pyhpp::constraints']]],
-  ['exposeexplicitconstraintset_15',['exposeExplicitConstraintSet',['../namespacepyhpp_1_1constraints.html#adde37b661e870629718c7c0a88742de2',1,'pyhpp::constraints']]],
-  ['exposegenerictransformations_16',['exposeGenericTransformations',['../namespacepyhpp_1_1constraints.html#a6733e2d77998d86fa9999ed17e3e73e5',1,'pyhpp::constraints']]],
-  ['exposegoalconfigurations_17',['exposeGoalConfigurations',['../namespacepyhpp_1_1core_1_1problemTarget.html#a4675bc962c1b391788c1217094abdd57',1,'pyhpp::core::problemTarget']]],
-  ['exposegraph_18',['exposeGraph',['../namespacepyhpp_1_1manipulation.html#ad4f7ed09f5e410e108f864bbbdbec0b7',1,'pyhpp::manipulation']]],
-  ['exposegraphsteeringmethod_19',['exposeGraphSteeringMethod',['../namespacepyhpp_1_1manipulation.html#af00d71fafbb7de314bd12ea803e45024',1,'pyhpp::manipulation']]],
-  ['exposegripper_20',['exposeGripper',['../namespacepyhpp_1_1pinocchio.html#a38511ca46376f1243d4e84770aa95977',1,'pyhpp::pinocchio']]],
-  ['exposehandle_21',['exposeHandle',['../namespacepyhpp_1_1manipulation.html#a5d013da922c0cf70e4deb22baa0b1760',1,'pyhpp::manipulation']]],
-  ['exposehierarchicaliterativesolver_22',['exposeHierarchicalIterativeSolver',['../namespacepyhpp_1_1constraints.html#af3ff0f06d0ae6ca1ece19c5c9e9f042a',1,'pyhpp::constraints']]],
-  ['exposeimplicit_23',['exposeImplicit',['../namespacepyhpp_1_1constraints.html#ab2ecfaa18fefbd600af8cfc052ed3569',1,'pyhpp::constraints']]],
-  ['exposeliegroup_24',['exposeLiegroup',['../namespacepyhpp_1_1pinocchio.html#a1558ec1ab9aca091a5a03305ffeb0cee',1,'pyhpp::pinocchio']]],
-  ['exposelinearconstraint_25',['exposeLinearConstraint',['../namespacepyhpp_1_1core_1_1pathOptimization.html#ab0daa3dd695b736d2b0577a8c414da96',1,'pyhpp::core::pathOptimization']]],
-  ['exposelockedjoint_26',['exposeLockedJoint',['../namespacepyhpp_1_1constraints.html#aed56a5104ee27f4c7a009346256afeb1',1,'pyhpp::constraints']]],
-  ['exposemodel_27',['exposeModel',['../namespacepyhpp_1_1pinocchio.html#af4bf68f511b3d5027656320dd03b467e',1,'pyhpp::pinocchio']]],
-  ['exposenode_28',['exposeNode',['../namespacepyhpp_1_1core.html#ae70f029d47f57bfbbb27e42a51452394',1,'pyhpp::core']]],
-  ['exposenontemplated_29',['exposeNonTemplated',['../namespacepyhpp_1_1core_1_1pathOptimization.html#a81b79d3f3bbda8aa3cce532468597913',1,'pyhpp::core::pathOptimization']]],
-  ['exposeparameter_30',['exposeParameter',['../namespacepyhpp_1_1core.html#ab5634c6a047389182bb2a7f2336ba799',1,'pyhpp::core']]],
-  ['exposepath_31',['exposePath',['../namespacepyhpp_1_1core.html#aca2bc457d5f8f161012b8b9d3edda66a',1,'pyhpp::core']]],
-  ['exposepathoptimizer_32',['exposePathOptimizer',['../namespacepyhpp_1_1core.html#a2506e8726ba55811096577a368c4fa43',1,'pyhpp::core']]],
-  ['exposepathplanner_33',['exposePathPlanner',['../namespacepyhpp_1_1core.html#a98c6d51f16bcfa02b63ce2ba7eff4b76',1,'pyhpp::core']]],
-  ['exposepathplanners_34',['exposePathPlanners',['../namespacepyhpp_1_1manipulation.html#a06c1f4c9f959acac7c6669f96eb2eaaf',1,'pyhpp::manipulation::exposePathPlanners()'],['../namespacepyhpp_1_1core_1_1pathPlanner.html#a1e35bf746c98e558846c766730e258da',1,'pyhpp::core::pathPlanner::exposePathPlanners()']]],
-  ['exposepathprojector_35',['exposePathProjector',['../namespacepyhpp_1_1core.html#af13d376b4b5ae9db1caa191a63f98538',1,'pyhpp::core::exposePathProjector()'],['../namespacepyhpp_1_1manipulation.html#ae29d662fa0e90f0d085ce03c5bdf98f8',1,'pyhpp::manipulation::exposePathProjector()']]],
-  ['exposepathvalidation_36',['exposePathValidation',['../namespacepyhpp_1_1core.html#a8cbdf40414bb1125ece7c5220e47b959',1,'pyhpp::core']]],
-  ['exposeplanandoptimize_37',['exposePlanAndOptimize',['../namespacepyhpp_1_1core_1_1pathPlanner.html#ad735ad028b9a2c23c1961467edf8f092',1,'pyhpp::core::pathPlanner']]],
-  ['exposeproblem_38',['exposeProblem',['../namespacepyhpp_1_1core.html#ad54e335ceb834fe82da79bfe47278532',1,'pyhpp::core::exposeProblem()'],['../namespacepyhpp_1_1manipulation.html#ae8cc0059304f5b600e7c95326c45bea7',1,'pyhpp::manipulation::exposeProblem()']]],
-  ['exposeproblemsolver_39',['exposeProblemSolver',['../namespacepyhpp_1_1core.html#a1399fe0a15e42ec3a3d60372eb8a44ac',1,'pyhpp::core']]],
-  ['exposeproblemtarget_40',['exposeProblemTarget',['../namespacepyhpp_1_1core.html#a6c53cda225e18a1cc285b60e9b4e6cc4',1,'pyhpp::core']]],
-  ['exposequadraticproblem_41',['exposeQuadraticProblem',['../namespacepyhpp_1_1core_1_1pathOptimization.html#a4d50a5b36d9d14612b5a3e5bfc397665',1,'pyhpp::core::pathOptimization']]],
-  ['exposerelativegenerictransformation_42',['exposeRelativeGenericTransformation',['../namespacepyhpp_1_1constraints.html#a713aab3c61ea25057d194d5daa9b4ac6',1,'pyhpp::constraints']]],
-  ['exposereports_43',['exposeReports',['../namespacepyhpp_1_1core.html#a3173516d88c63ca8a7423b9495fe47b6',1,'pyhpp::core']]],
-  ['exposeroadmap_44',['exposeRoadmap',['../namespacepyhpp_1_1core.html#a695061a0dd392f252ab5ed49df0f60fb',1,'pyhpp::core']]],
-  ['exposesearchinroadmap_45',['exposeSearchInRoadmap',['../namespacepyhpp_1_1core_1_1pathPlanner.html#ad623677f8651cdfe098680fd0f2f7689',1,'pyhpp::core::pathPlanner']]],
-  ['exposeserver_46',['exposeServer',['../namespacepyhpp_1_1corbaserver.html#a49ce8dcffc6e94eb40ed6c99058995fd',1,'pyhpp::corbaserver::exposeServer()'],['../namespacepyhpp_1_1corbaserver_1_1wholebodyStep.html#a442006ebe6b21496024bcecee9f98a66',1,'pyhpp::corbaserver::wholebodyStep::exposeServer()']]],
-  ['exposesplinebezier3_47',['exposeSplineBezier3',['../namespacepyhpp_1_1core_1_1steeringMethod.html#a0e3bb8f62514641dd0c793ab2a7e8ad9',1,'pyhpp::core::steeringMethod']]],
-  ['exposesplinebezier5_48',['exposeSplineBezier5',['../namespacepyhpp_1_1core_1_1steeringMethod.html#ad91c90421890997db260682e78135bb6',1,'pyhpp::core::steeringMethod']]],
-  ['exposesplinegradientbasedabstract_49',['exposeSplineGradientBasedAbstract',['../namespacepyhpp_1_1core_1_1pathOptimization.html#a2531f4e95c9c9010c54a78024fc88305',1,'pyhpp::core::pathOptimization']]],
-  ['exposesplinegradientbasedabstracts_50',['exposeSplineGradientBasedAbstracts',['../namespacepyhpp_1_1core_1_1pathOptimization.html#a7a1bcd2eaad70de7c03fa92e5a63b8c6',1,'pyhpp::core::pathOptimization']]],
-  ['exposesplines_51',['exposeSplines',['../namespacepyhpp_1_1core_1_1path.html#a144e1350fa16983cc32393ced284b542',1,'pyhpp::core::path']]],
-  ['exposestdarrayeigenspecifictype_52',['exposeStdArrayEigenSpecificType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a1a73fab01e23cce69ff3df6706f467d7',1,'eigenpy']]],
-  ['exposestdvector_53',['exposeStdVector',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a1af1e8c47abd36b6a22ee0ec8e092763',1,'eigenpy']]],
-  ['exposesteeringmethod_54',['exposeSteeringMethod',['../namespacepyhpp_1_1core.html#a82910dddaeb0adf7e832dc71cc197e07',1,'pyhpp::core']]],
-  ['exposesteeringmethods_55',['exposeSteeringMethods',['../namespacepyhpp_1_1core_1_1steeringMethod.html#a419dbbe037319ddf3db76a616eafe5be',1,'pyhpp::core::steeringMethod']]],
-  ['exposetype_56',['exposeType',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a388ccdb4ce546c306d1efbde447a4cd5',1,'eigenpy']]],
-  ['exposeutil_57',['exposeUtil',['../namespacepyhpp_1_1manipulation_1_1urdf.html#ad0efe17915407f5c5b66ae86252f1b24',1,'pyhpp::manipulation::urdf::exposeUtil()'],['../namespacepyhpp_1_1pinocchio_1_1urdf.html#a61f5c7595571e1c3716328218c9a21ea',1,'pyhpp::pinocchio::urdf::exposeUtil()']]],
-  ['exposevector_58',['exposeVector',['../namespacepyhpp_1_1core_1_1path.html#abce6c1cb94c5e36f0dda1eab839adb0b',1,'pyhpp::core::path']]],
-  ['extension_5fdef_59',['extension_def',['../classpyhpp_1_1cpp__like__vector__indexing__suite.html#a85fd6dc56a9ec90f7d18506cc0aa1e85',1,'pyhpp::cpp_like_vector_indexing_suite']]],
-  ['extract_5fvector_60',['extract_vector',['../namespacepyhpp.html#ab9e7313d46eddc55560af7bc4d915581',1,'pyhpp']]]
+var searchData = [
+  [
+    'empty_0',
+    [
+      'empty',
+      [
+        '../classpyhpp_1_1cpp__like__vector__indexing__suite.html#afa27a770cc40b4dc9911bd08c6cfb9e6',
+        1, 'pyhpp::cpp_like_vector_indexing_suite'
+      ]
+    ]
+  ],
+  [
+    'end_1',
+    [
+      'end',
+      [
+        '../structpyhpp_1_1core_1_1PathWrap.html#a809591d94c77427d9c5b92ca77d193ab',
+        1, 'pyhpp::core::PathWrap'
+      ]
+    ]
+  ],
+  [
+    'errorthreshold_2',
+    [
+      'errorThreshold',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a8dfb6a0bc2f89b045eb1dd079c67513f',
+        1,
+        'pyhpp::manipulation::PyWGraph::errorThreshold(const value_type &amp;threshold)'
+      ],
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#aa07c9124d3669ca33f4f499eed3596c9',
+        1, 'pyhpp::manipulation::PyWGraph::errorThreshold() const'
+      ]
+    ]
+  ],
+  [
+    'expose_3',
+    [
+      'expose',
+      [
+        '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#acbde50b2fb9b8b9f867111dc55b4008a',
+        1, 'pyhpp::core::path::SplineWrapper::expose()'
+      ],
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a104fc63fea80d6c29b0a54d91b6d8110',
+        1, 'eigenpy::expose()'
+      ]
+    ]
+  ],
+  [
+    'exposeabsolutegenerictransformation_4',
+    [
+      'exposeAbsoluteGenericTransformation',
+      [
+        '../namespacepyhpp_1_1constraints.html#a5338d67a58f3a529cdb8160e3337bda7',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposebysubstitution_5',
+    [
+      'exposeBySubstitution',
+      [
+        '../namespacepyhpp_1_1constraints.html#a1be12e4891570cb11518a2b25836a728',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposeconfigurationshooter_6',
+    [
+      'exposeConfigurationShooter',
+      [
+        '../namespacepyhpp_1_1core.html#ac9ce80d9d8f115a1e6e632e5e5f6bdd5', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeconfigvalidation_7',
+    [
+      'exposeConfigValidation',
+      [
+        '../namespacepyhpp_1_1core.html#a5091887f4dedc545dede9e10321e3b6f', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeconnectedcomponent_8',
+    [
+      'exposeConnectedComponent',
+      [
+        '../namespacepyhpp_1_1core.html#ab56e959ff3c3ed424358d82281deeef5', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeconstraint_9',
+    [
+      'exposeConstraint',
+      [
+        '../namespacepyhpp_1_1core.html#a95917c5eec82fdb7ec29aad685e84fde', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposedevice_10',
+    [
+      'exposeDevice',
+      [
+        '../namespacepyhpp_1_1manipulation.html#acd150525ca1fed2dfd3ad7bc9e23658f',
+        1, 'pyhpp::manipulation::exposeDevice()'
+      ],
+      [
+        '../namespacepyhpp_1_1pinocchio.html#ae554d0a8bc68cdabae34c566f4c1fc43',
+        1, 'pyhpp::pinocchio::exposeDevice()'
+      ]
+    ]
+  ],
+  [
+    'exposedifferentiablefunction_11',
+    [
+      'exposeDifferentiableFunction',
+      [
+        '../namespacepyhpp_1_1constraints.html#a410ccde1ff849a470d64c70ecafcf864',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposedistance_12',
+    [
+      'exposeDistance',
+      [
+        '../namespacepyhpp_1_1core.html#a81c5c3860039d9c38d5cbd247c58b33a', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeequation_13',
+    [
+      'exposeEquation',
+      [
+        '../namespacepyhpp_1_1core.html#ae7934ba24883fef2d0328cb9219df651', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeexplicit_14',
+    [
+      'exposeExplicit',
+      [
+        '../namespacepyhpp_1_1constraints.html#a39f5d637c8364c30a62488cfec947602',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposeexplicitconstraintset_15',
+    [
+      'exposeExplicitConstraintSet',
+      [
+        '../namespacepyhpp_1_1constraints.html#adde37b661e870629718c7c0a88742de2',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposegenerictransformations_16',
+    [
+      'exposeGenericTransformations',
+      [
+        '../namespacepyhpp_1_1constraints.html#a6733e2d77998d86fa9999ed17e3e73e5',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposegoalconfigurations_17',
+    [
+      'exposeGoalConfigurations',
+      [
+        '../namespacepyhpp_1_1core_1_1problemTarget.html#a4675bc962c1b391788c1217094abdd57',
+        1, 'pyhpp::core::problemTarget'
+      ]
+    ]
+  ],
+  [
+    'exposegraph_18',
+    [
+      'exposeGraph',
+      [
+        '../namespacepyhpp_1_1manipulation.html#ad4f7ed09f5e410e108f864bbbdbec0b7',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'exposegraphsteeringmethod_19',
+    [
+      'exposeGraphSteeringMethod',
+      [
+        '../namespacepyhpp_1_1manipulation.html#af00d71fafbb7de314bd12ea803e45024',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'exposegripper_20',
+    [
+      'exposeGripper',
+      [
+        '../namespacepyhpp_1_1pinocchio.html#a38511ca46376f1243d4e84770aa95977',
+        1, 'pyhpp::pinocchio'
+      ]
+    ]
+  ],
+  [
+    'exposehandle_21',
+    [
+      'exposeHandle',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a5d013da922c0cf70e4deb22baa0b1760',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'exposehierarchicaliterativesolver_22',
+    [
+      'exposeHierarchicalIterativeSolver',
+      [
+        '../namespacepyhpp_1_1constraints.html#af3ff0f06d0ae6ca1ece19c5c9e9f042a',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposeimplicit_23',
+    [
+      'exposeImplicit',
+      [
+        '../namespacepyhpp_1_1constraints.html#ab2ecfaa18fefbd600af8cfc052ed3569',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposeliegroup_24',
+    [
+      'exposeLiegroup',
+      [
+        '../namespacepyhpp_1_1pinocchio.html#a1558ec1ab9aca091a5a03305ffeb0cee',
+        1, 'pyhpp::pinocchio'
+      ]
+    ]
+  ],
+  [
+    'exposelinearconstraint_25',
+    [
+      'exposeLinearConstraint',
+      [
+        '../namespacepyhpp_1_1core_1_1pathOptimization.html#ab0daa3dd695b736d2b0577a8c414da96',
+        1, 'pyhpp::core::pathOptimization'
+      ]
+    ]
+  ],
+  [
+    'exposelockedjoint_26',
+    [
+      'exposeLockedJoint',
+      [
+        '../namespacepyhpp_1_1constraints.html#aed56a5104ee27f4c7a009346256afeb1',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposemodel_27',
+    [
+      'exposeModel',
+      [
+        '../namespacepyhpp_1_1pinocchio.html#af4bf68f511b3d5027656320dd03b467e',
+        1, 'pyhpp::pinocchio'
+      ]
+    ]
+  ],
+  [
+    'exposenode_28',
+    [
+      'exposeNode',
+      [
+        '../namespacepyhpp_1_1core.html#ae70f029d47f57bfbbb27e42a51452394', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposenontemplated_29',
+    [
+      'exposeNonTemplated',
+      [
+        '../namespacepyhpp_1_1core_1_1pathOptimization.html#a81b79d3f3bbda8aa3cce532468597913',
+        1, 'pyhpp::core::pathOptimization'
+      ]
+    ]
+  ],
+  [
+    'exposeparameter_30',
+    [
+      'exposeParameter',
+      [
+        '../namespacepyhpp_1_1core.html#ab5634c6a047389182bb2a7f2336ba799', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposepath_31',
+    [
+      'exposePath',
+      [
+        '../namespacepyhpp_1_1core.html#aca2bc457d5f8f161012b8b9d3edda66a', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposepathoptimizer_32',
+    [
+      'exposePathOptimizer',
+      [
+        '../namespacepyhpp_1_1core.html#a2506e8726ba55811096577a368c4fa43', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposepathplanner_33',
+    [
+      'exposePathPlanner',
+      [
+        '../namespacepyhpp_1_1core.html#a98c6d51f16bcfa02b63ce2ba7eff4b76', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposepathplanners_34',
+    [
+      'exposePathPlanners',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a06c1f4c9f959acac7c6669f96eb2eaaf',
+        1, 'pyhpp::manipulation::exposePathPlanners()'
+      ],
+      [
+        '../namespacepyhpp_1_1core_1_1pathPlanner.html#a1e35bf746c98e558846c766730e258da',
+        1, 'pyhpp::core::pathPlanner::exposePathPlanners()'
+      ]
+    ]
+  ],
+  [
+    'exposepathprojector_35',
+    [
+      'exposePathProjector',
+      [
+        '../namespacepyhpp_1_1core.html#af13d376b4b5ae9db1caa191a63f98538', 1,
+        'pyhpp::core::exposePathProjector()'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#ae29d662fa0e90f0d085ce03c5bdf98f8',
+        1, 'pyhpp::manipulation::exposePathProjector()'
+      ]
+    ]
+  ],
+  [
+    'exposepathvalidation_36',
+    [
+      'exposePathValidation',
+      [
+        '../namespacepyhpp_1_1core.html#a8cbdf40414bb1125ece7c5220e47b959', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeplanandoptimize_37',
+    [
+      'exposePlanAndOptimize',
+      [
+        '../namespacepyhpp_1_1core_1_1pathPlanner.html#ad735ad028b9a2c23c1961467edf8f092',
+        1, 'pyhpp::core::pathPlanner'
+      ]
+    ]
+  ],
+  [
+    'exposeproblem_38',
+    [
+      'exposeProblem',
+      [
+        '../namespacepyhpp_1_1core.html#ad54e335ceb834fe82da79bfe47278532', 1,
+        'pyhpp::core::exposeProblem()'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#ae8cc0059304f5b600e7c95326c45bea7',
+        1, 'pyhpp::manipulation::exposeProblem()'
+      ]
+    ]
+  ],
+  [
+    'exposeproblemsolver_39',
+    [
+      'exposeProblemSolver',
+      [
+        '../namespacepyhpp_1_1core.html#a1399fe0a15e42ec3a3d60372eb8a44ac', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeproblemtarget_40',
+    [
+      'exposeProblemTarget',
+      [
+        '../namespacepyhpp_1_1core.html#a6c53cda225e18a1cc285b60e9b4e6cc4', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposequadraticproblem_41',
+    [
+      'exposeQuadraticProblem',
+      [
+        '../namespacepyhpp_1_1core_1_1pathOptimization.html#a4d50a5b36d9d14612b5a3e5bfc397665',
+        1, 'pyhpp::core::pathOptimization'
+      ]
+    ]
+  ],
+  [
+    'exposerelativegenerictransformation_42',
+    [
+      'exposeRelativeGenericTransformation',
+      [
+        '../namespacepyhpp_1_1constraints.html#a713aab3c61ea25057d194d5daa9b4ac6',
+        1, 'pyhpp::constraints'
+      ]
+    ]
+  ],
+  [
+    'exposereports_43',
+    [
+      'exposeReports',
+      [
+        '../namespacepyhpp_1_1core.html#a3173516d88c63ca8a7423b9495fe47b6', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposeroadmap_44',
+    [
+      'exposeRoadmap',
+      [
+        '../namespacepyhpp_1_1core.html#a695061a0dd392f252ab5ed49df0f60fb', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposesearchinroadmap_45',
+    [
+      'exposeSearchInRoadmap',
+      [
+        '../namespacepyhpp_1_1core_1_1pathPlanner.html#ad623677f8651cdfe098680fd0f2f7689',
+        1, 'pyhpp::core::pathPlanner'
+      ]
+    ]
+  ],
+  [
+    'exposeserver_46',
+    [
+      'exposeServer',
+      [
+        '../namespacepyhpp_1_1corbaserver.html#a49ce8dcffc6e94eb40ed6c99058995fd',
+        1, 'pyhpp::corbaserver::exposeServer()'
+      ],
+      [
+        '../namespacepyhpp_1_1corbaserver_1_1wholebodyStep.html#a442006ebe6b21496024bcecee9f98a66',
+        1, 'pyhpp::corbaserver::wholebodyStep::exposeServer()'
+      ]
+    ]
+  ],
+  [
+    'exposesplinebezier3_47',
+    [
+      'exposeSplineBezier3',
+      [
+        '../namespacepyhpp_1_1core_1_1steeringMethod.html#a0e3bb8f62514641dd0c793ab2a7e8ad9',
+        1, 'pyhpp::core::steeringMethod'
+      ]
+    ]
+  ],
+  [
+    'exposesplinebezier5_48',
+    [
+      'exposeSplineBezier5',
+      [
+        '../namespacepyhpp_1_1core_1_1steeringMethod.html#ad91c90421890997db260682e78135bb6',
+        1, 'pyhpp::core::steeringMethod'
+      ]
+    ]
+  ],
+  [
+    'exposesplinegradientbasedabstract_49',
+    [
+      'exposeSplineGradientBasedAbstract',
+      [
+        '../namespacepyhpp_1_1core_1_1pathOptimization.html#a2531f4e95c9c9010c54a78024fc88305',
+        1, 'pyhpp::core::pathOptimization'
+      ]
+    ]
+  ],
+  [
+    'exposesplinegradientbasedabstracts_50',
+    [
+      'exposeSplineGradientBasedAbstracts',
+      [
+        '../namespacepyhpp_1_1core_1_1pathOptimization.html#a7a1bcd2eaad70de7c03fa92e5a63b8c6',
+        1, 'pyhpp::core::pathOptimization'
+      ]
+    ]
+  ],
+  [
+    'exposesplines_51',
+    [
+      'exposeSplines',
+      [
+        '../namespacepyhpp_1_1core_1_1path.html#a144e1350fa16983cc32393ced284b542',
+        1, 'pyhpp::core::path'
+      ]
+    ]
+  ],
+  [
+    'exposestdarrayeigenspecifictype_52',
+    [
+      'exposeStdArrayEigenSpecificType',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a1a73fab01e23cce69ff3df6706f467d7',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'exposestdvector_53',
+    [
+      'exposeStdVector',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a1af1e8c47abd36b6a22ee0ec8e092763',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'exposesteeringmethod_54',
+    [
+      'exposeSteeringMethod',
+      [
+        '../namespacepyhpp_1_1core.html#a82910dddaeb0adf7e832dc71cc197e07', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'exposesteeringmethods_55',
+    [
+      'exposeSteeringMethods',
+      [
+        '../namespacepyhpp_1_1core_1_1steeringMethod.html#a419dbbe037319ddf3db76a616eafe5be',
+        1, 'pyhpp::core::steeringMethod'
+      ]
+    ]
+  ],
+  [
+    'exposetype_56',
+    [
+      'exposeType',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/namespaceeigenpy.html#a388ccdb4ce546c306d1efbde447a4cd5',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'exposeutil_57',
+    [
+      'exposeUtil',
+      [
+        '../namespacepyhpp_1_1manipulation_1_1urdf.html#ad0efe17915407f5c5b66ae86252f1b24',
+        1, 'pyhpp::manipulation::urdf::exposeUtil()'
+      ],
+      [
+        '../namespacepyhpp_1_1pinocchio_1_1urdf.html#a61f5c7595571e1c3716328218c9a21ea',
+        1, 'pyhpp::pinocchio::urdf::exposeUtil()'
+      ]
+    ]
+  ],
+  [
+    'exposevector_58',
+    [
+      'exposeVector',
+      [
+        '../namespacepyhpp_1_1core_1_1path.html#abce6c1cb94c5e36f0dda1eab839adb0b',
+        1, 'pyhpp::core::path'
+      ]
+    ]
+  ],
+  [
+    'extension_5fdef_59',
+    [
+      'extension_def',
+      [
+        '../classpyhpp_1_1cpp__like__vector__indexing__suite.html#a85fd6dc56a9ec90f7d18506cc0aa1e85',
+        1, 'pyhpp::cpp_like_vector_indexing_suite'
+      ]
+    ]
+  ],
+  [
+    'extract_5fvector_60',
+    [
+      'extract_vector',
+      ['../namespacepyhpp.html#ab9e7313d46eddc55560af7bc4d915581', 1, 'pyhpp']
+    ]
+  ]
 ];

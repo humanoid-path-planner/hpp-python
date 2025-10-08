@@ -907,4 +907,3 @@ res_-Wno-long-long:INTERNAL=1
 res_-Wwrite-strings:INTERNAL=1
 //Test res_-pedantic
 res_-pedantic:INTERNAL=1
-

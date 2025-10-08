@@ -45,20 +45,20 @@ Directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
 "load_ur3" start time: Oct 03 07:51 CEST
 Output:
 ----------------------------------------------------------
-Position: position, active dof: [ 0, 6], 
+Position: position, active dof: [ 0, 6],
   Joint1: World
   Frame in joint 1
     R =   1, 0, 0
           0, 1, 0
-          0, 0, 1  
+          0, 0, 1
     p = 0, 0, 0
   Joint2: wrist_3_joint
   Frame in joint 2
     R =   1, 0, 0
           0, 1, 0
-          0, 0, 1  
+          0, 0, 1
     p = 0, 0, 0
-  mask: 1, 1, 1, 
+  mask: 1, 1, 1,
 R^3: [0.4569  0.11235 0.06655]
 [[-1.12350000e-01 -8.53499992e-02 -8.53499996e-02 -8.53500000e-02]
  [ 4.56900000e-01  0.00000000e+00  0.00000000e+00  0.00000000e+00]
@@ -119,16 +119,16 @@ Problem solved!
 PathVector:time in [ 0, 6.37943 ]
 
   StraightPath:time in [ 0, 2.90558 ]
-  
+
     initial configuration:   0.2, -1.57,  -1.8,     0,   0.8,     0
     final configuration:    -1.03533,   1.68534,  -1.39628,  0.339103, -0.142019,   0.80972
-  
+
   StraightPath:time in [ 0, 3.47385 ]
-  
+
     initial configuration:  -1.03533,   1.68534,  -1.39628,  0.339103, -0.142019,   0.80972
     final configuration:    1.57, -1.57,  -1.8,     0,   0.8,     0
-  
-  
+
+
 <end of output>
 Test time =   0.22 sec
 ----------------------------------------------------------

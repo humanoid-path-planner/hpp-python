@@ -1,4 +1,5 @@
-file(REMOVE_RECURSE
+file(
+  REMOVE_RECURSE
   "CMakeFiles/pyhpp_corbaserver.dir/link.d"
   "pyhpp/__init__.pyc"
   "pyhpp/manipulation/constraint_graph_factory.pyc"
@@ -9,8 +10,7 @@ file(REMOVE_RECURSE
   "pyhpp/corbaserver/bindings.cc"
   "pyhpp/corbaserver/bindings.pdb"
   "pyhpp/corbaserver/bindings.so"
-  "pyhpp/corbaserver/server.cc"
-)
+  "pyhpp/corbaserver/server.cc")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang CXX)

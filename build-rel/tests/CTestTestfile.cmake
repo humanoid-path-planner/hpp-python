@@ -1,24 +1,114 @@
-# CMake generated Testfile for 
-# Source directory: /home/psardin/devel/nix-hpp/src/hpp-python/tests
-# Build directory: /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
-# 
-# This file includes the relevant testing commands required for 
-# testing this directory and lists subdirectories to be tested as well.
-add_test([=[imports]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/imports.py")
-set_tests_properties([=[imports]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[liegroup]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/liegroup.py")
-set_tests_properties([=[liegroup]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[load_ur3]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/load_ur3.py")
-set_tests_properties([=[load_ur3]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[differentiable-function]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/differentiable-function.py")
-set_tests_properties([=[differentiable-function]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[path-planner]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path-planner.py")
-set_tests_properties([=[path-planner]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[rrt]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/rrt.py")
-set_tests_properties([=[rrt]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[path]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path.py")
-set_tests_properties([=[path]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[constraint_graph]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/constraint_graph.py")
-set_tests_properties([=[constraint_graph]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
-add_test([=[graph_factory2]=] "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python" "/home/psardin/devel/nix-hpp/src/hpp-python/tests/graph_factory2.py")
-set_tests_properties([=[graph_factory2]=] PROPERTIES  ENVIRONMENT "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages" _BACKTRACE_TRIPLES "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;")
+# CMake generated Testfile for Source directory:
+# /home/psardin/devel/nix-hpp/src/hpp-python/tests Build directory:
+# /home/psardin/devel/nix-hpp/src/hpp-python/build-rel/tests
+#
+# This file includes the relevant testing commands required for testing this
+# directory and lists subdirectories to be tested as well.
+add_test(
+  [=[imports]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/imports.py")
+set_tests_properties(
+  [=[imports]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[liegroup]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/liegroup.py")
+set_tests_properties(
+  [=[liegroup]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[load_ur3]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/load_ur3.py")
+set_tests_properties(
+  [=[load_ur3]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[differentiable-function]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/differentiable-function.py")
+set_tests_properties(
+  [=[differentiable-function]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[path-planner]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path-planner.py")
+set_tests_properties(
+  [=[path-planner]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[rrt]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/rrt.py")
+set_tests_properties(
+  [=[rrt]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[path]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/path.py")
+set_tests_properties(
+  [=[path]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[constraint_graph]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/constraint_graph.py")
+set_tests_properties(
+  [=[constraint_graph]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)
+add_test(
+  [=[graph_factory2]=]
+  "/nix/store/k3zk5z5s8mql9fhfm22x4k6bz5jdikmd-python3-3.12.9-env/bin/python"
+  "/home/psardin/devel/nix-hpp/src/hpp-python/tests/graph_factory2.py")
+set_tests_properties(
+  [=[graph_factory2]=]
+  PROPERTIES
+    ENVIRONMENT
+    "PYTHONPATH=/home/psardin/devel/nix-hpp/src/hpp-python/build-rel/src:/home/psardin/devel/nix-hpp/install/lib/python3.12/site-packages"
+    _BACKTRACE_TRIPLES
+    "/home/psardin/devel/nix-hpp/src/hpp-python/cmake/test.cmake;207;add_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;27;add_python_unit_test;/home/psardin/devel/nix-hpp/src/hpp-python/tests/CMakeLists.txt;0;"
+)

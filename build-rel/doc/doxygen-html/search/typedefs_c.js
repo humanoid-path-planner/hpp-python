@@ -1,22 +1,216 @@
-var searchData=
-[
-  ['pair_5ftype_0',['pair_type',['../structpyhpp_1_1stl__pair.html#a2b170d21b83e3c2cb12b35ba0bf2a270',1,'pyhpp::stl_pair']]],
-  ['parameter_1',['Parameter',['../namespacepyhpp_1_1core.html#a4cfd05740165f0e8d29d748b7b8cf2a3',1,'pyhpp::core']]],
-  ['pathoptimizerptr_5ft_2',['PathOptimizerPtr_t',['../namespacepyhpp_1_1manipulation.html#a0894623f0a8cd3fa752a716c2843f2fc',1,'pyhpp::manipulation']]],
-  ['pathprojectorptr_5ft_3',['PathProjectorPtr_t',['../namespacepyhpp_1_1core.html#a283013c7f7bcef2e98d5e7f2242c8d4c',1,'pyhpp::core::PathProjectorPtr_t'],['../namespacepyhpp_1_1manipulation.html#a749872cca1abd12a1642bcb9f323b310',1,'pyhpp::manipulation::PathProjectorPtr_t']]],
-  ['pathptr_5ft_4',['PathPtr_t',['../namespacepyhpp_1_1core.html#a90f7dd6b18a8bae748e4d3bd0b66084b',1,'pyhpp::core::PathPtr_t'],['../namespacepyhpp_1_1manipulation.html#ac9a878e9afa891b00df6e4e6396d5c56',1,'pyhpp::manipulation::PathPtr_t']]],
-  ['pathvalidationptr_5ft_5',['PathValidationPtr_t',['../namespacepyhpp_1_1core.html#ab3f6fb4d2c50912eefbd6cbb023d30ae',1,'pyhpp::core']]],
-  ['pathvectorptr_5ft_6',['PathVectorPtr_t',['../namespacepyhpp_1_1core.html#a54119efbb95a2a269167b2bccb9f387b',1,'pyhpp::core::PathVectorPtr_t'],['../namespacepyhpp_1_1manipulation.html#a11c750593d02e2fa71ce5548d1fb5c82',1,'pyhpp::manipulation::PathVectorPtr_t']]],
-  ['pindeviceptr_5ft_7',['PinDevicePtr_t',['../namespacepyhpp_1_1manipulation.html#a03d68549424e7df1e4ca9357b31c0b44',1,'pyhpp::manipulation']]],
-  ['problemconstptr_5ft_8',['ProblemConstPtr_t',['../namespacepyhpp_1_1core.html#a039d850499ad426c21f7403c5d0cfe93',1,'pyhpp::core']]],
-  ['problemptr_5ft_9',['ProblemPtr_t',['../namespacepyhpp_1_1core.html#a153569c86fd91a37a55bc5582f8b1eec',1,'pyhpp::core::ProblemPtr_t'],['../namespacepyhpp_1_1manipulation.html#a3a3e9134963f931796e6b11ba46af05a',1,'pyhpp::manipulation::ProblemPtr_t']]],
-  ['problemtargetptr_5ft_10',['ProblemTargetPtr_t',['../namespacepyhpp_1_1core.html#ae597c227e8e16c42ad887f30bacd603a',1,'pyhpp::core']]],
-  ['ptr_5ft_11',['Ptr_t',['../structpyhpp_1_1constraints_1_1DFWrapper.html#ad48bc345957ced1e33f68c5238a93c32',1,'pyhpp::constraints::DFWrapper::Ptr_t'],['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#acbfb7b7e83fc71b5c6d3529cd367f106',1,'pyhpp::core::path::SplineWrapper::Ptr_t']]],
-  ['pywdeviceptr_5ft_12',['PyWDevicePtr_t',['../namespacepyhpp_1_1manipulation.html#a22e4048236e810e252ebfba3eba5a040',1,'pyhpp::manipulation']]],
-  ['pywedgeptr_5ft_13',['PyWEdgePtr_t',['../namespacepyhpp_1_1manipulation.html#a2bed0a295255276da720d2227d32ad7b',1,'pyhpp::manipulation']]],
-  ['pywgraphptr_5ft_14',['PyWGraphPtr_t',['../namespacepyhpp_1_1manipulation.html#acbb3e0cbb0533480e23faafcf0400f54',1,'pyhpp::manipulation']]],
-  ['pywgraphsteeringmethodptr_5ft_15',['PyWGraphSteeringMethodPtr_t',['../namespacepyhpp_1_1manipulation.html#ae4f5b6156e356be6e208ca57e0cbb95b',1,'pyhpp::manipulation']]],
-  ['pywproblemptr_5ft_16',['PyWProblemPtr_t',['../namespacepyhpp_1_1manipulation.html#a97574691451a10dbe11a5b881bcb3a02',1,'pyhpp::manipulation']]],
-  ['pywstateptr_5ft_17',['PyWStatePtr_t',['../namespacepyhpp_1_1manipulation.html#a8e9f8b8445ef199f1723a136cde22722',1,'pyhpp::manipulation']]],
-  ['pywsteeringmethodptr_5ft_18',['PyWSteeringMethodPtr_t',['../namespacepyhpp_1_1core.html#a71aba401de1cb7fdd96d5c0406b9c423',1,'pyhpp::core::PyWSteeringMethodPtr_t'],['../namespacepyhpp_1_1manipulation.html#aa1d05a24f44dda8dbcd14318c1e31953',1,'pyhpp::manipulation::PyWSteeringMethodPtr_t']]]
+var searchData = [
+  [
+    'pair_5ftype_0',
+    [
+      'pair_type',
+      [
+        '../structpyhpp_1_1stl__pair.html#a2b170d21b83e3c2cb12b35ba0bf2a270', 1,
+        'pyhpp::stl_pair'
+      ]
+    ]
+  ],
+  [
+    'parameter_1',
+    [
+      'Parameter',
+      [
+        '../namespacepyhpp_1_1core.html#a4cfd05740165f0e8d29d748b7b8cf2a3', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'pathoptimizerptr_5ft_2',
+    [
+      'PathOptimizerPtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a0894623f0a8cd3fa752a716c2843f2fc',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pathprojectorptr_5ft_3',
+    [
+      'PathProjectorPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a283013c7f7bcef2e98d5e7f2242c8d4c', 1,
+        'pyhpp::core::PathProjectorPtr_t'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#a749872cca1abd12a1642bcb9f323b310',
+        1, 'pyhpp::manipulation::PathProjectorPtr_t'
+      ]
+    ]
+  ],
+  [
+    'pathptr_5ft_4',
+    [
+      'PathPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a90f7dd6b18a8bae748e4d3bd0b66084b', 1,
+        'pyhpp::core::PathPtr_t'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#ac9a878e9afa891b00df6e4e6396d5c56',
+        1, 'pyhpp::manipulation::PathPtr_t'
+      ]
+    ]
+  ],
+  [
+    'pathvalidationptr_5ft_5',
+    [
+      'PathValidationPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#ab3f6fb4d2c50912eefbd6cbb023d30ae', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'pathvectorptr_5ft_6',
+    [
+      'PathVectorPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a54119efbb95a2a269167b2bccb9f387b', 1,
+        'pyhpp::core::PathVectorPtr_t'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#a11c750593d02e2fa71ce5548d1fb5c82',
+        1, 'pyhpp::manipulation::PathVectorPtr_t'
+      ]
+    ]
+  ],
+  [
+    'pindeviceptr_5ft_7',
+    [
+      'PinDevicePtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a03d68549424e7df1e4ca9357b31c0b44',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'problemconstptr_5ft_8',
+    [
+      'ProblemConstPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a039d850499ad426c21f7403c5d0cfe93', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'problemptr_5ft_9',
+    [
+      'ProblemPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a153569c86fd91a37a55bc5582f8b1eec', 1,
+        'pyhpp::core::ProblemPtr_t'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#a3a3e9134963f931796e6b11ba46af05a',
+        1, 'pyhpp::manipulation::ProblemPtr_t'
+      ]
+    ]
+  ],
+  [
+    'problemtargetptr_5ft_10',
+    [
+      'ProblemTargetPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#ae597c227e8e16c42ad887f30bacd603a', 1,
+        'pyhpp::core'
+      ]
+    ]
+  ],
+  [
+    'ptr_5ft_11',
+    [
+      'Ptr_t',
+      [
+        '../structpyhpp_1_1constraints_1_1DFWrapper.html#ad48bc345957ced1e33f68c5238a93c32',
+        1, 'pyhpp::constraints::DFWrapper::Ptr_t'
+      ],
+      [
+        '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#acbfb7b7e83fc71b5c6d3529cd367f106',
+        1, 'pyhpp::core::path::SplineWrapper::Ptr_t'
+      ]
+    ]
+  ],
+  [
+    'pywdeviceptr_5ft_12',
+    [
+      'PyWDevicePtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a22e4048236e810e252ebfba3eba5a040',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywedgeptr_5ft_13',
+    [
+      'PyWEdgePtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a2bed0a295255276da720d2227d32ad7b',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywgraphptr_5ft_14',
+    [
+      'PyWGraphPtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#acbb3e0cbb0533480e23faafcf0400f54',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywgraphsteeringmethodptr_5ft_15',
+    [
+      'PyWGraphSteeringMethodPtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#ae4f5b6156e356be6e208ca57e0cbb95b',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywproblemptr_5ft_16',
+    [
+      'PyWProblemPtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a97574691451a10dbe11a5b881bcb3a02',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywstateptr_5ft_17',
+    [
+      'PyWStatePtr_t',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a8e9f8b8445ef199f1723a136cde22722',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'pywsteeringmethodptr_5ft_18',
+    [
+      'PyWSteeringMethodPtr_t',
+      [
+        '../namespacepyhpp_1_1core.html#a71aba401de1cb7fdd96d5c0406b9c423', 1,
+        'pyhpp::core::PyWSteeringMethodPtr_t'
+      ],
+      [
+        '../namespacepyhpp_1_1manipulation.html#aa1d05a24f44dda8dbcd14318c1e31953',
+        1, 'pyhpp::manipulation::PyWSteeringMethodPtr_t'
+      ]
+    ]
+  ]
 ];

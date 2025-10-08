@@ -1,21 +1,182 @@
-var searchData=
-[
-  ['identitypreconditionervisitor_0',['IdentityPreconditionerVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IdentityPreconditionerVisitor.html',1,'eigenpy']]],
-  ['idvisitor_1',['IdVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IdVisitor.html',1,'eigenpy']]],
-  ['implicit_3c_20quaternion_2c_20eigen_3a_3aquaternionbase_3c_20quaternion_20_3e_20_3e_2',['implicit&lt; Quaternion, Eigen::QuaternionBase&lt; Quaternion &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structboost_1_1python_1_1converter_1_1implicit_3_01Quaternion_00_01Eigen_1_1QuaternionBase_3_01Quaternion_01_4_01_4.html',1,'boost::python::converter']]],
-  ['incompletecholeskyvisitor_3',['IncompleteCholeskyVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IncompleteCholeskyVisitor.html',1,'eigenpy']]],
-  ['incompletelutvisitor_4',['IncompleteLUTVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IncompleteLUTVisitor.html',1,'eigenpy']]],
-  ['init_5fmatrix_5for_5farray_5',['init_matrix_or_array',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1init__matrix__or__array.html',1,'eigenpy::details']]],
-  ['init_5fmatrix_5for_5farray_3c_20mattype_2c_20true_20_3e_6',['init_matrix_or_array&lt; MatType, true &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1init__matrix__or__array_3_01MatType_00_01true_01_4.html',1,'eigenpy::details']]],
-  ['instance_3c_20value_5fholder_3c_20derived_20_3e_20_3e_7',['instance&lt; value_holder&lt; Derived &gt; &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structboost_1_1python_1_1objects_1_1instance_3_01value__holder_3_01Derived_01_4_01_4.html',1,'boost::python::objects']]],
-  ['internalstduniqueptrconverter_8',['InternalStdUniquePtrConverter',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1InternalStdUniquePtrConverter.html',1,'eigenpy::details']]],
-  ['is_5fclass_5for_5funion_9',['is_class_or_union',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__class__or__union.html',1,'eigenpy::details']]],
-  ['is_5fempty_5fvariant_10',['is_empty_variant',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__empty__variant.html',1,'eigenpy::details']]],
-  ['is_5fempty_5fvariant_3c_20boost_3a_3ablank_20_3e_11',['is_empty_variant&lt; boost::blank &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__empty__variant_3_01boost_1_1blank_01_4.html',1,'eigenpy::details']]],
-  ['is_5fpython_5fcomplex_12',['is_python_complex',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__complex.html',1,'eigenpy::details']]],
-  ['is_5fpython_5fprimitive_5ftype_13',['is_python_primitive_type',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type.html',1,'eigenpy::details']]],
-  ['is_5fpython_5fprimitive_5ftype_5fhelper_14',['is_python_primitive_type_helper',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type__helper.html',1,'eigenpy::details']]],
-  ['is_5fpython_5fprimitive_5ftype_5fhelper_3c_20remove_5fcvref_3c_20t_20_3e_3a_3atype_20_3e_15',['is_python_primitive_type_helper&lt; remove_cvref&lt; T &gt;::type &gt;',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type__helper.html',1,'eigenpy::details']]],
-  ['iterativesolverbasevisitor_16',['IterativeSolverBaseVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IterativeSolverBaseVisitor.html',1,'eigenpy']]],
-  ['iterativesolvervisitor_17',['IterativeSolverVisitor',['/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IterativeSolverVisitor.html',1,'eigenpy']]]
+var searchData = [
+  [
+    'identitypreconditionervisitor_0',
+    [
+      'IdentityPreconditionerVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IdentityPreconditionerVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'idvisitor_1',
+    [
+      'IdVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IdVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'implicit_3c_20quaternion_2c_20eigen_3a_3aquaternionbase_3c_20quaternion_20_3e_20_3e_2',
+    [
+      'implicit&lt; Quaternion, Eigen::QuaternionBase&lt; Quaternion &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structboost_1_1python_1_1converter_1_1implicit_3_01Quaternion_00_01Eigen_1_1QuaternionBase_3_01Quaternion_01_4_01_4.html',
+        1, 'boost::python::converter'
+      ]
+    ]
+  ],
+  [
+    'incompletecholeskyvisitor_3',
+    [
+      'IncompleteCholeskyVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IncompleteCholeskyVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'incompletelutvisitor_4',
+    [
+      'IncompleteLUTVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IncompleteLUTVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'init_5fmatrix_5for_5farray_5',
+    [
+      'init_matrix_or_array',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1init__matrix__or__array.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'init_5fmatrix_5for_5farray_3c_20mattype_2c_20true_20_3e_6',
+    [
+      'init_matrix_or_array&lt; MatType, true &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1init__matrix__or__array_3_01MatType_00_01true_01_4.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'instance_3c_20value_5fholder_3c_20derived_20_3e_20_3e_7',
+    [
+      'instance&lt; value_holder&lt; Derived &gt; &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structboost_1_1python_1_1objects_1_1instance_3_01value__holder_3_01Derived_01_4_01_4.html',
+        1, 'boost::python::objects'
+      ]
+    ]
+  ],
+  [
+    'internalstduniqueptrconverter_8',
+    [
+      'InternalStdUniquePtrConverter',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1InternalStdUniquePtrConverter.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fclass_5for_5funion_9',
+    [
+      'is_class_or_union',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__class__or__union.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fempty_5fvariant_10',
+    [
+      'is_empty_variant',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__empty__variant.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fempty_5fvariant_3c_20boost_3a_3ablank_20_3e_11',
+    [
+      'is_empty_variant&lt; boost::blank &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__empty__variant_3_01boost_1_1blank_01_4.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fpython_5fcomplex_12',
+    [
+      'is_python_complex',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__complex.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fpython_5fprimitive_5ftype_13',
+    [
+      'is_python_primitive_type',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fpython_5fprimitive_5ftype_5fhelper_14',
+    [
+      'is_python_primitive_type_helper',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type__helper.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'is_5fpython_5fprimitive_5ftype_5fhelper_3c_20remove_5fcvref_3c_20t_20_3e_3a_3atype_20_3e_15',
+    [
+      'is_python_primitive_type_helper&lt; remove_cvref&lt; T &gt;::type &gt;',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1details_1_1is__python__primitive__type__helper.html',
+        1, 'eigenpy::details'
+      ]
+    ]
+  ],
+  [
+    'iterativesolverbasevisitor_16',
+    [
+      'IterativeSolverBaseVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IterativeSolverBaseVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ],
+  [
+    'iterativesolvervisitor_17',
+    [
+      'IterativeSolverVisitor',
+      [
+        '/home/psardin/devel/nix-hpp/install/share/doc/eigenpy/doxygen-html/structeigenpy_1_1IterativeSolverVisitor.html',
+        1, 'eigenpy'
+      ]
+    ]
+  ]
 ];

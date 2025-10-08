@@ -1,4 +1,5 @@
-file(REMOVE_RECURSE
+file(
+  REMOVE_RECURSE
   "CMakeFiles/pyhpp_manipulation.dir/link.d"
   "pyhpp/__init__.pyc"
   "pyhpp/manipulation/constraint_graph_factory.pyc"
@@ -25,8 +26,7 @@ file(REMOVE_RECURSE
   "pyhpp/manipulation/path-planner.hh"
   "pyhpp/manipulation/path-projector.cc"
   "pyhpp/manipulation/problem.cc"
-  "pyhpp/manipulation/steering-method.cc"
-)
+  "pyhpp/manipulation/steering-method.cc")
 
 # Per-language clean rules from dependency scanning.
 foreach(lang CXX)

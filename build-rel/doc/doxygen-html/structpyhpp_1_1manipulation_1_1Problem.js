@@ -1,12 +1,47 @@
-var structpyhpp_1_1manipulation_1_1Problem =
-[
-    [ "Problem", "structpyhpp_1_1manipulation_1_1Problem.html#ae6d9011f79f24aa57e13739fcd565dc0", null ],
-    [ "Problem", "structpyhpp_1_1manipulation_1_1Problem.html#aa7558a99787af96e2fae665e48d7edfb", null ],
-    [ "checkProblem", "structpyhpp_1_1manipulation_1_1Problem.html#a2a8046b950c5168b47e05aadf38fedf0", null ],
-    [ "constraintGraph", "structpyhpp_1_1manipulation_1_1Problem.html#ae36508fb27f5dab4430032fc9d61c3a5", null ],
-    [ "constraintGraph", "structpyhpp_1_1manipulation_1_1Problem.html#adf60b727d7b495ea63b3ddbca293de1d", null ],
-    [ "graphSteeringMethod", "structpyhpp_1_1manipulation_1_1Problem.html#a40f1c21aef6ee44a65427bf4bc2a8d8c", null ],
-    [ "steeringMethod", "structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c", null ],
-    [ "steeringMethod", "structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532", null ],
-    [ "jointAndShapes", "structpyhpp_1_1manipulation_1_1Problem.html#afd95c7563fde243a9e5a3d5e4f999cdb", null ]
+var structpyhpp_1_1manipulation_1_1Problem = [
+  [
+    'Problem',
+    'structpyhpp_1_1manipulation_1_1Problem.html#ae6d9011f79f24aa57e13739fcd565dc0',
+    null
+  ],
+  [
+    'Problem',
+    'structpyhpp_1_1manipulation_1_1Problem.html#aa7558a99787af96e2fae665e48d7edfb',
+    null
+  ],
+  [
+    'checkProblem',
+    'structpyhpp_1_1manipulation_1_1Problem.html#a2a8046b950c5168b47e05aadf38fedf0',
+    null
+  ],
+  [
+    'constraintGraph',
+    'structpyhpp_1_1manipulation_1_1Problem.html#ae36508fb27f5dab4430032fc9d61c3a5',
+    null
+  ],
+  [
+    'constraintGraph',
+    'structpyhpp_1_1manipulation_1_1Problem.html#adf60b727d7b495ea63b3ddbca293de1d',
+    null
+  ],
+  [
+    'graphSteeringMethod',
+    'structpyhpp_1_1manipulation_1_1Problem.html#a40f1c21aef6ee44a65427bf4bc2a8d8c',
+    null
+  ],
+  [
+    'steeringMethod',
+    'structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c',
+    null
+  ],
+  [
+    'steeringMethod',
+    'structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532',
+    null
+  ],
+  [
+    'jointAndShapes',
+    'structpyhpp_1_1manipulation_1_1Problem.html#afd95c7563fde243a9e5a3d5e4f999cdb',
+    null
+  ]
 ];

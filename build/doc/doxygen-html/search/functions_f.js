@@ -1,36 +1,350 @@
-var searchData=
-[
-  ['setb_0',['setb',['../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#a75e71e630835cb21b40d85223dfa922e',1,'pyhpp::core::pathOptimization::LCWrapper::setb()'],['../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#aba35a1d74bd8064240a8f6fc5be8b10e',1,'pyhpp::core::pathOptimization::QPWrapper::setb()']]],
-  ['setcontainingnode_1',['setContainingNode',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a41b305946103e18a4786e873d1cf1e63',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setedge_2',['setEdge',['../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a4f5d9a8021a5fd5bbc85f17c8516668c',1,'pyhpp::manipulation::TransitionPlanner']]],
-  ['seth_3',['setH',['../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#a14306dbd6688b30c964342da8a1e9b5a',1,'pyhpp::core::pathOptimization::QPWrapper']]],
-  ['sethandlelocalposition_4',['setHandleLocalPosition',['../namespacepyhpp_1_1manipulation.html#a90a0eb1ff6d894f199f08488f28b16cf',1,'pyhpp::manipulation']]],
-  ['sethandlemask_5',['setHandleMask',['../namespacepyhpp_1_1manipulation.html#a4cade342bdd3e0ac329521f99a549cdb',1,'pyhpp::manipulation']]],
-  ['sethandlemaskcomp_6',['setHandleMaskComp',['../namespacepyhpp_1_1manipulation.html#abcdaed0c0f81fc2fb066ef256981a5d8',1,'pyhpp::manipulation']]],
-  ['sethandlename_7',['setHandleName',['../namespacepyhpp_1_1manipulation.html#aa79c3050e405140b900ab968876dc157',1,'pyhpp::manipulation']]],
-  ['setj_8',['setJ',['../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#ae11d29acb502d873d1d5c2f96698b9d5',1,'pyhpp::core::pathOptimization::LCWrapper']]],
-  ['setjointbounds_9',['setJointBounds',['../structpyhpp_1_1manipulation_1_1Device.html#aa4d4c335d2537e47de9a1ac13952773b',1,'pyhpp::manipulation::Device']]],
-  ['setparameter_10',['setParameter',['../structpyhpp_1_1core_1_1Problem.html#a199e1ab3029e68757207078dee033284',1,'pyhpp::core::Problem']]],
-  ['setreedsandsheppsteeringmethod_11',['setReedsAndSheppSteeringMethod',['../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a1033a9d49bfd1f6326c596534daf2608',1,'pyhpp::manipulation::TransitionPlanner']]],
-  ['setrobotrootposition_12',['setRobotRootPosition',['../structpyhpp_1_1manipulation_1_1Device.html#aff9db4e076a4a3b8569aa1b6b5bf53ca',1,'pyhpp::manipulation::Device']]],
-  ['setsecuritymarginfortransition_13',['setSecurityMarginForTransition',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ac21a3873ea1fcddba3d991b8e98fb4f4',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setshort_14',['setShort',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a0db56c6990f80d0d8edc8f41701dd6b0',1,'pyhpp::manipulation::PyWGraph']]],
-  ['settargetnodelist_15',['setTargetNodeList',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad546b05dd5b3bf805417eb4f616f7c97',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setwaypoint_16',['setWaypoint',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#a78a9a7612727d21a8a85036973adf34a',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setweight_17',['setWeight',['../structpyhpp_1_1manipulation_1_1PyWGraph.html#af7112e28a9a67d703470ad2fe6bdf31e',1,'pyhpp::manipulation::PyWGraph']]],
-  ['setweights_18',['setWeights',['../structpyhpp_1_1core_1_1DistanceWrapper.html#abe01123bf3e8a6bddb0f653399b39f57',1,'pyhpp::core::DistanceWrapper']]],
-  ['sgbwrapper_19',['SGBWrapper',['../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387',1,'pyhpp::core::pathOptimization::SGBWrapper']]],
-  ['shoot_20',['shoot',['../structpyhpp_1_1core_1_1CSWrapper.html#a287ea3aa04d93197d4164fd6a870f7a8',1,'pyhpp::core::CSWrapper']]],
-  ['solve_21',['solve',['../structpyhpp_1_1core_1_1PathPlanner.html#ad0e63b5bc00a6a78fac73402de2d95e1',1,'pyhpp::core::PathPlanner']]],
-  ['splinebezier3_22',['SplineBezier3',['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html#a2b2b778a6397a69155106f25bd16e0a5',1,'pyhpp::core::steeringMethod::SplineBezier3']]],
-  ['splinebezier5_23',['SplineBezier5',['../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html#a67379419ed11863b503c630f83372949',1,'pyhpp::core::steeringMethod::SplineBezier5']]],
-  ['squarednormbasisfunctionintegral_24',['squaredNormBasisFunctionIntegral',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a5da250282d0cadb79727ce55fc62aac7',1,'pyhpp::core::path::SplineWrapper']]],
-  ['squarednormintegralderivative_25',['squaredNormIntegralDerivative',['../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a7b008c85f47198e209d35ff77d1e1533',1,'pyhpp::core::path::SplineWrapper']]],
-  ['startcorbaserver_26',['startCorbaServer',['../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html#a338f5b4643262f91cb3b4d16139ec91d',1,'pyhpp::corbaserver::wholebodyStep::SWrapper']]],
-  ['startsolve_27',['startSolve',['../structpyhpp_1_1core_1_1PathPlanner.html#a004ba3c59729834671f342668da1dcc6',1,'pyhpp::core::PathPlanner']]],
-  ['steer_28',['steer',['../structpyhpp_1_1core_1_1SteeringMethod.html#a1b9395c0c814b001939c4b524152d437',1,'pyhpp::core::SteeringMethod']]],
-  ['steeringmethod_29',['SteeringMethod',['../structpyhpp_1_1core_1_1SteeringMethod.html#a497f443939444ec6d9174c92ac1898d5',1,'pyhpp::core::SteeringMethod']]],
-  ['steeringmethod_30',['steeringMethod',['../structpyhpp_1_1core_1_1Problem.html#aa0bfafead17c994baaa4045849d90af6',1,'pyhpp::core::Problem::steeringMethod() const'],['../structpyhpp_1_1core_1_1Problem.html#a2dd705429a3773be6daf3609f1504f58',1,'pyhpp::core::Problem::steeringMethod(const PyWSteeringMethodPtr_t &amp;steeringMethod)'],['../structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532',1,'pyhpp::manipulation::Problem::steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t &amp;steeringMethod)'],['../structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c',1,'pyhpp::manipulation::Problem::steeringMethod() const']]],
-  ['stl_5fpair_31',['stl_pair',['../structpyhpp_1_1stl__pair.html#a94c059f7480d8c2308ba5223c6c58289',1,'pyhpp::stl_pair']]],
-  ['stopwhenproblemissolved_32',['stopWhenProblemIsSolved',['../structpyhpp_1_1core_1_1PathPlanner.html#a032b8696418d7a8f6a36684f5cc87090',1,'pyhpp::core::PathPlanner']]]
+var searchData = [
+  [
+    'setb_0',
+    [
+      'setb',
+      [
+        '../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#a75e71e630835cb21b40d85223dfa922e',
+        1, 'pyhpp::core::pathOptimization::LCWrapper::setb()'
+      ],
+      [
+        '../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#aba35a1d74bd8064240a8f6fc5be8b10e',
+        1, 'pyhpp::core::pathOptimization::QPWrapper::setb()'
+      ]
+    ]
+  ],
+  [
+    'setcontainingnode_1',
+    [
+      'setContainingNode',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a41b305946103e18a4786e873d1cf1e63',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'setedge_2',
+    [
+      'setEdge',
+      [
+        '../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a4f5d9a8021a5fd5bbc85f17c8516668c',
+        1, 'pyhpp::manipulation::TransitionPlanner'
+      ]
+    ]
+  ],
+  [
+    'seth_3',
+    [
+      'setH',
+      [
+        '../structpyhpp_1_1core_1_1pathOptimization_1_1QPWrapper.html#a14306dbd6688b30c964342da8a1e9b5a',
+        1, 'pyhpp::core::pathOptimization::QPWrapper'
+      ]
+    ]
+  ],
+  [
+    'sethandlelocalposition_4',
+    [
+      'setHandleLocalPosition',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a90a0eb1ff6d894f199f08488f28b16cf',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'sethandlemask_5',
+    [
+      'setHandleMask',
+      [
+        '../namespacepyhpp_1_1manipulation.html#a4cade342bdd3e0ac329521f99a549cdb',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'sethandlemaskcomp_6',
+    [
+      'setHandleMaskComp',
+      [
+        '../namespacepyhpp_1_1manipulation.html#abcdaed0c0f81fc2fb066ef256981a5d8',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'sethandlename_7',
+    [
+      'setHandleName',
+      [
+        '../namespacepyhpp_1_1manipulation.html#aa79c3050e405140b900ab968876dc157',
+        1, 'pyhpp::manipulation'
+      ]
+    ]
+  ],
+  [
+    'setj_8',
+    [
+      'setJ',
+      [
+        '../structpyhpp_1_1core_1_1pathOptimization_1_1LCWrapper.html#ae11d29acb502d873d1d5c2f96698b9d5',
+        1, 'pyhpp::core::pathOptimization::LCWrapper'
+      ]
+    ]
+  ],
+  [
+    'setjointbounds_9',
+    [
+      'setJointBounds',
+      [
+        '../structpyhpp_1_1manipulation_1_1Device.html#aa4d4c335d2537e47de9a1ac13952773b',
+        1, 'pyhpp::manipulation::Device'
+      ]
+    ]
+  ],
+  [
+    'setparameter_10',
+    [
+      'setParameter',
+      [
+        '../structpyhpp_1_1core_1_1Problem.html#a199e1ab3029e68757207078dee033284',
+        1, 'pyhpp::core::Problem'
+      ]
+    ]
+  ],
+  [
+    'setreedsandsheppsteeringmethod_11',
+    [
+      'setReedsAndSheppSteeringMethod',
+      [
+        '../structpyhpp_1_1manipulation_1_1TransitionPlanner.html#a1033a9d49bfd1f6326c596534daf2608',
+        1, 'pyhpp::manipulation::TransitionPlanner'
+      ]
+    ]
+  ],
+  [
+    'setrobotrootposition_12',
+    [
+      'setRobotRootPosition',
+      [
+        '../structpyhpp_1_1manipulation_1_1Device.html#aff9db4e076a4a3b8569aa1b6b5bf53ca',
+        1, 'pyhpp::manipulation::Device'
+      ]
+    ]
+  ],
+  [
+    'setsecuritymarginfortransition_13',
+    [
+      'setSecurityMarginForTransition',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ac21a3873ea1fcddba3d991b8e98fb4f4',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'setshort_14',
+    [
+      'setShort',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a0db56c6990f80d0d8edc8f41701dd6b0',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'settargetnodelist_15',
+    [
+      'setTargetNodeList',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#ad546b05dd5b3bf805417eb4f616f7c97',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'setwaypoint_16',
+    [
+      'setWaypoint',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#a78a9a7612727d21a8a85036973adf34a',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'setweight_17',
+    [
+      'setWeight',
+      [
+        '../structpyhpp_1_1manipulation_1_1PyWGraph.html#af7112e28a9a67d703470ad2fe6bdf31e',
+        1, 'pyhpp::manipulation::PyWGraph'
+      ]
+    ]
+  ],
+  [
+    'setweights_18',
+    [
+      'setWeights',
+      [
+        '../structpyhpp_1_1core_1_1DistanceWrapper.html#abe01123bf3e8a6bddb0f653399b39f57',
+        1, 'pyhpp::core::DistanceWrapper'
+      ]
+    ]
+  ],
+  [
+    'sgbwrapper_19',
+    [
+      'SGBWrapper',
+      [
+        '../classpyhpp_1_1core_1_1pathOptimization_1_1SGBWrapper.html#a0c212ed2d0df166884cd01bf3baf2387',
+        1, 'pyhpp::core::pathOptimization::SGBWrapper'
+      ]
+    ]
+  ],
+  [
+    'shoot_20',
+    [
+      'shoot',
+      [
+        '../structpyhpp_1_1core_1_1CSWrapper.html#a287ea3aa04d93197d4164fd6a870f7a8',
+        1, 'pyhpp::core::CSWrapper'
+      ]
+    ]
+  ],
+  [
+    'solve_21',
+    [
+      'solve',
+      [
+        '../structpyhpp_1_1core_1_1PathPlanner.html#ad0e63b5bc00a6a78fac73402de2d95e1',
+        1, 'pyhpp::core::PathPlanner'
+      ]
+    ]
+  ],
+  [
+    'splinebezier3_22',
+    [
+      'SplineBezier3',
+      [
+        '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier3.html#a2b2b778a6397a69155106f25bd16e0a5',
+        1, 'pyhpp::core::steeringMethod::SplineBezier3'
+      ]
+    ]
+  ],
+  [
+    'splinebezier5_23',
+    [
+      'SplineBezier5',
+      [
+        '../structpyhpp_1_1core_1_1steeringMethod_1_1SplineBezier5.html#a67379419ed11863b503c630f83372949',
+        1, 'pyhpp::core::steeringMethod::SplineBezier5'
+      ]
+    ]
+  ],
+  [
+    'squarednormbasisfunctionintegral_24',
+    [
+      'squaredNormBasisFunctionIntegral',
+      [
+        '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a5da250282d0cadb79727ce55fc62aac7',
+        1, 'pyhpp::core::path::SplineWrapper'
+      ]
+    ]
+  ],
+  [
+    'squarednormintegralderivative_25',
+    [
+      'squaredNormIntegralDerivative',
+      [
+        '../structpyhpp_1_1core_1_1path_1_1SplineWrapper.html#a7b008c85f47198e209d35ff77d1e1533',
+        1, 'pyhpp::core::path::SplineWrapper'
+      ]
+    ]
+  ],
+  [
+    'startcorbaserver_26',
+    [
+      'startCorbaServer',
+      [
+        '../structpyhpp_1_1corbaserver_1_1wholebodyStep_1_1SWrapper.html#a338f5b4643262f91cb3b4d16139ec91d',
+        1, 'pyhpp::corbaserver::wholebodyStep::SWrapper'
+      ]
+    ]
+  ],
+  [
+    'startsolve_27',
+    [
+      'startSolve',
+      [
+        '../structpyhpp_1_1core_1_1PathPlanner.html#a004ba3c59729834671f342668da1dcc6',
+        1, 'pyhpp::core::PathPlanner'
+      ]
+    ]
+  ],
+  [
+    'steer_28',
+    [
+      'steer',
+      [
+        '../structpyhpp_1_1core_1_1SteeringMethod.html#a1b9395c0c814b001939c4b524152d437',
+        1, 'pyhpp::core::SteeringMethod'
+      ]
+    ]
+  ],
+  [
+    'steeringmethod_29',
+    [
+      'SteeringMethod',
+      [
+        '../structpyhpp_1_1core_1_1SteeringMethod.html#a497f443939444ec6d9174c92ac1898d5',
+        1, 'pyhpp::core::SteeringMethod'
+      ]
+    ]
+  ],
+  [
+    'steeringmethod_30',
+    [
+      'steeringMethod',
+      [
+        '../structpyhpp_1_1core_1_1Problem.html#aa0bfafead17c994baaa4045849d90af6',
+        1, 'pyhpp::core::Problem::steeringMethod() const'
+      ],
+      [
+        '../structpyhpp_1_1core_1_1Problem.html#a2dd705429a3773be6daf3609f1504f58',
+        1,
+        'pyhpp::core::Problem::steeringMethod(const PyWSteeringMethodPtr_t &amp;steeringMethod)'
+      ],
+      [
+        '../structpyhpp_1_1manipulation_1_1Problem.html#a6c546e458bd2266206cf4a5d6571b532',
+        1,
+        'pyhpp::manipulation::Problem::steeringMethod(const pyhpp::core::PyWSteeringMethodPtr_t &amp;steeringMethod)'
+      ],
+      [
+        '../structpyhpp_1_1manipulation_1_1Problem.html#a905af0612b182e597785c051e5cb7e4c',
+        1, 'pyhpp::manipulation::Problem::steeringMethod() const'
+      ]
+    ]
+  ],
+  [
+    'stl_5fpair_31',
+    [
+      'stl_pair',
+      [
+        '../structpyhpp_1_1stl__pair.html#a94c059f7480d8c2308ba5223c6c58289', 1,
+        'pyhpp::stl_pair'
+      ]
+    ]
+  ],
+  [
+    'stopwhenproblemissolved_32',
+    [
+      'stopWhenProblemIsSolved',
+      [
+        '../structpyhpp_1_1core_1_1PathPlanner.html#a032b8696418d7a8f6a36684f5cc87090',
+        1, 'pyhpp::core::PathPlanner'
+      ]
+    ]
+  ]
 ];

@@ -3,9 +3,15 @@ import numpy as np
 import datetime as dt
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, Graph, Problem, createProgressiveProjector, urdf, ManipulationPlanner
+from pyhpp.manipulation import (
+    Device,
+    Graph,
+    Problem,
+    createProgressiveProjector,
+    urdf,
+    ManipulationPlanner,
+)
 from pyhpp.core import createDichotomy, Straight
-from pyhpp.gepetto import Viewer
 
 from pyhpp.constraints import (
     Transformation,
@@ -289,31 +295,30 @@ manipulationPlanner.maxIterations(5000)
 
 # Run benchmark
 #
-import datetime as dt
-totalTime = dt.timedelta (0)
+totalTime = dt.timedelta(0)
 totalNumberNodes = 0
 success = 0
-for i in range (args.N):
-  try:
-    manipulationPlanner.roadmap().clear()
-    t1 = dt.datetime.now ()
-    manipulationPlanner.solve ()
-    t2 = dt.datetime.now ()
-  except Exception as e:
-    print (f"Failed to plan path: {e}")
-    break;
-  else:
-    success += 1
-    totalTime += t2 - t1
-    print (t2-t1)
-    n = len(manipulationPlanner.roadmap().nodes())
-    totalNumberNodes += n
-    print ("Number nodes: " + str(n))
+for i in range(args.N):
+    try:
+        manipulationPlanner.roadmap().clear()
+        t1 = dt.datetime.now()
+        manipulationPlanner.solve()
+        t2 = dt.datetime.now()
+    except Exception as e:
+        print(f"Failed to plan path: {e}")
+        break
+    else:
+        success += 1
+        totalTime += t2 - t1
+        print(t2 - t1)
+        n = len(manipulationPlanner.roadmap().nodes())
+        totalNumberNodes += n
+        print("Number nodes: " + str(n))
 if args.N != 0:
-  print ("#" * 20)
-  print (f"Number of rounds: {args.N}")
-  print (f"Number of successes: {success}")
-  print (f"Success rate: {success/ args.N * 100}%")
-  if success > 0:
-    print (f"Average time per success: {totalTime.total_seconds()/success}")
-    print (f"Average number nodes per success: {totalNumberNodes/success}")
+    print("#" * 20)
+    print(f"Number of rounds: {args.N}")
+    print(f"Number of successes: {success}")
+    print(f"Success rate: {success / args.N * 100}%")
+    if success > 0:
+        print(f"Average time per success: {totalTime.total_seconds() / success}")
+        print(f"Average number nodes per success: {totalNumberNodes / success}")

@@ -91,13 +91,13 @@ PKG_CONFIG_PATH /home/psardin/devel/nix-hpp/install/lib/pkgconfig
 ## ---------------- ##
 
 CMAKE_ROOT = /nix/store/ciiwq1ymzac9m5azhf4higkynmy3f8f7-cmake-3.31.5/share/cmake-3.31
-CMAKE_INCLUDE_PATH = 
-CMAKE_LIBRARY_PATH = 
-CMAKE_PREFIX_PATH = 
-CMAKE_INSTALL_ALWAYS = 
+CMAKE_INCLUDE_PATH =
+CMAKE_LIBRARY_PATH =
+CMAKE_PREFIX_PATH =
+CMAKE_INSTALL_ALWAYS =
 CMAKE_SKIP_RPATH = NO
-CMAKE_SUPPRESS_REGENERATION = 
-BUILD_SHARED_LIBS = 
+CMAKE_SUPPRESS_REGENERATION =
+BUILD_SHARED_LIBS =
 
 CMAKE_INSTALL_PREFIX = /home/psardin/devel/nix-hpp/install
 PROJECT_SOURCE_DIR = /home/psardin/devel/nix-hpp/src/hpp-python
@@ -108,15 +108,15 @@ CMAKE_BINARY_DIR = /home/psardin/devel/nix-hpp/src/hpp-python/build
 CMAKE_AR = /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/ar
 CMAKE_RANLIB = /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/ranlib
 CMAKE_BUILD_TYPE = Debug
-CMAKE_CONFIGURATION_TYPES = 
-CMAKE_SHARED_LINKER_FLAGS = 
+CMAKE_CONFIGURATION_TYPES =
+CMAKE_SHARED_LINKER_FLAGS =
 
-CMAKE_C_COMPILER = 
-CMAKE_C_FLAGS = 
-CMAKE_C_FLAGS_DEBUG = 
-CMAKE_C_FLAGS_RELEASE = 
+CMAKE_C_COMPILER =
+CMAKE_C_FLAGS =
+CMAKE_C_FLAGS_DEBUG =
+CMAKE_C_FLAGS_RELEASE =
 CMAKE_CXX_COMPILER = /nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++
-CMAKE_CXX_FLAGS = -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion 
+CMAKE_CXX_FLAGS = -pedantic -Wno-long-long -Wall -Wextra -Wcast-align -Wcast-qual -Wformat -Wwrite-strings -Wconversion
 CMAKE_CXX_FLAGS_DEBUG = -g
 CMAKE_CXX_FLAGS_RELEASE = -O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELWITHDEBINFO = -g -O3 -DNDEBUG
@@ -150,19 +150,19 @@ _PKG_CONFIG_DESCRIPTION = python bindings for HPP, based on boost python
 _PKG_CONFIG_URL = https://github.com/humanoid-path-planner/hpp-python
 _PKG_CONFIG_VERSION = 6.0.0
 _PKG_CONFIG_REQUIRES = omniORB4;omniORB4 >= 4.1.4;omniDynamic4 >= 4.1.4
-_PKG_CONFIG_REQUIRES_DEBUG = 
-_PKG_CONFIG_REQUIRES_OPTIMIZED = 
-_PKG_CONFIG_COMPILE_TIME_REQUIRES = 
-_PKG_CONFIG_CONFLICTS = 
-_PKG_CONFIG_LIBS = 
+_PKG_CONFIG_REQUIRES_DEBUG =
+_PKG_CONFIG_REQUIRES_OPTIMIZED =
+_PKG_CONFIG_COMPILE_TIME_REQUIRES =
+_PKG_CONFIG_CONFLICTS =
+_PKG_CONFIG_LIBS =
 _PKG_CONFIG_LIBS_DEBUG = -L${libdir}
 _PKG_CONFIG_LIBS_OPTIMIZED = -L${libdir}
-_PKG_CONFIG_LIBS_PRIVATE = 
+_PKG_CONFIG_LIBS_PRIVATE =
 _PKG_CONFIG_CFLAGS = -I${includedir}
-_PKG_CONFIG_CFLAGS_DEBUG = 
-_PKG_CONFIG_CFLAGS_OPTIMIZED = 
+_PKG_CONFIG_CFLAGS_DEBUG =
+_PKG_CONFIG_CFLAGS_OPTIMIZED =
 _PKG_CONFIG_FILENAME = hpp-python.pc
-PKG_CONFIG_EXTRA = 
+PKG_CONFIG_EXTRA =
 DOXYGEN_SKIP_DOT = undefined
 DOXYGEN_EXECUTABLE = /nix/store/h6m9yiksq519xd6s8b64243yglwyjd80-doxygen-1.13.2/bin/doxygen
 DOXYGEN_FOUND = YES
@@ -188,7 +188,7 @@ OMNIORB4_FOUND = 1
 OMNIORB4_LIBRARIES = omniORB4;omnithread
 OMNIORB4_LIBRARY_DIRS = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib
 OMNIORB4_LDFLAGS = -L/nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib;-lomniORB4;-lomnithread
-OMNIORB4_LDFLAGS_OTHER = 
+OMNIORB4_LDFLAGS_OTHER =
 OMNIORB4_INCLUDE_DIRS = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIORB4_CFLAGS = -D__OSVERSION__=2;-I/nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIORB4_CFLAGS_OTHER = -D__OSVERSION__=2
@@ -198,17 +198,17 @@ OMNIORB4_VERSION = 4.3.2
 OMNIORB4_PREFIX = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2
 OMNIORB4_INCLUDEDIR = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIORB4_LIBDIR = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib
-OMNIORB4_PKGLIBDIR = 
-OMNIORB4_BINDIR = 
-OMNIORB4_DATAROOTDIR = 
-OMNIORB4_PKGDATAROOTDIR = 
-OMNIORB4_DOCDIR = 
-OMNIORB4_DOXYGENDOCDIR = 
+OMNIORB4_PKGLIBDIR =
+OMNIORB4_BINDIR =
+OMNIORB4_DATAROOTDIR =
+OMNIORB4_PKGDATAROOTDIR =
+OMNIORB4_DOCDIR =
+OMNIORB4_DOXYGENDOCDIR =
 OMNIDYNAMIC4_FOUND = 1
 OMNIDYNAMIC4_LIBRARIES = omniDynamic4;omniORB4;omnithread
 OMNIDYNAMIC4_LIBRARY_DIRS = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib
 OMNIDYNAMIC4_LDFLAGS = -L/nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib;-lomniDynamic4;-lomniORB4;-lomnithread
-OMNIDYNAMIC4_LDFLAGS_OTHER = 
+OMNIDYNAMIC4_LDFLAGS_OTHER =
 OMNIDYNAMIC4_INCLUDE_DIRS = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIDYNAMIC4_CFLAGS = -D__OSVERSION__=2;-I/nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIDYNAMIC4_CFLAGS_OTHER = -D__OSVERSION__=2
@@ -218,13 +218,12 @@ OMNIDYNAMIC4_VERSION = 4.3.2
 OMNIDYNAMIC4_PREFIX = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2
 OMNIDYNAMIC4_INCLUDEDIR = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/include
 OMNIDYNAMIC4_LIBDIR = /nix/store/dkx4rrfva0wp7ap2ykwbpi99x7g9qqb9-omniorb-4.3.2/lib
-OMNIDYNAMIC4_PKGLIBDIR = 
-OMNIDYNAMIC4_BINDIR = 
-OMNIDYNAMIC4_DATAROOTDIR = 
-OMNIDYNAMIC4_PKGDATAROOTDIR = 
-OMNIDYNAMIC4_DOCDIR = 
-OMNIDYNAMIC4_DOXYGENDOCDIR = 
+OMNIDYNAMIC4_PKGLIBDIR =
+OMNIDYNAMIC4_BINDIR =
+OMNIDYNAMIC4_DATAROOTDIR =
+OMNIDYNAMIC4_PKGDATAROOTDIR =
+OMNIDYNAMIC4_DOCDIR =
+OMNIDYNAMIC4_DOXYGENDOCDIR =
 ## ---------------- ##
 ## Watched targets. ##
 ## ---------------- ##
-

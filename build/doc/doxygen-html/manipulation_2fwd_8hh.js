@@ -1,14 +1,57 @@
-var manipulation_2fwd_8hh =
-[
-    [ "pyhpp::manipulation::PyWDevicePtr_t", "namespacepyhpp_1_1manipulation.html#a22e4048236e810e252ebfba3eba5a040", null ],
-    [ "pyhpp::manipulation::PyWGraphPtr_t", "namespacepyhpp_1_1manipulation.html#acbb3e0cbb0533480e23faafcf0400f54", null ],
-    [ "pyhpp::manipulation::PyWGraphSteeringMethodPtr_t", "namespacepyhpp_1_1manipulation.html#ae4f5b6156e356be6e208ca57e0cbb95b", null ],
-    [ "pyhpp::manipulation::PyWProblemPtr_t", "namespacepyhpp_1_1manipulation.html#a97574691451a10dbe11a5b881bcb3a02", null ],
-    [ "pyhpp::manipulation::exposeDevice", "namespacepyhpp_1_1manipulation.html#acd150525ca1fed2dfd3ad7bc9e23658f", null ],
-    [ "pyhpp::manipulation::exposeGraph", "namespacepyhpp_1_1manipulation.html#ad4f7ed09f5e410e108f864bbbdbec0b7", null ],
-    [ "pyhpp::manipulation::exposeGraphSteeringMethod", "namespacepyhpp_1_1manipulation.html#af00d71fafbb7de314bd12ea803e45024", null ],
-    [ "pyhpp::manipulation::exposeHandle", "namespacepyhpp_1_1manipulation.html#a5d013da922c0cf70e4deb22baa0b1760", null ],
-    [ "pyhpp::manipulation::exposePathPlanners", "namespacepyhpp_1_1manipulation.html#a06c1f4c9f959acac7c6669f96eb2eaaf", null ],
-    [ "pyhpp::manipulation::exposePathProjector", "namespacepyhpp_1_1manipulation.html#ae29d662fa0e90f0d085ce03c5bdf98f8", null ],
-    [ "pyhpp::manipulation::exposeProblem", "namespacepyhpp_1_1manipulation.html#ae8cc0059304f5b600e7c95326c45bea7", null ]
+var manipulation_2fwd_8hh = [
+  [
+    'pyhpp::manipulation::PyWDevicePtr_t',
+    'namespacepyhpp_1_1manipulation.html#a22e4048236e810e252ebfba3eba5a040',
+    null
+  ],
+  [
+    'pyhpp::manipulation::PyWGraphPtr_t',
+    'namespacepyhpp_1_1manipulation.html#acbb3e0cbb0533480e23faafcf0400f54',
+    null
+  ],
+  [
+    'pyhpp::manipulation::PyWGraphSteeringMethodPtr_t',
+    'namespacepyhpp_1_1manipulation.html#ae4f5b6156e356be6e208ca57e0cbb95b',
+    null
+  ],
+  [
+    'pyhpp::manipulation::PyWProblemPtr_t',
+    'namespacepyhpp_1_1manipulation.html#a97574691451a10dbe11a5b881bcb3a02',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposeDevice',
+    'namespacepyhpp_1_1manipulation.html#acd150525ca1fed2dfd3ad7bc9e23658f',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposeGraph',
+    'namespacepyhpp_1_1manipulation.html#ad4f7ed09f5e410e108f864bbbdbec0b7',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposeGraphSteeringMethod',
+    'namespacepyhpp_1_1manipulation.html#af00d71fafbb7de314bd12ea803e45024',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposeHandle',
+    'namespacepyhpp_1_1manipulation.html#a5d013da922c0cf70e4deb22baa0b1760',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposePathPlanners',
+    'namespacepyhpp_1_1manipulation.html#a06c1f4c9f959acac7c6669f96eb2eaaf',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposePathProjector',
+    'namespacepyhpp_1_1manipulation.html#ae29d662fa0e90f0d085ce03c5bdf98f8',
+    null
+  ],
+  [
+    'pyhpp::manipulation::exposeProblem',
+    'namespacepyhpp_1_1manipulation.html#ae8cc0059304f5b600e7c95326c45bea7',
+    null
+  ]
 ];
