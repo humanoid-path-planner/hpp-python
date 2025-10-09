@@ -31,16 +31,15 @@
 #include "pyhpp/core/problem.hh"
 
 #include <boost/python.hpp>
+#include <hpp/core/collision-validation.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/distance.hh>
+#include <hpp/core/joint-bound-validation.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
 #include <hpp/core/problem.hh>
-#include <hpp/core/collision-validation.hh>
-#include <hpp/core/joint-bound-validation.hh>
-
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/steering-method.hh>
 namespace pyhpp {
@@ -67,7 +66,6 @@ void Problem::setParameterInt(const std::string& name, size_type value) {
   obj->setParameter(name, param);
 }
 
-
 void Problem::addConfigValidation(const std::string& type) {
   hpp::core::ConfigValidationPtr_t validation;
   if (type == "CollisionValidation")
@@ -77,9 +75,7 @@ void Problem::addConfigValidation(const std::string& type) {
   obj->addConfigValidation(validation);
 }
 
-void Problem::clearConfigValidations() {
-  obj->clearConfigValidations();
-}
+void Problem::clearConfigValidations() { obj->clearConfigValidations(); }
 
 const Parameter& Problem::getParameter(const std::string& name) const {
   return obj->getParameter(name);
@@ -142,9 +138,7 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
   obj->addGoalConfig(config);
 }
 
-void Problem::resetGoalConfigs() {
-  obj->resetGoalConfigs();
-}
+void Problem::resetGoalConfigs() { obj->resetGoalConfigs(); }
 
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);

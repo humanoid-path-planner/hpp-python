@@ -33,8 +33,8 @@
 #include <hpp/pinocchio/device-data.hh>
 #include <hpp/pinocchio/device.hh>
 #include <hpp/pinocchio/frame.hh>
-#include <hpp/pinocchio/joint.hh>
 #include <hpp/pinocchio/gripper.hh>
+#include <hpp/pinocchio/joint.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
@@ -95,7 +95,7 @@ typedef hpp::pinocchio::Frame Frame;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
 static void setJointBounds(Device& device, const char* jointName,
-                            boost::python::list py_jointBounds) {
+                           boost::python::list py_jointBounds) {
   Frame frame = device.getFrameByName(jointName);
   JointPtr_t joint = frame.joint();
   auto jointBounds = extract_vector<value_type>(py_jointBounds);
@@ -178,7 +178,6 @@ void exposeDevice() {
            &Device::computeFramesForwardKinematics)
       .def("updateGeometryPlacements", &Device::updateGeometryPlacements)
       .def("setJointBounds", &setJointBounds);
-
 }
 }  // namespace pinocchio
 }  // namespace pyhpp
