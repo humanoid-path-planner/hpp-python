@@ -120,6 +120,22 @@ struct Problem {
   void addPartialCom(const std::string& name, boost::python::list pyjointNames);
   hpp::pinocchio::vector3_t getPartialCom(const std::string& name);
   std::map<std::string, hpp::pinocchio::CenterOfMassComputationPtr_t> centerOfMassComputations;
+  hpp::constraints::ImplicitPtr_t createRelativeComConstraint(const char* constraintName,
+                                          const char* comName,
+                                          const char* jointName,
+                                          hpp::pinocchio::vector3_t point,
+                                          boost::python::list mask);
+
+  hpp::constraints::ImplicitPtr_t createTransformationConstraint(
+    const char* constraintName, const char* joint1Name,
+    const char* joint2Name, const hpp::pinocchio::Transform3s& M,
+    boost::python::list mask);
+
+  hpp::constraints::ImplicitPtr_t createTransformationConstraint2(
+    const char* constraintName, const char* joint1Name,
+    const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
+    const hpp::pinocchio::Transform3s& M2, const boost::python::list mask);
+
 };
 
 }  // namespace core
