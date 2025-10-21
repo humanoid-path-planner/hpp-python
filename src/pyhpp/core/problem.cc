@@ -271,6 +271,11 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
       .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs);
   register_problem_converters();
+
+  class_<ConstraintResult>("ConstraintResult")
+    .def_readwrite("success", &ConstraintResult::success)
+    .def_readwrite("configuration", &ConstraintResult::configuration)
+    .def_readwrite("error", &ConstraintResult::error);
 }
 
 }  // namespace core

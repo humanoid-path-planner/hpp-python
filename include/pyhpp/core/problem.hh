@@ -56,11 +56,23 @@ typedef hpp::core::ProblemTargetPtr_t ProblemTargetPtr_t;
 typedef hpp::core::DistancePtr_t DistancePtr_t;
 typedef hpp::core::value_type value_type;
 typedef hpp::core::size_type size_type;
+typedef hpp::core::Configuration_t Configuration_t;
+
+
+struct ConstraintResult {
+  bool success;
+  Configuration_t configuration;
+  value_type error;
+
+  ConstraintResult() : success(false), configuration(), error(0.0) {}
+  ConstraintResult(bool s, const Configuration_t& config, value_type err)
+      : success(s), configuration(config), error(err) {}
+};
+
 
 // Wrapper class for hpp::core::Problem
 struct Problem {
   hpp::core::ProblemPtr_t obj;
-
   Problem(const DevicePtr_t& robot);
   Problem(hpp::core::ProblemPtr_t problemPtr) : obj(problemPtr) {}
 
