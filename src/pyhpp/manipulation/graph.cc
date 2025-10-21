@@ -30,6 +30,7 @@
 #include <../src/pyhpp/manipulation/device.hh>
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/problem.hh>
+#include "pyhpp/core/problem.hh"
 #include <boost/python.hpp>
 #include <hpp/constraints/convex-shape-contact.hh>
 #include <hpp/constraints/differentiable-function.hh>
@@ -729,7 +730,7 @@ boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
 // Constraint application
 // =============================================================================
 
-ConstraintResult PyWGraph::applyStateConstraints(PyWStatePtr_t state,
+pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(PyWStatePtr_t state,
                                                  ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(state->obj->configConstraint());
@@ -741,10 +742,10 @@ ConstraintResult PyWGraph::applyStateConstraints(PyWStatePtr_t state,
           constraint->configProjector()) {
     residualError = configProjector->residualError();
   }
-  return ConstraintResult(success, output, residualError);
+  return pyhpp::core::ConstraintResult(success, output, residualError);
 }
 
-ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
+pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
                                                 ConfigurationIn_t q_rhs,
                                                 ConfigurationIn_t input) {
   using namespace hpp::manipulation;
@@ -758,10 +759,10 @@ ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
     success = constraint->apply(output);
     residualError = constraint->configProjector()->residualError();
   }
-  return ConstraintResult(success, output, residualError);
+  return pyhpp::core::ConstraintResult(success, output, residualError);
 }
 
-ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
+pyhpp::core::ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
                                                 ConfigurationIn_t q_rhs,
                                                 ConfigurationIn_t input) {
   using namespace hpp::manipulation;
@@ -778,7 +779,7 @@ ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
     residualError = configProjector->residualError();
   }
 
-  return ConstraintResult(success, output, residualError);
+  return pyhpp::core::ConstraintResult(success, output, residualError);
 }
 
 // =============================================================================
@@ -1330,11 +1331,6 @@ void exposeGraph() {
 
       // Initialization
       .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE);
-
-  class_<ConstraintResult>("ConstraintResult")
-      .def_readwrite("success", &ConstraintResult::success)
-      .def_readwrite("configuration", &ConstraintResult::configuration)
-      .def_readwrite("error", &ConstraintResult::error);
 }
 
 }  // namespace manipulation

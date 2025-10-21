@@ -33,6 +33,13 @@
 #include <hpp/manipulation/graph/graph.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
+
+namespace pyhpp {
+namespace core {
+struct ConstraintResult;
+}
+}
+
 namespace pyhpp {
 namespace manipulation {
 
@@ -51,17 +58,6 @@ typedef hpp::manipulation::graph::GraphPtr_t GraphPtr_t;
 typedef hpp::manipulation::ConstraintsAndComplements_t
     ConstraintsAndComplements_t;
 typedef hpp::manipulation::ConstraintAndComplement_t ConstraintAndComplement_t;
-
-/// Result structure for constraint operations
-struct ConstraintResult {
-  bool success;
-  Configuration_t configuration;
-  value_type error;
-
-  ConstraintResult() : success(false), configuration(), error(0.0) {}
-  ConstraintResult(bool s, const Configuration_t& config, value_type err)
-      : success(s), configuration(config), error(err) {}
-};
 
 /// Python wrapper for State
 struct PyWState {
@@ -201,16 +197,6 @@ struct PyWGraph {
       const PyWEdgePtr_t& edge, ConfigurationIn_t leafConfig,
       ConfigurationIn_t config) const;
 
-  // Constraint application
-  ConstraintResult applyStateConstraints(PyWStatePtr_t state,
-                                         ConfigurationIn_t input);
-  ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition,
-                                        ConfigurationIn_t q_rhs,
-                                        ConfigurationIn_t input);
-  ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
-                                        ConfigurationIn_t q_rhs,
-                                        ConfigurationIn_t input);
-
   // Level set edges
   void addLevelSetFoliation(PyWEdgePtr_t edge,
                             const boost::python::list& condNC,
@@ -224,6 +210,14 @@ struct PyWGraph {
   void removeCollisionPairFromTransition(PyWEdgePtr_t edge, const char* joint1,
                                          const char* joint2);
 
+  pyhpp::core::ConstraintResult applyStateConstraints(PyWStatePtr_t state,
+                        ConfigurationIn_t input);
+  pyhpp::core::ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition,
+                       ConfigurationIn_t q_rhs,
+                       ConfigurationIn_t input);
+  pyhpp::core::ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
+                       ConfigurationIn_t q_rhs,
+                       ConfigurationIn_t input);
   // Subgraph management
   void createSubGraph(const char* subgraphName,
                       hpp::core::RoadmapPtr_t roadmap);
