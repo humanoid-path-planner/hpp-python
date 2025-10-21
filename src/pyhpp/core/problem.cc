@@ -56,7 +56,9 @@ namespace core {
 using namespace boost::python;
 
 Problem::Problem(const DevicePtr_t& robot)
-    : obj(hpp::core::Problem::create(robot)) {}
+    : obj(hpp::core::Problem::create(robot)), errorThreshold_(1e-4), maxIterProjection_(20) {
+        constraints_ = hpp::core::ConstraintSet::create(robot, "Default constraint set");
+    }
 
 const DevicePtr_t& Problem::robot() const { return obj->robot(); }
 
@@ -353,6 +355,92 @@ boost::python::tuple Problem::isConfigValid(ConfigurationIn_t dofArray) {
         throw std::logic_error(exc.what());
     }
 }
+
+void Problem::addNumericalConstraintsToConfigProjector1(const char* configProjName,
+                                      boost::python::list constraints,
+                                      boost::python::list priorities) {
+  try {
+      auto constraintsVec = extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
+      auto prioritiesVec = extract_vector<std::size_t>(priorities);
+      hpp::core::ConfigProjectorPtr_t configProjector = constraints_->configProjector();
+    for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
+        if (!configProjector) {
+          configProjector = hpp::core::ConfigProjector::create(
+              robot(), configProjName, errorThreshold_, maxIterProjection_);
+          constraints_->addConstraint(configProjector);
+        }
+      configProjector->add(constraintsVec[i], prioritiesVec[i]);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+void Problem::addNumericalConstraintsToConfigProjector2(const char* configProjName,
+                                      boost::python::list constraints) {
+  try {
+      auto constraintsVec = extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
+      hpp::core::ConfigProjectorPtr_t configProjector = constraints_->configProjector();
+    for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
+        if (!configProjector) {
+          configProjector = hpp::core::ConfigProjector::create(
+              robot(), configProjName, errorThreshold_, maxIterProjection_);
+          constraints_->addConstraint(configProjector);
+        }
+      configProjector->add(constraintsVec[i], 0);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+hpp::constraints::ImplicitPtr_t Problem::createComBetweenFeet(
+    const char* constraintName, const char* comName, const char* jointLName,
+    const char* jointRName, const hpp::pinocchio::vector3_t& pointL, 
+    const hpp::pinocchio::vector3_t& pointR, const char* jointRefName, 
+    const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask) {
+  
+  if (!robot()) throw std::logic_error("No robot loaded");
+  
+  try {
+    hpp::pinocchio::JointPtr_t jointL, jointR, jointRef;
+    hpp::pinocchio::CenterOfMassComputationPtr_t comc;
+    
+    auto m = extract_vector<bool>(mask);
+    
+    jointL = robot()->getJointByName(jointLName);
+    jointR = robot()->getJointByName(jointRName);
+    
+    if (std::string(jointRefName) == std::string(""))
+      jointRef = robot()->rootJoint();
+    else
+      jointRef = robot()->getJointByName(jointRefName);
+    
+    std::string name(constraintName), comN(comName);
+    
+    hpp::constraints::ComparisonTypes_t comps(2, hpp::constraints::EqualToZero);
+    comps.push_back(hpp::constraints::Superior);
+    comps.push_back(hpp::constraints::Inferior);
+    
+    if (comN.compare("") == 0) {
+      return hpp::constraints::Implicit::create(
+          hpp::constraints::ComBetweenFeet::create(
+              name, robot(), jointL, jointR, pointL, pointR, jointRef, pointRef, m),
+          comps);
+    } else {
+      if (!centerOfMassComputations[comN])
+        throw std::logic_error("Partial COM " + comN + " not found.");
+      comc = centerOfMassComputations[comN];
+      return hpp::constraints::Implicit::create(
+          hpp::constraints::ComBetweenFeet::create(
+              name, robot(), comc, jointL, jointR, pointL, pointR, jointRef, pointRef, m),
+          comps);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 
@@ -491,6 +579,11 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
       .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
+      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector1)
+      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector2)      
+      .def_readwrite("errorThreshold", &Problem::errorThreshold_)
+      .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
+      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet)
       ;
 
   register_problem_converters();
