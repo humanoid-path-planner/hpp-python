@@ -300,6 +300,59 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
   }
 }
 
+void Problem::setConstantRightHandSide(hpp::constraints::ImplicitPtr_t constraint,
+                                       bool constant) {
+  try {
+    if (constant) {
+      hpp::constraints::ComparisonTypes_t eqtypes(constraint->function().outputDerivativeSize(), hpp::constraints::EqualToZero);
+      constraint->comparisonType(eqtypes);
+    } else {
+      hpp::constraints::ComparisonTypes_t eqtypes(constraint->function().outputDerivativeSize(), hpp::constraints::Equality);
+      constraint->comparisonType(eqtypes);
+
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+ConstraintResult Problem::applyConstraints(ConfigurationIn_t config) {
+  bool success = false;
+  double residualError = 0.0;
+  try {
+    Configuration_t output = config;
+    success = constraints_->apply(output);
+    if (hpp::core::ConfigProjectorPtr_t configProjector =
+            constraints_->configProjector()) {
+      residualError = configProjector->residualError();
+    }
+    ConstraintResult result(success, output, residualError);
+    return result;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+
+boost::python::tuple Problem::isConfigValid(ConfigurationIn_t dofArray) {
+    try {
+        Configuration_t config = dofArray;
+        hpp::core::ValidationReportPtr_t validationReport;
+        bool validity = obj->configValidations()->validate(config, validationReport);
+        
+        std::string report;
+        if (validity) {
+            report = "";
+        } else {
+            std::ostringstream oss;
+            oss << *validationReport;
+            report = oss.str();
+        }
+        return boost::python::make_tuple(validity, report);
+    } catch (const std::exception& exc) {
+        throw std::logic_error(exc.what());
+    }
+}
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 
@@ -435,6 +488,9 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, createRelativeComConstraint)
       .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint)
       .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint2)
+      .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
+      .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
+      .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
       ;
 
   register_problem_converters();

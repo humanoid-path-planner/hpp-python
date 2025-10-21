@@ -136,6 +136,11 @@ struct Problem {
     const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
     const hpp::pinocchio::Transform3s& M2, const boost::python::list mask);
 
+  void setConstantRightHandSide(hpp::constraints::ImplicitPtr_t constraint,
+                                bool constant);
+
+  ConstraintResult applyConstraints(ConfigurationIn_t config);
+  boost::python::tuple isConfigValid(ConfigurationIn_t dofArray);
 };
 
 }  // namespace core
