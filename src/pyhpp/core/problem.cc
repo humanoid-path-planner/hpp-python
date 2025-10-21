@@ -180,6 +180,126 @@ hpp::pinocchio::vector3_t Problem::getPartialCom(const std::string& name) {
   }
 }
 
+static int numberOfTrue(const std::vector<bool>& mask) {
+  std::size_t res = 0;
+  for (std::size_t i = 0; i < mask.size(); ++i)
+    if (mask[i]) ++res;
+  return (int)res;
+}
+
+hpp::constraints::ImplicitPtr_t Problem::createRelativeComConstraint(
+    const char* constraintName, const char* comName, const char* jointName,
+    hpp::pinocchio::vector3_t point, boost::python::list mask) {
+  hpp::pinocchio::JointPtr_t joint;
+  hpp::pinocchio::CenterOfMassComputationPtr_t comc;
+
+  try {
+    joint = robot()->getJointByName(jointName);
+    auto m = extract_vector<bool>(mask);
+    // Test whether joint1 is world frame
+    std::string name(constraintName), comN(comName);
+    if (comN.compare("") == 0) {
+      return hpp::constraints::Implicit::create(
+          hpp::constraints::RelativeCom::create(name, robot(), joint, point,
+                                                m),
+          numberOfTrue(m) * hpp::constraints::EqualToZero);
+    } else {
+      if (!centerOfMassComputations[comN])
+        throw std::logic_error("Partial COM not found.");
+      comc = centerOfMassComputations[comN];
+      return hpp::constraints::Implicit::create(
+          hpp::constraints::RelativeCom::create(name, robot(), comc, joint,
+                                                point, m),
+          numberOfTrue(m) * hpp::constraints::EqualToZero);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
+    const char* constraintName, const char* joint1Name,
+    const char* joint2Name, const hpp::pinocchio::Transform3s& M,
+    boost::python::list m) {
+  try {
+    if (!robot()) throw std::logic_error("No robot loaded");
+
+    using hpp::constraints::GenericTransformation;
+    using hpp::constraints::Implicit;
+    using hpp::constraints::OrientationBit;
+    using hpp::constraints::PositionBit;
+
+    std::string name(constraintName);
+
+    hpp::pinocchio::Frame f2 = robot()->getFrameByName(joint2Name);
+    auto mask = extract_vector<bool>(m);
+
+    const hpp::pinocchio::Transform3s ref2 = f2.positionInParentJoint() * M;
+
+    if (joint1Name && std::strlen(joint1Name) > 0) {
+      // Relative transformation constraint between two frames
+      hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
+      const hpp::pinocchio::Transform3s ref1 =
+          f1.positionInParentJoint() * hpp::pinocchio::Transform3s::Identity();
+      auto func = GenericTransformation<PositionBit | OrientationBit |
+                                        hpp::constraints::RelativeBit>::create(
+          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
+      return Implicit::create(
+          func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
+    } else {
+      // Absolute transformation of frame/joint2 to M in world frame
+      const hpp::pinocchio::Transform3s Id =
+          hpp::pinocchio::Transform3s::Identity();
+      auto func = GenericTransformation<PositionBit | OrientationBit>::create(
+          name, robot(), f2.joint(), ref2, Id, mask);
+      return Implicit::create(
+          func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
+    const char* constraintName, const char* joint1Name,
+    const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
+    const hpp::pinocchio::Transform3s& M2, const boost::python::list m) {
+  try {
+    if (!robot()) throw std::logic_error("No robot loaded");
+
+    using hpp::constraints::GenericTransformation;
+    using hpp::constraints::Implicit;
+    using hpp::constraints::OrientationBit;
+    using hpp::constraints::PositionBit;
+    auto mask = extract_vector<bool>(m);
+
+    std::string name(constraintName);
+
+    hpp::pinocchio::Frame f2 = robot()->getFrameByName(joint2Name);
+    const hpp::pinocchio::Transform3s ref2 = f2.positionInParentJoint() * M2;
+
+    if (joint1Name && std::strlen(joint1Name) > 0) {
+      hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
+      const hpp::pinocchio::Transform3s ref1 =
+          f1.positionInParentJoint() * M1;
+      auto func = GenericTransformation<PositionBit | OrientationBit |
+                                        hpp::constraints::RelativeBit>::create(
+          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
+      return Implicit::create(
+          func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
+    } else {
+      const hpp::pinocchio::Transform3s Id =
+          hpp::pinocchio::Transform3s::Identity();
+      auto func = GenericTransformation<PositionBit | OrientationBit>::create(
+          name, robot(), f2.joint(), ref2, Id, mask);
+      return Implicit::create(
+          func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 
@@ -312,6 +432,9 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs)
       .PYHPP_DEFINE_METHOD(Problem, addPartialCom)
       .PYHPP_DEFINE_METHOD(Problem, getPartialCom)
+      .PYHPP_DEFINE_METHOD(Problem, createRelativeComConstraint)
+      .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint)
+      .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint2)
       ;
 
   register_problem_converters();
