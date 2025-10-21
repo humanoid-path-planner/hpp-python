@@ -141,6 +141,19 @@ struct Problem {
 
   ConstraintResult applyConstraints(ConfigurationIn_t config);
   boost::python::tuple isConfigValid(ConfigurationIn_t dofArray);
+  void addNumericalConstraintsToConfigProjector1(const char* configProjName,
+                                      boost::python::list constraints,
+                                      boost::python::list priorities);
+  void addNumericalConstraintsToConfigProjector2(const char* configProjName,
+                                        boost::python::list constraints);
+  hpp::constraints::ImplicitPtr_t createComBetweenFeet(
+    const char* constraintName, const char* comName, const char* jointLName,
+    const char* jointRName, const hpp::pinocchio::vector3_t& pointL, 
+    const hpp::pinocchio::vector3_t& pointR, const char* jointRefName, 
+    const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask);
+  hpp::core::ConstraintSetPtr_t constraints_;
+  value_type errorThreshold_;
+  size_type maxIterProjection_;
 };
 
 }  // namespace core
