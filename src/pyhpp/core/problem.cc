@@ -31,7 +31,12 @@
 #include "pyhpp/core/problem.hh"
 
 #include <boost/python.hpp>
+#include <hpp/constraints/com-between-feet.hh>
+#include <hpp/constraints/generic-transformation.hh>
+#include <hpp/constraints/implicit.hh>
+#include <hpp/constraints/relative-com.hh>
 #include <hpp/core/collision-validation.hh>
+#include <hpp/core/config-projector.hh>
 #include <hpp/core/config-validations.hh>
 #include <hpp/core/configuration-shooter.hh>
 #include <hpp/core/distance.hh>
@@ -39,16 +44,11 @@
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
-#include <hpp/core/config-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
-#include <pyhpp/core/steering-method.hh>
 #include <hpp/pinocchio/center-of-mass-computation.hh>
-#include <hpp/constraints/implicit.hh>
-#include <hpp/constraints/relative-com.hh>
-#include <hpp/constraints/com-between-feet.hh>
-#include <hpp/constraints/generic-transformation.hh>
 #include <hpp/pinocchio/frame.hh>
+#include <pyhpp/core/steering-method.hh>
 
 namespace pyhpp {
 namespace core {
@@ -56,9 +56,12 @@ namespace core {
 using namespace boost::python;
 
 Problem::Problem(const DevicePtr_t& robot)
-    : obj(hpp::core::Problem::create(robot)), errorThreshold_(1e-4), maxIterProjection_(20) {
-        constraints_ = hpp::core::ConstraintSet::create(robot, "Default constraint set");
-    }
+    : obj(hpp::core::Problem::create(robot)),
+      errorThreshold_(1e-4),
+      maxIterProjection_(20) {
+  constraints_ =
+      hpp::core::ConstraintSet::create(robot, "Default constraint set");
+}
 
 const DevicePtr_t& Problem::robot() const { return obj->robot(); }
 
@@ -150,7 +153,8 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 
 void Problem::resetGoalConfigs() { obj->resetGoalConfigs(); }
 
-void Problem::addPartialCom(const std::string& name, boost::python::list pyjointNames) {
+void Problem::addPartialCom(const std::string& name,
+                            boost::python::list pyjointNames) {
   try {
     hpp::pinocchio::CenterOfMassComputationPtr_t comc =
         hpp::pinocchio::CenterOfMassComputation::create(robot());
@@ -202,8 +206,7 @@ hpp::constraints::ImplicitPtr_t Problem::createRelativeComConstraint(
     std::string name(constraintName), comN(comName);
     if (comN.compare("") == 0) {
       return hpp::constraints::Implicit::create(
-          hpp::constraints::RelativeCom::create(name, robot(), joint, point,
-                                                m),
+          hpp::constraints::RelativeCom::create(name, robot(), joint, point, m),
           numberOfTrue(m) * hpp::constraints::EqualToZero);
     } else {
       if (!centerOfMassComputations[comN])
@@ -220,9 +223,8 @@ hpp::constraints::ImplicitPtr_t Problem::createRelativeComConstraint(
 }
 
 hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
-    const char* constraintName, const char* joint1Name,
-    const char* joint2Name, const hpp::pinocchio::Transform3s& M,
-    boost::python::list m) {
+    const char* constraintName, const char* joint1Name, const char* joint2Name,
+    const hpp::pinocchio::Transform3s& M, boost::python::list m) {
   try {
     if (!robot()) throw std::logic_error("No robot loaded");
 
@@ -243,9 +245,10 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
       hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
       const hpp::pinocchio::Transform3s ref1 =
           f1.positionInParentJoint() * hpp::pinocchio::Transform3s::Identity();
-      auto func = GenericTransformation<PositionBit | OrientationBit |
-                                        hpp::constraints::RelativeBit>::create(
-          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
+      auto func = GenericTransformation<
+          PositionBit | OrientationBit |
+          hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
+                                                 f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {
@@ -263,8 +266,8 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
 }
 
 hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
-    const char* constraintName, const char* joint1Name,
-    const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
+    const char* constraintName, const char* joint1Name, const char* joint2Name,
+    const hpp::pinocchio::Transform3s& M1,
     const hpp::pinocchio::Transform3s& M2, const boost::python::list m) {
   try {
     if (!robot()) throw std::logic_error("No robot loaded");
@@ -282,11 +285,11 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
 
     if (joint1Name && std::strlen(joint1Name) > 0) {
       hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
-      const hpp::pinocchio::Transform3s ref1 =
-          f1.positionInParentJoint() * M1;
-      auto func = GenericTransformation<PositionBit | OrientationBit |
-                                        hpp::constraints::RelativeBit>::create(
-          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
+      const hpp::pinocchio::Transform3s ref1 = f1.positionInParentJoint() * M1;
+      auto func = GenericTransformation<
+          PositionBit | OrientationBit |
+          hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
+                                                 f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {
@@ -302,16 +305,19 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
   }
 }
 
-void Problem::setConstantRightHandSide(hpp::constraints::ImplicitPtr_t constraint,
-                                       bool constant) {
+void Problem::setConstantRightHandSide(
+    hpp::constraints::ImplicitPtr_t constraint, bool constant) {
   try {
     if (constant) {
-      hpp::constraints::ComparisonTypes_t eqtypes(constraint->function().outputDerivativeSize(), hpp::constraints::EqualToZero);
+      hpp::constraints::ComparisonTypes_t eqtypes(
+          constraint->function().outputDerivativeSize(),
+          hpp::constraints::EqualToZero);
       constraint->comparisonType(eqtypes);
     } else {
-      hpp::constraints::ComparisonTypes_t eqtypes(constraint->function().outputDerivativeSize(), hpp::constraints::Equality);
+      hpp::constraints::ComparisonTypes_t eqtypes(
+          constraint->function().outputDerivativeSize(),
+          hpp::constraints::Equality);
       constraint->comparisonType(eqtypes);
-
     }
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
@@ -335,40 +341,42 @@ ConstraintResult Problem::applyConstraints(ConfigurationIn_t config) {
   }
 }
 
-
 boost::python::tuple Problem::isConfigValid(ConfigurationIn_t dofArray) {
-    try {
-        Configuration_t config = dofArray;
-        hpp::core::ValidationReportPtr_t validationReport;
-        bool validity = obj->configValidations()->validate(config, validationReport);
-        
-        std::string report;
-        if (validity) {
-            report = "";
-        } else {
-            std::ostringstream oss;
-            oss << *validationReport;
-            report = oss.str();
-        }
-        return boost::python::make_tuple(validity, report);
-    } catch (const std::exception& exc) {
-        throw std::logic_error(exc.what());
+  try {
+    Configuration_t config = dofArray;
+    hpp::core::ValidationReportPtr_t validationReport;
+    bool validity =
+        obj->configValidations()->validate(config, validationReport);
+
+    std::string report;
+    if (validity) {
+      report = "";
+    } else {
+      std::ostringstream oss;
+      oss << *validationReport;
+      report = oss.str();
     }
+    return boost::python::make_tuple(validity, report);
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
 }
 
-void Problem::addNumericalConstraintsToConfigProjector1(const char* configProjName,
-                                      boost::python::list constraints,
-                                      boost::python::list priorities) {
+void Problem::addNumericalConstraintsToConfigProjector1(
+    const char* configProjName, boost::python::list constraints,
+    boost::python::list priorities) {
   try {
-      auto constraintsVec = extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
-      auto prioritiesVec = extract_vector<std::size_t>(priorities);
-      hpp::core::ConfigProjectorPtr_t configProjector = constraints_->configProjector();
+    auto constraintsVec =
+        extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
+    auto prioritiesVec = extract_vector<std::size_t>(priorities);
+    hpp::core::ConfigProjectorPtr_t configProjector =
+        constraints_->configProjector();
     for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
-        if (!configProjector) {
-          configProjector = hpp::core::ConfigProjector::create(
-              robot(), configProjName, errorThreshold_, maxIterProjection_);
-          constraints_->addConstraint(configProjector);
-        }
+      if (!configProjector) {
+        configProjector = hpp::core::ConfigProjector::create(
+            robot(), configProjName, errorThreshold_, maxIterProjection_);
+        constraints_->addConstraint(configProjector);
+      }
       configProjector->add(constraintsVec[i], prioritiesVec[i]);
     }
   } catch (const std::exception& exc) {
@@ -376,17 +384,19 @@ void Problem::addNumericalConstraintsToConfigProjector1(const char* configProjNa
   }
 }
 
-void Problem::addNumericalConstraintsToConfigProjector2(const char* configProjName,
-                                      boost::python::list constraints) {
+void Problem::addNumericalConstraintsToConfigProjector2(
+    const char* configProjName, boost::python::list constraints) {
   try {
-      auto constraintsVec = extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
-      hpp::core::ConfigProjectorPtr_t configProjector = constraints_->configProjector();
+    auto constraintsVec =
+        extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
+    hpp::core::ConfigProjectorPtr_t configProjector =
+        constraints_->configProjector();
     for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
-        if (!configProjector) {
-          configProjector = hpp::core::ConfigProjector::create(
-              robot(), configProjName, errorThreshold_, maxIterProjection_);
-          constraints_->addConstraint(configProjector);
-        }
+      if (!configProjector) {
+        configProjector = hpp::core::ConfigProjector::create(
+            robot(), configProjName, errorThreshold_, maxIterProjection_);
+        constraints_->addConstraint(configProjector);
+      }
       configProjector->add(constraintsVec[i], 0);
     }
   } catch (const std::exception& exc) {
@@ -396,44 +406,45 @@ void Problem::addNumericalConstraintsToConfigProjector2(const char* configProjNa
 
 hpp::constraints::ImplicitPtr_t Problem::createComBetweenFeet(
     const char* constraintName, const char* comName, const char* jointLName,
-    const char* jointRName, const hpp::pinocchio::vector3_t& pointL, 
-    const hpp::pinocchio::vector3_t& pointR, const char* jointRefName, 
+    const char* jointRName, const hpp::pinocchio::vector3_t& pointL,
+    const hpp::pinocchio::vector3_t& pointR, const char* jointRefName,
     const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask) {
-  
   if (!robot()) throw std::logic_error("No robot loaded");
-  
+
   try {
     hpp::pinocchio::JointPtr_t jointL, jointR, jointRef;
     hpp::pinocchio::CenterOfMassComputationPtr_t comc;
-    
+
     auto m = extract_vector<bool>(mask);
-    
+
     jointL = robot()->getJointByName(jointLName);
     jointR = robot()->getJointByName(jointRName);
-    
+
     if (std::string(jointRefName) == std::string(""))
       jointRef = robot()->rootJoint();
     else
       jointRef = robot()->getJointByName(jointRefName);
-    
+
     std::string name(constraintName), comN(comName);
-    
+
     hpp::constraints::ComparisonTypes_t comps(2, hpp::constraints::EqualToZero);
     comps.push_back(hpp::constraints::Superior);
     comps.push_back(hpp::constraints::Inferior);
-    
+
     if (comN.compare("") == 0) {
       return hpp::constraints::Implicit::create(
-          hpp::constraints::ComBetweenFeet::create(
-              name, robot(), jointL, jointR, pointL, pointR, jointRef, pointRef, m),
+          hpp::constraints::ComBetweenFeet::create(name, robot(), jointL,
+                                                   jointR, pointL, pointR,
+                                                   jointRef, pointRef, m),
           comps);
     } else {
       if (!centerOfMassComputations[comN])
         throw std::logic_error("Partial COM " + comN + " not found.");
       comc = centerOfMassComputations[comN];
       return hpp::constraints::Implicit::create(
-          hpp::constraints::ComBetweenFeet::create(
-              name, robot(), comc, jointL, jointR, pointL, pointR, jointRef, pointRef, m),
+          hpp::constraints::ComBetweenFeet::create(name, robot(), comc, jointL,
+                                                   jointR, pointL, pointR,
+                                                   jointRef, pointRef, m),
           comps);
     }
   } catch (const std::exception& exc) {
@@ -579,19 +590,20 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
       .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
-      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector1)
-      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector2)      
+      .def("addNumericalConstraintsToConfigProjector",
+           &Problem::addNumericalConstraintsToConfigProjector1)
+      .def("addNumericalConstraintsToConfigProjector",
+           &Problem::addNumericalConstraintsToConfigProjector2)
       .def_readwrite("errorThreshold", &Problem::errorThreshold_)
       .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
-      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet)
-      ;
+      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet);
 
   register_problem_converters();
 
   class_<ConstraintResult>("ConstraintResult")
-    .def_readwrite("success", &ConstraintResult::success)
-    .def_readwrite("configuration", &ConstraintResult::configuration)
-    .def_readwrite("error", &ConstraintResult::error);
+      .def_readwrite("success", &ConstraintResult::success)
+      .def_readwrite("configuration", &ConstraintResult::configuration)
+      .def_readwrite("error", &ConstraintResult::error);
 }
 
 }  // namespace core

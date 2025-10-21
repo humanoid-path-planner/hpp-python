@@ -30,15 +30,14 @@
 
 from hpp import Transform
 from pinocchio import SE3
-from pyhpp.constraints import RelativeCom, Implicit, Transformation, RelativeTransformation, ComparisonType, ComparisonTypes
+
+
 # # This class provides tools to create static stability constraints
 class StaticStabilityConstraintsFactory:
-    def __init__(
-        self,
-        problem
-    ):
+    def __init__(self, problem):
         self.problem = problem
         self.robot = problem.robot()
+
     def _getCOM(self, com):
         from numpy import array
 
@@ -111,12 +110,12 @@ class StaticStabilityConstraintsFactory:
 
         return created_constraints
 
-# # # Create static stability constraints where the feet are fixed on the ground,
+    # # # Create static stability constraints where the feet are fixed on the ground,
     def createStaticStabilityConstraint(
         self, prefix, comName, leftAnkle, rightAnkle, q0, maskCom=(True,) * 3
     ):
         created_constraints = dict()
-        
+
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
         Ml = Transform(_tfs[0])
         Mr = Transform(_tfs[1])
@@ -158,12 +157,11 @@ class StaticStabilityConstraintsFactory:
 
         return created_constraints
 
-
     def createAlignedCOMStabilityConstraint(
         self, prefix, comName, leftAnkle, rightAnkle, q0, sliding
     ):
         created_constraints = dict()
-        
+
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
         Ml = Transform(_tfs[0])
         Mr = Transform(_tfs[1])
@@ -195,24 +193,24 @@ class StaticStabilityConstraintsFactory:
         # Pose of the right foot
         result.append(prefix + "pose-right-foot")
         constraint = self.problem.createTransformationConstraint2(
-            result[-1], 
-            "", 
-            rightAnkle, 
+            result[-1],
+            "",
+            rightAnkle,
             SE3(Mr.quaternion.toRotationMatrix(), Mr.translation),
             SE3.Identity(),
-            mask
+            mask,
         )
         created_constraints[result[-1]] = constraint
 
         # Pose of the left foot
         result.append(prefix + "pose-left-foot")
         constraint = self.problem.createTransformationConstraint2(
-            result[-1], 
-            "", 
-            leftAnkle, 
+            result[-1],
+            "",
+            leftAnkle,
             SE3(Ml.quaternion.toRotationMatrix(), Ml.translation),
             SE3.Identity(),
-            mask
+            mask,
         )
         created_constraints[result[-1]] = constraint
 

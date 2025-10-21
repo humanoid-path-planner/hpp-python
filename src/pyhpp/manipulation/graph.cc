@@ -30,7 +30,6 @@
 #include <../src/pyhpp/manipulation/device.hh>
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/problem.hh>
-#include "pyhpp/core/problem.hh"
 #include <boost/python.hpp>
 #include <hpp/constraints/convex-shape-contact.hh>
 #include <hpp/constraints/differentiable-function.hh>
@@ -45,6 +44,7 @@
 #include <pinocchio/spatial/se3.hpp>
 
 #include "hpp/manipulation/constraint-set.hh"
+#include "pyhpp/core/problem.hh"
 
 namespace {
 
@@ -730,8 +730,8 @@ boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
 // Constraint application
 // =============================================================================
 
-pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(PyWStatePtr_t state,
-                                                 ConfigurationIn_t input) {
+pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(
+    PyWStatePtr_t state, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(state->obj->configConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
@@ -745,9 +745,8 @@ pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(PyWStatePtr_t stat
   return pyhpp::core::ConstraintResult(success, output, residualError);
 }
 
-pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
-                                                ConfigurationIn_t q_rhs,
-                                                ConfigurationIn_t input) {
+pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(
+    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->pathConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
@@ -762,9 +761,8 @@ pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(PyWEdgePtr_t transi
   return pyhpp::core::ConstraintResult(success, output, residualError);
 }
 
-pyhpp::core::ConstraintResult PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
-                                                ConfigurationIn_t q_rhs,
-                                                ConfigurationIn_t input) {
+pyhpp::core::ConstraintResult PyWGraph::generateTargetConfig(
+    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());

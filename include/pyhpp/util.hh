@@ -86,20 +86,20 @@ struct VectorOfPtr {
     return *v[i];
   }
 };
-template<typename T>
+template <typename T>
 std::vector<T> extract_vector(boost::python::list py_list) {
-    std::vector<T> result;
-    result.reserve(boost::python::len(py_list));
-    
-    for (int i = 0; i < boost::python::len(py_list); ++i) {
-        boost::python::extract<T> extractor(py_list[i]);
-        if (extractor.check()) {
-            result.push_back(extractor());
-        } else {
-            throw std::runtime_error("Failed to extract element");
-        }
+  std::vector<T> result;
+  result.reserve(boost::python::len(py_list));
+
+  for (int i = 0; i < boost::python::len(py_list); ++i) {
+    boost::python::extract<T> extractor(py_list[i]);
+    if (extractor.check()) {
+      result.push_back(extractor());
+    } else {
+      throw std::runtime_error("Failed to extract element");
     }
-    return result;
+  }
+  return result;
 }
 template <typename T>
 boost::python::list to_python_list(const std::vector<T>& vec) {

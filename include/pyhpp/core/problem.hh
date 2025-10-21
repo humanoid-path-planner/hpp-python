@@ -58,7 +58,6 @@ typedef hpp::core::value_type value_type;
 typedef hpp::core::size_type size_type;
 typedef hpp::core::Configuration_t Configuration_t;
 
-
 struct ConstraintResult {
   bool success;
   Configuration_t configuration;
@@ -68,7 +67,6 @@ struct ConstraintResult {
   ConstraintResult(bool s, const Configuration_t& config, value_type err)
       : success(s), configuration(config), error(err) {}
 };
-
 
 // Wrapper class for hpp::core::Problem
 struct Problem {
@@ -115,42 +113,41 @@ struct Problem {
     return bool(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, obj));
   }
 
-  //Constraints utility functions
+  // Constraints utility functions
 
   void addPartialCom(const std::string& name, boost::python::list pyjointNames);
   hpp::pinocchio::vector3_t getPartialCom(const std::string& name);
-  std::map<std::string, hpp::pinocchio::CenterOfMassComputationPtr_t> centerOfMassComputations;
-  hpp::constraints::ImplicitPtr_t createRelativeComConstraint(const char* constraintName,
-                                          const char* comName,
-                                          const char* jointName,
-                                          hpp::pinocchio::vector3_t point,
-                                          boost::python::list mask);
+  std::map<std::string, hpp::pinocchio::CenterOfMassComputationPtr_t>
+      centerOfMassComputations;
+  hpp::constraints::ImplicitPtr_t createRelativeComConstraint(
+      const char* constraintName, const char* comName, const char* jointName,
+      hpp::pinocchio::vector3_t point, boost::python::list mask);
 
   hpp::constraints::ImplicitPtr_t createTransformationConstraint(
-    const char* constraintName, const char* joint1Name,
-    const char* joint2Name, const hpp::pinocchio::Transform3s& M,
-    boost::python::list mask);
+      const char* constraintName, const char* joint1Name,
+      const char* joint2Name, const hpp::pinocchio::Transform3s& M,
+      boost::python::list mask);
 
   hpp::constraints::ImplicitPtr_t createTransformationConstraint2(
-    const char* constraintName, const char* joint1Name,
-    const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
-    const hpp::pinocchio::Transform3s& M2, const boost::python::list mask);
+      const char* constraintName, const char* joint1Name,
+      const char* joint2Name, const hpp::pinocchio::Transform3s& M1,
+      const hpp::pinocchio::Transform3s& M2, const boost::python::list mask);
 
   void setConstantRightHandSide(hpp::constraints::ImplicitPtr_t constraint,
                                 bool constant);
 
   ConstraintResult applyConstraints(ConfigurationIn_t config);
   boost::python::tuple isConfigValid(ConfigurationIn_t dofArray);
-  void addNumericalConstraintsToConfigProjector1(const char* configProjName,
-                                      boost::python::list constraints,
-                                      boost::python::list priorities);
-  void addNumericalConstraintsToConfigProjector2(const char* configProjName,
-                                        boost::python::list constraints);
+  void addNumericalConstraintsToConfigProjector1(
+      const char* configProjName, boost::python::list constraints,
+      boost::python::list priorities);
+  void addNumericalConstraintsToConfigProjector2(
+      const char* configProjName, boost::python::list constraints);
   hpp::constraints::ImplicitPtr_t createComBetweenFeet(
-    const char* constraintName, const char* comName, const char* jointLName,
-    const char* jointRName, const hpp::pinocchio::vector3_t& pointL, 
-    const hpp::pinocchio::vector3_t& pointR, const char* jointRefName, 
-    const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask);
+      const char* constraintName, const char* comName, const char* jointLName,
+      const char* jointRName, const hpp::pinocchio::vector3_t& pointL,
+      const hpp::pinocchio::vector3_t& pointR, const char* jointRefName,
+      const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask);
   hpp::core::ConstraintSetPtr_t constraints_;
   value_type errorThreshold_;
   size_type maxIterProjection_;
