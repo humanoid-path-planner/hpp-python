@@ -33,12 +33,11 @@
 #include <hpp/manipulation/graph/graph.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
-
 namespace pyhpp {
 namespace core {
 struct ConstraintResult;
 }
-}
+}  // namespace pyhpp
 
 namespace pyhpp {
 namespace manipulation {
@@ -211,13 +210,13 @@ struct PyWGraph {
                                          const char* joint2);
 
   pyhpp::core::ConstraintResult applyStateConstraints(PyWStatePtr_t state,
-                        ConfigurationIn_t input);
+                                                      ConfigurationIn_t input);
   pyhpp::core::ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition,
-                       ConfigurationIn_t q_rhs,
-                       ConfigurationIn_t input);
+                                                     ConfigurationIn_t q_rhs,
+                                                     ConfigurationIn_t input);
   pyhpp::core::ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
-                       ConfigurationIn_t q_rhs,
-                       ConfigurationIn_t input);
+                                                     ConfigurationIn_t q_rhs,
+                                                     ConfigurationIn_t input);
   // Subgraph management
   void createSubGraph(const char* subgraphName,
                       hpp::core::RoadmapPtr_t roadmap);

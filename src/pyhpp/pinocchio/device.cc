@@ -33,8 +33,8 @@
 #include <hpp/pinocchio/device-data.hh>
 #include <hpp/pinocchio/device.hh>
 #include <hpp/pinocchio/frame.hh>
-#include <hpp/pinocchio/joint.hh>
 #include <hpp/pinocchio/gripper.hh>
+#include <hpp/pinocchio/joint.hh>
 #include <hpp/pinocchio/liegroup-space.hh>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
@@ -104,7 +104,7 @@ typedef hpp::pinocchio::Frame Frame;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
 static void setJointBounds(Device& device, const char* jointName,
-                            boost::python::list py_jointBounds) {
+                           boost::python::list py_jointBounds) {
   Frame frame = device.getFrameByName(jointName);
   JointPtr_t joint = frame.joint();
   auto jointBounds = extract_vector<value_type>(py_jointBounds);
@@ -136,13 +136,13 @@ static boost::python::dict rankInConfiguration(Device& device) {
   try {
     auto joint_names = device.model().names;
     for (const auto& joint_name : joint_names) {
-          Frame frame = device.getFrameByName(joint_name.c_str());
-          if (!frame.isFixed()) {
-               JointPtr_t joint = frame.joint();
-               if (joint) {
-                    rank_dict[joint_name] = joint->rankInConfiguration();
-               }
-          }
+      Frame frame = device.getFrameByName(joint_name.c_str());
+      if (!frame.isFixed()) {
+        JointPtr_t joint = frame.joint();
+        if (joint) {
+          rank_dict[joint_name] = joint->rankInConfiguration();
+        }
+      }
     }
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
@@ -153,9 +153,9 @@ static boost::python::dict rankInConfiguration(Device& device) {
 typedef hpp::pinocchio::FrameIndex FrameIndex;
 typedef hpp::pinocchio::SE3 SE3;
 
-static boost::python::list getJointsPosition(Device& device,
-                                             const Configuration_t& dofArray,
-                                             const boost::python::list& jointNames) {
+static boost::python::list getJointsPosition(
+    Device& device, const Configuration_t& dofArray,
+    const boost::python::list& jointNames) {
   try {
     device.currentConfiguration(dofArray);
     device.computeForwardKinematics();
@@ -164,25 +164,27 @@ static boost::python::list getJointsPosition(Device& device,
     const Model& model(device.model());
     const Data& data(device.data());
     boost::python::list transforms;
-    for (Py_ssize_t i = 0; i < static_cast<Py_ssize_t>(boost::python::len(jointNames)); ++i) {
+    for (Py_ssize_t i = 0;
+         i < static_cast<Py_ssize_t>(boost::python::len(jointNames)); ++i) {
       std::string n = boost::python::extract<std::string>(jointNames[i]);
       if (!model.existFrame(n)) {
         throw std::logic_error("Robot has no frame with name " + n);
       }
       FrameIndex joint = model.getFrameId(n);
       if (model.frames.size() <= (std::size_t)joint)
-        throw std::logic_error("Frame index of joint " + n + " out of bounds: " + std::to_string(joint));
-    const SE3& M = data.oMf[joint];
-    Transform3s::Quaternion q(M.rotation());
-    boost::python::list t;
-    t.append(M.translation()[0]);
-    t.append(M.translation()[1]);
-    t.append(M.translation()[2]);
-    t.append(q.x());
-    t.append(q.y());
-    t.append(q.z());
-    t.append(q.w());
-    transforms.append(t);
+        throw std::logic_error("Frame index of joint " + n +
+                               " out of bounds: " + std::to_string(joint));
+      const SE3& M = data.oMf[joint];
+      Transform3s::Quaternion q(M.rotation());
+      boost::python::list t;
+      t.append(M.translation()[0]);
+      t.append(M.translation()[1]);
+      t.append(M.translation()[2]);
+      t.append(q.x());
+      t.append(q.y());
+      t.append(q.z());
+      t.append(q.w());
+      transforms.append(t);
     }
     return transforms;
   } catch (const std::exception& exc) {
@@ -249,7 +251,6 @@ void exposeDevice() {
       .def("setJointBounds", &setJointBounds)
       .def("getCenterOfMass", &getCenterOfMass)
       .def("getJointsPosition", &getJointsPosition);
-
 }
 }  // namespace pinocchio
 }  // namespace pyhpp
