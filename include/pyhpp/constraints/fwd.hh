@@ -42,6 +42,8 @@ void exposeExplicit();
 void exposeLockedJoint();
 void exposeHierarchicalIterativeSolver();
 void exposeBySubstitution();
+void exposeRelativeCom();
+
 }  // namespace constraints
 }  // namespace pyhpp
 
