@@ -39,9 +39,17 @@
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
+#include <hpp/core/config-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method.hh>
 #include <pyhpp/core/steering-method.hh>
+#include <hpp/pinocchio/center-of-mass-computation.hh>
+#include <hpp/constraints/implicit.hh>
+#include <hpp/constraints/relative-com.hh>
+#include <hpp/constraints/com-between-feet.hh>
+#include <hpp/constraints/generic-transformation.hh>
+#include <hpp/pinocchio/frame.hh>
+
 namespace pyhpp {
 namespace core {
 
@@ -139,6 +147,38 @@ void Problem::addGoalConfig(ConfigurationIn_t config) {
 }
 
 void Problem::resetGoalConfigs() { obj->resetGoalConfigs(); }
+
+void Problem::addPartialCom(const std::string& name, boost::python::list pyjointNames) {
+  try {
+    hpp::pinocchio::CenterOfMassComputationPtr_t comc =
+        hpp::pinocchio::CenterOfMassComputation::create(robot());
+    auto jointNames = extract_vector<std::string>(pyjointNames);
+
+    for (long unsigned int i = 0; i < jointNames.size(); ++i) {
+      std::string name(jointNames[i]);
+      hpp::pinocchio::JointPtr_t j = robot()->getJointByName(name);
+      if (!j) throw std::logic_error("One joint not found.");
+      comc->add(j);
+    }
+    centerOfMassComputations[name] = comc;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+hpp::pinocchio::vector3_t Problem::getPartialCom(const std::string& name) {
+  try {
+    if (!centerOfMassComputations[name]) {
+      throw std::logic_error("Partial COM " + name + " not found.");
+    }
+    hpp::pinocchio::CenterOfMassComputationPtr_t comc =
+        centerOfMassComputations[name];
+    comc->compute(hpp::pinocchio::COM);
+    return comc->com();
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
 
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
@@ -269,7 +309,11 @@ void exposeProblem() {
            (arg("configurationShooter")))
       .PYHPP_DEFINE_METHOD(Problem, initConfig)
       .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
-      .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs);
+      .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs)
+      .PYHPP_DEFINE_METHOD(Problem, addPartialCom)
+      .PYHPP_DEFINE_METHOD(Problem, getPartialCom)
+      ;
+
   register_problem_converters();
 
   class_<ConstraintResult>("ConstraintResult")

@@ -114,6 +114,12 @@ struct Problem {
   bool isManipulationProblem() const {
     return bool(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, obj));
   }
+
+  //Constraints utility functions
+
+  void addPartialCom(const std::string& name, boost::python::list pyjointNames);
+  hpp::pinocchio::vector3_t getPartialCom(const std::string& name);
+  std::map<std::string, hpp::pinocchio::CenterOfMassComputationPtr_t> centerOfMassComputations;
 };
 
 }  // namespace core
