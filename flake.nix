@@ -43,6 +43,7 @@
                   ./tests
                 ];
               };
+              patches = [ ];
               propagatedBuildInputs = (super.propagatedBuildInputs or [ ]) ++ [
                 pkgs.python3Packages.hpp-tutorial
               ];
