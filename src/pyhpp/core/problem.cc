@@ -325,7 +325,7 @@ void Problem::setConstantRightHandSide(
   }
 }
 
-ConstraintResult Problem::applyConstraints(ConfigurationIn_t config) {
+boost::python::tuple Problem::applyConstraints(ConfigurationIn_t config) {
   bool success = false;
   double residualError = 0.0;
   try {
@@ -335,8 +335,7 @@ ConstraintResult Problem::applyConstraints(ConfigurationIn_t config) {
             constraints_->configProjector()) {
       residualError = configProjector->residualError();
     }
-    ConstraintResult result(success, output, residualError);
-    return result;
+    return boost::python::make_tuple(success, output, residualError);
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
@@ -673,11 +672,6 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, directPath);
 
   register_problem_converters();
-
-  class_<ConstraintResult>("ConstraintResult")
-      .def_readwrite("success", &ConstraintResult::success)
-      .def_readwrite("configuration", &ConstraintResult::configuration)
-      .def_readwrite("error", &ConstraintResult::error);
 }
 
 }  // namespace core

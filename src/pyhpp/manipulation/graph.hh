@@ -34,12 +34,6 @@
 #include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
-namespace core {
-struct ConstraintResult;
-}
-}  // namespace pyhpp
-
-namespace pyhpp {
 namespace manipulation {
 
 typedef hpp::manipulation::Configuration_t Configuration_t;
@@ -209,12 +203,12 @@ struct PyWGraph {
   void removeCollisionPairFromTransition(PyWEdgePtr_t edge, const char* joint1,
                                          const char* joint2);
 
-  pyhpp::core::ConstraintResult applyStateConstraints(PyWStatePtr_t state,
-                                                      ConfigurationIn_t input);
-  pyhpp::core::ConstraintResult applyLeafConstraints(PyWEdgePtr_t transition,
-                                                     ConfigurationIn_t q_rhs,
-                                                     ConfigurationIn_t input);
-  pyhpp::core::ConstraintResult generateTargetConfig(PyWEdgePtr_t transition,
+  boost::python::tuple applyStateConstraints(PyWStatePtr_t state,
+                                              ConfigurationIn_t input);
+  boost::python::tuple applyLeafConstraints(PyWEdgePtr_t transition,
+                                             ConfigurationIn_t q_rhs,
+                                             ConfigurationIn_t input);
+  boost::python::tuple generateTargetConfig(PyWEdgePtr_t transition,
                                                      ConfigurationIn_t q_rhs,
                                                      ConfigurationIn_t input);
   // Subgraph management
