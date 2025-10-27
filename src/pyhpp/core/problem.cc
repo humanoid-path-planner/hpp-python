@@ -42,6 +42,7 @@
 #include <hpp/core/distance.hh>
 #include <hpp/core/joint-bound-validation.hh>
 #include <hpp/core/path-projector.hh>
+#include <hpp/core/path-vector.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/problem-target.hh>
 #include <hpp/core/problem.hh>
@@ -477,6 +478,52 @@ hpp::constraints::ImplicitPtr_t Problem::createComBetweenFeet(
   }
 }
 
+boost::python::tuple Problem::directPath(ConfigurationIn_t start, ConfigurationIn_t end, bool validate) {
+  std::string report = "";
+  
+  if (!obj) throw std::runtime_error("The problem is not defined.");
+  
+  SteeringMethodPtr_t sm(obj->steeringMethod());
+  PathPtr_t dp = (*sm)(start, end);
+  if (!dp) {
+    report = "Steering method failed to build a path.";
+    return boost::python::make_tuple(false, nullptr, report);
+  }
+  
+  PathPtr_t dp1, dp2;
+  hpp::core::PathValidationReportPtr_t r;
+  bool projValid = true, projected = true, pathValid = true;
+  
+  if (validate) {
+    PathProjectorPtr_t proj(obj->pathProjector());
+    if (proj) {
+      projected = proj->apply(dp, dp1);
+    } else {
+      dp1 = dp;
+    }
+    projValid = obj->pathValidation()->validate(dp1, false, dp2, r);
+    pathValid = projValid && projected;
+    if (!projValid) {
+      if (r) {
+        std::ostringstream oss;
+        oss << *r;
+        report = oss.str();
+      } else {
+        report = "No path validation report.";
+      }
+    }
+  } else {
+    dp2 = dp;
+  }
+  
+  hpp::core::PathVectorPtr_t path(
+    hpp::core::PathVector::create(dp2->outputSize(), dp2->outputDerivativeSize()));
+  path->appendPath(dp2);
+  return boost::python::make_tuple(pathValid, path, report);
+}
+
+
+
 typedef PyWSteeringMethodPtr_t (Problem::*GetSteeringMethod)() const;
 typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 
@@ -623,7 +670,8 @@ void exposeProblem() {
            &Problem::addNumericalConstraintsToConfigProjector2)
       .def_readwrite("errorThreshold", &Problem::errorThreshold_)
       .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
-      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet);
+      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet)
+      .PYHPP_DEFINE_METHOD(Problem, directPath);
 
   register_problem_converters();
 

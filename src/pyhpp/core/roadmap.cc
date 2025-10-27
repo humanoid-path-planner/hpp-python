@@ -29,6 +29,7 @@
 
 #include <boost/python.hpp>
 #include <hpp/core/roadmap.hh>
+#include <hpp/core/path.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -68,6 +69,21 @@ struct RWrapper {
     roadmap.addEdge(nodeFrom, nodeTo, path);
     return;
   }
+
+
+  static void addEdge2(Roadmap& roadmap, const ConfigurationIn_t from,
+                      ConfigurationIn_t to, const PathPtr_t& path, bool bothEdges) {
+    NodePtr_t nodeFrom = roadmap.addNode(from);
+    NodePtr_t nodeTo = roadmap.addNode(to);
+    if (bothEdges) {
+      roadmap.addEdge(nodeFrom, nodeTo, path);
+      roadmap.addEdge(nodeTo, nodeFrom, path->reverse());
+      return;
+    }
+    roadmap.addEdge(nodeFrom, nodeTo, path);
+    return;
+  }
+
 
   static boost::python::tuple nearestNode1(Roadmap& roadmap,
                                            ConfigurationIn_t configuration,
@@ -192,7 +208,8 @@ void exposeRoadmap() {
                             return_value_policy<reference_existing_object>())
       .PYHPP_DEFINE_METHOD1(RWrapper, addNodeAndEdge,
                             return_value_policy<reference_existing_object>())
-      .PYHPP_DEFINE_METHOD(RWrapper, addEdge)
+      .def("addEdge", &RWrapper::addEdge)
+      .def("addEdge", &RWrapper::addEdge2)
       .PYHPP_DEFINE_METHOD(Roadmap, addEdges)
       .def("merge",
            static_cast<void (Roadmap::*)(const RoadmapPtr_t&)>(&Roadmap::merge))
