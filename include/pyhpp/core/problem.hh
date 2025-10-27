@@ -151,8 +151,9 @@ struct Problem {
       const char* jointRName, const hpp::pinocchio::vector3_t& pointL,
       const hpp::pinocchio::vector3_t& pointR, const char* jointRefName,
       const hpp::pinocchio::vector3_t& pointRef, boost::python::list mask);
-  
-  boost::python::tuple directPath(ConfigurationIn_t start, ConfigurationIn_t end, bool validate);
+
+  boost::python::tuple directPath(ConfigurationIn_t start,
+                                  ConfigurationIn_t end, bool validate);
   hpp::core::ConstraintSetPtr_t constraints_;
   value_type errorThreshold_;
   size_type maxIterProjection_;
