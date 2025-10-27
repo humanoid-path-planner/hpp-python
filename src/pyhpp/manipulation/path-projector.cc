@@ -49,11 +49,11 @@ typedef pyhpp::core::PyWSteeringMethodPtr_t PyWSteeringMethodPtr_t;
 using namespace boost::python;
 void exposePathProjector() {
   def(
-      "createNoneProjector",
+      "NoneProjector",
       +[]() -> PathProjectorPtr_t { return PathProjectorPtr_t(); });
 
   def(
-      "createProgressiveProjector",
+      "ProgressiveProjector",
       +[](const DistancePtr_t& distance,
           const PyWSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -62,7 +62,7 @@ void exposePathProjector() {
       },
       (arg("distance"), arg("steeringMethod"), arg("step")));
   def(
-      "createProgressiveProjector",
+      "ProgressiveProjector",
       +[](const DistancePtr_t& distance,
           const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -72,7 +72,7 @@ void exposePathProjector() {
       (arg("distance"), arg("steeringMethod"), arg("step")));
 
   def(
-      "createDichotomyProjector",
+      "DichotomyProjector",
       +[](const DistancePtr_t& distance,
           const PyWSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -81,7 +81,7 @@ void exposePathProjector() {
       },
       (arg("distance"), arg("steeringMethod"), arg("step")));
   def(
-      "createDichotomyProjector",
+      "DichotomyProjector",
       +[](const DistancePtr_t& distance,
           const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -91,7 +91,7 @@ void exposePathProjector() {
       (arg("distance"), arg("steeringMethod"), arg("step")));
 
   def(
-      "createGlobalProjector",
+      "GlobalProjector",
       +[](const DistancePtr_t& distance,
           const PyWSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -100,7 +100,7 @@ void exposePathProjector() {
       },
       (arg("distance"), arg("steeringMethod"), arg("step")));
   def(
-      "createGlobalProjector",
+      "GlobalProjector",
       +[](const DistancePtr_t& distance,
           const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -110,7 +110,7 @@ void exposePathProjector() {
       (arg("distance"), arg("steeringMethod"), arg("step")));
 
   def(
-      "createRecursiveHermiteProjector",
+      "RecursiveHermiteProjector",
       +[](const DistancePtr_t& distance,
           const PyWSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {
@@ -119,7 +119,7 @@ void exposePathProjector() {
       },
       (arg("distance"), arg("steeringMethod"), arg("step")));
   def(
-      "createRecursiveHermiteProjector",
+      "RecursiveHermiteProjector",
       +[](const DistancePtr_t& distance,
           const PyWGraphSteeringMethodPtr_t& steeringMethodWrapper,
           const value_type& step) {

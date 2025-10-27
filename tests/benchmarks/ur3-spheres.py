@@ -7,11 +7,11 @@ from pyhpp.manipulation import (
     Device,
     Graph,
     Problem,
-    createProgressiveProjector,
+    ProgressiveProjector,
     urdf,
     ManipulationPlanner,
 )
-from pyhpp.core import createDichotomy, Straight
+from pyhpp.core import Dichotomy, Straight
 
 from pyhpp.constraints import (
     Transformation,
@@ -262,8 +262,8 @@ for i in range(nSphere):
     )
 
 problem.steeringMethod = Straight(problem)
-problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
-problem.pathProjector = createProgressiveProjector(
+problem.pathValidation = Dichotomy(robot.asPinDevice(), 0)
+problem.pathProjector = ProgressiveProjector(
     problem.distance(), problem.steeringMethod, 0.01
 )
 

@@ -15,11 +15,11 @@ from pyhpp.manipulation import (
     Device,
     Graph,
     Problem,
-    createProgressiveProjector,
+    ProgressiveProjector,
     urdf,
     StatesPathFinder,
 )
-from pyhpp.core import createDichotomy, Straight
+from pyhpp.core import Dichotomy, Straight
 
 from pyhpp.constraints import (
     Transformation,
@@ -281,10 +281,10 @@ for i in range(nSphere):
     )
 
 problem.steeringMethod = Straight(problem)
-problem.pathValidation = createDichotomy(robot.asPinDevice(), 0)
+problem.pathValidation = Dichotomy(robot.asPinDevice(), 0)
 
 # need to set path projector due to implicit constraints added above
-problem.pathProjector = createProgressiveProjector(
+problem.pathProjector = ProgressiveProjector(
     problem.distance(), problem.steeringMethod, 0.01
 )
 
