@@ -204,13 +204,13 @@ struct PyWGraph {
                                          const char* joint2);
 
   boost::python::tuple applyStateConstraints(PyWStatePtr_t state,
-                                              ConfigurationIn_t input);
-  boost::python::tuple applyLeafConstraints(PyWEdgePtr_t transition,
-                                             ConfigurationIn_t q_rhs,
                                              ConfigurationIn_t input);
+  boost::python::tuple applyLeafConstraints(PyWEdgePtr_t transition,
+                                            ConfigurationIn_t q_rhs,
+                                            ConfigurationIn_t input);
   boost::python::tuple generateTargetConfig(PyWEdgePtr_t transition,
-                                                     ConfigurationIn_t q_rhs,
-                                                     ConfigurationIn_t input);
+                                            ConfigurationIn_t q_rhs,
+                                            ConfigurationIn_t input);
   // Subgraph management
   void createSubGraph(const char* subgraphName,
                       hpp::core::RoadmapPtr_t roadmap);

@@ -730,8 +730,8 @@ boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
 // Constraint application
 // =============================================================================
 
-boost::python::tuple PyWGraph::applyStateConstraints(
-    PyWStatePtr_t state, ConfigurationIn_t input) {
+boost::python::tuple PyWGraph::applyStateConstraints(PyWStatePtr_t state,
+                                                     ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(state->obj->configConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
@@ -745,8 +745,9 @@ boost::python::tuple PyWGraph::applyStateConstraints(
   return boost::python::make_tuple(success, output, residualError);
 }
 
-boost::python::tuple PyWGraph::applyLeafConstraints(
-    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
+boost::python::tuple PyWGraph::applyLeafConstraints(PyWEdgePtr_t transition,
+                                                    ConfigurationIn_t q_rhs,
+                                                    ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->pathConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
@@ -761,8 +762,9 @@ boost::python::tuple PyWGraph::applyLeafConstraints(
   return boost::python::make_tuple(success, output, residualError);
 }
 
-boost::python::tuple PyWGraph::generateTargetConfig(
-    PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
+boost::python::tuple PyWGraph::generateTargetConfig(PyWEdgePtr_t transition,
+                                                    ConfigurationIn_t q_rhs,
+                                                    ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
   value_type residualError(std::numeric_limits<value_type>::quiet_NaN());
