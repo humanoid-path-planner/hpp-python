@@ -141,11 +141,11 @@ struct Problem {
   void setConstraints(hpp::core::ConstraintSetPtr_t constraints);
   void setRightHandSideFromConfig(ConfigurationIn_t configIn);
 
-  void addNumericalConstraintsToConfigProjector1(const char* configProjName,
-                                      boost::python::list constraints,
-                                      boost::python::list priorities);
-  void addNumericalConstraintsToConfigProjector2(const char* configProjName,
-                                        boost::python::list constraints);
+  void addNumericalConstraintsToConfigProjector1(
+      const char* configProjName, boost::python::list constraints,
+      boost::python::list priorities);
+  void addNumericalConstraintsToConfigProjector2(
+      const char* configProjName, boost::python::list constraints);
   hpp::constraints::ImplicitPtr_t createComBetweenFeet(
       const char* constraintName, const char* comName, const char* jointLName,
       const char* jointRName, const hpp::pinocchio::vector3_t& pointL,

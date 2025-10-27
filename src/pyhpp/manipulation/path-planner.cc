@@ -30,8 +30,8 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/path-planner.hh>
 #include <hpp/manipulation/manipulation-planner.hh>
-#include <hpp/manipulation/path-planner/transition-planner.hh>
 #include <hpp/manipulation/path-planner/end-effector-trajectory.hh>
+#include <hpp/manipulation/path-planner/transition-planner.hh>
 #include <hpp/manipulation/roadmap.hh>
 #include <hpp/pinocchio/configuration.hh>
 #include <pyhpp/core/path-planner.hh>
@@ -161,33 +161,35 @@ void TransitionPlanner::addPathOptimizer(
 }
 
 // EndEffectorTrajectory implementation
-EndEffectorTrajectory::EndEffectorTrajectory(const pyhpp::core::Problem& problem) {
-  obj = hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
-      problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
-                                              problem.obj->robot()));
+EndEffectorTrajectory::EndEffectorTrajectory(
+    const pyhpp::core::Problem& problem) {
+  obj =
+      hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
+          problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
+                                                  problem.obj->robot()));
 }
 
-EndEffectorTrajectory::EndEffectorTrajectory(const pyhpp::core::Problem& problem, 
-                                             const hpp::core::RoadmapPtr_t& roadmap) {
-  obj = hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
-      problem.obj, roadmap);
+EndEffectorTrajectory::EndEffectorTrajectory(
+    const pyhpp::core::Problem& problem,
+    const hpp::core::RoadmapPtr_t& roadmap) {
+  obj =
+      hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
+          problem.obj, roadmap);
 }
 
 hpp::manipulation::pathPlanner::EndEffectorTrajectoryPtr_t
 EndEffectorTrajectory::eetObj() const {
-  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::pathPlanner::EndEffectorTrajectory,
-                              obj));
-  return HPP_STATIC_PTR_CAST(hpp::manipulation::pathPlanner::EndEffectorTrajectory,
-                             obj);
+  assert(HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::pathPlanner::EndEffectorTrajectory, obj));
+  return HPP_STATIC_PTR_CAST(
+      hpp::manipulation::pathPlanner::EndEffectorTrajectory, obj);
 }
 
 int EndEffectorTrajectory::nRandomConfig() const {
   return eetObj()->nRandomConfig();
 }
 
-void EndEffectorTrajectory::nRandomConfig(int n) {
-  eetObj()->nRandomConfig(n);
-}
+void EndEffectorTrajectory::nRandomConfig(int n) { eetObj()->nRandomConfig(n); }
 
 int EndEffectorTrajectory::nDiscreteSteps() const {
   return eetObj()->nDiscreteSteps();
@@ -205,7 +207,9 @@ bool EndEffectorTrajectory::checkFeasibilityOnly() const {
   return eetObj()->checkFeasibilityOnly();
 }
 
-// void EndEffectorTrajectory::ikSolverInitialization(IkSolverInitializationPtr_t solver) {
+// void
+// EndEffectorTrajectory::ikSolverInitialization(IkSolverInitializationPtr_t
+// solver) {
 //   eetObj()->ikSolverInitialization(solver);
 // }
 
@@ -239,27 +243,27 @@ void exposePathPlanners() {
 
   boost::python::class_<EndEffectorTrajectory,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
-      "EndEffectorTrajectory", boost::python::init<const pyhpp::core::Problem&>())
-      .def(boost::python::init<const pyhpp::core::Problem&, const RoadmapPtr_t&>())
-      .def("nRandomConfig", 
-           static_cast<int (EndEffectorTrajectory::*)() const>(
-               &EndEffectorTrajectory::nRandomConfig))
-      .def("nRandomConfig", 
-           static_cast<void (EndEffectorTrajectory::*)(int)>(
-               &EndEffectorTrajectory::nRandomConfig))
-      .def("nDiscreteSteps", 
+      "EndEffectorTrajectory",
+      boost::python::init<const pyhpp::core::Problem&>())
+      .def(boost::python::init<const pyhpp::core::Problem&,
+                               const RoadmapPtr_t&>())
+      .def("nRandomConfig", static_cast<int (EndEffectorTrajectory::*)() const>(
+                                &EndEffectorTrajectory::nRandomConfig))
+      .def("nRandomConfig", static_cast<void (EndEffectorTrajectory::*)(int)>(
+                                &EndEffectorTrajectory::nRandomConfig))
+      .def("nDiscreteSteps",
            static_cast<int (EndEffectorTrajectory::*)() const>(
                &EndEffectorTrajectory::nDiscreteSteps))
-      .def("nDiscreteSteps", 
-           static_cast<void (EndEffectorTrajectory::*)(int)>(
-               &EndEffectorTrajectory::nDiscreteSteps))
-      .def("checkFeasibilityOnly", 
+      .def("nDiscreteSteps", static_cast<void (EndEffectorTrajectory::*)(int)>(
+                                 &EndEffectorTrajectory::nDiscreteSteps))
+      .def("checkFeasibilityOnly",
            static_cast<bool (EndEffectorTrajectory::*)() const>(
                &EndEffectorTrajectory::checkFeasibilityOnly))
-      .def("checkFeasibilityOnly", 
+      .def("checkFeasibilityOnly",
            static_cast<void (EndEffectorTrajectory::*)(bool)>(
                &EndEffectorTrajectory::checkFeasibilityOnly))
-      // .def("ikSolverInitialization", &EndEffectorTrajectory::ikSolverInitialization)
+      // .def("ikSolverInitialization",
+      // &EndEffectorTrajectory::ikSolverInitialization)
       ;
 }
 

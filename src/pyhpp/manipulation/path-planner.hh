@@ -35,7 +35,7 @@
 
 namespace pyhpp {
 namespace manipulation {
-  
+
 typedef boost::python::tuple tuple;
 typedef hpp::core::ConfigurationIn_t ConfigurationIn_t;
 typedef hpp::core::PathOptimizerPtr_t PathOptimizerPtr_t;
@@ -44,7 +44,8 @@ typedef hpp::core::PathPtr_t PathPtr_t;
 typedef hpp::core::PathVectorPtr_t PathVectorPtr_t;
 typedef hpp::core::RoadmapPtr_t RoadmapPtr_t;
 typedef hpp::manipulation::matrixIn_t matrixIn_t;
-// typedef hpp::manipulation::pathPlanner::IkSolverInitializationPtr_t IkSolverInitializationPtr_t;
+// typedef hpp::manipulation::pathPlanner::IkSolverInitializationPtr_t
+// IkSolverInitializationPtr_t;
 
 struct TransitionPlanner : public pyhpp::core::PathPlanner {
   // Dynamic cast pointer into TransitionPlanner
@@ -68,7 +69,8 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
 
 struct EndEffectorTrajectory : public pyhpp::core::PathPlanner {
   EndEffectorTrajectory(const pyhpp::core::Problem& problem);
-  EndEffectorTrajectory(const pyhpp::core::Problem& problem, const RoadmapPtr_t& roadmap);
+  EndEffectorTrajectory(const pyhpp::core::Problem& problem,
+                        const RoadmapPtr_t& roadmap);
   hpp::manipulation::pathPlanner::EndEffectorTrajectoryPtr_t eetObj() const;
   int nRandomConfig() const;
   void nRandomConfig(int n);
@@ -81,6 +83,6 @@ struct EndEffectorTrajectory : public pyhpp::core::PathPlanner {
 
 void exposePathPlanners();
 
-} // namespace manipulation
-} // namespace pyhpp
-#endif // PYHPP_MANIPULATION_PATH_PLANNER_HH
+}  // namespace manipulation
+}  // namespace pyhpp
+#endif  // PYHPP_MANIPULATION_PATH_PLANNER_HH
