@@ -73,14 +73,16 @@ static ConfigProjectorPtr_t createConfigProjector(
   return core::ConfigProjector::create(device, name, threshold, iterations);
 }
 
-static void rightHandSideFromConfig(ConfigProjectorPtr_t& configProj, ConfigurationIn_t config) {
+static void rightHandSideFromConfig(ConfigProjectorPtr_t& configProj,
+                                    ConfigurationIn_t config) {
   configProj->rightHandSideFromConfig(config);
 }
 
-static void setRightHandSideOfConstraint(ConfigProjectorPtr_t& configProj, hpp::constraints::ImplicitPtr_t constraint, ConfigurationIn_t config) {
+static void setRightHandSideOfConstraint(
+    ConfigProjectorPtr_t& configProj,
+    hpp::constraints::ImplicitPtr_t constraint, ConfigurationIn_t config) {
   configProj->rightHandSide(constraint, config);
 }
-
 
 void exposeConstraint() {
   class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)

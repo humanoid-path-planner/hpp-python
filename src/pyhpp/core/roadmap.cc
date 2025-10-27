@@ -141,12 +141,12 @@ struct RWrapper {
     return to_python_list(res);
   }
 
-  static boost::python::list nodesConnectedComponent(
-      Roadmap& roadmap, int connectedComponentId) {
+  static boost::python::list nodesConnectedComponent(Roadmap& roadmap,
+                                                     int connectedComponentId) {
     try {
       const ConnectedComponents_t& connectedComponents =
           roadmap.connectedComponents();
-      
+
       if ((std::size_t)connectedComponentId >= connectedComponents.size()) {
         std::ostringstream oss;
         oss << "connectedComponentId=" << connectedComponentId
@@ -156,18 +156,18 @@ struct RWrapper {
 
       ConnectedComponents_t::const_iterator itcc = connectedComponents.begin();
       std::advance(itcc, connectedComponentId);
-      
+
       const NodeVector_t& nodes = (*itcc)->nodes();
-      
+
       Configurations_t res;
       res.reserve(nodes.size());
-      
+
       for (const auto& node : nodes) {
         res.push_back(node->configuration());
       }
-      
+
       return to_python_list(res);
-      
+
     } catch (const std::exception& exc) {
       throw std::runtime_error(exc.what());
     }

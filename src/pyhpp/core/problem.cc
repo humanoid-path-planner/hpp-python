@@ -364,7 +364,8 @@ boost::python::tuple Problem::isConfigValid(ConfigurationIn_t dofArray) {
 
 void Problem::setConstraints(hpp::core::ConstraintSetPtr_t constraints) {
   try {
-    constraints_ = hpp::core::ConstraintSet::create(robot(), "Default constraint set");
+    constraints_ =
+        hpp::core::ConstraintSet::create(robot(), "Default constraint set");
     constraints_->addConstraint(constraints);
     obj->constraints(constraints_);
   } catch (const std::exception& exc) {
@@ -616,8 +617,10 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
       .PYHPP_DEFINE_METHOD(Problem, setConstraints)
       .PYHPP_DEFINE_METHOD(Problem, setRightHandSideFromConfig)
-      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector1)
-      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector2)      
+      .def("addNumericalConstraintsToConfigProjector",
+           &Problem::addNumericalConstraintsToConfigProjector1)
+      .def("addNumericalConstraintsToConfigProjector",
+           &Problem::addNumericalConstraintsToConfigProjector2)
       .def_readwrite("errorThreshold", &Problem::errorThreshold_)
       .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
       .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet);

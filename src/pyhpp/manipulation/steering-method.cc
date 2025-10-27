@@ -30,8 +30,8 @@
 #include <../src/pyhpp/manipulation/steering-method.hh>
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
-#include <pyhpp/core/steering-method.hh>
 #include <eigenpy/eigenpy.hpp>
+#include <pyhpp/core/steering-method.hh>
 
 namespace pyhpp {
 namespace manipulation {
@@ -45,19 +45,19 @@ GraphSteeringMethod::GraphSteeringMethod(
   obj = graph;
 }
 
-
 hpp::manipulation::steeringMethod::EndEffectorTrajectoryPtr_t
 EndEffectorTrajectorySteeringMethod::eetObj() const {
-  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::steeringMethod::EndEffectorTrajectory,
-                              obj));
-  return HPP_STATIC_PTR_CAST(hpp::manipulation::steeringMethod::EndEffectorTrajectory,
-                             obj);
+  assert(HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::steeringMethod::EndEffectorTrajectory, obj));
+  return HPP_STATIC_PTR_CAST(
+      hpp::manipulation::steeringMethod::EndEffectorTrajectory, obj);
 }
 
 EndEffectorTrajectorySteeringMethod::EndEffectorTrajectorySteeringMethod(
-    const hpp::core::ProblemConstPtr_t& problem) 
-    : SteeringMethod(hpp::manipulation::steeringMethod::EndEffectorTrajectory::create(problem)) {
-}
+    const hpp::core::ProblemConstPtr_t& problem)
+    : SteeringMethod(
+          hpp::manipulation::steeringMethod::EndEffectorTrajectory::create(
+              problem)) {}
 
 void EndEffectorTrajectorySteeringMethod::setTrajectoryConstraint(
     const hpp::constraints::ImplicitPtr_t& ic) {
@@ -74,13 +74,14 @@ void exposeManipSteeringMethod() {
       "GraphSteeringMethod",
       boost::python::init<const PyWSteeringMethodPtr_t&>());
 
-  class_<EndEffectorTrajectorySteeringMethod, bases<pyhpp::core::SteeringMethod>>(
-    "EndEffectorTrajectorySteeringMethod",
-    boost::python::init<const hpp::core::ProblemConstPtr_t&>())
-    .def("setTrajectoryConstraint",
-          &EndEffectorTrajectorySteeringMethod::setTrajectoryConstraint)
-    .def("setTrajectory",
-          &EndEffectorTrajectorySteeringMethod::setTrajectory);
+  class_<EndEffectorTrajectorySteeringMethod,
+         bases<pyhpp::core::SteeringMethod>>(
+      "EndEffectorTrajectorySteeringMethod",
+      boost::python::init<const hpp::core::ProblemConstPtr_t&>())
+      .def("setTrajectoryConstraint",
+           &EndEffectorTrajectorySteeringMethod::setTrajectoryConstraint)
+      .def("setTrajectory",
+           &EndEffectorTrajectorySteeringMethod::setTrajectory);
 }
 
 }  // namespace manipulation
