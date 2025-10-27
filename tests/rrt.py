@@ -27,11 +27,10 @@ qGoal = np.array([1.57, -1.57, -1.8, 0, 0.8, 0])
 problem = Problem(robot)
 configurationShooter = problem.configurationShooter()
 steer = problem.steeringMethod()
-weighedDistance = WeighedDistance.create(robot)
-distance = weighedDistance.asDistancePtr_t()
+weighedDistance = WeighedDistance(robot)
 
 # Initialize roadmap
-roadmap = Roadmap.create(distance, robot)
+roadmap = Roadmap(weighedDistance, robot)
 roadmap.initNode(qInit)
 roadmap.addGoalNode(qGoal)
 

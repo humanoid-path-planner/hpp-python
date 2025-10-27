@@ -20,8 +20,12 @@
 #define PYHPP_MANIPULATION_STEERING_METHOD_HH
 
 #include <hpp/core/steering-method.hh>
+#include <hpp/core/path.hh>
+#include <hpp/constraints/differentiable-function.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
+#include <hpp/manipulation/steering-method/end-effector-trajectory.hh>
 #include <pyhpp/core/problem.hh>
+#include <pyhpp/core/steering-method.hh>
 
 namespace pyhpp {
 namespace manipulation {
@@ -31,11 +35,15 @@ typedef pyhpp::core::PyWSteeringMethodPtr_t PyWSteeringMethodPtr_t;
 
 struct GraphSteeringMethod {
   hpp::manipulation::steeringMethod::GraphPtr_t obj;
-
   GraphSteeringMethod(const PyWSteeringMethodPtr_t& steeringMethodWrapper);
 };
 
+struct EndEffectorTrajectorySteeringMethod : pyhpp::core::SteeringMethod{
+  hpp::manipulation::steeringMethod::EndEffectorTrajectoryPtr_t eetObj() const;
+  EndEffectorTrajectorySteeringMethod(const hpp::core::ProblemConstPtr_t& problem);
+  void setTrajectoryConstraint(const hpp::constraints::ImplicitPtr_t& ic);
+  void setTrajectory(const hpp::core::PathPtr_t& eeTraj, bool se3Output);
+};
 }  // namespace manipulation
 }  // namespace pyhpp
-
 #endif  // PYHPP_MANIPULATION_STEERING_METHOD_HH

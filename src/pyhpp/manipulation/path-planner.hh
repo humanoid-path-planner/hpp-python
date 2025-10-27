@@ -1,6 +1,6 @@
 //
 // Copyright (c) 2025, CNRS
-// Authors: Florent Lamiraux
+// Authors: Florent Lamiraux, Paul Sardin
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -35,7 +35,7 @@
 
 namespace pyhpp {
 namespace manipulation {
-
+  
 typedef boost::python::tuple tuple;
 typedef hpp::core::ConfigurationIn_t ConfigurationIn_t;
 typedef hpp::core::PathOptimizerPtr_t PathOptimizerPtr_t;
@@ -44,6 +44,7 @@ typedef hpp::core::PathPtr_t PathPtr_t;
 typedef hpp::core::PathVectorPtr_t PathVectorPtr_t;
 typedef hpp::core::RoadmapPtr_t RoadmapPtr_t;
 typedef hpp::manipulation::matrixIn_t matrixIn_t;
+// typedef hpp::manipulation::pathPlanner::IkSolverInitializationPtr_t IkSolverInitializationPtr_t;
 
 struct TransitionPlanner : public pyhpp::core::PathPlanner {
   // Dynamic cast pointer into TransitionPlanner
@@ -63,7 +64,23 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
   void pathProjector(const PathProjectorPtr_t pathProjector);
   void clearPathOptimizers();
   void addPathOptimizer(const PathOptimizerPtr_t& pathOptimizer);
-};  // struct TransitionPlanner
-}  // namespace manipulation
-}  // namespace pyhpp
-#endif  // PYHPP_MANIPULATION_PATH_PLANNER_HH
+};
+
+struct EndEffectorTrajectory : public pyhpp::core::PathPlanner {
+  EndEffectorTrajectory(const pyhpp::core::Problem& problem);
+  EndEffectorTrajectory(const pyhpp::core::Problem& problem, const RoadmapPtr_t& roadmap);
+  hpp::manipulation::pathPlanner::EndEffectorTrajectoryPtr_t eetObj() const;
+  int nRandomConfig() const;
+  void nRandomConfig(int n);
+  int nDiscreteSteps() const;
+  void nDiscreteSteps(int n);
+  void checkFeasibilityOnly(bool enable);
+  bool checkFeasibilityOnly() const;
+  // void ikSolverInitialization(IkSolverInitializationPtr_t solver);
+};
+
+void exposePathPlanners();
+
+} // namespace manipulation
+} // namespace pyhpp
+#endif // PYHPP_MANIPULATION_PATH_PLANNER_HH
