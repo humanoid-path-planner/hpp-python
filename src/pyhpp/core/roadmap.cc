@@ -28,8 +28,8 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
-#include <hpp/core/roadmap.hh>
 #include <hpp/core/path.hh>
+#include <hpp/core/roadmap.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -70,9 +70,9 @@ struct RWrapper {
     return;
   }
 
-
   static void addEdge2(Roadmap& roadmap, const ConfigurationIn_t from,
-                      ConfigurationIn_t to, const PathPtr_t& path, bool bothEdges) {
+                       ConfigurationIn_t to, const PathPtr_t& path,
+                       bool bothEdges) {
     NodePtr_t nodeFrom = roadmap.addNode(from);
     NodePtr_t nodeTo = roadmap.addNode(to);
     if (bothEdges) {
@@ -83,7 +83,6 @@ struct RWrapper {
     roadmap.addEdge(nodeFrom, nodeTo, path);
     return;
   }
-
 
   static boost::python::tuple nearestNode1(Roadmap& roadmap,
                                            ConfigurationIn_t configuration,
