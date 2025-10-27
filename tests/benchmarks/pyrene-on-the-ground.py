@@ -251,14 +251,12 @@ q2 = np.array(
     ]
 )
 
-result = problem.applyConstraints(q1)
-assert result.success
-q1proj = result.configuration
+result, q1proj, err = problem.applyConstraints(q1)
+assert result
 valid = problem.isConfigValid(q1proj)
 assert valid[0]
-result = problem.applyConstraints(q2)
-assert result.success
-q2proj = result.configuration
+result, q2proj, err = problem.applyConstraints(q2)
+assert result
 assert problem.isConfigValid(q2proj)
 
 problem.initConfig(q1proj)

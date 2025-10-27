@@ -155,19 +155,19 @@ const char* DOC_GETCONFIGERRORFORTRANSITIONTARGET =
 
 const char* DOC_APPLYSTATECONSTRAINTS =
     "Apply constraints to a configuration. "
-    "Returns ConstraintResult with success flag, output configuration, and "
+    "Returns tuple with success flag, output configuration, and "
     "error norm.";
 
 const char* DOC_APPLYLEAFCONSTRAINTS =
     "Apply transition constraints to a configuration. "
-    "Returns ConstraintResult with success flag, output configuration, and "
+    "Returns tuple with success flag, output configuration, and "
     "error norm. "
     "If success, the output configuration is reachable from q_rhs along the "
     "transition.";
 
 const char* DOC_GENERATETARGETCONFIG =
     "Generate configuration in destination state on a given leaf. "
-    "Returns ConstraintResult with success flag, output configuration, and "
+    "Returns tuple with success flag, output configuration, and "
     "error norm. "
     "Computes a configuration in the destination state of the transition, "
     "reachable from q_rhs.";
@@ -730,7 +730,7 @@ boost::python::tuple PyWGraph::getConfigErrorForTransitionTarget(
 // Constraint application
 // =============================================================================
 
-pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(
+boost::python::tuple PyWGraph::applyStateConstraints(
     PyWStatePtr_t state, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(state->obj->configConstraint());
@@ -742,10 +742,10 @@ pyhpp::core::ConstraintResult PyWGraph::applyStateConstraints(
           constraint->configProjector()) {
     residualError = configProjector->residualError();
   }
-  return pyhpp::core::ConstraintResult(success, output, residualError);
+  return boost::python::make_tuple(success, output, residualError);
 }
 
-pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(
+boost::python::tuple PyWGraph::applyLeafConstraints(
     PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->pathConstraint());
@@ -758,10 +758,10 @@ pyhpp::core::ConstraintResult PyWGraph::applyLeafConstraints(
     success = constraint->apply(output);
     residualError = constraint->configProjector()->residualError();
   }
-  return pyhpp::core::ConstraintResult(success, output, residualError);
+  return boost::python::make_tuple(success, output, residualError);
 }
 
-pyhpp::core::ConstraintResult PyWGraph::generateTargetConfig(
+boost::python::tuple PyWGraph::generateTargetConfig(
     PyWEdgePtr_t transition, ConfigurationIn_t q_rhs, ConfigurationIn_t input) {
   using namespace hpp::manipulation;
   ConstraintSetPtr_t constraint(transition->obj->targetConstraint());
@@ -777,7 +777,7 @@ pyhpp::core::ConstraintResult PyWGraph::generateTargetConfig(
     residualError = configProjector->residualError();
   }
 
-  return pyhpp::core::ConstraintResult(success, output, residualError);
+  return boost::python::make_tuple(success, output, residualError);
 }
 
 // =============================================================================

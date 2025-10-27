@@ -58,16 +58,6 @@ typedef hpp::core::value_type value_type;
 typedef hpp::core::size_type size_type;
 typedef hpp::core::Configuration_t Configuration_t;
 
-struct ConstraintResult {
-  bool success;
-  Configuration_t configuration;
-  value_type error;
-
-  ConstraintResult() : success(false), configuration(), error(0.0) {}
-  ConstraintResult(bool s, const Configuration_t& config, value_type err)
-      : success(s), configuration(config), error(err) {}
-};
-
 // Wrapper class for hpp::core::Problem
 struct Problem {
   hpp::core::ProblemPtr_t obj;
@@ -136,7 +126,7 @@ struct Problem {
   void setConstantRightHandSide(hpp::constraints::ImplicitPtr_t constraint,
                                 bool constant);
 
-  ConstraintResult applyConstraints(ConfigurationIn_t config);
+  boost::python::tuple applyConstraints(ConfigurationIn_t config);
   boost::python::tuple isConfigValid(ConfigurationIn_t dofArray);
   void setConstraints(hpp::core::ConstraintSetPtr_t constraints);
   void setRightHandSideFromConfig(ConfigurationIn_t configIn);

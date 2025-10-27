@@ -162,7 +162,7 @@ solver = BySubstitution(robot.configSpace())
 
 for i in range(100):
     q = configurationShooter.shoot()
-    res = graph.applyStateConstraints(state_placement, q)
-    if res.success:
-        print("after applying constraints: ", res.configuration)
+    res, config, err = graph.applyStateConstraints(state_placement, q)
+    if res:
+        print("after applying constraints: ", config)
         break
