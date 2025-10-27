@@ -53,7 +53,7 @@ void exposeGraph();
 void exposePathPlanners();
 void exposeProblem();
 void exposePathProjector();
-void exposeGraphSteeringMethod();
+void exposeManipSteeringMethod();
 
 }  // namespace manipulation
 }  // namespace pyhpp

@@ -140,12 +140,43 @@ struct RWrapper {
     }
     return to_python_list(res);
   }
+
+  static boost::python::list nodesConnectedComponent(
+      Roadmap& roadmap, int connectedComponentId) {
+    try {
+      const ConnectedComponents_t& connectedComponents =
+          roadmap.connectedComponents();
+      
+      if ((std::size_t)connectedComponentId >= connectedComponents.size()) {
+        std::ostringstream oss;
+        oss << "connectedComponentId=" << connectedComponentId
+            << " out of range [0," << connectedComponents.size() - 1 << "].";
+        throw std::runtime_error(oss.str());
+      }
+
+      ConnectedComponents_t::const_iterator itcc = connectedComponents.begin();
+      std::advance(itcc, connectedComponentId);
+      
+      const NodeVector_t& nodes = (*itcc)->nodes();
+      
+      Configurations_t res;
+      res.reserve(nodes.size());
+      
+      for (const auto& node : nodes) {
+        res.push_back(node->configuration());
+      }
+      
+      return to_python_list(res);
+      
+    } catch (const std::exception& exc) {
+      throw std::runtime_error(exc.what());
+    }
+  }
 };
 
 void exposeRoadmap() {
   class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", no_init)
-      .def("create", &Roadmap::create)
-      .staticmethod("create")
+      .def("__init__", make_constructor(&Roadmap::create))
       .def("__str__", &to_str<Roadmap>)
       .PYHPP_DEFINE_METHOD(Roadmap, clear)
       .PYHPP_DEFINE_METHOD1(RWrapper, addNode,
@@ -171,6 +202,7 @@ void exposeRoadmap() {
       .PYHPP_DEFINE_METHOD(Roadmap, resetGoalNodes)
       .PYHPP_DEFINE_METHOD(Roadmap, pathExists)
       .def("nodes", &RWrapper::nodes)
+      .def("nodesConnectedComponent", &RWrapper::nodesConnectedComponent)
       .def("initNode", &RWrapper::initNode1)
       .def("initNode", &RWrapper::initNode2,
            return_value_policy<reference_existing_object>())

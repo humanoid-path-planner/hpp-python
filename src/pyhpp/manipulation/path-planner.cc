@@ -31,6 +31,7 @@
 #include <../src/pyhpp/manipulation/path-planner.hh>
 #include <hpp/manipulation/manipulation-planner.hh>
 #include <hpp/manipulation/path-planner/transition-planner.hh>
+#include <hpp/manipulation/path-planner/end-effector-trajectory.hh>
 #include <hpp/manipulation/roadmap.hh>
 #include <hpp/pinocchio/configuration.hh>
 #include <pyhpp/core/path-planner.hh>
@@ -50,35 +51,7 @@ struct ManipulationPlanner : public pyhpp::core::PathPlanner {
   }
 };
 
-void exposePathPlanners() {
-  boost::python::class_<TransitionPlanner,
-                        boost::python::bases<pyhpp::core::PathPlanner>>(
-      "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
-      .def("innerPlanner",
-           static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
-               &TransitionPlanner::innerPlanner))
-      .def("innerPlanner", static_cast<void (TransitionPlanner::*)(
-                               const pyhpp::core::PathPlanner&)>(
-                               &TransitionPlanner::innerPlanner))
-      .def("innerProblem", &TransitionPlanner::innerProblem)
-      .def("planPath", &TransitionPlanner::planPath)
-      .def("directPath", &TransitionPlanner::directPath)
-      .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
-      .def("optimizePath", &TransitionPlanner::optimizePath)
-      .def("timeParameterization", &TransitionPlanner::timeParameterization)
-      .def("setEdge", &TransitionPlanner::setEdge)
-      .def("setReedsAndSheppSteeringMethod",
-           &TransitionPlanner::setReedsAndSheppSteeringMethod)
-      .def("pathProjector", &TransitionPlanner::pathProjector)
-      .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
-      .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
-
-  boost::python::class_<ManipulationPlanner,
-                        boost::python::bases<pyhpp::core::PathPlanner>>(
-      "ManipulationPlanner",
-      boost::python::init<const pyhpp::core::Problem&>());
-}
-
+// TransitionPlanner implementation
 TransitionPlanner::TransitionPlanner(const pyhpp::core::Problem& problem) {
   obj = hpp::manipulation::pathPlanner::TransitionPlanner::createWithRoadmap(
       problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
@@ -102,6 +75,7 @@ pyhpp::core::PathPlanner TransitionPlanner::innerPlanner() const {
 void TransitionPlanner::innerPlanner(const pyhpp::core::PathPlanner& planner) {
   trObj()->innerPlanner(planner.obj);
 }
+
 pyhpp::core::Problem TransitionPlanner::innerProblem() const {
   return pyhpp::core::Problem(trObj()->innerProblem());
 }
@@ -109,7 +83,6 @@ pyhpp::core::Problem TransitionPlanner::innerProblem() const {
 PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
                                             matrixIn_t qGoals,
                                             bool resetRoadmap) {
-  // Check sizes of initial and goal configurations
   if (qInit.rows() != obj->problem()->robot()->configSize()) {
     std::ostringstream os;
     os << "qInit = " << hpp::pinocchio::displayConfig(qInit)
@@ -132,7 +105,6 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
 
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
                                     bool validate) {
-  // Check sizes of initial and goal configurations
   if (q1.rows() != obj->problem()->robot()->configSize()) {
     std::ostringstream os;
     os << "q1 = " << hpp::pinocchio::displayConfig(q1) << "should be of size "
@@ -186,6 +158,109 @@ void TransitionPlanner::clearPathOptimizers() {
 void TransitionPlanner::addPathOptimizer(
     const PathOptimizerPtr_t& pathOptimizer) {
   trObj()->addPathOptimizer(pathOptimizer);
+}
+
+// EndEffectorTrajectory implementation
+EndEffectorTrajectory::EndEffectorTrajectory(const pyhpp::core::Problem& problem) {
+  obj = hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
+      problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
+                                              problem.obj->robot()));
+}
+
+EndEffectorTrajectory::EndEffectorTrajectory(const pyhpp::core::Problem& problem, 
+                                             const hpp::core::RoadmapPtr_t& roadmap) {
+  obj = hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
+      problem.obj, roadmap);
+}
+
+hpp::manipulation::pathPlanner::EndEffectorTrajectoryPtr_t
+EndEffectorTrajectory::eetObj() const {
+  assert(HPP_DYNAMIC_PTR_CAST(hpp::manipulation::pathPlanner::EndEffectorTrajectory,
+                              obj));
+  return HPP_STATIC_PTR_CAST(hpp::manipulation::pathPlanner::EndEffectorTrajectory,
+                             obj);
+}
+
+int EndEffectorTrajectory::nRandomConfig() const {
+  return eetObj()->nRandomConfig();
+}
+
+void EndEffectorTrajectory::nRandomConfig(int n) {
+  eetObj()->nRandomConfig(n);
+}
+
+int EndEffectorTrajectory::nDiscreteSteps() const {
+  return eetObj()->nDiscreteSteps();
+}
+
+void EndEffectorTrajectory::nDiscreteSteps(int n) {
+  eetObj()->nDiscreteSteps(n);
+}
+
+void EndEffectorTrajectory::checkFeasibilityOnly(bool enable) {
+  eetObj()->checkFeasibilityOnly(enable);
+}
+
+bool EndEffectorTrajectory::checkFeasibilityOnly() const {
+  return eetObj()->checkFeasibilityOnly();
+}
+
+// void EndEffectorTrajectory::ikSolverInitialization(IkSolverInitializationPtr_t solver) {
+//   eetObj()->ikSolverInitialization(solver);
+// }
+
+void exposePathPlanners() {
+  boost::python::class_<TransitionPlanner,
+                        boost::python::bases<pyhpp::core::PathPlanner>>(
+      "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
+      .def("innerPlanner",
+           static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
+               &TransitionPlanner::innerPlanner))
+      .def("innerPlanner", static_cast<void (TransitionPlanner::*)(
+                               const pyhpp::core::PathPlanner&)>(
+                               &TransitionPlanner::innerPlanner))
+      .def("innerProblem", &TransitionPlanner::innerProblem)
+      .def("planPath", &TransitionPlanner::planPath)
+      .def("directPath", &TransitionPlanner::directPath)
+      .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
+      .def("optimizePath", &TransitionPlanner::optimizePath)
+      .def("timeParameterization", &TransitionPlanner::timeParameterization)
+      .def("setEdge", &TransitionPlanner::setEdge)
+      .def("setReedsAndSheppSteeringMethod",
+           &TransitionPlanner::setReedsAndSheppSteeringMethod)
+      .def("pathProjector", &TransitionPlanner::pathProjector)
+      .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
+      .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
+
+  boost::python::class_<ManipulationPlanner,
+                        boost::python::bases<pyhpp::core::PathPlanner>>(
+      "ManipulationPlanner",
+      boost::python::init<const pyhpp::core::Problem&>());
+
+  boost::python::class_<EndEffectorTrajectory,
+                        boost::python::bases<pyhpp::core::PathPlanner>>(
+      "EndEffectorTrajectory", boost::python::init<const pyhpp::core::Problem&>())
+      .def(boost::python::init<const pyhpp::core::Problem&, const RoadmapPtr_t&>())
+      .def("nRandomConfig", 
+           static_cast<int (EndEffectorTrajectory::*)() const>(
+               &EndEffectorTrajectory::nRandomConfig))
+      .def("nRandomConfig", 
+           static_cast<void (EndEffectorTrajectory::*)(int)>(
+               &EndEffectorTrajectory::nRandomConfig))
+      .def("nDiscreteSteps", 
+           static_cast<int (EndEffectorTrajectory::*)() const>(
+               &EndEffectorTrajectory::nDiscreteSteps))
+      .def("nDiscreteSteps", 
+           static_cast<void (EndEffectorTrajectory::*)(int)>(
+               &EndEffectorTrajectory::nDiscreteSteps))
+      .def("checkFeasibilityOnly", 
+           static_cast<bool (EndEffectorTrajectory::*)() const>(
+               &EndEffectorTrajectory::checkFeasibilityOnly))
+      .def("checkFeasibilityOnly", 
+           static_cast<void (EndEffectorTrajectory::*)(bool)>(
+               &EndEffectorTrajectory::checkFeasibilityOnly))
+      // .def("ikSolverInitialization", &EndEffectorTrajectory::ikSolverInitialization)
+      ;
 }
 
 }  // namespace manipulation

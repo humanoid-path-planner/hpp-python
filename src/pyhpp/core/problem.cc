@@ -362,6 +362,30 @@ boost::python::tuple Problem::isConfigValid(ConfigurationIn_t dofArray) {
   }
 }
 
+void Problem::setConstraints(hpp::core::ConstraintSetPtr_t constraints) {
+  try {
+    constraints_ = hpp::core::ConstraintSet::create(robot(), "Default constraint set");
+    constraints_->addConstraint(constraints);
+    obj->constraints(constraints_);
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+void Problem::setRightHandSideFromConfig(ConfigurationIn_t configIn) {
+  try {
+    hpp::core::ConfigProjectorPtr_t configProjector(
+        constraints_->configProjector());
+    if (!configProjector) {
+      throw std::runtime_error("No constraint has been set.");
+    }
+    Configuration_t q = configIn;
+    configProjector->rightHandSideFromConfig(q);
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
 void Problem::addNumericalConstraintsToConfigProjector1(
     const char* configProjName, boost::python::list constraints,
     boost::python::list priorities) {
@@ -590,10 +614,10 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
       .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
-      .def("addNumericalConstraintsToConfigProjector",
-           &Problem::addNumericalConstraintsToConfigProjector1)
-      .def("addNumericalConstraintsToConfigProjector",
-           &Problem::addNumericalConstraintsToConfigProjector2)
+      .PYHPP_DEFINE_METHOD(Problem, setConstraints)
+      .PYHPP_DEFINE_METHOD(Problem, setRightHandSideFromConfig)
+      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector1)
+      .def("addNumericalConstraintsToConfigProjector", &Problem::addNumericalConstraintsToConfigProjector2)      
       .def_readwrite("errorThreshold", &Problem::errorThreshold_)
       .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
       .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet);

@@ -92,7 +92,7 @@ path = biRRTPlanner.solve()
 # path = kPrmStar_inst.solve()  infinite search
 # viewer.displayPath(path, 0.001, 50)
 
-# roadmap = Roadmap.create(problem.distance(), robot)
+# roadmap = Roadmap(problem.distance(), robot)
 # roadmap.initNode(q_init)
 # roadmap.addGoalNode(q_goal)
 # searchInRoadmap = SearchInRoadmap(problem, roadmap)

@@ -62,6 +62,26 @@ struct CWrapper {
   static ConstraintPtr_t copy(const Constraint* cs) { return cs->copy(); }
 };
 
+static ConstraintSetPtr_t createConstraintSet(
+    const hpp::pinocchio::DevicePtr_t& device, const std::string& name) {
+  return core::ConstraintSet::create(device, name);
+}
+
+static ConfigProjectorPtr_t createConfigProjector(
+    const hpp::pinocchio::DevicePtr_t& device, const std::string& name,
+    value_type threshold, size_type iterations) {
+  return core::ConfigProjector::create(device, name, threshold, iterations);
+}
+
+static void rightHandSideFromConfig(ConfigProjectorPtr_t& configProj, ConfigurationIn_t config) {
+  configProj->rightHandSideFromConfig(config);
+}
+
+static void setRightHandSideOfConstraint(ConfigProjectorPtr_t& configProj, hpp::constraints::ImplicitPtr_t constraint, ConfigurationIn_t config) {
+  configProj->rightHandSide(constraint, config);
+}
+
+
 void exposeConstraint() {
   class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
       .def("__str__", &to_str_from_operator<Constraint>)
@@ -73,11 +93,13 @@ void exposeConstraint() {
 
   class_<ConstraintSet, ConstraintSetPtr_t, boost::noncopyable,
          bases<Constraint> >("ConstraintSet", no_init)
+      .def("__init__", make_constructor(&createConstraintSet))
       .PYHPP_DEFINE_METHOD(ConstraintSet, addConstraint)
       .PYHPP_DEFINE_METHOD(ConstraintSet, configProjector);
 
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
          bases<Constraint> >("ConfigProjector", no_init)
+      .def("__init__", make_constructor(&createConfigProjector))
       .def("solver",
            static_cast<BySubstitution& (ConfigProjector::*)()>(
                &ConfigProjector::solver),
@@ -92,6 +114,8 @@ void exposeConstraint() {
            static_cast<value_type (ConfigProjector::*)() const>(
                &ConfigProjector::errorThreshold))
       .PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
+      .def("setRightHandSideFromConfig", &rightHandSideFromConfig)
+      .def("setRightHandSideOfConstraint", &setRightHandSideOfConstraint)
       .def("sigma", &ConfigProjector::sigma,
            return_value_policy<return_by_value>());
 }

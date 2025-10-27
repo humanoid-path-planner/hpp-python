@@ -59,8 +59,7 @@ void exposeDistance() {
       .def("compute", &DistanceWrapper::compute);
   class_<WeighedDistance, bases<Distance>, WeighedDistancePtr_t,
          boost::noncopyable>("WeighedDistance", no_init)
-      .def("create", &WeighedDistance::create)
-      .staticmethod("create")
+      .def("__init__", make_constructor(&WeighedDistance::create))
       .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t)
       .def("getWeights", &DistanceWrapper::getWeights)
       .def("setWeights", &DistanceWrapper::setWeights);
