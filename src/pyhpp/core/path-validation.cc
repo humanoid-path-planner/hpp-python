@@ -102,8 +102,7 @@ void exposePathValidation() {
   def("DiscretizedCollision",
       &pathValidation::createDiscretizedCollisionChecking,
       (arg("robot"), arg("stepSize")));
-  def("DiscretizedJointBound",
-      &pathValidation::createDiscretizedJointBound,
+  def("DiscretizedJointBound", &pathValidation::createDiscretizedJointBound,
       (arg("robot"), arg("stepSize")));
   def("DiscretizedCollisionAndJointBound",
       &PVWrapper::createDiscretizedJointBoundAndCollisionChecking,
