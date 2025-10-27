@@ -97,20 +97,20 @@ void exposePathValidation() {
          hpp::core::continuousValidation::DichotomyPtr_t, boost::noncopyable>(
       "Dichotomy", no_init);
 
-  def("createDiscretized", &pathValidation::createDiscretizedCollisionChecking,
+  def("Discretized", &pathValidation::createDiscretizedCollisionChecking,
       (arg("robot"), arg("stepSize")));
-  def("createDiscretizedCollision",
+  def("DiscretizedCollision",
       &pathValidation::createDiscretizedCollisionChecking,
       (arg("robot"), arg("stepSize")));
-  def("createDiscretizedJointBound",
+  def("DiscretizedJointBound",
       &pathValidation::createDiscretizedJointBound,
       (arg("robot"), arg("stepSize")));
-  def("createDiscretizedCollisionAndJointBound",
+  def("DiscretizedCollisionAndJointBound",
       &PVWrapper::createDiscretizedJointBoundAndCollisionChecking,
       (arg("robot"), arg("stepSize")));
-  def("createProgressive", &continuousValidation::Progressive::create,
+  def("Progressive", &continuousValidation::Progressive::create,
       (arg("robot"), arg("tolerance")));
-  def("createDichotomy", &continuousValidation::Dichotomy::create,
+  def("Dichotomy", &continuousValidation::Dichotomy::create,
       (arg("robot"), arg("tolerance")));
 }
 }  // namespace core

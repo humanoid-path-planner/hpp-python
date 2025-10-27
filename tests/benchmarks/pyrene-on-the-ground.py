@@ -10,8 +10,8 @@ from pyhpp.core.static_stability_constraint_factory import (
 from pyhpp.core import (
     Problem,
     DiffusingPlanner,
-    createDichotomy,
-    createProgressiveProjector,
+    Dichotomy,
+    ProgressiveProjector,
     Straight,
 )
 from pyhpp.constraints import LockedJoint
@@ -133,9 +133,9 @@ problem.addNumericalConstraintsToConfigProjector(
     "balance-proj", list(constraints.values()), [0] * len(constraints)
 )
 # Set up path validation and projection
-problem.pathValidation = createDichotomy(robot, 0)
+problem.pathValidation = Dichotomy(robot, 0)
 problem.steeringMethod = Straight(problem)
-problem.pathProjector = createProgressiveProjector(
+problem.pathProjector = ProgressiveProjector(
     problem.distance(), problem.steeringMethod, 0.2
 )
 
