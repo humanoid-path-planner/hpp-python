@@ -232,25 +232,27 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
     using hpp::constraints::Implicit;
     using hpp::constraints::OrientationBit;
     using hpp::constraints::PositionBit;
-    
+
     std::string name(constraintName);
     hpp::pinocchio::Frame f2 = robot()->getFrameByName(joint2Name);
     auto mask = extract_vector<bool>(m);
-    
-    const hpp::pinocchio::Transform3s ref2 = M; 
-    
+
+    const hpp::pinocchio::Transform3s ref2 = M;
+
     if (joint1Name && std::strlen(joint1Name) > 0) {
       hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
-      
-      const hpp::pinocchio::Transform3s ref1 = 
+
+      const hpp::pinocchio::Transform3s ref1 =
           hpp::pinocchio::Transform3s::Identity();
       auto func = GenericTransformation<
-          PositionBit | OrientationBit | hpp::constraints::RelativeBit>::create(
-          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
+          PositionBit | OrientationBit |
+          hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
+                                                 f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {
-      const hpp::pinocchio::Transform3s Id = hpp::pinocchio::Transform3s::Identity();
+      const hpp::pinocchio::Transform3s Id =
+          hpp::pinocchio::Transform3s::Identity();
       auto func = GenericTransformation<PositionBit | OrientationBit>::create(
           name, robot(), f2.joint(), ref2, Id, mask);
       return Implicit::create(
