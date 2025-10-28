@@ -228,34 +228,29 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
     const hpp::pinocchio::Transform3s& M, boost::python::list m) {
   try {
     if (!robot()) throw std::logic_error("No robot loaded");
-
     using hpp::constraints::GenericTransformation;
     using hpp::constraints::Implicit;
     using hpp::constraints::OrientationBit;
     using hpp::constraints::PositionBit;
-
+    
     std::string name(constraintName);
-
     hpp::pinocchio::Frame f2 = robot()->getFrameByName(joint2Name);
     auto mask = extract_vector<bool>(m);
-
-    const hpp::pinocchio::Transform3s ref2 = f2.positionInParentJoint() * M;
-
+    
+    const hpp::pinocchio::Transform3s ref2 = M; 
+    
     if (joint1Name && std::strlen(joint1Name) > 0) {
-      // Relative transformation constraint between two frames
       hpp::pinocchio::Frame f1 = robot()->getFrameByName(joint1Name);
-      const hpp::pinocchio::Transform3s ref1 =
-          f1.positionInParentJoint() * hpp::pinocchio::Transform3s::Identity();
+      
+      const hpp::pinocchio::Transform3s ref1 = 
+          hpp::pinocchio::Transform3s::Identity();
       auto func = GenericTransformation<
-          PositionBit | OrientationBit |
-          hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
-                                                 f2.joint(), ref1, ref2, mask);
+          PositionBit | OrientationBit | hpp::constraints::RelativeBit>::create(
+          name, robot(), f1.joint(), f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {
-      // Absolute transformation of frame/joint2 to M in world frame
-      const hpp::pinocchio::Transform3s Id =
-          hpp::pinocchio::Transform3s::Identity();
+      const hpp::pinocchio::Transform3s Id = hpp::pinocchio::Transform3s::Identity();
       auto func = GenericTransformation<PositionBit | OrientationBit>::create(
           name, robot(), f2.joint(), ref2, Id, mask);
       return Implicit::create(
@@ -655,8 +650,10 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, addPartialCom)
       .PYHPP_DEFINE_METHOD(Problem, getPartialCom)
       .PYHPP_DEFINE_METHOD(Problem, createRelativeComConstraint)
-      .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint)
-      .PYHPP_DEFINE_METHOD(Problem, createTransformationConstraint2)
+      .def("createTransformationConstraint",
+           &Problem::createTransformationConstraint)
+      .def("createTransformationConstraint",
+           &Problem::createTransformationConstraint2)
       .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
       .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
