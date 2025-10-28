@@ -133,23 +133,24 @@ static void setJointBounds(Device& device, const char* jointName,
 
 typedef hpp::pinocchio::FrameIndex FrameIndex;
 typedef hpp::pinocchio::SE3 SE3;
-static boost::python::list getJointPosition(Device& device, const std::string& jointName) {
+static boost::python::list getJointPosition(Device& device,
+                                            const std::string& jointName) {
   try {
     const Model& model(device.model());
     const Data& data(device.data());
-    
+
     if (!model.existFrame(jointName)) {
       throw std::logic_error("Robot has no frame with name " + jointName);
     }
-    
+
     FrameIndex joint = model.getFrameId(jointName);
     if (model.frames.size() <= (std::size_t)joint)
       throw std::logic_error("Frame index of joint " + jointName +
                              " out of bounds: " + std::to_string(joint));
-    
+
     const SE3& M = data.oMf[joint];
     Transform3s::Quaternion q(M.rotation());
-    
+
     boost::python::list t;
     t.append(M.translation()[0]);
     t.append(M.translation()[1]);
@@ -158,7 +159,7 @@ static boost::python::list getJointPosition(Device& device, const std::string& j
     t.append(q.y());
     t.append(q.z());
     t.append(q.w());
-    
+
     return t;
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
