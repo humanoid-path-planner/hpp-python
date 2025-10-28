@@ -23,8 +23,8 @@ srdfFilename = (
 urdfFilenameBall = "package://hpp_environments/urdf/ur_benchmark/pokeball.urdf"
 srdfFilenameBall = "package://hpp_environments/srdf/ur_benchmark/pokeball.srdf"
 
-r0_pose = SE3(rotation=np.identity(3), translation=np.array([-0.25, 0, 0]))
-r1_pose = SE3(rotation=np.identity(3), translation=np.array([1, 0, 0]))
+r0_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
+r1_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 
 robot = Device("bot")
 
