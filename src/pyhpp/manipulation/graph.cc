@@ -895,6 +895,10 @@ void PyWGraph::removeCollisionPairFromTransition(PyWEdgePtr_t edge,
   }
 }
 
+PathValidationPtr_t PyWEdge::pathValidation() const {
+  return obj->pathValidation();
+}
+
 // =============================================================================
 // Subgraph management
 // =============================================================================
@@ -1210,7 +1214,8 @@ void exposeGraph() {
       .def("name", &PyWState::name);
 
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
-      .def("name", &PyWEdge::name);
+      .def("name", &PyWEdge::name)
+      .def("pathValidation", &PyWEdge::pathValidation);
 
   class_<PyWGraph>(
       "Graph",
