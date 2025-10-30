@@ -30,12 +30,14 @@
 #ifndef PYHPP_GRAPH_HH
 #define PYHPP_GRAPH_HH
 
+#include <hpp/core/path-validation.hh>
 #include <hpp/manipulation/graph/graph.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
 namespace manipulation {
 
+typedef hpp::core::PathValidationPtr_t PathValidationPtr_t;
 typedef hpp::manipulation::Configuration_t Configuration_t;
 typedef hpp::manipulation::ConfigurationIn_t ConfigurationIn_t;
 typedef hpp::manipulation::size_type size_type;
@@ -65,6 +67,7 @@ struct PyWEdge {
   EdgePtr_t obj;
   PyWEdge(const EdgePtr_t& object);
   std::string name() const;
+  PathValidationPtr_t pathValidation() const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
 
