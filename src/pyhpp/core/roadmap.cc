@@ -53,7 +53,7 @@ struct RWrapper {
     if (d > 0) {
       std::ostringstream os;
       os << "Roadmap::addNodeAndEdge: initial configuration (" << from
-	 << ") not in the roadmap";
+         << ") not in the roadmap";
       throw std::logic_error(os.str().c_str());
     }
     roadmap.addNodeAndEdges(nodeFrom, to, path);
@@ -66,7 +66,7 @@ struct RWrapper {
     if (d > 0) {
       std::ostringstream os;
       os << "Roadmap::addNodeAndEdge: initial configuration (" << from
-	 << ") not in the roadmap";
+         << ") not in the roadmap";
       throw std::logic_error(os.str().c_str());
     }
     NodePtr_t nodeTo = roadmap.addNode(to);
