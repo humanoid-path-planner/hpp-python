@@ -51,16 +51,18 @@ struct CCWrapper {
   }
   static boost::python::list reachableFrom(ConnectedComponent& cc) {
     std::vector<ConnectedComponentPtr_t> res;
-    for(ConnectedComponent::RawPtrs_t::const_iterator itcc = cc.reachableFrom().begin();
-	itcc != cc.reachableFrom().end(); ++itcc) {
+    for (ConnectedComponent::RawPtrs_t::const_iterator itcc =
+             cc.reachableFrom().begin();
+         itcc != cc.reachableFrom().end(); ++itcc) {
       res.push_back((*itcc)->self());
     }
     return to_python_list(res);
   }
   static boost::python::list reachableTo(ConnectedComponent& cc) {
     std::vector<ConnectedComponentPtr_t> res;
-    for(ConnectedComponent::RawPtrs_t::const_iterator itcc = cc.reachableTo().begin();
-	itcc != cc.reachableTo().end(); ++itcc) {
+    for (ConnectedComponent::RawPtrs_t::const_iterator itcc =
+             cc.reachableTo().begin();
+         itcc != cc.reachableTo().end(); ++itcc) {
       res.push_back((*itcc)->self());
     }
     return to_python_list(res);
