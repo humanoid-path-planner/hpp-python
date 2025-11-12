@@ -48,14 +48,29 @@ using namespace hpp::core;
 struct RWrapper {
   static void addNodeAndEdges(Roadmap& roadmap, const ConfigurationIn_t from,
                               ConfigurationIn_t to, const PathPtr_t path) {
-    NodePtr_t nodeFrom = roadmap.addNode(from);
+    value_type d;
+    NodePtr_t nodeFrom = roadmap.nearestNode(from, d);
+    if (d > 0) {
+      std::ostringstream os;
+      os << "Roadmap::addNodeAndEdge: initial configuration (" << from
+	 << ") not in the roadmap";
+      throw std::logic_error(os.str().c_str());
+    }
     roadmap.addNodeAndEdges(nodeFrom, to, path);
   }
 
   static void addNodeAndEdge(Roadmap& roadmap, const ConfigurationIn_t from,
                              ConfigurationIn_t to, const PathPtr_t path) {
-    NodePtr_t nodeFrom = roadmap.addNode(from);
-    roadmap.addNodeAndEdge(nodeFrom, to, path);
+    value_type d;
+    NodePtr_t nodeFrom = roadmap.nearestNode(from, d);
+    if (d > 0) {
+      std::ostringstream os;
+      os << "Roadmap::addNodeAndEdge: initial configuration (" << from
+	 << ") not in the roadmap";
+      throw std::logic_error(os.str().c_str());
+    }
+    NodePtr_t nodeTo = roadmap.addNode(to);
+    roadmap.addEdge(nodeFrom, nodeTo, path);
   }
 
   static void addNode(Roadmap& roadmap, const ConfigurationIn_t config) {
