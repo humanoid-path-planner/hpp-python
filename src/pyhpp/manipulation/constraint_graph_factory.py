@@ -770,7 +770,7 @@ class ConstraintFactory(ConstraintFactoryAbstract):
                     q = self.graph.robot.getJointConfig(n)
                     self.registerConstraint(
                         LockedJoint(
-                            self.graph.robot.asPinDevice(), n, np.array(q)
+                            self.graph.robot, n, np.array(q)
                         ),
                         n,
                     )

@@ -39,6 +39,7 @@
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
+#include <../src/pyhpp/pinocchio/device.hh>
 #include <pyhpp/util.hh>
 
 // #include <pinocchio/bindings/python/fwd.hpp>
@@ -56,22 +57,12 @@ namespace pyhpp {
 namespace pinocchio {
 
 namespace bp = boost::python;
-typedef hpp::pinocchio::Model Model;
-typedef hpp::pinocchio::Data Data;
-typedef hpp::pinocchio::ModelPtr_t ModelPtr_t;
-typedef hpp::pinocchio::GeomData GeomData;
-typedef hpp::pinocchio::LiegroupSpacePtr_t LiegroupSpacePtr_t;
-typedef hpp::pinocchio::GeomModel GeomModel;
-typedef hpp::pinocchio::Configuration_t Configuration_t;
-typedef hpp::pinocchio::ConfigurationIn_t ConfigurationIn_t;
-typedef hpp::pinocchio::size_type size_type;
-typedef hpp::pinocchio::Transform3s Transform3s;
-typedef hpp::pinocchio::Device Device;
-typedef hpp::pinocchio::DevicePtr_t DevicePtr_t;
 typedef hpp::pinocchio::GripperPtr_t GripperPtr_t;
 typedef hpp::pinocchio::Gripper Gripper;
-typedef hpp::pinocchio::Computation_t Computation_t;
-typedef hpp::pinocchio::value_type value_type;
+typedef hpp::pinocchio::FrameIndex FrameIndex;
+typedef hpp::pinocchio::SE3 SE3;
+typedef hpp::pinocchio::Frame Frame;
+typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
 using namespace boost::python;
 
@@ -93,19 +84,16 @@ Transform3s getObjectPositionInJoint(const GripperPtr_t& gripper) {
 
 static hpp::pinocchio::vector3_t getCenterOfMass(Device& d) {
   try {
-    d.computeForwardKinematics();
-    return d.positionCenterOfMass();
+    d.computeForwardKinematics(hpp::pinocchio::COM);
+    return d.obj->positionCenterOfMass();
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
 }
 
-typedef hpp::pinocchio::Frame Frame;
-typedef hpp::pinocchio::JointPtr_t JointPtr_t;
-
 static void setJointBounds(Device& device, const char* jointName,
                            boost::python::list py_jointBounds) {
-  Frame frame = device.getFrameByName(jointName);
+  Frame frame = device.obj->getFrameByName(jointName);
   JointPtr_t joint = frame.joint();
   auto jointBounds = extract_vector<value_type>(py_jointBounds);
 
@@ -131,8 +119,6 @@ static void setJointBounds(Device& device, const char* jointName,
   }
 }
 
-typedef hpp::pinocchio::FrameIndex FrameIndex;
-typedef hpp::pinocchio::SE3 SE3;
 static boost::python::list getJointPosition(Device& device,
                                             const std::string& jointName) {
   try {
@@ -171,7 +157,7 @@ static boost::python::dict rankInConfiguration(Device& device) {
   try {
     auto joint_names = device.model().names;
     for (const auto& joint_name : joint_names) {
-      Frame frame = device.getFrameByName(joint_name.c_str());
+      Frame frame = device.obj->getFrameByName(joint_name.c_str());
       if (!frame.isFixed()) {
         JointPtr_t joint = frame.joint();
         if (joint) {
@@ -190,7 +176,7 @@ static boost::python::list getJointsPosition(
     const boost::python::list& jointNames) {
   try {
     device.currentConfiguration(dofArray);
-    device.computeForwardKinematics();
+    device.computeForwardKinematics(hpp::pinocchio::JOINT_POSITION);
     device.computeFramesForwardKinematics();
 
     const Model& model(device.model());
@@ -239,6 +225,65 @@ void exposeGripper() {
           boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,
                                             true>());
 }
+
+static boost::shared_ptr<Device> createDevice(const std::string& name) {
+  return boost::make_shared<Device>(
+      hpp::pinocchio::Device::create(name));
+}
+
+
+struct DeviceWrapperConverter {
+  static void* convertible(PyObject* obj_ptr) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Device> extractor(obj);
+    return extractor.check() ? obj_ptr : nullptr;
+  }
+
+  static void construct_shared_ptr(
+      PyObject* obj_ptr,
+      boost::python::converter::rvalue_from_python_stage1_data* data) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Device> extractor(obj);
+
+    const Device& wrapper = extractor();
+    typedef std::shared_ptr<hpp::pinocchio::Device> PinDevicePtr_t;
+    typedef boost::python::converter::rvalue_from_python_storage<PinDevicePtr_t> StorageType;
+    
+    void* storage = ((StorageType*)data)->storage.bytes;
+    new (storage) PinDevicePtr_t(wrapper.obj);
+    data->convertible = storage;
+  }
+
+  static void construct_const_shared_ptr(
+      PyObject* obj_ptr,
+      boost::python::converter::rvalue_from_python_stage1_data* data) {
+    boost::python::object obj(boost::python::borrowed(obj_ptr));
+    boost::python::extract<Device> extractor(obj);
+
+    const Device& wrapper = extractor();
+    typedef std::shared_ptr<hpp::pinocchio::Device const> ConstPinDevicePtr_t;
+    typedef boost::python::converter::rvalue_from_python_storage<ConstPinDevicePtr_t> StorageType;
+    
+    void* storage = ((StorageType*)data)->storage.bytes;
+    new (storage) ConstPinDevicePtr_t(wrapper.obj);
+    data->convertible = storage;
+  }
+};
+
+void register_device_converters() {
+  typedef std::shared_ptr<hpp::pinocchio::Device> PinDevicePtr_t;
+  typedef std::shared_ptr<hpp::pinocchio::Device const> ConstPinDevicePtr_t;
+  
+  boost::python::converter::registry::push_back(
+      &DeviceWrapperConverter::convertible,
+      &DeviceWrapperConverter::construct_shared_ptr,
+      boost::python::type_id<PinDevicePtr_t>());
+
+  boost::python::converter::registry::push_back(
+      &DeviceWrapperConverter::convertible,
+      &DeviceWrapperConverter::construct_const_shared_ptr,
+      boost::python::type_id<ConstPinDevicePtr_t>());
+}
 void exposeDevice() {
   enum_<Computation_t>("ComputationFlag")
       .value("JOINT_POSITION", hpp::pinocchio::JOINT_POSITION)
@@ -248,23 +293,18 @@ void exposeDevice() {
       .value("COM", hpp::pinocchio::COM)
       .value("COMPUTE_ALL", hpp::pinocchio::COMPUTE_ALL);
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
-  class_<Device, DevicePtr_t, boost::noncopyable>("Device", no_init)
+  
+class_<Device, boost::shared_ptr<Device>, boost::noncopyable>
+      ("Device", no_init)
+      .def("__init__", make_constructor(&createDevice))
       .def("name", &Device::name, return_value_policy<return_by_value>())
-      .def("__init__", make_constructor(&Device::create))
       .def("configSpace", &Device::configSpace,
            return_value_policy<return_by_value>())
-      .def("model", static_cast<Model& (Device::*)()>(&Device::model),
-           return_internal_reference<>())
-      .def("data", static_cast<Data& (Device::*)()>(&Device::data),
-           return_internal_reference<>())
-      .def("geomData", static_cast<GeomData& (Device::*)()>(&Device::geomData),
-           return_internal_reference<>())
-      .def("geomModel",
-           static_cast<GeomModel& (Device::*)()>(&Device::geomModel),
-           return_internal_reference<>())
-      .def("visualModel",
-           static_cast<GeomModel& (Device::*)()>(&Device::visualModel),
-           return_internal_reference<>())
+      .def("model", &Device::model, return_internal_reference<>())
+      .def("data", &Device::data, return_internal_reference<>())
+      .def("geomData", &Device::geomData, return_internal_reference<>())
+      .def("geomModel", &Device::geomModel, return_internal_reference<>())
+      .def("visualModel", &Device::visualModel, return_internal_reference<>())
       .PYHPP_DEFINE_METHOD(Device, configSize)
       .PYHPP_DEFINE_METHOD(Device, numberDof)
 
@@ -283,6 +323,7 @@ void exposeDevice() {
       .def("getCenterOfMass", &getCenterOfMass)
       .def("getJointPosition", &getJointPosition)
       .def("getJointsPosition", &getJointsPosition);
+    register_device_converters();
 }
 }  // namespace pinocchio
 }  // namespace pyhpp

@@ -21,7 +21,7 @@ robot.currentConfiguration(q)
 m = Mask()
 m[:] = (True,) * 3
 Id = SE3.Identity()
-pc = Position.create(
+pc = Position(
     "position", robot, robot.model().getJointId("wrist_3_joint"), Id, Id, m
 )
 print(pc)
