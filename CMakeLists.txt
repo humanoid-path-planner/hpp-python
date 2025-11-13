@@ -85,7 +85,6 @@ set(${PROJECT_NAME}_HEADERS
     include/pyhpp/manipulation/urdf/fwd.hh
     include/pyhpp/pinocchio/fwd.hh
     include/pyhpp/pinocchio/urdf/fwd.hh
-    include/pyhpp/coverage/fwd.hh
     include/pyhpp/ref.hh
     include/pyhpp/stl-pair.hh
     include/pyhpp/util.hh
@@ -104,11 +103,6 @@ add_project_dependency(hpp-core REQUIRED)
 add_project_dependency(hpp-corbaserver REQUIRED)
 add_project_dependency(hpp-manipulation REQUIRED)
 add_project_dependency(hpp-manipulation-urdf REQUIRED)
-
-option(BUILD_HPP_COVERAGE "Build with hpp-coverage support" ON)
-if(BUILD_HPP_COVERAGE)
-  add_project_dependency(hpp-coverage REQUIRED)
-endif()
 
 if(BUILD_TESTING)
   find_package(example-robot-data REQUIRED)
