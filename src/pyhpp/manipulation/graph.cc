@@ -1017,7 +1017,8 @@ boost::python::tuple PyWGraph::createPlacementConstraint(
     auto surface2 = extract_vector<std::string>(py_surface2);
 
     bool explicit_(true);
-    if (!robot->asManipulationDevice()) throw std::runtime_error("No robot loaded");
+    if (!robot->asManipulationDevice())
+      throw std::runtime_error("No robot loaded");
     JointAndShapes_t floorSurfaces, objectSurfaces, l;
 
     for (std::vector<std::string>::const_iterator it1 = surface1.begin();
@@ -1055,7 +1056,8 @@ boost::python::tuple PyWGraph::createPlacementConstraint(
       typedef hpp::constraints::explicit_::ConvexShapeContact Constraint_t;
       Constraint_t::Constraints_t constraints(
           Constraint_t::createConstraintAndComplement(
-              name, robot->asManipulationDevice(), floorSurfaces, objectSurfaces, margin));
+              name, robot->asManipulationDevice(), floorSurfaces,
+              objectSurfaces, margin));
 
       assert(hpp::dynamic_pointer_cast<hpp::constraints::ConvexShapeContact>(
           std::get<0>(constraints)->functionPtr()));
@@ -1081,7 +1083,8 @@ boost::python::tuple PyWGraph::createPlacementConstraint(
       std::pair<hpp::constraints::ConvexShapeContactPtr_t,
                 hpp::constraints::ConvexShapeContactComplementPtr_t>
           functions(hpp::constraints::ConvexShapeContactComplement::createPair(
-              name, robot->asManipulationDevice(), floorSurfaces, objectSurfaces));
+              name, robot->asManipulationDevice(), floorSurfaces,
+              objectSurfaces));
 
       functions.first->setNormalMargin(margin);
 
@@ -1118,7 +1121,8 @@ ImplicitPtr_t PyWGraph::createPrePlacementConstraint(
     auto surface1 = extract_vector<std::string>(py_surface1);
     auto surface2 = extract_vector<std::string>(py_surface2);
 
-    if (!robot->asManipulationDevice()) throw std::runtime_error("No robot loaded");
+    if (!robot->asManipulationDevice())
+      throw std::runtime_error("No robot loaded");
     JointAndShapes_t floorSurfaces, objectSurfaces, l;
 
     for (std::vector<std::string>::const_iterator it1 = surface1.begin();
@@ -1143,7 +1147,8 @@ ImplicitPtr_t PyWGraph::createPrePlacementConstraint(
 
     hpp::constraints::ConvexShapeContactPtr_t cvxShape(
         hpp::constraints::ConvexShapeContact::create(
-            name, robot->asManipulationDevice(), floorSurfaces, objectSurfaces));
+            name, robot->asManipulationDevice(), floorSurfaces,
+            objectSurfaces));
     cvxShape->setNormalMargin(margin + width);
 
     return hpp::constraints::Implicit::create(
@@ -1171,9 +1176,11 @@ boost::python::list PyWGraph::createGraspConstraint(const std::string& name,
                                                     const std::string& handle) {
   boost::python::list result;
 
-  GripperPtr_t g = robot->asManipulationDevice()->grippers.get(gripper, GripperPtr_t());
+  GripperPtr_t g =
+      robot->asManipulationDevice()->grippers.get(gripper, GripperPtr_t());
   if (!g) throw std::runtime_error("No gripper with name " + gripper + ".");
-  HandlePtr_t h = robot->asManipulationDevice()->handles.get(handle, HandlePtr_t());
+  HandlePtr_t h =
+      robot->asManipulationDevice()->handles.get(handle, HandlePtr_t());
   if (!h) throw std::runtime_error("No handle with name " + handle + ".");
   const std::string cname = name + "/complement";
   const std::string bname = name + "/hold";
@@ -1194,9 +1201,11 @@ boost::python::list PyWGraph::createGraspConstraint(const std::string& name,
 ImplicitPtr_t PyWGraph::createPreGraspConstraint(const std::string& name,
                                                  const std::string& gripper,
                                                  const std::string& handle) {
-  GripperPtr_t g = robot->asManipulationDevice()->grippers.get(gripper, GripperPtr_t());
+  GripperPtr_t g =
+      robot->asManipulationDevice()->grippers.get(gripper, GripperPtr_t());
   if (!g) throw std::runtime_error("No gripper with name " + gripper + ".");
-  HandlePtr_t h = robot->asManipulationDevice()->handles.get(handle, HandlePtr_t());
+  HandlePtr_t h =
+      robot->asManipulationDevice()->handles.get(handle, HandlePtr_t());
   if (!h) throw std::runtime_error("No handle with name " + handle + ".");
 
   value_type c = h->clearance() + g->clearance();

@@ -45,7 +45,8 @@ namespace pyhpp {
 namespace manipulation {
 
 Problem::Problem(const PyWDevicePtr_t& robot)
-    : pyhpp::core::Problem(hpp::manipulation::Problem::create(robot->asManipulationDevice())) {}
+    : pyhpp::core::Problem(
+          hpp::manipulation::Problem::create(robot->asManipulationDevice())) {}
 
 Problem::Problem(const hpp::manipulation::ProblemPtr_t& object)
     : pyhpp::core::Problem(object) {}
