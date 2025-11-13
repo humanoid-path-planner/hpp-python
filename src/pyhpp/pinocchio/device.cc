@@ -250,8 +250,7 @@ void exposeDevice() {
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
   class_<Device, DevicePtr_t, boost::noncopyable>("Device", no_init)
       .def("name", &Device::name, return_value_policy<return_by_value>())
-      .def("create", &Device::create)
-      .staticmethod("create")
+      .def("__init__", make_constructor(&Device::create))
       .def("configSpace", &Device::configSpace,
            return_value_policy<return_by_value>())
       .def("model", static_cast<Model& (Device::*)()>(&Device::model),

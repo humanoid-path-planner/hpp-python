@@ -130,7 +130,7 @@ for i in range(nSphere):
     q = Quaternion(1, 0, 0, 0)
     ballPlacement = SE3(q, np.array([0, 0, 0.02]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
-    pc = Transformation.create(
+    pc = Transformation(
         placementName,
         robot.asPinDevice(),
         joint,
@@ -145,11 +145,11 @@ for i in range(nSphere):
         ComparisonType.EqualToZero,
     )
     implicit_mask = [True, True, True]
-    implicitPlacementConstraint = Implicit.create(pc, cts, implicit_mask)
+    implicitPlacementConstraint = Implicit(pc, cts, implicit_mask)
     constraints[placementName] = implicitPlacementConstraint
 
     # placement complement constraint
-    pc = Transformation.create(
+    pc = Transformation(
         placementName + "/complement",
         robot.asPinDevice(),
         joint,
@@ -163,7 +163,7 @@ for i in range(nSphere):
         ComparisonType.Equality,
     )
     implicit_mask = [True, True, True]
-    implicitPlacementComplementConstraint = Implicit.create(pc, cts, implicit_mask)
+    implicitPlacementComplementConstraint = Implicit(pc, cts, implicit_mask)
     constraints[placementName + "/complement"] = implicitPlacementComplementConstraint
 
     # combination of placement and complement
@@ -194,7 +194,7 @@ for i in range(nSphere):
     q = Quaternion(1, 0, 0, 0)
     ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
-    pc = Transformation.create(
+    pc = Transformation(
         preplacementName,
         robot.asPinDevice(),
         joint,
@@ -208,7 +208,7 @@ for i in range(nSphere):
         ComparisonType.EqualToZero,
     )
     implicit_mask = [True, True, True]
-    implicitPrePlacementConstraint = Implicit.create(pc, cts, implicit_mask)
+    implicitPrePlacementConstraint = Implicit(pc, cts, implicit_mask)
     constraints[preplacementName] = implicitPrePlacementConstraint
 
 q_init = [

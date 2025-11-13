@@ -28,7 +28,7 @@ args = parser.parse_args()
 talos_urdf = "package://example-robot-data/robots/talos_data/robots/talos_full_v2.urdf"
 talos_srdf = "package://example-robot-data/robots/talos_data/srdf/talos.srdf"
 
-robot = Device.create("pyrene")
+robot = Device("pyrene")
 
 # Load Talos robot
 talos_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
@@ -119,14 +119,14 @@ gripperJoints = [j for j in jointNames if j.startswith("gripper_")]
 for j in gripperJoints:
     ljName = "locked_" + j
     value = q0[robot.rankInConfiguration[j]]
-    cs = LockedJoint.create(robot, j, np.array([value]))
+    cs = LockedJoint(robot, j, np.array([value]))
     constraints[ljName] = cs
 
 # Lock torso joints
 for j in ["pyrene/torso_1_joint", "pyrene/torso_2_joint"]:
     ljName = "locked_" + j
     value = q0[robot.rankInConfiguration[j]]
-    cs = LockedJoint.create(robot, j, np.array([value]))
+    cs = LockedJoint(robot, j, np.array([value]))
     constraints[ljName] = cs
 
 problem.addNumericalConstraintsToConfigProjector(

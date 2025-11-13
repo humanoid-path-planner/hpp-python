@@ -8,7 +8,7 @@ urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur5_join
 srdfFilename = "package://example-robot-data/robots/ur_description/srdf/ur5_joint_limited_robot.srdf"
 
 # Initialize robot and viewer
-robot = Device.create("ur5")
+robot = Device("ur5")
 
 # Add robot and obstacles to scene
 urdf.loadModel(robot, 0, "r0", "anchor", urdfFilename, srdfFilename, SE3.Identity())

@@ -68,10 +68,10 @@ rank = rankInConfiguration["box/root_joint"]
 q_goal[rank : rank + 3] = [-2.5, -4.5, 0.746]
 
 # Create constraints
-ll = LockedJoint.create(
+ll = LockedJoint(
     robot.asPinDevice(), "pr2/l_gripper_l_finger_joint", np.array([0.5])
 )
-lr = LockedJoint.create(
+lr = LockedJoint(
     robot.asPinDevice(), "pr2/l_gripper_r_finger_joint", np.array([0.5])
 )
 

@@ -64,10 +64,8 @@ LockedJointPtr_t createLockedJointWithComp(const DevicePtr_t& robot,
 void exposeLockedJoint() {
   class_<LockedJoint, bases<Implicit>, LockedJointPtr_t, boost::noncopyable>(
       "LockedJoint", no_init)
-      .def("create", &createLockedJoint)
-      .staticmethod("create")
-      .def("createWithComp", &createLockedJointWithComp)
-      .staticmethod("create");
+      .def("__init__", make_constructor(&createLockedJoint))
+      .def("__init__", make_constructor(&createLockedJointWithComp));
 }
 }  // namespace constraints
 }  // namespace pyhpp

@@ -15,7 +15,7 @@ srdfFilename = "package://example-robot-data/robots/pr2_description/srdf/pr2.srd
 rootJointType = "planar"
 
 # Initialize robot and viewer
-robot = Device.create("ur2")
+robot = Device("ur2")
 urdf.loadModel(
     robot, 0, "r0", rootJointType, urdfFilename, srdfFilename, SE3.Identity()
 )

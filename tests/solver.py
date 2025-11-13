@@ -11,7 +11,7 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, StdVec_Bool as Mask
 
-robot = Device.create("ur3")
+robot = Device("ur3")
 urdf.loadRobotModel(
     robot,
     "anchor",
@@ -35,7 +35,7 @@ cts[:] = (
     ComparisonType.EqualToZero,
     ComparisonType.Equality,
 )
-solver.add(Implicit.create(pc, cts, [True, True, True]), 0)
+solver.add(Implicit(pc, cts, [True, True, True]), 0)
 
 print(solver)
 
