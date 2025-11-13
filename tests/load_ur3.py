@@ -11,7 +11,7 @@ srdfFilename = (
     "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
 )
 
-robot = Device.create("ur3")
+robot = Device("ur3")
 urdf.loadModel(robot, 0, "", "anchor", urdfFilename, srdfFilename, SE3.Identity())
 
 q = robot.currentConfiguration()

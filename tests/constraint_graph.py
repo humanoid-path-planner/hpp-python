@@ -116,7 +116,7 @@ m = [
 ]
 q = Quaternion(0, 0, 0, 1)
 ballGround = SE3(q, np.array([0, 0, 0.15]))
-pc = Transformation.create(
+pc = Transformation(
     "placementConstraint", robot.asPinDevice(), joint2, Id, ballGround, m
 )
 cts = ComparisonTypes()
@@ -126,14 +126,14 @@ cts[:] = (
     ComparisonType.EqualToZero,
 )
 implicit_mask = [True, True, True]
-implicitPlacementConstraint = Implicit.create(pc, cts, implicit_mask)
+implicitPlacementConstraint = Implicit(pc, cts, implicit_mask)
 
 
 q = Quaternion(0.5, 0.5, -0.5, 0.5)
 ballInGripper = SE3(q, np.array([0, 0.137, 0]))
 m = Mask()
 m[:] = (True,) * 6
-pc = RelativeTransformation.create(
+pc = RelativeTransformation(
     "grasp", robot.asPinDevice(), joint1, joint2, ballInGripper, Id, m
 )
 cts = ComparisonTypes()
@@ -145,7 +145,7 @@ cts[:] = (
     ComparisonType.EqualToZero,
     ComparisonType.EqualToZero,
 )
-implicitGraspConstraint = Implicit.create(pc, cts, m)
+implicitGraspConstraint = Implicit(pc, cts, m)
 
 
 # Set constraints of nodes and edges

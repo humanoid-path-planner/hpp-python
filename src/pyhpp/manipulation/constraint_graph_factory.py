@@ -769,7 +769,7 @@ class ConstraintFactory(ConstraintFactoryAbstract):
                     ljs.append(n)
                     q = self.graph.robot.getJointConfig(n)
                     self.registerConstraint(
-                        LockedJoint.create(
+                        LockedJoint(
                             self.graph.robot.asPinDevice(), n, np.array(q)
                         ),
                         n,
