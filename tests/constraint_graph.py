@@ -117,7 +117,7 @@ m = [
 q = Quaternion(0, 0, 0, 1)
 ballGround = SE3(q, np.array([0, 0, 0.15]))
 pc = Transformation(
-    "placementConstraint", robot.asPinDevice(), joint2, Id, ballGround, m
+    "placementConstraint", robot, joint2, Id, ballGround, m
 )
 cts = ComparisonTypes()
 cts[:] = (
@@ -134,7 +134,7 @@ ballInGripper = SE3(q, np.array([0, 0.137, 0]))
 m = Mask()
 m[:] = (True,) * 6
 pc = RelativeTransformation(
-    "grasp", robot.asPinDevice(), joint1, joint2, ballInGripper, Id, m
+    "grasp", robot, joint1, joint2, ballInGripper, Id, m
 )
 cts = ComparisonTypes()
 cts[:] = (

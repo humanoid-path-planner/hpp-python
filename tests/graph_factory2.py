@@ -91,7 +91,7 @@ for i in range(nSphere):
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation(
         placementName,
-        robot.asPinDevice(),
+        robot,
         joint,
         ballPlacement,
         Id,
@@ -109,7 +109,7 @@ for i in range(nSphere):
     # placement complement constraint
     pc = Transformation(
         placementName + "/complement",
-        robot.asPinDevice(),
+        robot,
         joint,
         ballPlacement,
         Id,
@@ -133,8 +133,8 @@ for i in range(nSphere):
         ComparisonType.EqualToZero,
         ComparisonType.Equality,
     )
-    ll = LockedJoint.createWithComp(
-        robot.asPinDevice(),
+    ll = LockedJoint(
+        robot,
         "sphere{0}/root_joint".format(i),
         np.array([0, 0, 0.02, 0, 0, 0, 1]),
         cts,
@@ -153,7 +153,7 @@ for i in range(nSphere):
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation(
         preplacementName,
-        robot.asPinDevice(),
+        robot,
         joint,
         ballPrePlacement,
         Id,

@@ -39,6 +39,7 @@ robot.setJointBounds("box/root_joint", [-5.1, -2, -5.2, -2.7, 0, 1.5])
 
 # Create problem
 problem = Problem(robot)
+print(model.names)
 
 # Generate initial and goal configuration.
 rankInConfiguration = dict()
@@ -69,10 +70,10 @@ q_goal[rank : rank + 3] = [-2.5, -4.5, 0.746]
 
 # Create constraints
 ll = LockedJoint(
-    robot.asPinDevice(), "pr2/l_gripper_l_finger_joint", np.array([0.5])
+    robot, "pr2/l_gripper_l_finger_joint", np.array([0.5])
 )
 lr = LockedJoint(
-    robot.asPinDevice(), "pr2/l_gripper_r_finger_joint", np.array([0.5])
+    robot, "pr2/l_gripper_r_finger_joint", np.array([0.5])
 )
 
 # Create the constraint graph

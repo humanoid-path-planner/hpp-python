@@ -40,6 +40,7 @@
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
 #include <pinocchio/spatial/se3.hpp>
+#include <../src/pyhpp/pinocchio/device.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
@@ -72,28 +73,13 @@ typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 // Boost python does not correctly handle weak pointers. To overcome this
 // limitation, we create a wrapper class and bind this class with boost python
 // instead of the original class.
-struct Device {
-  DevicePtr_t obj;
-  Device(const DevicePtr_t& object);
+struct Device : public pyhpp::pinocchio::Device {
   Device(const std::string& name);
-  // Methods from hpp::pinocchio::Device
-  const std::string& name() const;
-  const LiegroupSpacePtr_t& configSpace() const;
-  Model& model();
-  Data& data();
-  GeomData& geomData();
-  GeomModel& geomModel();
-  GeomModel& visualModel();
-  size_type configSize() const;
-  size_type numberDof() const;
-  const Configuration_t& currentConfiguration() const;
-  bool currentConfiguration(ConfigurationIn_t configuration);
-  void computeForwardKinematics(int flag);
-  void computeFramesForwardKinematics();
-  void updateGeometryPlacements();
-  // Methods for hpp::manipulation::Device
+  
   void setRobotRootPosition(const std::string& robotName,
                             const Transform3s& positionWRTParentJoint);
+  std::map<std::string, HandlePtr_t> handles();
+  std::map<std::string, GripperPtr_t> grippers();
   PinDevicePtr_t asPinDevice();
   boost::python::list getJointConfig(const char* jointName);
   boost::python::list getJointNames();
