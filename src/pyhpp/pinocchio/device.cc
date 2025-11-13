@@ -27,6 +27,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <../src/pyhpp/pinocchio/device.hh>
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
@@ -39,7 +40,6 @@
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
 #include <pyhpp/pinocchio/urdf/fwd.hh>
-#include <../src/pyhpp/pinocchio/device.hh>
 #include <pyhpp/util.hh>
 
 // #include <pinocchio/bindings/python/fwd.hpp>
@@ -227,10 +227,8 @@ void exposeGripper() {
 }
 
 static boost::shared_ptr<Device> createDevice(const std::string& name) {
-  return boost::make_shared<Device>(
-      hpp::pinocchio::Device::create(name));
+  return boost::make_shared<Device>(hpp::pinocchio::Device::create(name));
 }
-
 
 struct DeviceWrapperConverter {
   static void* convertible(PyObject* obj_ptr) {
@@ -247,8 +245,9 @@ struct DeviceWrapperConverter {
 
     const Device& wrapper = extractor();
     typedef std::shared_ptr<hpp::pinocchio::Device> PinDevicePtr_t;
-    typedef boost::python::converter::rvalue_from_python_storage<PinDevicePtr_t> StorageType;
-    
+    typedef boost::python::converter::rvalue_from_python_storage<PinDevicePtr_t>
+        StorageType;
+
     void* storage = ((StorageType*)data)->storage.bytes;
     new (storage) PinDevicePtr_t(wrapper.obj);
     data->convertible = storage;
@@ -262,8 +261,10 @@ struct DeviceWrapperConverter {
 
     const Device& wrapper = extractor();
     typedef std::shared_ptr<hpp::pinocchio::Device const> ConstPinDevicePtr_t;
-    typedef boost::python::converter::rvalue_from_python_storage<ConstPinDevicePtr_t> StorageType;
-    
+    typedef boost::python::converter::rvalue_from_python_storage<
+        ConstPinDevicePtr_t>
+        StorageType;
+
     void* storage = ((StorageType*)data)->storage.bytes;
     new (storage) ConstPinDevicePtr_t(wrapper.obj);
     data->convertible = storage;
@@ -273,7 +274,7 @@ struct DeviceWrapperConverter {
 void register_device_converters() {
   typedef std::shared_ptr<hpp::pinocchio::Device> PinDevicePtr_t;
   typedef std::shared_ptr<hpp::pinocchio::Device const> ConstPinDevicePtr_t;
-  
+
   boost::python::converter::registry::push_back(
       &DeviceWrapperConverter::convertible,
       &DeviceWrapperConverter::construct_shared_ptr,
@@ -293,9 +294,9 @@ void exposeDevice() {
       .value("COM", hpp::pinocchio::COM)
       .value("COMPUTE_ALL", hpp::pinocchio::COMPUTE_ALL);
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
-  
-class_<Device, boost::shared_ptr<Device>, boost::noncopyable>
-      ("Device", no_init)
+
+  class_<Device, boost::shared_ptr<Device>, boost::noncopyable>("Device",
+                                                                no_init)
       .def("__init__", make_constructor(&createDevice))
       .def("name", &Device::name, return_value_policy<return_by_value>())
       .def("configSpace", &Device::configSpace,
@@ -323,7 +324,7 @@ class_<Device, boost::shared_ptr<Device>, boost::noncopyable>
       .def("getCenterOfMass", &getCenterOfMass)
       .def("getJointPosition", &getJointPosition)
       .def("getJointsPosition", &getJointsPosition);
-    register_device_converters();
+  register_device_converters();
 }
 }  // namespace pinocchio
 }  // namespace pyhpp

@@ -54,7 +54,8 @@ void exposeAbsoluteGenericTransformation(const char* name) {
 
   class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
          boost::noncopyable>(name, no_init)
-      .def("__init__", make_constructor(&AbsoluteGenericTransformation_create<GT_t>));
+      .def("__init__",
+           make_constructor(&AbsoluteGenericTransformation_create<GT_t>));
 }
 
 template <typename GT_t>
@@ -73,7 +74,8 @@ template <typename GT_t>
 void exposeRelativeGenericTransformation(const char* name) {
   class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
          boost::noncopyable>(name, no_init)
-      .def("__init__", make_constructor(&RelativeGenericTransformation_create<GT_t>));
+      .def("__init__",
+           make_constructor(&RelativeGenericTransformation_create<GT_t>));
 }
 
 void exposeGenericTransformations() {

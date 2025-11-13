@@ -69,12 +69,8 @@ rank = rankInConfiguration["box/root_joint"]
 q_goal[rank : rank + 3] = [-2.5, -4.5, 0.746]
 
 # Create constraints
-ll = LockedJoint(
-    robot, "pr2/l_gripper_l_finger_joint", np.array([0.5])
-)
-lr = LockedJoint(
-    robot, "pr2/l_gripper_r_finger_joint", np.array([0.5])
-)
+ll = LockedJoint(robot, "pr2/l_gripper_l_finger_joint", np.array([0.5]))
+lr = LockedJoint(robot, "pr2/l_gripper_r_finger_joint", np.array([0.5]))
 
 # Create the constraint graph
 grippers = ["pr2/l_gripper"]

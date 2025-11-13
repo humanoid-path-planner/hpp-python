@@ -51,7 +51,8 @@ void loadModel(const Device& robot, const FrameIndex& baseFrame,
   hpp::pinocchio::urdf::loadModel(robot.obj, baseFrame, prefix, rootType,
                                   urdfPath, srdfPath, bMr);
   if (!std::string(srdfPath).empty()) {
-    hpp::manipulation::srdf::loadModelFromFile(robot.asManipulationDevice(), prefix, srdfPath);
+    hpp::manipulation::srdf::loadModelFromFile(robot.asManipulationDevice(),
+                                               prefix, srdfPath);
   }
 }
 
@@ -61,7 +62,8 @@ void loadModelFromString(const Device& robot, const FrameIndex& baseFrame,
                          const std::string& srdfString, const SE3& bMr) {
   hpp::pinocchio::urdf::loadModelFromString(
       robot.obj, baseFrame, prefix, rootType, urdfString, srdfString, bMr);
-  hpp::manipulation::srdf::loadModelFromXML(robot.asManipulationDevice(), prefix, srdfString);
+  hpp::manipulation::srdf::loadModelFromXML(robot.asManipulationDevice(),
+                                            prefix, srdfString);
 }
 
 void exposeUtil() {

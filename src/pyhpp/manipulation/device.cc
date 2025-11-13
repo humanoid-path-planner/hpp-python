@@ -50,7 +50,8 @@ std::map<std::string, HandlePtr_t> Device::handles() {
 }
 
 std::map<std::string, GripperPtr_t> Device::grippers() {
-  return std::dynamic_pointer_cast<hpp::manipulation::Device>(obj)->grippers.map;
+  return std::dynamic_pointer_cast<hpp::manipulation::Device>(obj)
+      ->grippers.map;
 }
 
 PinDevicePtr_t Device::asPinDevice() {
@@ -166,9 +167,8 @@ void exposeHandle() {
                                              true>());
 }
 void exposeDevice() {
-  class_<Device, bases<pyhpp::pinocchio::Device>,
-         boost::shared_ptr<Device>, boost::noncopyable>
-         ("Device", init<const std::string&>())
+  class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
+         boost::noncopyable>("Device", init<const std::string&>())
       .def("setRobotRootPosition", &Device::setRobotRootPosition)
       .def("handles", &Device::handles)
       .def("grippers", &Device::grippers)

@@ -30,6 +30,7 @@
 #ifndef PYHPP_MANIPULATION_DEVICE_HH
 #define PYHPP_MANIPULATION_DEVICE_HH
 
+#include <../src/pyhpp/pinocchio/device.hh>
 #include <hpp/constraints/implicit.hh>
 #include <hpp/manipulation/device.hh>
 #include <hpp/manipulation/handle.hh>
@@ -40,7 +41,6 @@
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/geometry.hpp>
 #include <pinocchio/spatial/se3.hpp>
-#include <../src/pyhpp/pinocchio/device.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
@@ -75,7 +75,7 @@ typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 // instead of the original class.
 struct Device : public pyhpp::pinocchio::Device {
   Device(const std::string& name);
-  
+
   void setRobotRootPosition(const std::string& robotName,
                             const Transform3s& positionWRTParentJoint);
   std::map<std::string, HandlePtr_t> handles();
