@@ -6,8 +6,8 @@
 #ifndef PYHPP_PINOCCHIO_DEVICE_HH
 #define PYHPP_PINOCCHIO_DEVICE_HH
 
-#include <hpp/pinocchio/device.hh>
 #include <hpp/manipulation/device.hh>
+#include <hpp/pinocchio/device.hh>
 #include <hpp/pinocchio/fwd.hh>
 
 namespace pyhpp {
@@ -29,9 +29,9 @@ typedef hpp::pinocchio::value_type value_type;
 
 struct Device {
   DevicePtr_t obj;
-  
+
   Device(const DevicePtr_t& object) : obj(object) {}
-  
+
   const std::string& name() const { return obj->name(); }
   const LiegroupSpacePtr_t& configSpace() const { return obj->configSpace(); }
   Model& model() { return obj->model(); }
@@ -41,22 +41,19 @@ struct Device {
   GeomModel& visualModel() { return obj->visualModel(); }
   size_type configSize() const { return obj->configSize(); }
   size_type numberDof() const { return obj->numberDof(); }
-  const Configuration_t& currentConfiguration() const { 
-    return obj->currentConfiguration(); 
+  const Configuration_t& currentConfiguration() const {
+    return obj->currentConfiguration();
   }
-  bool currentConfiguration(ConfigurationIn_t configuration) { 
-    return obj->currentConfiguration(configuration); 
+  bool currentConfiguration(ConfigurationIn_t configuration) {
+    return obj->currentConfiguration(configuration);
   }
-  void computeForwardKinematics(int flag) { 
-    obj->computeForwardKinematics(flag); 
+  void computeForwardKinematics(int flag) {
+    obj->computeForwardKinematics(flag);
   }
-  void computeFramesForwardKinematics() { 
-    obj->computeFramesForwardKinematics(); 
+  void computeFramesForwardKinematics() {
+    obj->computeFramesForwardKinematics();
   }
-  void updateGeometryPlacements() { 
-    obj->updateGeometryPlacements(); 
-  }
-
+  void updateGeometryPlacements() { obj->updateGeometryPlacements(); }
 
   hpp::manipulation::DevicePtr_t asManipulationDevice() const {
     auto manipDevice = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, obj);
