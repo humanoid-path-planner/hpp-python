@@ -166,12 +166,3 @@ add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
   hpp-manipulation-urdf::hpp-manipulation-urdf)
-
-if(BUILD_HPP_COVERAGE)
-  add_python_library(
-    pyhpp/coverage
-    FILES
-    pyhpp/coverage/path.cc
-    LINK_LIBRARIES
-    hpp-coverage::hpp-coverage)
-endif()
