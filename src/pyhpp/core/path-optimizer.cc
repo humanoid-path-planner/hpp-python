@@ -32,6 +32,8 @@
 #include <hpp/core/path-optimizer.hh>
 #include <hpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
+#include <hpp/core/path-optimization/random-shortcut.hh>
+#include <hpp/core/path-vector.hh>
 
 using namespace boost::python;
 
@@ -41,7 +43,18 @@ using namespace hpp::core;
 
 void exposePathOptimizer() {
   class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
-                                                                no_init);
+                                                                no_init)
+      .def("problem", &PathOptimizer::problem)
+      .def("optimize", &PathOptimizer::optimize)
+      .def("interrupt", &PathOptimizer::interrupt)
+      .def("maxIterations", &PathOptimizer::maxIterations)
+      .def("timeOut", &PathOptimizer::timeOut);
+
+  class_<pathOptimization::RandomShortcut, std::shared_ptr<pathOptimization::RandomShortcut>, bases<PathOptimizer>,
+        boost::noncopyable>("RandomShortcut", no_init)
+      .def("__init__", make_constructor(&pathOptimization::RandomShortcut::create));
+
+
 }
 }  // namespace core
 }  // namespace pyhpp
