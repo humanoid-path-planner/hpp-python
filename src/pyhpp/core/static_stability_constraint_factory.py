@@ -34,10 +34,9 @@ from pinocchio import SE3
 
 # # This class provides tools to create static stability constraints
 class StaticStabilityConstraintsFactory:
-    def __init__(self, problem):
+    def __init__(self, problem, robot):
         self.problem = problem
-        self.robot = problem.robot()
-
+        self.robot = robot
     def _getCOM(self, com):
         from numpy import array
 
@@ -75,7 +74,7 @@ class StaticStabilityConstraintsFactory:
 
         result.append(prefix + "relative-pose")
         rel_transform = Mr.inverse() * Ml
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             leftAnkle,
             rightAnkle,
@@ -86,7 +85,7 @@ class StaticStabilityConstraintsFactory:
         created_constraints[result[-1]] = constraint
 
         result.append(prefix + "pose-left-foot")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             leftAnkle,
@@ -97,7 +96,7 @@ class StaticStabilityConstraintsFactory:
         created_constraints[result[-1]] = constraint
 
         result.append(prefix + "pose-left-foot-complement")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             leftAnkle,
@@ -112,7 +111,7 @@ class StaticStabilityConstraintsFactory:
 
     # # # Create static stability constraints where the feet are fixed on the ground,
     def createStaticStabilityConstraint(
-        self, prefix, comName, leftAnkle, rightAnkle, q0, maskCom=(True,) * 3
+        self, prefix, comName, leftAnkle, rightAnkle, q0, maskCom=[True] * 3
     ):
         created_constraints = dict()
 
@@ -133,7 +132,7 @@ class StaticStabilityConstraintsFactory:
 
         # Pose of the left foot
         result.append(prefix + "pose-left-foot")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             leftAnkle,
@@ -145,7 +144,7 @@ class StaticStabilityConstraintsFactory:
 
         # Pose of the right foot
         result.append(prefix + "pose-right-foot")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             rightAnkle,
@@ -192,7 +191,7 @@ class StaticStabilityConstraintsFactory:
 
         # Pose of the right foot
         result.append(prefix + "pose-right-foot")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             rightAnkle,
@@ -204,7 +203,7 @@ class StaticStabilityConstraintsFactory:
 
         # Pose of the left foot
         result.append(prefix + "pose-left-foot")
-        constraint = self.problem.createTransformationConstraint2(
+        constraint = self.problem.createTransformationConstraint(
             result[-1],
             "",
             leftAnkle,
