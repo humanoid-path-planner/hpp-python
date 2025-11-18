@@ -407,12 +407,11 @@ bool PyWGraph::isShort(PyWEdgePtr_t edge) {
   }
 }
 
-void PyWGraph::getNodesConnectedByTransition(PyWEdgePtr_t edge,
-                                             std::string& nodeFrom,
-                                             std::string& nodeTo) {
+boost::python::tuple PyWGraph::getNodesConnectedByTransition(PyWEdgePtr_t edge) {
   try {
-    nodeFrom = edge->obj->stateFrom()->name();
-    nodeTo = edge->obj->stateTo()->name();
+    std::string nodeFrom = edge->obj->stateFrom()->name();
+    std::string nodeTo = edge->obj->stateTo()->name();
+    return boost::python::make_tuple(nodeFrom, nodeTo);
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }

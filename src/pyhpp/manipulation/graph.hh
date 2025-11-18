@@ -117,8 +117,7 @@ struct PyWGraph {
   std::string getContainingNode(PyWEdgePtr_t edge);
   void setShort(PyWEdgePtr_t edge, bool isShort);
   bool isShort(PyWEdgePtr_t edge);
-  void getNodesConnectedByTransition(PyWEdgePtr_t edge, std::string& nodeFrom,
-                                     std::string& nodeTo);
+  boost::python::tuple getNodesConnectedByTransition(PyWEdgePtr_t edge);
   void setWeight(PyWEdgePtr_t edge, int weight);
   size_t getWeight(PyWEdgePtr_t edge);
   void setWaypoint(PyWEdgePtr_t waypointEdge, int index, PyWEdgePtr_t edge,
