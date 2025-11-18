@@ -105,7 +105,7 @@ constraints = dict()
 
 leftAnkle = "pyrene/leg_left_6_joint"
 rightAnkle = "pyrene/leg_right_6_joint"
-factory = StaticStabilityConstraintsFactory(problem)
+factory = StaticStabilityConstraintsFactory(problem, robot)
 constraints = factory.createSlidingStabilityConstraint(
     "balance/", "pyrene", leftAnkle, rightAnkle, q0
 )
