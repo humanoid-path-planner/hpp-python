@@ -32,6 +32,7 @@
 #include <hpp/manipulation/manipulation-planner.hh>
 #include <hpp/manipulation/path-planner/end-effector-trajectory.hh>
 #include <hpp/manipulation/path-planner/transition-planner.hh>
+#include <hpp/manipulation/path-planner/states-path-finder.hh>
 #include <hpp/manipulation/roadmap.hh>
 #include <hpp/pinocchio/configuration.hh>
 #include <pyhpp/core/path-planner.hh>
@@ -46,6 +47,17 @@ struct ManipulationPlanner : public pyhpp::core::PathPlanner {
         hpp::manipulation::Roadmap::create(problem.obj->distance(),
                                            problem.obj->robot());
     obj = hpp::manipulation::ManipulationPlanner::create(problem.obj, roadmap);
+    roadmap->constraintGraph(
+        problem.asManipulationProblem()->constraintGraph());
+  }
+};
+
+struct StatesPathFinder : public pyhpp::core::PathPlanner {
+  StatesPathFinder(const pyhpp::core::Problem& problem) {
+    hpp::manipulation::RoadmapPtr_t roadmap =
+        hpp::manipulation::Roadmap::create(problem.obj->distance(),
+                                           problem.obj->robot());
+    obj = hpp::manipulation::pathPlanner::StatesPathFinder::createWithRoadmap(problem.obj, roadmap);
     roadmap->constraintGraph(
         problem.asManipulationProblem()->constraintGraph());
   }
@@ -240,6 +252,11 @@ void exposePathPlanners() {
                         boost::python::bases<pyhpp::core::PathPlanner>>(
       "ManipulationPlanner",
       boost::python::init<const pyhpp::core::Problem&>());
+
+  boost::python::class_<StatesPathFinder,
+                      boost::python::bases<pyhpp::core::PathPlanner>>(
+    "StatesPathFinder",
+    boost::python::init<const pyhpp::core::Problem&>());
 
   boost::python::class_<EndEffectorTrajectory,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
