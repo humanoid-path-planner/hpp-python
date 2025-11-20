@@ -121,7 +121,6 @@ void Problem::graphSteeringMethod(
 // }
 
 void exposeProblem() {
-  boost::python::import("pyhpp.core");
   class_<Problem, bases<pyhpp::core::Problem>>("Problem",
                                                init<const PyWDevicePtr_t&>())
       .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
