@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(bindings) {
 
   boost::python::import("pyhpp.pinocchio");
   boost::python::import("pyhpp.constraints");
+  boost::python::import("pyhpp.core");
   pyhpp::manipulation::exposeHandle();
   pyhpp::manipulation::exposeProblem();
   pyhpp::manipulation::exposeDevice();
@@ -43,4 +44,6 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::manipulation::exposePathProjector();
   pyhpp::manipulation::exposeManipSteeringMethod();
   pyhpp::manipulation::exposePathPlanners();
+  pyhpp::manipulation::exposePathOptimizers();
+
 }

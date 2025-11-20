@@ -160,6 +160,7 @@ add_python_library(
   pyhpp/manipulation/path-planner.hh
   pyhpp/manipulation/path-projector.cc
   pyhpp/manipulation/steering-method.cc
+  pyhpp/manipulation/path-optimizer.cc
   LINK_LIBRARIES
   hpp-manipulation::hpp-manipulation)
 

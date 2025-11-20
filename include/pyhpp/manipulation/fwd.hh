@@ -54,6 +54,7 @@ void exposePathPlanners();
 void exposeProblem();
 void exposePathProjector();
 void exposeManipSteeringMethod();
+void exposePathOptimizers();
 
 }  // namespace manipulation
 }  // namespace pyhpp
