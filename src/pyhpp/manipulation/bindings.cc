@@ -45,5 +45,4 @@ BOOST_PYTHON_MODULE(bindings) {
   pyhpp::manipulation::exposeManipSteeringMethod();
   pyhpp::manipulation::exposePathPlanners();
   pyhpp::manipulation::exposePathOptimizers();
-
 }

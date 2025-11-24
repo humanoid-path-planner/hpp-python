@@ -243,7 +243,7 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint(
       auto func = GenericTransformation<
           PositionBit | OrientationBit |
           hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
-                                                   f2.joint(), ref1, ref2, mask);
+                                                 f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {
@@ -283,7 +283,7 @@ hpp::constraints::ImplicitPtr_t Problem::createTransformationConstraint2(
       auto func = GenericTransformation<
           PositionBit | OrientationBit |
           hpp::constraints::RelativeBit>::create(name, robot(), f1.joint(),
-                                                   f2.joint(), ref1, ref2, mask);
+                                                 f2.joint(), ref1, ref2, mask);
       return Implicit::create(
           func, numberOfTrue(mask) * hpp::constraints::EqualToZero);
     } else {

@@ -29,43 +29,45 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
+#include <hpp/core/path-optimization/partial-shortcut.hh>
+#include <hpp/core/path-optimization/random-shortcut.hh>
 #include <hpp/core/path-optimizer.hh>
 #include <hpp/core/problem.hh>
-#include <hpp/core/path-optimization/random-shortcut.hh>
-#include <hpp/core/path-optimization/partial-shortcut.hh>
+#include <hpp/manipulation/graph-optimizer.hh>
 #include <hpp/manipulation/path-optimization/enforce-transition-semantic.hh>
 #include <hpp/manipulation/path-optimization/random-shortcut.hh>
-#include <hpp/manipulation/graph-optimizer.hh>
 
 using namespace boost::python;
-
 
 namespace pyhpp {
 namespace manipulation {
 using namespace hpp::manipulation;
 
-template<typename InnerOpt>
-hpp::core::PathOptimizerPtr_t createGraphOptimizer(const hpp::core::ProblemConstPtr_t& problem) {
+template <typename InnerOpt>
+hpp::core::PathOptimizerPtr_t createGraphOptimizer(
+    const hpp::core::ProblemConstPtr_t& problem) {
   return GraphOptimizer::create<InnerOpt>(problem);
 }
 
 void exposePathOptimizers() {
-
-  class_<pathOptimization::RandomShortcut, 
-         std::shared_ptr<pathOptimization::RandomShortcut>, 
-         bases<hpp::core::PathOptimizer>,
-         boost::noncopyable>("RandomShortcut", no_init)
-      .def("__init__", make_constructor(&pathOptimization::RandomShortcut::create));
+  class_<pathOptimization::RandomShortcut,
+         std::shared_ptr<pathOptimization::RandomShortcut>,
+         bases<hpp::core::PathOptimizer>, boost::noncopyable>("RandomShortcut",
+                                                              no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::RandomShortcut::create));
 
   class_<pathOptimization::EnforceTransitionSemantic,
          std::shared_ptr<pathOptimization::EnforceTransitionSemantic>,
-         bases<hpp::core::PathOptimizer>,
-         boost::noncopyable>("EnforceTransitionSemantic", no_init)
-      .def("__init__", make_constructor(&pathOptimization::EnforceTransitionSemantic::create));
+         bases<hpp::core::PathOptimizer>, boost::noncopyable>(
+      "EnforceTransitionSemantic", no_init)
+      .def("__init__",
+           make_constructor(
+               &pathOptimization::EnforceTransitionSemantic::create));
 
-  def("GraphRandomShortcut", 
+  def("GraphRandomShortcut",
       &createGraphOptimizer<hpp::core::pathOptimization::RandomShortcut>);
-  
+
   def("GraphPartialShortcut",
       &createGraphOptimizer<hpp::core::pathOptimization::PartialShortcut>);
 }

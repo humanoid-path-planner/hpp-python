@@ -37,6 +37,7 @@ class StaticStabilityConstraintsFactory:
     def __init__(self, problem, robot):
         self.problem = problem
         self.robot = robot
+
     def _getCOM(self, com):
         from numpy import array
 

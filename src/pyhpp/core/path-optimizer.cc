@@ -29,16 +29,15 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
+#include <hpp/core/path-optimization/partial-shortcut.hh>
+#include <hpp/core/path-optimization/random-shortcut.hh>
+#include <hpp/core/path-optimization/rs-time-parameterization.hh>
+#include <hpp/core/path-optimization/simple-shortcut.hh>
+#include <hpp/core/path-optimization/simple-time-parameterization.hh>
 #include <hpp/core/path-optimizer.hh>
+#include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
-#include <hpp/core/path-optimization/random-shortcut.hh>
-#include <hpp/core/path-optimization/simple-shortcut.hh>
-#include <hpp/core/path-optimization/partial-shortcut.hh>
-#include <hpp/core/path-optimization/rs-time-parameterization.hh>
-#include <hpp/core/path-optimization/simple-time-parameterization.hh>
-
-#include <hpp/core/path-vector.hh>
 
 using namespace boost::python;
 
@@ -55,27 +54,38 @@ void exposePathOptimizer() {
       .def("maxIterations", &PathOptimizer::maxIterations)
       .def("timeOut", &PathOptimizer::timeOut);
 
-  class_<pathOptimization::RandomShortcut, std::shared_ptr<pathOptimization::RandomShortcut>, bases<PathOptimizer>,
-        boost::noncopyable>("RandomShortcut", no_init)
-      .def("__init__", make_constructor(&pathOptimization::RandomShortcut::create));
+  class_<pathOptimization::RandomShortcut,
+         std::shared_ptr<pathOptimization::RandomShortcut>,
+         bases<PathOptimizer>, boost::noncopyable>("RandomShortcut", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::RandomShortcut::create));
 
-  class_<pathOptimization::SimpleShortcut, std::shared_ptr<pathOptimization::SimpleShortcut>, bases<PathOptimizer>,
-        boost::noncopyable>("SimpleShortcut", no_init)
-      .def("__init__", make_constructor(&pathOptimization::SimpleShortcut::create));
+  class_<pathOptimization::SimpleShortcut,
+         std::shared_ptr<pathOptimization::SimpleShortcut>,
+         bases<PathOptimizer>, boost::noncopyable>("SimpleShortcut", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::SimpleShortcut::create));
 
-  class_<pathOptimization::PartialShortcut, std::shared_ptr<pathOptimization::PartialShortcut>, bases<PathOptimizer>,
-        boost::noncopyable>("PartialShortcut", no_init)
-      .def("__init__", make_constructor(&pathOptimization::PartialShortcut::create));
+  class_<pathOptimization::PartialShortcut,
+         std::shared_ptr<pathOptimization::PartialShortcut>,
+         bases<PathOptimizer>, boost::noncopyable>("PartialShortcut", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::PartialShortcut::create));
 
-  class_<pathOptimization::SimpleTimeParameterization, std::shared_ptr<pathOptimization::SimpleTimeParameterization>, bases<PathOptimizer>,
-        boost::noncopyable>("SimpleTimeParameterization", no_init)
-      .def("__init__", make_constructor(&pathOptimization::SimpleTimeParameterization::create));
+  class_<pathOptimization::SimpleTimeParameterization,
+         std::shared_ptr<pathOptimization::SimpleTimeParameterization>,
+         bases<PathOptimizer>, boost::noncopyable>("SimpleTimeParameterization",
+                                                   no_init)
+      .def("__init__",
+           make_constructor(
+               &pathOptimization::SimpleTimeParameterization::create));
 
-  class_<pathOptimization::RSTimeParameterization, std::shared_ptr<pathOptimization::RSTimeParameterization>, bases<PathOptimizer>,
-        boost::noncopyable>("RSTimeParameterization", no_init)
-      .def("__init__", make_constructor(&pathOptimization::RSTimeParameterization::create));
-
-
+  class_<pathOptimization::RSTimeParameterization,
+         std::shared_ptr<pathOptimization::RSTimeParameterization>,
+         bases<PathOptimizer>, boost::noncopyable>("RSTimeParameterization",
+                                                   no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::RSTimeParameterization::create));
 }
 }  // namespace core
 }  // namespace pyhpp
