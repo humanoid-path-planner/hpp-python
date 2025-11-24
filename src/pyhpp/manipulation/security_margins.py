@@ -49,7 +49,8 @@ class SecurityMargins:
         for ro in self.robotsAndObjects:
             le = len(ro)
             self.robotToJoints[ro] = [
-                n for n in jointNames 
+                n
+                for n in jointNames
                 if n[:le] == ro and (len(n) == le or n[le] in self.separators)
             ]
         self.robotToJoints["universe"] = ["universe"]
@@ -61,20 +62,22 @@ class SecurityMargins:
     def computeGrippers(self):
         self.gripperToRobot = dict()
         self.gripperToJoints = dict()
-        
+
         for g in self.factory.grippers:
             for joint_name in self.robot.model().names:
                 if g.startswith(joint_name):
-                    self.gripperToRobot[g] = self.jointToRobot.get(joint_name, "unknown")
+                    self.gripperToRobot[g] = self.jointToRobot.get(
+                        joint_name, "unknown"
+                    )
                     self.gripperToJoints[g] = [joint_name]
                     break
 
     def computePossibleContacts(self):
         self.contactSurfaces = {k: [] for k in self.robotToJoints.keys()}
         self.possibleContacts = [
-            (o1, o2) 
-            for o1, l1 in self.contactSurfaces.items() 
-            for o2, l2 in self.contactSurfaces.items() 
+            (o1, o2)
+            for o1, l1 in self.contactSurfaces.items()
+            for o2, l2 in self.contactSurfaces.items()
             if o1 != o2 and len(l1) > 0 and len(l2) > 0
         ]
 
@@ -87,46 +90,52 @@ class SecurityMargins:
     def getActiveConstraintsAlongEdge(self, edge):
         factory = self.factory
         graph = factory.graph
-        
+
         result = graph.getNodesConnectedByTransition(edge)
         from_name, to_name = result if isinstance(result, tuple) else (result, result)
-        
+
         state_from = graph.getState(from_name)
         state_to = graph.getState(to_name)
-        
+
         constraints_from = graph.getNumericalConstraintsForState(state_from)
         constraints_graph = graph.getNumericalConstraintsForGraph()
         constraints_to = graph.getNumericalConstraintsForState(state_to)
-        
-        all_constraint_objects = set(constraints_from + constraints_graph + constraints_to)
-        
+
+        all_constraint_objects = set(
+            constraints_from + constraints_graph + constraints_to
+        )
+
         active_names = []
-        if hasattr(factory, 'constraints') and hasattr(factory.constraints, 'available_constraints'):
+        if hasattr(factory, "constraints") and hasattr(
+            factory.constraints, "available_constraints"
+        ):
             constraint_dict = factory.constraints.available_constraints
             for name, constraint_obj in constraint_dict.items():
                 if constraint_obj in all_constraint_objects:
                     active_names.append(name)
-        
+
         res = {"place": [], "grasp": []}
-        
+
         for c in active_names:
             for o in factory.objects:
                 if c == "place_" + o:
                     res["place"].append(o)
             for g in factory.grippers:
-                for o, handle_indices in zip(factory.objects, factory.handlesPerObjects):
+                for o, handle_indices in zip(
+                    factory.objects, factory.handlesPerObjects
+                ):
                     for h_idx in handle_indices:
                         h = factory.handles[h_idx]
                         if c == g + " grasps " + h:
                             res["grasp"].append((g, o))
-        
+
         return res
 
     def apply(self):
         factory = self.factory
         graph = factory.graph
         edges = graph.getTransitions()
-        
+
         for edge in edges:
             for i1, ro1 in enumerate([*self.robotsAndObjects, "universe"]):
                 for i2, ro2 in enumerate([*self.robotsAndObjects, "universe"]):
@@ -136,15 +145,17 @@ class SecurityMargins:
                     for j1 in self.robotToJoints[ro1]:
                         for j2 in self.robotToJoints[ro2]:
                             if j1 != j2:
-                                graph.setSecurityMarginForTransition(edge, j1, j2, margin)
-            
+                                graph.setSecurityMarginForTransition(
+                                    edge, j1, j2, margin
+                                )
+
             constraints = self.getActiveConstraintsAlongEdge(edge)
             for g, ro1 in constraints["grasp"]:
                 if g in self.gripperToJoints and ro1 in self.robotToJoints:
                     for j1 in self.robotToJoints[ro1]:
                         for j2 in self.gripperToJoints[g]:
                             graph.setSecurityMarginForTransition(edge, j1, j2, 0)
-            
+
             for o1 in constraints["place"]:
                 for o2, o3 in self.possibleContacts:
                     if o1 == o2:
