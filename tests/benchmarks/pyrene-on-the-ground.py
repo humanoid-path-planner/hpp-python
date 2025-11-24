@@ -19,7 +19,7 @@ from pyhpp.pinocchio import Device, urdf
 from pinocchio import SE3
 
 parser = ArgumentParser()
-parser.add_argument("-N", default=20, type=int)
+parser.add_argument("-N", default=0, type=int)
 parser.add_argument("--display", action="store_true")
 parser.add_argument("--run", action="store_true")
 args = parser.parse_args()

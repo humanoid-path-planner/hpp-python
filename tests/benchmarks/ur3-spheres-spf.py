@@ -31,7 +31,7 @@ from pyhpp.constraints import (
 from pinocchio import SE3, Quaternion
 
 parser = ArgumentParser()
-parser.add_argument("-N", default=20, type=int)
+parser.add_argument("-N", default=0, type=int)
 args = parser.parse_args()
 
 # Robot and environment file paths
@@ -309,8 +309,6 @@ success = 0
 for i in range(args.N):
     try:
         planner.roadmap().clear()
-        # TODO: Verify if resetGoalConfigs equivalent is needed
-        # In old API: ps.resetGoalConfigs()
         t1 = dt.datetime.now()
         planner.solve()
         t2 = dt.datetime.now()
