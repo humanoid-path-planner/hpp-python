@@ -26,7 +26,7 @@ from pinocchio import SE3, Quaternion
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
-parser.add_argument("-N", default=20, type=int)
+parser.add_argument("-N", default=0, type=int)
 args = parser.parse_args()
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
@@ -289,7 +289,6 @@ for i in range(args.N):
         t2 = dt.datetime.now()
     except Exception as e:
         print(f"Failed to plan path: {e}")
-        break
     else:
         success += 1
         totalTime += t2 - t1
