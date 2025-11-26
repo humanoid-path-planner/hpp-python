@@ -59,8 +59,8 @@ struct RWrapper {
     roadmap.addNodeAndEdges(nodeFrom, to, path);
   }
 
-  static ConnectedComponentPtr_t connectedComponentOfNode(Roadmap& roadmap,
-      const ConfigurationIn_t q) {
+  static ConnectedComponentPtr_t connectedComponentOfNode(
+      Roadmap& roadmap, const ConfigurationIn_t q) {
     value_type d;
     NodePtr_t node = roadmap.nearestNode(q, d);
     if (d > 0) {
