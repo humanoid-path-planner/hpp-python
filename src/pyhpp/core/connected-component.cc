@@ -67,13 +67,18 @@ struct CCWrapper {
     }
     return to_python_list(res);
   }
+  // Test that raw pointers are the same.
+  static bool equality(ConnectedComponent& cc1, ConnectedComponent& cc2) {
+    return &cc1 == &cc2;
+  }
 };
 void exposeConnectedComponent() {
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
       "ConnectedComponent", no_init)
       .def("nodes", &CCWrapper::nodes)
       .def("reachableFrom", &CCWrapper::reachableFrom)
-      .def("reachableTo", &CCWrapper::reachableTo);
+      .def("reachableTo", &CCWrapper::reachableTo)
+      .def("__eq__", &CCWrapper::equality);
 }
 }  // namespace core
 }  // namespace pyhpp
