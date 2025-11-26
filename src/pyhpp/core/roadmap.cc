@@ -59,6 +59,19 @@ struct RWrapper {
     roadmap.addNodeAndEdges(nodeFrom, to, path);
   }
 
+  static ConnectedComponentPtr_t connectedComponentOfNode(Roadmap& roadmap,
+      const ConfigurationIn_t q) {
+    value_type d;
+    NodePtr_t node = roadmap.nearestNode(q, d);
+    if (d > 0) {
+      std::ostringstream os;
+      os << "Roadmap::connectedComponentOfNode: input configuration (" << q
+         << ") not in the roadmap";
+      throw std::logic_error(os.str().c_str());
+    }
+    return node->connectedComponent();
+  }
+
   static void addNodeAndEdge(Roadmap& roadmap, const ConfigurationIn_t from,
                              ConfigurationIn_t to, const PathPtr_t path) {
     value_type d;
@@ -242,6 +255,7 @@ void exposeRoadmap() {
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, distance)
       .def("numberConnectedComponents", &RWrapper::numberConnectedComponents)
       .def("getConnectedComponent", &RWrapper::getConnectedComponent)
+      .def("connectedComponentOfNode", &RWrapper::connectedComponentOfNode)
       // .def("cost", &RWrapper::cost1)
       // .def("cost", &RWrapper::cost2,
       // return_value_policy<reference_existing_object>())
