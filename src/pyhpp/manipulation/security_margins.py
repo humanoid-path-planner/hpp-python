@@ -45,47 +45,101 @@ class SecurityMargins:
 
     def computeJoints(self):
         self.robotToJoints = dict()
-        jointNames = self.robot.model().names
+        model = self.robot.model()
+        jointNames = list(model.names)
         for ro in self.robotsAndObjects:
             le = len(ro)
-            self.robotToJoints[ro] = [
-                n
-                for n in jointNames
-                if n[:le] == ro and (len(n) == le or n[le] in self.separators)
-            ]
+            self.robotToJoints[ro] = list(
+                filter(
+                    lambda n: n[:le] == ro and n[le] in self.separators,
+                    jointNames,
+                )
+            )
         self.robotToJoints["universe"] = ["universe"]
         self.jointToRobot = dict()
         for ro, joints in self.robotToJoints.items():
             for j in joints:
                 self.jointToRobot[j] = ro
 
+    def _getChildJoints(self, jointName):
+        model = self.robot.model()
+        try:
+            jointId = model.getJointId(jointName)
+        except Exception:
+            return []
+
+        childNames = []
+        if jointId < len(model.children):
+            for childId in model.children[jointId]:
+                if childId < len(model.names):
+                    childNames.append(model.names[childId])
+        return childNames
+
+    def _getGripperJoint(self, gripperName):
+        model = self.robot.model()
+        if model.existFrame(gripperName):
+            frameId = model.getFrameId(gripperName)
+            frame = model.frames[frameId]
+            parentJointId = frame.parentJoint
+            if parentJointId < len(model.names):
+                return model.names[parentJointId]
+        return None
+
     def computeGrippers(self):
         self.gripperToRobot = dict()
         self.gripperToJoints = dict()
-
         for g in self.factory.grippers:
-            for joint_name in self.robot.model().names:
-                if g.startswith(joint_name):
-                    self.gripperToRobot[g] = self.jointToRobot.get(
-                        joint_name, "unknown"
-                    )
-                    self.gripperToJoints[g] = [joint_name]
-                    break
+            j = self._getGripperJoint(g)
+            if j is not None and j in self.jointToRobot:
+                self.gripperToRobot[g] = self.jointToRobot[j]
+                childJoints = self._getChildJoints(j)
+                self.gripperToJoints[g] = [j] + childJoints
+            else:
+                for joint_name in self.robot.model().names:
+                    if g.startswith(joint_name) and joint_name in self.jointToRobot:
+                        self.gripperToRobot[g] = self.jointToRobot[joint_name]
+                        childJoints = self._getChildJoints(joint_name)
+                        self.gripperToJoints[g] = [joint_name] + childJoints
+                        break
 
     def computePossibleContacts(self):
-        self.contactSurfaces = {k: [] for k in self.robotToJoints.keys()}
-        self.possibleContacts = [
-            (o1, o2)
-            for o1, l1 in self.contactSurfaces.items()
-            for o2, l2 in self.contactSurfaces.items()
-            if o1 != o2 and len(l1) > 0 and len(l2) > 0
-        ]
+        self.contactSurfaces = dict()
+        for k in self.robotToJoints.keys():
+            self.contactSurfaces[k] = list()
+
+        for io, obj_name in enumerate(self.factory.objects):
+            if io < len(self.factory.contactsPerObjects):
+                for surface_name in self.factory.contactsPerObjects[io]:
+                    if obj_name in self.contactSurfaces:
+                        self.contactSurfaces[obj_name].append(surface_name)
+
+        for surface_name in self.factory.envContacts:
+            found = False
+            for ro in list(self.robotsAndObjects) + ["universe"]:
+                for sep in self.separators:
+                    prefix = ro + sep
+                    if surface_name.startswith(prefix):
+                        if ro in self.contactSurfaces:
+                            self.contactSurfaces[ro].append(surface_name)
+                        found = True
+                        break
+                if found:
+                    break
+            if not found:
+                self.contactSurfaces["universe"].append(surface_name)
+
+        self.possibleContacts = list()
+        for o1, l1 in self.contactSurfaces.items():
+            for o2, l2 in self.contactSurfaces.items():
+                if o1 != o2 and len(l1) > 0 and len(l2) > 0:
+                    self.possibleContacts.append((o1, o2))
 
     def setSecurityMarginBetween(self, obj1, obj2, margin):
         self.marginMatrix[frozenset([obj1, obj2])] = margin
 
     def getSecurityMarginBetween(self, obj1, obj2):
-        return self.marginMatrix.get(frozenset([obj1, obj2]), self.defaultMargin)
+        key = frozenset([obj1, obj2])
+        return self.marginMatrix.get(key, self.defaultMargin)
 
     def getActiveConstraintsAlongEdge(self, edge):
         factory = self.factory
@@ -150,6 +204,7 @@ class SecurityMargins:
                                 )
 
             constraints = self.getActiveConstraintsAlongEdge(edge)
+
             for g, ro1 in constraints["grasp"]:
                 if g in self.gripperToJoints and ro1 in self.robotToJoints:
                     for j1 in self.robotToJoints[ro1]:
