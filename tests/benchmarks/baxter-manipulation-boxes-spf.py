@@ -183,10 +183,7 @@ res, q_goal_proj, err = cg.applyStateConstraints(cg.getState('free'), q_goal)
 if not res:
     raise Exception('Goal configuration could not be projected.')
 
-print(q_init)
 problem.initConfig(q_init_proj)
-print(q_init_proj)
-print(cg.displayStateConstraints(cg.getState('free')))
 
 problem.addGoalConfig(q_goal_proj)
 problem.constraintGraph(cg)
