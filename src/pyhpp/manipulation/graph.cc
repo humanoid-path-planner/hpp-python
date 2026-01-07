@@ -1212,6 +1212,23 @@ ImplicitPtr_t PyWGraph::createPreGraspConstraint(const std::string& name,
   ImplicitPtr_t constraint = h->createPreGrasp(g, c, name);
   return constraint;
 }
+
+static void graphCapsuleDestructor(PyObject* capsule) {
+  auto* ptr = static_cast<GraphPtr_t*>(
+      PyCapsule_GetPointer(capsule, "hpp.manipulation.graph.GraphPtr"));
+  if (ptr) {
+    delete ptr;
+  }
+}
+
+/// Create a PyCapsule containing a copy of the GraphPtr_t shared_ptr
+/// This allows external modules to extract the native C++ pointer
+PyObject* getGraphCapsule(const PyWGraph& self) {
+  auto* ptr = new GraphPtr_t(self.obj);
+  return PyCapsule_New(ptr, "hpp.manipulation.graph.GraphPtr",
+                       graphCapsuleDestructor);
+}
+
 // =============================================================================
 // Boost.Python bindings
 // =============================================================================
@@ -1230,6 +1247,7 @@ void exposeGraph() {
       "Graph",
       init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())
 
+      .def("_get_native_graph", &getGraphCapsule)
       .def_readwrite("robot", &PyWGraph::robot)
       // Configuration methods
       .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations,
