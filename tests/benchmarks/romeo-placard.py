@@ -1,44 +1,53 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import time
 import numpy as np
 import datetime as dt
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
 from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
 from pyhpp.core import Dichotomy, Straight, ProgressiveProjector
-from pyhpp.constraints import Transformation, LockedJoint
+from pyhpp.constraints import LockedJoint
 from pyhpp.core.static_stability_constraint_factory import (
     StaticStabilityConstraintsFactory,
 )
 from pinocchio import SE3
 
 parser = ArgumentParser()
-parser.add_argument('-N', default=0, type=int)
-parser.add_argument('--display', action='store_true')
-parser.add_argument('--run', action='store_true')
+parser.add_argument("-N", default=0, type=int)
+parser.add_argument("--display", action="store_true")
+parser.add_argument("--run", action="store_true")
 args = parser.parse_args()
 
 # Robot and object file paths
 romeo_urdf = "package://example-robot-data/robots/romeo_description/urdf/romeo.urdf"
-romeo_srdf_moveit = "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+romeo_srdf_moveit = (
+    "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+)
 placard_urdf = "package://hpp_environments/urdf/placard.urdf"
 placard_srdf = "package://hpp_environments/srdf/placard.srdf"
 
-robot = Device('romeo-placard')
+robot = Device("romeo-placard")
 
 # Load Romeo robot
 romeo_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
-urdf.loadModel(robot, 0, "romeo", "freeflyer", romeo_urdf, romeo_srdf_moveit, romeo_pose)
+urdf.loadModel(
+    robot, 0, "romeo", "freeflyer", romeo_urdf, romeo_srdf_moveit, romeo_pose
+)
 
-robot.setJointBounds('romeo/root_joint', [-1, 1, -1, 1, 0, 2, -2., 2, -2., 2, -2., 2, -2., 2])
+robot.setJointBounds(
+    "romeo/root_joint", [-1, 1, -1, 1, 0, 2, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2]
+)
 
 # Load placard
 placard_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
-urdf.loadModel(robot, 0, "placard", "freeflyer", placard_urdf, placard_srdf, placard_pose)
+urdf.loadModel(
+    robot, 0, "placard", "freeflyer", placard_urdf, placard_srdf, placard_pose
+)
 
-robot.setJointBounds('placard/root_joint', [-1, 1, -1, 1, 0, 1.5, -2., 2, -2., 2, -2., 2, -2., 2])
+robot.setJointBounds(
+    "placard/root_joint", [-1, 1, -1, 1, 0, 1.5, -2.0, 2, -2.0, 2, -2.0, 2, -2.0, 2]
+)
 
 model = robot.model()
 
@@ -88,7 +97,7 @@ rightHandOpen = {
 # Lock left hand
 locklhand = list()
 for j, v in leftHandOpen.items():
-    joint_name = 'romeo/' + j
+    joint_name = "romeo/" + j
     locklhand.append(joint_name)
     if type(v) is float or type(v) is int:
         val = np.array([v])
@@ -101,7 +110,7 @@ for j, v in leftHandOpen.items():
 # Lock right hand
 lockrhand = list()
 for j, v in rightHandOpen.items():
-    joint_name = 'romeo/' + j
+    joint_name = "romeo/" + j
     lockrhand.append(joint_name)
     if type(v) is float or type(v) is int:
         val = np.array([v])
@@ -115,13 +124,13 @@ lockHands = lockrhand + locklhand
 
 # Create static stability constraint
 q = robot.currentConfiguration()
-placard_rank = model.idx_qs[model.getJointId('placard/root_joint')]
-q[placard_rank:placard_rank+3] = [.4, 0, 1.2]
+placard_rank = model.idx_qs[model.getJointId("placard/root_joint")]
+q[placard_rank : placard_rank + 3] = [0.4, 0, 1.2]
 
 problem.addPartialCom("romeo", ["romeo/root_joint"])
 
-leftAnkle = 'romeo/LAnkleRoll'
-rightAnkle = 'romeo/RAnkleRoll'
+leftAnkle = "romeo/LAnkleRoll"
+rightAnkle = "romeo/RAnkleRoll"
 
 factory = StaticStabilityConstraintsFactory(problem, robot)
 balanceConstraintsDict = factory.createStaticStabilityConstraint(
@@ -129,9 +138,9 @@ balanceConstraintsDict = factory.createStaticStabilityConstraint(
 )
 
 balanceConstraints = [
-    balanceConstraintsDict.get('balance/pose-left-foot'),
-    balanceConstraintsDict.get('balance/pose-right-foot'),
-    balanceConstraintsDict.get('balance/relative-com'),
+    balanceConstraintsDict.get("balance/pose-left-foot"),
+    balanceConstraintsDict.get("balance/pose-right-foot"),
+    balanceConstraintsDict.get("balance/relative-com"),
 ]
 balanceConstraints = [c for c in balanceConstraints if c is not None]
 
@@ -141,8 +150,8 @@ for name, constraint in balanceConstraintsDict.items():
         graphConstraints[name] = constraint
 
 # Build graph
-grippers = ['romeo/r_hand', 'romeo/l_hand']
-handlesPerObjects = [['placard/low', 'placard/high']]
+grippers = ["romeo/r_hand", "romeo/l_hand"]
+handlesPerObjects = [["placard/low", "placard/high"]]
 
 rules = [
     Rule(["romeo/l_hand", "romeo/r_hand"], ["placard/low", ""], True),
@@ -152,7 +161,7 @@ rules = [
 
 factory_cg = ConstraintGraphFactory(cg, constraints)
 factory_cg.setGrippers(grippers)
-factory_cg.setObjects(['placard'], handlesPerObjects, [[]])
+factory_cg.setObjects(["placard"], handlesPerObjects, [[]])
 factory_cg.setRules(rules)
 factory_cg.generate()
 
@@ -162,11 +171,83 @@ cg.addNumericalConstraintsToGraph(all_graph_constraints)
 cg.initialize()
 
 # Define initial and final configurations
-q_goal = np.array([-0.003429678026293006, 7.761615492429529e-05, 0.8333148411182841, -0.08000440760954532, 0.06905332841243099, -0.09070086400314036, 0.9902546570793265, 0.2097693637044623, 0.19739743868699455, -0.6079135018296973, 0.8508704420155889, -0.39897628829947995, -0.05274298289004072, 0.20772797293264825, 0.1846394290733244, -0.49824886682709824, 0.5042013065348324, -0.16158420369261683, -0.039828502509861335, -0.3827070014985058, -0.24118425356319423, 1.0157846623463191, 0.5637424355124602, -1.3378817283780955, -1.3151786907256797, -0.392409481224193, 0.11332560818107676, 1.06, 1.06, 1.06, 1.06, 1.06, 1.06, 1.0, 1.06, 1.06, -1.06, 1.06, 1.06, 0.35936687035487364, -0.32595302056157444, -0.33115291290191723, 0.20387672048126043, 0.9007626913161502, -0.39038645767349395, 0.31725226129015516, 1.5475253831101246, -0.0104572058777634, 0.32681856374063933, 0.24476959944940427, 1.06, 1.06, 1.06, 1.06, 1.06, 1.06, 1.0, 1.06, 1.06, -1.06, 1.06, 1.06, 0.412075621240969, 0.020809907186176854, 1.056724788359247, 0.0, 0.0, 0.0, 1.0])
+q_goal = np.array(
+    [
+        -0.003429678026293006,
+        7.761615492429529e-05,
+        0.8333148411182841,
+        -0.08000440760954532,
+        0.06905332841243099,
+        -0.09070086400314036,
+        0.9902546570793265,
+        0.2097693637044623,
+        0.19739743868699455,
+        -0.6079135018296973,
+        0.8508704420155889,
+        -0.39897628829947995,
+        -0.05274298289004072,
+        0.20772797293264825,
+        0.1846394290733244,
+        -0.49824886682709824,
+        0.5042013065348324,
+        -0.16158420369261683,
+        -0.039828502509861335,
+        -0.3827070014985058,
+        -0.24118425356319423,
+        1.0157846623463191,
+        0.5637424355124602,
+        -1.3378817283780955,
+        -1.3151786907256797,
+        -0.392409481224193,
+        0.11332560818107676,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.0,
+        1.06,
+        1.06,
+        -1.06,
+        1.06,
+        1.06,
+        0.35936687035487364,
+        -0.32595302056157444,
+        -0.33115291290191723,
+        0.20387672048126043,
+        0.9007626913161502,
+        -0.39038645767349395,
+        0.31725226129015516,
+        1.5475253831101246,
+        -0.0104572058777634,
+        0.32681856374063933,
+        0.24476959944940427,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.06,
+        1.0,
+        1.06,
+        1.06,
+        -1.06,
+        1.06,
+        1.06,
+        0.412075621240969,
+        0.020809907186176854,
+        1.056724788359247,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+    ]
+)
 q_init = q_goal.copy()
-q_init[placard_rank+3:placard_rank+7] = [0, 0, 1, 0]
+q_init[placard_rank + 3 : placard_rank + 7] = [0, 0, 1, 0]
 
-n = 'romeo/l_hand grasps placard/low'
+n = "romeo/l_hand grasps placard/low"
 state = cg.getState(n)
 res, q_init_proj, err = cg.applyStateConstraints(state, q_init)
 if not res:
@@ -217,5 +298,3 @@ if args.N != 0:
     if success > 0:
         print(f"Average time per success: {totalTime.total_seconds() / success}")
         print(f"Average number nodes per success: {totalNumberNodes / success}")
-
-
