@@ -13,7 +13,7 @@ pr2_srdf = (
 )
 box_urdf = "package://hpp_tutorial/urdf/box.urdf"
 box_srdf = "package://hpp_tutorial/srdf/box.srdf"
-kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area.urdf"
+kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf"
 kitchen_srdf = "package://hpp_tutorial/srdf/kitchen_area.srdf"
 
 robot = Device("pr2-box")

@@ -21,7 +21,7 @@ pr2_urdf = "package://example-robot-data/robots/pr2_description/urdf/pr2.urdf"
 pr2_srdf = "package://example-robot-data/robots/pr2_description/srdf/pr2_manipulation.srdf"
 box_urdf = "package://hpp_tutorial/urdf/box.urdf"
 box_srdf = "package://hpp_tutorial/srdf/box.srdf"
-kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area.urdf"
+kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf"
 kitchen_srdf = "package://hpp_tutorial/srdf/kitchen_area.srdf"
 
 robot = Device('pr2-box')
@@ -148,7 +148,7 @@ for i in range(args.N):
         success += 1
         totalTime += t2 - t1
         print(t2 - t1)
-        n = len(problem.roadmap().nodes())
+        n = len(planner.roadmap().nodes())
         totalNumberNodes += n
         print("Number nodes: " + str(n))
 
