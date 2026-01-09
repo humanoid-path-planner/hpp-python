@@ -34,6 +34,7 @@
 #include <hpp/core/path-optimization/rs-time-parameterization.hh>
 #include <hpp/core/path-optimization/simple-shortcut.hh>
 #include <hpp/core/path-optimization/simple-time-parameterization.hh>
+#include <hpp/core/path-optimization/spline-gradient-based.hh>
 #include <hpp/core/path-optimizer.hh>
 #include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
@@ -86,6 +87,28 @@ void exposePathOptimizer() {
                                                    no_init)
       .def("__init__",
            make_constructor(&pathOptimization::RSTimeParameterization::create));
+
+  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 1>,
+        std::shared_ptr<pathOptimization::SplineGradientBased<path::BernsteinBasis, 1> >,
+        bases<PathOptimizer>, boost::noncopyable>("SplineGradientBased_bezier1", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::SplineGradientBased<path::BernsteinBasis, 1>::create)
+	   );
+
+  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 3>,
+        std::shared_ptr<pathOptimization::SplineGradientBased<path::BernsteinBasis, 3> >,
+        bases<PathOptimizer>, boost::noncopyable>("SplineGradientBased_bezier3", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::SplineGradientBased<path::BernsteinBasis, 3>::create)
+	   );
+
+  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 5>,
+        std::shared_ptr<pathOptimization::SplineGradientBased<path::BernsteinBasis, 5> >,
+        bases<PathOptimizer>, boost::noncopyable>("SplineGradientBased_bezier5", no_init)
+      .def("__init__",
+           make_constructor(&pathOptimization::SplineGradientBased<path::BernsteinBasis, 5>::create)
+	   );
+
 }
 }  // namespace core
 }  // namespace pyhpp
