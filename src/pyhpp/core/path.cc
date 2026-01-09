@@ -160,6 +160,7 @@ void exposePath() {
       .def("timeRange",
            static_cast<const interval_t& (Path::*)() const>(&Path::timeRange),
            return_internal_reference<>())
+      .def("reverse", &Path::reverse)
       .PYHPP_DEFINE_METHOD_INTERNAL_REF(Path, paramRange)
       .PYHPP_DEFINE_METHOD(Path, length)
       .PYHPP_DEFINE_METHOD(Path, initial)
