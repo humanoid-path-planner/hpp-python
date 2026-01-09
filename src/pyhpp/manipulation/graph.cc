@@ -234,16 +234,16 @@ namespace manipulation {
 // Utility functions
 // =============================================================================
 
-std::vector<std::vector<int>> matrixToVectorVector(
+std::vector<std::vector<double>> matrixToVectorVector(
     const Eigen::Ref<const Eigen::Matrix<double, -1, -1>>& input) {
-  std::vector<std::vector<int>> result;
+  std::vector<std::vector<double>> result;
   result.reserve(input.rows());
 
   for (int i = 0; i < input.rows(); ++i) {
-    std::vector<int> row;
+    std::vector<double> row;
     row.reserve(input.cols());
     for (int j = 0; j < input.cols(); ++j) {
-      row.push_back(static_cast<int>(input(i, j)));
+      row.push_back(input(i, j));
     }
     result.push_back(std::move(row));
   }
@@ -817,7 +817,7 @@ void PyWGraph::addLevelSetFoliation(PyWEdgePtr_t edge,
 boost::python::list PyWGraph::getSecurityMarginMatrixForTransition(
     PyWEdgePtr_t edge) {
   try {
-    std::vector<std::vector<int>> matrix =
+    std::vector<std::vector<double>> matrix =
         matrixToVectorVector(edge->obj->securityMargins());
 
     boost::python::list result;
