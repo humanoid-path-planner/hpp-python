@@ -247,7 +247,9 @@ void exposePathPlanners() {
            &TransitionPlanner::setReedsAndSheppSteeringMethod)
       .def("pathProjector", &TransitionPlanner::pathProjector)
       .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
-      .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer);
+      .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer,
+           "Add a path optimizer\n\n  Note: the input path optimizer should have been constructed"
+           " with\n    the inner problem of this class.");
 
   boost::python::class_<ManipulationPlanner,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
