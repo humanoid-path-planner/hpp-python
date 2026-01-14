@@ -178,7 +178,7 @@ class StaticStabilityConstraintsFactory:
             np.zeros(3),
             np.zeros(3),
             "",
-            x, 
+            x,
             [True] * 4,
         )
         created_constraints[result[-1]] = constraint
