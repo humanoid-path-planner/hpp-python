@@ -36,6 +36,7 @@ def create_benchmark_parser(description: str = "HPP Benchmark") -> ArgumentParse
 @dataclass
 class BenchmarkResult:
     """Results from a single benchmark iteration."""
+
     success: bool
     time_elapsed: dt.timedelta = field(default_factory=lambda: dt.timedelta(0))
     num_nodes: int = 0
@@ -46,6 +47,7 @@ class BenchmarkResult:
 @dataclass
 class BenchmarkStats:
     """Aggregated statistics from benchmark runs."""
+
     total_iterations: int = 0
     num_successes: int = 0
     total_time: dt.timedelta = field(default_factory=lambda: dt.timedelta(0))
@@ -164,9 +166,13 @@ class BenchmarkRunner:
 
         if self.stats.num_successes > 0:
             print(f"Average time per success: {self.stats.avg_time_per_success:.4f}s")
-            print(f"Average number nodes per success: {self.stats.avg_nodes_per_success:.1f}")
+            print(
+                f"Average number nodes per success: {self.stats.avg_nodes_per_success:.1f}"
+            )
             if self.stats.total_path_length > 0:
-                print(f"Average path length per success: {self.stats.avg_path_length_per_success:.4f}")
+                print(
+                    f"Average path length per success: {self.stats.avg_path_length_per_success:.4f}"
+                )
 
     def verify_results(self) -> bool:
         """
@@ -212,6 +218,7 @@ def run_benchmark_main(
     Returns:
         BenchmarkStats with results
     """
+
     def reset():
         planner.roadmap().clear()
         problem.resetGoalConfigs()

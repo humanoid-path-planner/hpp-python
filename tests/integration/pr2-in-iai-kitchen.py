@@ -15,7 +15,7 @@ pr2_urdf = "package://example-robot-data/robots/pr2_description/urdf/pr2.urdf"
 pr2_srdf = "package://example-robot-data/robots/pr2_description/srdf/pr2.srdf"
 kitchen_urdf = "package://hpp_tutorial/urdf/kitchen_area_obstacle.urdf"
 
-robot = Device('pr2')
+robot = Device("pr2")
 
 pr2_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(robot, 0, "pr2", "planar", pr2_urdf, pr2_srdf, pr2_pose)
@@ -31,17 +31,17 @@ q_init = robot.currentConfiguration()
 q_goal = q_init.copy()
 
 q_init[0:2] = [-3.2, -4]
-rank = model.idx_qs[model.getJointId('pr2/torso_lift_joint')]
+rank = model.idx_qs[model.getJointId("pr2/torso_lift_joint")]
 q_init[rank] = 0.2
 
 q_goal[0:2] = [-3.2, -4]
-rank = model.idx_qs[model.getJointId('pr2/l_shoulder_lift_joint')]
+rank = model.idx_qs[model.getJointId("pr2/l_shoulder_lift_joint")]
 q_goal[rank] = 0.5
-rank = model.idx_qs[model.getJointId('pr2/r_shoulder_lift_joint')]
+rank = model.idx_qs[model.getJointId("pr2/r_shoulder_lift_joint")]
 q_goal[rank] = 0.5
-rank = model.idx_qs[model.getJointId('pr2/l_elbow_flex_joint')]
+rank = model.idx_qs[model.getJointId("pr2/l_elbow_flex_joint")]
 q_goal[rank] = -0.5
-rank = model.idx_qs[model.getJointId('pr2/r_elbow_flex_joint')]
+rank = model.idx_qs[model.getJointId("pr2/r_elbow_flex_joint")]
 q_goal[rank] = -0.5
 
 problem = Problem(robot)

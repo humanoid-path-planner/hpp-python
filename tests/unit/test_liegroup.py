@@ -10,7 +10,6 @@ from pyhpp.pinocchio import LiegroupSpace, LiegroupElement
 
 
 class TestLiegroupSpace(unittest.TestCase):
-
     def test_create_r1(self):
         space = LiegroupSpace.R1(False)
 
@@ -49,7 +48,6 @@ class TestLiegroupSpace(unittest.TestCase):
 
 
 class TestLiegroupElement(unittest.TestCase):
-
     def test_create_element(self):
         space = LiegroupSpace.R3()
         v = np.array([1.0, 2.0, 3.0])

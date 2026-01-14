@@ -9,8 +9,8 @@ import numpy as np
 from pinocchio import SE3
 from unit.conftest import create_ur5_problem
 
-class TestProblemAccessors(unittest.TestCase):
 
+class TestProblemAccessors(unittest.TestCase):
     def test_steering_method_returns_object(self):
         problem, robot = create_ur5_problem()
 
@@ -48,7 +48,6 @@ class TestProblemAccessors(unittest.TestCase):
 
 
 class TestProblemDirectPath(unittest.TestCase):
-
     def test_direct_path_without_validation(self):
         problem, robot = create_ur5_problem()
         q_start = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -84,7 +83,6 @@ class TestProblemDirectPath(unittest.TestCase):
 
 
 class TestProblemConstraintProjection(unittest.TestCase):
-
     def test_error_threshold_settable(self):
         problem, robot = create_ur5_problem()
 
@@ -113,18 +111,13 @@ class TestProblemConstraintProjection(unittest.TestCase):
 
 
 class TestProblemTransformationConstraints(unittest.TestCase):
-
     def test_create_transformation_constraint(self):
         problem, robot = create_ur5_problem()
         M = SE3.Identity()
         mask = [True, True, True, True, True, True]
 
         constraint = problem.createTransformationConstraint(
-            "test_constraint",
-            "",
-            "ur5/ee_fixed_joint",
-            M,
-            mask
+            "test_constraint", "", "ur5/ee_fixed_joint", M, mask
         )
 
         self.assertIsNotNone(constraint)
@@ -135,11 +128,7 @@ class TestProblemTransformationConstraints(unittest.TestCase):
         mask = [True, True, True, True, True, True]
 
         constraint = problem.createTransformationConstraint(
-            "relative_constraint",
-            "ur5/shoulder_link",
-            "ur5/ee_fixed_joint",
-            M,
-            mask
+            "relative_constraint", "ur5/shoulder_link", "ur5/ee_fixed_joint", M, mask
         )
 
         self.assertIsNotNone(constraint)

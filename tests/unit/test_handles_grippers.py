@@ -5,7 +5,6 @@
 #
 
 import unittest
-import numpy as np
 from pinocchio import SE3
 from pyhpp.manipulation import Device, urdf
 
@@ -19,12 +18,13 @@ SPHERE_SRDF = "package://hpp_environments/srdf/construction_set/sphere.srdf"
 def create_manipulation_device():
     robot = Device("ur3-sphere")
     urdf.loadModel(robot, 0, "ur3", "anchor", UR3_URDF, UR3_SRDF, SE3.Identity())
-    urdf.loadModel(robot, 0, "sphere", "freeflyer", SPHERE_URDF, SPHERE_SRDF, SE3.Identity())
+    urdf.loadModel(
+        robot, 0, "sphere", "freeflyer", SPHERE_URDF, SPHERE_SRDF, SE3.Identity()
+    )
     return robot
 
 
 class TestGrippers(unittest.TestCase):
-
     def test_grippers_returns_map(self):
         robot = create_manipulation_device()
 
@@ -49,7 +49,6 @@ class TestGrippers(unittest.TestCase):
 
 
 class TestHandles(unittest.TestCase):
-
     def test_handles_returns_map(self):
         robot = create_manipulation_device()
 
@@ -91,7 +90,6 @@ class TestHandles(unittest.TestCase):
 
 
 class TestGraspCreation(unittest.TestCase):
-
     def test_create_grasp_constraint(self):
         robot = create_manipulation_device()
         handles = robot.handles()

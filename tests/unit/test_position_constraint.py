@@ -22,7 +22,6 @@ def create_ur5_device():
 
 
 class TestPositionConstraint(unittest.TestCase):
-
     def test_create_position_constraint(self):
         robot = create_ur5_device()
         joint_id = robot.model().getJointId("ur5/wrist_3_joint")
@@ -30,12 +29,7 @@ class TestPositionConstraint(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "test_position",
-            robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "test_position", robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         self.assertIsNotNone(pc)
@@ -47,12 +41,7 @@ class TestPositionConstraint(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "my_position",
-            robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "my_position", robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         self.assertIn("my_position", str(pc))
@@ -63,20 +52,12 @@ class TestPositionConstraint(unittest.TestCase):
         mask = Mask()
         mask[:] = (True, True, True)
 
-        pc = Position(
-            "position",
-            robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
-        )
+        pc = Position("position", robot, joint_id, SE3.Identity(), SE3.Identity(), mask)
 
         self.assertEqual(pc.ndo, 3)
 
 
 class TestPositionConstraintEvaluation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.robot = create_ur5_device()
@@ -87,12 +68,7 @@ class TestPositionConstraintEvaluation(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "position",
-            self.robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "position", self.robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         q = np.zeros((pc.ni, 1))
@@ -107,12 +83,7 @@ class TestPositionConstraintEvaluation(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "position",
-            self.robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "position", self.robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         q = self.robot.currentConfiguration()
@@ -127,12 +98,7 @@ class TestPositionConstraintEvaluation(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "position",
-            self.robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "position", self.robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         q = np.zeros((pc.ni, 1))
@@ -146,12 +112,7 @@ class TestPositionConstraintEvaluation(unittest.TestCase):
         mask[:] = (True, True, True)
 
         pc = Position(
-            "position",
-            self.robot,
-            joint_id,
-            SE3.Identity(),
-            SE3.Identity(),
-            mask
+            "position", self.robot, joint_id, SE3.Identity(), SE3.Identity(), mask
         )
 
         q = self.robot.currentConfiguration()

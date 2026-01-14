@@ -11,7 +11,6 @@ from pyhpp.core import Roadmap, WeighedDistance
 
 
 class TestRoadmap(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
