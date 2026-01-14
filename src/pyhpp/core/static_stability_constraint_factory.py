@@ -28,6 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 # DAMAGE.
 
+import numpy as np
 from hpp import Transform
 from pinocchio import SE3
 
@@ -39,12 +40,10 @@ class StaticStabilityConstraintsFactory:
         self.robot = robot
 
     def _getCOM(self, com):
-        from numpy import array
-
         if com == "":
-            return array(self.robot.getCenterOfMass())
+            return np.array(self.robot.getCenterOfMass())
         else:
-            return array(self.problem.getPartialCom(com))
+            return np.array(self.problem.getPartialCom(com))
 
     # # Create static stability constraints where the robot slides on the ground,
     # # \param prefix prefix of the names of the constraint
@@ -171,14 +170,13 @@ class StaticStabilityConstraintsFactory:
 
         # COM between feet
         result.append(prefix + "com-between-feet")
-        # TODO: verify createComBetweenFeet parameters conversion
         constraint = self.problem.createComBetweenFeet(
             result[-1],
             comName,
             leftAnkle,
             rightAnkle,
-            [0, 0, 0],
-            [0, 0, 0],
+            np.zeros(3),
+            np.zeros(3),
             "",
             x,
             [True] * 4,
