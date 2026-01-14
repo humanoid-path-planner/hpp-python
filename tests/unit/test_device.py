@@ -21,7 +21,6 @@ def create_ur5_device():
 
 
 class TestDeviceInstantiation(unittest.TestCase):
-
     def test_device_creates_with_name(self):
         robot = Device("test_robot")
 
@@ -35,7 +34,6 @@ class TestDeviceInstantiation(unittest.TestCase):
 
 
 class TestDeviceConfiguration(unittest.TestCase):
-
     def test_config_size_returns_dof_count(self):
         robot = create_ur5_device()
 
@@ -69,7 +67,6 @@ class TestDeviceConfiguration(unittest.TestCase):
 
 
 class TestDeviceJointBounds(unittest.TestCase):
-
     def test_set_joint_bounds(self):
         robot = create_ur5_device()
 
@@ -88,7 +85,6 @@ class TestDeviceJointBounds(unittest.TestCase):
 
 
 class TestDeviceForwardKinematics(unittest.TestCase):
-
     def test_compute_forward_kinematics_joint_position(self):
         robot = create_ur5_device()
         q = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -141,7 +137,6 @@ class TestDeviceForwardKinematics(unittest.TestCase):
 
 
 class TestDeviceRankInConfiguration(unittest.TestCase):
-
     def test_rank_in_configuration_returns_dict(self):
         robot = create_ur5_device()
 
@@ -168,7 +163,6 @@ class TestDeviceRankInConfiguration(unittest.TestCase):
 
 
 class TestDeviceNegativeCases(unittest.TestCase):
-
     def test_get_joint_position_invalid_frame_raises(self):
         robot = create_ur5_device()
         q = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])

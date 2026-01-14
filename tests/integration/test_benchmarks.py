@@ -16,15 +16,14 @@ def main():
     # List of benchmark files to run (excluding this file and utilities)
     excluded = {Path(__file__).name, "benchmark_utils.py", "__init__.py"}
     benchmarks = sorted(
-        script for script in folder.glob("*.py")
-        if script.name not in excluded
+        script for script in folder.glob("*.py") if script.name not in excluded
     )
 
     print(f"Running {len(benchmarks)} benchmarks...")
 
     failed = []
     for script in benchmarks:
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"Running: {script.name}")
         print("=" * 60)
 
@@ -37,7 +36,7 @@ def main():
             failed.append(script.name)
             print(f"FAILED: {script.name} (exit code {result.returncode})")
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("SUMMARY")
     print("=" * 60)
     print(f"Total benchmarks: {len(benchmarks)}")

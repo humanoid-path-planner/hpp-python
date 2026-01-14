@@ -12,7 +12,6 @@ import pyhpp.core.path
 
 
 class TestPathOptimizerInstantiation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -29,7 +28,6 @@ class TestPathOptimizerInstantiation(unittest.TestCase):
 
 
 class TestPathOptimizerOptimize(unittest.TestCase):
-
     def test_optimize_returns_path(self):
         """PathOptimizer.optimize should return a valid path."""
         problem, robot = create_ur5_problem()

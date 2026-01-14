@@ -6,22 +6,18 @@
 
 import unittest
 from pyhpp.manipulation.constraint_graph_factory import (
-    Constraints,
     PossibleGrasps,
     GraspIsAllowed,
     Rules,
     Rule,
 )
 
-class TestPossibleGrasps(unittest.TestCase):
 
+class TestPossibleGrasps(unittest.TestCase):
     def test_allowed_grasp_returns_true(self):
         grippers = ["gripper1", "gripper2"]
         handles = ["handle1", "handle2", "handle3"]
-        grasps = {
-            "gripper1": ["handle1", "handle2"],
-            "gripper2": ["handle3"]
-        }
+        grasps = {"gripper1": ["handle1", "handle2"], "gripper2": ["handle3"]}
         validator = PossibleGrasps(grippers, handles, grasps)
 
         self.assertTrue(validator((0, 2)))  # gripper1->handle1, gripper2->handle3
@@ -30,10 +26,7 @@ class TestPossibleGrasps(unittest.TestCase):
     def test_forbidden_grasp_returns_false(self):
         grippers = ["gripper1", "gripper2"]
         handles = ["handle1", "handle2", "handle3"]
-        grasps = {
-            "gripper1": ["handle1"],
-            "gripper2": ["handle3"]
-        }
+        grasps = {"gripper1": ["handle1"], "gripper2": ["handle3"]}
         validator = PossibleGrasps(grippers, handles, grasps)
 
         self.assertFalse(validator((1, 2)))  # gripper1->handle2 not allowed
@@ -48,7 +41,6 @@ class TestPossibleGrasps(unittest.TestCase):
 
 
 class TestGraspIsAllowed(unittest.TestCase):
-
     def test_empty_validator_allows_all(self):
         validator = GraspIsAllowed()
         self.assertTrue(validator((0, 1, 2)))
@@ -71,7 +63,6 @@ class TestGraspIsAllowed(unittest.TestCase):
 
 
 class TestRules(unittest.TestCase):
-
     def test_simple_rule_allows(self):
         grippers = ["gripper1"]
         handles = ["handle1", "handle2"]
@@ -102,6 +93,7 @@ class TestRules(unittest.TestCase):
         # Tuple format: (handle_idx_for_gripper0, handle_idx_for_gripper1)
         # (0, None) = left_gripper grasps box_handle, right_gripper grasps nothing
         self.assertTrue(validator((0, None)))
+
 
 if __name__ == "__main__":
     unittest.main()

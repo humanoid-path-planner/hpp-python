@@ -10,7 +10,6 @@ from unit.conftest import create_ur5_problem
 
 
 class TestConfigurationShooter(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -37,13 +36,9 @@ class TestConfigurationShooterEdgeCases(unittest.TestCase):
         for _ in range(10):
             q = shooter.shoot()
             for i in range(len(q)):
+                self.assertFalse(np.isnan(q[i]), f"Configuration element {i} is NaN")
                 self.assertFalse(
-                    np.isnan(q[i]),
-                    f"Configuration element {i} is NaN"
-                )
-                self.assertFalse(
-                    np.isinf(q[i]),
-                    f"Configuration element {i} is infinite"
+                    np.isinf(q[i]), f"Configuration element {i} is infinite"
                 )
 
 

@@ -40,18 +40,16 @@ foreach(TEST_FILE ${UNITTEST_TEST_FILES})
   get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
   add_test(
     NAME unittest_${TEST_NAME}
-    COMMAND ${PYTHON_EXECUTABLE} -m unittest discover
-      -s ${CMAKE_CURRENT_SOURCE_DIR}
-      -p "${TEST_NAME}.py"
-      -v
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  )
+    COMMAND ${PYTHON_EXECUTABLE} -m unittest discover -s
+            ${CMAKE_CURRENT_SOURCE_DIR} -p "${TEST_NAME}.py" -v
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
   set_tests_properties(
     unittest_${TEST_NAME}
     PROPERTIES
-      ENVIRONMENT "${UNITTEST_ENV_VARIABLES}"
+      ENVIRONMENT
+      "${UNITTEST_ENV_VARIABLES}"
       ENVIRONMENT_MODIFICATION
       "ROS_PACKAGE_PATH=path_list_prepend:${example-robot-data_INCLUDE_DIRS}/../share;ROS_PACKAGE_PATH=path_list_prepend:${hpp-environments_INCLUDE_DIRS}/../share;"
-      LABELS "python;unit"
-  )
+      LABELS
+      "python;unit")
 endforeach()

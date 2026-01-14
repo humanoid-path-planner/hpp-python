@@ -8,12 +8,10 @@ import unittest
 from unit.conftest import create_constraint_graph_setup
 from pyhpp.manipulation.constraint_graph_factory import (
     Constraints,
-    ConstraintFactory,
 )
 
 
 class TestConstraintFactoryBuildGrasp(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.graph, cls.factory, cls.robot, cls.objects = (
@@ -21,9 +19,7 @@ class TestConstraintFactoryBuildGrasp(unittest.TestCase):
         )
 
     def test_build_grasp_returns_dict(self):
-        result = self.factory.constraints.buildGrasp(
-            "ur3/gripper", "sphere0/handle"
-        )
+        result = self.factory.constraints.buildGrasp("ur3/gripper", "sphere0/handle")
 
         self.assertIsInstance(result, dict)
         self.assertIn("grasp", result)
@@ -31,9 +27,7 @@ class TestConstraintFactoryBuildGrasp(unittest.TestCase):
         self.assertIn("preGrasp", result)
 
     def test_build_grasp_constraint_values_are_constraints(self):
-        result = self.factory.constraints.buildGrasp(
-            "ur3/gripper", "sphere0/handle"
-        )
+        result = self.factory.constraints.buildGrasp("ur3/gripper", "sphere0/handle")
 
         self.assertIsInstance(result["grasp"], Constraints)
         self.assertIsInstance(result["graspComplement"], Constraints)
@@ -46,13 +40,11 @@ class TestConstraintFactoryBuildGrasp(unittest.TestCase):
         result2 = cf.buildGrasp("ur3/gripper", "sphere1/handle")
 
         self.assertEqual(
-            result1["grasp"].numConstraints,
-            result2["grasp"].numConstraints
+            result1["grasp"].numConstraints, result2["grasp"].numConstraints
         )
 
 
 class TestConstraintFactoryBuildPlacement(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.graph, cls.factory, cls.robot, cls.objects = (
@@ -76,7 +68,6 @@ class TestConstraintFactoryBuildPlacement(unittest.TestCase):
 
 
 class TestConstraintFactoryRegistration(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.graph, cls.factory, cls.robot, cls.objects = (

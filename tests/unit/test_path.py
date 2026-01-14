@@ -11,7 +11,6 @@ import pyhpp.core.path
 
 
 class TestPathMethods(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -136,7 +135,6 @@ class TestPathNegativeCases(unittest.TestCase):
 
 
 class TestPathVector(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()

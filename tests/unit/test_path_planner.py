@@ -15,7 +15,6 @@ from pyhpp.core import (
 
 
 class TestPathPlannerInstantiation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -37,7 +36,6 @@ class TestPathPlannerInstantiation(unittest.TestCase):
 
 
 class TestPathPlannerConfiguration(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -56,7 +54,6 @@ class TestPathPlannerConfiguration(unittest.TestCase):
 
 
 class TestPathPlannerSolve(unittest.TestCase):
-
     def test_birrt_solves_simple_path(self):
         """BiRRT should find a path between nearby collision-free configurations."""
         problem, robot = create_ur5_problem()
@@ -122,6 +119,7 @@ class TestPathPlannerNegativeCases(unittest.TestCase):
 
         roadmap = planner.roadmap()
         self.assertLessEqual(len(roadmap.nodes()), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

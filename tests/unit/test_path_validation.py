@@ -10,7 +10,6 @@ from unit.conftest import create_ur5_problem
 
 
 class TestPathValidation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()

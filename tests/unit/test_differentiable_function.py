@@ -25,7 +25,6 @@ class DoubleFunction(DifferentiableFunction):
 
 
 class TestDifferentiableFunctionInheritance(unittest.TestCase):
-
     def test_create_subclass(self):
         func = DoubleFunction()
 

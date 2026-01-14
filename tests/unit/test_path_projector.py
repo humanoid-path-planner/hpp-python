@@ -14,7 +14,6 @@ from pyhpp.core import (
 
 
 class TestPathProjectorInstantiation(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()
@@ -33,7 +32,6 @@ class TestPathProjectorInstantiation(unittest.TestCase):
 
 
 class TestPathProjectorProject(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.problem, cls.robot = create_ur5_problem()

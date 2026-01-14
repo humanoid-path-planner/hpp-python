@@ -13,7 +13,6 @@ from pyhpp.manipulation.security_margins import SecurityMargins
 
 
 class TestSecurityMarginsCorrectness(unittest.TestCase):
-
     def test_gripper_correctly_mapped_to_robot(self):
         sm, *_ = create_security_margins_instance()
 
@@ -115,7 +114,9 @@ class TestSecurityMarginsCorrectness(unittest.TestCase):
                 self.assertEqual(margin, 0.0)
 
         self.assertTrue(found_free_loop, "Did not find 'Loop | f' edge")
-        self.assertTrue(found_grasp_edge, f"Did not find 'Loop | 0-0' edge. Available: {edge_names}")
+        self.assertTrue(
+            found_grasp_edge, f"Did not find 'Loop | 0-0' edge. Available: {edge_names}"
+        )
 
         if free_margin is not None and grasp_margin is not None:
             self.assertNotEqual(free_margin, grasp_margin)
