@@ -2,7 +2,16 @@ from math import pi
 import numpy as np
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation import Device, urdf, Graph, Problem
+from pyhpp.manipulation import (
+    Device,
+    Graph,
+    Problem,
+    ProgressiveProjector,
+    urdf,
+    ManipulationPlanner,
+)
+from pyhpp.core import Dichotomy, Straight
+
 from pyhpp.constraints import (
     Transformation,
     ComparisonTypes,
@@ -12,8 +21,10 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, Quaternion
 
-# based on /hpp_benchmark/2025/04-01/ur3-spheres/script.py
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
 
+parser = create_benchmark_parser("UR3 Spheres Manipulation Benchmark")
+args = parser.parse_args()
 # Robot and environment file paths
 ur3_urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
 ur3_srdf = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
@@ -31,7 +42,7 @@ urdf.loadModel(robot, 0, "ur3", "anchor", ur3_urdf, ur3_srdf, ur3_pose)
 # Load sphere to be manipulated
 objects = list()
 nSphere = 2
-sphere_pose = SE3(rotation=np.identity(3), translation=np.array([-2.5, -4, 0.746]))
+sphere_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 for i in range(nSphere):
     urdf.loadModel(
         robot,
@@ -63,10 +74,14 @@ for i in range(nSphere):
     )
     objects.append("sphere{0}".format(i))
 
-# Load kitchen environment
-kitchen_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(
-    robot, 0, "kitchen_area", "anchor", ground_urdf, ground_srdf, kitchen_pose
+    robot,
+    0,
+    "kitchen_area",
+    "anchor",
+    ground_urdf,
+    ground_srdf,
+    SE3(rotation=np.identity(3), translation=np.array([0, 0, 0])),
 )
 
 model = robot.model()
@@ -86,16 +101,16 @@ for i in range(nSphere):
     # placement constraint
     placementName = "place_sphere{0}".format(i)
     Id = SE3.Identity()
-    q = Quaternion(0, 0, 0, 1)
+    q = Quaternion(1, 0, 0, 0)
     ballPlacement = SE3(q, np.array([0, 0, 0.02]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation(
         placementName,
         robot,
         joint,
-        ballPlacement,
         Id,
-        [True, True, False, False, False, True],
+        ballPlacement,
+        [False, False, True, True, True, False],
     )
     cts = ComparisonTypes()
     cts[:] = (
@@ -111,9 +126,9 @@ for i in range(nSphere):
         placementName + "/complement",
         robot,
         joint,
-        ballPlacement,
         Id,
-        [False, False, True, True, True, False],
+        ballPlacement,
+        [True, True, False, False, False, True],
     )
     cts[:] = (
         ComparisonType.Equality,
@@ -148,15 +163,15 @@ for i in range(nSphere):
 
     preplacementName = "preplace_sphere{0}".format(i)
     Id = SE3.Identity()
-    q = Quaternion(0, 0, 0, 1)
+    q = Quaternion(1, 0, 0, 0)
     ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
     joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
     pc = Transformation(
         preplacementName,
         robot,
         joint,
-        ballPrePlacement,
         Id,
+        ballPrePlacement,
         [False, False, True, True, True, False],
     )
     cts[:] = (
@@ -213,12 +228,11 @@ q_goal = [
     1,
 ]
 
-
 grippers = ["ur3/gripper"]
 handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
 contactsPerObject = [[] for i in range(nSphere)]
 
-cg.maxIterations(100)
+cg.maxIterations(40)
 cg.errorThreshold(0.0001)
 factory = ConstraintGraphFactory(cg, constraints)
 
@@ -226,9 +240,47 @@ factory.setGrippers(grippers)
 factory.setObjects(objects, handlesPerObject, contactsPerObject)
 factory.generate()
 
-cg.initialize()
-# cg.display("./temp.dot")
-# problem.initConfig(q_init)
-# problem.addGoalConfig(q_goal)
+# Uncomment to help M-RRT pathplanner
+# for e in ['ur3/gripper > sphere0/handle | f_ls',
+#           'ur3/gripper > sphere1/handle | f_ls'] :
+#  cg.setWeight(cg.getTransition(e), 100)
+# for e in ['ur3/gripper < sphere0/handle | 0-0_ls',
+#          'ur3/gripper < sphere1/handle | 0-1_ls'] :
+#  cg.setWeight(cg.getTransition(e), 100)
 
-print("Script completed!")
+for i in range(nSphere):
+    e = cg.getTransition("ur3/gripper > sphere{}/handle | f_23".format(i))
+    cg.addNumericalConstraintsToTransition(
+        e, [constraints["place_sphere{}/complement".format(i)]]
+    )
+    e = cg.getTransition("ur3/gripper < sphere{}/handle | 0-{}_32".format(i, i))
+    cg.addNumericalConstraintsToTransition(
+        e, [constraints["place_sphere{}/complement".format(i)]]
+    )
+
+problem.steeringMethod = Straight(problem)
+problem.pathValidation = Dichotomy(robot, 0)
+problem.pathProjector = ProgressiveProjector(
+    problem.distance(), problem.steeringMethod, 0.01
+)
+
+cg.initialize()
+
+q_init_arr = np.array(q_init)
+q_goal_arr = np.array(q_goal)
+
+problem.initConfig(q_init_arr)
+problem.addGoalConfig(q_goal_arr)
+problem.constraintGraph(cg)
+manipulationPlanner = ManipulationPlanner(problem)
+manipulationPlanner.maxIterations(5000)
+
+# Run benchmark using shared utilities
+if args.N > 0:
+    run_benchmark_main(
+        planner=manipulationPlanner,
+        problem=problem,
+        q_init=q_init_arr,
+        q_goal=q_goal_arr,
+        num_iterations=args.N,
+    )

@@ -45,6 +45,12 @@ tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
 }
 
 void exposeBySubstitution() {
+  enum_<HierarchicalIterative::Status>("SolverStatus")
+      .value("ERROR_INCREASED", HierarchicalIterative::ERROR_INCREASED)
+      .value("MAX_ITERATION_REACHED", HierarchicalIterative::MAX_ITERATION_REACHED)
+      .value("INFEASIBLE", HierarchicalIterative::INFEASIBLE)
+      .value("SUCCESS", HierarchicalIterative::SUCCESS);
+
   class_<BySubstitution, bases<HierarchicalIterative> >(
       "BySubstitution", init<LiegroupSpacePtr_t>())
       .def("explicitConstraintSetHasChanged",
