@@ -7,8 +7,6 @@
 
 from math import pi
 import numpy as np
-import datetime as dt
-from argparse import ArgumentParser
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 from pyhpp.manipulation import (
@@ -30,8 +28,9 @@ from pyhpp.constraints import (
 )
 from pinocchio import SE3, Quaternion
 
-parser = ArgumentParser()
-parser.add_argument("-N", default=0, type=int)
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
+
+parser = create_benchmark_parser("UR3 Spheres StatesPathFinder Benchmark")
 args = parser.parse_args()
 
 # Robot and environment file paths
@@ -290,8 +289,11 @@ problem.pathProjector = ProgressiveProjector(
 
 cg.initialize()
 
-problem.initConfig(np.array(q_init))
-problem.addGoalConfig(np.array(q_goal))
+q_init_arr = np.array(q_init)
+q_goal_arr = np.array(q_goal)
+
+problem.initConfig(q_init_arr)
+problem.addGoalConfig(q_goal_arr)
 problem.constraintGraph(cg)
 
 planner = StatesPathFinder(problem)
@@ -301,32 +303,12 @@ problem.setParameter("StatesPathFinder/innerPlannerTimeOut", 0.0)
 problem.setParameter("StatesPathFinder/innerPlannerMaxIterations", 100)
 problem.setParameter("StatesPathFinder/nTriesUntilBacktrack", 3)
 
-# Run benchmark
-#
-totalTime = dt.timedelta(0)
-totalNumberNodes = 0
-success = 0
-for i in range(args.N):
-    try:
-        planner.roadmap().clear()
-        t1 = dt.datetime.now()
-        planner.solve()
-        t2 = dt.datetime.now()
-    except Exception as e:
-        print(f"Failed to plan path: {e}")
-    else:
-        success += 1
-        totalTime += t2 - t1
-        print(t2 - t1)
-        n = len(planner.roadmap().nodes())
-        totalNumberNodes += n
-        print("Number nodes: " + str(n))
-
-if args.N != 0:
-    print("#" * 20)
-    print(f"Number of rounds: {args.N}")
-    print(f"Number of successes: {success}")
-    print(f"Success rate: {success / args.N * 100}%")
-    if success > 0:
-        print(f"Average time per success: {totalTime.total_seconds() / success}")
-        print(f"Average number nodes per success: {totalNumberNodes / success}")
+# Run benchmark using shared utilities
+if args.N > 0:
+    run_benchmark_main(
+        planner=planner,
+        problem=problem,
+        q_init=q_init_arr,
+        q_goal=q_goal_arr,
+        num_iterations=args.N,
+    )
