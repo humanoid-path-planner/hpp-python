@@ -37,6 +37,8 @@
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -48,10 +50,11 @@ void exposeHierarchicalIterativeSolver() {
   class_<ComparisonTypes_t>("ComparisonTypes")
       .def(vector_indexing_suite<ComparisonTypes_t>());
 
+  // DocClass(solver::HierarchicalIterative)
   class_<HierarchicalIterative>("HierarchicalIterative",
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<HierarchicalIterative>)
-      .def("add", &HierarchicalIterative::add)
+      .def("add", &HierarchicalIterative::add, DocClassMethod(add))
 
       .add_property(
           "errorThreshold",

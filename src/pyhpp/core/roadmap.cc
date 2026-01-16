@@ -33,6 +33,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -218,49 +220,52 @@ struct RWrapper {
 };
 
 void exposeRoadmap() {
+  // DocClass(Roadmap)
   class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", no_init)
       .def("__init__", make_constructor(&Roadmap::create))
       .def("__str__", &to_str<Roadmap>)
-      .PYHPP_DEFINE_METHOD(Roadmap, clear)
-      .PYHPP_DEFINE_METHOD1(RWrapper, addNode,
-                            return_value_policy<reference_existing_object>())
+      .def("clear", &Roadmap::clear, DocClassMethod(clear))
+      .def("addNode", &RWrapper::addNode,
+           return_value_policy<reference_existing_object>())
       .def("nearestNode", &RWrapper::nearestNode1)
       .def("nearestNode", &RWrapper::nearestNode2)
       .def("nearestNode", &RWrapper::nearestNode3)
       .def("nearestNode", &RWrapper::nearestNode4)
       .def("nearestNodes", &RWrapper::nearestNodes1)
       .def("nearestNodes", &RWrapper::nearestNodes2)
-      .PYHPP_DEFINE_METHOD(Roadmap, nodesWithinBall)
-      .PYHPP_DEFINE_METHOD1(RWrapper, addNodeAndEdges,
-                            return_value_policy<reference_existing_object>())
-      .PYHPP_DEFINE_METHOD1(RWrapper, addNodeAndEdge,
-                            return_value_policy<reference_existing_object>())
+      .def("nodesWithinBall", &Roadmap::nodesWithinBall,
+           DocClassMethod(nodesWithinBall))
+      .def("addNodeAndEdges", &RWrapper::addNodeAndEdges,
+           return_value_policy<reference_existing_object>())
+      .def("addNodeAndEdge", &RWrapper::addNodeAndEdge,
+           return_value_policy<reference_existing_object>())
       .def("addEdge", &RWrapper::addEdge)
       .def("addEdge", &RWrapper::addEdge2)
-      .PYHPP_DEFINE_METHOD(Roadmap, addEdges)
+      .def("addEdges", &Roadmap::addEdges, DocClassMethod(addEdges))
       .def("merge",
-           static_cast<void (Roadmap::*)(const RoadmapPtr_t&)>(&Roadmap::merge))
-      .PYHPP_DEFINE_METHOD(Roadmap, insertPathVector)
-      .PYHPP_DEFINE_METHOD1(Roadmap, addGoalNode,
-                            return_value_policy<reference_existing_object>())
-      .PYHPP_DEFINE_METHOD(Roadmap, resetGoalNodes)
-      .PYHPP_DEFINE_METHOD(Roadmap, pathExists)
+           static_cast<void (Roadmap::*)(const RoadmapPtr_t&)>(&Roadmap::merge),
+           DocClassMethod(merge))
+      .def("insertPathVector", &Roadmap::insertPathVector,
+           DocClassMethod(insertPathVector))
+      .def("addGoalNode", &Roadmap::addGoalNode,
+           return_value_policy<reference_existing_object>(),
+           DocClassMethod(addGoalNode))
+      .def("resetGoalNodes", &Roadmap::resetGoalNodes,
+           DocClassMethod(resetGoalNodes))
+      .def("pathExists", &Roadmap::pathExists, DocClassMethod(pathExists))
       .def("nodes", &RWrapper::nodes)
       .def("nodesConnectedComponent", &RWrapper::nodesConnectedComponent)
       .def("initNode", &RWrapper::initNode1)
       .def("initNode", &RWrapper::initNode2,
            return_value_policy<reference_existing_object>())
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, goalNodes)
+      .def("goalNodes", &Roadmap::goalNodes, return_internal_reference<>(),
+           DocClassMethod(goalNodes))
       .def("connectedComponents", &RWrapper::connectedComponents)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Roadmap, distance)
+      .def("distance", &Roadmap::distance, return_internal_reference<>(),
+           DocClassMethod(distance))
       .def("numberConnectedComponents", &RWrapper::numberConnectedComponents)
       .def("getConnectedComponent", &RWrapper::getConnectedComponent)
-      .def("connectedComponentOfNode", &RWrapper::connectedComponentOfNode)
-      // .def("cost", &RWrapper::cost1)
-      // .def("cost", &RWrapper::cost2,
-      // return_value_policy<reference_existing_object>())
-
-      ;
+      .def("connectedComponentOfNode", &RWrapper::connectedComponentOfNode);
 }
 }  // namespace core
 }  // namespace pyhpp

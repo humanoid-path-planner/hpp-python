@@ -32,6 +32,8 @@
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -39,10 +41,11 @@ namespace constraints {
 using namespace hpp::constraints;
 
 void exposeExplicitConstraintSet() {
+  // DocClass(ExplicitConstraintSet)
   class_<ExplicitConstraintSet>("ExplicitConstraintSet",
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<ExplicitConstraintSet>)
-      .def("add", &ExplicitConstraintSet::add);
+      .def("add", &ExplicitConstraintSet::add, DocClassMethod(add));
 }
 }  // namespace constraints
 }  // namespace pyhpp
