@@ -29,12 +29,12 @@
 
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <fstream>
 #include <hpp/core/path-vector.hh>
-#include <hpp/util/serialization.hh>
 #include <hpp/python/config.hh>
+#include <hpp/util/serialization.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/util.hh>
-#include <fstream>
 #include <stdexcept>
 
 using namespace boost::python;
@@ -83,10 +83,8 @@ void exposeVector() {
       .PYHPP_DEFINE_METHOD(PathVector, flatten)
 
       // Serialization methods (binary format)
-      .def("save", &savePathVector,
-           "Save PathVector to file (binary format)")
-      .def("load", &loadPathVector,
-           "Load PathVector from file (binary format)")
+      .def("save", &savePathVector, "Save PathVector to file (binary format)")
+      .def("load", &loadPathVector, "Load PathVector from file (binary format)")
       .staticmethod("load");
 
   class_<PathVectors_t>("Vectors").def(
