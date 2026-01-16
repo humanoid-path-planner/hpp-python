@@ -31,6 +31,8 @@
 #include <hpp/constraints/solver/by-substitution.hh>
 #include <pyhpp/constraints/fwd.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -52,15 +54,18 @@ void exposeBySubstitution() {
       .value("INFEASIBLE", HierarchicalIterative::INFEASIBLE)
       .value("SUCCESS", HierarchicalIterative::SUCCESS);
 
+  // DocClass(solver::BySubstitution)
   class_<BySubstitution, bases<HierarchicalIterative> >(
       "BySubstitution", init<LiegroupSpacePtr_t>())
       .def("explicitConstraintSetHasChanged",
-           &BySubstitution::explicitConstraintSetHasChanged)
+           &BySubstitution::explicitConstraintSetHasChanged,
+           DocClassMethod(explicitConstraintSetHasChanged))
       .def("solve", &BySubstitution_solve)
       .def("explicitConstraintSet",
            static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
                &BySubstitution::explicitConstraintSet),
-           return_internal_reference<>())
+           return_internal_reference<>(),
+           DocClassMethod(explicitConstraintSet))
       .add_property("errorThreshold",
                     static_cast<value_type (BySubstitution::*)() const>(
                         &BySubstitution::errorThreshold),

@@ -37,6 +37,8 @@
 #include <pyhpp/util.hh>
 #include <pyhpp/vector-indexing-suite.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -53,13 +55,22 @@ void exposeImplicit() {
       .value("EqualToZero", EqualToZero)
       .value("Superior", Superior)
       .value("Inferior", Inferior);
+  // DocClass(Implicit)
   class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", no_init)
       .def("__init__", make_constructor(&Implicit::create))
-      .PYHPP_DEFINE_GETTER_SETTER_INTERNAL_REF(Implicit, comparisonType,
-                                               const ComparisonTypes_t&)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Implicit, function)
-      .def("parameterSize", &Implicit::parameterSize)
-      .def("rightHandSideSize", &Implicit::rightHandSideSize)
+      .def("comparisonType",
+           static_cast<const ComparisonTypes_t& (Implicit::*)() const>(
+               &Implicit::comparisonType),
+           return_internal_reference<>())
+      .def("comparisonType",
+           static_cast<void (Implicit::*)(const ComparisonTypes_t&)>(
+               &Implicit::comparisonType))
+      .def("function", &Implicit::function, return_internal_reference<>(),
+           DocClassMethod(function))
+      .def("parameterSize", &Implicit::parameterSize,
+           DocClassMethod(parameterSize))
+      .def("rightHandSideSize", &Implicit::rightHandSideSize,
+           DocClassMethod(rightHandSideSize))
       .def("getFunctionOutputSize", &getFunctionOutputSize)
       .staticmethod("getFunctionOutputSize");
 }

@@ -36,6 +36,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -141,6 +143,7 @@ struct PathWrap : PathWrapper, wrapper<PathWrapper> {
 };
 
 void exposePath() {
+  // DocClass(Path)
   class_<Path, hpp::shared_ptr<Path>, boost::noncopyable>("Path", no_init)
       .def("__str__", &to_str_from_operator<Path>)
 
@@ -148,26 +151,29 @@ void exposePath() {
       .def("__call__", &PathWrap::py_call2)
       .def("eval", &PathWrap::py_call1)
       .def("eval", &PathWrap::py_call2)
-      .PYHPP_DEFINE_METHOD(PathWrap, derivative)
+      .def("derivative", &PathWrap::derivative)
 
-      .def("copy", static_cast<PathPtr_t (Path::*)() const>(&Path::copy))
+      .def("copy", static_cast<PathPtr_t (Path::*)() const>(&Path::copy),
+           DocClassMethod(copy))
       .def("extract",
            static_cast<PathPtr_t (Path::*)(const value_type&, const value_type&)
-                           const>(&Path::extract))
+                           const>(&Path::extract),
+           DocClassMethod(extract))
       .def("extract", static_cast<PathPtr_t (Path::*)(const interval_t&) const>(
                           &Path::extract))
-      // .PYHPP_DEFINE_METHOD (Path, timeRange)
       .def("timeRange",
            static_cast<const interval_t& (Path::*)() const>(&Path::timeRange),
-           return_internal_reference<>())
-      .def("reverse", &Path::reverse)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Path, paramRange)
-      .PYHPP_DEFINE_METHOD(Path, length)
-      .PYHPP_DEFINE_METHOD(Path, initial)
-      .PYHPP_DEFINE_METHOD(Path, end)
-      .PYHPP_DEFINE_METHOD(PathWrap, constraints)
-      .PYHPP_DEFINE_METHOD(Path, outputSize)
-      .PYHPP_DEFINE_METHOD(Path, outputDerivativeSize);
+           return_internal_reference<>(), DocClassMethod(timeRange))
+      .def("reverse", &Path::reverse, DocClassMethod(reverse))
+      .def("paramRange", &Path::paramRange, return_internal_reference<>(),
+           DocClassMethod(paramRange))
+      .def("length", &Path::length, DocClassMethod(length))
+      .def("initial", &Path::initial, DocClassMethod(initial))
+      .def("end", &Path::end, DocClassMethod(end))
+      .def("constraints", &PathWrap::constraints)
+      .def("outputSize", &Path::outputSize, DocClassMethod(outputSize))
+      .def("outputDerivativeSize", &Path::outputDerivativeSize,
+           DocClassMethod(outputDerivativeSize));
 
   class_<PathWrap, bases<Path>, hpp::shared_ptr<PathWrap>, boost::noncopyable>(
       "PathWrap", no_init)
