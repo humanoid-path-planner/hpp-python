@@ -30,9 +30,12 @@
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <hpp/core/path-vector.hh>
+#include <hpp/util/serialization.hh>
 #include <hpp/python/config.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/util.hh>
+#include <fstream>
+#include <stdexcept>
 
 using namespace boost::python;
 
@@ -40,6 +43,31 @@ namespace pyhpp {
 namespace core {
 namespace path {
 using namespace hpp::core;
+
+void savePathVector(PathVectorPtr_t pathVector, const std::string& filename) {
+  if (!pathVector) {
+    throw std::invalid_argument("Cannot save null PathVector");
+  }
+  std::ofstream ofs(filename, std::ios::binary);
+  if (!ofs.is_open()) {
+    throw std::runtime_error("Failed to open file for writing: " + filename);
+  }
+  hpp::serialization::binary_oarchive ar(ofs);
+  ar.initialize();
+  ar << hpp::serialization::make_nvp("pathVector", pathVector);
+}
+
+PathVectorPtr_t loadPathVector(const std::string& filename) {
+  std::ifstream ifs(filename, std::ios::binary);
+  if (!ifs.is_open()) {
+    throw std::runtime_error("Failed to open file for reading: " + filename);
+  }
+  hpp::serialization::binary_iarchive ar(ifs);
+  ar.initialize();
+  PathVectorPtr_t pathVector;
+  ar >> hpp::serialization::make_nvp("pathVector", pathVector);
+  return pathVector;
+}
 
 void exposeVector() {
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
@@ -52,7 +80,14 @@ void exposeVector() {
       .PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
       .PYHPP_DEFINE_METHOD(PathVector, appendPath)
       .PYHPP_DEFINE_METHOD(PathVector, concatenate)
-      .PYHPP_DEFINE_METHOD(PathVector, flatten);
+      .PYHPP_DEFINE_METHOD(PathVector, flatten)
+
+      // Serialization methods (binary format)
+      .def("save", &savePathVector,
+           "Save PathVector to file (binary format)")
+      .def("load", &loadPathVector,
+           "Load PathVector from file (binary format)")
+      .staticmethod("load");
 
   class_<PathVectors_t>("Vectors").def(
       vector_indexing_suite<PathVectors_t, true>());
