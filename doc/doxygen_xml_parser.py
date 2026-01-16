@@ -22,14 +22,16 @@ class Index:
 class ClassDoc:
     def __init__(self, filename):
         self.tree = etree.parse(filename)
-        self.compound = self.tree.find("/compounddef")
+        self.compound = self.tree.find("./compounddef")
         self.classname = self.compound.find("compoundname").text.strip()
 
     @staticmethod
     def _getDoc(el):
         b = el.find("briefdescription")
         d = el.find("detaileddescription")
-        return etree.tostring(b, method="text").strip(), d.text.strip()
+        brief = etree.tostring(b, method="text", encoding="unicode").strip()
+        detailed = d.text.strip() if d.text else ""
+        return brief, detailed
 
     def _getMember(self, sectionKind, memberDefKind, name):
         # return self.compound.xpath ("sectiondef[@kind='" + sectionKind
@@ -76,14 +78,16 @@ class ClassDoc:
             ]
         else:
             args = []
-        args += [el.text.strip() for el in member.xpath("param/declname")]
+        args += [el.text.strip() for el in member.xpath("param/declname") if el.text]
         for parameters in dd.xpath("para/parameterlist/parameteritem"):
             pargs = [
                 el.text.strip()
                 for el in parameters.find("parameternamelist").findall("parametername")
+                if el.text
             ]
             pns = " ".join(pargs)
-            pd = parameters.find("parameterdescription").find("para").text.strip()
+            para_el = parameters.find("parameterdescription").find("para")
+            pd = para_el.text.strip() if para_el is not None and para_el.text else ""
             d += "\n:param " + pns + ":" + pd
         return b, d, args
 
