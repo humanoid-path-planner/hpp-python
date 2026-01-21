@@ -145,10 +145,6 @@ add_python_library(
   pyhpp/core/path_optimization/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
 
 add_python_library(
-  pyhpp/corbaserver FILES pyhpp/corbaserver/bindings.cc
-  pyhpp/corbaserver/server.cc LINK_LIBRARIES hpp-corbaserver::hpp-corbaserver)
-
-add_python_library(
   pyhpp/manipulation
   FILES
   pyhpp/manipulation/bindings.cc
