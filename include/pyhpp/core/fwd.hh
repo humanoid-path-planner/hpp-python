@@ -58,7 +58,6 @@ void exposePathPlanner();
 
 void exposeParameter();
 void exposeProblem();
-void exposeProblemSolver();
 
 // forward declaration of some classes
 class PathPlanner;

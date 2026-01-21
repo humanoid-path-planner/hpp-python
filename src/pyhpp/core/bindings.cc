@@ -44,7 +44,6 @@ BOOST_PYTHON_MODULE(bindings) {
 
   pyhpp::core::exposeParameter();
   pyhpp::core::exposeProblem();
-  pyhpp::core::exposeProblemSolver();
 
   pyhpp::core::exposeConfigValidation();
   pyhpp::core::exposeConfigurationShooter();
