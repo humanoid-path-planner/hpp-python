@@ -121,7 +121,6 @@ add_python_library(
   pyhpp/core/problem-target.cc
   pyhpp/core/parameter.cc
   pyhpp/core/problem.cc
-  pyhpp/core/problem-solver.cc
   pyhpp/core/bindings.cc
   LINK_LIBRARIES
   hpp-core::hpp-core)
