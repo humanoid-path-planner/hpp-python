@@ -29,9 +29,11 @@
 
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <fstream>
 #include <hpp/core/path-vector.hh>
 #include <hpp/util/serialization.hh>
 #include <hpp/python/config.hh>
+#include <hpp/util/serialization.hh>
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/util.hh>
 #include <fstream>

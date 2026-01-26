@@ -34,6 +34,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -42,23 +44,26 @@ namespace core {
 using namespace hpp::core;
 
 void exposeNode() {
+  // DocClass(Node)
   class_<Node, boost::shared_ptr<Node>, boost::noncopyable>("Node", no_init)
       .def(init<ConfigurationIn_t>())
       .def(init<ConfigurationIn_t, ConnectedComponentPtr_t>())
-      .PYHPP_DEFINE_METHOD(Node, addOutEdge)
-      .PYHPP_DEFINE_METHOD(Node, addInEdge)
+      .def("addOutEdge", &Node::addOutEdge, DocClassMethod(addOutEdge))
+      .def("addInEdge", &Node::addInEdge, DocClassMethod(addInEdge))
       .def("connectedComponent",
            static_cast<ConnectedComponentPtr_t (Node::*)() const>(
                &Node::connectedComponent))
       .def("connectedComponent",
            static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(
                &Node::connectedComponent))
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, outEdges)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, inEdges)
-      .PYHPP_DEFINE_METHOD(Node, isOutNeighbor)
-      .PYHPP_DEFINE_METHOD(Node, isInNeighbor)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, configuration)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Node, print);
+      .def("outEdges", &Node::outEdges, return_internal_reference<>(),
+           DocClassMethod(outEdges))
+      .def("inEdges", &Node::inEdges, return_internal_reference<>(),
+           DocClassMethod(inEdges))
+      .def("isOutNeighbor", &Node::isOutNeighbor, DocClassMethod(isOutNeighbor))
+      .def("isInNeighbor", &Node::isInNeighbor, DocClassMethod(isInNeighbor))
+      .def("configuration", &Node::configuration, return_internal_reference<>(),
+           DocClassMethod(configuration));
 }
 }  // namespace core
 }  // namespace pyhpp

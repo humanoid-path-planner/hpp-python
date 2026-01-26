@@ -36,6 +36,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -85,41 +87,54 @@ static void setRightHandSideOfConstraint(
 }
 
 void exposeConstraint() {
+  // DocClass(Constraint)
   class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
       .def("__str__", &to_str_from_operator<Constraint>)
-      .PYHPP_DEFINE_METHOD_INTERNAL_REF(Constraint, name)
-      .PYHPP_DEFINE_METHOD(CWrapper, apply)
+      .def("name", &Constraint::name, return_internal_reference<>(),
+           DocClassMethod(name))
+      .def("apply", &CWrapper::apply)
       .def("isSatisfied", &CWrapper::isSatisfied1)
       .def("isSatisfied", &CWrapper::isSatisfied2)
-      .PYHPP_DEFINE_METHOD(CWrapper, copy);
+      .def("copy", &CWrapper::copy);
 
+  // DocClass(ConstraintSet)
   class_<ConstraintSet, ConstraintSetPtr_t, boost::noncopyable,
          bases<Constraint> >("ConstraintSet", no_init)
       .def("__init__", make_constructor(&createConstraintSet))
-      .PYHPP_DEFINE_METHOD(ConstraintSet, addConstraint)
-      .PYHPP_DEFINE_METHOD(ConstraintSet, configProjector);
+      .def("addConstraint", &ConstraintSet::addConstraint,
+           DocClassMethod(addConstraint))
+      .def("configProjector", &ConstraintSet::configProjector,
+           DocClassMethod(configProjector));
 
+  // DocClass(ConfigProjector)
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
          bases<Constraint> >("ConfigProjector", no_init)
       .def("__init__", make_constructor(&createConfigProjector))
       .def("solver",
            static_cast<BySubstitution& (ConfigProjector::*)()>(
                &ConfigProjector::solver),
-           return_internal_reference<>())
-      .def("add", &ConfigProjector::add)
-      .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, lastIsOptional, bool)
-      .PYHPP_DEFINE_GETTER_SETTER(ConfigProjector, maxIterations, size_type)
+           return_internal_reference<>(), DocClassMethod(solver))
+      .def("add", &ConfigProjector::add, DocClassMethod(add))
+      .def("lastIsOptional", static_cast<bool (ConfigProjector::*)() const>(
+                                 &ConfigProjector::lastIsOptional))
+      .def("lastIsOptional", static_cast<void (ConfigProjector::*)(bool)>(
+                                 &ConfigProjector::lastIsOptional))
+      .def("maxIterations", static_cast<size_type (ConfigProjector::*)() const>(
+                                &ConfigProjector::maxIterations))
+      .def("maxIterations", static_cast<void (ConfigProjector::*)(size_type)>(
+                                &ConfigProjector::maxIterations))
       .def("errorThreshold",
            static_cast<void (ConfigProjector::*)(const value_type&)>(
                &ConfigProjector::errorThreshold))
       .def("errorThreshold",
            static_cast<value_type (ConfigProjector::*)() const>(
                &ConfigProjector::errorThreshold))
-      .PYHPP_DEFINE_METHOD(ConfigProjector, residualError)
+      .def("residualError", &ConfigProjector::residualError,
+           DocClassMethod(residualError))
       .def("setRightHandSideFromConfig", &rightHandSideFromConfig)
       .def("setRightHandSideOfConstraint", &setRightHandSideOfConstraint)
       .def("sigma", &ConfigProjector::sigma,
-           return_value_policy<return_by_value>());
+           return_value_policy<return_by_value>(), DocClassMethod(sigma));
 }
 }  // namespace core
 }  // namespace pyhpp
