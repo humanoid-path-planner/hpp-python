@@ -116,7 +116,13 @@ def _xmlDirFromPkgConfig(pkg):
 
 nsToPackage = {
     "hpp::core": _xmlDirFromPkgConfig("hpp-core"),
+    "hpp::core::path": _xmlDirFromPkgConfig("hpp-core"),
     "hpp::constraints": _xmlDirFromPkgConfig("hpp-constraints"),
+    "hpp::constraints::solver": _xmlDirFromPkgConfig("hpp-constraints"),
+    "hpp::pinocchio": _xmlDirFromPkgConfig("hpp-pinocchio"),
+    "hpp::manipulation": _xmlDirFromPkgConfig("hpp-manipulation"),
+    "hpp::manipulation::graph": _xmlDirFromPkgConfig("hpp-manipulation"),
+    "hpp::manipulation::pathPlanner": _xmlDirFromPkgConfig("hpp-manipulation"),
 }
 
 
@@ -142,7 +148,7 @@ def make_doc_string(brief, detailled):
 
 
 def make_args_string(args):
-    return "(" + ",".join(['arg("' + a + '")' for a in args]) + ")"
+    return "(" + ",".join(['boost::python::arg("' + a + '")' for a in args]) + ")"
 
 
 def substitute(istr, ostr):

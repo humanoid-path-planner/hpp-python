@@ -31,6 +31,8 @@
 #include <hpp/constraints/generic-transformation.hh>
 #include <pyhpp/constraints/fwd.hh>
 
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {

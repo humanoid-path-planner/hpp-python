@@ -38,6 +38,8 @@
 #include <pyhpp/core/path-planner.hh>
 #include <pyhpp/core/problem.hh>
 
+// DocNamespace(hpp::manipulation::pathPlanner)
+
 namespace pyhpp {
 namespace manipulation {
 
@@ -227,6 +229,7 @@ bool EndEffectorTrajectory::checkFeasibilityOnly() const {
 // }
 
 void exposePathPlanners() {
+  // DocClass(TransitionPlanner)
   boost::python::class_<TransitionPlanner,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
       "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
@@ -236,21 +239,25 @@ void exposePathPlanners() {
       .def("innerPlanner", static_cast<void (TransitionPlanner::*)(
                                const pyhpp::core::PathPlanner&)>(
                                &TransitionPlanner::innerPlanner))
-      .def("innerProblem", &TransitionPlanner::innerProblem)
-      .def("planPath", &TransitionPlanner::planPath)
+      .def("innerProblem", &TransitionPlanner::innerProblem,
+           DocClassMethod(innerProblem))
+      .def("planPath", &TransitionPlanner::planPath, DocClassMethod(planPath))
       .def("directPath", &TransitionPlanner::directPath)
       .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
-      .def("optimizePath", &TransitionPlanner::optimizePath)
-      .def("timeParameterization", &TransitionPlanner::timeParameterization)
-      .def("setEdge", &TransitionPlanner::setEdge)
+      .def("optimizePath", &TransitionPlanner::optimizePath,
+           DocClassMethod(optimizePath))
+      .def("timeParameterization", &TransitionPlanner::timeParameterization,
+           DocClassMethod(timeParameterization))
+      .def("setEdge", &TransitionPlanner::setEdge, DocClassMethod(setEdge))
       .def("setReedsAndSheppSteeringMethod",
-           &TransitionPlanner::setReedsAndSheppSteeringMethod)
-      .def("pathProjector", &TransitionPlanner::pathProjector)
-      .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers)
+           &TransitionPlanner::setReedsAndSheppSteeringMethod,
+           DocClassMethod(setReedsAndSheppSteeringMethod))
+      .def("pathProjector", &TransitionPlanner::pathProjector,
+           DocClassMethod(pathProjector))
+      .def("clearPathOptimizers", &TransitionPlanner::clearPathOptimizers,
+           DocClassMethod(clearPathOptimizers))
       .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer,
-           "Add a path optimizer\n\n  Note: the input path optimizer should "
-           "have been constructed"
-           " with\n    the inner problem of this class.");
+           DocClassMethod(addPathOptimizer));
 
   boost::python::class_<ManipulationPlanner,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
@@ -261,6 +268,7 @@ void exposePathPlanners() {
                         boost::python::bases<pyhpp::core::PathPlanner>>(
       "StatesPathFinder", boost::python::init<const pyhpp::core::Problem&>());
 
+  // DocClass(EndEffectorTrajectory)
   boost::python::class_<EndEffectorTrajectory,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
       "EndEffectorTrajectory",

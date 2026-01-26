@@ -30,6 +30,8 @@
 
 #include "pyhpp/core/problem.hh"
 
+// DocNamespace(hpp::core)
+
 #include <boost/python.hpp>
 #include <hpp/constraints/com-between-feet.hh>
 #include <hpp/constraints/generic-transformation.hh>
@@ -593,12 +595,16 @@ void register_problem_converters() {
 void exposeProblem() {
   class_<hpp::core::Problem, boost::noncopyable>("CppCoreProblem", no_init);
 
+  // DocClass(Problem)
   class_<Problem>("Problem", init<const DevicePtr_t&>())
-      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, robot)
-      .PYHPP_DEFINE_METHOD(Problem, setParameter)
+      .def("robot", &Problem::robot,
+           return_value_policy<copy_const_reference>(), DocClassMethod(robot))
+      .def("setParameter", &Problem::setParameter, DocClassMethod(setParameter))
       .def("setParameter", &Problem::setParameterFloat)
       .def("setParameter", &Problem::setParameterInt)
-      .PYHPP_DEFINE_METHOD_CONST_REF_BY_VALUE(Problem, getParameter)
+      .def("getParameter", &Problem::getParameter,
+           return_value_policy<copy_const_reference>(),
+           DocClassMethod(getParameter))
       .def("steeringMethod",
            static_cast<PyWSteeringMethodPtr_t (Problem::*)() const>(
                &Problem::steeringMethod))
@@ -613,8 +619,10 @@ void exposeProblem() {
            static_cast<SetConfigValidation>(&Problem::configValidation),
            (arg("configValidation")))
 
-      .def("addConfigValidation", &Problem::addConfigValidation)
-      .def("clearConfigValidations", &Problem::clearConfigValidations)
+      .def("addConfigValidation", &Problem::addConfigValidation,
+           DocClassMethod(addConfigValidation))
+      .def("clearConfigValidations", &Problem::clearConfigValidations,
+           DocClassMethod(clearConfigValidations))
 
       .def("pathValidation",
            static_cast<GetPathValidation>(&Problem::pathValidation))
@@ -640,9 +648,11 @@ void exposeProblem() {
       .def("configurationShooter",
            static_cast<SetConfigurationShooter>(&Problem::configurationShooter),
            (arg("configurationShooter")))
-      .PYHPP_DEFINE_METHOD(Problem, initConfig)
-      .PYHPP_DEFINE_METHOD(Problem, addGoalConfig)
-      .PYHPP_DEFINE_METHOD(Problem, resetGoalConfigs)
+      .def("initConfig", &Problem::initConfig, DocClassMethod(initConfig))
+      .def("addGoalConfig", &Problem::addGoalConfig,
+           DocClassMethod(addGoalConfig))
+      .def("resetGoalConfigs", &Problem::resetGoalConfigs,
+           DocClassMethod(resetGoalConfigs))
       .PYHPP_DEFINE_METHOD(Problem, addPartialCom)
       .PYHPP_DEFINE_METHOD(Problem, getPartialCom)
       .PYHPP_DEFINE_METHOD(Problem, createRelativeComConstraint)

@@ -37,6 +37,8 @@
 #include <hpp/manipulation/path-optimization/enforce-transition-semantic.hh>
 #include <hpp/manipulation/path-optimization/random-shortcut.hh>
 
+// DocNamespace(hpp::manipulation)
+
 using namespace boost::python;
 
 namespace pyhpp {

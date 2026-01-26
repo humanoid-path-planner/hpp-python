@@ -31,6 +31,8 @@
 #include <hpp/core/problem-target.hh>
 #include <pyhpp/core/fwd.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -39,6 +41,7 @@ namespace core {
 using namespace hpp::core;
 
 void exposeProblemTarget() {
+  // DocClass(ProblemTarget)
   class_<ProblemTarget, ProblemTargetPtr_t, boost::noncopyable>("ProblemTarget",
                                                                 no_init)
 

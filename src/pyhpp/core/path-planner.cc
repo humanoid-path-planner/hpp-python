@@ -39,6 +39,8 @@
 #include <hpp/core/visibility-prm-planner.hh>
 #include <pyhpp/core/path-planner.hh>
 
+// DocNamespace(hpp::core)
+
 namespace pyhpp {
 namespace core {
 
@@ -142,20 +144,33 @@ void PathPlanner::stopWhenProblemIsSolved(bool enable) {
 PathVectorPtr_t PathPlanner::computePath() const { return obj->computePath(); }
 
 void exposePathPlanner() {
+  // DocClass(PathPlanner)
   class_<PathPlanner>("PathPlanner", no_init)
-      .PYHPP_DEFINE_METHOD_CONST_REF(PathPlanner, roadmap)
-      .PYHPP_DEFINE_METHOD(PathPlanner, problem)
-      .PYHPP_DEFINE_METHOD(PathPlanner, startSolve)
-      .PYHPP_DEFINE_METHOD(PathPlanner, solve)
-      .PYHPP_DEFINE_METHOD(PathPlanner, tryConnectInitAndGoals)
-      .PYHPP_DEFINE_METHOD(PathPlanner, oneStep)
-      .PYHPP_DEFINE_METHOD(PathPlanner, finishSolve)
-      .PYHPP_DEFINE_METHOD(PathPlanner, interrupt)
-      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PathPlanner, maxIterations,
-                                            unsigned long int)
-      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PathPlanner, timeOut, double)
-      .PYHPP_DEFINE_METHOD(PathPlanner, stopWhenProblemIsSolved)
-      .PYHPP_DEFINE_METHOD(PathPlanner, computePath);
+      .def("roadmap", &PathPlanner::roadmap,
+           return_value_policy<copy_const_reference>(), DocClassMethod(roadmap))
+      .def("problem", &PathPlanner::problem, DocClassMethod(problem))
+      .def("startSolve", &PathPlanner::startSolve, DocClassMethod(startSolve))
+      .def("solve", &PathPlanner::solve, DocClassMethod(solve))
+      .def("tryConnectInitAndGoals", &PathPlanner::tryConnectInitAndGoals,
+           DocClassMethod(tryConnectInitAndGoals))
+      .def("oneStep", &PathPlanner::oneStep, DocClassMethod(oneStep))
+      .def("finishSolve", &PathPlanner::finishSolve,
+           DocClassMethod(finishSolve))
+      .def("interrupt", &PathPlanner::interrupt, DocClassMethod(interrupt))
+      .def("maxIterations",
+           static_cast<unsigned long int (PathPlanner::*)() const>(
+               &PathPlanner::maxIterations))
+      .def("maxIterations",
+           static_cast<void (PathPlanner::*)(const unsigned long int&)>(
+               &PathPlanner::maxIterations))
+      .def("timeOut",
+           static_cast<double (PathPlanner::*)() const>(&PathPlanner::timeOut))
+      .def("timeOut", static_cast<void (PathPlanner::*)(const double&)>(
+                          &PathPlanner::timeOut))
+      .def("stopWhenProblemIsSolved", &PathPlanner::stopWhenProblemIsSolved,
+           DocClassMethod(stopWhenProblemIsSolved))
+      .def("computePath", &PathPlanner::computePath,
+           DocClassMethod(computePath));
 
   pyhpp::core::pathPlanner::exposePathPlanners();
 }

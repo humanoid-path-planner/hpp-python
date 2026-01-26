@@ -32,6 +32,8 @@
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::manipulation)
+
 namespace pyhpp {
 namespace manipulation {
 using namespace boost::python;
@@ -146,8 +148,9 @@ void setHandleMaskComp(const HandlePtr_t& handle,
 }
 
 void exposeHandle() {
+  // DocClass(Handle)
   class_<Handle, HandlePtr_t>("Handle", no_init)
-      .def("create", &Handle::create)
+      .def("create", &Handle::create, DocClassMethod(create))
       .staticmethod("create")
       .add_property("name", &getHandleName, &setHandleName)
       .add_property("localPosition", &getHandleLocalPosition,
@@ -158,15 +161,19 @@ void exposeHandle() {
           "clearance",
           static_cast<value_type (Handle::*)() const>(&Handle::clearance),
           static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance))
-      .def("createGrasp", &Handle::createGrasp)
-      .def("createPreGrasp", &Handle::createPreGrasp)
-      .def("createGraspComplement", &Handle::createGraspComplement)
-      .def("createGraspAndComplement", &Handle::createGraspAndComplement);
+      .def("createGrasp", &Handle::createGrasp, DocClassMethod(createGrasp))
+      .def("createPreGrasp", &Handle::createPreGrasp,
+           DocClassMethod(createPreGrasp))
+      .def("createGraspComplement", &Handle::createGraspComplement,
+           DocClassMethod(createGraspComplement))
+      .def("createGraspAndComplement", &Handle::createGraspAndComplement,
+           DocClassMethod(createGraspAndComplement));
   class_<std::map<std::string, HandlePtr_t> >("HandleMap")
       .def(boost::python::map_indexing_suite<std::map<std::string, HandlePtr_t>,
                                              true>());
 }
 void exposeDevice() {
+  // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
          boost::noncopyable>("Device", init<const std::string&>())
       .def("setRobotRootPosition", &Device::setRobotRootPosition)

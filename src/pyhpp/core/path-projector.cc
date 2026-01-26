@@ -36,6 +36,8 @@
 #include <hpp/core/path-projector/recursive-hermite.hh>
 #include <pyhpp/core/steering-method.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -56,9 +58,10 @@ struct PPWrapper {
 };
 
 void exposePathProjector() {
+  // DocClass(PathProjector)
   class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>("PathProjector",
                                                                 no_init)
-      .def("apply", &PPWrapper::apply)
+      .def("apply", &PPWrapper::apply, DocClassMethod(apply))
       .def("apply", &PPWrapper::py_apply);
 
   class_<pathProjector::Progressive, bases<PathProjector>,

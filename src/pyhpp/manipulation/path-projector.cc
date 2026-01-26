@@ -39,6 +39,8 @@
 #include <pyhpp/core/steering-method.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {

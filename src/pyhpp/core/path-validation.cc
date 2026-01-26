@@ -40,6 +40,8 @@
 #include <pyhpp/core/problem.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -79,9 +81,10 @@ struct PVWrapper {
 };
 
 void exposePathValidation() {
+  // DocClass(PathValidation)
   class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
       "PathValidation", no_init)
-      .def("validate", &PVWrapper::validate)
+      .def("validate", &PVWrapper::validate, DocClassMethod(validate))
       .def("validate", &PVWrapper::py_validate)
       .def("validateConfiguration", &PVWrapper::validateConfiguration);
 

@@ -16,14 +16,18 @@ class Index:
 
     def classDoc(self, name):
         el = self._getCompound("class", name)
-        return ClassDoc(path.join(self.directory, el.get("refid") + ".xml"))
+        return ClassDoc(
+            path.join(self.directory, el.get("refid") + ".xml"), self.directory
+        )
 
 
 class ClassDoc:
-    def __init__(self, filename):
+    def __init__(self, filename, directory=None):
         self.tree = etree.parse(filename)
         self.compound = self.tree.find("./compounddef")
         self.classname = self.compound.find("compoundname").text.strip()
+        self.directory = directory if directory else path.dirname(filename)
+        self._group_cache = {}
 
     @staticmethod
     def _getDoc(el):
@@ -33,30 +37,91 @@ class ClassDoc:
         detailed = d.text.strip() if d.text else ""
         return brief, detailed
 
+    def _getMemberFromGroup(self, memberDefKind, name):
+        """Look for memberdef in a group file via member refid."""
+        members = self.compound.xpath(
+            "sectiondef/member[@kind='" + memberDefKind + "' and name='" + name + "']"
+        )
+        if not members:
+            return None
+        member = members[0]
+        refid = member.get("refid")
+        if not refid:
+            return None
+        group_id = refid.rsplit("_1", 1)[0]
+        if group_id not in self._group_cache:
+            group_file = path.join(self.directory, group_id + ".xml")
+            if not path.isfile(group_file):
+                return None
+            self._group_cache[group_id] = etree.parse(group_file)
+        group_tree = self._group_cache[group_id]
+        memberdefs = group_tree.xpath(
+            "//memberdef[@id='" + refid + "' and @kind='" + memberDefKind + "']"
+        )
+        if memberdefs:
+            return memberdefs[0]
+        return None
+
+    def _getMemberFromInherited(self, memberDefKind, name):
+        """Look for memberdef in base class XML via listofallmembers member refid."""
+        members = self.compound.xpath("listofallmembers/member[name='" + name + "']")
+        if not members:
+            return None
+        member = members[0]
+        refid = member.get("refid")
+        if not refid:
+            return None
+        # Extract base class file from refid
+        # e.g., "classhpp_1_1pinocchio_1_1AbstractDevice_1a312..." -> "classhpp_1_1pinocchio_1_1AbstractDevice"
+        parts = refid.rsplit("_1", 1)
+        if len(parts) < 2:
+            return None
+        base_class_id = parts[0]
+        base_class_file = path.join(self.directory, base_class_id + ".xml")
+        if not path.isfile(base_class_file):
+            return None
+        if base_class_id not in self._group_cache:
+            self._group_cache[base_class_id] = etree.parse(base_class_file)
+        base_tree = self._group_cache[base_class_id]
+        memberdefs = base_tree.xpath(
+            "//memberdef[@id='" + refid + "' and @kind='" + memberDefKind + "']"
+        )
+        if memberdefs:
+            return memberdefs[0]
+        return None
+
     def _getMember(self, sectionKind, memberDefKind, name):
-        # return self.compound.xpath ("sectiondef[@kind='" + sectionKind
-        try:
-            return self.compound.xpath(
-                "sectiondef[re:test(@kind,'"
-                + sectionKind
-                + "')]/memberdef[@kind='"
-                + memberDefKind
-                + "' and name='"
-                + name
-                + "']",
-                namespaces={"re": "http://exslt.org/regular-expressions"},
-            )[0]
-        except IndexError as e:
-            msg = (
-                "Error: Could not find member ("
-                + sectionKind
-                + ") "
-                + name
-                + " of class "
-                + self.classname
-            )
-            print(msg + "\n" + str(e), file=sys.stderr)
-            raise IndexError(msg)
+        # First try to find memberdef directly in class XML
+        results = self.compound.xpath(
+            "sectiondef[re:test(@kind,'"
+            + sectionKind
+            + "')]/memberdef[@kind='"
+            + memberDefKind
+            + "' and name='"
+            + name
+            + "']",
+            namespaces={"re": "http://exslt.org/regular-expressions"},
+        )
+        if results:
+            return results[0]
+        # Fall back to looking in group files (for @ingroup documented classes)
+        memberdef = self._getMemberFromGroup(memberDefKind, name)
+        if memberdef is not None:
+            return memberdef
+        # Fall back to looking in base class files (for inherited methods)
+        memberdef = self._getMemberFromInherited(memberDefKind, name)
+        if memberdef is not None:
+            return memberdef
+        msg = (
+            "Error: Could not find member ("
+            + sectionKind
+            + ") "
+            + name
+            + " of class "
+            + self.classname
+        )
+        print(msg, file=sys.stderr)
+        raise IndexError(msg)
 
     def getClassDoc(self):
         return self._getDoc(self.compound)

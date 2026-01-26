@@ -32,6 +32,9 @@
 #include <hpp/pinocchio/device.hh>
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
+
+// DocNamespace(hpp::constraints)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -64,9 +67,10 @@ static RelativeComPtr_t create3(const std::string& name,
 }
 
 void exposeRelativeCom() {
+  // DocClass(RelativeCom)
   class_<RelativeCom, RelativeComPtr_t, bases<DifferentiableFunction>,
          boost::noncopyable>("RelativeCom", no_init)
-      .def("create", &create1)
+      .def("create", &create1, DocClassMethod(create))
       .def("create", &create2)
       .def("create", &create3)
       .staticmethod("create");

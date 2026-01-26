@@ -39,6 +39,8 @@
 #include <pyhpp/core/problem.hh>
 #include <pyhpp/core/steering-method.hh>
 
+// DocNamespace(hpp::core)
+
 namespace pyhpp {
 namespace core {
 
@@ -140,13 +142,15 @@ const ConstraintSetPtr_t& SteeringMethod::constraints() const {
 
 void exposeSteeringMethod() {
   register_ptr_to_python<std::shared_ptr<pyhpp::core::SteeringMethod>>();
+  // DocClass(SteeringMethod)
   class_<SteeringMethod>("SteeringMethod", no_init)
       .def("__call__", &SteeringMethod::operator())
-      .def("steer", &SteeringMethod::steer)
-      .def("problem", &SteeringMethod::problem)
+      .def("steer", &SteeringMethod::steer, DocClassMethod(steer))
+      .def("problem", &SteeringMethod::problem, DocClassMethod(problem))
       .def("constraints",
            static_cast<void (SteeringMethod::*)(const ConstraintSetPtr_t&)>(
-               &SteeringMethod::constraints))
+               &SteeringMethod::constraints),
+           DocClassMethod(constraints))
       .def("constraints",
            static_cast<const ConstraintSetPtr_t& (SteeringMethod::*)() const>(
                &SteeringMethod::constraints),

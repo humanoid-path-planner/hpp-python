@@ -40,6 +40,8 @@
 #include <hpp/core/problem.hh>
 #include <pyhpp/core/fwd.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -47,13 +49,15 @@ namespace core {
 using namespace hpp::core;
 
 void exposePathOptimizer() {
+  // DocClass(PathOptimizer)
   class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
                                                                 no_init)
-      .def("problem", &PathOptimizer::problem)
-      .def("optimize", &PathOptimizer::optimize)
-      .def("interrupt", &PathOptimizer::interrupt)
-      .def("maxIterations", &PathOptimizer::maxIterations)
-      .def("timeOut", &PathOptimizer::timeOut);
+      .def("problem", &PathOptimizer::problem, DocClassMethod(problem))
+      .def("optimize", &PathOptimizer::optimize, DocClassMethod(optimize))
+      .def("interrupt", &PathOptimizer::interrupt, DocClassMethod(interrupt))
+      .def("maxIterations", &PathOptimizer::maxIterations,
+           DocClassMethod(maxIterations))
+      .def("timeOut", &PathOptimizer::timeOut, DocClassMethod(timeOut));
 
   class_<pathOptimization::RandomShortcut,
          std::shared_ptr<pathOptimization::RandomShortcut>,

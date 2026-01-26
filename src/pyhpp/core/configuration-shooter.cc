@@ -32,6 +32,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -43,9 +45,10 @@ struct CSWrapper {
 };
 
 void exposeConfigurationShooter() {
+  // DocClass(ConfigurationShooter)
   class_<ConfigurationShooter, ConfigurationShooterPtr_t, boost::noncopyable>(
       "ConfigurationShooter", no_init)
-      .def("shoot", &CSWrapper::shoot);
+      .def("shoot", &CSWrapper::shoot, DocClassMethod(shoot));
 }
 }  // namespace core
 }  // namespace pyhpp
