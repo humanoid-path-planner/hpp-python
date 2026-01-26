@@ -64,8 +64,7 @@ void exposeBySubstitution() {
       .def("explicitConstraintSet",
            static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
                &BySubstitution::explicitConstraintSet),
-           return_internal_reference<>(),
-           DocClassMethod(explicitConstraintSet))
+           return_internal_reference<>(), DocClassMethod(explicitConstraintSet))
       .add_property("errorThreshold",
                     static_cast<value_type (BySubstitution::*)() const>(
                         &BySubstitution::errorThreshold),

@@ -75,8 +75,9 @@ void exposeVector() {
   // DocClass(PathVector)
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
                                                                        no_init)
-      .def("create", static_cast<PathVectorPtr_t (*)(size_type, size_type)>(
-                         &PathVector::create),
+      .def("create",
+           static_cast<PathVectorPtr_t (*)(size_type, size_type)>(
+               &PathVector::create),
            DocClassMethod(create))
       .staticmethod("create")
       .def("numberPaths", &PathVector::numberPaths, DocClassMethod(numberPaths))

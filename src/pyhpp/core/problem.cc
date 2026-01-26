@@ -597,8 +597,8 @@ void exposeProblem() {
 
   // DocClass(Problem)
   class_<Problem>("Problem", init<const DevicePtr_t&>())
-      .def("robot", &Problem::robot, return_value_policy<copy_const_reference>(),
-           DocClassMethod(robot))
+      .def("robot", &Problem::robot,
+           return_value_policy<copy_const_reference>(), DocClassMethod(robot))
       .def("setParameter", &Problem::setParameter, DocClassMethod(setParameter))
       .def("setParameter", &Problem::setParameterFloat)
       .def("setParameter", &Problem::setParameterInt)

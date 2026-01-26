@@ -64,9 +64,7 @@ class ClassDoc:
 
     def _getMemberFromInherited(self, memberDefKind, name):
         """Look for memberdef in base class XML via listofallmembers member refid."""
-        members = self.compound.xpath(
-            "listofallmembers/member[name='" + name + "']"
-        )
+        members = self.compound.xpath("listofallmembers/member[name='" + name + "']")
         if not members:
             return None
         member = members[0]

@@ -115,18 +115,14 @@ void exposeConstraint() {
                &ConfigProjector::solver),
            return_internal_reference<>(), DocClassMethod(solver))
       .def("add", &ConfigProjector::add, DocClassMethod(add))
-      .def("lastIsOptional",
-           static_cast<bool (ConfigProjector::*)() const>(
-               &ConfigProjector::lastIsOptional))
-      .def("lastIsOptional",
-           static_cast<void (ConfigProjector::*)(bool)>(
-               &ConfigProjector::lastIsOptional))
-      .def("maxIterations",
-           static_cast<size_type (ConfigProjector::*)() const>(
-               &ConfigProjector::maxIterations))
-      .def("maxIterations",
-           static_cast<void (ConfigProjector::*)(size_type)>(
-               &ConfigProjector::maxIterations))
+      .def("lastIsOptional", static_cast<bool (ConfigProjector::*)() const>(
+                                 &ConfigProjector::lastIsOptional))
+      .def("lastIsOptional", static_cast<void (ConfigProjector::*)(bool)>(
+                                 &ConfigProjector::lastIsOptional))
+      .def("maxIterations", static_cast<size_type (ConfigProjector::*)() const>(
+                                &ConfigProjector::maxIterations))
+      .def("maxIterations", static_cast<void (ConfigProjector::*)(size_type)>(
+                                &ConfigProjector::maxIterations))
       .def("errorThreshold",
            static_cast<void (ConfigProjector::*)(const value_type&)>(
                &ConfigProjector::errorThreshold))

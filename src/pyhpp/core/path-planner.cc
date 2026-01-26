@@ -154,7 +154,8 @@ void exposePathPlanner() {
       .def("tryConnectInitAndGoals", &PathPlanner::tryConnectInitAndGoals,
            DocClassMethod(tryConnectInitAndGoals))
       .def("oneStep", &PathPlanner::oneStep, DocClassMethod(oneStep))
-      .def("finishSolve", &PathPlanner::finishSolve, DocClassMethod(finishSolve))
+      .def("finishSolve", &PathPlanner::finishSolve,
+           DocClassMethod(finishSolve))
       .def("interrupt", &PathPlanner::interrupt, DocClassMethod(interrupt))
       .def("maxIterations",
            static_cast<unsigned long int (PathPlanner::*)() const>(
@@ -164,12 +165,12 @@ void exposePathPlanner() {
                &PathPlanner::maxIterations))
       .def("timeOut",
            static_cast<double (PathPlanner::*)() const>(&PathPlanner::timeOut))
-      .def("timeOut",
-           static_cast<void (PathPlanner::*)(const double&)>(
-               &PathPlanner::timeOut))
+      .def("timeOut", static_cast<void (PathPlanner::*)(const double&)>(
+                          &PathPlanner::timeOut))
       .def("stopWhenProblemIsSolved", &PathPlanner::stopWhenProblemIsSolved,
            DocClassMethod(stopWhenProblemIsSolved))
-      .def("computePath", &PathPlanner::computePath, DocClassMethod(computePath));
+      .def("computePath", &PathPlanner::computePath,
+           DocClassMethod(computePath));
 
   pyhpp::core::pathPlanner::exposePathPlanners();
 }
