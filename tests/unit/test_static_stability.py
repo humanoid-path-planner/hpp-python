@@ -16,7 +16,9 @@ from pyhpp.core.static_stability_constraint_factory import (
 
 def load_romeo():
     romeo_urdf = "package://example-robot-data/robots/romeo_description/urdf/romeo.urdf"
-    romeo_srdf = "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+    romeo_srdf = (
+        "package://example-robot-data/robots/romeo_description/srdf/romeo_moveit.srdf"
+    )
 
     robot = Device("romeo")
     romeo_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
@@ -31,7 +33,6 @@ def load_romeo():
 
 
 class TestStaticStabilityConstraintsFactory(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.robot = load_romeo()
@@ -77,7 +78,12 @@ class TestStaticStabilityConstraintsFactory(unittest.TestCase):
 
     def test_create_aligned_com_stability_constraint_sliding(self):
         constraints = self.factory.createAlignedCOMStabilityConstraint(
-            "aligned_slide_", "", self.left_ankle, self.right_ankle, self.q0, sliding=True
+            "aligned_slide_",
+            "",
+            self.left_ankle,
+            self.right_ankle,
+            self.q0,
+            sliding=True,
         )
 
         self.assertIsInstance(constraints, dict)
