@@ -37,6 +37,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -44,16 +46,19 @@ namespace core {
 using namespace hpp::core;
 
 void exposeReports() {
+  // DocClass(ValidationReport)
   class_<ValidationReport, ValidationReportPtr_t, boost::noncopyable>(
       "ValidationReport", no_init)
       .def("__str__", &to_str<ValidationReport>);
 
+  // DocClass(CollisionValidationReport)
   class_<CollisionValidationReport, CollisionValidationReportPtr_t,
          bases<ValidationReport> >("CollisionValidationReport", no_init)
       .def_readonly("object1", &CollisionValidationReport::object1)
       .def_readonly("object2", &CollisionValidationReport::object2)
       .def_readonly("result", &CollisionValidationReport::result);
 
+  // DocClass(JointBoundValidationReport)
   class_<JointBoundValidationReport, JointBoundValidationReportPtr_t,
          bases<ValidationReport> >("JointBoundValidationReport", no_init)
       .def_readonly("joint_", &JointBoundValidationReport::joint_)
@@ -62,12 +67,14 @@ void exposeReports() {
       .def_readonly("upperBound_", &JointBoundValidationReport::upperBound_)
       .def_readonly("value_", &JointBoundValidationReport::value_);
 
+  // DocClass(PathValidationReport)
   class_<PathValidationReport, PathValidationReportPtr_t,
          bases<ValidationReport> >("PathValidationReport", no_init)
       .def_readwrite("parameter", &PathValidationReport::parameter)
       .def_readwrite("configurationReport",
                      &PathValidationReport::configurationReport);
 
+  // DocClass(CollisionPathValidationReport)
   class_<CollisionPathValidationReport, CollisionPathValidationReportPtr_t,
          bases<CollisionValidationReport> >("CollisionPathValidationReport",
                                             no_init)

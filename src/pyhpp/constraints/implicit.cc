@@ -61,7 +61,7 @@ void exposeImplicit() {
       .def("comparisonType",
            static_cast<const ComparisonTypes_t& (Implicit::*)() const>(
                &Implicit::comparisonType),
-           return_internal_reference<>())
+           return_internal_reference<>(), DocClassMethod(comparisonType))
       .def("comparisonType",
            static_cast<void (Implicit::*)(const ComparisonTypes_t&)>(
                &Implicit::comparisonType))

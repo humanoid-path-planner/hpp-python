@@ -39,6 +39,8 @@
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pyhpp/core/steering-method.hh>
 
+// DocNamespace(hpp::manipulation)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -121,11 +123,12 @@ void Problem::graphSteeringMethod(
 // }
 
 void exposeProblem() {
+  // DocClass(Problem)
   class_<Problem, bases<pyhpp::core::Problem>>("Problem",
                                                init<const PyWDevicePtr_t&>())
       .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
                                             PyWGraphPtr_t)
-      .PYHPP_DEFINE_METHOD(Problem, checkProblem)
+      .def("checkProblem", &Problem::checkProblem, DocClassMethod(checkProblem))
       .def(
           "steeringMethod",
           static_cast<pyhpp::core::PyWSteeringMethodPtr_t (Problem::*)() const>(

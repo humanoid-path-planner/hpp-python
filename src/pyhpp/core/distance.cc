@@ -33,6 +33,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -55,8 +57,11 @@ struct DistanceWrapper {
 };
 
 void exposeDistance() {
+  // DocClass(Distance)
   class_<Distance, DistancePtr_t, boost::noncopyable>("Distance", no_init)
-      .def("compute", &DistanceWrapper::compute);
+      .def("compute", &DistanceWrapper::compute, DocClassMethod(compute));
+
+  // DocClass(WeighedDistance)
   class_<WeighedDistance, bases<Distance>, WeighedDistancePtr_t,
          boost::noncopyable>("WeighedDistance", no_init)
       .def("__init__", make_constructor(&WeighedDistance::create))

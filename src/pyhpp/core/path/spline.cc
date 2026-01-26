@@ -34,6 +34,8 @@
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core::path)
+
 using namespace boost::python;
 
 namespace pyhpp {

@@ -46,6 +46,8 @@
 #include "hpp/manipulation/constraint-set.hh"
 #include "pyhpp/core/problem.hh"
 
+// DocNamespace(hpp::manipulation::graph)
+
 namespace {
 
 const char* DOC_CREATESTATE =
@@ -1236,13 +1238,17 @@ PyObject* getGraphCapsule(const PyWGraph& self) {
 using namespace boost::python;
 
 void exposeGraph() {
+  // DocClass(State)
   class_<PyWState, PyWStatePtr_t>("State", no_init)
-      .def("name", &PyWState::name);
+      .def("name", &PyWState::name, DocClassMethod(name));
 
+  // DocClass(Edge)
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
-      .def("name", &PyWEdge::name)
-      .def("pathValidation", &PyWEdge::pathValidation);
+      .def("name", &PyWEdge::name, DocClassMethod(name))
+      .def("pathValidation", &PyWEdge::pathValidation,
+           DocClassMethod(pathValidation));
 
+  // DocClass(Graph)
   class_<PyWGraph>(
       "Graph",
       init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())

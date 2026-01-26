@@ -35,6 +35,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -73,11 +75,13 @@ struct CCWrapper {
   }
 };
 void exposeConnectedComponent() {
+  // DocClass(ConnectedComponent)
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
       "ConnectedComponent", no_init)
-      .def("nodes", &CCWrapper::nodes)
-      .def("reachableFrom", &CCWrapper::reachableFrom)
-      .def("reachableTo", &CCWrapper::reachableTo)
+      .def("nodes", &CCWrapper::nodes, DocClassMethod(nodes))
+      .def("reachableFrom", &CCWrapper::reachableFrom,
+           DocClassMethod(reachableFrom))
+      .def("reachableTo", &CCWrapper::reachableTo, DocClassMethod(reachableTo))
       .def("__eq__", &CCWrapper::equality);
 }
 }  // namespace core

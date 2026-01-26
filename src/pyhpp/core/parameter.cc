@@ -31,6 +31,8 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -80,6 +82,7 @@ Parameter create(object param) {
 Parameter createBool(bool param) { return Parameter(param); }
 
 void exposeParameter() {
+  // DocClass(Parameter)
   class_<Parameter>("Parameter", no_init)
       .def("create", &create)
       .staticmethod("create")

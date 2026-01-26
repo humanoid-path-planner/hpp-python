@@ -42,6 +42,8 @@
 #include <pyhpp/pinocchio/urdf/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::pinocchio)
+
 // #include <pinocchio/bindings/python/fwd.hpp>
 // #include <pinocchio/bindings/python/multibody/model.hpp>
 
@@ -211,8 +213,9 @@ static boost::python::list getJointsPosition(
 }
 
 void exposeGripper() {
+  // DocClass(Gripper)
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
-      .def("create", &Gripper::create)
+      .def("create", &Gripper::create, DocClassMethod(create))
       .staticmethod("create")
       .add_property("localPosition", &getObjectPositionInJoint)
       .add_property(
@@ -295,30 +298,35 @@ void exposeDevice() {
       .value("COMPUTE_ALL", hpp::pinocchio::COMPUTE_ALL);
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
 
+  // DocClass(Device)
   class_<Device, boost::shared_ptr<Device>, boost::noncopyable>("Device",
                                                                 no_init)
       .def("__init__", make_constructor(&createDevice))
-      .def("name", &Device::name, return_value_policy<return_by_value>())
+      .def("name", &Device::name, return_value_policy<return_by_value>(),
+           DocClassMethod(name))
       .def("configSpace", &Device::configSpace,
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(), DocClassMethod(configSpace))
       .def("model", &Device::model, return_internal_reference<>())
       .def("data", &Device::data, return_internal_reference<>())
       .def("geomData", &Device::geomData, return_internal_reference<>())
       .def("geomModel", &Device::geomModel, return_internal_reference<>())
-      .def("visualModel", &Device::visualModel, return_internal_reference<>())
-      .PYHPP_DEFINE_METHOD(Device, configSize)
-      .PYHPP_DEFINE_METHOD(Device, numberDof)
+      .def("configSize", &Device::configSize, DocClassMethod(configSize))
+      .def("numberDof", &Device::numberDof, DocClassMethod(numberDof))
 
       .def("currentConfiguration",
            static_cast<const Configuration_t& (Device::*)() const>(
                &Device::currentConfiguration),
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(),
+           DocClassMethod(currentConfiguration))
       .def("currentConfiguration", Device_currentConfiguration)
 
-      .def("computeForwardKinematics", cfk)
+      .def("computeForwardKinematics", cfk,
+           DocClassMethod(computeForwardKinematics))
       .def("computeFramesForwardKinematics",
-           &Device::computeFramesForwardKinematics)
-      .def("updateGeometryPlacements", &Device::updateGeometryPlacements)
+           &Device::computeFramesForwardKinematics,
+           DocClassMethod(computeFramesForwardKinematics))
+      .def("updateGeometryPlacements", &Device::updateGeometryPlacements,
+           DocClassMethod(updateGeometryPlacements))
       .add_property("rankInConfiguration", &rankInConfiguration)
       .def("setJointBounds", &setJointBounds)
       .def("getCenterOfMass", &getCenterOfMass)

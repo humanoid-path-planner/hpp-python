@@ -33,6 +33,8 @@
 #include <eigenpy/eigenpy.hpp>
 #include <pyhpp/core/steering-method.hh>
 
+// DocNamespace(hpp::manipulation)
+
 namespace pyhpp {
 namespace manipulation {
 

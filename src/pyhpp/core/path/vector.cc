@@ -34,6 +34,8 @@
 #include <pyhpp/core/path/fwd.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::core)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -42,17 +44,19 @@ namespace path {
 using namespace hpp::core;
 
 void exposeVector() {
+  // DocClass(PathVector)
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
                                                                        no_init)
       .def("create", static_cast<PathVectorPtr_t (*)(size_type, size_type)>(
-                         &PathVector::create))
+                         &PathVector::create),
+           DocClassMethod(create))
       .staticmethod("create")
-      .PYHPP_DEFINE_METHOD(PathVector, numberPaths)
-      .PYHPP_DEFINE_METHOD(PathVector, pathAtRank)
-      .PYHPP_DEFINE_METHOD(PathVector, rankAtParam)
-      .PYHPP_DEFINE_METHOD(PathVector, appendPath)
-      .PYHPP_DEFINE_METHOD(PathVector, concatenate)
-      .PYHPP_DEFINE_METHOD(PathVector, flatten);
+      .def("numberPaths", &PathVector::numberPaths, DocClassMethod(numberPaths))
+      .def("pathAtRank", &PathVector::pathAtRank, DocClassMethod(pathAtRank))
+      .def("rankAtParam", &PathVector::rankAtParam, DocClassMethod(rankAtParam))
+      .def("appendPath", &PathVector::appendPath, DocClassMethod(appendPath))
+      .def("concatenate", &PathVector::concatenate, DocClassMethod(concatenate))
+      .def("flatten", &PathVector::flatten, DocClassMethod(flatten));
 
   class_<PathVectors_t>("Vectors").def(
       vector_indexing_suite<PathVectors_t, true>());

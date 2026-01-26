@@ -36,6 +36,8 @@
 #include <pyhpp/ref.hh>
 #include <pyhpp/util.hh>
 
+// DocNamespace(hpp::pinocchio)
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -154,39 +156,43 @@ struct LgERWrapper {
 };
 
 void exposeLiegroup() {
+  // DocClass(LiegroupSpace)
   class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable>("LiegroupSpace",
                                                                 no_init)
       .def("__str__", &to_str_from_operator<LiegroupSpace>)
-      .def("name", &LiegroupSpace::name, return_value_policy<return_by_value>())
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, Rn)
+      .def("name", &LiegroupSpace::name, return_value_policy<return_by_value>(),
+           DocClassMethod(name))
+      .def("Rn", &LiegroupSpace::Rn, DocClassMethod(Rn))
       .staticmethod("Rn")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, R1)
+      .def("R1", &LiegroupSpace::R1, DocClassMethod(R1))
       .staticmethod("R1")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, R2)
+      .def("R2", &LiegroupSpace::R2, DocClassMethod(R2))
       .staticmethod("R2")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, R3)
+      .def("R3", &LiegroupSpace::R3, DocClassMethod(R3))
       .staticmethod("R3")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, SE2)
+      .def("SE2", &LiegroupSpace::SE2, DocClassMethod(SE2))
       .staticmethod("SE2")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, SE3)
+      .def("SE3", &LiegroupSpace::SE3, DocClassMethod(SE3))
       .staticmethod("SE3")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, R2xSO2)
+      .def("R2xSO2", &LiegroupSpace::R2xSO2, DocClassMethod(R2xSO2))
       .staticmethod("R2xSO2")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, R3xSO3)
+      .def("R3xSO3", &LiegroupSpace::R3xSO3, DocClassMethod(R3xSO3))
       .staticmethod("R3xSO3")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, empty)
+      .def("empty", &LiegroupSpace::empty, DocClassMethod(empty))
       .staticmethod("empty")
-      .PYHPP_DEFINE_METHOD(LiegroupSpace, mergeVectorSpaces)
-      .PYHPP_DEFINE_METHOD(LgSWrapper, dIntegrate_dq)
-      .PYHPP_DEFINE_METHOD(LgSWrapper, dIntegrate_dv)
-      .PYHPP_DEFINE_METHOD(LgSWrapper, dDifference_dq0)
-      .PYHPP_DEFINE_METHOD(LgSWrapper, dDifference_dq1)
+      .def("mergeVectorSpaces", &LiegroupSpace::mergeVectorSpaces,
+           DocClassMethod(mergeVectorSpaces))
+      .def("dIntegrate_dq", &LgSWrapper::dIntegrate_dq)
+      .def("dIntegrate_dv", &LgSWrapper::dIntegrate_dv)
+      .def("dDifference_dq0", &LgSWrapper::dDifference_dq0)
+      .def("dDifference_dq1", &LgSWrapper::dDifference_dq1)
       .def(self == self)
       .def(self != self)
       // Operation on shared pointers...
       .def("__imul__", &LgSWrapper::itimes)
       .def("__mul__", &LgSWrapper::times);
 
+  // DocClass(LiegroupElement)
   class_<LiegroupElement>("LiegroupElement",
                           init<const vector_t&, const LiegroupSpacePtr_t&>())
       .def(init<const LiegroupSpacePtr_t&>())
@@ -199,12 +205,13 @@ void exposeLiegroup() {
       .def("vector",
            static_cast<const vector_t& (LiegroupElement::*)() const>(
                &LiegroupElement::vector),
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(), DocClassMethod(vector))
       .def("space", &LiegroupElement::space,
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(), DocClassMethod(space))
       .def(self - self)
       .def(self + vector_t());
 
+  // DocClass(LiegroupElementRef)
   class_<LiegroupElementRef>("LiegroupElementRef",
                              init<vectorOut_t, LiegroupSpacePtr_t&>())
       // Pythonic API
@@ -216,9 +223,9 @@ void exposeLiegroup() {
       .def("vector",
            static_cast<const vectorOut_t& (LiegroupElementRef::*)() const>(
                &LiegroupElementRef::vector),
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(), DocClassMethod(vector))
       .def("space", &LiegroupElementRef::space,
-           return_value_policy<return_by_value>())
+           return_value_policy<return_by_value>(), DocClassMethod(space))
       .def(self - self)
       .def(self + vector_t());
 }

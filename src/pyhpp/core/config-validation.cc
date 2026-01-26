@@ -69,7 +69,7 @@ void exposeConfigValidation() {
       .PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
       .PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
                             DocClassMethod(numberConfigValidations))
-      .PYHPP_DEFINE_METHOD2(ConfigValidations, clear, DocClassMethod(clear));
+      .def("clear", &ConfigValidations::clear);
 }
 }  // namespace core
 }  // namespace pyhpp
