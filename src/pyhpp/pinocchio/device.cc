@@ -312,6 +312,7 @@ void exposeDevice() {
       .def("geomModel", &Device::geomModel, return_internal_reference<>())
       .def("configSize", &Device::configSize, DocClassMethod(configSize))
       .def("numberDof", &Device::numberDof, DocClassMethod(numberDof))
+      .def("visualModel", &Device::visualModel, return_internal_reference<>())
 
       .def("currentConfiguration",
            static_cast<const Configuration_t& (Device::*)() const>(
