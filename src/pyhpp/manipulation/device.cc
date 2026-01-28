@@ -56,12 +56,6 @@ std::map<std::string, GripperPtr_t> Device::grippers() {
       ->grippers.map;
 }
 
-PinDevicePtr_t Device::asPinDevice() {
-  hpp::pinocchio::DevicePtr_t pinDevice =
-      std::dynamic_pointer_cast<hpp::pinocchio::Device>(obj);
-  return pinDevice;
-}
-
 void Device::setJointBounds(const char* jointName,
                             boost::python::list py_jointBounds) {
   Frame frame = obj->getFrameByName(jointName);
@@ -172,6 +166,14 @@ void exposeHandle() {
       .def(boost::python::map_indexing_suite<std::map<std::string, HandlePtr_t>,
                                              true>());
 }
+object asPinDevice(object self) {
+  PyErr_WarnEx(PyExc_DeprecationWarning,
+               "asPinDevice() is deprecated: manipulation.Device already "
+               "inherits from pinocchio.Device, use the object directly",
+               1);
+  return self;
+}
+
 void exposeDevice() {
   // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
@@ -179,7 +181,7 @@ void exposeDevice() {
       .def("setRobotRootPosition", &Device::setRobotRootPosition)
       .def("handles", &Device::handles)
       .def("grippers", &Device::grippers)
-      .def("asPinDevice", &Device::asPinDevice)
+      .def("asPinDevice", &asPinDevice)
       .def("getJointNames", &Device::getJointNames)
       .def("getJointConfig", &Device::getJointConfig)
       .def("setJointBounds", &Device::setJointBounds);
