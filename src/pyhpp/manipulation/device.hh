@@ -80,7 +80,6 @@ struct Device : public pyhpp::pinocchio::Device {
                             const Transform3s& positionWRTParentJoint);
   std::map<std::string, HandlePtr_t> handles();
   std::map<std::string, GripperPtr_t> grippers();
-  PinDevicePtr_t asPinDevice();
   boost::python::list getJointConfig(const char* jointName);
   boost::python::list getJointNames();
   void setJointBounds(const char* jointName, boost::python::list jointBounds);
