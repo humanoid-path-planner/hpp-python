@@ -227,6 +227,7 @@ struct PyWGraph {
   // Initialization
   void initialize();
 };
+typedef std::shared_ptr<PyWGraph> PyWGraphPtr_t;
 
 }  // namespace manipulation
 }  // namespace pyhpp

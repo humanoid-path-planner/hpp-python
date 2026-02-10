@@ -1249,7 +1249,7 @@ void exposeGraph() {
            DocClassMethod(pathValidation));
 
   // DocClass(Graph)
-  class_<PyWGraph>(
+  class_<PyWGraph, PyWGraphPtr_t>(
       "Graph",
       init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())
 
