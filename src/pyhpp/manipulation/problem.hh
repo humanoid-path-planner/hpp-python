@@ -49,6 +49,7 @@ namespace manipulation {
 // Wrapper class for hpp::manipulation::Problem
 struct Problem : public pyhpp::core::Problem {
   hpp::core::Container<JointAndShapes_t> jointAndShapes;
+  PyWGraphPtr_t graph_;
 
   Problem(const PyWDevicePtr_t& robot);
   Problem(const hpp::manipulation::ProblemPtr_t& object);

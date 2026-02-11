@@ -55,12 +55,11 @@ Problem::Problem(const hpp::manipulation::ProblemPtr_t& object)
 
 void Problem::constraintGraph(const PyWGraphPtr_t& graph) {
   asManipulationProblem()->constraintGraph(graph->obj);
+  graph_ = graph;
 }
 
 PyWGraphPtr_t Problem::constraintGraph() const {
-  pyhpp::manipulation::PyWGraph* graph =
-      new PyWGraph(asManipulationProblem()->constraintGraph());
-  return std::shared_ptr<PyWGraph>(graph);
+  return graph_;
 }
 
 void Problem::checkProblem() const { asManipulationProblem()->checkProblem(); }
