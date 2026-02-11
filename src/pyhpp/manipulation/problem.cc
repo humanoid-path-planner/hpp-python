@@ -58,9 +58,7 @@ void Problem::constraintGraph(const PyWGraphPtr_t& graph) {
   graph_ = graph;
 }
 
-PyWGraphPtr_t Problem::constraintGraph() const {
-  return graph_;
-}
+PyWGraphPtr_t Problem::constraintGraph() const { return graph_; }
 
 void Problem::checkProblem() const { asManipulationProblem()->checkProblem(); }
 
