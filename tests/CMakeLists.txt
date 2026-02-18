@@ -13,21 +13,6 @@
 # License along with hpp-python  If not, see <http://www.gnu.org/licenses/>.
 
 # =============================================================================
-# Existing Python unit tests (run as simple scripts)
-# =============================================================================
-
-foreach(UNIT_TEST ${PYTHON_UNIT_TESTS})
-  add_python_unit_test(${UNIT_TEST} tests/${UNIT_TEST}.py src)
-endforeach()
-
-set_tests_properties(
-  ${PYTHON_UNIT_TESTS}
-  PROPERTIES
-    ENVIRONMENT_MODIFICATION
-    "ROS_PACKAGE_PATH=path_list_prepend:${example-robot-data_INCLUDE_DIRS}/../share;ROS_PACKAGE_PATH=path_list_prepend:${hpp-environments_INCLUDE_DIRS}/../share;"
-)
-
-# =============================================================================
 # unittest-based unit tests (uses Python's built-in unittest framework)
 # =============================================================================
 
