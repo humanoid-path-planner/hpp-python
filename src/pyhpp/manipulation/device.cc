@@ -86,8 +86,7 @@ void Device::setJointBounds(const char* jointName,
 }
 
 boost::python::list Device::contactSurfaceNames() {
-  auto manipDevice =
-      std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
+  auto manipDevice = std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
   boost::python::list result;
   for (const auto& entry : manipDevice->jointAndShapes.map) {
     result.append(entry.first);
@@ -96,8 +95,7 @@ boost::python::list Device::contactSurfaceNames() {
 }
 
 boost::python::dict Device::contactSurfaces() {
-  auto manipDevice =
-      std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
+  auto manipDevice = std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
   boost::python::dict result;
 
   for (const auto& entry : manipDevice->jointAndShapes.map) {
@@ -108,8 +106,7 @@ boost::python::dict Device::contactSurfaces() {
     for (const auto& jas : jointAndShapes) {
       boost::python::dict surfaceDict;
       // jas.first is JointPtr_t, jas.second is Shape_t (vector<vector3_t>)
-      std::string jointName =
-          jas.first ? jas.first->name() : "universe";
+      std::string jointName = jas.first ? jas.first->name() : "universe";
       surfaceDict["joint"] = jointName;
 
       boost::python::list points;
