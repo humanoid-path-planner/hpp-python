@@ -83,6 +83,8 @@ struct Device : public pyhpp::pinocchio::Device {
   boost::python::list getJointConfig(const char* jointName);
   boost::python::list getJointNames();
   void setJointBounds(const char* jointName, boost::python::list jointBounds);
+  boost::python::list contactSurfaceNames();
+  boost::python::dict contactSurfaces();
 };  // struct Device
 }  // namespace manipulation
 }  // namespace pyhpp
