@@ -84,6 +84,49 @@ void Device::setJointBounds(const char* jointName,
     joint->upperBound(i, vMax);  // Set upper bound for DOF i
   }
 }
+
+boost::python::list Device::contactSurfaceNames() {
+  auto manipDevice =
+      std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
+  boost::python::list result;
+  for (const auto& entry : manipDevice->jointAndShapes.map) {
+    result.append(entry.first);
+  }
+  return result;
+}
+
+boost::python::dict Device::contactSurfaces() {
+  auto manipDevice =
+      std::dynamic_pointer_cast<hpp::manipulation::Device>(obj);
+  boost::python::dict result;
+
+  for (const auto& entry : manipDevice->jointAndShapes.map) {
+    const std::string& name = entry.first;
+    const auto& jointAndShapes = entry.second;
+    boost::python::list surfacesList;
+
+    for (const auto& jas : jointAndShapes) {
+      boost::python::dict surfaceDict;
+      // jas.first is JointPtr_t, jas.second is Shape_t (vector<vector3_t>)
+      std::string jointName =
+          jas.first ? jas.first->name() : "universe";
+      surfaceDict["joint"] = jointName;
+
+      boost::python::list points;
+      for (const auto& pt : jas.second) {
+        boost::python::list point;
+        point.append(pt[0]);
+        point.append(pt[1]);
+        point.append(pt[2]);
+        points.append(point);
+      }
+      surfaceDict["points"] = points;
+      surfacesList.append(surfaceDict);
+    }
+    result[name] = surfacesList;
+  }
+  return result;
+}
 boost::python::list Device::getJointConfig(const char* jointName) {
   try {
     Frame frame = obj->getFrameByName(jointName);
@@ -184,7 +227,11 @@ void exposeDevice() {
       .def("asPinDevice", &asPinDevice)
       .def("getJointNames", &Device::getJointNames)
       .def("getJointConfig", &Device::getJointConfig)
-      .def("setJointBounds", &Device::setJointBounds);
+      .def("setJointBounds", &Device::setJointBounds)
+      .def("contactSurfaceNames", &Device::contactSurfaceNames,
+           "Return list of contact surface names registered on device")
+      .def("contactSurfaces", &Device::contactSurfaces,
+           "Return dict mapping surface names to list of {joint, points}");
 }
 }  // namespace manipulation
 }  // namespace pyhpp
