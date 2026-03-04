@@ -54,6 +54,8 @@ typedef hpp::pinocchio::LiegroupSpacePtr_t LiegroupSpacePtr_t;
 typedef hpp::pinocchio::GeomModel GeomModel;
 typedef hpp::pinocchio::Configuration_t Configuration_t;
 typedef hpp::pinocchio::ConfigurationIn_t ConfigurationIn_t;
+typedef hpp::pinocchio::vector_t vector_t;
+typedef hpp::pinocchio::vector3_t vector3_t;
 typedef hpp::pinocchio::size_type size_type;
 typedef hpp::pinocchio::value_type value_type;
 typedef hpp::pinocchio::Transform3s Transform3s;
@@ -65,6 +67,7 @@ typedef hpp::manipulation::Handle Handle;
 typedef hpp::manipulation::DevicePtr_t DevicePtr_t;
 typedef hpp::pinocchio::DevicePtr_t PinDevicePtr_t;
 typedef hpp::pinocchio::Frame Frame;
+typedef hpp::pinocchio::FrameIndex FrameIndex;
 typedef hpp::pinocchio::Joint Joint;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
@@ -85,6 +88,10 @@ struct Device : public pyhpp::pinocchio::Device {
   void setJointBounds(const char* jointName, boost::python::list jointBounds);
   boost::python::list contactSurfaceNames();
   boost::python::dict contactSurfaces();
+  void addHandle(const std::string& linkName, const std::string& handleName,
+                 const Transform3s& pose, value_type clearance, const std::vector<bool>& mask);
+  void addGripper(const std::string& linkName, const std::string& gripperName,
+                  const Transform3s& pose, value_type clearance);
 };  // struct Device
 }  // namespace manipulation
 }  // namespace pyhpp

@@ -59,6 +59,7 @@ namespace pyhpp {
 namespace pinocchio {
 
 namespace bp = boost::python;
+typedef hpp::pinocchio::DevicePtr_t DevicePtr_t;
 typedef hpp::pinocchio::GripperPtr_t GripperPtr_t;
 typedef hpp::pinocchio::Gripper Gripper;
 typedef hpp::pinocchio::FrameIndex FrameIndex;
@@ -215,8 +216,6 @@ static boost::python::list getJointsPosition(
 void exposeGripper() {
   // DocClass(Gripper)
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
-      .def("create", &Gripper::create, DocClassMethod(create))
-      .staticmethod("create")
       .add_property("localPosition", &getObjectPositionInJoint)
       .add_property(
           "clearance",
