@@ -332,7 +332,8 @@ void exposeDevice() {
       .def("setJointBounds", &setJointBounds)
       .def("getCenterOfMass", &getCenterOfMass)
       .def("getJointPosition", &getJointPosition)
-      .def("getJointsPosition", &getJointsPosition);
+      .def("getJointsPosition", &getJointsPosition)
+      .def("removeJoints", &Device::removeJoints);
   register_device_converters();
 }
 }  // namespace pinocchio
