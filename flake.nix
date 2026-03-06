@@ -20,7 +20,7 @@
         imports = [
           inputs.gepetto.flakeModule
           {
-            gazebros2nix.overrides.hpp-python = _final: {
+            gazebros2nix.pyOverrides.hpp-python = _final: _python-final: {
               src = lib.fileset.toSource {
                 root = ./.;
                 fileset = lib.fileset.unions [
