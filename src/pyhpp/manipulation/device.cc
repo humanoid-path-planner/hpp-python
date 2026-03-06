@@ -256,6 +256,12 @@ void setApproachingDirection(const HandlePtr_t& handle, const vector3_t& dir) {
   handle->approachingDirection(dir);
 }
 
+static JointIndex getParentJointId(const HandlePtr_t& handle) {
+  assert(handle->robot());
+  Model model(handle->robot()->model());
+  return model.frames[model.getFrameId(handle->name())].parentJoint;
+}
+
 void exposeHandle() {
   // DocClass(Handle)
   class_<Handle, HandlePtr_t>("Handle", no_init)
@@ -270,6 +276,8 @@ void exposeHandle() {
           static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance))
       .add_property("approachingDirection", &getApproachingDirection, &setApproachingDirection)
       .def("createGrasp", &Handle::createGrasp, DocClassMethod(createGrasp))
+      .def("getParentJointId", &getParentJointId, "Get index of the joint the handle is attached to"
+         " in pinocchio Model")
       .def("createPreGrasp", &Handle::createPreGrasp,
            DocClassMethod(createPreGrasp))
       .def("createGraspComplement", &Handle::createGraspComplement,

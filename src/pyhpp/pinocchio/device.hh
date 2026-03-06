@@ -21,6 +21,7 @@ typedef hpp::pinocchio::LiegroupSpacePtr_t LiegroupSpacePtr_t;
 typedef hpp::pinocchio::GeomModel GeomModel;
 typedef hpp::pinocchio::Configuration_t Configuration_t;
 typedef hpp::pinocchio::ConfigurationIn_t ConfigurationIn_t;
+typedef hpp::pinocchio::JointIndex JointIndex;
 typedef hpp::pinocchio::size_type size_type;
 typedef hpp::pinocchio::Transform3s Transform3s;
 typedef hpp::pinocchio::DevicePtr_t DevicePtr_t;
