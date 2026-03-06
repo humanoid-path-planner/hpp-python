@@ -20,19 +20,24 @@
         imports = [
           inputs.gepetto.flakeModule
           {
-            gazebros2nix.pyOverrides.hpp-python = _final: _python-final: {
-              src = lib.fileset.toSource {
-                root = ./.;
-                fileset = lib.fileset.unions [
-                  ./CMakeLists.txt
-                  ./doc
-                  ./include
-                  ./package.xml
-                  ./src
-                  ./tests
+            gazebros2nix.pyOverrides.hpp-python =
+              _final: python-final:
+              (super: {
+                propagatedBuildInputs = super.propagatedBuildInputs ++ [
+                  python-final.lxml
                 ];
-              };
-            };
+                src = lib.fileset.toSource {
+                  root = ./.;
+                  fileset = lib.fileset.unions [
+                    ./CMakeLists.txt
+                    ./doc
+                    ./include
+                    ./package.xml
+                    ./src
+                    ./tests
+                  ];
+                };
+              });
           }
         ];
       }
