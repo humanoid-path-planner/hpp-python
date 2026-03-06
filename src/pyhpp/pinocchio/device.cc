@@ -213,6 +213,15 @@ static boost::python::list getJointsPosition(
   }
 }
 
+static std::string getGripperName(const GripperPtr_t& gripper) { return gripper->name(); }
+
+static JointIndex getParentJointId(const GripperPtr_t& gripper) {
+  assert(gripper->joint());
+  assert(gripper->joint()->robot());
+  Model model(gripper->joint()->robot()->model());
+  return model.frames[model.getFrameId(gripper->name())].parentJoint;
+}
+
 void exposeGripper() {
   // DocClass(Gripper)
   class_<Gripper, GripperPtr_t>("Gripper", no_init)
@@ -221,7 +230,10 @@ void exposeGripper() {
           "clearance",
           static_cast<value_type (Gripper::*)() const>(&Gripper::clearance),
           static_cast<void (Gripper::*)(const value_type&)>(
-              &Gripper::clearance));
+              &Gripper::clearance))
+      .def("name", &getGripperName)
+      .def("getParentJointId", &getParentJointId, "Get index of the joint the handle is attached to"
+           " in pinocchio Model");
   class_<std::map<std::string, GripperPtr_t> >("GripperMap")
       .def(
           boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,

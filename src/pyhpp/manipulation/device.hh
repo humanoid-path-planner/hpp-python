@@ -69,6 +69,7 @@ typedef hpp::pinocchio::DevicePtr_t PinDevicePtr_t;
 typedef hpp::pinocchio::Frame Frame;
 typedef hpp::pinocchio::FrameIndex FrameIndex;
 typedef hpp::pinocchio::Joint Joint;
+typedef hpp::pinocchio::JointIndex JointIndex;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
 // Wrapper class to hpp::manipulation::Device
