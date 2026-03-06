@@ -106,7 +106,7 @@ add_project_dependency(hpp-manipulation-urdf REQUIRED)
 if(BUILD_TESTING)
   find_package(example-robot-data REQUIRED)
   find_package(hpp-environments REQUIRED)
-  find_package(hpp_tutorial REQUIRED)
+  # find_package(hpp_tutorial REQUIRED) TODO: dependency loop ?
 endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
