@@ -56,7 +56,9 @@ struct Device {
   }
   void updateGeometryPlacements() { obj->updateGeometryPlacements(); }
   void removeJoints(const std::vector<std::string>& jointNames,
-                    Configuration_t q) { obj->removeJoints(jointNames, q); }
+                    Configuration_t q) {
+    obj->removeJoints(jointNames, q);
+  }
   hpp::manipulation::DevicePtr_t asManipulationDevice() const {
     auto manipDevice = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, obj);
     if (!manipDevice) {

@@ -90,7 +90,8 @@ struct Device : public pyhpp::pinocchio::Device {
   boost::python::list contactSurfaceNames();
   boost::python::dict contactSurfaces();
   void addHandle(const std::string& linkName, const std::string& handleName,
-                 const Transform3s& pose, value_type clearance, const std::vector<bool>& mask);
+                 const Transform3s& pose, value_type clearance,
+                 const std::vector<bool>& mask);
   void addGripper(const std::string& linkName, const std::string& gripperName,
                   const Transform3s& pose, value_type clearance);
 };  // struct Device

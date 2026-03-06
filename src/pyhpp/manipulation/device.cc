@@ -125,20 +125,23 @@ boost::python::dict Device::contactSurfaces() {
   return result;
 }
 
-void Device::addHandle(const std::string& linkName, const std::string& handleName,
-                       const Transform3s& pose, value_type clearance, const std::vector<bool>& mask){
-  hpp::manipulation::DevicePtr_t robot = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, this->obj);
+void Device::addHandle(const std::string& linkName,
+                       const std::string& handleName, const Transform3s& pose,
+                       value_type clearance, const std::vector<bool>& mask) {
+  hpp::manipulation::DevicePtr_t robot =
+      HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, this->obj);
   if (!robot) {
-    throw std::logic_error("Device.addHandle expects a manipulation device (imported from pyhpp."
-                           "manipulation)");
+    throw std::logic_error(
+        "Device.addHandle expects a manipulation device (imported from pyhpp."
+        "manipulation)");
   }
-  if (mask.size () != 6) {
+  if (mask.size() != 6) {
     throw std::logic_error("mask should be of size 6");
   }
   JointPtr_t joint = robot->getJointByBodyName(linkName);
 
   const ::pinocchio::Frame& linkFrame =
-    robot->model().frames[robot->model().getFrameId(std::string(linkName))];
+      robot->model().frames[robot->model().getFrameId(std::string(linkName))];
   assert(linkFrame.type == ::pinocchio::BODY);
 
   hpp::pinocchio::JointIndex index(0);
@@ -148,7 +151,7 @@ void Device::addHandle(const std::string& linkName, const std::string& handleNam
     jointName = joint->name();
   }
   HandlePtr_t handle =
-    Handle::create(handleName, linkFrame.placement * pose, robot, joint);
+      Handle::create(handleName, linkFrame.placement * pose, robot, joint);
   handle->clearance(clearance);
   handle->mask(mask);
   robot->handles.add(handleName, handle);
@@ -161,17 +164,20 @@ void Device::addHandle(const std::string& linkName, const std::string& handleNam
   robot->createData();
 }
 
-void Device::addGripper(const std::string& linkName, const std::string& gripperName,
-                        const Transform3s& pose, value_type clearance) {
-  hpp::manipulation::DevicePtr_t robot = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, this->obj);
+void Device::addGripper(const std::string& linkName,
+                        const std::string& gripperName, const Transform3s& pose,
+                        value_type clearance) {
+  hpp::manipulation::DevicePtr_t robot =
+      HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Device, this->obj);
   if (!robot) {
-    throw std::logic_error("Device.addHandle expects a manipulation device (imported from pyhpp."
-                           "manipulation)");
+    throw std::logic_error(
+        "Device.addHandle expects a manipulation device (imported from pyhpp."
+        "manipulation)");
   }
   JointPtr_t joint = robot->getJointByBodyName(linkName);
 
   const ::pinocchio::Frame& linkFrame =
-    robot->model().frames[robot->model().getFrameId(std::string(linkName))];
+      robot->model().frames[robot->model().getFrameId(std::string(linkName))];
   assert(linkFrame.type == ::pinocchio::BODY);
 
   hpp::pinocchio::JointIndex index(0);
@@ -183,7 +189,8 @@ void Device::addGripper(const std::string& linkName, const std::string& gripperN
   assert(robot->model().existFrame(jointName));
   FrameIndex previousFrame(robot->model().getFrameId(jointName));
   robot->model().addFrame(::pinocchio::Frame(gripperName, index, previousFrame,
-      linkFrame.placement * pose, ::pinocchio::OP_FRAME));
+                                             linkFrame.placement * pose,
+                                             ::pinocchio::OP_FRAME));
   // Recreate pinocchio data after modifying model
   robot->createData();
   GripperPtr_t gripper = Gripper::create(gripperName, robot);
@@ -274,10 +281,12 @@ void exposeHandle() {
           "clearance",
           static_cast<value_type (Handle::*)() const>(&Handle::clearance),
           static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance))
-      .add_property("approachingDirection", &getApproachingDirection, &setApproachingDirection)
+      .add_property("approachingDirection", &getApproachingDirection,
+                    &setApproachingDirection)
       .def("createGrasp", &Handle::createGrasp, DocClassMethod(createGrasp))
-      .def("getParentJointId", &getParentJointId, "Get index of the joint the handle is attached to"
-         " in pinocchio Model")
+      .def("getParentJointId", &getParentJointId,
+           "Get index of the joint the handle is attached to"
+           " in pinocchio Model")
       .def("createPreGrasp", &Handle::createPreGrasp,
            DocClassMethod(createPreGrasp))
       .def("createGraspComplement", &Handle::createGraspComplement,
@@ -317,16 +326,19 @@ void exposeDevice() {
            "    linkName: name of the link the handle is attached to,\n"
            "    handleName: name of the handle,\n"
            "    pose: pose of the handle in the link frame (SE3),\n"
-           "    clearance: clearance of the handle, the sum of handle and gripper clearances\n"
+           "    clearance: clearance of the handle, the sum of handle and "
+           "gripper clearances\n"
            "               defines the distance between pregrasp and grasp,\n"
-           "    mask: list of 6 Boolean use to define symmetries in the grasp constraint.")
+           "    mask: list of 6 Boolean use to define symmetries in the grasp "
+           "constraint.")
       .def("addGripper", &Device::addGripper,
            "Add a gripper to the kinematic chain\n\n"
            "  input\n"
            "    linkName: name of the link the handle is attached to,\n"
            "    gripperName: name of the gripper,\n"
            "    pose: pose of the gripper in the link frame (SE3),\n"
-           "    clearance: clearance of the gripper, the sum of handle and gripper clearances\n"
+           "    clearance: clearance of the gripper, the sum of handle and "
+           "gripper clearances\n"
            "               defines the distance between pregrasp and grasp.");
 }
 }  // namespace manipulation
