@@ -79,7 +79,7 @@ add_python_library(
   pyhpp/pinocchio/liegroup.cc
   pyhpp/pinocchio/bindings.cc
   LINK_LIBRARIES
-  hpp-pinocchio::hpp-pinocchio)
+  hpp-manipulation::hpp-manipulation)
 
 add_python_library(
   pyhpp/pinocchio/urdf FILES pyhpp/pinocchio/urdf/util.cc
@@ -123,7 +123,7 @@ add_python_library(
   pyhpp/core/problem.cc
   pyhpp/core/bindings.cc
   LINK_LIBRARIES
-  hpp-core::hpp-core)
+  hpp-manipulation::hpp-manipulation)
 
 add_python_library(
   pyhpp/core/problem_target FILES
