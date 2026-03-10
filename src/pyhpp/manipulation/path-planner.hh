@@ -61,6 +61,7 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
   PathVectorPtr_t optimizePath(const PathPtr_t& path);
   PathVectorPtr_t timeParameterization(const PathVectorPtr_t& path);
   void setEdge(const PyWEdge& transition);
+  void setTransition(const PyWEdge& transition);
   void setReedsAndSheppSteeringMethod(double turningRadius);
   void pathProjector(const PathProjectorPtr_t pathProjector);
   void clearPathOptimizers();
