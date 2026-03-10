@@ -158,8 +158,9 @@ PathVectorPtr_t TransitionPlanner::timeParameterization(
 void TransitionPlanner::setEdge(const PyWEdge& transition) {
   trObj()->setEdge(transition.obj);
   boost::python::object warnings = boost::python::import("warnings");
-  warnings.attr("warn")("pyhpp.manipulation.TransitionPlanner.setEdge is deprecated. "
-                        "Use setTransition instead.");
+  warnings.attr("warn")(
+      "pyhpp.manipulation.TransitionPlanner.setEdge is deprecated. "
+      "Use setTransition instead.");
 }
 
 void TransitionPlanner::setTransition(const PyWEdge& transition) {
@@ -256,8 +257,10 @@ void exposePathPlanners() {
            DocClassMethod(optimizePath))
       .def("timeParameterization", &TransitionPlanner::timeParameterization,
            DocClassMethod(timeParameterization))
-      .def("setEdge", &TransitionPlanner::setEdge, DocClassMethod(setEdge)) // deprecated
-      .def("setTransition", &TransitionPlanner::setTransition, DocClassMethod(setEdge))
+      .def("setEdge", &TransitionPlanner::setEdge,
+           DocClassMethod(setEdge))  // deprecated
+      .def("setTransition", &TransitionPlanner::setTransition,
+           DocClassMethod(setEdge))
       .def("setReedsAndSheppSteeringMethod",
            &TransitionPlanner::setReedsAndSheppSteeringMethod,
            DocClassMethod(setReedsAndSheppSteeringMethod))
