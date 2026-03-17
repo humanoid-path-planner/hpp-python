@@ -44,14 +44,20 @@ else()
   endif()
 endif()
 
-include("${JRL_CMAKE_MODULES}/base.cmake")
-include("${JRL_CMAKE_MODULES}/python.cmake")
+include("${JRL_CMAKE_MODULES}/hpp.cmake")
 include("${JRL_CMAKE_MODULES}/boost.cmake")
+include("${JRL_CMAKE_MODULES}/apple.cmake")
+include("${JRL_CMAKE_MODULES}/python.cmake")
 include("${JRL_CMAKE_MODULES}/test.cmake")
 
 compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 check_minimal_cxx_standard(11 REQUIRED)
+
+# Handle APPLE Cmake policy
+if(APPLE)
+  apply_default_apple_configuration()
+endif(APPLE)
 
 # Activate hpp-util logging if requested
 set(HPP_DEBUG
@@ -91,17 +97,17 @@ set(${PROJECT_NAME}_HEADERS
     include/pyhpp/vector-indexing-suite.hh)
 
 set(PYTHON_COMPONENTS Interpreter Development NumPy)
-findpython()
-search_for_boost_python()
 
-add_project_dependency(eigenpy REQUIRED)
-add_project_dependency(pinocchio REQUIRED)
 add_project_dependency(hpp-util REQUIRED)
 add_project_dependency(hpp-pinocchio REQUIRED)
 add_project_dependency(hpp-constraints REQUIRED)
 add_project_dependency(hpp-core REQUIRED)
 add_project_dependency(hpp-manipulation REQUIRED)
 add_project_dependency(hpp-manipulation-urdf REQUIRED)
+add_project_dependency(eigenpy REQUIRED)
+add_project_dependency(pinocchio REQUIRED)
+findpython()
+search_for_boost_python()
 
 if(BUILD_TESTING)
   find_package(example-robot-data REQUIRED)
