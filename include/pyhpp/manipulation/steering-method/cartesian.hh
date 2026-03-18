@@ -37,37 +37,38 @@ namespace pyhpp {
 namespace manipulation {
 namespace steeringMethod {
 
-  typedef hpp::constraints::Configuration_t Configuration_t;
-  typedef hpp::constraints::DifferentiableFunctionPtr_t DifferentiableFunctionPtr_t;
-  typedef hpp::constraints::interval_t interval_t;
-  typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
-  typedef hpp::constraints::size_type size_type;
-  typedef hpp::constraints::value_type value_type;
-  typedef hpp::core::PathPtr_t PathPtr_t;
+typedef hpp::constraints::Configuration_t Configuration_t;
+typedef hpp::constraints::DifferentiableFunctionPtr_t
+    DifferentiableFunctionPtr_t;
+typedef hpp::constraints::interval_t interval_t;
+typedef hpp::constraints::ImplicitPtr_t ImplicitPtr_t;
+typedef hpp::constraints::size_type size_type;
+typedef hpp::constraints::value_type value_type;
+typedef hpp::core::PathPtr_t PathPtr_t;
 
-  class Cartesian {
-  public:
-    hpp::manipulation::steeringMethod::CartesianPtr_t obj;
-    Cartesian(const pyhpp::core::Problem& problem);
-    void setMaxIterations(size_type iterations);
-    size_type getMaxIterations() const;
-    void setErrorThreshold(value_type threshold);
-    value_type getErrorThreshold() const;
-    void setTrajectoryConstraint(const ImplicitPtr_t& ic);
-    ImplicitPtr_t getTrajectoryConstraint();
-    void setRightHandSide1(const PathPtr_t& rhs, bool se3Output);
-    void setRightHandSide2(const DifferentiableFunctionPtr_t& rhs,
-			   const interval_t& timeRange);
-    DifferentiableFunctionPtr_t getRightHandSide() const;
-    interval_t getTimeRange() const;
-    size_type getNDiscreteSteps() const;
-    void setNDiscreteSteps(size_type n);
-    boost::python::tuple planPath(const Configuration_t& q_init);
-  };
+class Cartesian {
+ public:
+  hpp::manipulation::steeringMethod::CartesianPtr_t obj;
+  Cartesian(const pyhpp::core::Problem& problem);
+  void setMaxIterations(size_type iterations);
+  size_type getMaxIterations() const;
+  void setErrorThreshold(value_type threshold);
+  value_type getErrorThreshold() const;
+  void setTrajectoryConstraint(const ImplicitPtr_t& ic);
+  ImplicitPtr_t getTrajectoryConstraint();
+  void setRightHandSide1(const PathPtr_t& rhs, bool se3Output);
+  void setRightHandSide2(const DifferentiableFunctionPtr_t& rhs,
+                         const interval_t& timeRange);
+  DifferentiableFunctionPtr_t getRightHandSide() const;
+  interval_t getTimeRange() const;
+  size_type getNDiscreteSteps() const;
+  void setNDiscreteSteps(size_type n);
+  boost::python::tuple planPath(const Configuration_t& q_init);
+};
 
-  void exposeCartesian();
+void exposeCartesian();
+}  // namespace steeringMethod
 }  // namespace manipulation
 }  // namespace pyhpp
-} // namespace steeringMethod
 
 #endif
