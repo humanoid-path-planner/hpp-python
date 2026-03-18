@@ -158,6 +158,56 @@
         "type": "github"
       }
     },
+    "hpp-manipulation": {
+      "inputs": {
+        "flake-parts": [
+          "hpp-manipulation",
+          "gepetto",
+          "flake-parts"
+        ],
+        "gazebros2nix": [
+          "hpp-manipulation",
+          "gepetto",
+          "gazebros2nix"
+        ],
+        "gepetto": [
+          "gepetto"
+        ],
+        "nix-ros-overlay": [
+          "hpp-manipulation",
+          "gepetto",
+          "nix-ros-overlay"
+        ],
+        "nixpkgs": [
+          "hpp-manipulation",
+          "gepetto",
+          "nixpkgs"
+        ],
+        "systems": [
+          "hpp-manipulation",
+          "gepetto",
+          "systems"
+        ],
+        "treefmt-nix": [
+          "hpp-manipulation",
+          "gepetto",
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773846451,
+        "narHash": "sha256-J3t/rLFMEWvlRFByGKbBGzH/dopFA1bq9T3Vlyyell8=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-manipulation",
+        "rev": "e413c6f7e3e3315c403424ab9a2520d7868d1dc6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-manipulation",
+        "type": "github"
+      }
+    },
     "nix-ros-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -295,6 +345,7 @@
           "gazebros2nix"
         ],
         "gepetto": "gepetto",
+        "hpp-manipulation": "hpp-manipulation",
         "nix-ros-overlay": [
           "gepetto",
           "nix-ros-overlay"

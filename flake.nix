@@ -9,6 +9,10 @@
     nix-ros-overlay.follows = "gepetto/nix-ros-overlay";
     systems.follows = "gepetto/systems";
     treefmt-nix.follows = "gepetto/treefmt-nix";
+
+    # https://github.com/humanoid-path-planner/hpp-manipulation/pull/262
+    hpp-manipulation.url = "github:humanoid-path-planner/hpp-manipulation";
+    hpp-manipulation.inputs.gepetto.follows = "gepetto";
   };
 
   outputs =
@@ -20,24 +24,27 @@
         imports = [
           inputs.gepetto.flakeModule
           {
-            gazebros2nix.pyOverrides.hpp-python =
-              _final: python-final:
-              (super: {
-                propagatedBuildInputs = super.propagatedBuildInputs ++ [
-                  python-final.lxml
-                ];
-                src = lib.fileset.toSource {
-                  root = ./.;
-                  fileset = lib.fileset.unions [
-                    ./CMakeLists.txt
-                    ./doc
-                    ./include
-                    ./package.xml
-                    ./src
-                    ./tests
+            gazebros2nix = {
+              overlays = [ inputs.hpp-manipulation.overlays.default ];
+              pyOverrides.hpp-python =
+                _final: python-final:
+                (super: {
+                  propagatedBuildInputs = super.propagatedBuildInputs ++ [
+                    python-final.lxml
                   ];
-                };
-              });
+                  src = lib.fileset.toSource {
+                    root = ./.;
+                    fileset = lib.fileset.unions [
+                      ./CMakeLists.txt
+                      ./doc
+                      ./include
+                      ./package.xml
+                      ./src
+                      ./tests
+                    ];
+                  };
+                });
+            };
           }
         ];
       }
