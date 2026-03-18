@@ -187,6 +187,10 @@ void TransitionPlanner::addPathOptimizer(
 // EndEffectorTrajectory implementation
 EndEffectorTrajectory::EndEffectorTrajectory(
     const pyhpp::core::Problem& problem) {
+  boost::python::object warnings = boost::python::import("warnings");
+  warnings.attr("warn")(
+      "pyhpp.manipulation.EndEffectorTrajectory is deprecated. "
+      "Use pyhpp.manipulation.steering_method.Cartesian instead.");
   obj =
       hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
           problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),

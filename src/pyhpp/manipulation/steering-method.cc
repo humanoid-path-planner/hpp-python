@@ -31,6 +31,7 @@
 #include <boost/python.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
+#include <hpp/manipulation/steering-method/cartesian.hh>
 #include <pyhpp/core/steering-method.hh>
 
 // DocNamespace(hpp::manipulation)
