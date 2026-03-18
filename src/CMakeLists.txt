@@ -160,6 +160,10 @@ add_python_library(
   hpp-manipulation::hpp-manipulation)
 
 add_python_library(
+  pyhpp/manipulation/steering_method FILES pyhpp/manipulation/steering_method/cartesian.cc
+  pyhpp/manipulation/steering_method/bindings.cc LINK_LIBRARIES hpp-manipulation::hpp-manipulation)
+
+add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
   hpp-manipulation-urdf::hpp-manipulation-urdf)

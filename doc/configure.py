@@ -123,6 +123,7 @@ nsToPackage = {
     "hpp::manipulation": _xmlDirFromPkgConfig("hpp-manipulation"),
     "hpp::manipulation::graph": _xmlDirFromPkgConfig("hpp-manipulation"),
     "hpp::manipulation::pathPlanner": _xmlDirFromPkgConfig("hpp-manipulation"),
+    "hpp::manipulation::steeringMethod": _xmlDirFromPkgConfig("hpp-manipulation"),
 }
 
 
