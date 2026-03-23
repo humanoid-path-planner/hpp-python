@@ -171,3 +171,7 @@ add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
   hpp-manipulation-urdf::hpp-manipulation-urdf)
+
+# Install tool submodule
+python_install_on_site(pyhpp/tools __init__.py)
+python_install_on_site(pyhpp/tools xacro.py)
