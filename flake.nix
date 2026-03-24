@@ -3,6 +3,7 @@
 
   inputs = {
     gepetto.url = "github:gepetto/nix";
+    flakoboros.follows = "gepetto/flakoboros";
     gazebros2nix.follows = "gepetto/gazebros2nix";
     flake-parts.follows = "gepetto/flake-parts";
     nixpkgs.follows = "gepetto/nixpkgs";
@@ -24,9 +25,9 @@
         imports = [
           inputs.gepetto.flakeModule
           {
-            gazebros2nix = {
+            flakoboros = {
               overlays = [ inputs.hpp-manipulation.overlays.default ];
-              pyOverrides.hpp-python =
+              pyOverrideAttrs.hpp-python =
                 _final: python-final:
                 (super: {
                   propagatedBuildInputs = super.propagatedBuildInputs ++ [
