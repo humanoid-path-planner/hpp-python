@@ -2,7 +2,6 @@ import os
 import sys
 import xml
 
-from xacro import filestack
 
 try:  # python 2
     _basestr = basestring
