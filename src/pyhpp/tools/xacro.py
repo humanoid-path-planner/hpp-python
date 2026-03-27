@@ -24,21 +24,6 @@ def process_xacro(*args):
         # open and process file
         doc = xacro.process_file(retrieve_resource(input_file_name, dirs), **vars(opts))
 
-    # error handling
-    except xml.parsers.expat.ExpatError as e:
-        xacro.error(f"XML parsing error: {unicode(e)}", alt_text=None)
-        if xacro.verbosity > 0:
-            xacro.print_location()
-            print(file=sys.stderr)  # add empty separator line before error
-            print("Check that:", file=sys.stderr)
-            print(" - Your XML is well-formed", file=sys.stderr)
-            print(
-                " - You have the xacro xmlns declaration:",
-                'xmlns:xacro="http://www.ros.org/wiki/xacro"',
-                file=sys.stderr,
-            )
-        sys.exit(2)  # indicate failure, but don't print stack trace on XML errors
-
     except Exception as e:
         msg = unicode(e)
         if not msg:
@@ -46,11 +31,10 @@ def process_xacro(*args):
         xacro.error(msg)
         if xacro.verbosity > 0:
             xacro.print_location()
+            raise
         if xacro.verbosity > 1:
             print(file=sys.stderr)  # add empty separator line before error
             raise  # create stack trace
-        else:
-            sys.exit(2)  # gracefully exit with error condition
 
     # write output
     return doc.toprettyxml(indent="  ", **encoding)
