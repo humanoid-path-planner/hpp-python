@@ -118,6 +118,29 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
   return trObj()->planPath(qInit, qGoals, resetRoadmap);
 }
 
+PathVectorPtr_t TransitionPlanner::planPathSingle(ConfigurationIn_t qInit,
+                                                  ConfigurationIn_t qGoal,
+                                                  bool resetRoadmap) {
+  const size_type n = obj->problem()->robot()->configSize();
+  if (qInit.rows() != n) {
+    std::ostringstream os;
+    os << "qInit = " << hpp::pinocchio::displayConfig(qInit)
+       << "should be of size " << n << ".";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (qGoal.rows() != n) {
+    std::ostringstream os;
+    os << "qGoal = " << hpp::pinocchio::displayConfig(qGoal)
+       << "should be of size " << n << ".";
+    throw std::logic_error(os.str().c_str());
+  }
+  // Build a C++-owned (1 x n) MatrixXd to avoid the eigenpy (1,N) conversion
+  // issue where Ref<const MatrixXd> receives garbage values for rows()>0 index.
+  hpp::constraints::matrix_t goals(1, n);
+  goals.row(0) = qGoal;
+  return trObj()->planPath(qInit, goals, resetRoadmap);
+}
+
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
                                     bool validate) {
   if (q1.rows() != obj->problem()->robot()->configSize()) {
@@ -255,6 +278,8 @@ void exposePathPlanners() {
       .def("innerProblem", &TransitionPlanner::innerProblem,
            DocClassMethod(innerProblem))
       .def("planPath", &TransitionPlanner::planPath, DocClassMethod(planPath))
+      .def("planPathSingle", &TransitionPlanner::planPathSingle,
+           DocClassMethod(planPath))
       .def("directPath", &TransitionPlanner::directPath)
       .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
       .def("optimizePath", &TransitionPlanner::optimizePath,
