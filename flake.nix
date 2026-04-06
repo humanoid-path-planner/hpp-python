@@ -3,17 +3,17 @@
 
   inputs = {
     gepetto.url = "github:gepetto/nix";
-    flakoboros.follows = "gepetto/flakoboros";
-    gazebros2nix.follows = "gepetto/gazebros2nix";
     flake-parts.follows = "gepetto/flake-parts";
-    nixpkgs.follows = "gepetto/nixpkgs";
-    nix-ros-overlay.follows = "gepetto/nix-ros-overlay";
     systems.follows = "gepetto/systems";
     treefmt-nix.follows = "gepetto/treefmt-nix";
 
     # https://github.com/humanoid-path-planner/hpp-manipulation/pull/262
     hpp-manipulation.url = "github:humanoid-path-planner/hpp-manipulation";
     hpp-manipulation.inputs.gepetto.follows = "gepetto";
+
+    # https://github.com/humanoid-path-planner/hpp-core/pull/429
+    hpp-core.url = "github:humanoid-path-planner/hpp-core";
+    hpp-core.inputs.gepetto.follows = "gepetto";
   };
 
   outputs =
@@ -26,10 +26,14 @@
           inputs.gepetto.flakeModule
           {
             flakoboros = {
-              overlays = [ inputs.hpp-manipulation.overlays.default ];
+              overlays = [
+                inputs.hpp-core.overlays.flakoboros
+                inputs.hpp-manipulation.overlays.flakoboros
+              ];
               pyOverrideAttrs.hpp-python =
-                _final: python-final:
+                _: python-final:
                 (super: {
+                  buildInputs = [ python-final.boost ] ++ super.buildInputs;
                   propagatedBuildInputs = super.propagatedBuildInputs ++ [
                     python-final.lxml
                   ];
