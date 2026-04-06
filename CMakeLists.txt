@@ -24,24 +24,32 @@ set(PROJECT_USE_CMAKE_EXPORT TRUE)
 # Check if the submodule cmake have been initialized
 set(JRL_CMAKE_MODULES "${CMAKE_CURRENT_LIST_DIR}/cmake")
 if(EXISTS "${JRL_CMAKE_MODULES}/base.cmake")
-  message(STATUS "JRL cmakemodules found in 'cmake/' git submodule")
+    message(STATUS "JRL cmakemodules found in 'cmake/' git submodule")
 else()
-  find_package(jrl-cmakemodules QUIET CONFIG)
-  if(jrl-cmakemodules_FOUND)
-    get_property(
-      JRL_CMAKE_MODULES
-      TARGET jrl-cmakemodules::jrl-cmakemodules
-      PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-    message(STATUS "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}")
-  else()
-    message(STATUS "JRL cmakemodules not found. Let's fetch it.")
-    include(FetchContent)
-    FetchContent_Declare(
-      "jrl-cmakemodules"
-      GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git")
-    FetchContent_MakeAvailable("jrl-cmakemodules")
-    FetchContent_GetProperties("jrl-cmakemodules" SOURCE_DIR JRL_CMAKE_MODULES)
-  endif()
+    find_package(jrl-cmakemodules QUIET CONFIG)
+    if(jrl-cmakemodules_FOUND)
+        get_property(
+            JRL_CMAKE_MODULES
+            TARGET jrl-cmakemodules::jrl-cmakemodules
+            PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+        )
+        message(
+            STATUS
+            "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}"
+        )
+    else()
+        message(STATUS "JRL cmakemodules not found. Let's fetch it.")
+        include(FetchContent)
+        FetchContent_Declare(
+            "jrl-cmakemodules"
+            GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git"
+        )
+        FetchContent_MakeAvailable("jrl-cmakemodules")
+        FetchContent_GetProperties(
+            "jrl-cmakemodules"
+            SOURCE_DIR JRL_CMAKE_MODULES
+        )
+    endif()
 endif()
 
 include("${JRL_CMAKE_MODULES}/hpp.cmake")
@@ -56,27 +64,25 @@ check_minimal_cxx_standard(11 REQUIRED)
 
 # Handle APPLE Cmake policy
 if(APPLE)
-  apply_default_apple_configuration()
+    apply_default_apple_configuration()
 endif(APPLE)
 
 # Activate hpp-util logging if requested
-set(HPP_DEBUG
-    FALSE
-    CACHE BOOL "trigger hpp-util debug output")
+set(HPP_DEBUG FALSE CACHE BOOL "trigger hpp-util debug output")
 if(HPP_DEBUG)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
 endif()
 # Activate hpp-util logging if requested
-set(HPP_BENCHMARK
-    FALSE
-    CACHE BOOL "trigger hpp-util benchmark output")
+set(HPP_BENCHMARK FALSE CACHE BOOL "trigger hpp-util benchmark output")
 if(HPP_BENCHMARK)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_ENABLE_BENCHMARK")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_ENABLE_BENCHMARK")
 endif()
 # Ask Doxygen to create a tree view in html documentation
 set(DOXYGEN_TREEVIEW
     "NO"
-    CACHE STRING "Set to YES to generate a tree view in the html documentation")
+    CACHE STRING
+    "Set to YES to generate a tree view in the html documentation"
+)
 
 # Declare Headers
 set(${PROJECT_NAME}_HEADERS
@@ -94,7 +100,8 @@ set(${PROJECT_NAME}_HEADERS
     include/pyhpp/ref.hh
     include/pyhpp/stl-pair.hh
     include/pyhpp/util.hh
-    include/pyhpp/vector-indexing-suite.hh)
+    include/pyhpp/vector-indexing-suite.hh
+)
 
 set(PYTHON_COMPONENTS Interpreter Development NumPy)
 
@@ -110,18 +117,15 @@ findpython()
 search_for_boost_python()
 
 if(BUILD_TESTING)
-  find_package(example-robot-data REQUIRED)
-  find_package(hpp-environments REQUIRED)
-  # find_package(hpp_tutorial REQUIRED) TODO: dependency loop ?
+    find_package(example-robot-data REQUIRED)
+    find_package(hpp-environments REQUIRED)
+    # find_package(hpp_tutorial REQUIRED) TODO: dependency loop ?
 endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
-install(
-  TARGETS ${PROJECT_NAME}
-  EXPORT ${TARGETS_EXPORT_NAME}
-  DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
 
 add_subdirectory(src)
 if(BUILD_TESTING)
-  add_subdirectory(tests)
+    add_subdirectory(tests)
 endif()
