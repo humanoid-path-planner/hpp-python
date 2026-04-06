@@ -258,6 +258,36 @@
         "type": "github"
       }
     },
+    "hpp-core": {
+      "inputs": {
+        "flake-parts": [
+          "hpp-core",
+          "gepetto",
+          "flake-parts"
+        ],
+        "gepetto": [
+          "gepetto"
+        ],
+        "systems": [
+          "hpp-core",
+          "gepetto",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775490126,
+        "narHash": "sha256-avBPV0xiJD6p8K/TwnJNxvFjo1wkFjzI9by1PCVt/DI=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-core",
+        "rev": "62de907f7185febfa11dd955c62a0f679bf3f65f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-core",
+        "type": "github"
+      }
+    },
     "hpp-manipulation": {
       "inputs": {
         "flake-parts": [
@@ -265,46 +295,21 @@
           "gepetto",
           "flake-parts"
         ],
-        "flakoboros": [
-          "hpp-manipulation",
-          "gepetto",
-          "flakoboros"
-        ],
-        "gazebros2nix": [
-          "hpp-manipulation",
-          "gepetto",
-          "gazebros2nix"
-        ],
         "gepetto": [
           "gepetto"
-        ],
-        "nix-ros-overlay": [
-          "hpp-manipulation",
-          "gepetto",
-          "nix-ros-overlay"
-        ],
-        "nixpkgs": [
-          "hpp-manipulation",
-          "gepetto",
-          "nixpkgs"
         ],
         "systems": [
           "hpp-manipulation",
           "gepetto",
           "systems"
-        ],
-        "treefmt-nix": [
-          "hpp-manipulation",
-          "gepetto",
-          "treefmt-nix"
         ]
       },
       "locked": {
-        "lastModified": 1775132876,
-        "narHash": "sha256-Rc+RK74Bk8qSiSC4zZpQ1MqixFKY3rOc3ANIriVl7wY=",
+        "lastModified": 1775490082,
+        "narHash": "sha256-IWljq9pui80xEducZurIR9Ju3f5zA9d4NCSIhamsmgE=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-manipulation",
-        "rev": "e457ff63985b26c03d29f6924565edd1f8fa1a8f",
+        "rev": "daec3ee4820036b36c08ca439578edd10c2060b2",
         "type": "github"
       },
       "original": {
@@ -476,6 +481,7 @@
           "flake-parts"
         ],
         "gepetto": "gepetto",
+        "hpp-core": "hpp-core",
         "hpp-manipulation": "hpp-manipulation",
         "systems": [
           "gepetto",

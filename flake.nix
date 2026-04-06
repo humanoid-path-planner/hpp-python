@@ -10,6 +10,10 @@
     # https://github.com/humanoid-path-planner/hpp-manipulation/pull/262
     hpp-manipulation.url = "github:humanoid-path-planner/hpp-manipulation";
     hpp-manipulation.inputs.gepetto.follows = "gepetto";
+
+    # https://github.com/humanoid-path-planner/hpp-core/pull/429
+    hpp-core.url = "github:humanoid-path-planner/hpp-core";
+    hpp-core.inputs.gepetto.follows = "gepetto";
   };
 
   outputs =
@@ -22,10 +26,14 @@
           inputs.gepetto.flakeModule
           {
             flakoboros = {
-              overlays = [ inputs.hpp-manipulation.overlays.default ];
+              overlays = [
+                inputs.hpp-core.overlays.flakoboros
+                inputs.hpp-manipulation.overlays.flakoboros
+              ];
               pyOverrideAttrs.hpp-python =
                 _: python-final:
                 (super: {
+                  buildInputs = [ python-final.boost ] ++ super.buildInputs;
                   propagatedBuildInputs = super.propagatedBuildInputs ++ [
                     python-final.lxml
                   ];
