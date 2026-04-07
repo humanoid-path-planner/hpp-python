@@ -36,6 +36,7 @@ namespace pyhpp {
 namespace constraints {
 void exposeDifferentiableFunction();
 void exposeGenericTransformations();
+void exposeManipulability();
 void exposeImplicit();
 void exposeExplicitConstraintSet();
 void exposeExplicit();
