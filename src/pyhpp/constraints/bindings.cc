@@ -42,6 +42,7 @@ BOOST_PYTHON_MODULE(bindings) {
       "segment");
 
   pyhpp::constraints::exposeDifferentiableFunction();
+  pyhpp::constraints::exposeManipulability();
   pyhpp::constraints::exposeGenericTransformations();
   pyhpp::constraints::exposeExplicit();
   pyhpp::constraints::exposeImplicit();

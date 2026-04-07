@@ -31,6 +31,7 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
 #include <hpp/constraints/differentiable-function.hh>
+#include <hpp/constraints/manipulability.hh>
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -135,5 +136,11 @@ void exposeDifferentiableFunction() {
       .def("impl_compute", pure_virtual(&DFWrapper::impl_compute))
       .def("impl_jacobian", pure_virtual(&DFWrapper::impl_jacobian));
 }
+void exposeManipulability() {
+  class_<Manipulability, ManipulabilityPtr_t, bases<DifferentiableFunction>, boost::noncopyable>(
+      "Manipulability", no_init)
+    .def("__init__", make_constructor(&Manipulability::create));
+}
+
 }  // namespace constraints
 }  // namespace pyhpp
