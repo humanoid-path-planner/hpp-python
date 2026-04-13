@@ -305,11 +305,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775490082,
-        "narHash": "sha256-IWljq9pui80xEducZurIR9Ju3f5zA9d4NCSIhamsmgE=",
+        "lastModified": 1775604707,
+        "narHash": "sha256-n0ryLQJZ+1hygN4FgwzKYP/xjHwudOAqfNj2FEuXAAk=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-manipulation",
-        "rev": "daec3ee4820036b36c08ca439578edd10c2060b2",
+        "rev": "dc0f8290333ed9ccfead9427d52db7084d54064e",
         "type": "github"
       },
       "original": {
