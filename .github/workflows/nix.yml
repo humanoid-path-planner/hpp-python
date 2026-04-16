@@ -14,8 +14,9 @@ jobs:
   nix:
     runs-on: "${{ matrix.os }}-latest"
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu]  # TODO
+        os: [ubuntu]
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
