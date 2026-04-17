@@ -258,6 +258,37 @@
         "type": "github"
       }
     },
+    "hpp-core": {
+      "inputs": {
+        "flake-parts": [
+          "hpp-core",
+          "gepetto",
+          "flake-parts"
+        ],
+        "gepetto": [
+          "gepetto"
+        ],
+        "systems": [
+          "hpp-core",
+          "gepetto",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1776407163,
+        "narHash": "sha256-9dy/cZjjdt7oNjiPPKiN5im82zqdkWfEMIyz07tY+2U=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-core",
+        "rev": "d15d7ef530d54bbfccc51d231124b20f3410378a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "ref": "pull/434/head",
+        "repo": "hpp-core",
+        "type": "github"
+      }
+    },
     "nix-ros-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -416,7 +447,8 @@
     },
     "root": {
       "inputs": {
-        "gepetto": "gepetto"
+        "gepetto": "gepetto",
+        "hpp-core": "hpp-core"
       }
     },
     "system-manager": {
