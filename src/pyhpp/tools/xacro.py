@@ -1,6 +1,5 @@
 import os
 import sys
-import xml
 
 
 try:  # python 2
