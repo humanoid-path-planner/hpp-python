@@ -48,6 +48,26 @@ namespace pyhpp {
 namespace core {
 using namespace hpp::core;
 
+template <int Order>
+void exposeSplineGradientBased(const char* name) {
+  typedef pathOptimization::SplineGradientBased<path::BernsteinBasis, Order>
+      SGB_t;
+  class_<SGB_t, std::shared_ptr<SGB_t>, bases<PathOptimizer>,
+         boost::noncopyable>(name, no_init)
+      .def("__init__", make_constructor(&SGB_t::create))
+      .def_readwrite("alphaInit", &SGB_t::alphaInit)
+      .def_readwrite("alwaysStopAtFirst", &SGB_t::alwaysStopAtFirst)
+      .def_readwrite("costOrder", &SGB_t::costOrder)
+      .def_readwrite("usePathLengthAsWeights", &SGB_t::usePathLengthAsWeights)
+      .def_readwrite("reorderIntervals", &SGB_t::reorderIntervals)
+      .def_readwrite("linearizeAtEachStep", &SGB_t::linearizeAtEachStep)
+      .def_readwrite("checkJointBound", &SGB_t::checkJointBound)
+      .def_readwrite("returnOptimum", &SGB_t::returnOptimum)
+      .def_readwrite("costThreshold", &SGB_t::costThreshold)
+      .def_readwrite("guessThreshold", &SGB_t::guessThreshold)
+      .def_readwrite("QPAccuracy", &SGB_t::QPAccuracy);
+}
+
 void exposePathOptimizer() {
   // DocClass(PathOptimizer)
   class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
@@ -99,29 +119,9 @@ void exposePathOptimizer() {
       .def("__init__",
            make_constructor(&pathOptimization::RSTimeParameterization::create));
 
-  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 1>,
-         std::shared_ptr<
-             pathOptimization::SplineGradientBased<path::BernsteinBasis, 1> >,
-         bases<PathOptimizer>, boost::noncopyable>(
-      "SplineGradientBased_bezier1", no_init)
-      .def("__init__", make_constructor(&pathOptimization::SplineGradientBased<
-                                        path::BernsteinBasis, 1>::create));
-
-  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 3>,
-         std::shared_ptr<
-             pathOptimization::SplineGradientBased<path::BernsteinBasis, 3> >,
-         bases<PathOptimizer>, boost::noncopyable>(
-      "SplineGradientBased_bezier3", no_init)
-      .def("__init__", make_constructor(&pathOptimization::SplineGradientBased<
-                                        path::BernsteinBasis, 3>::create));
-
-  class_<pathOptimization::SplineGradientBased<path::BernsteinBasis, 5>,
-         std::shared_ptr<
-             pathOptimization::SplineGradientBased<path::BernsteinBasis, 5> >,
-         bases<PathOptimizer>, boost::noncopyable>(
-      "SplineGradientBased_bezier5", no_init)
-      .def("__init__", make_constructor(&pathOptimization::SplineGradientBased<
-                                        path::BernsteinBasis, 5>::create));
+  exposeSplineGradientBased<1>("SplineGradientBased_bezier1");
+  exposeSplineGradientBased<3>("SplineGradientBased_bezier3");
+  exposeSplineGradientBased<5>("SplineGradientBased_bezier5");
 }
 }  // namespace core
 }  // namespace pyhpp
