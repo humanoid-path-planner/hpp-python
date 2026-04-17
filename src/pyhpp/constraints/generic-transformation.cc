@@ -57,7 +57,16 @@ void exposeAbsoluteGenericTransformation(const char* name) {
   class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
          boost::noncopyable>(name, no_init)
       .def("__init__",
-           make_constructor(&AbsoluteGenericTransformation_create<GT_t>));
+           make_constructor(&AbsoluteGenericTransformation_create<GT_t>),
+           "name: name of the constraint,\n"
+           "robot: device the constraint applies to,\n"
+           "j2: index of joint that holds frame 2,\n"
+           "frame2 (SE3): pose of frame 2 in joint 2,\n"
+           "frame1 (SE3): pose of frame 1 in world frame,\n"
+           "mask: tuple of Boolean.\n\n"
+           "Create a absolute (Position, Orientation, Transformation) constraint of a frame "
+           "(frame 2) in a fixed frame (frame 1)."
+           );
 }
 
 template <typename GT_t>
@@ -77,7 +86,17 @@ void exposeRelativeGenericTransformation(const char* name) {
   class_<GT_t, bases<DifferentiableFunction>, typename GT_t::Ptr_t,
          boost::noncopyable>(name, no_init)
       .def("__init__",
-           make_constructor(&RelativeGenericTransformation_create<GT_t>));
+           make_constructor(&RelativeGenericTransformation_create<GT_t>),
+           "name: name of the constraint,\n"
+           "robot: device the constraint applies to,\n"
+           "j1: index of joint that holds frame 1,\n"
+           "j2: index of joint that holds frame 2,\n"
+           "frame1 (SE3): pose of frame 1 in joint 1,\n"
+           "frame2 (SE3): pose of frame 2 in joint 2,\n"
+           "mask: tuple of Boolean.\n\n"
+           "Create a relative (Position, Orientation, Transformation) constraint between "
+           "two frames."
+           );
 }
 
 void exposeGenericTransformations() {
