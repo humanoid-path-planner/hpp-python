@@ -107,10 +107,10 @@ void exposeConstraint() {
            DocClassMethod(configProjector));
 
   enum_<ConfigProjector::LineSearchType>("LineSearchType")
-    .value("Backtracking", ConfigProjector::Backtracking)
-    .value("ErrorNormBased", ConfigProjector::ErrorNormBased)
-    .value("FixedSequence", ConfigProjector::FixedSequence)
-    .value("Constant", ConfigProjector::Constant);
+      .value("Backtracking", ConfigProjector::Backtracking)
+      .value("ErrorNormBased", ConfigProjector::ErrorNormBased)
+      .value("FixedSequence", ConfigProjector::FixedSequence)
+      .value("Constant", ConfigProjector::Constant);
   // DocClass(ConfigProjector)
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
          bases<Constraint> >("ConfigProjector", no_init)
@@ -119,11 +119,13 @@ void exposeConstraint() {
            static_cast<BySubstitution& (ConfigProjector::*)()>(
                &ConfigProjector::solver),
            return_internal_reference<>(), DocClassMethod(solver))
-      .add_property("lineSearchType",
-           static_cast<ConfigProjector::LineSearchType (ConfigProjector::*)() const>(
-               &ConfigProjector::lineSearchType),
-           static_cast<void (ConfigProjector::*)(ConfigProjector::LineSearchType)>(
-               &ConfigProjector::lineSearchType))
+      .add_property(
+          "lineSearchType",
+          static_cast<ConfigProjector::LineSearchType (ConfigProjector::*)()
+                          const>(&ConfigProjector::lineSearchType),
+          static_cast<void (ConfigProjector::*)(
+              ConfigProjector::LineSearchType)>(
+              &ConfigProjector::lineSearchType))
       .def("add", &ConfigProjector::add, DocClassMethod(add))
       .def("lastIsOptional", static_cast<bool (ConfigProjector::*)() const>(
                                  &ConfigProjector::lastIsOptional))

@@ -63,30 +63,32 @@ void exposeHierarchicalIterativeSolver() {
           static_cast<void (HierarchicalIterative::*)(const value_type&)>(
               &HierarchicalIterative::errorThreshold))
       .def("rightHandSideFromConfig",
-           static_cast<vector_t (HierarchicalIterative::*)(ConfigurationIn_t)>
-           (&HierarchicalIterative::rightHandSideFromConfig))
+           static_cast<vector_t (HierarchicalIterative::*)(ConfigurationIn_t)>(
+               &HierarchicalIterative::rightHandSideFromConfig))
       .def("rightHandSideFromConfig",
-           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,ConfigurationIn_t)>
-           (&HierarchicalIterative::rightHandSideFromConfig))
+           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
+                                                       ConfigurationIn_t)>(
+               &HierarchicalIterative::rightHandSideFromConfig))
+      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
+                                const ImplicitPtr_t&, vectorIn_t)>(
+                                &HierarchicalIterative::rightHandSide))
       .def("rightHandSide",
-           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,vectorIn_t)>
-           (&HierarchicalIterative::rightHandSide))
+           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide))
       .def("rightHandSide",
-           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>
-           (&HierarchicalIterative::rightHandSide))
-      .def("rightHandSide",
-           static_cast<vector_t (HierarchicalIterative::*)() const>
-           (&HierarchicalIterative::rightHandSide))
+           static_cast<vector_t (HierarchicalIterative::*)() const>(
+               &HierarchicalIterative::rightHandSide))
       .add_property("maxIterations",
                     static_cast<size_type (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::maxIterations),
                     static_cast<void (HierarchicalIterative::*)(size_type)>(
                         &HierarchicalIterative::maxIterations))
-      .add_property("errorThreshold",
-                    static_cast<value_type (HierarchicalIterative::*)() const>(
-                        &HierarchicalIterative::errorThreshold),
-                    static_cast<void (HierarchicalIterative::*)(const value_type&)>(
-                        &HierarchicalIterative::errorThreshold))
+      .add_property(
+          "errorThreshold",
+          static_cast<value_type (HierarchicalIterative::*)() const>(
+              &HierarchicalIterative::errorThreshold),
+          static_cast<void (HierarchicalIterative::*)(const value_type&)>(
+              &HierarchicalIterative::errorThreshold))
       .add_property("lastIsOptional",
                     static_cast<bool (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::lastIsOptional),

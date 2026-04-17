@@ -66,20 +66,21 @@ void exposeBySubstitution() {
                &BySubstitution::explicitConstraintSet),
            return_internal_reference<>(), DocClassMethod(explicitConstraintSet))
       .def("rightHandSideFromConfig",
-           static_cast<vector_t (BySubstitution::*)(ConfigurationIn_t)>
-           (&BySubstitution::rightHandSideFromConfig))
+           static_cast<vector_t (BySubstitution::*)(ConfigurationIn_t)>(
+               &BySubstitution::rightHandSideFromConfig))
       .def("rightHandSideFromConfig",
-           static_cast<bool (BySubstitution::*)(const ImplicitPtr_t&,ConfigurationIn_t)>
-           (&BySubstitution::rightHandSideFromConfig))
+           static_cast<bool (BySubstitution::*)(const ImplicitPtr_t&,
+                                                ConfigurationIn_t)>(
+               &BySubstitution::rightHandSideFromConfig))
+      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
+                                const ImplicitPtr_t&, vectorIn_t)>(
+                                &HierarchicalIterative::rightHandSide))
       .def("rightHandSide",
-           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,vectorIn_t)>
-           (&HierarchicalIterative::rightHandSide))
+           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide))
       .def("rightHandSide",
-           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>
-           (&HierarchicalIterative::rightHandSide))
-      .def("rightHandSide",
-           static_cast<vector_t (HierarchicalIterative::*)() const>
-           (&HierarchicalIterative::rightHandSide));
+           static_cast<vector_t (HierarchicalIterative::*)() const>(
+               &HierarchicalIterative::rightHandSide));
 }
 }  // namespace constraints
 }  // namespace pyhpp
