@@ -154,7 +154,16 @@ PathVectorPtr_t TransitionPlanner::timeParameterization(
   return trObj()->timeParameterization(path);
 }
 
+// deprecated
 void TransitionPlanner::setEdge(const PyWEdge& transition) {
+  trObj()->setEdge(transition.obj);
+  boost::python::object warnings = boost::python::import("warnings");
+  warnings.attr("warn")(
+      "pyhpp.manipulation.TransitionPlanner.setEdge is deprecated. "
+      "Use setTransition instead.");
+}
+
+void TransitionPlanner::setTransition(const PyWEdge& transition) {
   trObj()->setEdge(transition.obj);
 }
 
@@ -178,6 +187,10 @@ void TransitionPlanner::addPathOptimizer(
 // EndEffectorTrajectory implementation
 EndEffectorTrajectory::EndEffectorTrajectory(
     const pyhpp::core::Problem& problem) {
+  boost::python::object warnings = boost::python::import("warnings");
+  warnings.attr("warn")(
+      "pyhpp.manipulation.EndEffectorTrajectory is deprecated. "
+      "Use pyhpp.manipulation.steering_method.Cartesian instead.");
   obj =
       hpp::manipulation::pathPlanner::EndEffectorTrajectory::createWithRoadmap(
           problem.obj, hpp::core::Roadmap::create(problem.obj->distance(),
@@ -248,7 +261,10 @@ void exposePathPlanners() {
            DocClassMethod(optimizePath))
       .def("timeParameterization", &TransitionPlanner::timeParameterization,
            DocClassMethod(timeParameterization))
-      .def("setEdge", &TransitionPlanner::setEdge, DocClassMethod(setEdge))
+      .def("setEdge", &TransitionPlanner::setEdge,
+           DocClassMethod(setEdge))  // deprecated
+      .def("setTransition", &TransitionPlanner::setTransition,
+           DocClassMethod(setEdge))
       .def("setReedsAndSheppSteeringMethod",
            &TransitionPlanner::setReedsAndSheppSteeringMethod,
            DocClassMethod(setReedsAndSheppSteeringMethod))

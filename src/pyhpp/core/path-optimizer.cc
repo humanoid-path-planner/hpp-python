@@ -83,7 +83,14 @@ void exposePathOptimizer() {
                                                    no_init)
       .def("__init__",
            make_constructor(
-               &pathOptimization::SimpleTimeParameterization::create));
+               &pathOptimization::SimpleTimeParameterization::create))
+      .def_readwrite("safety",
+                     &pathOptimization::SimpleTimeParameterization::safety)
+      .def_readwrite("order",
+                     &pathOptimization::SimpleTimeParameterization::order)
+      .def_readwrite(
+          "maxAcceleration",
+          &pathOptimization::SimpleTimeParameterization::maxAcceleration);
 
   class_<pathOptimization::RSTimeParameterization,
          std::shared_ptr<pathOptimization::RSTimeParameterization>,

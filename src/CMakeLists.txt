@@ -25,45 +25,61 @@
 # ADD_PYTHON_LIBRARY ( module FILES file1.cc file2.cc ... LINK_LIBRARIES
 # hpp-core::hpp-core ...)
 macro(ADD_PYTHON_LIBRARY MODULE)
-  set(options)
-  set(oneValueArgs)
-  set(multiValueArgs FILES PY_FILES LINK_LIBRARIES)
-  cmake_parse_arguments(ADD_PYTHON_LIBRARY "${options}" "${oneValueArgs}"
-                        "${multiValueArgs}" ${ARGN})
+    set(options)
+    set(oneValueArgs)
+    set(multiValueArgs FILES PY_FILES LINK_LIBRARIES)
+    cmake_parse_arguments(
+        ADD_PYTHON_LIBRARY
+        "${options}"
+        "${oneValueArgs}"
+        "${multiValueArgs}"
+        ${ARGN}
+    )
 
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE})
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE})
 
-  set(GENERATED_FILES)
-  foreach(F ${ADD_PYTHON_LIBRARY_FILES})
-    add_custom_command(
-      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${F}
-      COMMAND ${CMAKE_SOURCE_DIR}/doc/configure.py
-              ${CMAKE_CURRENT_SOURCE_DIR}/${F} ${CMAKE_CURRENT_BINARY_DIR}/${F}
-      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${F}
-      COMMENT "Generate with documentation for ${F}")
-    list(APPEND GENERATED_FILES ${CMAKE_CURRENT_BINARY_DIR}/${F})
-  endforeach()
+    set(GENERATED_FILES)
+    foreach(F ${ADD_PYTHON_LIBRARY_FILES})
+        add_custom_command(
+            OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${F}
+            COMMAND
+                ${CMAKE_SOURCE_DIR}/doc/configure.py
+                ${CMAKE_CURRENT_SOURCE_DIR}/${F}
+                ${CMAKE_CURRENT_BINARY_DIR}/${F}
+            DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${F}
+            COMMENT "Generate with documentation for ${F}"
+        )
+        list(APPEND GENERATED_FILES ${CMAKE_CURRENT_BINARY_DIR}/${F})
+    endforeach()
 
-  string(REGEX REPLACE "[/-]" "_" TARGET_NAME "${MODULE}")
-  set(LIBNAME "bindings")
-  add_library(${TARGET_NAME} SHARED ${GENERATED_FILES})
-  set_target_properties(
-    ${TARGET_NAME}
-    PROPERTIES PREFIX ""
-               LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}
-               LIBRARY_OUTPUT_NAME ${LIBNAME})
+    string(REGEX REPLACE "[/-]" "_" TARGET_NAME "${MODULE}")
+    set(LIBNAME "bindings")
+    add_library(${TARGET_NAME} SHARED ${GENERATED_FILES})
+    set_target_properties(
+        ${TARGET_NAME}
+        PROPERTIES
+            PREFIX ""
+            LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}
+            LIBRARY_OUTPUT_NAME ${LIBNAME}
+    )
 
-  target_link_boost_python(${TARGET_NAME} PUBLIC)
-  target_link_libraries(
-    ${TARGET_NAME} PUBLIC eigenpy::eigenpy ${ADD_PYTHON_LIBRARY_LINK_LIBRARIES})
+    target_link_boost_python(${TARGET_NAME} PUBLIC)
+    target_link_libraries(
+        ${TARGET_NAME}
+        PUBLIC eigenpy::eigenpy ${ADD_PYTHON_LIBRARY_LINK_LIBRARIES}
+    )
 
-  install(TARGETS ${TARGET_NAME} DESTINATION ${PYTHON_SITELIB}/${MODULE})
+    install(TARGETS ${TARGET_NAME} DESTINATION ${PYTHON_SITELIB}/${MODULE})
 
-  # Write __init__.py file
-  file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
-       "from .${LIBNAME} import *")
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
-          DESTINATION ${PYTHON_SITELIB}/${MODULE})
+    # Write __init__.py file
+    file(
+        WRITE ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
+        "from .${LIBNAME} import *"
+    )
+    install(
+        FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
+        DESTINATION ${PYTHON_SITELIB}/${MODULE}
+    )
 endmacro()
 
 python_install_on_site(pyhpp __init__.py)
@@ -79,11 +95,13 @@ add_python_library(
   pyhpp/pinocchio/liegroup.cc
   pyhpp/pinocchio/bindings.cc
   LINK_LIBRARIES
-  hpp-pinocchio::hpp-pinocchio)
+  hpp-manipulation::hpp-manipulation
+)
 
 add_python_library(
   pyhpp/pinocchio/urdf FILES pyhpp/pinocchio/urdf/util.cc
-  pyhpp/pinocchio/urdf/bindings.cc LINK_LIBRARIES hpp-pinocchio::hpp-pinocchio)
+  pyhpp/pinocchio/urdf/bindings.cc LINK_LIBRARIES hpp-pinocchio::hpp-pinocchio
+)
 
 add_python_library(
   pyhpp/constraints
@@ -99,7 +117,8 @@ add_python_library(
   pyhpp/constraints/relative-com.cc
   pyhpp/constraints/bindings.cc
   LINK_LIBRARIES
-  hpp-constraints::hpp-constraints)
+  hpp-constraints::hpp-constraints
+)
 
 add_python_library(
   pyhpp/core
@@ -123,12 +142,14 @@ add_python_library(
   pyhpp/core/problem.cc
   pyhpp/core/bindings.cc
   LINK_LIBRARIES
-  hpp-core::hpp-core)
+  hpp-manipulation::hpp-manipulation
+)
 
 add_python_library(
   pyhpp/core/problem_target FILES
   pyhpp/core/problem_target/goal-configurations.cc
-  pyhpp/core/problem_target/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
+  pyhpp/core/problem_target/bindings.cc LINK_LIBRARIES hpp-core::hpp-core
+)
 
 add_python_library(
   pyhpp/core/path
@@ -137,12 +158,14 @@ add_python_library(
   pyhpp/core/path/vector.cc
   pyhpp/core/path/bindings.cc
   LINK_LIBRARIES
-  hpp-core::hpp-core)
+  hpp-core::hpp-core
+)
 
 add_python_library(
   pyhpp/core/path_optimization FILES
   pyhpp/core/path_optimization/spline-gradient-based-abstract.cc
-  pyhpp/core/path_optimization/bindings.cc LINK_LIBRARIES hpp-core::hpp-core)
+  pyhpp/core/path_optimization/bindings.cc LINK_LIBRARIES hpp-core::hpp-core
+)
 
 add_python_library(
   pyhpp/manipulation
@@ -157,9 +180,24 @@ add_python_library(
   pyhpp/manipulation/steering-method.cc
   pyhpp/manipulation/path-optimizer.cc
   LINK_LIBRARIES
-  hpp-manipulation::hpp-manipulation)
+  hpp-manipulation::hpp-manipulation
+)
+
+add_python_library(
+  pyhpp/manipulation/steering_method
+  FILES
+  pyhpp/manipulation/steering_method/cartesian.cc
+  pyhpp/manipulation/steering_method/bindings.cc
+  LINK_LIBRARIES
+  hpp-manipulation::hpp-manipulation
+)
 
 add_python_library(
   pyhpp/manipulation/urdf FILES pyhpp/manipulation/urdf/util.cc
   pyhpp/manipulation/urdf/bindings.cc LINK_LIBRARIES
-  hpp-manipulation-urdf::hpp-manipulation-urdf)
+  hpp-manipulation-urdf::hpp-manipulation-urdf
+)
+
+# Install tool submodule
+python_install_on_site(pyhpp/tools __init__.py)
+python_install_on_site(pyhpp/tools xacro.py)
