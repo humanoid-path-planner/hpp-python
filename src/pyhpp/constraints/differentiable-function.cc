@@ -137,9 +137,9 @@ void exposeDifferentiableFunction() {
       .def("impl_jacobian", pure_virtual(&DFWrapper::impl_jacobian));
 }
 void exposeManipulability() {
-  class_<Manipulability, ManipulabilityPtr_t, bases<DifferentiableFunction>, boost::noncopyable>(
-      "Manipulability", no_init)
-    .def("__init__", make_constructor(&Manipulability::create));
+  class_<Manipulability, ManipulabilityPtr_t, bases<DifferentiableFunction>,
+         boost::noncopyable>("Manipulability", no_init)
+      .def("__init__", make_constructor(&Manipulability::create));
 }
 
 }  // namespace constraints

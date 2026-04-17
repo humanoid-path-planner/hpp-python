@@ -64,9 +64,9 @@ void exposeAbsoluteGenericTransformation(const char* name) {
            "frame2 (SE3): pose of frame 2 in joint 2,\n"
            "frame1 (SE3): pose of frame 1 in world frame,\n"
            "mask: tuple of Boolean.\n\n"
-           "Create a absolute (Position, Orientation, Transformation) constraint of a frame "
-           "(frame 2) in a fixed frame (frame 1)."
-           );
+           "Create a absolute (Position, Orientation, Transformation) "
+           "constraint of a frame "
+           "(frame 2) in a fixed frame (frame 1).");
 }
 
 template <typename GT_t>
@@ -94,9 +94,9 @@ void exposeRelativeGenericTransformation(const char* name) {
            "frame1 (SE3): pose of frame 1 in joint 1,\n"
            "frame2 (SE3): pose of frame 2 in joint 2,\n"
            "mask: tuple of Boolean.\n\n"
-           "Create a relative (Position, Orientation, Transformation) constraint between "
-           "two frames."
-           );
+           "Create a relative (Position, Orientation, Transformation) "
+           "constraint between "
+           "two frames.");
 }
 
 void exposeGenericTransformations() {
