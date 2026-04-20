@@ -43,7 +43,7 @@ void exposeGoalConfigurations() {
   class_<GoalConfigurations, GoalConfigurationsPtr_t,
          bases<hpp::core::ProblemTarget>, boost::noncopyable>(
       "GoalConfigurations", no_init)
-      .def("create", &GoalConfigurations::create)
+      .def("__init__", make_constructor(&GoalConfigurations::create))
       .PYHPP_DEFINE_METHOD(GoalConfigurations, computePath)
       .PYHPP_DEFINE_METHOD(GoalConfigurations, reached)
 

@@ -201,14 +201,13 @@ void exposePath() {
 
   class_<StraightPath, bases<Path>, StraightPathPtr_t, boost::noncopyable>(
       "StraightPath", no_init)
-      .def("create", static_cast<StraightPathPtr_t (*)(
+      .def("__init__", make_constructor(static_cast<StraightPathPtr_t (*)(
                          LiegroupSpacePtr_t, vectorIn_t, vectorIn_t, interval_t,
-                         ConstraintSetPtr_t)>(&StraightPath::create))
-      .def("create",
-           static_cast<StraightPathPtr_t (*)(
+                         ConstraintSetPtr_t)>(&StraightPath::create)))
+      .def("__init__",
+           make_constructor(static_cast<StraightPathPtr_t (*)(
                const DevicePtr_t&, ConfigurationIn_t, ConfigurationIn_t,
-               interval_t, ConstraintSetPtr_t)>(&StraightPath::create))
-      .staticmethod("create");
+               interval_t, ConstraintSetPtr_t)>(&StraightPath::create)));
 }
 }  // namespace core
 }  // namespace pyhpp

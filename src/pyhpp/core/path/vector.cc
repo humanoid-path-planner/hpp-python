@@ -73,13 +73,16 @@ PathVectorPtr_t loadPathVector(const std::string& filename) {
 
 void exposeVector() {
   // DocClass(PathVector)
+  typedef PathVectorPtr_t (*constructor_t)(size_type, size_type);
+  constructor_t constructor(static_cast<constructor_t>(&PathVector::create));
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
                                                                        no_init)
-      .def("create",
-           static_cast<PathVectorPtr_t (*)(size_type, size_type)>(
-               &PathVector::create),
-           DocClassMethod(create))
-      .staticmethod("create")
+      .def("__init__",
+           make_constructor(constructor),
+           "Create an empty path vector.\n"
+           "   param:\n"
+           "     inputSize dimension of the configuration space,\n"
+           "     inputDerivativeSize dimension of the tangent space.")
       .def("numberPaths", &PathVector::numberPaths, DocClassMethod(numberPaths))
       .def("pathAtRank", &PathVector::pathAtRank, DocClassMethod(pathAtRank))
       .def("rankAtParam", &PathVector::rankAtParam, DocClassMethod(rankAtParam))
