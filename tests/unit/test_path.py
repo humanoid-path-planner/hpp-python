@@ -141,7 +141,7 @@ class TestPathVector(unittest.TestCase):
 
     def test_create_empty_path_vector(self):
         """PathVector.create should create an empty vector."""
-        pv = pyhpp.core.path.Vector.create(
+        pv = pyhpp.core.path.Vector(
             self.robot.configSize(), self.robot.numberDof()
         )
 
@@ -150,7 +150,7 @@ class TestPathVector(unittest.TestCase):
 
     def test_append_path_increases_count(self):
         """Appending paths should increase numberPaths."""
-        pv = pyhpp.core.path.Vector.create(
+        pv = pyhpp.core.path.Vector(
             self.robot.configSize(), self.robot.numberDof()
         )
 
@@ -166,7 +166,7 @@ class TestPathVector(unittest.TestCase):
 
     def test_path_vector_length_is_sum(self):
         """PathVector length should be sum of contained paths."""
-        pv = pyhpp.core.path.Vector.create(
+        pv = pyhpp.core.path.Vector(
             self.robot.configSize(), self.robot.numberDof()
         )
 
@@ -194,7 +194,7 @@ class TestPathVectorNegativeCases(unittest.TestCase):
 
     def test_path_at_valid_index_works(self):
         """Accessing path at valid index should work."""
-        pv = pyhpp.core.path.Vector.create(
+        pv = pyhpp.core.path.Vector(
             self.robot.configSize(), self.robot.numberDof()
         )
 
@@ -211,7 +211,7 @@ class TestPathVectorNegativeCases(unittest.TestCase):
 
     def test_empty_path_vector_has_zero_length(self):
         """Empty PathVector should have zero length."""
-        pv = pyhpp.core.path.Vector.create(
+        pv = pyhpp.core.path.Vector(
             self.robot.configSize(), self.robot.numberDof()
         )
 

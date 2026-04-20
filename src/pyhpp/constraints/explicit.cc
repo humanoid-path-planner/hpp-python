@@ -65,8 +65,7 @@ ExplicitPtr_t createExplicit(const LiegroupSpacePtr_t& configSpace,
 void exposeExplicit() {
   // DocClass(Explicit)
   class_<Explicit, ExplicitPtr_t, boost::noncopyable>("Explicit", no_init)
-      .def("create", &createExplicit)
-      .staticmethod("create");
+    .def("__init__", make_constructor(&createExplicit));
 }
 }  // namespace constraints
 }  // namespace pyhpp
