@@ -85,7 +85,7 @@ void exposeParameter() {
   // DocClass(Parameter)
   class_<Parameter>("Parameter", no_init)
       .def("__init__", &create)
-        .def("create_bool", &createBool)
+      .def("create_bool", &createBool)
       .staticmethod("create_bool")
       .PYHPP_DEFINE_METHOD(Parameter, boolValue)
       .PYHPP_DEFINE_METHOD(Parameter, intValue)

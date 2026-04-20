@@ -77,8 +77,7 @@ void exposeVector() {
   constructor_t constructor(static_cast<constructor_t>(&PathVector::create));
   class_<PathVector, PathVectorPtr_t, bases<Path>, boost::noncopyable>("Vector",
                                                                        no_init)
-      .def("__init__",
-           make_constructor(constructor),
+      .def("__init__", make_constructor(constructor),
            "Create an empty path vector.\n"
            "   param:\n"
            "     inputSize dimension of the configuration space,\n"
