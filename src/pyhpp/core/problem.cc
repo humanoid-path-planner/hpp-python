@@ -366,6 +366,14 @@ void Problem::setConstraints(hpp::core::ConstraintSetPtr_t constraints) {
   }
 }
 
+hpp::core::ConstraintSetPtr_t Problem::getConstraints() {
+  try {
+    return obj->constraints();
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
 void Problem::setRightHandSideFromConfig(ConfigurationIn_t configIn) {
   try {
     hpp::core::ConfigProjectorPtr_t configProjector(
@@ -664,6 +672,7 @@ void exposeProblem() {
       .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
       .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
       .PYHPP_DEFINE_METHOD(Problem, setConstraints)
+      .PYHPP_DEFINE_METHOD(Problem, getConstraints)
       .PYHPP_DEFINE_METHOD(Problem, setRightHandSideFromConfig)
       .def("addNumericalConstraintsToConfigProjector",
            &Problem::addNumericalConstraintsToConfigProjector1)
