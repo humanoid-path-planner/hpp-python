@@ -108,6 +108,8 @@ void exposeGenericTransformations() {
       "RelativeOrientation");
   exposeRelativeGenericTransformation<RelativeTransformation>(
       "RelativeTransformation");
+  exposeRelativeGenericTransformation<RelativeTransformationR3xSO3>(
+      "RelativeTransformationR3xSO3");
 }
 }  // namespace constraints
 }  // namespace pyhpp
