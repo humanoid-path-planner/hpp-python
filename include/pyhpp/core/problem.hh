@@ -129,6 +129,7 @@ struct Problem {
   boost::python::tuple applyConstraints(ConfigurationIn_t config);
   boost::python::tuple isConfigValid(ConfigurationIn_t dofArray);
   void setConstraints(hpp::core::ConstraintSetPtr_t constraints);
+  hpp::core::ConstraintSetPtr_t getConstraints();
   void setRightHandSideFromConfig(ConfigurationIn_t configIn);
 
   void addNumericalConstraintsToConfigProjector1(
