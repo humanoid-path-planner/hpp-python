@@ -152,8 +152,9 @@ void exposeManipulability() {
          boost::noncopyable>("Manipulability", no_init)
       .def("__init__", make_constructor(&Manipulability::create))
       .def("lockJoint", &lockJoint<ManipulabilityPtr_t>);
-  class_<MinManipulability, MinManipulabilityPtr_t, bases<DifferentiableFunction>,
-         boost::noncopyable>("MinManipulability", no_init)
+  class_<MinManipulability, MinManipulabilityPtr_t,
+         bases<DifferentiableFunction>, boost::noncopyable>("MinManipulability",
+                                                            no_init)
       .def("__init__", make_constructor(&MinManipulability::create))
       .def("lockJoint", &lockJoint<MinManipulabilityPtr_t>);
 }
