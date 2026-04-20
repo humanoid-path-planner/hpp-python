@@ -141,18 +141,14 @@ class TestPathVector(unittest.TestCase):
 
     def test_create_empty_path_vector(self):
         """PathVector.create should create an empty vector."""
-        pv = pyhpp.core.path.Vector(
-            self.robot.configSize(), self.robot.numberDof()
-        )
+        pv = pyhpp.core.path.Vector(self.robot.configSize(), self.robot.numberDof())
 
         self.assertIsNotNone(pv)
         self.assertEqual(pv.numberPaths(), 0)
 
     def test_append_path_increases_count(self):
         """Appending paths should increase numberPaths."""
-        pv = pyhpp.core.path.Vector(
-            self.robot.configSize(), self.robot.numberDof()
-        )
+        pv = pyhpp.core.path.Vector(self.robot.configSize(), self.robot.numberDof())
 
         q1 = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q2 = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -166,9 +162,7 @@ class TestPathVector(unittest.TestCase):
 
     def test_path_vector_length_is_sum(self):
         """PathVector length should be sum of contained paths."""
-        pv = pyhpp.core.path.Vector(
-            self.robot.configSize(), self.robot.numberDof()
-        )
+        pv = pyhpp.core.path.Vector(self.robot.configSize(), self.robot.numberDof())
 
         q1 = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q2 = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -194,9 +188,7 @@ class TestPathVectorNegativeCases(unittest.TestCase):
 
     def test_path_at_valid_index_works(self):
         """Accessing path at valid index should work."""
-        pv = pyhpp.core.path.Vector(
-            self.robot.configSize(), self.robot.numberDof()
-        )
+        pv = pyhpp.core.path.Vector(self.robot.configSize(), self.robot.numberDof())
 
         q1 = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q2 = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -211,9 +203,7 @@ class TestPathVectorNegativeCases(unittest.TestCase):
 
     def test_empty_path_vector_has_zero_length(self):
         """Empty PathVector should have zero length."""
-        pv = pyhpp.core.path.Vector(
-            self.robot.configSize(), self.robot.numberDof()
-        )
+        pv = pyhpp.core.path.Vector(self.robot.configSize(), self.robot.numberDof())
 
         self.assertEqual(pv.length(), 0.0)
 
