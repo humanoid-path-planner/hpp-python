@@ -65,11 +65,22 @@ void exposeBySubstitution() {
            static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
                &BySubstitution::explicitConstraintSet),
            return_internal_reference<>(), DocClassMethod(explicitConstraintSet))
-      .add_property("errorThreshold",
-                    static_cast<value_type (BySubstitution::*)() const>(
-                        &BySubstitution::errorThreshold),
-                    static_cast<void (BySubstitution::*)(const value_type&)>(
-                        &BySubstitution::errorThreshold));
+      .def("rightHandSideFromConfig",
+           static_cast<vector_t (BySubstitution::*)(ConfigurationIn_t)>(
+               &BySubstitution::rightHandSideFromConfig))
+      .def("rightHandSideFromConfig",
+           static_cast<bool (BySubstitution::*)(const ImplicitPtr_t&,
+                                                ConfigurationIn_t)>(
+               &BySubstitution::rightHandSideFromConfig))
+      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
+                                const ImplicitPtr_t&, vectorIn_t)>(
+                                &HierarchicalIterative::rightHandSide))
+      .def("rightHandSide",
+           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide))
+      .def("rightHandSide",
+           static_cast<vector_t (HierarchicalIterative::*)() const>(
+               &HierarchicalIterative::rightHandSide));
 }
 }  // namespace constraints
 }  // namespace pyhpp

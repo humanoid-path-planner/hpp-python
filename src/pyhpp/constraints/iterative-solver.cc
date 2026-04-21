@@ -62,11 +62,43 @@ void exposeHierarchicalIterativeSolver() {
               &HierarchicalIterative::errorThreshold),
           static_cast<void (HierarchicalIterative::*)(const value_type&)>(
               &HierarchicalIterative::errorThreshold))
+      .def("rightHandSideFromConfig",
+           static_cast<vector_t (HierarchicalIterative::*)(ConfigurationIn_t)>(
+               &HierarchicalIterative::rightHandSideFromConfig))
+      .def("rightHandSideFromConfig",
+           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
+                                                       ConfigurationIn_t)>(
+               &HierarchicalIterative::rightHandSideFromConfig))
+      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
+                                const ImplicitPtr_t&, vectorIn_t)>(
+                                &HierarchicalIterative::rightHandSide))
+      .def("rightHandSide",
+           static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide))
+      .def("rightHandSide",
+           static_cast<vector_t (HierarchicalIterative::*)() const>(
+               &HierarchicalIterative::rightHandSide))
       .add_property("maxIterations",
                     static_cast<size_type (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::maxIterations),
                     static_cast<void (HierarchicalIterative::*)(size_type)>(
-                        &HierarchicalIterative::maxIterations));
+                        &HierarchicalIterative::maxIterations))
+      .add_property(
+          "errorThreshold",
+          static_cast<value_type (HierarchicalIterative::*)() const>(
+              &HierarchicalIterative::errorThreshold),
+          static_cast<void (HierarchicalIterative::*)(const value_type&)>(
+              &HierarchicalIterative::errorThreshold))
+      .add_property("lastIsOptional",
+                    static_cast<bool (HierarchicalIterative::*)() const>(
+                        &HierarchicalIterative::lastIsOptional),
+                    static_cast<void (HierarchicalIterative::*)(bool)>(
+                        &HierarchicalIterative::lastIsOptional))
+      .add_property("solveLevelByLevel",
+                    static_cast<bool (HierarchicalIterative::*)() const>(
+                        &HierarchicalIterative::solveLevelByLevel),
+                    static_cast<void (HierarchicalIterative::*)(bool)>(
+                        &HierarchicalIterative::solveLevelByLevel));
 }
 }  // namespace constraints
 }  // namespace pyhpp

@@ -40,7 +40,7 @@ class TestPathOptimizerOptimize(unittest.TestCase):
         path1 = steer(q1, q2)
         path2 = steer(q2, q3)
 
-        pv = pyhpp.core.path.Vector.create(robot.configSize(), robot.numberDof())
+        pv = pyhpp.core.path.Vector(robot.configSize(), robot.numberDof())
         pv.appendPath(path1)
         pv.appendPath(path2)
 
@@ -67,7 +67,7 @@ class TestPathOptimizerOptimize(unittest.TestCase):
         q2 = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
         steer = problem.steeringMethod()
         path = steer(q1, q2)
-        pv = pyhpp.core.path.Vector.create(robot.configSize(), robot.numberDof())
+        pv = pyhpp.core.path.Vector(robot.configSize(), robot.numberDof())
         pv.appendPath(path)
 
         optimized = optimizer.optimize(pv)
@@ -85,7 +85,7 @@ class TestPathOptimizerNegativeCases(unittest.TestCase):
         steer = problem.steeringMethod()
         path = steer(q, q)
 
-        pv = pyhpp.core.path.Vector.create(robot.configSize(), robot.numberDof())
+        pv = pyhpp.core.path.Vector(robot.configSize(), robot.numberDof())
         pv.appendPath(path)
 
         optimizer = RandomShortcut(problem)
@@ -105,7 +105,7 @@ class TestPathOptimizerNegativeCases(unittest.TestCase):
         q4 = np.array([0.6, -1.0, -1.2, 0.3, 0.5, 0.3])
 
         steer = problem.steeringMethod()
-        pv = pyhpp.core.path.Vector.create(robot.configSize(), robot.numberDof())
+        pv = pyhpp.core.path.Vector(robot.configSize(), robot.numberDof())
         pv.appendPath(steer(q1, q2))
         pv.appendPath(steer(q2, q3))
         pv.appendPath(steer(q3, q4))
@@ -128,7 +128,7 @@ class TestPathOptimizerNegativeCases(unittest.TestCase):
         steer = problem.steeringMethod()
         path = steer(q1, q2)
 
-        pv = pyhpp.core.path.Vector.create(robot.configSize(), robot.numberDof())
+        pv = pyhpp.core.path.Vector(robot.configSize(), robot.numberDof())
         pv.appendPath(path)
         original_length = pv.length()
 

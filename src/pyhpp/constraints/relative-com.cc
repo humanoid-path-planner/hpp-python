@@ -70,10 +70,9 @@ void exposeRelativeCom() {
   // DocClass(RelativeCom)
   class_<RelativeCom, RelativeComPtr_t, bases<DifferentiableFunction>,
          boost::noncopyable>("RelativeCom", no_init)
-      .def("create", &create1, DocClassMethod(create))
-      .def("create", &create2)
-      .def("create", &create3)
-      .staticmethod("create");
+      .def("__init__", &create1, DocClassMethod(create))
+      .def("__init__", &create2)
+      .def("__init__", &create3);
 }
 }  // namespace constraints
 }  // namespace pyhpp

@@ -31,6 +31,9 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <eigenpy/eigenpy.hpp>
 #include <hpp/constraints/differentiable-function.hh>
+#include <hpp/constraints/manipulability.hh>
+#include <hpp/constraints/min-manipulability.hh>
+#include <hpp/pinocchio/device.hh>
 #include <pyhpp/constraints/fwd.hh>
 #include <pyhpp/util.hh>
 
@@ -137,5 +140,26 @@ void exposeDifferentiableFunction() {
       .def("impl_compute", pure_virtual(&DFWrapper::impl_compute))
       .def("impl_jacobian", pure_virtual(&DFWrapper::impl_jacobian));
 }
+template <typename M>
+void lockJoint(M manipulability, const char* jointName) {
+  try {
+    JointPtr_t joint = manipulability->robot()->getJointByName(jointName);
+    manipulability->lockJoint(joint);
+  } catch (const std::exception& exc) {
+    throw std::runtime_error(exc.what());
+  }
+}
+void exposeManipulability() {
+  class_<Manipulability, ManipulabilityPtr_t, bases<DifferentiableFunction>,
+         boost::noncopyable>("Manipulability", no_init)
+      .def("__init__", make_constructor(&Manipulability::create))
+      .def("lockJoint", &lockJoint<ManipulabilityPtr_t>);
+  class_<MinManipulability, MinManipulabilityPtr_t,
+         bases<DifferentiableFunction>, boost::noncopyable>("MinManipulability",
+                                                            no_init)
+      .def("__init__", make_constructor(&MinManipulability::create))
+      .def("lockJoint", &lockJoint<MinManipulabilityPtr_t>);
+}
+
 }  // namespace constraints
 }  // namespace pyhpp
