@@ -258,9 +258,16 @@ std::vector<std::vector<double>> matrixToVectorVector(
 
 PyWState::PyWState(const StatePtr_t& state) : obj(state) {}
 std::string PyWState::name() const { return obj->name(); }
+std::size_t PyWState::id() const { return obj->id(); }
 
 PyWEdge::PyWEdge(const EdgePtr_t& edge) : obj(edge) {}
+std::size_t PyWEdge::id() const { return obj->id(); }
 std::string PyWEdge::name() const { return obj->name(); }
+std::size_t PyWEdge::nbWaypoints() const {
+  using hpp::manipulation::graph::WaypointEdge;
+  auto waypointEdge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, obj);
+  return waypointEdge ? waypointEdge->nbWaypoints() : 0;
+}
 
 PyWGraph::PyWGraph(const hpp::manipulation::graph::GraphPtr_t& object)
     : obj(object) {}
@@ -1240,13 +1247,16 @@ using namespace boost::python;
 void exposeGraph() {
   // DocClass(State)
   class_<PyWState, PyWStatePtr_t>("State", no_init)
-      .def("name", &PyWState::name, DocClassMethod(name));
+      .def("name", &PyWState::name, DocClassMethod(name))
+      .def("id", &PyWState::id, DocClassMethod(id));
 
   // DocClass(Edge)
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
+      .def("id", &PyWEdge::id, DocClassMethod(id))
       .def("name", &PyWEdge::name, DocClassMethod(name))
+      .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
       .def("pathValidation", &PyWEdge::pathValidation,
-           DocClassMethod(pathValidation));
+           DocClassMethod(pathValidation)),
 
   // DocClass(Graph)
   class_<PyWGraph, PyWGraphPtr_t>(

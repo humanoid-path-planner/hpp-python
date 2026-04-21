@@ -58,16 +58,20 @@ typedef hpp::manipulation::ConstraintAndComplement_t ConstraintAndComplement_t;
 struct PyWState {
   StatePtr_t obj;
   PyWState(const StatePtr_t& object);
+  std::size_t id() const;
   std::string name() const;
 };
 typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 
 /// Python wrapper for Edge
 struct PyWEdge {
-  EdgePtr_t obj;
-  PyWEdge(const EdgePtr_t& object);
-  std::string name() const;
-  PathValidationPtr_t pathValidation() const;
+    EdgePtr_t obj;
+    PyWEdge(const EdgePtr_t& object);
+    std::size_t id() const;
+    std::string name() const;
+    std::size_t nbWaypoints() const;
+    std::size_t weight() const;
+    PathValidationPtr_t pathValidation() const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
 
