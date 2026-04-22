@@ -131,6 +131,9 @@ void exposeDifferentiableFunction() {
       .def("outputDerivativeSize",
            &DifferentiableFunction::outputDerivativeSize,
            DocClassMethod(outputDerivativeSize))
+
+      .def("name", &DifferentiableFunction::name,
+           return_value_policy<copy_const_reference>())
       //;
 
       // class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable,
