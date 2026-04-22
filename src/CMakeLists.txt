@@ -201,3 +201,4 @@ add_python_library(
 # Install tool submodule
 python_install_on_site(pyhpp/tools __init__.py)
 python_install_on_site(pyhpp/tools xacro.py)
+python_install_on_site(pyhpp/tools constraint_error.py)

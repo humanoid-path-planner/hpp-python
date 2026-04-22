@@ -60,8 +60,8 @@ struct PyWState {
   PyWState(const StatePtr_t& object);
   std::size_t id() const;
   std::string name() const;
-
   boost::python::list neighborEdges();
+  hpp::core::ConstraintSetPtr_t configConstraint() const;
 };
 typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 

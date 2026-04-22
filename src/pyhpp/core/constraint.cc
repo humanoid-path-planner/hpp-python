@@ -86,6 +86,12 @@ static void setRightHandSideOfConstraint(
   configProj->rightHandSide(constraint, config);
 }
 
+static boost::python::list getNumConstraints(ConfigProjector& cp) {
+  boost::python::list result;
+  for (const auto& c : cp.numericalConstraints()) result.append(c);
+  return result;
+}
+
 void exposeConstraint() {
   // DocClass(Constraint)
   class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
@@ -146,7 +152,8 @@ void exposeConstraint() {
       .def("setRightHandSideFromConfig", &rightHandSideFromConfig)
       .def("setRightHandSideOfConstraint", &setRightHandSideOfConstraint)
       .def("sigma", &ConfigProjector::sigma,
-           return_value_policy<return_by_value>(), DocClassMethod(sigma));
+           return_value_policy<return_by_value>(), DocClassMethod(sigma))
+      .def("numericalConstraints", &getNumConstraints);
 }
 }  // namespace core
 }  // namespace pyhpp

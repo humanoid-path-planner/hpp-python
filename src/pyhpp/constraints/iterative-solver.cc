@@ -29,6 +29,7 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // cland-format off
+#include <hpp/constraints/implicit-constraint-set.hh>
 #include <hpp/constraints/solver/hierarchical-iterative.hh>
 // cland-format on
 
@@ -45,6 +46,14 @@ namespace pyhpp {
 namespace constraints {
 using namespace hpp::constraints;
 using namespace hpp::constraints::solver;
+
+static boost::python::list getConstraintsForPriority(
+    HierarchicalIterative& hi, std::size_t priority) {
+  boost::python::list result;
+  for (const auto& c : hi.constraints(priority).constraints())
+    result.append(c);
+  return result;
+}
 
 void exposeHierarchicalIterativeSolver() {
   class_<ComparisonTypes_t>("ComparisonTypes")
@@ -98,7 +107,11 @@ void exposeHierarchicalIterativeSolver() {
                     static_cast<bool (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::solveLevelByLevel),
                     static_cast<void (HierarchicalIterative::*)(bool)>(
-                        &HierarchicalIterative::solveLevelByLevel));
+                        &HierarchicalIterative::solveLevelByLevel))
+      .def("numberStacks", &HierarchicalIterative::numberStacks)
+      .def("constraintsForPriority", &getConstraintsForPriority)
+      .def("dimension", &HierarchicalIterative::dimension,
+           return_value_policy<copy_const_reference>());
 }
 }  // namespace constraints
 }  // namespace pyhpp

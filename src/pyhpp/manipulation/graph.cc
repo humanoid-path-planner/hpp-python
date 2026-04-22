@@ -276,6 +276,10 @@ boost::python::list PyWState::neighborEdges() {
   }
 }
 
+hpp::core::ConstraintSetPtr_t PyWState::configConstraint() const {
+  return obj->configConstraint();
+}
+
 PyWEdge::PyWEdge(const EdgePtr_t& edge) : obj(edge) {}
 std::size_t PyWEdge::id() const { return obj->id(); }
 std::string PyWEdge::name() const { return obj->name(); }
@@ -1282,6 +1286,7 @@ void exposeGraph() {
   class_<PyWState, PyWStatePtr_t>("State", no_init)
       .def("name", &PyWState::name, DocClassMethod(name))
       .def("id", &PyWState::id, DocClassMethod(id))
+      .def("configConstraint", &PyWState::configConstraint)
       .PYHPP_DEFINE_METHOD1(PyWState, neighborEdges, DOC_NEIGHBOREDGES);
 
   // DocClass(Edge)

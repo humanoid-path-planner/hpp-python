@@ -28,8 +28,12 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/python.hpp>
+#include <eigenpy/eigenpy.hpp>
+#include <hpp/constraints/implicit-constraint-set.hh>
 #include <hpp/constraints/solver/by-substitution.hh>
 #include <pyhpp/constraints/fwd.hh>
+
+#include <set>
 
 // DocNamespace(hpp::constraints::solver)
 
@@ -44,6 +48,47 @@ tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
   vector_t qout(q);
   HierarchicalIterative::Status s = hs.solve(qout);
   return make_tuple(qout, s);
+}
+
+boost::python::list BySubstitution_describeError(BySubstitution& solver,
+                                                  vectorIn_t arg) {
+  size_type implicitDim = solver.dimension();
+  size_type explicitDim = solver.explicitConstraintSet().errorSize();
+  vector_t error(implicitDim + explicitDim);
+  bool satisfied = solver.isSatisfied(arg, error);
+  (void)satisfied;
+
+  boost::python::list result;
+  size_type offset = 0;
+
+  // Implicit constraints by priority level
+  std::set<ImplicitPtr_t> implicitSet;
+  for (std::size_t p = 0; p < solver.numberStacks(); ++p) {
+    const auto& stack = solver.constraints(p);
+    for (const auto& c : stack.constraints()) {
+      implicitSet.insert(c);
+      const DifferentiableFunction& f = c->function();
+      size_type nv = f.outputDerivativeSize();
+      vector_t errSlice = error.segment(offset, nv);
+      result.append(boost::python::make_tuple(
+          f.name(), errSlice, std::string("implicit"), static_cast<int>(p)));
+      offset += nv;
+    }
+  }
+
+  // Explicit constraints: those in numericalConstraints() not in any stack
+  for (const auto& c : solver.numericalConstraints()) {
+    if (implicitSet.count(c) == 0) {
+      const DifferentiableFunction& f = c->function();
+      size_type nv = f.outputDerivativeSize();
+      vector_t errSlice = error.segment(offset, nv);
+      result.append(boost::python::make_tuple(
+          f.name(), errSlice, std::string("explicit"), -1));
+      offset += nv;
+    }
+  }
+
+  return result;
 }
 
 void exposeBySubstitution() {
@@ -80,7 +125,13 @@ void exposeBySubstitution() {
                &HierarchicalIterative::rightHandSide))
       .def("rightHandSide",
            static_cast<vector_t (HierarchicalIterative::*)() const>(
-               &HierarchicalIterative::rightHandSide));
+               &HierarchicalIterative::rightHandSide))
+      .add_property("errorThreshold",
+                    static_cast<value_type (BySubstitution::*)() const>(
+                        &BySubstitution::errorThreshold),
+                    static_cast<void (BySubstitution::*)(const value_type&)>(
+                        &BySubstitution::errorThreshold))
+      .def("describeError", &BySubstitution_describeError);
 }
 }  // namespace constraints
 }  // namespace pyhpp
