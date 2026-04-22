@@ -45,7 +45,8 @@ void exposeExplicitConstraintSet() {
   class_<ExplicitConstraintSet>("ExplicitConstraintSet",
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<ExplicitConstraintSet>)
-      .def("add", &ExplicitConstraintSet::add, DocClassMethod(add));
+      .def("add", &ExplicitConstraintSet::add, DocClassMethod(add))
+      .def("errorSize", &ExplicitConstraintSet::errorSize);
 }
 }  // namespace constraints
 }  // namespace pyhpp

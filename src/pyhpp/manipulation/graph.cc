@@ -227,6 +227,9 @@ const char* DOC_CREATEPREPLACEMENTCONSTRAINT =
     "Create pre-placement constraint with specified width margin. "
     "Used for approaching placement configurations before final placement.";
 
+const char* DOC_NEIGHBOREDGES =
+    "Get the list of edges connected to this state.";
+
 }  // namespace
 
 namespace pyhpp {
@@ -259,6 +262,24 @@ std::vector<std::vector<double>> matrixToVectorVector(
 PyWState::PyWState(const StatePtr_t& state) : obj(state) {}
 std::string PyWState::name() const { return obj->name(); }
 std::size_t PyWState::id() const { return obj->id(); }
+
+boost::python::list PyWState::neighborEdges() {
+  try {
+    boost::python::list result;
+    for (const auto& edge : obj->neighborEdges()) {
+      if (edge) {
+        result.append(PyWEdgePtr_t(new PyWEdge(edge)));
+      }
+    }
+    return result;
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+}
+
+hpp::core::ConstraintSetPtr_t PyWState::configConstraint() const {
+  return obj->configConstraint();
+}
 
 PyWEdge::PyWEdge(const EdgePtr_t& edge) : obj(edge) {}
 std::size_t PyWEdge::id() const { return obj->id(); }
@@ -1248,7 +1269,9 @@ void exposeGraph() {
   // DocClass(State)
   class_<PyWState, PyWStatePtr_t>("State", no_init)
       .def("name", &PyWState::name, DocClassMethod(name))
-      .def("id", &PyWState::id, DocClassMethod(id));
+      .def("id", &PyWState::id, DocClassMethod(id))
+      .def("configConstraint", &PyWState::configConstraint)
+      .PYHPP_DEFINE_METHOD1(PyWState, neighborEdges, DOC_NEIGHBOREDGES);
 
   // DocClass(Edge)
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
