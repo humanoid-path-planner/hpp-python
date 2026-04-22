@@ -107,8 +107,8 @@ void exposeDifferentiableFunction() {
       .def("__str__", &to_str<DifferentiableFunction>)
       .def("__call__", &DFWrapper::py_value)
       .def("J", &DFWrapper::py_jacobian)
-      .def("name", &DFWrapper::name, return_value_policy<copy_const_reference>(), DocClassMethod(name))
-
+      .def("name", &DFWrapper::name,
+           return_value_policy<copy_const_reference>(), DocClassMethod(name))
 
       .add_property("ni", &DifferentiableFunction::inputSize)
       .add_property("no", &DifferentiableFunction::outputSize)
