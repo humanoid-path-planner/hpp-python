@@ -60,6 +60,8 @@ struct PyWState {
   PyWState(const StatePtr_t& object);
   std::size_t id() const;
   std::string name() const;
+
+  boost::python::list neighborEdges();
 };
 typedef std::shared_ptr<PyWState> PyWStatePtr_t;
 
@@ -69,8 +71,10 @@ struct PyWEdge {
   PyWEdge(const EdgePtr_t& object);
   std::size_t id() const;
   std::string name() const;
+  bool isWaypointEdge() const;
   std::size_t nbWaypoints() const;
   std::size_t weight() const;
+  PyWEdge waypoint(int index) const;
   PathValidationPtr_t pathValidation() const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
