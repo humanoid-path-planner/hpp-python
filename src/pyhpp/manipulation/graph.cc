@@ -289,6 +289,23 @@ std::size_t PyWEdge::nbWaypoints() const {
   auto waypointEdge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, obj);
   return waypointEdge ? waypointEdge->nbWaypoints() : 0;
 }
+bool PyWEdge::isWaypointTransition() const {
+  using hpp::manipulation::graph::WaypointEdge;
+  return HPP_DYNAMIC_PTR_CAST(WaypointEdge, obj) != nullptr;
+}
+
+PyWEdge PyWEdge::waypoint(int index) const {
+  using hpp::manipulation::graph::WaypointEdge;
+  auto waypointEdge = HPP_DYNAMIC_PTR_CAST(WaypointEdge, obj);
+  if (!waypointEdge) {
+    throw std::logic_error("Edge is not a WaypointEdge");
+  }
+  if (index < 0 ||
+      static_cast<std::size_t>(index) > waypointEdge->nbWaypoints()) {
+    throw std::logic_error("Waypoint index out of range");
+  }
+  return (PyWEdge(waypointEdge->waypoint(static_cast<std::size_t>(index))));
+}
 
 PyWGraph::PyWGraph(const hpp::manipulation::graph::GraphPtr_t& object)
     : obj(object) {}
@@ -1283,6 +1300,10 @@ void exposeGraph() {
   class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
       .def("id", &PyWEdge::id, DocClassMethod(id))
       .def("name", &PyWEdge::name, DocClassMethod(name))
+      .def("isWaypointTransition", &PyWEdge::isWaypointTransition,
+           DocClassMethod(isWaypointEdge))
+      .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
+      .def("waypoint", &PyWEdge::waypoint, DocClassMethod(waypoint))
       .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
       .def("pathValidation", &PyWEdge::pathValidation,
            DocClassMethod(pathValidation));
