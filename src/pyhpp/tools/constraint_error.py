@@ -47,14 +47,9 @@ def print_error(config_projector, q):
     threshold = config_projector.errorThreshold()
 
     print(f"Overall satisfied: {satisfied}  (threshold: {threshold:.0e})")
-    print(
-        f"{'Constraint':<50} {'Kind':<10} {'Pri':<5} {'Norm':>12} {'OK?':>5}"
-    )
+    print(f"{'Constraint':<50} {'Kind':<10} {'Pri':<5} {'Norm':>12} {'OK?':>5}")
     print("-" * 85)
     for e in entries:
         pri = str(e["priority"]) if e["priority"] is not None else "-"
         ok = "yes" if e["satisfied"] else "NO"
-        print(
-            f"{e['name']:<50} {e['kind']:<10} {pri:<5} "
-            f"{e['norm']:>12.6e} {ok:>5}"
-        )
+        print(f"{e['name']:<50} {e['kind']:<10} {pri:<5} {e['norm']:>12.6e} {ok:>5}")
