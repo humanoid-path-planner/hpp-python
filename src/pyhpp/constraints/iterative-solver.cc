@@ -47,11 +47,10 @@ namespace constraints {
 using namespace hpp::constraints;
 using namespace hpp::constraints::solver;
 
-static boost::python::list getConstraintsForPriority(
-    HierarchicalIterative& hi, std::size_t priority) {
+static boost::python::list getConstraintsForPriority(HierarchicalIterative& hi,
+                                                     std::size_t priority) {
   boost::python::list result;
-  for (const auto& c : hi.constraints(priority).constraints())
-    result.append(c);
+  for (const auto& c : hi.constraints(priority).constraints()) result.append(c);
   return result;
 }
 

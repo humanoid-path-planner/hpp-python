@@ -32,7 +32,6 @@
 #include <hpp/constraints/implicit-constraint-set.hh>
 #include <hpp/constraints/solver/by-substitution.hh>
 #include <pyhpp/constraints/fwd.hh>
-
 #include <set>
 
 // DocNamespace(hpp::constraints::solver)
@@ -51,7 +50,7 @@ tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
 }
 
 boost::python::list BySubstitution_describeError(BySubstitution& solver,
-                                                  vectorIn_t arg) {
+                                                 vectorIn_t arg) {
   size_type implicitDim = solver.dimension();
   size_type explicitDim = solver.explicitConstraintSet().errorSize();
   vector_t error(implicitDim + explicitDim);
@@ -82,8 +81,8 @@ boost::python::list BySubstitution_describeError(BySubstitution& solver,
       const DifferentiableFunction& f = c->function();
       size_type nv = f.outputDerivativeSize();
       vector_t errSlice = error.segment(offset, nv);
-      result.append(boost::python::make_tuple(
-          f.name(), errSlice, std::string("explicit"), -1));
+      result.append(boost::python::make_tuple(f.name(), errSlice,
+                                              std::string("explicit"), -1));
       offset += nv;
     }
   }
