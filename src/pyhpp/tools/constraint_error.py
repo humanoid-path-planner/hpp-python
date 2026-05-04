@@ -20,7 +20,7 @@ def describe_error(config_projector, q):
     solver = config_projector.solver()
     threshold = config_projector.errorThreshold()
 
-    raw = solver.describeError(q)
+    raw, satisfied = solver.describeError(q)
 
     entries = []
     for name, error, kind, priority in raw:
@@ -37,7 +37,6 @@ def describe_error(config_projector, q):
             }
         )
 
-    satisfied = all(e["satisfied"] for e in entries)
     return entries, satisfied
 
 
