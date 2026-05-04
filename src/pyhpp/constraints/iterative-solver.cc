@@ -47,8 +47,12 @@ namespace constraints {
 using namespace hpp::constraints;
 using namespace hpp::constraints::solver;
 
-static boost::python::list getConstraintsForPriority(HierarchicalIterative& hi,
-                                                     std::size_t priority) {
+static boost::python::list getConstraintsForPriority(
+    HierarchicalIterative& hi, std::size_t priority) {
+  if (priority >= hi.numberStacks()) {
+    PyErr_SetString(PyExc_IndexError, "priority is out of range");
+    boost::python::throw_error_already_set();
+  }
   boost::python::list result;
   for (const auto& c : hi.constraints(priority).constraints()) result.append(c);
   return result;

@@ -49,13 +49,12 @@ tuple BySubstitution_solve(const BySubstitution& hs, const vector_t& q) {
   return make_tuple(qout, s);
 }
 
-boost::python::list BySubstitution_describeError(BySubstitution& solver,
-                                                 vectorIn_t arg) {
+boost::python::tuple BySubstitution_describeError(BySubstitution& solver,
+                                                  vectorIn_t arg) {
   size_type implicitDim = solver.dimension();
   size_type explicitDim = solver.explicitConstraintSet().errorSize();
   vector_t error(implicitDim + explicitDim);
   bool satisfied = solver.isSatisfied(arg, error);
-  (void)satisfied;
 
   boost::python::list result;
   size_type offset = 0;
@@ -87,7 +86,7 @@ boost::python::list BySubstitution_describeError(BySubstitution& solver,
     }
   }
 
-  return result;
+  return boost::python::make_tuple(result, satisfied);
 }
 
 void exposeBySubstitution() {
