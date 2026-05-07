@@ -489,7 +489,8 @@ void PyWGraph::setWaypoint(PyWEdgePtr_t waypointEdge, int index,
   }
 }
 
-PyWEdgePtr_t PyWGraph::transitionAtParam(hpp::core::PathVectorPtr_t path, value_type param) {
+PyWEdgePtr_t PyWGraph::transitionAtParam(hpp::core::PathVectorPtr_t path,
+                                         value_type param) {
   EdgePtr_t edge = hpp::manipulation::graph::Graph::edgeAtParam(path, param);
   return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
 }
@@ -1288,8 +1289,8 @@ void exposeGraph() {
 
   // DocClass(Graph)
   class_<PyWGraph, PyWGraphPtr_t>(
-      "Graph", init<const std::string&, const PyWDevicePtr_t&,
-                    const PyWProblemPtr_t&>())
+      "Graph",
+      init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())
 
       .def("_get_native_graph", &getGraphCapsule)
       .def_readwrite("robot", &PyWGraph::robot)
@@ -1301,18 +1302,15 @@ void exposeGraph() {
 
       // Graph construction
       .PYHPP_DEFINE_METHOD1(PyWGraph, createState, DOC_CREATESTATE)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, createTransition,
-                            DOC_CREATETRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createTransition, DOC_CREATETRANSITION)
       .PYHPP_DEFINE_METHOD1(PyWGraph, createWaypointTransition,
                             DOC_CREATEWAYPOINTTRANSITION)
       .PYHPP_DEFINE_METHOD1(PyWGraph, createLevelSetTransition,
                             DOC_CREATELEVELSETTRANSITION)
 
       // Transition/State management
-      .PYHPP_DEFINE_METHOD1(PyWGraph, setContainingNode,
-                            DOC_SETCONTAININGNODE)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, getContainingNode,
-                            DOC_GETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setContainingNode, DOC_SETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getContainingNode, DOC_GETCONTAININGNODE)
       .PYHPP_DEFINE_METHOD1(PyWGraph, setShort, DOC_SETSHORT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, isShort, DOC_ISSHORT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getNodesConnectedByTransition,
@@ -1320,7 +1318,7 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
-       .PYHPP_DEFINE_METHOD(PyWGraph, getState)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getState)
       .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
       .PYHPP_DEFINE_METHOD(PyWGraph, getStates)
       .PYHPP_DEFINE_METHOD(PyWGraph, getTransitions)
@@ -1328,8 +1326,7 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD(PyWGraph, getTransitionNames)
 
       // State queries
-      .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration,
-                            DOC_GETSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration, DOC_GETSTATE)
 
       // Constraint management
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint,
@@ -1347,16 +1344,13 @@ void exposeGraph() {
                             DOC_GETNUMERICALCONSTRAINTSFOREDGE)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForGraph,
                             DOC_GETNUMERICALCONSTRAINTSFORGRAPH)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints,
-                            DOC_RESETCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints, DOC_RESETCONSTRAINTS)
       .PYHPP_DEFINE_METHOD1(PyWGraph, registerConstraints,
                             DOC_REGISTERCONSTRAINTS)
 
-      .def("createPlacementConstraint",
-           &PyWGraph::createPlacementConstraint1,
+      .def("createPlacementConstraint", &PyWGraph::createPlacementConstraint1,
            DOC_CREATEPLACEMENTCONSTRAINT)
-      .def("createPlacementConstraint",
-           &PyWGraph::createPlacementConstraint2,
+      .def("createPlacementConstraint", &PyWGraph::createPlacementConstraint2,
            DOC_CREATEPLACEMENTCONSTRAINT)
       .def("createPrePlacementConstraint",
            &PyWGraph::createPrePlacementConstraint1,
@@ -1400,8 +1394,7 @@ void exposeGraph() {
 
       // Subgraph management
       .PYHPP_DEFINE_METHOD1(PyWGraph, createSubGraph, DOC_CREATESUBGRAPH)
-      .PYHPP_DEFINE_METHOD1(PyWGraph, setTargetNodeList,
-                            DOC_SETTARGETNODELIST)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setTargetNodeList, DOC_SETTARGETNODELIST)
 
       // Display and debugging
       .PYHPP_DEFINE_METHOD1(PyWGraph, displayStateConstraints,

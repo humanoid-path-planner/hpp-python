@@ -233,7 +233,8 @@ struct PyWGraph {
   // Initialization
   void initialize();
   // Get transition at given parameter of a PathVector
-  static PyWEdgePtr_t transitionAtParam(hpp::core::PathVectorPtr_t path, value_type param);
+  static PyWEdgePtr_t transitionAtParam(hpp::core::PathVectorPtr_t path,
+                                        value_type param);
 };
 typedef std::shared_ptr<PyWGraph> PyWGraphPtr_t;
 
