@@ -258,33 +258,42 @@
         "type": "github"
       }
     },
-    "hpp-core": {
+    "hpp-constraints": {
       "inputs": {
-        "flake-parts": [
-          "hpp-core",
-          "gepetto",
-          "flake-parts"
-        ],
         "gepetto": [
           "gepetto"
-        ],
-        "systems": [
-          "hpp-core",
-          "gepetto",
-          "systems"
         ]
       },
       "locked": {
-        "lastModified": 1776407163,
-        "narHash": "sha256-9dy/cZjjdt7oNjiPPKiN5im82zqdkWfEMIyz07tY+2U=",
+        "lastModified": 1777805837,
+        "narHash": "sha256-fRsu0rZhNSAqQg/5XTQdoH2fQonyfAY7NArXm/ur8sI=",
         "owner": "humanoid-path-planner",
-        "repo": "hpp-core",
-        "rev": "d15d7ef530d54bbfccc51d231124b20f3410378a",
+        "repo": "hpp-constraints",
+        "rev": "44d80dba5789f008155922ed6c624f6766d026d3",
         "type": "github"
       },
       "original": {
         "owner": "humanoid-path-planner",
-        "ref": "pull/434/head",
+        "repo": "hpp-constraints",
+        "type": "github"
+      }
+    },
+    "hpp-core": {
+      "inputs": {
+        "gepetto": [
+          "gepetto"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777485380,
+        "narHash": "sha256-gu4Aumlz6CmouJFvxpMztWiUpKzQlMF4ONQoGQ24czQ=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-core",
+        "rev": "3e4bf1d7c601780dc31a9f39809809a63f5d4a67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
         "repo": "hpp-core",
         "type": "github"
       }
@@ -448,6 +457,7 @@
     "root": {
       "inputs": {
         "gepetto": "gepetto",
+        "hpp-constraints": "hpp-constraints",
         "hpp-core": "hpp-core"
       }
     },
