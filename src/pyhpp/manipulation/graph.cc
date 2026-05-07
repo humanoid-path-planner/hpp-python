@@ -1279,137 +1279,136 @@ void exposeGraph() {
       .def("name", &PyWEdge::name, DocClassMethod(name))
       .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
       .def("pathValidation", &PyWEdge::pathValidation,
-           DocClassMethod(pathValidation)),
+           DocClassMethod(pathValidation));
 
-      // DocClass(Graph)
-      class_<PyWGraph, PyWGraphPtr_t>(
-          "Graph", init<const std::string&, const PyWDevicePtr_t&,
-                        const PyWProblemPtr_t&>())
+  // DocClass(Graph)
+  class_<PyWGraph, PyWGraphPtr_t>(
+      "Graph", init<const std::string&, const PyWDevicePtr_t&,
+                    const PyWProblemPtr_t&>())
 
-          .def("_get_native_graph", &getGraphCapsule)
-          .def_readwrite("robot", &PyWGraph::robot)
-          // Configuration methods
-          .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations,
-                                      hpp::manipulation::size_type)
-          .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PyWGraph, errorThreshold,
-                                                hpp::manipulation::value_type)
+      .def("_get_native_graph", &getGraphCapsule)
+      .def_readwrite("robot", &PyWGraph::robot)
+      // Configuration methods
+      .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations,
+                                  hpp::manipulation::size_type)
+      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PyWGraph, errorThreshold,
+                                            hpp::manipulation::value_type)
 
-          // Graph construction
-          .PYHPP_DEFINE_METHOD1(PyWGraph, createState, DOC_CREATESTATE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, createTransition,
-                                DOC_CREATETRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, createWaypointTransition,
-                                DOC_CREATEWAYPOINTTRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, createLevelSetTransition,
-                                DOC_CREATELEVELSETTRANSITION)
+      // Graph construction
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createState, DOC_CREATESTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createTransition,
+                            DOC_CREATETRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createWaypointTransition,
+                            DOC_CREATEWAYPOINTTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createLevelSetTransition,
+                            DOC_CREATELEVELSETTRANSITION)
 
-          // Transition/State management
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setContainingNode,
-                                DOC_SETCONTAININGNODE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getContainingNode,
-                                DOC_GETCONTAININGNODE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setShort, DOC_SETSHORT)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, isShort, DOC_ISSHORT)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getNodesConnectedByTransition,
-                                DOC_GETNODESCONNECTEDBYTRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
+      // Transition/State management
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setContainingNode,
+                            DOC_SETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getContainingNode,
+                            DOC_GETCONTAININGNODE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setShort, DOC_SETSHORT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, isShort, DOC_ISSHORT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNodesConnectedByTransition,
+                            DOC_GETNODESCONNECTEDBYTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
+       .PYHPP_DEFINE_METHOD(PyWGraph, getState)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getStates)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitions)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getStateNames)
+      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitionNames)
 
-          .PYHPP_DEFINE_METHOD(PyWGraph, getState)
-          .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
-          .PYHPP_DEFINE_METHOD(PyWGraph, getStates)
-          .PYHPP_DEFINE_METHOD(PyWGraph, getTransitions)
-          .PYHPP_DEFINE_METHOD(PyWGraph, getStateNames)
-          .PYHPP_DEFINE_METHOD(PyWGraph, getTransitionNames)
+      // State queries
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration,
+                            DOC_GETSTATE)
 
-          // State queries
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration,
-                                DOC_GETSTATE)
+      // Constraint management
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint,
+                            DOC_ADDNUMERICALCONSTRAINT)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToState,
+                            DOC_ADDNUMERICALCONSTRAINTSTOSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToTransition,
+                            DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION)
+      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraintsToGraph)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsForPath,
+                            DOC_ADDNUMERICALCONSTRAINTSFORPATH)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForState,
+                            DOC_GETNUMERICALCONSTRAINTSFORSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForEdge,
+                            DOC_GETNUMERICALCONSTRAINTSFOREDGE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForGraph,
+                            DOC_GETNUMERICALCONSTRAINTSFORGRAPH)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints,
+                            DOC_RESETCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, registerConstraints,
+                            DOC_REGISTERCONSTRAINTS)
 
-          // Constraint management
-          .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraint,
-                                DOC_ADDNUMERICALCONSTRAINT)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToState,
-                                DOC_ADDNUMERICALCONSTRAINTSTOSTATE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToTransition,
-                                DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION)
-          .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraintsToGraph)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsForPath,
-                                DOC_ADDNUMERICALCONSTRAINTSFORPATH)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForState,
-                                DOC_GETNUMERICALCONSTRAINTSFORSTATE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForEdge,
-                                DOC_GETNUMERICALCONSTRAINTSFOREDGE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForGraph,
-                                DOC_GETNUMERICALCONSTRAINTSFORGRAPH)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, resetConstraints,
-                                DOC_RESETCONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, registerConstraints,
-                                DOC_REGISTERCONSTRAINTS)
+      .def("createPlacementConstraint",
+           &PyWGraph::createPlacementConstraint1,
+           DOC_CREATEPLACEMENTCONSTRAINT)
+      .def("createPlacementConstraint",
+           &PyWGraph::createPlacementConstraint2,
+           DOC_CREATEPLACEMENTCONSTRAINT)
+      .def("createPrePlacementConstraint",
+           &PyWGraph::createPrePlacementConstraint1,
+           DOC_CREATEPREPLACEMENTCONSTRAINT)
+      .def("createPrePlacementConstraint",
+           &PyWGraph::createPrePlacementConstraint2,
+           DOC_CREATEPREPLACEMENTCONSTRAINT)
+      .def("createGraspConstraint", &PyWGraph::createGraspConstraint)
+      .def("createPreGraspConstraint", &PyWGraph::createPreGraspConstraint)
+      // Configuration error checking
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState,
+                            DOC_GETCONFIGERRORFORSTATE)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransition,
+                            DOC_GETCONFIGERRORFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionLeaf,
+                            DOC_GETCONFIGERRORFORTRANSITIONLEAF)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionTarget,
+                            DOC_GETCONFIGERRORFORTRANSITIONTARGET)
 
-          .def("createPlacementConstraint",
-               &PyWGraph::createPlacementConstraint1,
-               DOC_CREATEPLACEMENTCONSTRAINT)
-          .def("createPlacementConstraint",
-               &PyWGraph::createPlacementConstraint2,
-               DOC_CREATEPLACEMENTCONSTRAINT)
-          .def("createPrePlacementConstraint",
-               &PyWGraph::createPrePlacementConstraint1,
-               DOC_CREATEPREPLACEMENTCONSTRAINT)
-          .def("createPrePlacementConstraint",
-               &PyWGraph::createPrePlacementConstraint2,
-               DOC_CREATEPREPLACEMENTCONSTRAINT)
-          .def("createGraspConstraint", &PyWGraph::createGraspConstraint)
-          .def("createPreGraspConstraint", &PyWGraph::createPreGraspConstraint)
-          // Configuration error checking
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState,
-                                DOC_GETCONFIGERRORFORSTATE)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransition,
-                                DOC_GETCONFIGERRORFORTRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionLeaf,
-                                DOC_GETCONFIGERRORFORTRANSITIONLEAF)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForTransitionTarget,
-                                DOC_GETCONFIGERRORFORTRANSITIONTARGET)
+      // Constraint application
+      .PYHPP_DEFINE_METHOD1(PyWGraph, applyStateConstraints,
+                            DOC_APPLYSTATECONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, applyLeafConstraints,
+                            DOC_APPLYLEAFCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, generateTargetConfig,
+                            DOC_GENERATETARGETCONFIG)
 
-          // Constraint application
-          .PYHPP_DEFINE_METHOD1(PyWGraph, applyStateConstraints,
-                                DOC_APPLYSTATECONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, applyLeafConstraints,
-                                DOC_APPLYLEAFCONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, generateTargetConfig,
-                                DOC_GENERATETARGETCONFIG)
+      // Level set transitions
+      .PYHPP_DEFINE_METHOD1(PyWGraph, addLevelSetFoliation,
+                            DOC_ADDLEVELSETFOLIATION)
 
-          // Level set transitions
-          .PYHPP_DEFINE_METHOD1(PyWGraph, addLevelSetFoliation,
-                                DOC_ADDLEVELSETFOLIATION)
+      // Security margins and collision
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getSecurityMarginMatrixForTransition,
+                            DOC_GETSECURITYMARGINMATRIXFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setSecurityMarginForTransition,
+                            DOC_SETSECURITYMARGINFORTRANSITION)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, getRelativeMotionMatrix,
+                            DOC_GETRELATIVEMOTIONMATRIX)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, removeCollisionPairFromTransition,
+                            DOC_REMOVECOLLISIONPAIRFROMTRANSITION)
 
-          // Security margins and collision
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getSecurityMarginMatrixForTransition,
-                                DOC_GETSECURITYMARGINMATRIXFORTRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setSecurityMarginForTransition,
-                                DOC_SETSECURITYMARGINFORTRANSITION)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, getRelativeMotionMatrix,
-                                DOC_GETRELATIVEMOTIONMATRIX)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, removeCollisionPairFromTransition,
-                                DOC_REMOVECOLLISIONPAIRFROMTRANSITION)
+      // Subgraph management
+      .PYHPP_DEFINE_METHOD1(PyWGraph, createSubGraph, DOC_CREATESUBGRAPH)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, setTargetNodeList,
+                            DOC_SETTARGETNODELIST)
 
-          // Subgraph management
-          .PYHPP_DEFINE_METHOD1(PyWGraph, createSubGraph, DOC_CREATESUBGRAPH)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, setTargetNodeList,
-                                DOC_SETTARGETNODELIST)
+      // Display and debugging
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayStateConstraints,
+                            DOC_DISPLAYSTATECONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionConstraints,
+                            DOC_DISPLAYTRANSITIONCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionTargetConstraints,
+                            DOC_DISPLAYTRANSITIONTARGETCONSTRAINTS)
+      .PYHPP_DEFINE_METHOD1(PyWGraph, display, DOC_DISPLAY)
 
-          // Display and debugging
-          .PYHPP_DEFINE_METHOD1(PyWGraph, displayStateConstraints,
-                                DOC_DISPLAYSTATECONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionConstraints,
-                                DOC_DISPLAYTRANSITIONCONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, displayTransitionTargetConstraints,
-                                DOC_DISPLAYTRANSITIONTARGETCONSTRAINTS)
-          .PYHPP_DEFINE_METHOD1(PyWGraph, display, DOC_DISPLAY)
-
-          // Initialization
-          .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE);
+      // Initialization
+      .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE);
 }
 
 }  // namespace manipulation
