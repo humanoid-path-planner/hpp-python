@@ -489,6 +489,11 @@ void PyWGraph::setWaypoint(PyWEdgePtr_t waypointEdge, int index,
   }
 }
 
+PyWEdgePtr_t PyWGraph::transitionAtParam(hpp::core::PathVectorPtr_t path, value_type param) {
+  EdgePtr_t edge = hpp::manipulation::graph::Graph::edgeAtParam(path, param);
+  return std::shared_ptr<PyWEdge>(new PyWEdge(edge));
+}
+
 PyWEdgePtr_t PyWGraph::getTransition(const std::string& edgeName) {
   try {
     using namespace hpp::manipulation::graph;
@@ -1408,7 +1413,11 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, display, DOC_DISPLAY)
 
       // Initialization
-      .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE);
+      .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE)
+
+      // Transition at parameter.
+      .def("transitionAtParam", &PyWGraph::transitionAtParam)
+      .staticmethod("transitionAtParam");
 }
 
 }  // namespace manipulation
