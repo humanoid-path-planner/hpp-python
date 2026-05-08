@@ -298,6 +298,26 @@
         "type": "github"
       }
     },
+    "hpp-manipulation": {
+      "inputs": {
+        "gepetto": [
+          "gepetto"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778231957,
+        "narHash": "sha256-vbfDlrclTfd2t1O4V4WOmBDSL7DjdJRwMZkYVxUzO0U=",
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-manipulation",
+        "rev": "88d79cbded13878205bfb89655093163b2aeff0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "humanoid-path-planner",
+        "repo": "hpp-manipulation",
+        "type": "github"
+      }
+    },
     "nix-ros-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -458,7 +478,8 @@
       "inputs": {
         "gepetto": "gepetto",
         "hpp-constraints": "hpp-constraints",
-        "hpp-core": "hpp-core"
+        "hpp-core": "hpp-core",
+        "hpp-manipulation": "hpp-manipulation"
       }
     },
     "system-manager": {
