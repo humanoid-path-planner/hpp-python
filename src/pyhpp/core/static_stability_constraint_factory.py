@@ -29,8 +29,7 @@
 # DAMAGE.
 
 import numpy as np
-from hpp import Transform
-from pinocchio import SE3
+from pinocchio import Quaternion, SE3
 
 
 # # This class provides tools to create static stability constraints
@@ -59,13 +58,13 @@ class StaticStabilityConstraintsFactory:
         created_constraints = dict()
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
-        Ml = Transform(_tfs[0])
-        Mr = Transform(_tfs[1])
+        Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
+        Mr = SE3(Quaternion(np.array(_tfs[1][3:7])), np.array(_tfs[1][0:3]))
         self.robot.currentConfiguration(q0)
         x = self._getCOM(comName)
         result = []
         # COM wrt left ankle frame
-        xloc = Ml.inverse().transform(x)
+        xloc = Ml.inverse().act(x)
         result.append(prefix + "relative-com")
         constraint = self.problem.createRelativeComConstraint(
             result[-1], comName, leftAnkle, xloc, [True] * 3
@@ -79,7 +78,7 @@ class StaticStabilityConstraintsFactory:
             leftAnkle,
             rightAnkle,
             SE3.Identity(),
-            SE3(rel_transform.quaternion.toRotationMatrix(), rel_transform.translation),
+            rel_transform,
             [True] * 6,
         )
         created_constraints[result[-1]] = constraint
@@ -89,7 +88,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             leftAnkle,
-            SE3(Ml.quaternion.toRotationMatrix(), Ml.translation),
+            Ml,
             SE3.Identity(),
             [False, False, True, True, True, False],
         )
@@ -100,7 +99,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             leftAnkle,
-            SE3(Ml.quaternion.toRotationMatrix(), Ml.translation),
+            Ml,
             SE3.Identity(),
             [True, True, False, False, False, True],
         )
@@ -116,14 +115,14 @@ class StaticStabilityConstraintsFactory:
         created_constraints = dict()
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
-        Ml = Transform(_tfs[0])
-        Mr = Transform(_tfs[1])
+        Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
+        Mr = SE3(Quaternion(np.array(_tfs[1][3:7])), np.array(_tfs[1][0:3]))
         self.robot.currentConfiguration(q0)
         x = self._getCOM(comName)
         result = []
 
         # COM wrt left ankle frame
-        xloc = Ml.inverse().transform(x)
+        xloc = Ml.inverse().act(x)
         result.append(prefix + "relative-com")
         constraint = self.problem.createRelativeComConstraint(
             result[-1], comName, leftAnkle, xloc, maskCom
@@ -136,7 +135,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             leftAnkle,
-            SE3(Ml.quaternion.toRotationMatrix(), Ml.translation),
+            Ml,
             SE3.Identity(),
             [True] * 6,
         )
@@ -148,7 +147,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             rightAnkle,
-            SE3(Mr.quaternion.toRotationMatrix(), Mr.translation),
+            Mr,
             SE3.Identity(),
             [True] * 6,
         )
@@ -162,8 +161,8 @@ class StaticStabilityConstraintsFactory:
         created_constraints = dict()
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
-        Ml = Transform(_tfs[0])
-        Mr = Transform(_tfs[1])
+        Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
+        Mr = SE3(Quaternion(np.array(_tfs[1][3:7])), np.array(_tfs[1][0:3]))
         self.robot.currentConfiguration(q0)
         x = self._getCOM(comName)
         result = []
@@ -194,7 +193,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             rightAnkle,
-            SE3(Mr.quaternion.toRotationMatrix(), Mr.translation),
+            Mr,
             SE3.Identity(),
             mask,
         )
@@ -206,7 +205,7 @@ class StaticStabilityConstraintsFactory:
             result[-1],
             "",
             leftAnkle,
-            SE3(Ml.quaternion.toRotationMatrix(), Ml.translation),
+            Ml,
             SE3.Identity(),
             mask,
         )
