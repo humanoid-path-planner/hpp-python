@@ -35,6 +35,7 @@
 #include <hpp/core/path-optimization/simple-shortcut.hh>
 #include <hpp/core/path-optimization/simple-time-parameterization.hh>
 #include <hpp/core/path-optimization/spline-gradient-based.hh>
+#include <hpp/core/path-optimization/trapezoidal-time-parameterization.hh>
 #include <hpp/core/path-optimizer.hh>
 #include <hpp/core/path-vector.hh>
 #include <hpp/core/problem.hh>
@@ -118,6 +119,23 @@ void exposePathOptimizer() {
                                                    no_init)
       .def("__init__",
            make_constructor(&pathOptimization::RSTimeParameterization::create));
+
+  class_<pathOptimization::TrapezoidalTimeParameterization,
+         std::shared_ptr<pathOptimization::TrapezoidalTimeParameterization>,
+         bases<PathOptimizer>, boost::noncopyable>(
+      "TrapezoidalTimeParameterization", no_init)
+      .def("__init__",
+           make_constructor(
+               &pathOptimization::TrapezoidalTimeParameterization::create))
+      .def_readwrite(
+          "maxVelocity",
+          &pathOptimization::TrapezoidalTimeParameterization::maxVelocity)
+      .def_readwrite(
+          "maxAcceleration",
+          &pathOptimization::TrapezoidalTimeParameterization::maxAcceleration)
+      .def_readwrite(
+          "minimumDuration",
+          &pathOptimization::TrapezoidalTimeParameterization::minimumDuration);
 
   exposeSplineGradientBased<1>("SplineGradientBased_bezier1");
   exposeSplineGradientBased<3>("SplineGradientBased_bezier3");
