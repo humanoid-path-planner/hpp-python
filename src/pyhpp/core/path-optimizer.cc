@@ -120,22 +120,26 @@ void exposePathOptimizer() {
       .def("__init__",
            make_constructor(&pathOptimization::RSTimeParameterization::create));
 
-  class_<pathOptimization::TrapezoidalTimeParameterization,
-         std::shared_ptr<pathOptimization::TrapezoidalTimeParameterization>,
-         bases<PathOptimizer>, boost::noncopyable>(
-      "TrapezoidalTimeParameterization", no_init)
+  typedef pathOptimization::TrapezoidalTimeParameterization TTP_t;
+  class_<TTP_t, std::shared_ptr<TTP_t>, bases<PathOptimizer>,
+         boost::noncopyable>("TrapezoidalTimeParameterization", no_init)
       .def("__init__",
            make_constructor(
                &pathOptimization::TrapezoidalTimeParameterization::create))
-      .def_readwrite(
+      .add_property(
           "maxVelocity",
-          &pathOptimization::TrapezoidalTimeParameterization::maxVelocity)
-      .def_readwrite(
+          static_cast<value_type (TTP_t::*)() const>(&TTP_t::maxVelocity),
+          static_cast<void (TTP_t::*)(const value_type&)>(&TTP_t::maxVelocity))
+      .add_property(
           "maxAcceleration",
-          &pathOptimization::TrapezoidalTimeParameterization::maxAcceleration)
-      .def_readwrite(
+          static_cast<value_type (TTP_t::*)() const>(&TTP_t::maxAcceleration),
+          static_cast<void (TTP_t::*)(const value_type&)>(
+              &TTP_t::maxAcceleration))
+      .add_property(
           "minimumDuration",
-          &pathOptimization::TrapezoidalTimeParameterization::minimumDuration);
+          static_cast<value_type (TTP_t::*)() const>(&TTP_t::minimumDuration),
+          static_cast<void (TTP_t::*)(const value_type&)>(
+              &TTP_t::minimumDuration));
 
   exposeSplineGradientBased<1>("SplineGradientBased_bezier1");
   exposeSplineGradientBased<3>("SplineGradientBased_bezier3");
