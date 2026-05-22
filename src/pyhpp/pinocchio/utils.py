@@ -28,6 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 # DAMAGE.
 
+
 def shrinkJointRange(robot, joints, ratio):
     """
     Reduce the range of selected joints for security
@@ -54,4 +55,3 @@ def shrinkJointRange(robot, joints, ratio):
         M = mean + 0.5 * ratio * width
         model.lowerPositionLimit[iq] = m
         model.upperPositionLimit[iq] = M
-
