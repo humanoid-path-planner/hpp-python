@@ -84,6 +84,7 @@ endmacro()
 
 python_install_on_site(pyhpp __init__.py)
 
+python_install_on_site(pyhpp/pinocchio utils.py)
 python_install_on_site(pyhpp/manipulation constraint_graph_factory.py)
 python_install_on_site(pyhpp/core static_stability_constraint_factory.py)
 python_install_on_site(pyhpp/manipulation security_margins.py)
