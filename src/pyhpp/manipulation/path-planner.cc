@@ -115,6 +115,22 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
     os << "qGoals = " << qGoals << "should have at least one line.";
     throw std::logic_error(os.str().c_str());
   }
+  // Workaround for eigenpy bug: (1,N) numpy arrays have both C- and
+  // F-contiguous flags set. eigenpy's is_arr_layout_compatible_with_mat_type
+  // sees F-contiguous and creates Ref<MatrixXd> with Stride<0,0>, causing
+  // the actual numpy strides to be ignored. Only element (0,0) maps correctly;
+  // all other columns receive garbage. Re-map via the raw data pointer with an
+  // explicit RowMajor layout to recover the correct values.
+  // Multi-row matrices (rows > 1) are not affected: their C- and F-contiguous
+  // flags differ, so eigenpy correctly allocates a copy.
+  if (qGoals.rows() == 1) {
+    typedef Eigen::Map<const Eigen::Matrix<double, 1, Eigen::Dynamic,
+                                           Eigen::RowMajor>>
+        RowMap;
+    const hpp::constraints::matrix_t goals =
+        RowMap(qGoals.data(), 1, qGoals.cols());
+    return trObj()->planPath(qInit, goals, resetRoadmap);
+  }
   return trObj()->planPath(qInit, qGoals, resetRoadmap);
 }
 
