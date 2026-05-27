@@ -124,8 +124,8 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
   // Multi-row matrices (rows > 1) are not affected: their C- and F-contiguous
   // flags differ, so eigenpy correctly allocates a copy.
   if (qGoals.rows() == 1) {
-    typedef Eigen::Map<const Eigen::Matrix<double, 1, Eigen::Dynamic,
-                                           Eigen::RowMajor>>
+    typedef Eigen::Map<
+        const Eigen::Matrix<double, 1, Eigen::Dynamic, Eigen::RowMajor>>
         RowMap;
     const hpp::constraints::matrix_t goals =
         RowMap(qGoals.data(), 1, qGoals.cols());
