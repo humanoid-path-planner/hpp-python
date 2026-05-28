@@ -199,11 +199,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777984530,
-        "narHash": "sha256-uaOroT+Yu5gL+wS8V/3QYFbLr/LpZ67zlKnSR/K4Vhs=",
+        "lastModified": 1778404540,
+        "narHash": "sha256-fbmPdeofeq/FW5XY8dUYrE4YsZIkwFS1aJMiT5nT6cQ=",
         "owner": "gepetto",
         "repo": "nix",
-        "rev": "3fa13ddddcc4a20317679ace2d7e53b891628354",
+        "rev": "a733fe9dedf14577bf45fc087c5098bd19ebb15c",
         "type": "github"
       },
       "original": {
@@ -285,11 +285,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777485380,
-        "narHash": "sha256-gu4Aumlz6CmouJFvxpMztWiUpKzQlMF4ONQoGQ24czQ=",
+        "lastModified": 1778665867,
+        "narHash": "sha256-03TqKH6eQHceTZwUn5L07I585+BxDnIqr1nQNwh9rpY=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-core",
-        "rev": "3e4bf1d7c601780dc31a9f39809809a63f5d4a67",
+        "rev": "bd78bd959009f45904ef274aa033937d50d079d3",
         "type": "github"
       },
       "original": {
@@ -305,11 +305,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778231957,
-        "narHash": "sha256-vbfDlrclTfd2t1O4V4WOmBDSL7DjdJRwMZkYVxUzO0U=",
+        "lastModified": 1778493726,
+        "narHash": "sha256-IA36QP3wxkXNvVc+EBnboQl7rAiFnWmIba8JlflVk5Y=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-manipulation",
-        "rev": "88d79cbded13878205bfb89655093163b2aeff0e",
+        "rev": "eedf14151b414ca38c491a11f1754a5fcbdcaeb9",
         "type": "github"
       },
       "original": {
