@@ -28,4 +28,10 @@
  <build_depend>hpp-core</build_depend>
  <exec_depend>hpp-core</exec_depend>
  <build_export_depend>hpp-core</build_export_depend>
+ <build_depend>hpp-manipulation</build_depend>
+ <exec_depend>hpp-manipulation</exec_depend>
+ <build_export_depend>hpp-manipulation</build_export_depend>
+ <build_depend>hpp-manipulation-urdf</build_depend>
+ <exec_depend>hpp-manipulation-urdf</exec_depend>
+ <build_export_depend>hpp-manipulation-urdf</build_export_depend>
  </package>
