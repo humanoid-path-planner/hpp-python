@@ -72,8 +72,6 @@ typedef hpp::pinocchio::Joint Joint;
 typedef hpp::pinocchio::JointIndex JointIndex;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
-
-
 struct modelsInfo {
   std::string urdfPath;
   std::string srdfPath;
@@ -81,10 +79,8 @@ struct modelsInfo {
   hpp::pinocchio::SE3 pose;
 
   bool operator==(const modelsInfo& other) const {
-    return urdfPath == other.urdfPath &&
-           srdfPath == other.srdfPath &&
-           prefix == other.prefix &&
-           pose == other.pose;
+    return urdfPath == other.urdfPath && srdfPath == other.srdfPath &&
+           prefix == other.prefix && pose == other.pose;
   }
 };
 

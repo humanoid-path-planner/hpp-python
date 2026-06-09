@@ -43,8 +43,6 @@ using hpp::manipulation::DevicePtr_t;
 using ::pinocchio::FrameIndex;
 using ::pinocchio::SE3;
 
-
-
 // Redefine loadModel in order to parse the srdf file with hpp-manipulation-urdf
 void loadModel(Device& robot, const FrameIndex& baseFrame,
                const std::string& prefix, const std::string& rootType,
@@ -53,7 +51,8 @@ void loadModel(Device& robot, const FrameIndex& baseFrame,
   hpp::pinocchio::urdf::loadModel(robot.obj, baseFrame, prefix, rootType,
                                   urdfPath, srdfPath, bMr);
 
-  // Sorry for this, but we need to store the urdf paths and the initial pose in the device for the rviz visualization. 
+  // Sorry for this, but we need to store the urdf paths and the initial pose in
+  // the device for the rviz visualization.
   modelsInfo info{urdfPath, srdfPath, prefix, bMr};
   robot.getModelsInfo().push_back(info);
   ////////////////////////////////////////////////////////

@@ -294,7 +294,7 @@ void exposeHandle() {
            DocClassMethod(createGraspComplement))
       .def("createGraspAndComplement", &Handle::createGraspAndComplement,
            DocClassMethod(createGraspAndComplement));
-  class_<std::map<std::string, HandlePtr_t> >("HandleMap")
+  class_<std::map<std::string, HandlePtr_t>>("HandleMap")
       .def(boost::python::map_indexing_suite<std::map<std::string, HandlePtr_t>,
                                              true>());
 }
@@ -308,13 +308,13 @@ object asPinDevice(object self) {
 
 void exposeDevice() {
   class_<modelsInfo>("modelsInfo")
-    .def_readwrite("urdfPath", &modelsInfo::urdfPath)
-    .def_readwrite("srdfPath", &modelsInfo::srdfPath)
-    .def_readwrite("prefix", &modelsInfo::prefix)
-    .def_readwrite("pose", &modelsInfo::pose);
+      .def_readwrite("urdfPath", &modelsInfo::urdfPath)
+      .def_readwrite("srdfPath", &modelsInfo::srdfPath)
+      .def_readwrite("prefix", &modelsInfo::prefix)
+      .def_readwrite("pose", &modelsInfo::pose);
 
   class_<std::vector<modelsInfo>>("modelsInfoVec")
-    .def(vector_indexing_suite<std::vector<modelsInfo>>());
+      .def(vector_indexing_suite<std::vector<modelsInfo>>());
 
   // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
@@ -350,7 +350,10 @@ void exposeDevice() {
            "    clearance: clearance of the gripper, the sum of handle and "
            "gripper clearances\n"
            "               defines the distance between pregrasp and grasp.")
-      .def("modelsInfo", &Device::getModelsInfo, return_internal_reference<>(), " Return list of modelsInfo stored in the device, each element contains the urdf path, srdf path, prefix and initial pose of a model loaded in the device");
+      .def("modelsInfo", &Device::getModelsInfo, return_internal_reference<>(),
+           " Return list of modelsInfo stored in the device, each element "
+           "contains the urdf path, srdf path, prefix and initial pose of a "
+           "model loaded in the device");
 }
 }  // namespace manipulation
 }  // namespace pyhpp
