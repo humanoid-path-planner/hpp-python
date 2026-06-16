@@ -1,37 +1,27 @@
 <?xml version='1.0'?>
- <package format='2'>
- <name>hpp-python</name>
- <version>8.0.0</version>
- <description>Implement python bindings for HPP </description>
+<package format='2'>
+  <name>hpp_python</name>
+  <version>8.0.0</version>
+  <description>Implement python bindings for HPP</description>
+  <author>Joseph Mirabel</author>
+  <author>Florent Lamiraux</author>
+  <maintainer email='guilhem.saurel@laas.fr'>Guilhem Saurel</maintainer>
+  <license>BSD-2-Clause</license>
 
- <maintainer email='hpp@laas.fr'>Joseph Mirabel</maintainer>
- <license>BSD</license>
+  <depend>eigenpy</depend>
+  <depend>pinocchio</depend>
+  <depend>hpp_util</depend>
+  <depend>hpp_pinocchio</depend>
+  <depend>hpp_constraints</depend>
+  <depend>hpp_core</depend>
+  <depend>hpp_manipulation</depend>
+  <depend>hpp_manipulation_urdf</depend>
 
- <author>Joseph Mirabel</author>
- <author>Florent Lamiraux</author>
+  <buildtool_depend>cmake</buildtool_depend>
+  <build_depend>doxygen</build_depend>
+  <build_depend>jrl_cmakemodules</build_depend>
 
- <build_depend>eigenpy</build_depend>
- <exec_depend>eigenpy</exec_depend>
- <build_export_depend>eigenpy</build_export_depend>
- <build_depend>pinocchio</build_depend>
- <exec_depend>pinocchio</exec_depend>
- <build_export_depend>pinocchio</build_export_depend>
- <build_depend>hpp-util</build_depend>
- <exec_depend>hpp-util</exec_depend>
- <build_export_depend>hpp-util</build_export_depend>
- <build_depend>hpp-pinocchio</build_depend>
- <exec_depend>hpp-pinocchio</exec_depend>
- <build_export_depend>hpp-pinocchio</build_export_depend>
- <build_depend>hpp-constraints</build_depend>
- <exec_depend>hpp-constraints</exec_depend>
- <build_export_depend>hpp-constraints</build_export_depend>
- <build_depend>hpp-core</build_depend>
- <exec_depend>hpp-core</exec_depend>
- <build_export_depend>hpp-core</build_export_depend>
- <build_depend>hpp-manipulation</build_depend>
- <exec_depend>hpp-manipulation</exec_depend>
- <build_export_depend>hpp-manipulation</build_export_depend>
- <build_depend>hpp-manipulation-urdf</build_depend>
- <exec_depend>hpp-manipulation-urdf</exec_depend>
- <build_export_depend>hpp-manipulation-urdf</build_export_depend>
- </package>
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
