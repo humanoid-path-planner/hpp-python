@@ -131,9 +131,9 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
         RowMap;
     const hpp::constraints::matrix_t goals =
         RowMap(qGoals.data(), 1, qGoals.cols());
-    return trObj()->planPath(qInit, goals, resetRoadmap);
+    return this->computePath(qInit, goals.transpose().eval(), resetRoadmap);
   }
-  return trObj()->planPath(qInit, qGoals, resetRoadmap);
+  return this->computePath(qInit, qGoals.transpose().eval(), resetRoadmap);
 }
 
 PathVectorPtr_t TransitionPlanner::computePath(ConfigurationIn_t qInit,
