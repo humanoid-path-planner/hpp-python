@@ -72,6 +72,18 @@ typedef hpp::pinocchio::Joint Joint;
 typedef hpp::pinocchio::JointIndex JointIndex;
 typedef hpp::pinocchio::JointPtr_t JointPtr_t;
 
+struct modelsInfo {
+  std::string urdfPath;
+  std::string srdfPath;
+  std::string prefix;
+  hpp::pinocchio::SE3 pose;
+
+  bool operator==(const modelsInfo& other) const {
+    return urdfPath == other.urdfPath && srdfPath == other.srdfPath &&
+           prefix == other.prefix && pose == other.pose;
+  }
+};
+
 // Wrapper class to hpp::manipulation::Device
 //
 // Boost python does not correctly handle weak pointers. To overcome this
@@ -84,6 +96,10 @@ struct Device : public pyhpp::pinocchio::Device {
                             const Transform3s& positionWRTParentJoint);
   std::map<std::string, HandlePtr_t> handles();
   std::map<std::string, GripperPtr_t> grippers();
+
+  std::vector<modelsInfo> models_info_;
+  std::vector<modelsInfo>& getModelsInfo() { return models_info_; }
+
   boost::python::list getJointConfig(const char* jointName);
   boost::python::list getJointNames();
   void setJointBounds(const char* jointName, boost::python::list jointBounds);
