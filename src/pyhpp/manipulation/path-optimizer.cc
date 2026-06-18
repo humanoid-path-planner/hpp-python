@@ -89,37 +89,42 @@ hpp::core::PathOptimizerPtr_t createGraphOptimizer(
   return GraphOptimizer::create<InnerOpt>(problem);
 }
 
-typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis, 1>
+typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                              1>
     SGB1_t;
 
-static SGB1_t::Ptr_t createSplineGradientBased1(const pyhpp::core::Problem& problem)
-{
-  hpp::manipulation::ProblemPtr_t manipProblem = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem,
-                                                                      problem.obj);
+static SGB1_t::Ptr_t createSplineGradientBased1(
+    const pyhpp::core::Problem& problem) {
+  hpp::manipulation::ProblemPtr_t manipProblem =
+      HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, problem.obj);
   if (!manipProblem) {
-    throw std::runtime_error("SplineGradientBased_bezier1 constructor expects a "
-                             "pyhpp.manipulation.Problem as input");
+    throw std::runtime_error(
+        "SplineGradientBased_bezier1 constructor expects a "
+        "pyhpp.manipulation.Problem as input");
   }
   return SGB1_t::create(manipProblem);
 }
 
-typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis, 3>
+typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                              3>
     SGB3_t;
 
-static SGB3_t::Ptr_t createSplineGradientBased3(const pyhpp::core::Problem& problem)
-{
-  hpp::manipulation::ProblemPtr_t manipProblem = HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem,
-                                                                      problem.obj);
+static SGB3_t::Ptr_t createSplineGradientBased3(
+    const pyhpp::core::Problem& problem) {
+  hpp::manipulation::ProblemPtr_t manipProblem =
+      HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, problem.obj);
   if (!manipProblem) {
-    throw std::runtime_error("SplineGradientBased_bezier3 constructor expects a "
-                             "pyhpp.manipulation.Problem as input");
+    throw std::runtime_error(
+        "SplineGradientBased_bezier3 constructor expects a "
+        "pyhpp.manipulation.Problem as input");
   }
   return SGB3_t::create(manipProblem);
 }
 
 void exposeSplineGradientBased1(const char* name) {
-  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis, 1>
-    SGB_t;
+  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                                1>
+      SGB_t;
   class_<SGB_t, std::shared_ptr<SGB_t>, bases<PathOptimizer>,
          boost::noncopyable>(name, no_init)
       .def("__init__", make_constructor(&createSplineGradientBased1))
@@ -137,8 +142,9 @@ void exposeSplineGradientBased1(const char* name) {
 }
 
 void exposeSplineGradientBased3(const char* name) {
-  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis, 3>
-    SGB_t;
+  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                                3>
+      SGB_t;
   class_<SGB_t, std::shared_ptr<SGB_t>, bases<PathOptimizer>,
          boost::noncopyable>(name, no_init)
       .def("__init__", make_constructor(&createSplineGradientBased3))
