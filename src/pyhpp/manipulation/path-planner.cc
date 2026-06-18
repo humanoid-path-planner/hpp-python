@@ -98,6 +98,8 @@ pyhpp::core::Problem TransitionPlanner::innerProblem() const {
 PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
                                             matrixIn_t qGoals,
                                             bool resetRoadmap) {
+  PyErr_WarnEx(PyExc_DeprecationWarning,
+               "planPath is deprecated, use computePath()", 1);
   if (qInit.rows() != obj->problem()->robot()->configSize()) {
     std::ostringstream os;
     os << "qInit = " << hpp::pinocchio::displayConfig(qInit)
@@ -129,9 +131,48 @@ PathVectorPtr_t TransitionPlanner::planPath(ConfigurationIn_t qInit,
         RowMap;
     const hpp::constraints::matrix_t goals =
         RowMap(qGoals.data(), 1, qGoals.cols());
-    return trObj()->planPath(qInit, goals, resetRoadmap);
+    return this->computePath(qInit, goals.transpose().eval(), resetRoadmap);
   }
-  return trObj()->planPath(qInit, qGoals, resetRoadmap);
+  return this->computePath(qInit, qGoals.transpose().eval(), resetRoadmap);
+}
+
+PathVectorPtr_t TransitionPlanner::computePath(ConfigurationIn_t qInit,
+                                               matrixIn_t qGoals,
+                                               bool resetRoadmap) {
+  if (qInit.rows() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "qInit = " << hpp::pinocchio::displayConfig(qInit)
+       << "should be of size " << obj->problem()->robot()->configSize() << ".";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (qGoals.rows() != obj->problem()->robot()->configSize()) {
+    std::ostringstream os;
+    os << "qGoals = " << qGoals << "should have "
+       << obj->problem()->robot()->configSize() << " rows.";
+    throw std::logic_error(os.str().c_str());
+  }
+  if (qGoals.cols() < 1) {
+    std::ostringstream os;
+    os << "qGoals = " << qGoals << "should have at least one line.";
+    throw std::logic_error(os.str().c_str());
+  }
+  // Workaround for eigenpy bug: (N,1) numpy arrays have both C- and
+  // F-contiguous flags set. eigenpy's is_arr_layout_compatible_with_mat_type
+  // sees C-contiguous and creates Ref<MatrixXd> with Stride<0,0>, causing
+  // the actual numpy strides to be ignored. Only element (0,0) maps correctly;
+  // all other rows receive garbage. Re-map via the raw data pointer with an
+  // explicit ColMajor layout to recover the correct values.
+  // Multi-column matrices (cols > 1) are not affected: their C- and
+  // F-contiguous flags differ, so eigenpy correctly allocates a copy.
+  if (qGoals.cols() == 1) {
+    typedef Eigen::Map<
+        const Eigen::Matrix<double, Eigen::Dynamic, 1, Eigen::ColMajor>>
+        ColMap;
+    const hpp::constraints::matrix_t goals =
+        ColMap(qGoals.data(), qGoals.rows(), 1);
+    return trObj()->computePath(qInit, goals, resetRoadmap);
+  }
+  return trObj()->computePath(qInit, qGoals, resetRoadmap);
 }
 
 tuple TransitionPlanner::directPath(ConfigurationIn_t q1, ConfigurationIn_t q2,
@@ -270,6 +311,8 @@ void exposePathPlanners() {
                                &TransitionPlanner::innerPlanner))
       .def("innerProblem", &TransitionPlanner::innerProblem,
            DocClassMethod(innerProblem))
+      .def("computePath", &TransitionPlanner::computePath,
+           DocClassMethod(computePath))
       .def("planPath", &TransitionPlanner::planPath, DocClassMethod(planPath))
       .def("directPath", &TransitionPlanner::directPath)
       .def("validateConfiguration", &TransitionPlanner::validateConfiguration)

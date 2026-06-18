@@ -56,6 +56,8 @@ struct TransitionPlanner : public pyhpp::core::PathPlanner {
   pyhpp::core::Problem innerProblem() const;
   PathVectorPtr_t planPath(ConfigurationIn_t qInit, matrixIn_t qGoals,
                            bool resetRoadmap);
+  PathVectorPtr_t computePath(ConfigurationIn_t qInit, matrixIn_t qGoals,
+                              bool resetRoadmap);
   tuple directPath(ConfigurationIn_t q1, ConfigurationIn_t q2, bool validate);
   tuple validateConfiguration(ConfigurationIn_t q, std::size_t id) const;
   PathVectorPtr_t optimizePath(const PathPtr_t& path);
