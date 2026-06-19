@@ -104,6 +104,7 @@ set(${PROJECT_NAME}_HEADERS
 )
 
 set(PYTHON_COMPONENTS Interpreter Development NumPy)
+findpython()
 
 add_project_dependency(hpp-util REQUIRED)
 add_project_dependency(hpp-pinocchio REQUIRED)
@@ -113,7 +114,6 @@ add_project_dependency(hpp-manipulation REQUIRED)
 add_project_dependency(hpp-manipulation-urdf REQUIRED)
 add_project_dependency(eigenpy REQUIRED)
 add_project_dependency(pinocchio REQUIRED)
-findpython()
 search_for_boost_python()
 
 if(BUILD_TESTING)

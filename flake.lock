@@ -97,11 +97,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1780737291,
-        "narHash": "sha256-X/NV78229FRopX6lqV2r/e0zS602Gp0kmUyp4lA/3iI=",
+        "lastModified": 1781324212,
+        "narHash": "sha256-lqIEMqeuJ450S7JdWTo8JjF3YlahGNR2FCz/AlA9ZhM=",
         "owner": "gepetto",
         "repo": "flakoboros",
-        "rev": "325b46e60bf77a5b10929d94381430a390ec4843",
+        "rev": "78aa318051a5345d82931df66c5c8d0844edcb2a",
         "type": "github"
       },
       "original": {
@@ -148,11 +148,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1780851304,
-        "narHash": "sha256-J9gvQIWdUFcBOwP0/2BnLkRIx+htvgd5F8SNROltZTM=",
+        "lastModified": 1781856266,
+        "narHash": "sha256-rwgV7jx1K2ZQ9FIGhyIZ+jBfBAtOnigjUeRPJMxJ4YM=",
         "owner": "gepetto",
         "repo": "gazebros2nix",
-        "rev": "8d51270e902f551389a69aea2e060eb9394645f5",
+        "rev": "812b80b2f74016a8e108543020e5533d8fd2f070",
         "type": "github"
       },
       "original": {
@@ -199,11 +199,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781178493,
-        "narHash": "sha256-XSOrR8ik3OOB0jsMkHu2TpsLfhm+GIhKSKdeWYrWDmQ=",
+        "lastModified": 1781880640,
+        "narHash": "sha256-HWFeAGxxxBaZeL39ZcVcRTu8AWV4yPGQoCBsghZWceY=",
         "owner": "gepetto",
         "repo": "nix",
-        "rev": "e0bb6996b70713fcd1c8b4938c66d171771db50b",
+        "rev": "ea3664e2fd9ae29d2c5d7a4b1c87a7ab96686fc4",
         "type": "github"
       },
       "original": {
@@ -265,11 +265,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780497056,
-        "narHash": "sha256-1h0PsQ3B5TN2jrnnU+eBhO8stRoAz1fO36UNvvCocro=",
+        "lastModified": 1781895116,
+        "narHash": "sha256-qA8/hxMfQULCGEq0rBGJY+6+vWUl4Unti9S7JkXuWIc=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-constraints",
-        "rev": "879a874506c7bdfb67aa57dc97961bc21d8ed9e8",
+        "rev": "4edad7b514e36110553c723a98256c73a356452f",
         "type": "github"
       },
       "original": {
@@ -285,11 +285,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780909024,
-        "narHash": "sha256-Zrx9rPEvSnuTO6owRdHwIJz/gmpCuzIieHxYFOqW8po=",
+        "lastModified": 1781898666,
+        "narHash": "sha256-hR+JOUIO0lQPzQXnLtAcMyJx4kdGy7QlxgpEk6LqqPA=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-core",
-        "rev": "4a048056051b30cffe1425ba2bcb96996824af3b",
+        "rev": "d85bc67d2cbb2cae2bb5f01230dcd413104fbdb6",
         "type": "github"
       },
       "original": {
@@ -305,11 +305,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780876985,
-        "narHash": "sha256-p5OA7mjI/PzkP2otyysUtJBDnJ5Q0NtgpZqgPL8t9So=",
+        "lastModified": 1781899913,
+        "narHash": "sha256-V4bX9KCH1+XPwwAsmt3ys7KObO01hPSjBOERbX1fXoE=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-manipulation",
-        "rev": "6eef2de4baeb5d8778f5d7eac61419ce196dedcf",
+        "rev": "7b1bf9bbeaab965125c9823baa2b7a32239e1be2",
         "type": "github"
       },
       "original": {
@@ -325,11 +325,11 @@
         "rosdistro": "rosdistro"
       },
       "locked": {
-        "lastModified": 1780736467,
-        "narHash": "sha256-Z+2rqsfRTsbt84tcmLBPawHekPU2yaEhsr/inJ2Vb5c=",
+        "lastModified": 1781297240,
+        "narHash": "sha256-OpYxlrSlcqJyknjgIuvv8dtEEbHuuZoe+fJzclrBgmg=",
         "owner": "lopsided98",
         "repo": "nix-ros-overlay",
-        "rev": "58ed8bba49e54700448cddd05c26fd3c743909e3",
+        "rev": "9e9b9a2953a195985e1e6c99e353fbb767380a2d",
         "type": "github"
       },
       "original": {
@@ -620,11 +620,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780418295,
-        "narHash": "sha256-yZVQNvmDx1SFjvlwevywsXWJnieSRqmQr7/fCTMyyd0=",
+        "lastModified": 1781249037,
+        "narHash": "sha256-Us5r9461lhAZ0cR4oTf7NQuNbp8ETFu0d683AF3mIPE=",
         "owner": "pyproject-nix",
         "repo": "uv2nix",
-        "rev": "0497ccef038da091002be7c05263a7f27820974f",
+        "rev": "ca656fb2cf1c2834e83413c7b2caa2b2d0c2b366",
         "type": "github"
       },
       "original": {
