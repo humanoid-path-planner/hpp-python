@@ -22,6 +22,12 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+find_program(
+    PYBIND11_STUBGEN_EXECUTABLE
+    NAMES pybind11-stubgen
+    DOC "Path to pybind11-stubgen"
+)
+
 # ADD_PYTHON_LIBRARY ( module FILES file1.cc file2.cc ... LINK_LIBRARIES
 # hpp-core::hpp-core ...)
 macro(ADD_PYTHON_LIBRARY MODULE)
@@ -80,6 +86,38 @@ macro(ADD_PYTHON_LIBRARY MODULE)
         FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
         DESTINATION ${PYTHON_SITELIB}/${MODULE}
     )
+
+    if(PYBIND11_STUBGEN_EXECUTABLE)
+        string(REPLACE "/" "." MODULE_DOT_PATH "${MODULE}")
+
+        set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
+        set(STUB_STAMP ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.pyi.stamp)
+
+        set(_STUB_PYTHONPATH
+            "${CMAKE_BINARY_DIR}/src:${STUB_EXTRA_PYTHONPATH_STR}"
+        )
+
+        add_custom_command(
+            OUTPUT ${STUB_STAMP}
+            COMMAND
+                ${CMAKE_COMMAND} -E env "PYTHONPATH=${_STUB_PYTHONPATH}"
+                ${PYBIND11_STUBGEN_EXECUTABLE} ${MODULE_DOT_PATH}.${LIBNAME}
+                --output-dir ${STUB_OUTPUT_DIR}
+            COMMAND ${CMAKE_COMMAND} -E touch ${STUB_STAMP}
+            DEPENDS ${TARGET_NAME}
+            COMMENT "Generating stubs for ${MODULE_DOT_PATH}.${LIBNAME}"
+            VERBATIM
+        )
+
+        string(REPLACE "/" "_" STUB_TARGET_NAME "stubs_${MODULE}")
+
+        add_custom_target(${STUB_TARGET_NAME} ALL DEPENDS ${STUB_STAMP})
+
+        install(
+            FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            DESTINATION ${PYTHON_SITELIB}/${MODULE}
+        )
+    endif()
 endmacro()
 
 python_install_on_site(pyhpp __init__.py)
