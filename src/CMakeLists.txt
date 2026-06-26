@@ -80,45 +80,40 @@ macro(ADD_PYTHON_LIBRARY MODULE)
         FILES ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}/__init__.py
         DESTINATION ${PYTHON_SITELIB}/${MODULE}
     )
-endmacro()
 
-macro(ADD_PYTHON_STUBS MODULE)
-    set(options)
-    set(oneValueArgs)
-    set(multiValueArgs FILES PY_FILES LINK_LIBRARIES)
-    cmake_parse_arguments(
-        ADD_PYTHON_STUBS
-        "${options}"
-        "${oneValueArgs}"
-        "${multiValueArgs}"
-        ${ARGN}
-    )
-    string(REPLACE "/" "." MODULE_DOT_PATH "${MODULE}")
-    set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
-    string(REGEX REPLACE "[/-]" "_" TARGET_NAME "${MODULE}")
-
-    add_custom_command(
-        OUTPUT ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
-        COMMAND
-            ${CMAKE_COMMAND} -E env
-            "PYTHONPATH=${CMAKE_BINARY_DIR}/src:$ENV{PYTHONPATH}"
-            ${PYBIND11_STUBGEN_EXECUTABLE} ${MODULE_DOT_PATH}.${LIBNAME}
-            --output-dir ${STUB_OUTPUT_DIR}
-        DEPENDS ${TARGET_NAME}
-        COMMENT "Generating Python stubs for ${MODULE_DOT_PATH}.${LIBNAME}"
-        VERBATIM
+    set_property(
+        GLOBAL
+        APPEND
+        PROPERTY PYHPP_ALL_BINDING_TARGETS ${TARGET_NAME}
     )
 
-    add_custom_target(
-        stubs_${TARGET_NAME}
-        ALL
-        DEPENDS ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
-    )
+    if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
+        string(REPLACE "/" "." MODULE_DOT_PATH "${MODULE}")
+        set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
 
-    install(
-        FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
-        DESTINATION ${PYTHON_SITELIB}/${MODULE}
-    )
+        add_custom_command(
+            OUTPUT ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            COMMAND
+                ${CMAKE_COMMAND} -E env
+                "PYTHONPATH=${CMAKE_BINARY_DIR}/src:$ENV{PYTHONPATH}"
+                ${PYBIND11_STUBGEN_EXECUTABLE} ${MODULE_DOT_PATH}.${LIBNAME}
+                --output-dir ${STUB_OUTPUT_DIR}
+            DEPENDS all_pyhpp_bindings
+            COMMENT "Generating Python stubs for ${MODULE_DOT_PATH}.${LIBNAME}"
+            VERBATIM
+        )
+
+        add_custom_target(
+            stubs_${TARGET_NAME}
+            ALL
+            DEPENDS ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+        )
+
+        install(
+            FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            DESTINATION ${PYTHON_SITELIB}/${MODULE}
+        )
+    endif()
 endmacro()
 
 python_install_on_site(pyhpp __init__.py)
@@ -238,21 +233,8 @@ add_python_library(
   hpp-manipulation-urdf::hpp-manipulation-urdf
 )
 
-if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
-    add_python_stubs(pyhpp/pinocchio)
-    add_python_stubs(pyhpp/pinocchio/urdf)
-
-    add_python_stubs(pyhpp/core)
-    add_python_stubs(pyhpp/core/problem_target)
-    add_python_stubs(pyhpp/core/path)
-    add_python_stubs(pyhpp/core/path_optimization)
-
-    add_python_stubs(pyhpp/constraints)
-
-    add_python_stubs(pyhpp/manipulation)
-    add_python_stubs(pyhpp/manipulation/steering_method)
-    add_python_stubs(pyhpp/manipulation/urdf)
-endif()
+get_property(PYHPP_ALL_BINDINGS GLOBAL PROPERTY PYHPP_ALL_BINDING_TARGETS)
+add_custom_target(all_pyhpp_bindings DEPENDS ${PYHPP_ALL_BINDINGS})
 
 # Install tool submodule
 python_install_on_site(pyhpp/tools __init__.py)
