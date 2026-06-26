@@ -21,23 +21,6 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# ------------------------------------------------------------------------------
-# Python stubs generation (optional)
-# ------------------------------------------------------------------------------
-option(GENERATE_PYTHON_STUBS "Generate Python stubs (.pyi files)" ON)
-
-if(GENERATE_PYTHON_STUBS)
-    find_program(PYBIND11_STUBGEN_EXECUTABLE pybind11-stubgen)
-    if(NOT PYBIND11_STUBGEN_EXECUTABLE)
-        message(
-            WARNING
-            "pybind11-stubgen not found. Stubs will not be generated."
-        )
-        set(GENERATE_PYTHON_STUBS OFF CACHE BOOL "Generate Python stubs" FORCE)
-    else()
-        message(STATUS "pybind11-stubgen found: ${PYBIND11_STUBGEN_EXECUTABLE}")
-    endif()
-endif()
 
 # ADD_PYTHON_LIBRARY ( module FILES file1.cc file2.cc ... LINK_LIBRARIES
 # hpp-core::hpp-core ...)
