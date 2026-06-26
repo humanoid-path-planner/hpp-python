@@ -125,6 +125,20 @@ endif()
 add_library(${PROJECT_NAME} INTERFACE)
 install(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
 
+option(GENERATE_PYTHON_STUBS "Generate Python stubs (.pyi files)" ON)
+if(GENERATE_PYTHON_STUBS)
+    find_program(PYBIND11_STUBGEN_EXECUTABLE pybind11-stubgen)
+    if(NOT PYBIND11_STUBGEN_EXECUTABLE)
+        message(
+            WARNING
+            "pybind11-stubgen not found. Stubs will not be generated."
+        )
+        set(GENERATE_PYTHON_STUBS OFF CACHE BOOL "Generate Python stubs" FORCE)
+    else()
+        message(STATUS "pybind11-stubgen found: ${PYBIND11_STUBGEN_EXECUTABLE}")
+    endif()
+endif()
+
 add_subdirectory(src)
 if(BUILD_TESTING)
     add_subdirectory(tests)

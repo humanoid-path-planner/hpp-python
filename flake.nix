@@ -27,19 +27,22 @@
           inputs.hpp-core.overlays.flakoboros
           inputs.hpp-manipulation.overlays.flakoboros
         ];
-        pyOverrideAttrs.hpp-python = {
-          src = lib.fileset.toSource {
-            root = ./.;
-            fileset = lib.fileset.unions [
-              ./CMakeLists.txt
-              ./doc
-              ./include
-              ./package.xml
-              ./src
-              ./tests
-            ];
+        pyOverrideAttrs.hpp-python =
+          { drv-prev, python-final, ... }:
+          {
+            nativeBuildInputs = drv-prev.nativeBuildInputs ++ [ python-final.pybind11-stubgen ];
+            src = lib.fileset.toSource {
+              root = ./.;
+              fileset = lib.fileset.unions [
+                ./CMakeLists.txt
+                ./doc
+                ./include
+                ./package.xml
+                ./src
+                ./tests
+              ];
+            };
           };
-        };
       }
     );
 }
