@@ -41,6 +41,13 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_PP_MAXITER_GET = "Get maximal number of iterations.";
+const char* DOC_PP_MAXITER_SET = "Set maximal number of iterations.";
+const char* DOC_PP_TIMEOUT_GET = "Get time out.";
+const char* DOC_PP_TIMEOUT_SET = "Set time out (in seconds).";
+}  // namespace
+
 namespace pyhpp {
 namespace core {
 
@@ -159,14 +166,19 @@ void exposePathPlanner() {
       .def("interrupt", &PathPlanner::interrupt, DocClassMethod(interrupt))
       .def("maxIterations",
            static_cast<unsigned long int (PathPlanner::*)() const>(
-               &PathPlanner::maxIterations))
+               &PathPlanner::maxIterations),
+           DOC_PP_MAXITER_GET)
       .def("maxIterations",
            static_cast<void (PathPlanner::*)(const unsigned long int&)>(
-               &PathPlanner::maxIterations))
+               &PathPlanner::maxIterations),
+           DOC_PP_MAXITER_SET)
       .def("timeOut",
-           static_cast<double (PathPlanner::*)() const>(&PathPlanner::timeOut))
-      .def("timeOut", static_cast<void (PathPlanner::*)(const double&)>(
-                          &PathPlanner::timeOut))
+           static_cast<double (PathPlanner::*)() const>(&PathPlanner::timeOut),
+           DOC_PP_TIMEOUT_GET)
+      .def("timeOut",
+           static_cast<void (PathPlanner::*)(const double&)>(
+               &PathPlanner::timeOut),
+           DOC_PP_TIMEOUT_SET)
       .def("stopWhenProblemIsSolved", &PathPlanner::stopWhenProblemIsSolved,
            DocClassMethod(stopWhenProblemIsSolved))
       .def("computePath", &PathPlanner::computePath,

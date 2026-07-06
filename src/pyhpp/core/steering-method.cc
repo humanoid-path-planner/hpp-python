@@ -154,7 +154,7 @@ void exposeSteeringMethod() {
       .def("constraints",
            static_cast<const ConstraintSetPtr_t& (SteeringMethod::*)() const>(
                &SteeringMethod::constraints),
-           return_value_policy<copy_const_reference>());
+           return_value_policy<copy_const_reference>(), "Get constraint set.");
 
   pyhpp::core::steeringMethod::exposeSteeringMethods();
 }

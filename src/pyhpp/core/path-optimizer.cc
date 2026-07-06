@@ -43,6 +43,15 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_TTP_MAXVEL =
+    "Maximum velocity for each output degree of freedom.";
+const char* DOC_TTP_MAXACC =
+    "Maximum acceleration for each output degree of freedom.";
+const char* DOC_TTP_MINDUR =
+    "Minimum duration assigned to each non-empty subpath.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -129,17 +138,20 @@ void exposePathOptimizer() {
       .add_property(
           "maxVelocity",
           static_cast<value_type (TTP_t::*)() const>(&TTP_t::maxVelocity),
-          static_cast<void (TTP_t::*)(const value_type&)>(&TTP_t::maxVelocity))
+          static_cast<void (TTP_t::*)(const value_type&)>(&TTP_t::maxVelocity),
+          DOC_TTP_MAXVEL)
       .add_property(
           "maxAcceleration",
           static_cast<value_type (TTP_t::*)() const>(&TTP_t::maxAcceleration),
           static_cast<void (TTP_t::*)(const value_type&)>(
-              &TTP_t::maxAcceleration))
+              &TTP_t::maxAcceleration),
+          DOC_TTP_MAXACC)
       .add_property(
           "minimumDuration",
           static_cast<value_type (TTP_t::*)() const>(&TTP_t::minimumDuration),
           static_cast<void (TTP_t::*)(const value_type&)>(
-              &TTP_t::minimumDuration));
+              &TTP_t::minimumDuration),
+          DOC_TTP_MINDUR);
 
   exposeSplineGradientBased<1>("SplineGradientBased_bezier1");
   exposeSplineGradientBased<3>("SplineGradientBased_bezier3");

@@ -38,6 +38,15 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_CP_LINESEARCHTYPE = "Get/set the line search type.";
+const char* DOC_CP_MAXITER_GET =
+    "Get maximal number of iterations in config projector.";
+const char* DOC_CP_MAXITER_SET = "Set maximal number of iterations.";
+const char* DOC_CP_ERRTHRESH_GET = "Get error threshold in config projector.";
+const char* DOC_CP_ERRTHRESH_SET = "Set error threshold.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -131,22 +140,29 @@ void exposeConstraint() {
                           const>(&ConfigProjector::lineSearchType),
           static_cast<void (ConfigProjector::*)(
               ConfigProjector::LineSearchType)>(
-              &ConfigProjector::lineSearchType))
+              &ConfigProjector::lineSearchType),
+          DOC_CP_LINESEARCHTYPE)
       .def("add", &ConfigProjector::add, DocClassMethod(add))
       .def("lastIsOptional", static_cast<bool (ConfigProjector::*)() const>(
                                  &ConfigProjector::lastIsOptional))
       .def("lastIsOptional", static_cast<void (ConfigProjector::*)(bool)>(
                                  &ConfigProjector::lastIsOptional))
-      .def("maxIterations", static_cast<size_type (ConfigProjector::*)() const>(
-                                &ConfigProjector::maxIterations))
-      .def("maxIterations", static_cast<void (ConfigProjector::*)(size_type)>(
-                                &ConfigProjector::maxIterations))
+      .def("maxIterations",
+           static_cast<size_type (ConfigProjector::*)() const>(
+               &ConfigProjector::maxIterations),
+           DOC_CP_MAXITER_GET)
+      .def("maxIterations",
+           static_cast<void (ConfigProjector::*)(size_type)>(
+               &ConfigProjector::maxIterations),
+           DOC_CP_MAXITER_SET)
       .def("errorThreshold",
            static_cast<void (ConfigProjector::*)(const value_type&)>(
-               &ConfigProjector::errorThreshold))
+               &ConfigProjector::errorThreshold),
+           DOC_CP_ERRTHRESH_SET)
       .def("errorThreshold",
            static_cast<value_type (ConfigProjector::*)() const>(
-               &ConfigProjector::errorThreshold))
+               &ConfigProjector::errorThreshold),
+           DOC_CP_ERRTHRESH_GET)
       .def("residualError", &ConfigProjector::residualError,
            DocClassMethod(residualError))
       .def("setRightHandSideFromConfig", &rightHandSideFromConfig)

@@ -40,6 +40,24 @@
 
 // DocNamespace(hpp::manipulation::pathPlanner)
 
+namespace {
+
+const char* DOC_INNERPLANNER_GET = "Get the inner planner.";
+const char* DOC_INNERPLANNER_SET = "Set the inner planner.";
+
+const char* DOC_NRANDOMCONFIG =
+    "Get the number of random configurations used to generate the initial "
+    "config of the final path.";
+
+const char* DOC_NDISCRETESTEPS =
+    "Number of steps to generate goal config (successive projections).";
+
+const char* DOC_CHECKFEASIBILITYONLY =
+    "If enabled, only add one solution to the roadmap. "
+    "Otherwise add all solutions.";
+
+}  // namespace
+
 namespace pyhpp {
 namespace manipulation {
 
@@ -305,10 +323,13 @@ void exposePathPlanners() {
       "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
       .def("innerPlanner",
            static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
-               &TransitionPlanner::innerPlanner))
-      .def("innerPlanner", static_cast<void (TransitionPlanner::*)(
-                               const pyhpp::core::PathPlanner&)>(
-                               &TransitionPlanner::innerPlanner))
+               &TransitionPlanner::innerPlanner),
+           DOC_INNERPLANNER_GET)
+      .def("innerPlanner",
+           static_cast<void (TransitionPlanner::*)(
+               const pyhpp::core::PathPlanner&)>(
+               &TransitionPlanner::innerPlanner),
+           DOC_INNERPLANNER_SET)
       .def("innerProblem", &TransitionPlanner::innerProblem,
            DocClassMethod(innerProblem))
       .def("computePath", &TransitionPlanner::computePath,
@@ -350,18 +371,22 @@ void exposePathPlanners() {
       boost::python::init<const pyhpp::core::Problem&>())
       .def(boost::python::init<const pyhpp::core::Problem&,
                                const RoadmapPtr_t&>())
-      .def("nRandomConfig", static_cast<int (EndEffectorTrajectory::*)() const>(
-                                &EndEffectorTrajectory::nRandomConfig))
+      .def("nRandomConfig",
+           static_cast<int (EndEffectorTrajectory::*)() const>(
+               &EndEffectorTrajectory::nRandomConfig),
+           DOC_NRANDOMCONFIG)
       .def("nRandomConfig", static_cast<void (EndEffectorTrajectory::*)(int)>(
                                 &EndEffectorTrajectory::nRandomConfig))
       .def("nDiscreteSteps",
            static_cast<int (EndEffectorTrajectory::*)() const>(
-               &EndEffectorTrajectory::nDiscreteSteps))
+               &EndEffectorTrajectory::nDiscreteSteps),
+           DOC_NDISCRETESTEPS)
       .def("nDiscreteSteps", static_cast<void (EndEffectorTrajectory::*)(int)>(
                                  &EndEffectorTrajectory::nDiscreteSteps))
       .def("checkFeasibilityOnly",
            static_cast<bool (EndEffectorTrajectory::*)() const>(
-               &EndEffectorTrajectory::checkFeasibilityOnly))
+               &EndEffectorTrajectory::checkFeasibilityOnly),
+           DOC_CHECKFEASIBILITYONLY)
       .def("checkFeasibilityOnly",
            static_cast<void (EndEffectorTrajectory::*)(bool)>(
                &EndEffectorTrajectory::checkFeasibilityOnly))

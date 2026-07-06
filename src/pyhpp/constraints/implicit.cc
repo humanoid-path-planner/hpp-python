@@ -39,6 +39,11 @@
 
 // DocNamespace(hpp::constraints)
 
+namespace {
+const char* DOC_COMPARISONTYPE_GET = "Return the ComparisonType.";
+const char* DOC_COMPARISONTYPE_SET = "Set the comparison type.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -61,10 +66,11 @@ void exposeImplicit() {
       .def("comparisonType",
            static_cast<const ComparisonTypes_t& (Implicit::*)() const>(
                &Implicit::comparisonType),
-           return_internal_reference<>(), DocClassMethod(comparisonType))
+           return_internal_reference<>(), DOC_COMPARISONTYPE_GET)
       .def("comparisonType",
            static_cast<void (Implicit::*)(const ComparisonTypes_t&)>(
-               &Implicit::comparisonType))
+               &Implicit::comparisonType),
+           DOC_COMPARISONTYPE_SET)
       .def("function", &Implicit::function, return_internal_reference<>(),
            DocClassMethod(function))
       .def("parameterSize", &Implicit::parameterSize,

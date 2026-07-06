@@ -55,7 +55,8 @@ void exposeNode() {
                &Node::connectedComponent))
       .def("connectedComponent",
            static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(
-               &Node::connectedComponent))
+               &Node::connectedComponent),
+           "Store the connected component the node belongs to.")
       .def("outEdges", &Node::outEdges, return_internal_reference<>(),
            DocClassMethod(outEdges))
       .def("inEdges", &Node::inEdges, return_internal_reference<>(),

@@ -35,6 +35,29 @@
 
 // DocNamespace(hpp::manipulation)
 
+namespace {
+
+const char* DOC_HANDLE_NAME = "Name of the handle.";
+
+const char* DOC_HANDLE_LOCALPOSITION =
+    "Local position of the handle in the joint frame.";
+
+const char* DOC_HANDLE_MASK =
+    "Constraint mask: vector<bool> of size 6 defining the symmetries of the "
+    "handle. See Handle class documentation for details.";
+
+const char* DOC_HANDLE_MASKCOMP = "Mask of the complement constraint.";
+
+const char* DOC_HANDLE_CLEARANCE =
+    "Distance from the center of the gripper along x-axis that ensures no "
+    "collision. Also gives an order of magnitude of the gripper size.";
+
+const char* DOC_HANDLE_APPROACHINGDIRECTION =
+    "Approaching direction for pregrasp (unit vector in handle frame, default "
+    "is x-axis).";
+
+}  // namespace
+
 namespace pyhpp {
 namespace manipulation {
 using namespace boost::python;
@@ -273,17 +296,19 @@ static JointIndex getParentJointId(const HandlePtr_t& handle) {
 void exposeHandle() {
   // DocClass(Handle)
   class_<Handle, HandlePtr_t>("Handle", no_init)
-      .add_property("name", &getHandleName, &setHandleName)
+      .add_property("name", &getHandleName, &setHandleName, DOC_HANDLE_NAME)
       .add_property("localPosition", &getHandleLocalPosition,
-                    &setHandleLocalPosition)
-      .add_property("mask", &getHandleMask, &setHandleMask)
-      .add_property("maskComp", &getHandleMaskComp, &setHandleMaskComp)
+                    &setHandleLocalPosition, DOC_HANDLE_LOCALPOSITION)
+      .add_property("mask", &getHandleMask, &setHandleMask, DOC_HANDLE_MASK)
+      .add_property("maskComp", &getHandleMaskComp, &setHandleMaskComp,
+                    DOC_HANDLE_MASKCOMP)
       .add_property(
           "clearance",
           static_cast<value_type (Handle::*)() const>(&Handle::clearance),
-          static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance))
+          static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance),
+          DOC_HANDLE_CLEARANCE)
       .add_property("approachingDirection", &getApproachingDirection,
-                    &setApproachingDirection)
+                    &setApproachingDirection, DOC_HANDLE_APPROACHINGDIRECTION)
       .def("createGrasp", &Handle::createGrasp, DocClassMethod(createGrasp))
       .def("getParentJointId", &getParentJointId,
            "Get index of the joint the handle is attached to"

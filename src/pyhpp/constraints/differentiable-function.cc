@@ -39,6 +39,18 @@
 
 // DocNamespace(hpp::constraints)
 
+namespace {
+const char* DOC_DF_CALL = "Evaluate the function at a given parameter.";
+const char* DOC_DF_NI = "Get dimension of input vector.";
+const char* DOC_DF_NDI =
+    "Get dimension of input derivative vector.\n\n"
+    "The dimension of configuration vectors might differ from the dimension\n"
+    "of velocity vectors since some joints are represented by non minimal\n"
+    "size vectors: e.g. quaternion for SO(3).";
+const char* DOC_DF_NO = "Get dimension of output vector.";
+const char* DOC_DF_NDO = "Get dimension of output derivative vector.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -105,15 +117,18 @@ void exposeDifferentiableFunction() {
       "DifferentiableFunction", no_init)
       // Pythonic API
       .def("__str__", &to_str<DifferentiableFunction>)
-      .def("__call__", &DFWrapper::py_value)
-      .def("J", &DFWrapper::py_jacobian)
+      .def("__call__", &DFWrapper::py_value, DOC_DF_CALL)
+      .def("J", &DFWrapper::py_jacobian,
+           "Compute Jacobian matrix and return as a numpy array.")
       .def("name", &DFWrapper::name,
            return_value_policy<copy_const_reference>(), DocClassMethod(name))
 
-      .add_property("ni", &DifferentiableFunction::inputSize)
-      .add_property("no", &DifferentiableFunction::outputSize)
-      .add_property("ndi", &DifferentiableFunction::inputDerivativeSize)
-      .add_property("ndo", &DifferentiableFunction::outputDerivativeSize)
+      .add_property("ni", &DifferentiableFunction::inputSize, DOC_DF_NI)
+      .add_property("no", &DifferentiableFunction::outputSize, DOC_DF_NO)
+      .add_property("ndi", &DifferentiableFunction::inputDerivativeSize,
+                    DOC_DF_NDI)
+      .add_property("ndo", &DifferentiableFunction::outputDerivativeSize,
+                    DOC_DF_NDO)
 
       // C++ API
       .def("value", &DFWrapper::value_wrap, DocClassMethod(value))

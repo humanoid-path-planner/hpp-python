@@ -40,6 +40,32 @@
 
 // DocNamespace(hpp::constraints)
 
+namespace {
+const char* DOC_HI_ERRORTHRESHOLD = "Get error threshold.";
+const char* DOC_HI_MAXITERATIONS =
+    "Get maximal number of iterations in config projector.";
+const char* DOC_HI_RHSFC1 =
+    "Compute right hand side of equality constraints from a configuration.\n\n"
+    "For each constraint of type Equality, set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_HI_RHSFC2 =
+    "Compute right hand side of a constraint from a configuration.\n\n"
+    "Set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_HI_RHS_SET1 =
+    "Set right hand side of a constraint.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_HI_RHS_SET2 =
+    "Set the right hand side.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_HI_RHS_GET =
+    "Get the right hand side.\n\n"
+    "Size of result is equal to total dimension of parameterizable\n"
+    "constraints (type Equality).";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -73,28 +99,36 @@ void exposeHierarchicalIterativeSolver() {
           static_cast<value_type (HierarchicalIterative::*)() const>(
               &HierarchicalIterative::errorThreshold),
           static_cast<void (HierarchicalIterative::*)(const value_type&)>(
-              &HierarchicalIterative::errorThreshold))
+              &HierarchicalIterative::errorThreshold),
+          DOC_HI_ERRORTHRESHOLD)
       .def("rightHandSideFromConfig",
            static_cast<vector_t (HierarchicalIterative::*)(ConfigurationIn_t)>(
-               &HierarchicalIterative::rightHandSideFromConfig))
+               &HierarchicalIterative::rightHandSideFromConfig),
+           DOC_HI_RHSFC1)
       .def("rightHandSideFromConfig",
            static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
                                                        ConfigurationIn_t)>(
-               &HierarchicalIterative::rightHandSideFromConfig))
-      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
-                                const ImplicitPtr_t&, vectorIn_t)>(
-                                &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSideFromConfig),
+           DOC_HI_RHSFC2)
+      .def("rightHandSide",
+           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
+                                                       vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_SET1)
       .def("rightHandSide",
            static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_SET2)
       .def("rightHandSide",
            static_cast<vector_t (HierarchicalIterative::*)() const>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_GET)
       .add_property("maxIterations",
                     static_cast<size_type (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::maxIterations),
                     static_cast<void (HierarchicalIterative::*)(size_type)>(
-                        &HierarchicalIterative::maxIterations))
+                        &HierarchicalIterative::maxIterations),
+                    DOC_HI_MAXITERATIONS)
       .add_property(
           "errorThreshold",
           static_cast<value_type (HierarchicalIterative::*)() const>(

@@ -41,6 +41,13 @@
 
 // DocNamespace(hpp::manipulation)
 
+namespace {
+
+const char* DOC_CONSTRAINTGRAPH_GET = "Get the graph of constraints.";
+const char* DOC_CONSTRAINTGRAPH_SET = "Set the graph of constraints.";
+
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -123,8 +130,14 @@ void exposeProblem() {
   // DocClass(Problem)
   class_<Problem, bases<pyhpp::core::Problem>>("Problem",
                                                init<const PyWDevicePtr_t&>())
-      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
-                                            PyWGraphPtr_t)
+      .def("constraintGraph",
+           static_cast<PyWGraphPtr_t (Problem::*)() const>(
+               &Problem::constraintGraph),
+           DOC_CONSTRAINTGRAPH_GET)
+      .def("constraintGraph",
+           static_cast<void (Problem::*)(const PyWGraphPtr_t&)>(
+               &Problem::constraintGraph),
+           DOC_CONSTRAINTGRAPH_SET)
       .def("checkProblem", &Problem::checkProblem, DocClassMethod(checkProblem))
       .def(
           "steeringMethod",

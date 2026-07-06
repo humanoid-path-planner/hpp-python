@@ -36,6 +36,18 @@
 
 // DocNamespace(hpp::manipulation)
 
+namespace {
+
+const char* DOC_SET_TRAJECTORY_CONSTRAINT =
+    "Set the constraint whose right hand side will vary along the trajectory.";
+
+const char* DOC_SET_TRAJECTORY =
+    "Set the right hand side of the trajectory constraint from a path. "
+    "param se3Output: set to True if the output of path must be understood "
+    "as SE3.";
+
+}  // namespace
+
 namespace pyhpp {
 namespace manipulation {
 
@@ -82,9 +94,10 @@ void exposeManipSteeringMethod() {
       "EndEffectorTrajectorySteeringMethod",
       boost::python::init<const hpp::core::ProblemConstPtr_t&>())
       .def("setTrajectoryConstraint",
-           &EndEffectorTrajectorySteeringMethod::setTrajectoryConstraint)
-      .def("setTrajectory",
-           &EndEffectorTrajectorySteeringMethod::setTrajectory);
+           &EndEffectorTrajectorySteeringMethod::setTrajectoryConstraint,
+           DOC_SET_TRAJECTORY_CONSTRAINT)
+      .def("setTrajectory", &EndEffectorTrajectorySteeringMethod::setTrajectory,
+           DOC_SET_TRAJECTORY);
 }
 
 }  // namespace manipulation

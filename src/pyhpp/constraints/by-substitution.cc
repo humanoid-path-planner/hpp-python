@@ -36,6 +36,30 @@
 
 // DocNamespace(hpp::constraints::solver)
 
+namespace {
+const char* DOC_BS_ERRORTHRESHOLD = "Get error threshold.";
+const char* DOC_BS_RHSFC1 =
+    "Compute right hand side of equality constraints from a configuration.\n\n"
+    "For each constraint of type Equality, set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_BS_RHSFC2 =
+    "Compute right hand side of a constraint from a configuration.\n\n"
+    "Set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_BS_RHS_SET1 =
+    "Set right hand side of a constraint.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_BS_RHS_SET2 =
+    "Set the right hand side.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_BS_RHS_GET =
+    "Get the right hand side.\n\n"
+    "Size of result is equal to total dimension of parameterizable\n"
+    "constraints (type Equality).";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -110,25 +134,32 @@ void exposeBySubstitution() {
            return_internal_reference<>(), DocClassMethod(explicitConstraintSet))
       .def("rightHandSideFromConfig",
            static_cast<vector_t (BySubstitution::*)(ConfigurationIn_t)>(
-               &BySubstitution::rightHandSideFromConfig))
+               &BySubstitution::rightHandSideFromConfig),
+           DOC_BS_RHSFC1)
       .def("rightHandSideFromConfig",
            static_cast<bool (BySubstitution::*)(const ImplicitPtr_t&,
                                                 ConfigurationIn_t)>(
-               &BySubstitution::rightHandSideFromConfig))
-      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
-                                const ImplicitPtr_t&, vectorIn_t)>(
-                                &HierarchicalIterative::rightHandSide))
+               &BySubstitution::rightHandSideFromConfig),
+           DOC_BS_RHSFC2)
+      .def("rightHandSide",
+           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
+                                                       vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide),
+           DOC_BS_RHS_SET1)
       .def("rightHandSide",
            static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_BS_RHS_SET2)
       .def("rightHandSide",
            static_cast<vector_t (HierarchicalIterative::*)() const>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_BS_RHS_GET)
       .add_property("errorThreshold",
                     static_cast<value_type (BySubstitution::*)() const>(
                         &BySubstitution::errorThreshold),
                     static_cast<void (BySubstitution::*)(const value_type&)>(
-                        &BySubstitution::errorThreshold))
+                        &BySubstitution::errorThreshold),
+                    DOC_BS_ERRORTHRESHOLD)
       .def("describeError", &BySubstitution_describeError);
 }
 }  // namespace constraints
