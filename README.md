@@ -41,7 +41,10 @@ hpp-python/
 ├── include/pyhpp/          # C++ headers shared by the binding translation units
 ├── doc/
 │   ├── configure.py            # Injects Doxygen-extracted docstrings into the .cc binding sources
-│   └── doxygen_xml_parser.py   # Parses Doxygen XML to feed configure.py
+│   ├── doxygen_xml_parser.py   # Parses Doxygen XML to feed configure.py
+│   ├── core_doc_todo.md        # Docstring coverage status for pyhpp.core bindings
+│   ├── constraints_doc_todo.md # Docstring coverage status for pyhpp.constraints bindings
+│   └── manipulation_doc_todo.md # Docstring coverage status for pyhpp.manipulation bindings
 ├── src/pyhpp/
 │   ├── __init__.py             # Top-level package init (imports eigenpy, silences converter warnings)
 │   ├── pinocchio/              # hpp-pinocchio bindings: Device, Gripper, Lie-group utilities
@@ -257,6 +260,20 @@ Doxygen comments in the upstream C++ libraries can be injected into the Python d
    - `DocClassMethod(methodname, classname=None)` is replaced by the corresponding Doxygen-extracted docstring.
 
 See the header comment of `doc/configure.py` for the full syntax and a worked example.
+
+For binding methods that have no upstream `///` Doxygen comment (Python-only wrappers, modified signatures that hide output parameters, etc.), docstrings are written directly in the `.cc` binding source using `const char*` constants in an anonymous namespace placed before `namespace pyhpp {`:
+
+```cpp
+namespace {
+const char* DOC_MY_METHOD = "Describe what the method does from the Python caller's perspective.";
+}  // namespace
+
+namespace pyhpp {
+  // ...
+  .def("myMethod", &MyClass::myMethod, DOC_MY_METHOD)
+```
+
+The documentation coverage for each module is tracked in `doc/core_doc_todo.md`, `doc/constraints_doc_todo.md` and `doc/manipulation_doc_todo.md`, using a `✅ / ❌ / ⚠️` legend per method.
 
 > **TODO** (tracked in the source): use Doxygen to generate XML documentation of the headers included by a given binding file, then use that generated XML to auto-update the documentation comments in `src/pyhpp` (Doxygen's `INCLUDE_PATH` / `SEARCH_INCLUDES` options may help here).
 
