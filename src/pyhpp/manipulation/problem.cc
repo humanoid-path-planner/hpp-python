@@ -142,14 +142,19 @@ void exposeProblem() {
       .def(
           "steeringMethod",
           static_cast<pyhpp::core::PyWSteeringMethodPtr_t (Problem::*)() const>(
-              &Problem::steeringMethod))
-      .def("steeringMethod", static_cast<void (Problem::*)(
-                                 const pyhpp::core::PyWSteeringMethodPtr_t&)>(
-                                 &Problem::steeringMethod))
+              &Problem::steeringMethod),
+          "Get the inner steering method (unwrapped from the graph steering "
+          "method if applicable).")
+      .def("steeringMethod",
+           static_cast<void (Problem::*)(
+               const pyhpp::core::PyWSteeringMethodPtr_t&)>(
+               &Problem::steeringMethod),
+           "Set the steering method.")
       .def("steeringMethod",
            static_cast<void (Problem::*)(
                const pyhpp::manipulation::PyWGraphSteeringMethodPtr_t&)>(
-               &Problem::graphSteeringMethod))
+               &Problem::graphSteeringMethod),
+           "Set the graph steering method.")
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,

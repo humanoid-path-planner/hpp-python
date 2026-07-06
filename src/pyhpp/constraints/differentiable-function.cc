@@ -170,13 +170,17 @@ void lockJoint(M manipulability, const char* jointName) {
 void exposeManipulability() {
   class_<Manipulability, ManipulabilityPtr_t, bases<DifferentiableFunction>,
          boost::noncopyable>("Manipulability", no_init)
-      .def("__init__", make_constructor(&Manipulability::create))
-      .def("lockJoint", &lockJoint<ManipulabilityPtr_t>);
+      .def("__init__", make_constructor(&Manipulability::create),
+           "Create a manipulability function for the given robot.")
+      .def("lockJoint", &lockJoint<ManipulabilityPtr_t>,
+           "Lock a joint by name so it is excluded from the Jacobian.");
   class_<MinManipulability, MinManipulabilityPtr_t,
          bases<DifferentiableFunction>, boost::noncopyable>("MinManipulability",
                                                             no_init)
-      .def("__init__", make_constructor(&MinManipulability::create))
-      .def("lockJoint", &lockJoint<MinManipulabilityPtr_t>);
+      .def("__init__", make_constructor(&MinManipulability::create),
+           "Create a minimum-manipulability function for the given robot.")
+      .def("lockJoint", &lockJoint<MinManipulabilityPtr_t>,
+           "Lock a joint by name so it is excluded from the Jacobian.");
 }
 
 }  // namespace constraints

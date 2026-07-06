@@ -82,7 +82,9 @@ void exposeConnectedComponent() {
       .def("reachableFrom", &CCWrapper::reachableFrom,
            DocClassMethod(reachableFrom))
       .def("reachableTo", &CCWrapper::reachableTo, DocClassMethod(reachableTo))
-      .def("__eq__", &CCWrapper::equality);
+      .def(
+          "__eq__", &CCWrapper::equality,
+          "Return true if both objects refer to the same connected component.");
 }
 }  // namespace core
 }  // namespace pyhpp

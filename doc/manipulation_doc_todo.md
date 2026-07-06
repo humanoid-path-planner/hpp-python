@@ -35,10 +35,10 @@
 
 | Method / property | Status | Note |
 |---|---|---|
-| `Graph._get_native_graph` | ⚠️ Python-only | C++ capsule for external interop |
-| `Graph.robot` | ⚠️ Python-only | `def_readwrite`, no `///` |
-| `Graph.maxIterations` | ❌ No C++ doc | `Graph::maxIterations()` has `///` in `graph.hh` but exposed via `PYHPP_DEFINE_GETTER_SETTER` without docstring |
-| `Graph.errorThreshold` | ❌ No C++ doc | Same |
+| `Graph._get_native_graph` | ✅ | Inline string — C++ capsule for external interop |
+| `Graph.robot` | ✅ | Inline string — `def_readwrite`, no `///` |
+| `Graph.maxIterations` | ✅ | Explicit `.def()` pair with inline strings |
+| `Graph.errorThreshold` | ✅ | Explicit `.def()` pair with inline strings |
 | `Graph.createState` | ✅ | `DOC_CREATESTATE` inline |
 | `Graph.createTransition` | ✅ | `DOC_CREATETRANSITION` inline |
 | `Graph.createWaypointTransition` | ✅ | `DOC_CREATEWAYPOINTTRANSITION` inline |
@@ -51,17 +51,17 @@
 | `Graph.setWeight` | ✅ | `DOC_SETWEIGHT` inline |
 | `Graph.getWeight` | ✅ | `DOC_GETWEIGHT` inline |
 | `Graph.setWaypoint` | ✅ | `DOC_SETWAYPOINT` inline |
-| `Graph.getState` *(by name)* | ⚠️ Python-only | Lookup by name in internal map |
-| `Graph.getTransition` *(by name)* | ⚠️ Python-only | Lookup by name in internal map |
-| `Graph.getStates` | ⚠️ Python-only | Returns list of `PyWState` |
-| `Graph.getTransitions` | ⚠️ Python-only | Returns list of `PyWEdge` |
-| `Graph.getStateNames` | ⚠️ Python-only | Returns list of names |
-| `Graph.getTransitionNames` | ⚠️ Python-only | Returns list of names |
+| `Graph.getState` *(by name)* | ✅ | Inline string — lookup by name in internal map |
+| `Graph.getTransition` *(by name)* | ✅ | Inline string — lookup by name in internal map |
+| `Graph.getStates` | ✅ | Inline string — returns list of `PyWState` |
+| `Graph.getTransitions` | ✅ | Inline string — returns list of `PyWEdge` |
+| `Graph.getStateNames` | ✅ | Inline string — returns list of names |
+| `Graph.getTransitionNames` | ✅ | Inline string — returns list of names |
 | `Graph.getStateFromConfiguration` | ✅ | `DOC_GETSTATE` inline |
 | `Graph.addNumericalConstraint` | ✅ | `DOC_ADDNUMERICALCONSTRAINT` inline |
 | `Graph.addNumericalConstraintsToState` | ✅ | `DOC_ADDNUMERICALCONSTRAINTSTOSTATE` inline |
 | `Graph.addNumericalConstraintsToTransition` | ✅ | `DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION` inline |
-| `Graph.addNumericalConstraintsToGraph` | ⚠️ Python-only | Takes a list, no direct equivalent |
+| `Graph.addNumericalConstraintsToGraph` | ✅ | Inline string — takes a list, no direct equivalent |
 | `Graph.addNumericalConstraintsForPath` | ✅ | `DOC_ADDNUMERICALCONSTRAINTSFORPATH` inline |
 | `Graph.getNumericalConstraintsForState` | ✅ | `DOC_GETNUMERICALCONSTRAINTSFORSTATE` inline |
 | `Graph.getNumericalConstraintsForEdge` | ✅ | `DOC_GETNUMERICALCONSTRAINTSFOREDGE` inline |
@@ -70,8 +70,8 @@
 | `Graph.registerConstraints` | ✅ | `DOC_REGISTERCONSTRAINTS` inline |
 | `Graph.createPlacementConstraint` | ✅ | `DOC_CREATEPLACEMENTCONSTRAINT` inline |
 | `Graph.createPrePlacementConstraint` | ✅ | `DOC_CREATEPREPLACEMENTCONSTRAINT` inline |
-| `Graph.createGraspConstraint` | ⚠️ Python-only | Wrapper around `Handle::createGrasp`, no `///` |
-| `Graph.createPreGraspConstraint` | ⚠️ Python-only | Wrapper around `Handle::createPreGrasp` |
+| `Graph.createGraspConstraint` | ✅ | Inline string — wrapper around `Handle::createGrasp` |
+| `Graph.createPreGraspConstraint` | ✅ | Inline string — wrapper around `Handle::createPreGrasp` |
 | `Graph.getConfigErrorForState` | ✅ | `DOC_GETCONFIGERRORFORSTATE` inline |
 | `Graph.getConfigErrorForTransition` | ✅ | `DOC_GETCONFIGERRORFORTRANSITION` inline |
 | `Graph.getConfigErrorForTransitionLeaf` | ✅ | `DOC_GETCONFIGERRORFORTRANSITIONLEAF` inline |
@@ -91,7 +91,7 @@
 | `Graph.displayTransitionTargetConstraints` | ✅ | `DOC_DISPLAYTRANSITIONTARGETCONSTRAINTS` inline |
 | `Graph.display` | ✅ | `DOC_DISPLAY` inline |
 | `Graph.initialize` | ✅ | `DOC_INITIALIZE` inline |
-| `Graph.transitionAtParam` | ⚠️ Python-only | Static method, wraps `Graph::edgeAtParam` |
+| `Graph.transitionAtParam` | ✅ | Inline string — static method, wraps `Graph::edgeAtParam` |
 
 ---
 
@@ -117,12 +117,12 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `Device.setRobotRootPosition` | ❌ No C++ doc | Declared without `///` in `device.hh` |
-| `Device.handles` | ❌ No C++ doc | Public member without `///` |
-| `Device.grippers` | ❌ No C++ doc | Public member without `///` |
-| `Device.getJointNames` | ⚠️ Python-only | Wrapper without direct C++ equivalent |
-| `Device.getJointConfig` | ⚠️ Python-only | Wrapper without direct C++ equivalent |
-| `Device.setJointBounds` | ⚠️ Python-only | No docstring in the binding |
+| `Device.setRobotRootPosition` | ✅ | Inline string — no `///` in `device.hh` |
+| `Device.handles` | ✅ | Inline string — public member without `///` |
+| `Device.grippers` | ✅ | Inline string — public member without `///` |
+| `Device.getJointNames` | ✅ | Inline string — wrapper without direct C++ equivalent |
+| `Device.getJointConfig` | ✅ | Inline string — wrapper without direct C++ equivalent |
+| `Device.setJointBounds` | ✅ | Inline string |
 | `Device.contactSurfaceNames` | ✅ | Inline string |
 | `Device.contactSurfaces` | ✅ | Inline string |
 | `Device.addHandle` | ✅ | Inline string |
@@ -138,7 +138,9 @@
 | `Problem.constraintGraph` (getter) | ✅ | Inline string (`DocClassMethod` unsafe: setter kwargs > getter args) |
 | `Problem.constraintGraph` (setter) | ✅ | Inline string |
 | `Problem.checkProblem` | ✅ | `DocClassMethod(checkProblem)` |
-| `Problem.steeringMethod` (getter/setter ×3) | ❌ No C++ doc | No `///` in `manipulation::Problem` |
+| `Problem.steeringMethod` (getter) | ✅ | Inline string — unwraps graph SM if applicable |
+| `Problem.steeringMethod` (setter, core SM) | ✅ | Inline string |
+| `Problem.steeringMethod` (setter, graph SM) | ✅ | Inline string |
 
 ---
 
@@ -151,8 +153,8 @@
 | `innerProblem` | ✅ | `DocClassMethod(innerProblem)` |
 | `computePath` | ✅ | `DocClassMethod(computePath)` |
 | `planPath` *(deprecated)* | ✅ | `DocClassMethod(planPath)` |
-| `directPath` | ⚠️ Signature diff. | Hides `success` and `status` output params → kwargs count mismatch |
-| `validateConfiguration` | ⚠️ Signature diff. | Hides `report` output param → kwargs count mismatch |
+| `directPath` | ✅ | Inline string — returns `(success, path, status)` |
+| `validateConfiguration` | ✅ | Inline string — returns `(valid, report)` |
 | `optimizePath` | ✅ | `DocClassMethod(optimizePath)` |
 | `timeParameterization` | ✅ | `DocClassMethod(timeParameterization)` |
 | `setEdge` *(deprecated)* | ✅ | `DocClassMethod(setEdge)` |
@@ -187,7 +189,7 @@
 | `RandomShortcut` | ❌ No C++ doc | No class-level `///` in `random-shortcut.hh` |
 | `GraphRandomShortcut` | ⚠️ Python-only | Factory function, no direct equivalent |
 | `GraphPartialShortcut` | ⚠️ Python-only | Same |
-| `SplineGradientBased_bezier1/3` attributes (`alphaInit`, `alwaysStopAtFirst`, `costOrder`, `usePathLengthAsWeights`, `reorderIntervals`, `linearizeAtEachStep`, `checkJointBound`, `returnOptimum`, `costThreshold`, `guessThreshold`, `QPAccuracy`) | ❌ No C++ doc | `def_readwrite` without `///` |
+| `SplineGradientBased_bezier1/3` attributes (`alphaInit`, `alwaysStopAtFirst`, `costOrder`, `usePathLengthAsWeights`, `reorderIntervals`, `linearizeAtEachStep`, `checkJointBound`, `returnOptimum`, `costThreshold`, `guessThreshold`, `QPAccuracy`) | ❌ No C++ doc | `def_readwrite` without `///` in manipulation binding |
 
 ---
 
@@ -233,5 +235,5 @@
 
 | Python function | Status | Note |
 |---|---|---|
-| `loadModel` | ⚠️ Python-only | Overload that also calls `srdf::loadModelFromFile` |
-| `loadModelFromString` | ⚠️ Python-only | Overload with XML string |
+| `loadModel` | ✅ | Inline string — also calls `srdf::loadModelFromFile` |
+| `loadModelFromString` | ✅ | Inline string — overload with XML strings |

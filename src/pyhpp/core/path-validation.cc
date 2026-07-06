@@ -85,8 +85,10 @@ void exposePathValidation() {
   class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
       "PathValidation", no_init)
       .def("validate", &PVWrapper::validate, DocClassMethod(validate))
-      .def("validate", &PVWrapper::py_validate)
-      .def("validateConfiguration", &PVWrapper::validateConfiguration);
+      .def("validate", &PVWrapper::py_validate,
+           "Validate path; returns (valid, validPart, report).")
+      .def("validateConfiguration", &PVWrapper::validateConfiguration,
+           "Validate a configuration; returns (valid, report).");
 
   class_<pathValidation::Discretized, bases<PathValidation>,
          hpp::core::pathValidation::DiscretizedPtr_t, boost::noncopyable>(
@@ -101,19 +103,26 @@ void exposePathValidation() {
       "Dichotomy", no_init);
 
   def("Discretized", &pathValidation::createDiscretizedCollisionChecking,
-      (arg("robot"), arg("stepSize")));
+      (arg("robot"), arg("stepSize")),
+      "Create a discretized collision-checking path validation.");
   def("DiscretizedCollision",
       &pathValidation::createDiscretizedCollisionChecking,
-      (arg("robot"), arg("stepSize")));
+      (arg("robot"), arg("stepSize")),
+      "Create a discretized collision-checking path validation.");
   def("DiscretizedJointBound", &pathValidation::createDiscretizedJointBound,
-      (arg("robot"), arg("stepSize")));
+      (arg("robot"), arg("stepSize")),
+      "Create a discretized joint-bound path validation.");
   def("DiscretizedCollisionAndJointBound",
       &PVWrapper::createDiscretizedJointBoundAndCollisionChecking,
-      (arg("robot"), arg("stepSize")));
+      (arg("robot"), arg("stepSize")),
+      "Create a discretized path validation checking both collision and joint "
+      "bounds.");
   def("Progressive", &continuousValidation::Progressive::create,
-      (arg("robot"), arg("tolerance")));
+      (arg("robot"), arg("tolerance")),
+      "Create a progressive continuous path validation.");
   def("Dichotomy", &continuousValidation::Dichotomy::create,
-      (arg("robot"), arg("tolerance")));
+      (arg("robot"), arg("tolerance")),
+      "Create a dichotomy-based continuous path validation.");
 }
 }  // namespace core
 }  // namespace pyhpp

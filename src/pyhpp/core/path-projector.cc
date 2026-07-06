@@ -62,7 +62,8 @@ void exposePathProjector() {
   class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>("PathProjector",
                                                                 no_init)
       .def("apply", &PPWrapper::apply, DocClassMethod(apply))
-      .def("apply", &PPWrapper::py_apply);
+      .def("apply", &PPWrapper::py_apply,
+           "Apply projection to path; returns (success, projectedPath).");
 
   class_<pathProjector::Progressive, bases<PathProjector>,
          hpp::core::pathProjector::ProgressivePtr_t, boost::noncopyable>(
@@ -86,7 +87,8 @@ void exposePathProjector() {
           const value_type&) -> PathProjectorPtr_t {
         return PathProjectorPtr_t();
       },
-      (arg("distance"), arg("steeringMethod"), arg("step")));
+      (arg("distance"), arg("steeringMethod"), arg("step")),
+      "Return a null path projector (no projection).");
 
   def(
       "ProgressiveProjector",
@@ -96,7 +98,8 @@ void exposePathProjector() {
         return pathProjector::Progressive::create(
             distance, steeringMethodWrapper->obj, step);
       },
-      (arg("distance"), arg("steeringMethod"), arg("step")));
+      (arg("distance"), arg("steeringMethod"), arg("step")),
+      "Create a progressive path projector with the given step size.");
 
   def(
       "DichotomyProjector",
@@ -106,7 +109,8 @@ void exposePathProjector() {
         return pathProjector::Dichotomy::create(
             distance, steeringMethodWrapper->obj, step);
       },
-      (arg("distance"), arg("steeringMethod"), arg("step")));
+      (arg("distance"), arg("steeringMethod"), arg("step")),
+      "Create a dichotomy-based path projector with the given step size.");
 
   def(
       "GlobalProjector",
@@ -116,7 +120,8 @@ void exposePathProjector() {
         return pathProjector::Global::create(distance,
                                              steeringMethodWrapper->obj, step);
       },
-      (arg("distance"), arg("steeringMethod"), arg("step")));
+      (arg("distance"), arg("steeringMethod"), arg("step")),
+      "Create a global path projector with the given step size.");
 
   def(
       "RecursiveHermiteProjector",
@@ -126,7 +131,8 @@ void exposePathProjector() {
         return pathProjector::RecursiveHermite::create(
             distance, steeringMethodWrapper->obj, step);
       },
-      (arg("distance"), arg("steeringMethod"), arg("step")));
+      (arg("distance"), arg("steeringMethod"), arg("step")),
+      "Create a recursive Hermite path projector with the given step size.");
 }
 }  // namespace core
 }  // namespace pyhpp

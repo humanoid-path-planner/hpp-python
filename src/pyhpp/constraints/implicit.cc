@@ -62,7 +62,9 @@ void exposeImplicit() {
       .value("Inferior", Inferior);
   // DocClass(Implicit)
   class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", no_init)
-      .def("__init__", make_constructor(&Implicit::create))
+      .def("__init__", make_constructor(&Implicit::create),
+           "Create an implicit constraint from a differentiable function and "
+           "comparison types.")
       .def("comparisonType",
            static_cast<const ComparisonTypes_t& (Implicit::*)() const>(
                &Implicit::comparisonType),
@@ -77,7 +79,8 @@ void exposeImplicit() {
            DocClassMethod(parameterSize))
       .def("rightHandSideSize", &Implicit::rightHandSideSize,
            DocClassMethod(rightHandSideSize))
-      .def("getFunctionOutputSize", &getFunctionOutputSize)
+      .def("getFunctionOutputSize", &getFunctionOutputSize,
+           "Return the output size of the underlying differentiable function.")
       .staticmethod("getFunctionOutputSize");
 }
 }  // namespace constraints

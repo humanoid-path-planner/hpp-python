@@ -3,7 +3,7 @@
 ## Legend
 
 - ✅ **Documented** — docstring present in the binding
-- ❌ **No C++ doc** — C++ method has no `///` → nothing to add
+- ❌ **No C++ doc** — C++ method has no `///` and no generated doc
 - ⚠️ **Python-only** — no direct C++ equivalent → wrapper or modified signature
 - ⚠️ **Signature diff.** — Python wrapper hides output params → `DocClassMethod` would trigger a Boost.Python static_assert
 
@@ -15,10 +15,10 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `__call__` (×2) | ⚠️ Python-only | Wrappers returning `(q, success)` and `success` |
-| `eval` (×2) | ⚠️ Python-only | Same |
-| `derivative` | ⚠️ Python-only | Wrapper returning a numpy vector |
-| `constraints` | ❌ No C++ doc | No `///` on `constraints()` in `path.hh` |
+| `__call__` (×2) | ✅ | Inline strings — `(q, success)` and in-place form |
+| `eval` (×2) | ✅ | Same inline strings as `__call__` |
+| `derivative` | ✅ | Inline string — returns numpy vector |
+| `constraints` | ✅ | Inline string — no `///` in `path.hh` |
 | `copy` | ✅ | `DocClassMethod(copy)` |
 | `extract` | ✅ | `DocClassMethod(extract)` |
 | `timeRange` | ✅ | `DocClassMethod(timeRange)` |
@@ -29,7 +29,7 @@
 | `end` | ✅ | `DocClassMethod(end)` |
 | `outputSize` | ✅ | `DocClassMethod(outputSize)` |
 | `outputDerivativeSize` | ✅ | `DocClassMethod(outputDerivativeSize)` |
-| `StraightPath.__init__` | ⚠️ Python-only | Factory wrapper for `StraightPath::create` |
+| `StraightPath.__init__` | ❌ No C++ doc | Factory wrapper — no `///` on `StraightPath::create` |
 
 ---
 
@@ -47,28 +47,28 @@
 | `initConfig` | ✅ | `DocClassMethod(initConfig)` |
 | `addGoalConfig` | ✅ | `DocClassMethod(addGoalConfig)` |
 | `resetGoalConfigs` | ✅ | `DocClassMethod(resetGoalConfigs)` |
-| `steeringMethod` (getter/setter) | ❌ No C++ doc | Python wrapper struct; no `///` in `problem.hh` |
-| `configValidation` (getter/setter) | ❌ No C++ doc | Same |
-| `pathValidation` (getter/setter) | ❌ No C++ doc | Same |
-| `pathProjector` (getter/setter) | ❌ No C++ doc | Same |
-| `distance` (getter/setter) | ❌ No C++ doc | Same |
-| `target` (getter/setter) | ❌ No C++ doc | Same |
-| `configurationShooter` (getter/setter) | ❌ No C++ doc | Same |
-| `errorThreshold` (def_readwrite) | ⚠️ Python-only | Python wrapper field — default threshold for ConfigProjector creation |
-| `maxIterProjection` (def_readwrite) | ⚠️ Python-only | Same |
-| `addPartialCom` | ⚠️ Python-only | |
-| `getPartialCom` | ⚠️ Python-only | |
-| `createRelativeComConstraint` | ⚠️ Python-only | |
-| `createTransformationConstraint` (×2) | ⚠️ Python-only | |
-| `setConstantRightHandSide` | ⚠️ Python-only | |
-| `applyConstraints` | ⚠️ Python-only | |
-| `isConfigValid` | ⚠️ Python-only | |
-| `setConstraints` | ⚠️ Python-only | |
-| `getConstraints` | ⚠️ Python-only | |
-| `setRightHandSideFromConfig` | ⚠️ Python-only | |
-| `addNumericalConstraintsToConfigProjector` (×2) | ⚠️ Python-only | |
-| `createComBetweenFeet` | ⚠️ Python-only | |
-| `directPath` | ⚠️ Signature diff. | Returns `(valid, path, report)`; hides output params |
+| `steeringMethod` (getter/setter) | ✅ | Inline strings — no `///` in `problem.hh` |
+| `configValidation` (getter/setter) | ✅ | Inline strings |
+| `pathValidation` (getter/setter) | ✅ | Inline strings |
+| `pathProjector` (getter/setter) | ✅ | Inline strings |
+| `distance` (getter/setter) | ✅ | Inline strings |
+| `target` (getter/setter) | ✅ | Inline strings |
+| `configurationShooter` (getter/setter) | ✅ | Inline strings |
+| `errorThreshold` (def_readwrite) | ✅ | Inline string — Python-only field |
+| `maxIterProjection` (def_readwrite) | ✅ | Inline string — Python-only field |
+| `addPartialCom` | ✅ | Inline string |
+| `getPartialCom` | ✅ | Inline string |
+| `createRelativeComConstraint` | ✅ | Inline string |
+| `createTransformationConstraint` (×2) | ✅ | Inline string |
+| `setConstantRightHandSide` | ✅ | Inline string |
+| `applyConstraints` | ✅ | Inline string — returns `(success, projected_config, residual_error)` |
+| `isConfigValid` | ✅ | Inline string — returns `(valid, report)` |
+| `setConstraints` | ✅ | Inline string |
+| `getConstraints` | ✅ | Inline string |
+| `setRightHandSideFromConfig` | ✅ | Inline string |
+| `addNumericalConstraintsToConfigProjector` (×2) | ✅ | Inline strings |
+| `createComBetweenFeet` | ✅ | Inline string |
+| `directPath` | ✅ | Inline string — returns `(valid, path, report)` |
 
 ---
 
@@ -88,19 +88,19 @@
 | `pathExists` | ✅ | `DocClassMethod(pathExists)` |
 | `goalNodes` | ✅ | `DocClassMethod(goalNodes)` |
 | `distance` | ✅ | `DocClassMethod(distance)` |
-| `addNode` | ⚠️ Python-only | Wrapper on `roadmap.addNode(config)` |
-| `nearestNode` (×4) | ⚠️ Python-only | Return `(config, minDistance)` |
-| `nearestNodes` (×2) | ⚠️ Python-only | |
-| `addNodeAndEdges` | ⚠️ Python-only | |
-| `addNodeAndEdge` | ⚠️ Python-only | |
-| `addEdge` (×2) | ⚠️ Python-only | |
-| `nodes` | ⚠️ Python-only | Returns list of configurations |
-| `nodesConnectedComponent` | ⚠️ Python-only | |
-| `initNode` (×2) | ⚠️ Python-only | |
-| `connectedComponents` | ⚠️ Python-only | |
-| `numberConnectedComponents` | ⚠️ Python-only | |
-| `getConnectedComponent` | ⚠️ Python-only | |
-| `connectedComponentOfNode` | ⚠️ Python-only | |
+| `addNode` | ✅ | Inline string |
+| `nearestNode` (×4) | ✅ | Inline strings — returns `(config, minDistance)` |
+| `nearestNodes` (×2) | ✅ | Inline strings |
+| `addNodeAndEdges` | ✅ | Inline string |
+| `addNodeAndEdge` | ✅ | Inline string |
+| `addEdge` (×2) | ✅ | Inline strings |
+| `nodes` | ✅ | Inline string |
+| `nodesConnectedComponent` | ✅ | Inline string |
+| `initNode` (×2) | ✅ | Inline strings |
+| `connectedComponents` | ✅ | Inline string |
+| `numberConnectedComponents` | ✅ | Inline string |
+| `getConnectedComponent` | ✅ | Inline string |
+| `connectedComponentOfNode` | ✅ | Inline string |
 
 ---
 
@@ -121,7 +121,7 @@
 | `stopWhenProblemIsSolved` | ✅ | `DocClassMethod(stopWhenProblemIsSolved)` |
 | `computePath` | ✅ | `DocClassMethod(computePath)` |
 | `maxIterations` (getter) | ✅ | `DOC_PP_MAXITER_GET` from `path-planner.hh` |
-| `maxIterations` (setter) | ✅ | `DOC_PP_MAXITER_SET` (getter/setter pair → `DocClassMethod` unsafe on getter) |
+| `maxIterations` (setter) | ✅ | `DOC_PP_MAXITER_SET` |
 | `timeOut` (getter) | ✅ | `DOC_PP_TIMEOUT_GET` from `path-planner.hh` |
 | `timeOut` (setter) | ✅ | `DOC_PP_TIMEOUT_SET` |
 
@@ -151,15 +151,25 @@
 
 | Python property | Status | Note |
 |---|---|---|
-| `safety` | ❌ No C++ doc | `def_readwrite`; no `///` in `simple-time-parameterization.hh` |
-| `order` | ❌ No C++ doc | Same |
-| `maxAcceleration` | ❌ No C++ doc | Same |
+| `safety` | ✅ | `DOC_STP_SAFETY` — from `///` in `simple-time-parameterization.hh` |
+| `order` | ✅ | `DOC_STP_ORDER` |
+| `maxAcceleration` | ✅ | `DOC_STP_MAXACC` |
 
 ### SplineGradientBased (×3 templates)
 
 | Python property | Status | Note |
 |---|---|---|
-| `alphaInit`, `alwaysStopAtFirst`, `costOrder`, etc. | ❌ No C++ doc | `def_readwrite` on public fields without `///` |
+| `alphaInit` | ✅ | `DOC_SGB_ALPHAINIT` — from `///` in `spline-gradient-based.hh` |
+| `alwaysStopAtFirst` | ✅ | `DOC_SGB_ALWAYSSTOPFIRST` |
+| `costOrder` | ✅ | `DOC_SGB_COSTORDER` |
+| `usePathLengthAsWeights` | ✅ | `DOC_SGB_USEPATHLENGTH` |
+| `reorderIntervals` | ✅ | `DOC_SGB_REORDERINTERVALS` |
+| `linearizeAtEachStep` | ✅ | `DOC_SGB_LINEARIZE` |
+| `checkJointBound` | ✅ | `DOC_SGB_CHECKJOINTBOUND` |
+| `returnOptimum` | ✅ | `DOC_SGB_RETURNOPTIMUM` |
+| `costThreshold` | ✅ | `DOC_SGB_COSTTHRESHOLD` |
+| `guessThreshold` | ✅ | `DOC_SGB_GUESSTHRESHOLD` |
+| `QPAccuracy` | ✅ | `DOC_SGB_QPACCURACY` |
 
 ---
 
@@ -169,11 +179,11 @@
 
 | Python method | Status | Note |
 |---|---|---|
+| `__call__` | ✅ | Inline string |
 | `steer` | ✅ | `DocClassMethod(steer)` |
 | `problem` | ✅ | `DocClassMethod(problem)` |
 | `constraints` (setter) | ✅ | `DocClassMethod(constraints)` |
-| `constraints` (getter) | ✅ | `"Get constraint set."` inline (getter/setter pair → `DocClassMethod` unsafe on getter) |
-| `__call__` | ⚠️ Python-only | Wrapper on `operator()` |
+| `constraints` (getter) | ✅ | Inline string (getter/setter pair → `DocClassMethod` unsafe on getter) |
 
 ---
 
@@ -185,8 +195,8 @@
 |---|---|---|
 | `addOutEdge` | ✅ | `DocClassMethod(addOutEdge)` |
 | `addInEdge` | ✅ | `DocClassMethod(addInEdge)` |
-| `connectedComponent` (getter) | ❌ No C++ doc | No `///` on the getter in `node.hh` |
-| `connectedComponent` (setter) | ✅ | `"Store the connected component the node belongs to."` inline |
+| `connectedComponent` (getter) | ✅ | Inline string — no `///` in `node.hh` |
+| `connectedComponent` (setter) | ✅ | Inline string |
 | `outEdges` | ✅ | `DocClassMethod(outEdges)` |
 | `inEdges` | ✅ | `DocClassMethod(inEdges)` |
 | `isOutNeighbor` | ✅ | `DocClassMethod(isOutNeighbor)` |
@@ -202,9 +212,9 @@
 | Python method | Status | Note |
 |---|---|---|
 | `name` | ✅ | `DocClassMethod(name)` |
-| `apply` | ⚠️ Signature diff. | Wrapper modifying `q` in-place |
-| `isSatisfied` (×2) | ⚠️ Signature diff. | Wrappers modifying `error` in-place |
-| `copy` | ⚠️ Python-only | Static wrapper |
+| `apply` | ✅ | Inline string — modifies `q` in-place |
+| `isSatisfied` (×2) | ✅ | Inline strings |
+| `copy` | ✅ | Inline string |
 
 ### ConstraintSet
 
@@ -218,18 +228,18 @@
 | Method / property | Status | Note |
 |---|---|---|
 | `solver` | ✅ | `DocClassMethod(solver)` |
-| `lineSearchType` (add_property) | ✅ | `DOC_CP_LINESEARCHTYPE` from `config-projector.hh` |
+| `lineSearchType` (add_property) | ✅ | `DOC_CP_LINESEARCHTYPE` |
 | `add` | ✅ | `DocClassMethod(add)` |
-| `lastIsOptional` (getter/setter) | ❌ No C++ doc | No `///` in `config-projector.hh` |
+| `lastIsOptional` (getter/setter) | ✅ | Inline strings — no `///` in `config-projector.hh` |
 | `maxIterations` (getter) | ✅ | `DOC_CP_MAXITER_GET` |
 | `maxIterations` (setter) | ✅ | `DOC_CP_MAXITER_SET` |
 | `errorThreshold` (getter) | ✅ | `DOC_CP_ERRTHRESH_GET` |
 | `errorThreshold` (setter) | ✅ | `DOC_CP_ERRTHRESH_SET` |
 | `residualError` | ✅ | `DocClassMethod(residualError)` |
 | `sigma` | ✅ | `DocClassMethod(sigma)` |
-| `setRightHandSideFromConfig` | ⚠️ Python-only | |
-| `setRightHandSideOfConstraint` | ⚠️ Python-only | |
-| `numericalConstraints` | ⚠️ Python-only | Returns a Python list |
+| `setRightHandSideFromConfig` | ✅ | Inline string |
+| `setRightHandSideOfConstraint` | ✅ | Inline string |
+| `numericalConstraints` | ✅ | Inline string |
 
 ---
 
@@ -245,9 +255,9 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `asDistancePtr_t` | ⚠️ Python-only | |
-| `getWeights` | ⚠️ Python-only | Wrapper on `dist->weights()` |
-| `setWeights` | ⚠️ Python-only | Wrapper on `dist->weights(weights)` |
+| `asDistancePtr_t` | ✅ | Inline string |
+| `getWeights` | ✅ | Inline string |
+| `setWeights` | ✅ | Inline string |
 
 ---
 
@@ -257,10 +267,10 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `nodes` | ✅ | `DocClassMethod(nodes)` (note: Python wrapper returns configurations, not node objects) |
+| `nodes` | ✅ | `DocClassMethod(nodes)` |
 | `reachableFrom` | ✅ | `DocClassMethod(reachableFrom)` |
 | `reachableTo` | ✅ | `DocClassMethod(reachableTo)` |
-| `__eq__` | ⚠️ Python-only | Raw pointer comparison |
+| `__eq__` | ✅ | Inline string |
 
 ---
 
@@ -281,7 +291,7 @@
 | Python method | Status | Note |
 |---|---|---|
 | `validate` | ✅ | `DocClassMethod(validate)` via `PYHPP_DEFINE_METHOD2` |
-| `validate` (py tuple) | ⚠️ Signature diff. | Returns `(bool, report)` |
+| `validate` (py tuple) | ✅ | Inline string — returns `(bool, report)` |
 
 ### ConfigValidations
 
@@ -289,7 +299,7 @@
 |---|---|---|
 | `add` | ✅ | `DocClassMethod(add)` via `PYHPP_DEFINE_METHOD2` |
 | `numberConfigValidations` | ✅ | `DocClassMethod(numberConfigValidations)` |
-| `clear` | ❌ No C++ doc | No `///` in `config-validations.hh` |
+| `clear` | ✅ | Inline string — no `///` in `config-validations.hh` |
 
 ---
 
@@ -299,9 +309,14 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `boolValue`, `intValue`, `floatValue`, `stringValue`, `vectorValue`, `matrixValue` | ❌ No C++ doc | `PYHPP_DEFINE_METHOD` without docstring; no `///` in `parameter.hh` |
-| `value` | ⚠️ Python-only | Converts to Python object by type |
-| `create_bool` | ⚠️ Python-only | Factory for `bool` |
+| `boolValue` | ✅ | Inline string |
+| `intValue` | ✅ | Inline string |
+| `floatValue` | ✅ | Inline string |
+| `stringValue` | ✅ | Inline string |
+| `vectorValue` | ✅ | Inline string |
+| `matrixValue` | ✅ | Inline string |
+| `value` | ✅ | Inline string — converts to Python object by type |
+| `create_bool` | ✅ | Inline string — factory for `bool` |
 
 ---
 
@@ -312,8 +327,12 @@
 | Python method | Status | Note |
 |---|---|---|
 | `apply` | ✅ | `DocClassMethod(apply)` |
-| `apply` (py tuple) | ⚠️ Signature diff. | Returns `(bool, projPath)` |
-| Factories (NoneProjector, ProgressiveProjector, etc.) | ⚠️ Python-only | |
+| `apply` (py tuple) | ✅ | Inline string — returns `(bool, projPath)` |
+| `NoneProjector` | ✅ | Inline string |
+| `ProgressiveProjector` | ✅ | Inline string |
+| `DichotomyProjector` | ✅ | Inline string |
+| `GlobalProjector` | ✅ | Inline string |
+| `RecursiveHermiteProjector` | ✅ | Inline string |
 
 ---
 
@@ -324,9 +343,13 @@
 | Python method | Status | Note |
 |---|---|---|
 | `validate` | ✅ | `DocClassMethod(validate)` |
-| `validate` (py tuple) | ⚠️ Signature diff. | Returns `(bool, validPart, report)` |
-| `validateConfiguration` | ⚠️ Python-only | Returns `(bool, report)` |
-| Factories (Discretized, Progressive, Dichotomy, etc.) | ⚠️ Python-only | |
+| `validate` (py tuple) | ✅ | Inline string — returns `(bool, validPart, report)` |
+| `validateConfiguration` | ✅ | Inline string — returns `(bool, report)` |
+| `Discretized` / `DiscretizedCollision` | ✅ | Inline string |
+| `DiscretizedJointBound` | ✅ | Inline string |
+| `DiscretizedCollisionAndJointBound` | ✅ | Inline string |
+| `Progressive` | ✅ | Inline string |
+| `Dichotomy` | ✅ | Inline string |
 
 ---
 
@@ -370,7 +393,7 @@ No methods exposed.
 
 | Python method | Status | Note |
 |---|---|---|
-| All methods | ❌ No C++ doc | `PYHPP_DEFINE_METHOD` without docstring |
+| All methods | ❌ No C++ doc | `PYHPP_DEFINE_METHOD` — no `///` in spline headers |
 
 ---
 
@@ -380,7 +403,7 @@ No methods exposed.
 
 | Python method | Status | Note |
 |---|---|---|
-| `computePath` | ❌ No C++ doc | `PYHPP_DEFINE_METHOD` without docstring |
+| `computePath` | ❌ No C++ doc | No `///` in `goal-configurations.hh` |
 | `reached` | ❌ No C++ doc | Same |
 
 ---
@@ -391,4 +414,4 @@ No methods exposed.
 
 | Python method / property | Status | Note |
 |---|---|---|
-| All methods and properties | ❌ No C++ doc | `PYHPP_DEFINE_METHOD` or `add_property`/`def_readwrite` without `///` |
+| All methods and properties | ❌ No C++ doc | No `///` in the corresponding headers |

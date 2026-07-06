@@ -344,13 +344,20 @@ void exposeDevice() {
   // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
          boost::noncopyable>("Device", init<const std::string&>())
-      .def("setRobotRootPosition", &Device::setRobotRootPosition)
-      .def("handles", &Device::handles)
-      .def("grippers", &Device::grippers)
+      .def("setRobotRootPosition", &Device::setRobotRootPosition,
+           "Set the root position of a sub-robot (identified by name) relative "
+           "to its parent joint.")
+      .def("handles", &Device::handles,
+           "Return a map from handle name to Handle object.")
+      .def("grippers", &Device::grippers,
+           "Return a map from gripper name to Gripper object.")
       .def("asPinDevice", &asPinDevice)
-      .def("getJointNames", &Device::getJointNames)
-      .def("getJointConfig", &Device::getJointConfig)
-      .def("setJointBounds", &Device::setJointBounds)
+      .def("getJointNames", &Device::getJointNames,
+           "Return list of all joint names in the Pinocchio model.")
+      .def("getJointConfig", &Device::getJointConfig,
+           "Return current configuration values of the named joint.")
+      .def("setJointBounds", &Device::setJointBounds,
+           "Set joint bounds from a flat list [min0, max0, min1, max1, ...].")
       .def("contactSurfaceNames", &Device::contactSurfaceNames,
            "Return list of contact surface names registered on device")
       .def("contactSurfaces", &Device::contactSurfaces,

@@ -335,8 +335,12 @@ void exposePathPlanners() {
       .def("computePath", &TransitionPlanner::computePath,
            DocClassMethod(computePath))
       .def("planPath", &TransitionPlanner::planPath, DocClassMethod(planPath))
-      .def("directPath", &TransitionPlanner::directPath)
-      .def("validateConfiguration", &TransitionPlanner::validateConfiguration)
+      .def("directPath", &TransitionPlanner::directPath,
+           "Compute a direct path on a transition. Returns (success, path, "
+           "status).")
+      .def("validateConfiguration", &TransitionPlanner::validateConfiguration,
+           "Validate configuration against the graph state identified by id. "
+           "Returns (valid, report).")
       .def("optimizePath", &TransitionPlanner::optimizePath,
            DocClassMethod(optimizePath))
       .def("timeParameterization", &TransitionPlanner::timeParameterization,

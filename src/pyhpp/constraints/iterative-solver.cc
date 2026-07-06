@@ -139,16 +139,22 @@ void exposeHierarchicalIterativeSolver() {
                     static_cast<bool (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::lastIsOptional),
                     static_cast<void (HierarchicalIterative::*)(bool)>(
-                        &HierarchicalIterative::lastIsOptional))
-      .add_property("solveLevelByLevel",
-                    static_cast<bool (HierarchicalIterative::*)() const>(
-                        &HierarchicalIterative::solveLevelByLevel),
-                    static_cast<void (HierarchicalIterative::*)(bool)>(
-                        &HierarchicalIterative::solveLevelByLevel))
-      .def("numberStacks", &HierarchicalIterative::numberStacks)
-      .def("constraintsForPriority", &getConstraintsForPriority)
+                        &HierarchicalIterative::lastIsOptional),
+                    "Whether the last priority level is treated as optional.")
+      .add_property(
+          "solveLevelByLevel",
+          static_cast<bool (HierarchicalIterative::*)() const>(
+              &HierarchicalIterative::solveLevelByLevel),
+          static_cast<void (HierarchicalIterative::*)(bool)>(
+              &HierarchicalIterative::solveLevelByLevel),
+          "Whether to solve constraints one priority level at a time.")
+      .def("numberStacks", &HierarchicalIterative::numberStacks,
+           "Return the number of priority stacks.")
+      .def("constraintsForPriority", &getConstraintsForPriority,
+           "Return list of constraints at the given priority level.")
       .def("dimension", &HierarchicalIterative::dimension,
-           return_value_policy<copy_const_reference>());
+           return_value_policy<copy_const_reference>(),
+           "Return total dimension of the active constraints.");
 }
 }  // namespace constraints
 }  // namespace pyhpp

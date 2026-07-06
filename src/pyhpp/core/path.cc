@@ -38,6 +38,17 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_PATH_CALL1 =
+    "Evaluate path at parameter t. Returns (configuration, success).";
+const char* DOC_PATH_CALL2 =
+    "Evaluate path at parameter t into q. Returns success flag.";
+const char* DOC_PATH_DERIVATIVE =
+    "Compute derivative of given order at parameter t. Returns a numpy vector.";
+const char* DOC_PATH_CONSTRAINTS =
+    "Return the constraint set attached to the path, or None.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -147,11 +158,11 @@ void exposePath() {
   class_<Path, hpp::shared_ptr<Path>, boost::noncopyable>("Path", no_init)
       .def("__str__", &to_str_from_operator<Path>)
 
-      .def("__call__", &PathWrap::py_call1)
-      .def("__call__", &PathWrap::py_call2)
-      .def("eval", &PathWrap::py_call1)
-      .def("eval", &PathWrap::py_call2)
-      .def("derivative", &PathWrap::derivative)
+      .def("__call__", &PathWrap::py_call1, DOC_PATH_CALL1)
+      .def("__call__", &PathWrap::py_call2, DOC_PATH_CALL2)
+      .def("eval", &PathWrap::py_call1, DOC_PATH_CALL1)
+      .def("eval", &PathWrap::py_call2, DOC_PATH_CALL2)
+      .def("derivative", &PathWrap::derivative, DOC_PATH_DERIVATIVE)
 
       .def("copy", static_cast<PathPtr_t (Path::*)() const>(&Path::copy),
            DocClassMethod(copy))
@@ -170,7 +181,7 @@ void exposePath() {
       .def("length", &Path::length, DocClassMethod(length))
       .def("initial", &Path::initial, DocClassMethod(initial))
       .def("end", &Path::end, DocClassMethod(end))
-      .def("constraints", &PathWrap::constraints)
+      .def("constraints", &PathWrap::constraints, DOC_PATH_CONSTRAINTS)
       .def("outputSize", &Path::outputSize, DocClassMethod(outputSize))
       .def("outputDerivativeSize", &Path::outputDerivativeSize,
            DocClassMethod(outputDerivativeSize));

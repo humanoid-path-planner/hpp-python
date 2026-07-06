@@ -61,7 +61,8 @@ void exposeConfigValidation() {
       "ConfigValidation", no_init)
       .PYHPP_DEFINE_METHOD2(ConfigValidation, validate,
                             DocClassMethod(validate))
-      .def("validate", &CVWrapper::py_validate);
+      .def("validate", &CVWrapper::py_validate,
+           "Validate configuration; returns (valid, report).");
 
   // DocClass (ConfigValidations)
   class_<ConfigValidations, ConfigValidationsPtr_t, bases<ConfigValidation>,
@@ -69,7 +70,8 @@ void exposeConfigValidation() {
       .PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
       .PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
                             DocClassMethod(numberConfigValidations))
-      .def("clear", &ConfigValidations::clear);
+      .def("clear", &ConfigValidations::clear,
+           "Remove all config validations.");
 }
 }  // namespace core
 }  // namespace pyhpp

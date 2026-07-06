@@ -36,10 +36,10 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `Manipulability.__init__` | ⚠️ Python-only | Factory `Manipulability::create` |
-| `Manipulability.lockJoint` | ❌ No C++ doc | No `///` in `manipulability.hh` |
-| `MinManipulability.__init__` | ⚠️ Python-only | Factory `MinManipulability::create` |
-| `MinManipulability.lockJoint` | ❌ No C++ doc | Same |
+| `Manipulability.__init__` | ✅ | Inline string — factory `Manipulability::create` |
+| `Manipulability.lockJoint` | ✅ | Inline string — no `///` in `manipulability.hh` |
+| `MinManipulability.__init__` | ✅ | Inline string — factory `MinManipulability::create` |
+| `MinManipulability.lockJoint` | ✅ | Inline string — no `///` in `manipulability.hh` |
 
 ---
 
@@ -49,13 +49,13 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `__init__` | ⚠️ Python-only | Wrapper for `Implicit::create` |
+| `__init__` | ✅ | Inline string — wrapper for `Implicit::create` |
 | `comparisonType` (getter) | ✅ | `DOC_COMPARISONTYPE_GET` (`DocClassMethod` unsafe: setter has `comp` param → kwargs mismatch) |
 | `comparisonType` (setter) | ✅ | `DOC_COMPARISONTYPE_SET` |
 | `function` | ✅ | `DocClassMethod(function)` |
 | `parameterSize` | ✅ | `DocClassMethod(parameterSize)` |
 | `rightHandSideSize` | ✅ | `DocClassMethod(rightHandSideSize)` |
-| `getFunctionOutputSize` | ⚠️ Python-only | Static method, no direct C++ equivalent |
+| `getFunctionOutputSize` | ✅ | Inline string — static method, no direct C++ equivalent |
 
 ---
 
@@ -63,7 +63,7 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `createExplicit` | ⚠️ Python-only | Wrapper around `Explicit::create` |
+| `createExplicit` | ✅ | Inline string — wrapper around `Explicit::create` |
 
 ---
 
@@ -94,11 +94,11 @@
 | `rightHandSide` (setter rhs only) | ✅ | `DOC_HI_RHS_SET2` |
 | `rightHandSide` (getter) | ✅ | `DOC_HI_RHS_GET` |
 | `maxIterations` (add_property) | ✅ | `DOC_HI_MAXITERATIONS` from `hierarchical-iterative.hh` |
-| `lastIsOptional` (add_property) | ❌ No C++ doc | No `///` in `hierarchical-iterative.hh` (uses `//`) |
-| `solveLevelByLevel` (add_property) | ❌ No C++ doc | Same (`//` non-doxygen) |
-| `numberStacks` | ❌ No C++ doc | No `///` |
-| `constraintsForPriority` | ⚠️ Python-only | Wrapper returning a Python list |
-| `dimension` | ❌ No C++ doc | No `///` on the exposed method |
+| `lastIsOptional` (add_property) | ✅ | Inline string — no `///` in `hierarchical-iterative.hh` (uses `//`) |
+| `solveLevelByLevel` (add_property) | ✅ | Inline string — same (non-doxygen `//`) |
+| `numberStacks` | ✅ | Inline string — no `///` |
+| `constraintsForPriority` | ✅ | Inline string — wrapper returning a Python list |
+| `dimension` | ✅ | Inline string — no `///` on the exposed method |
 
 ---
 
@@ -110,7 +110,7 @@
 |---|---|---|
 | `SolverStatus` (enum) | ❌ No C++ doc | Enum without class-level `///` |
 | `explicitConstraintSetHasChanged` | ✅ | `DocClassMethod(explicitConstraintSetHasChanged)` |
-| `solve` | ⚠️ Signature diff. | Python wrapper returns `(qout, status)` tuple, hides output arg |
+| `solve` | ✅ | Inline string — returns `(qout, status)` tuple |
 | `explicitConstraintSet` | ✅ | `DocClassMethod(explicitConstraintSet)` |
 | `rightHandSideFromConfig` (config only) | ✅ | `DOC_BS_RHSFC1` from `by-substitution.hh` |
 | `rightHandSideFromConfig` (constraint + config) | ✅ | `DOC_BS_RHSFC2` |
@@ -118,7 +118,7 @@
 | `rightHandSide` (setter rhs only) | ✅ | `DOC_BS_RHS_SET2` |
 | `rightHandSide` (getter) | ✅ | `DOC_BS_RHS_GET` |
 | `errorThreshold` (add_property) | ✅ | `DOC_BS_ERRORTHRESHOLD` from `by-substitution.hh` |
-| `describeError` | ⚠️ Python-only | Wrapper decomposing error by constraint |
+| `describeError` | ✅ | Inline string — returns list of `(constraint_name, error_norm)` pairs |
 
 ---
 
@@ -142,8 +142,8 @@
 
 | Python method | Status | Note |
 |---|---|---|
-| `__init__` (joint + config) | ⚠️ Python-only | `createLockedJoint`: wrapper without direct C++ equivalent |
-| `__init__` (joint + config + comp) | ⚠️ Python-only | `createLockedJointWithComp`: same |
+| `__init__` (joint + config) | ✅ | Inline string — `createLockedJoint` wrapper |
+| `__init__` (joint + config + comp) | ✅ | Inline string — `createLockedJointWithComp` wrapper |
 
 ---
 

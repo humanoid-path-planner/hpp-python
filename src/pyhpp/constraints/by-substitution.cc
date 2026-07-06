@@ -127,7 +127,10 @@ void exposeBySubstitution() {
       .def("explicitConstraintSetHasChanged",
            &BySubstitution::explicitConstraintSetHasChanged,
            DocClassMethod(explicitConstraintSetHasChanged))
-      .def("solve", &BySubstitution_solve)
+      .def(
+          "solve", &BySubstitution_solve,
+          "Solve the constraints from configuration q. Returns (output_config, "
+          "status).")
       .def("explicitConstraintSet",
            static_cast<ExplicitConstraintSet& (BySubstitution::*)()>(
                &BySubstitution::explicitConstraintSet),
@@ -160,7 +163,9 @@ void exposeBySubstitution() {
                     static_cast<void (BySubstitution::*)(const value_type&)>(
                         &BySubstitution::errorThreshold),
                     DOC_BS_ERRORTHRESHOLD)
-      .def("describeError", &BySubstitution_describeError);
+      .def("describeError", &BySubstitution_describeError,
+           "Describe the constraint error for configuration q. Returns a list "
+           "of (constraint_name, error_norm) pairs.");
 }
 }  // namespace constraints
 }  // namespace pyhpp

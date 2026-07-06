@@ -52,7 +52,8 @@ void exposeNode() {
       .def("addInEdge", &Node::addInEdge, DocClassMethod(addInEdge))
       .def("connectedComponent",
            static_cast<ConnectedComponentPtr_t (Node::*)() const>(
-               &Node::connectedComponent))
+               &Node::connectedComponent),
+           "Return the connected component the node belongs to.")
       .def("connectedComponent",
            static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(
                &Node::connectedComponent),
