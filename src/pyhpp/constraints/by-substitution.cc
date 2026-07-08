@@ -123,7 +123,7 @@ void exposeBySubstitution() {
 
   // DocClass(BySubstitution)
   class_<BySubstitution, bases<HierarchicalIterative> >(
-      "BySubstitution", init<LiegroupSpacePtr_t>())
+      "BySubstitution", DocClassDoc(), init<LiegroupSpacePtr_t>())
       .def("explicitConstraintSetHasChanged",
            &BySubstitution::explicitConstraintSetHasChanged,
            DocClassMethod(explicitConstraintSetHasChanged))

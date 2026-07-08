@@ -97,7 +97,7 @@ Parameter createBool(bool param) { return Parameter(param); }
 
 void exposeParameter() {
   // DocClass(Parameter)
-  class_<Parameter>("Parameter", no_init)
+  class_<Parameter>("Parameter", DocClassDoc(), no_init)
       .def("__init__", &create)
       .def("create_bool", &createBool, DOC_PAR_CREATEBOOL)
       .staticmethod("create_bool")

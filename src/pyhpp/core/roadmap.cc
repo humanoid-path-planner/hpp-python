@@ -260,7 +260,8 @@ struct RWrapper {
 
 void exposeRoadmap() {
   // DocClass(Roadmap)
-  class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", no_init)
+  class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", DocClassDoc(),
+                                                    no_init)
       .def("__init__", make_constructor(&Roadmap::create))
       .def("__str__", &to_str<Roadmap>)
       .def("clear", &Roadmap::clear, DocClassMethod(clear))

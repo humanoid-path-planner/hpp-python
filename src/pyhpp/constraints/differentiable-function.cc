@@ -114,7 +114,7 @@ void exposeDifferentiableFunction() {
   // class_<DifferentiableFunction, DifferentiableFunctionPtr_t,
   // boost::noncopyable>
   class_<DFWrapper, DFWrapper::Ptr_t, boost::noncopyable>(
-      "DifferentiableFunction", no_init)
+      "DifferentiableFunction", DocClassDoc(), no_init)
       // Pythonic API
       .def("__str__", &to_str<DifferentiableFunction>)
       .def("__call__", &DFWrapper::py_value, DOC_DF_CALL)

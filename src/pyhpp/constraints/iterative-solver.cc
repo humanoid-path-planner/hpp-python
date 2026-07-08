@@ -89,7 +89,7 @@ void exposeHierarchicalIterativeSolver() {
       .def(vector_indexing_suite<ComparisonTypes_t>());
 
   // DocClass(solver::HierarchicalIterative)
-  class_<HierarchicalIterative>("HierarchicalIterative",
+  class_<HierarchicalIterative>("HierarchicalIterative", DocClassDoc(),
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<HierarchicalIterative>)
       .def("add", &HierarchicalIterative::add, DocClassMethod(add))

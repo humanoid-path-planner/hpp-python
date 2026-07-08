@@ -59,8 +59,8 @@ struct PPWrapper {
 
 void exposePathProjector() {
   // DocClass(PathProjector)
-  class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>("PathProjector",
-                                                                no_init)
+  class_<PathProjector, PathProjectorPtr_t, boost::noncopyable>(
+      "PathProjector", DocClassDoc(), no_init)
       .def("apply", &PPWrapper::apply, DocClassMethod(apply))
       .def("apply", &PPWrapper::py_apply,
            "Apply projection to path; returns (success, projectedPath).");

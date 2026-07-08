@@ -155,7 +155,8 @@ struct PathWrap : PathWrapper, wrapper<PathWrapper> {
 
 void exposePath() {
   // DocClass(Path)
-  class_<Path, hpp::shared_ptr<Path>, boost::noncopyable>("Path", no_init)
+  class_<Path, hpp::shared_ptr<Path>, boost::noncopyable>("Path", DocClassDoc(),
+                                                          no_init)
       .def("__str__", &to_str_from_operator<Path>)
 
       .def("__call__", &PathWrap::py_call1, DOC_PATH_CALL1)

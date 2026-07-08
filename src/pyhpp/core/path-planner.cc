@@ -152,7 +152,7 @@ PathVectorPtr_t PathPlanner::computePath() const { return obj->computePath(); }
 
 void exposePathPlanner() {
   // DocClass(PathPlanner)
-  class_<PathPlanner>("PathPlanner", no_init)
+  class_<PathPlanner>("PathPlanner", DocClassDoc(), no_init)
       .def("roadmap", &PathPlanner::roadmap,
            return_value_policy<copy_const_reference>(), DocClassMethod(roadmap))
       .def("problem", &PathPlanner::problem, DocClassMethod(problem))

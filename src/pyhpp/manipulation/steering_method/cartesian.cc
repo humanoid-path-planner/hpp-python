@@ -82,7 +82,8 @@ boost::python::tuple Cartesian::planPath(const Configuration_t& q_init) {
 void exposeCartesian() {
   // DocClass(Cartesian)
   boost::python::class_<Cartesian>(
-      "Cartesian", boost::python::init<const pyhpp::core::Problem&>())
+      "Cartesian", DocClassDoc(),
+      boost::python::init<const pyhpp::core::Problem&>())
       .add_property("maxIterations", &Cartesian::getMaxIterations,
                     &Cartesian::setMaxIterations,
                     "Maximal number of iterations of numerical solver.")

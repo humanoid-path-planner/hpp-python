@@ -295,7 +295,7 @@ static JointIndex getParentJointId(const HandlePtr_t& handle) {
 
 void exposeHandle() {
   // DocClass(Handle)
-  class_<Handle, HandlePtr_t>("Handle", no_init)
+  class_<Handle, HandlePtr_t>("Handle", DocClassDoc(), no_init)
       .add_property("name", &getHandleName, &setHandleName, DOC_HANDLE_NAME)
       .add_property("localPosition", &getHandleLocalPosition,
                     &setHandleLocalPosition, DOC_HANDLE_LOCALPOSITION)
@@ -343,7 +343,8 @@ void exposeDevice() {
 
   // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
-         boost::noncopyable>("Device", init<const std::string&>())
+         boost::noncopyable>("Device", DocClassDoc(),
+                             init<const std::string&>())
       .def("setRobotRootPosition", &Device::setRobotRootPosition,
            "Set the root position of a sub-robot (identified by name) relative "
            "to its parent joint.")

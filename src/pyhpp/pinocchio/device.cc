@@ -226,7 +226,7 @@ static JointIndex getParentJointId(const GripperPtr_t& gripper) {
 
 void exposeGripper() {
   // DocClass(Gripper)
-  class_<Gripper, GripperPtr_t>("Gripper", no_init)
+  class_<Gripper, GripperPtr_t>("Gripper", DocClassDoc(), no_init)
       .add_property("localPosition", &getObjectPositionInJoint)
       .add_property(
           "clearance",
@@ -313,8 +313,8 @@ void exposeDevice() {
   void (Device::*cfk)(int) = &Device::computeForwardKinematics;
 
   // DocClass(Device)
-  class_<Device, boost::shared_ptr<Device>, boost::noncopyable>("Device",
-                                                                no_init)
+  class_<Device, boost::shared_ptr<Device>, boost::noncopyable>(
+      "Device", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createDevice))
       .def("name", &Device::name, return_value_policy<return_by_value>(),
            DocClassMethod(name))

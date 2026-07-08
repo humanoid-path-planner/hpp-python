@@ -118,8 +118,8 @@ void exposeSplineGradientBased(const char* name) {
 
 void exposePathOptimizer() {
   // DocClass(PathOptimizer)
-  class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>("PathOptimizer",
-                                                                no_init)
+  class_<PathOptimizer, PathOptimizerPtr_t, boost::noncopyable>(
+      "PathOptimizer", DocClassDoc(), no_init)
       .def("problem", &PathOptimizer::problem, DocClassMethod(problem))
       .def("optimize", &PathOptimizer::optimize, DocClassMethod(optimize))
       .def("interrupt", &PathOptimizer::interrupt, DocClassMethod(interrupt))

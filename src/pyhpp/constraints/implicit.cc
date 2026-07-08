@@ -61,7 +61,8 @@ void exposeImplicit() {
       .value("Superior", Superior)
       .value("Inferior", Inferior);
   // DocClass(Implicit)
-  class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", no_init)
+  class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", DocClassDoc(),
+                                                      no_init)
       .def("__init__", make_constructor(&Implicit::create),
            "Create an implicit constraint from a differentiable function and "
            "comparison types.")

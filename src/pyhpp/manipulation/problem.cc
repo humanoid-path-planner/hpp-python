@@ -128,7 +128,7 @@ void Problem::graphSteeringMethod(
 
 void exposeProblem() {
   // DocClass(Problem)
-  class_<Problem, bases<pyhpp::core::Problem>>("Problem",
+  class_<Problem, bases<pyhpp::core::Problem>>("Problem", DocClassDoc(),
                                                init<const PyWDevicePtr_t&>())
       .def("constraintGraph",
            static_cast<PyWGraphPtr_t (Problem::*)() const>(

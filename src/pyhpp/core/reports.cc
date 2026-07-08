@@ -48,19 +48,21 @@ using namespace hpp::core;
 void exposeReports() {
   // DocClass(ValidationReport)
   class_<ValidationReport, ValidationReportPtr_t, boost::noncopyable>(
-      "ValidationReport", no_init)
+      "ValidationReport", DocClassDoc(), no_init)
       .def("__str__", &to_str<ValidationReport>);
 
   // DocClass(CollisionValidationReport)
   class_<CollisionValidationReport, CollisionValidationReportPtr_t,
-         bases<ValidationReport> >("CollisionValidationReport", no_init)
+         bases<ValidationReport> >("CollisionValidationReport", DocClassDoc(),
+                                   no_init)
       .def_readonly("object1", &CollisionValidationReport::object1)
       .def_readonly("object2", &CollisionValidationReport::object2)
       .def_readonly("result", &CollisionValidationReport::result);
 
   // DocClass(JointBoundValidationReport)
   class_<JointBoundValidationReport, JointBoundValidationReportPtr_t,
-         bases<ValidationReport> >("JointBoundValidationReport", no_init)
+         bases<ValidationReport> >("JointBoundValidationReport", DocClassDoc(),
+                                   no_init)
       .def_readonly("joint_", &JointBoundValidationReport::joint_)
       .def_readonly("rank_", &JointBoundValidationReport::rank_)
       .def_readonly("lowerBound_", &JointBoundValidationReport::lowerBound_)
@@ -69,7 +71,8 @@ void exposeReports() {
 
   // DocClass(PathValidationReport)
   class_<PathValidationReport, PathValidationReportPtr_t,
-         bases<ValidationReport> >("PathValidationReport", no_init)
+         bases<ValidationReport> >("PathValidationReport", DocClassDoc(),
+                                   no_init)
       .def_readwrite("parameter", &PathValidationReport::parameter)
       .def_readwrite("configurationReport",
                      &PathValidationReport::configurationReport);
@@ -77,7 +80,7 @@ void exposeReports() {
   // DocClass(CollisionPathValidationReport)
   class_<CollisionPathValidationReport, CollisionPathValidationReportPtr_t,
          bases<CollisionValidationReport> >("CollisionPathValidationReport",
-                                            no_init)
+                                            DocClassDoc(), no_init)
       .def("__str__", &to_str<CollisionPathValidationReport>);
 }
 }  // namespace core

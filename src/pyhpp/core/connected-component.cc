@@ -77,7 +77,7 @@ struct CCWrapper {
 void exposeConnectedComponent() {
   // DocClass(ConnectedComponent)
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
-      "ConnectedComponent", no_init)
+      "ConnectedComponent", DocClassDoc(), no_init)
       .def("nodes", &CCWrapper::nodes, DocClassMethod(nodes))
       .def("reachableFrom", &CCWrapper::reachableFrom,
            DocClassMethod(reachableFrom))

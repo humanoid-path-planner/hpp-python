@@ -58,7 +58,7 @@ struct CVWrapper {
 void exposeConfigValidation() {
   // DocClass (ConfigValidation)
   class_<ConfigValidation, ConfigValidationPtr_t, boost::noncopyable>(
-      "ConfigValidation", no_init)
+      "ConfigValidation", DocClassDoc(), no_init)
       .PYHPP_DEFINE_METHOD2(ConfigValidation, validate,
                             DocClassMethod(validate))
       .def("validate", &CVWrapper::py_validate,
@@ -66,7 +66,7 @@ void exposeConfigValidation() {
 
   // DocClass (ConfigValidations)
   class_<ConfigValidations, ConfigValidationsPtr_t, bases<ConfigValidation>,
-         boost::noncopyable>("ConfigValidations", no_init)
+         boost::noncopyable>("ConfigValidations", DocClassDoc(), no_init)
       .PYHPP_DEFINE_METHOD2(ConfigValidations, add, DocClassMethod(add))
       .PYHPP_DEFINE_METHOD2(ConfigValidations, numberConfigValidations,
                             DocClassMethod(numberConfigValidations))

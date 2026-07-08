@@ -661,7 +661,7 @@ void exposeProblem() {
   class_<hpp::core::Problem, boost::noncopyable>("CppCoreProblem", no_init);
 
   // DocClass(Problem)
-  class_<Problem>("Problem", init<const DevicePtr_t&>())
+  class_<Problem>("Problem", DocClassDoc(), init<const DevicePtr_t&>())
       .def("robot", &Problem::robot,
            return_value_policy<copy_const_reference>(), DocClassMethod(robot))
       .def("setParameter", &Problem::setParameter, DocClassMethod(setParameter))

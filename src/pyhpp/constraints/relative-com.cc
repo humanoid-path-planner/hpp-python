@@ -69,7 +69,7 @@ static RelativeComPtr_t create3(const std::string& name,
 void exposeRelativeCom() {
   // DocClass(RelativeCom)
   class_<RelativeCom, RelativeComPtr_t, bases<DifferentiableFunction>,
-         boost::noncopyable>("RelativeCom", no_init)
+         boost::noncopyable>("RelativeCom", DocClassDoc(), no_init)
       .def("__init__", &create1, DocClassMethod(create))
       .def("__init__", &create2)
       .def("__init__", &create3);

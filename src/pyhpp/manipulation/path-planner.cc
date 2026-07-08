@@ -320,7 +320,8 @@ void exposePathPlanners() {
   // DocClass(TransitionPlanner)
   boost::python::class_<TransitionPlanner,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
-      "TransitionPlanner", boost::python::init<const pyhpp::core::Problem&>())
+      "TransitionPlanner", DocClassDoc(),
+      boost::python::init<const pyhpp::core::Problem&>())
       .def("innerPlanner",
            static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
                &TransitionPlanner::innerPlanner),
@@ -371,7 +372,7 @@ void exposePathPlanners() {
   // DocClass(EndEffectorTrajectory)
   boost::python::class_<EndEffectorTrajectory,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
-      "EndEffectorTrajectory",
+      "EndEffectorTrajectory", DocClassDoc(),
       boost::python::init<const pyhpp::core::Problem&>())
       .def(boost::python::init<const pyhpp::core::Problem&,
                                const RoadmapPtr_t&>())

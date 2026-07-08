@@ -121,7 +121,8 @@ static boost::python::list getNumConstraints(ConfigProjector& cp) {
 
 void exposeConstraint() {
   // DocClass(Constraint)
-  class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
+  class_<Constraint, ConstraintPtr_t, boost::noncopyable>(
+      "Constraint", DocClassDoc(), no_init)
       .def("__str__", &to_str_from_operator<Constraint>)
       .def("name", &Constraint::name, return_internal_reference<>(),
            DocClassMethod(name))
@@ -132,7 +133,7 @@ void exposeConstraint() {
 
   // DocClass(ConstraintSet)
   class_<ConstraintSet, ConstraintSetPtr_t, boost::noncopyable,
-         bases<Constraint> >("ConstraintSet", no_init)
+         bases<Constraint> >("ConstraintSet", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createConstraintSet))
       .def("addConstraint", &ConstraintSet::addConstraint,
            DocClassMethod(addConstraint))
@@ -146,7 +147,7 @@ void exposeConstraint() {
       .value("Constant", ConfigProjector::Constant);
   // DocClass(ConfigProjector)
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
-         bases<Constraint> >("ConfigProjector", no_init)
+         bases<Constraint> >("ConfigProjector", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createConfigProjector))
       .def("solver",
            static_cast<BySubstitution& (ConfigProjector::*)()>(

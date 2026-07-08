@@ -83,7 +83,7 @@ struct PVWrapper {
 void exposePathValidation() {
   // DocClass(PathValidation)
   class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
-      "PathValidation", no_init)
+      "PathValidation", DocClassDoc(), no_init)
       .def("validate", &PVWrapper::validate, DocClassMethod(validate))
       .def("validate", &PVWrapper::py_validate,
            "Validate path; returns (valid, validPart, report).")

@@ -45,7 +45,8 @@ using namespace hpp::core;
 
 void exposeNode() {
   // DocClass(Node)
-  class_<Node, boost::shared_ptr<Node>, boost::noncopyable>("Node", no_init)
+  class_<Node, boost::shared_ptr<Node>, boost::noncopyable>(
+      "Node", DocClassDoc(), no_init)
       .def(init<ConfigurationIn_t>())
       .def(init<ConfigurationIn_t, ConnectedComponentPtr_t>())
       .def("addOutEdge", &Node::addOutEdge, DocClassMethod(addOutEdge))

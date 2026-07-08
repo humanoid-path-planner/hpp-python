@@ -1290,14 +1290,14 @@ using namespace boost::python;
 
 void exposeGraph() {
   // DocClass(State)
-  class_<PyWState, PyWStatePtr_t>("State", no_init)
+  class_<PyWState, PyWStatePtr_t>("State", DocClassDoc(), no_init)
       .def("name", &PyWState::name, DocClassMethod(name))
       .def("id", &PyWState::id, DocClassMethod(id))
       .def("configConstraint", &PyWState::configConstraint)
       .PYHPP_DEFINE_METHOD1(PyWState, neighborEdges, DOC_NEIGHBOREDGES);
 
   // DocClass(Edge)
-  class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
+  class_<PyWEdge, PyWEdgePtr_t>("Transition", DocClassDoc(), no_init)
       .def("id", &PyWEdge::id, DocClassMethod(id))
       .def("name", &PyWEdge::name, DocClassMethod(name))
       .def("isWaypointTransition", &PyWEdge::isWaypointTransition,
@@ -1310,7 +1310,7 @@ void exposeGraph() {
 
   // DocClass(Graph)
   class_<PyWGraph, PyWGraphPtr_t>(
-      "Graph",
+      "Graph", DocClassDoc(),
       init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())
 
       .def(

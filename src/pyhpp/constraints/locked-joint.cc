@@ -64,8 +64,9 @@ LockedJointPtr_t createLockedJointWithComp(const DevicePtr_t& robot,
 }
 
 void exposeLockedJoint() {
+  // DocClass(LockedJoint)
   class_<LockedJoint, bases<Implicit>, LockedJointPtr_t, boost::noncopyable>(
-      "LockedJoint", no_init)
+      "LockedJoint", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createLockedJoint),
            "Create a locked joint constraint fixing the named joint to the "
            "given configuration.")
