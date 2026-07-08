@@ -30,7 +30,7 @@
 
 
 class SecurityMargins:
-    defaultMargin = 0
+    defaultMargin = 0.0
     separators = ["/"]
 
     def __init__(self, problem, factory, robotsAndObjects, robot):
