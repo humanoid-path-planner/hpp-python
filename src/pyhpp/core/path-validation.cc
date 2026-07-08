@@ -31,6 +31,7 @@
 #include <hpp/core/collision-validation.hh>
 #include <hpp/core/continuous-validation/dichotomy.hh>
 #include <hpp/core/continuous-validation/progressive.hh>
+#include <hpp/core/fwd.hh>
 #include <hpp/core/joint-bound-validation.hh>
 #include <hpp/core/path-validation.hh>
 #include <hpp/core/path-validation/discretized-collision-checking.hh>
@@ -39,7 +40,6 @@
 #include <pyhpp/core/fwd.hh>
 #include <pyhpp/core/problem.hh>
 #include <pyhpp/util.hh>
-
 // DocNamespace(hpp::core)
 
 using namespace boost::python;
@@ -79,7 +79,6 @@ struct PVWrapper {
                                });
   }
 };
-
 void exposePathValidation() {
   // DocClass(PathValidation)
   class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
@@ -92,19 +91,38 @@ void exposePathValidation() {
 
   class_<pathValidation::Discretized, bases<PathValidation>,
          hpp::core::pathValidation::DiscretizedPtr_t, boost::noncopyable>(
-      "Discretized", no_init);
+      "Discretized", DocClassDoc(), no_init)
+      .def("__init__",
+           make_constructor(
+               +[](const DevicePtr_t& robot, const value_type& stepSize) {
+                 return pathValidation::createDiscretizedCollisionChecking(
+                     robot, stepSize);
+               },
+               default_call_policies(), (arg("robot"), arg("stepSize"))),
+           "Create a discretized collision-checking path validation.");
 
+  hpp::core::continuousValidation::ProgressivePtr_t (*ProgressiveConstructor)(
+      const DevicePtr_t&, const value_type&) =
+      &continuousValidation::Progressive::create;
   class_<continuousValidation::Progressive, bases<PathValidation>,
          hpp::core::continuousValidation::ProgressivePtr_t, boost::noncopyable>(
-      "Progressive", no_init);
+      "Progressive", DocClassDoc(), no_init)
+      .def("__init__",
+           make_constructor(ProgressiveConstructor, default_call_policies(),
+                            (arg("robot"), arg("tolerance"))),
+           "Create a progressive continuous path validation.");
 
+  hpp::core::continuousValidation::DichotomyPtr_t (*DichotomyConstructor)(
+      const DevicePtr_t&, const value_type&) =
+      &continuousValidation::Dichotomy::create;
   class_<continuousValidation::Dichotomy, bases<PathValidation>,
          hpp::core::continuousValidation::DichotomyPtr_t, boost::noncopyable>(
-      "Dichotomy", no_init);
+      "Dichotomy", DocClassDoc(), no_init)
+      .def("__init__",
+           make_constructor(DichotomyConstructor, default_call_policies(),
+                            (arg("robot"), arg("tolerance"))),
+           "Create a dichotomy-based continuous path validation.");
 
-  def("Discretized", &pathValidation::createDiscretizedCollisionChecking,
-      (arg("robot"), arg("stepSize")),
-      "Create a discretized collision-checking path validation.");
   def("DiscretizedCollision",
       &pathValidation::createDiscretizedCollisionChecking,
       (arg("robot"), arg("stepSize")),
@@ -117,12 +135,6 @@ void exposePathValidation() {
       (arg("robot"), arg("stepSize")),
       "Create a discretized path validation checking both collision and joint "
       "bounds.");
-  def("Progressive", &continuousValidation::Progressive::create,
-      (arg("robot"), arg("tolerance")),
-      "Create a progressive continuous path validation.");
-  def("Dichotomy", &continuousValidation::Dichotomy::create,
-      (arg("robot"), arg("tolerance")),
-      "Create a dichotomy-based continuous path validation.");
 }
 }  // namespace core
 }  // namespace pyhpp
