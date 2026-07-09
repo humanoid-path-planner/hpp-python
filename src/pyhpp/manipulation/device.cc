@@ -43,6 +43,7 @@ const char* DOC_HANDLE_LOCALPOSITION =
     "Local position of the handle in the joint frame.";
 
 const char* DOC_HANDLE_MASK =
+    "mask( (Handle)arg1) -> list:\n"
     "Constraint mask: vector<bool> of size 6 defining the symmetries of the "
     "handle. See Handle class documentation for details.";
 
