@@ -60,7 +60,8 @@ struct Problem : public pyhpp::core::Problem {
   void steeringMethod(
       const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod);
   pyhpp::core::PyWSteeringMethodPtr_t steeringMethod() const;
-  void graphSteeringMethod(const PyWGraphSteeringMethodPtr_t& steeringMethod);
+  void fullSteeringMethod(
+      const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod);
   // PathValidationPtr_t pathValidation() const;
   // void pathValidation (const PathValidationPtr_t &pathValidation);
   // SteeringMethodPtr_t manipulationSteeringMethod() const;

@@ -36,6 +36,7 @@
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method/straight.hh>
+#include <hpp/manipulation/steering-method/end-effector-trajectory.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pyhpp/core/steering-method.hh>
 
@@ -71,6 +72,28 @@ void Problem::checkProblem() const { asManipulationProblem()->checkProblem(); }
 
 void Problem::steeringMethod(
     const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod) {
+  auto manipulationSteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::SteeringMethod, steeringMethod->obj);
+  auto endEffectorTrajectorySteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::steeringMethod::EndEffectorTrajectory,
+      steeringMethod->obj);
+  if (manipulationSteeringMethod || endEffectorTrajectorySteeringMethod) {
+    obj->steeringMethod(steeringMethod->obj);
+    return;
+  }
+
+  manipulationSteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::SteeringMethod, obj->steeringMethod());
+  if (!manipulationSteeringMethod) {
+    manipulationSteeringMethod =
+        hpp::manipulation::steeringMethod::Graph::create(obj);
+    obj->steeringMethod(manipulationSteeringMethod);
+  }
+  manipulationSteeringMethod->innerSteeringMethod(steeringMethod->obj);
+}
+
+void Problem::fullSteeringMethod(
+    const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod) {
   obj->steeringMethod(steeringMethod->obj);
 }
 
@@ -85,11 +108,6 @@ pyhpp::core::PyWSteeringMethodPtr_t Problem::steeringMethod() const {
   pyhpp::core::SteeringMethod* sm =
       new pyhpp::core::SteeringMethod(gsm->innerSteeringMethod());
   return std::shared_ptr<pyhpp::core::SteeringMethod>(sm);
-}
-
-void Problem::graphSteeringMethod(
-    const PyWGraphSteeringMethodPtr_t& steeringMethod) {
-  obj->steeringMethod(steeringMethod->obj);
 }
 
 // PathValidationPtr_t Problem::pathValidation() const {
@@ -150,11 +168,11 @@ void exposeProblem() {
                const pyhpp::core::PyWSteeringMethodPtr_t&)>(
                &Problem::steeringMethod),
            "Set the steering method.")
-      .def("steeringMethod",
-           static_cast<void (Problem::*)(
-               const pyhpp::manipulation::PyWGraphSteeringMethodPtr_t&)>(
-               &Problem::graphSteeringMethod),
-           "Set the graph steering method.")
+
+      .def("fullSteeringMethod", &Problem::fullSteeringMethod,
+           "Set the problem steering method directly. Unlike steeringMethod, "
+           "this does not wrap the given steering method in a manipulation "
+           "graph steering method.")
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,
