@@ -36,6 +36,7 @@
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method/straight.hh>
+#include <hpp/manipulation/steering-method/end-effector-trajectory.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pyhpp/core/steering-method.hh>
 
@@ -63,6 +64,28 @@ PyWGraphPtr_t Problem::constraintGraph() const { return graph_; }
 void Problem::checkProblem() const { asManipulationProblem()->checkProblem(); }
 
 void Problem::steeringMethod(
+    const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod) {
+  auto manipulationSteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::SteeringMethod, steeringMethod->obj);
+  auto endEffectorTrajectorySteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::steeringMethod::EndEffectorTrajectory,
+      steeringMethod->obj);
+  if (manipulationSteeringMethod || endEffectorTrajectorySteeringMethod) {
+    obj->steeringMethod(steeringMethod->obj);
+    return;
+  }
+
+  manipulationSteeringMethod = HPP_DYNAMIC_PTR_CAST(
+      hpp::manipulation::SteeringMethod, obj->steeringMethod());
+  if (!manipulationSteeringMethod) {
+    manipulationSteeringMethod =
+        hpp::manipulation::steeringMethod::Graph::create(obj);
+    obj->steeringMethod(manipulationSteeringMethod);
+  }
+  manipulationSteeringMethod->innerSteeringMethod(steeringMethod->obj);
+}
+
+void Problem::fullSteeringMethod(
     const pyhpp::core::PyWSteeringMethodPtr_t& steeringMethod) {
   obj->steeringMethod(steeringMethod->obj);
 }
@@ -137,6 +160,7 @@ void exposeProblem() {
            static_cast<void (Problem::*)(
                const pyhpp::manipulation::PyWGraphSteeringMethodPtr_t&)>(
                &Problem::graphSteeringMethod))
+      .def("fullSteeringMethod", &Problem::fullSteeringMethod)
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,
