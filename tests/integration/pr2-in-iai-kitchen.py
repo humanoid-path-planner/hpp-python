@@ -45,8 +45,8 @@ rank = model.idx_qs[model.getJointId("pr2/r_elbow_flex_joint")]
 q_goal[rank] = -0.5
 
 problem = Problem(robot)
-problem.pathValidation = Dichotomy(robot, 0.0)
-problem.steeringMethod = Straight(problem)
+problem.pathValidation(Dichotomy(robot, 0.0))
+problem.steeringMethod(Straight(problem))
 
 problem.initConfig(q_init)
 problem.addGoalConfig(q_goal)

@@ -258,10 +258,10 @@ for i in range(nSphere):
         e, [constraints["place_sphere{}/complement".format(i)]]
     )
 
-problem.steeringMethod = Straight(problem)
-problem.pathValidation = Dichotomy(robot, 0)
-problem.pathProjector = ProgressiveProjector(
-    problem.distance(), problem.steeringMethod, 0.01
+problem.steeringMethod(Straight(problem))
+problem.pathValidation(Dichotomy(robot, 0))
+problem.pathProjector(
+    ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.01)
 )
 
 cg.initialize()

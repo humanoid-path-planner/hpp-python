@@ -253,10 +253,10 @@ res, q_goal_proj, err = cg.applyStateConstraints(state, q_goal)
 if not res:
     raise RuntimeError("Failed to project goal configuration.")
 
-problem.steeringMethod = Straight(problem)
-problem.pathValidation = Dichotomy(robot, 0)
-problem.pathProjector = ProgressiveProjector(
-    problem.distance(), problem.steeringMethod, 0.05
+problem.steeringMethod(Straight(problem))
+problem.pathValidation(Dichotomy(robot, 0))
+problem.pathProjector(
+    ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.05)
 )
 
 problem.initConfig(q_init_proj)
