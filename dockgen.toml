@@ -1,0 +1,7 @@
+[hpp-manipulation-urdf]
+url = "github:humanoid-path-planner"
+
+[hpp-python]
+apt_deps = ["python3-lxml"]
+src_deps = ["hpp-manipulation-urdf"]
+url = "."
