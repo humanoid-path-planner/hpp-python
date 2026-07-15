@@ -113,6 +113,13 @@ macro(ADD_PYTHON_LIBRARY MODULE)
             FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
             DESTINATION ${PYTHON_SITELIB}/${MODULE}
         )
+
+        set_property(
+            GLOBAL
+            APPEND
+            PROPERTY
+                PYHPP_ALL_STUB_FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+        )
     endif()
 endmacro()
 
@@ -240,3 +247,24 @@ add_custom_target(all_pyhpp_bindings DEPENDS ${PYHPP_ALL_BINDINGS})
 python_install_on_site(pyhpp/tools __init__.py)
 python_install_on_site(pyhpp/tools xacro.py)
 python_install_on_site(pyhpp/tools constraint_error.py)
+
+if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
+    get_property(PYHPP_ALL_STUB_FILES GLOBAL PROPERTY PYHPP_ALL_STUB_FILES)
+    set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
+    set(FIX_STUBS_STAMP ${CMAKE_BINARY_DIR}/fix_stubs.stamp)
+
+    add_custom_command(
+        OUTPUT ${FIX_STUBS_STAMP}
+        COMMAND
+            ${CMAKE_COMMAND} -E env
+            "PYTHONPATH=${CMAKE_SOURCE_DIR}/doc:$ENV{PYTHONPATH}"
+            ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doc/fix_stubs.py
+            ${STUB_OUTPUT_DIR}
+        COMMAND ${CMAKE_COMMAND} -E touch ${FIX_STUBS_STAMP}
+        DEPENDS ${PYHPP_ALL_STUB_FILES}
+        COMMENT "Fixing Python stub signatures with fix_stubs.py"
+        VERBATIM
+    )
+
+    add_custom_target(fix_stubs ALL DEPENDS ${FIX_STUBS_STAMP})
+endif()

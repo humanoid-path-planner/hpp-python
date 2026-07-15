@@ -32,6 +32,12 @@ ARG_RE = re.compile(
     r"^\(\s*(?P<type>[A-Za-z_][A-Za-z0-9_.]*)\s*\)\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)$"
 )
 
+# Detects `arg1: "Some.Qualified.Type"` in a def line (nested class membership signal)
+NESTED_ARG1_RE = re.compile(r'\barg1:\s*"([^"]+)"')
+
+# Matches a def line whose first parameter is the bare `self` keyword (outer class method)
+DEF_SELF_FIRST_RE = re.compile(r"^\s*def\s+\w+\s*\(\s*self\s*[,)]")
+
 BUILTIN_TYPES = {
     "int",
     "float",

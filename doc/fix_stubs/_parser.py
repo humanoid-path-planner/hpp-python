@@ -5,7 +5,6 @@ The tree is a list of ClassI objects.  The first entry may be a pseudo-class
 """
 
 from __future__ import annotations
-
 import sys
 from pathlib import Path
 
@@ -16,7 +15,9 @@ from ._patterns import (
     CLASS_ATTR_RE,
     CLASS_RE,
     DEF_RE,
+    DEF_SELF_FIRST_RE,
     DOCSTRING_OPEN_RE,
+    NESTED_ARG1_RE,
     PROPERTY_RE,
     SETTER_RE,
     SIG_RE,
@@ -131,6 +132,173 @@ def _apply_method_override(
     fc.overloads = [Overload(ret, params, "", True) for ret, params in sigs]
     fc.from_docstring = True
     return True
+
+
+def _nested_class_from_fn(fn: Function, outer_name: str) -> str | None:
+    """Return nested class name from parsed overloads (primary signal).
+
+    A function belongs to a nested class when its first overload has is_method=False
+    and the first parameter is named 'arg1' with type 'OuterClass.NestedClass'.
+
+    Exception: if any OTHER parameter also has that same NestedClass type, the function
+    is a static method of the outer class that takes NestedClass data as argument (e.g.
+    copy(Splines, Splines)), not an instance method of the nested class.
+    """
+    marker = outer_name + "."
+    all_overloads = list(fn.overloads) + list(fn.setter_overloads)
+    for ov in all_overloads:
+        if ov.is_method or not ov.params or ov.params[0][0] != "arg1":
+            continue
+        type_path = ov.params[0][1]
+        idx = type_path.rfind(marker)
+        if idx == -1:
+            continue
+        rest = type_path[idx + len(marker) :]
+        if not rest or "." in rest:
+            continue
+        nested_name = rest
+        # Guard: if another parameter also carries the same nested class type,
+        # this is likely a real static method of the outer class, not an instance method.
+        nested_marker = outer_name + "." + nested_name
+        if any(
+            nested_marker in t or t.endswith("." + nested_name)
+            for _, t in ov.params[1:]
+        ):
+            return None
+        return nested_name
+    return None
+
+
+def _nested_class_from_blocks(blocks: list[list[str]], outer_name: str) -> str | None:
+    """Fallback: find nested class name from typed `arg1: "outer.Nested"` in raw def lines.
+
+    Used only for non-docstring functions where overloads are unavailable.
+    """
+    marker = outer_name + "."
+    for block in blocks:
+        for line in block:
+            m = NESTED_ARG1_RE.search(line)
+            if m:
+                type_path = m.group(1)
+                idx = type_path.rfind(marker)
+                if idx != -1:
+                    rest = type_path[idx + len(marker) :]
+                    if rest and "." not in rest:
+                        return rest
+    return None
+
+
+def _is_definite_outer_method(fn: Function) -> bool:
+    """True only for non-dunder methods that definitively belong to the outer class."""
+    if fn.name.startswith("__") and fn.name.endswith("__"):
+        return False
+    if fn.from_docstring:
+        return bool(fn.overloads and fn.overloads[0].is_method)
+    # Raw (non-docstring) functions: check for non-static def with self as first arg
+    for block in fn.raw_blocks + fn.setter_raw_blocks:
+        if any("@staticmethod" in ln for ln in block):
+            continue
+        for ln in block:
+            if DEF_SELF_FIRST_RE.match(ln):
+                return True
+    return False
+
+
+def _make_instance_method(fn: Function) -> None:
+    """Convert is_method=False overloads with first param 'arg1' into instance method form."""
+    for ov in list(fn.overloads) + list(fn.setter_overloads):
+        if not ov.is_method and ov.params and ov.params[0][0] == "arg1":
+            ov.params = ov.params[1:]
+            ov.is_method = True
+
+
+def _post_process_nested_classes(cls: ClassI) -> None:
+    """Detect and move nested-class methods out of a flat ClassI into nested ClassI objects."""
+    outer_name = cls.name
+
+    # Step 1: compute hint for each function (nested class name, "" = outer, None = ambiguous)
+    hints: list[str | None] = []
+    for fn in cls.functions:
+        nested = _nested_class_from_fn(fn, outer_name)
+        if nested is None and not fn.from_docstring:
+            nested = _nested_class_from_blocks(
+                fn.raw_blocks + fn.setter_raw_blocks, outer_name
+            )
+        if nested is not None:
+            hints.append(nested)
+        elif _is_definite_outer_method(fn):
+            hints.append("")
+        else:
+            hints.append(None)
+
+    if not any(h is not None and h != "" for h in hints):
+        return
+
+    # Step 2: fill ambiguous hints from nearest definite neighbour
+    n = len(hints)
+    filled: list[str] = [""] * n
+    for i, h in enumerate(hints):
+        if h is not None:
+            filled[i] = h
+    for i in range(n):
+        if hints[i] is not None:
+            continue
+        prev_h = next(
+            (filled[j] for j in range(i - 1, -1, -1) if hints[j] is not None), None
+        )
+        next_h = next(
+            (filled[j] for j in range(i + 1, n) if hints[j] is not None), None
+        )
+        if prev_h == next_h:
+            filled[i] = prev_h if prev_h is not None else ""
+        elif prev_h is None:
+            filled[i] = next_h if next_h is not None else ""
+        elif next_h is None:
+            filled[i] = prev_h
+        else:
+            # Boundary between two blocks: assign to the next block
+            filled[i] = next_h
+
+    # Step 3: collect ordered nested class names (first-occurrence order)
+    seen: set[str] = set()
+    ordered_names: list[str] = []
+    for h in filled:
+        if h and h not in seen:
+            seen.add(h)
+            ordered_names.append(h)
+
+    if not ordered_names:
+        return
+
+    # Step 4: group functions and convert nested-class methods to instance methods
+    outer_fns: list[Function] = []
+    nested_fn_map: dict[str, list[Function]] = {name: [] for name in ordered_names}
+
+    for fn, h in zip(cls.functions, filled):
+        if h == "":
+            outer_fns.append(fn)
+        else:
+            _make_instance_method(fn)
+            nested_fn_map[h].append(fn)
+
+    # Step 5: distribute __instance_size__ extra_lines to nested classes (in order)
+    size_extras = [e for e in cls.extra_lines if "__instance_size__" in e]
+    other_extras = [e for e in cls.extra_lines if "__instance_size__" not in e]
+    cls.extra_lines = other_extras + size_extras[:1]
+    nested_sizes = size_extras[1:]
+
+    # Step 6: build nested ClassI objects
+    nested_classes: list[ClassI] = []
+    for i, name in enumerate(ordered_names):
+        nested_cls = ClassI()
+        nested_cls.name = name
+        nested_cls.functions = nested_fn_map[name]
+        if i < len(nested_sizes):
+            nested_cls.extra_lines = [nested_sizes[i]]
+        nested_classes.append(nested_cls)
+
+    cls.nested_classes = nested_classes
+    cls.functions = outer_fns
 
 
 def extract_tree(
@@ -344,5 +512,9 @@ def extract_tree(
 
     if module_root.functions:
         tree.insert(0, module_root)
+
+    for cls in tree:
+        if not cls.is_module:
+            _post_process_nested_classes(cls)
 
     return header, tree

@@ -163,6 +163,7 @@ class ClassI:
         self.bases: list[str] = []
         self.docstring = ""
         self.functions: list[Function] = []
+        self.nested_classes: list["ClassI"] = []
         self.is_module = is_module
         self.extra_lines: list[str] = []
 
@@ -187,6 +188,10 @@ class ClassI:
 
         for extra in self.extra_lines:
             lines.append(indent_block(extra, 4))
+
+        for nested in self.nested_classes:
+            lines.append(indent_block(str(nested), 4))
+            lines.append("")
 
         for fn in self.functions:
             lines.append(indent_block(str(fn), 4))
