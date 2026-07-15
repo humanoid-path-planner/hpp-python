@@ -34,7 +34,7 @@ class ClassDoc:
         b = el.find("briefdescription")
         d = el.find("detaileddescription")
         brief = etree.tostring(b, method="text", encoding="unicode").strip()
-        detailed = d.text.strip() if d.text else ""
+        detailed = etree.tostring(d, method="text", encoding="unicode").strip()
         return brief, detailed
 
     def _getMemberFromGroup(self, memberDefKind, name):
@@ -124,11 +124,7 @@ class ClassDoc:
         raise IndexError(msg)
 
     def getClassDoc(self):
-        b_el = self.compound.find("briefdescription")
-        d_el = self.compound.find("detaileddescription")
-        brief = etree.tostring(b_el, method="text", encoding="unicode").strip()
-        detailed = etree.tostring(d_el, method="text", encoding="unicode").strip()
-        return brief, detailed
+        return self._getDoc(self.compound)
 
     def getClassMemberDoc(self, membername):
         # member = self.compound.find ("sectiondef[@kind='public-attrib']/memberdef[@kind='variable' and name='" + methodname + "']")
