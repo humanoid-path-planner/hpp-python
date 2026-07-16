@@ -37,6 +37,7 @@
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method/straight.hh>
+#include <hpp/manipulation/graph-path-validation.hh>
 #include <hpp/manipulation/steering-method/end-effector-trajectory.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
 #include <pyhpp/core/path-validation.hh>
@@ -55,6 +56,39 @@ using namespace boost::python;
 
 namespace pyhpp {
 namespace manipulation {
+
+namespace {
+
+struct GraphPathValidation : pyhpp::core::PathValidation {
+  GraphPathValidation(const pyhpp::core::PyWPathValidationPtr_t& pathValidation)
+      : GraphPathValidation(check(pathValidation), 0) {}
+
+ private:
+  GraphPathValidation(const pyhpp::core::PyWPathValidationPtr_t& pathValidation,
+                      int)
+      : pyhpp::core::PathValidation(
+            hpp::manipulation::GraphPathValidation::create(pathValidation->obj),
+            graphFactory(pathValidation->factory), pathValidation->tolerance) {}
+
+  static pyhpp::core::PyWPathValidationPtr_t check(
+      const pyhpp::core::PyWPathValidationPtr_t& pathValidation) {
+    if (!pathValidation || !pathValidation->factory)
+      throw std::invalid_argument("Path validation has no factory.");
+    return pathValidation;
+  }
+
+  static hpp::core::PathValidationBuilder_t graphFactory(
+      const hpp::core::PathValidationBuilder_t& innerFactory) {
+    return [innerFactory](const hpp::core::DevicePtr_t& robot,
+                          const hpp::core::value_type& tolerance)
+               -> hpp::core::PathValidationPtr_t {
+      return hpp::manipulation::GraphPathValidation::create(
+          innerFactory(robot, tolerance));
+    };
+  }
+};
+
+}  // namespace
 
 Problem::Problem(const PyWDevicePtr_t& robot)
     : pyhpp::core::Problem(
@@ -170,6 +204,10 @@ void Problem::pyPathValidation(
 // }
 
 void exposeProblem() {
+  class_<GraphPathValidation, bases<pyhpp::core::PathValidation>>(
+      "GraphPathValidation", init<const pyhpp::core::PyWPathValidationPtr_t&>(
+                                 (arg("pathValidation"))));
+
   // DocClass(Problem)
   class_<Problem, bases<pyhpp::core::Problem>>("Problem", DocClassDoc(),
                                                init<const PyWDevicePtr_t&>())
