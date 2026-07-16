@@ -56,6 +56,21 @@ const char* DOC_CHECKFEASIBILITYONLY =
     "If enabled, only add one solution to the roadmap. "
     "Otherwise add all solutions.";
 
+template <typename Planner>
+void plannerStartSolve(Planner& planner) {
+  planner.obj->startSolve();
+}
+
+template <typename Planner>
+void plannerTryConnectInitAndGoals(Planner& planner) {
+  planner.obj->tryConnectInitAndGoals();
+}
+
+template <typename Planner>
+void plannerOneStep(Planner& planner) {
+  planner.obj->oneStep();
+}
+
 }  // namespace
 
 namespace pyhpp {
@@ -322,6 +337,10 @@ void exposePathPlanners() {
                         boost::python::bases<pyhpp::core::PathPlanner>>(
       "TransitionPlanner", DocClassDoc(),
       boost::python::init<const pyhpp::core::Problem&>())
+      .def("startSolve", &plannerStartSolve<TransitionPlanner>,
+           DocClassMethod(startSolve))
+      .def("oneStep", &plannerOneStep<TransitionPlanner>,
+           DocClassMethod(oneStep))
       .def("innerPlanner",
            static_cast<pyhpp::core::PathPlanner (TransitionPlanner::*)() const>(
                &TransitionPlanner::innerPlanner),
@@ -360,14 +379,28 @@ void exposePathPlanners() {
       .def("addPathOptimizer", &TransitionPlanner::addPathOptimizer,
            DocClassMethod(addPathOptimizer));
 
+  // DocNamespace(hpp::manipulation)
+  // DocClass(ManipulationPlanner)
   boost::python::class_<ManipulationPlanner,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
-      "ManipulationPlanner",
-      boost::python::init<const pyhpp::core::Problem&>());
+      "ManipulationPlanner", DocClassDoc(),
+      boost::python::init<const pyhpp::core::Problem&>())
+      .def("oneStep", &plannerOneStep<ManipulationPlanner>,
+           DocClassMethod(oneStep));
 
+  // DocNamespace(hpp::manipulation::pathPlanner)
+  // DocClass(StatesPathFinder)
   boost::python::class_<StatesPathFinder,
                         boost::python::bases<pyhpp::core::PathPlanner>>(
-      "StatesPathFinder", boost::python::init<const pyhpp::core::Problem&>());
+      "StatesPathFinder", DocClassDoc(),
+      boost::python::init<const pyhpp::core::Problem&>())
+      .def("startSolve", &plannerStartSolve<StatesPathFinder>,
+           DocClassMethod(startSolve))
+      .def("tryConnectInitAndGoals",
+           &plannerTryConnectInitAndGoals<StatesPathFinder>,
+           DocClassMethod(tryConnectInitAndGoals))
+      .def("oneStep", &plannerOneStep<StatesPathFinder>,
+           DocClassMethod(oneStep));
 
   // DocClass(EndEffectorTrajectory)
   boost::python::class_<EndEffectorTrajectory,
@@ -376,6 +409,13 @@ void exposePathPlanners() {
       boost::python::init<const pyhpp::core::Problem&>())
       .def(boost::python::init<const pyhpp::core::Problem&,
                                const RoadmapPtr_t&>())
+      .def("startSolve", &plannerStartSolve<EndEffectorTrajectory>,
+           DocClassMethod(startSolve))
+      .def("tryConnectInitAndGoals",
+           &plannerTryConnectInitAndGoals<EndEffectorTrajectory>,
+           DocClassMethod(tryConnectInitAndGoals))
+      .def("oneStep", &plannerOneStep<EndEffectorTrajectory>,
+           DocClassMethod(oneStep))
       .def("nRandomConfig",
            static_cast<int (EndEffectorTrajectory::*)() const>(
                &EndEffectorTrajectory::nRandomConfig),

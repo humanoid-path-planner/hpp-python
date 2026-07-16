@@ -55,27 +55,70 @@ using namespace boost::python;
 
 namespace pathPlanner {
 
-#define DEFINE_PLANNER_WRAPPER(WrapperName, PlannerType, PlannerPtr) \
-  struct WrapperName : public pyhpp::core::PathPlanner {             \
-    WrapperName(const pyhpp::core::Problem& problem) {               \
-      obj = PlannerType::create(problem.obj);                        \
-    }                                                                \
-  };                                                                 \
-  void expose##WrapperName() {                                       \
-    class_<WrapperName, bases<pyhpp::core::PathPlanner>>(            \
-        #WrapperName, init<const pyhpp::core::Problem&>());          \
+#define DEFINE_PLANNER_WRAPPER(WrapperName, PlannerType) \
+  struct WrapperName : public pyhpp::core::PathPlanner { \
+    WrapperName(const pyhpp::core::Problem& problem) {   \
+      obj = PlannerType::create(problem.obj);            \
+    }                                                    \
   }
 
-DEFINE_PLANNER_WRAPPER(DiffusingPlanner, hpp::core::DiffusingPlanner,
-                       hpp::core::DiffusingPlannerPtr_t)
-DEFINE_PLANNER_WRAPPER(BiRRTPlanner, hpp::core::BiRRTPlanner,
-                       hpp::core::BiRRTPlannerPtr_t)
-DEFINE_PLANNER_WRAPPER(VisibilityPrmPlanner, hpp::core::VisibilityPrmPlanner,
-                       hpp::core::VisibilityPrmPlannerPtr_t)
-DEFINE_PLANNER_WRAPPER(BiRrtStar, hpp::core::pathPlanner::BiRrtStar,
-                       hpp::core::pathPlanner::BiRrtStarPtr_t)
-DEFINE_PLANNER_WRAPPER(kPrmStar, hpp::core::pathPlanner::kPrmStar,
-                       hpp::core::pathPlanner::kPrmStarPtr_t)
+DEFINE_PLANNER_WRAPPER(DiffusingPlanner, hpp::core::DiffusingPlanner);
+DEFINE_PLANNER_WRAPPER(BiRRTPlanner, hpp::core::BiRRTPlanner);
+DEFINE_PLANNER_WRAPPER(VisibilityPrmPlanner, hpp::core::VisibilityPrmPlanner);
+DEFINE_PLANNER_WRAPPER(BiRrtStar, hpp::core::pathPlanner::BiRrtStar);
+DEFINE_PLANNER_WRAPPER(kPrmStar, hpp::core::pathPlanner::kPrmStar);
+
+// DocClass(DiffusingPlanner)
+void exposeDiffusingPlanner() {
+  class_<DiffusingPlanner, bases<pyhpp::core::PathPlanner>>(
+      "DiffusingPlanner", DocClassDoc(), init<const pyhpp::core::Problem&>())
+      .def("startSolve", &pyhpp::core::PathPlanner::startSolve,
+           DocClassMethod(startSolve))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
+}
+
+// DocClass(BiRRTPlanner)
+void exposeBiRRTPlanner() {
+  class_<BiRRTPlanner, bases<pyhpp::core::PathPlanner>>(
+      "BiRRTPlanner", DocClassDoc(), init<const pyhpp::core::Problem&>())
+      .def("startSolve", &pyhpp::core::PathPlanner::startSolve,
+           DocClassMethod(startSolve))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
+}
+
+// DocClass(VisibilityPrmPlanner)
+void exposeVisibilityPrmPlanner() {
+  class_<VisibilityPrmPlanner, bases<pyhpp::core::PathPlanner>>(
+      "VisibilityPrmPlanner", DocClassDoc(),
+      init<const pyhpp::core::Problem&>())
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
+}
+
+// DocClass(pathPlanner::BiRrtStar)
+void exposeBiRrtStar() {
+  class_<BiRrtStar, bases<pyhpp::core::PathPlanner>>(
+      "BiRrtStar", DocClassDoc(), init<const pyhpp::core::Problem&>())
+      .def("startSolve", &pyhpp::core::PathPlanner::startSolve,
+           DocClassMethod(startSolve))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
+}
+
+// DocClass(pathPlanner::kPrmStar)
+void exposekPrmStar() {
+  class_<kPrmStar, bases<pyhpp::core::PathPlanner>>(
+      "kPrmStar", DocClassDoc(), init<const pyhpp::core::Problem&>())
+      .def("startSolve", &pyhpp::core::PathPlanner::startSolve,
+           DocClassMethod(startSolve))
+      .def("tryConnectInitAndGoals",
+           &pyhpp::core::PathPlanner::tryConnectInitAndGoals,
+           DocClassMethod(tryConnectInitAndGoals))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
+}
 
 struct SearchInRoadmap : public pyhpp::core::PathPlanner {
   SearchInRoadmap(const pyhpp::core::Problem& problem,
@@ -85,10 +128,16 @@ struct SearchInRoadmap : public pyhpp::core::PathPlanner {
   }
 };
 
+// DocClass(pathPlanner::SearchInRoadmap)
 void exposeSearchInRoadmap() {
   class_<SearchInRoadmap, bases<pyhpp::core::PathPlanner>>(
-      "SearchInRoadmap",
-      init<const pyhpp::core::Problem&, const hpp::core::RoadmapPtr_t&>());
+      "SearchInRoadmap", DocClassDoc(),
+      init<const pyhpp::core::Problem&, const hpp::core::RoadmapPtr_t&>())
+      .def("tryConnectInitAndGoals",
+           &pyhpp::core::PathPlanner::tryConnectInitAndGoals,
+           DocClassMethod(tryConnectInitAndGoals))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep));
 }
 
 struct PlanAndOptimize : public pyhpp::core::PathPlanner {
@@ -97,9 +146,16 @@ struct PlanAndOptimize : public pyhpp::core::PathPlanner {
   }
 };
 
+// DocClass(PlanAndOptimize)
 void exposePlanAndOptimize() {
   class_<PlanAndOptimize, bases<pyhpp::core::PathPlanner>>(
-      "PlanAndOptimize", init<const pyhpp::core::PathPlanner&>());
+      "PlanAndOptimize", DocClassDoc(), init<const pyhpp::core::PathPlanner&>())
+      .def("startSolve", &pyhpp::core::PathPlanner::startSolve,
+           DocClassMethod(startSolve))
+      .def("oneStep", &pyhpp::core::PathPlanner::oneStep,
+           DocClassMethod(oneStep))
+      .def("finishSolve", &pyhpp::core::PathPlanner::finishSolve,
+           DocClassMethod(finishSolve));
 }
 
 void exposePathPlanners() {
