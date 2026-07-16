@@ -44,6 +44,7 @@
 #include <pinocchio/spatial/se3.hpp>
 
 #include "hpp/manipulation/constraint-set.hh"
+#include "pyhpp/core/path-validation.hh"
 #include "pyhpp/core/problem.hh"
 
 // DocNamespace(hpp::manipulation::graph)
@@ -952,6 +953,10 @@ PathValidationPtr_t PyWEdge::pathValidation() const {
   return obj->pathValidation();
 }
 
+pyhpp::core::PyWPathValidationPtr_t PyWEdge::pyPathValidation() const {
+  return std::make_shared<pyhpp::core::PathValidation>(obj->pathValidation());
+}
+
 // =============================================================================
 // Subgraph management
 // =============================================================================
@@ -1305,7 +1310,7 @@ void exposeGraph() {
       .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
       .def("waypoint", &PyWEdge::waypoint, DocClassMethod(waypoint))
       .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
-      .def("pathValidation", &PyWEdge::pathValidation,
+      .def("pathValidation", &PyWEdge::pyPathValidation,
            DocClassMethod(pathValidation));
 
   // DocClass(Graph)

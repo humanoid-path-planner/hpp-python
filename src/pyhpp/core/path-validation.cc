@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 - 2023, CNRS
-// Authors: Joseph Mirabel, Florent Lamiraux
+// Copyright (c) 2018 - 2026, CNRS
+// Authors: Joseph Mirabel, Florent Lamiraux, Paul Sardin
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -33,108 +33,163 @@
 #include <hpp/core/continuous-validation/progressive.hh>
 #include <hpp/core/fwd.hh>
 #include <hpp/core/joint-bound-validation.hh>
-#include <hpp/core/path-validation.hh>
 #include <hpp/core/path-validation/discretized-collision-checking.hh>
 #include <hpp/core/path-validation/discretized-joint-bound.hh>
 #include <hpp/core/path-validation/discretized.hh>
-#include <pyhpp/core/fwd.hh>
-#include <pyhpp/core/problem.hh>
+#include <hpp/core/problem-solver.hh>
+#include <pyhpp/core/path-validation.hh>
 #include <pyhpp/util.hh>
 // DocNamespace(hpp::core)
 
-using namespace boost::python;
-
 namespace pyhpp {
 namespace core {
-using namespace hpp::core;
+
+using namespace boost::python;
+
+namespace {
+
+hpp::core::PathValidationPtr_t createDiscretizedJointBoundAndCollisionChecking(
+    const hpp::core::DevicePtr_t& robot,
+    const hpp::core::value_type& stepSize) {
+  return hpp::core::pathValidation::Discretized::create(
+      stepSize, {hpp::core::JointBoundValidation::create(robot),
+                 hpp::core::CollisionValidation::create(robot)});
+}
+
+const hpp::core::PathValidationBuilder_t& noValidationFactory() {
+  static const hpp::core::PathValidationBuilder_t factory =
+      hpp::core::ProblemSolver::create()->pathValidations.get("NoValidation");
+  return factory;
+}
 
 struct PVWrapper {
-  static bool validate(PathValidation* pv, const PathPtr_t path, bool reverse,
-                       PathPtr_t& validPart,
-                       PathValidationReportPtr_t& report) {
-    return pv->validate(path, reverse, validPart, report);
+  static bool validate(PathValidation* pv, const hpp::core::PathPtr_t path,
+                       bool reverse, hpp::core::PathPtr_t& validPart,
+                       hpp::core::PathValidationReportPtr_t& report) {
+    return pv->obj->validate(path, reverse, validPart, report);
   }
 
-  static tuple py_validate(PathValidation* pv, const PathPtr_t path,
-                           bool reverse = false) {
-    PathPtr_t validPart;
-    PathValidationReportPtr_t report;
-    bool res = pv->validate(path, reverse, validPart, report);
-    return boost::python::make_tuple(res, validPart, report);
-  }
-  static tuple validateConfiguration(PathValidation* pv, ConfigurationIn_t q) {
-    ValidationReportPtr_t report;
-    bool res = pv->validate(q, report);
-    return boost::python::make_tuple(res, report);
+  static tuple pyValidate(PathValidation* pv, const hpp::core::PathPtr_t path,
+                          bool reverse = false) {
+    hpp::core::PathPtr_t validPart;
+    hpp::core::PathValidationReportPtr_t report;
+    bool result = pv->obj->validate(path, reverse, validPart, report);
+    return boost::python::make_tuple(result, validPart, report);
   }
 
-  static pathValidation::DiscretizedPtr_t
-  createDiscretizedJointBoundAndCollisionChecking(const DevicePtr_t& robot,
-                                                  const value_type& stepSize) {
-    using namespace pathValidation;
-    return Discretized::create(stepSize,
-                               {
-                                   JointBoundValidation::create(robot),
-                                   CollisionValidation::create(robot),
-                               });
+  static tuple validateConfiguration(PathValidation* pv,
+                                     hpp::core::ConfigurationIn_t q) {
+    hpp::core::ValidationReportPtr_t report;
+    bool result = pv->obj->validate(q, report);
+    return boost::python::make_tuple(result, report);
   }
 };
+namespace pathValidation {
+
+struct NoValidation : PathValidation {
+  NoValidation(const hpp::core::DevicePtr_t& robot,
+               const hpp::core::value_type& tolerance)
+      : PathValidation(robot, noValidationFactory(), tolerance) {}
+};
+
+struct Discretized : PathValidation {
+  Discretized(const hpp::core::DevicePtr_t& robot,
+              const hpp::core::value_type& stepSize)
+      : PathValidation(
+            robot,
+            hpp::core::pathValidation::createDiscretizedCollisionChecking,
+            stepSize) {}
+};
+
+struct DiscretizedCollision : PathValidation {
+  DiscretizedCollision(const hpp::core::DevicePtr_t& robot,
+                       const hpp::core::value_type& stepSize)
+      : PathValidation(
+            robot,
+            hpp::core::pathValidation::createDiscretizedCollisionChecking,
+            stepSize) {}
+};
+
+struct DiscretizedJointBound : PathValidation {
+  DiscretizedJointBound(const hpp::core::DevicePtr_t& robot,
+                        const hpp::core::value_type& stepSize)
+      : PathValidation(robot,
+                       hpp::core::pathValidation::createDiscretizedJointBound,
+                       stepSize) {}
+};
+
+struct DiscretizedCollisionAndJointBound : PathValidation {
+  DiscretizedCollisionAndJointBound(const hpp::core::DevicePtr_t& robot,
+                                    const hpp::core::value_type& stepSize)
+      : PathValidation(robot, createDiscretizedJointBoundAndCollisionChecking,
+                       stepSize) {}
+};
+
+struct Progressive : PathValidation {
+  Progressive(const hpp::core::DevicePtr_t& robot,
+              const hpp::core::value_type& tolerance)
+      : PathValidation(robot,
+                       hpp::core::continuousValidation::Progressive::create,
+                       tolerance) {}
+};
+
+struct Dichotomy : PathValidation {
+  Dichotomy(const hpp::core::DevicePtr_t& robot,
+            const hpp::core::value_type& tolerance)
+      : PathValidation(robot,
+                       hpp::core::continuousValidation::Dichotomy::create,
+                       tolerance) {}
+};
+
+}  // namespace pathValidation
+}  // namespace
+
 void exposePathValidation() {
+  register_ptr_to_python<PyWPathValidationPtr_t>();
+
   // DocClass(PathValidation)
-  class_<PathValidation, PathValidationPtr_t, boost::noncopyable>(
+  class_<PathValidation, PyWPathValidationPtr_t, boost::noncopyable>(
       "PathValidation", DocClassDoc(), no_init)
       .def("validate", &PVWrapper::validate, DocClassMethod(validate))
-      .def("validate", &PVWrapper::py_validate,
+      .def("validate", &PVWrapper::pyValidate,
            "Validate path; returns (valid, validPart, report).")
       .def("validateConfiguration", &PVWrapper::validateConfiguration,
            "Validate a configuration; returns (valid, report).");
 
-  class_<pathValidation::Discretized, bases<PathValidation>,
-         hpp::core::pathValidation::DiscretizedPtr_t, boost::noncopyable>(
-      "Discretized", DocClassDoc(), no_init)
-      .def("__init__",
-           make_constructor(
-               +[](const DevicePtr_t& robot, const value_type& stepSize) {
-                 return pathValidation::createDiscretizedCollisionChecking(
-                     robot, stepSize);
-               },
-               default_call_policies(), (arg("robot"), arg("stepSize"))),
-           "Create a discretized collision-checking path validation.");
-
-  hpp::core::continuousValidation::ProgressivePtr_t (*ProgressiveConstructor)(
-      const DevicePtr_t&, const value_type&) =
-      &continuousValidation::Progressive::create;
-  class_<continuousValidation::Progressive, bases<PathValidation>,
-         hpp::core::continuousValidation::ProgressivePtr_t, boost::noncopyable>(
-      "Progressive", DocClassDoc(), no_init)
-      .def("__init__",
-           make_constructor(ProgressiveConstructor, default_call_policies(),
-                            (arg("robot"), arg("tolerance"))),
-           "Create a progressive continuous path validation.");
-
-  hpp::core::continuousValidation::DichotomyPtr_t (*DichotomyConstructor)(
-      const DevicePtr_t&, const value_type&) =
-      &continuousValidation::Dichotomy::create;
-  class_<continuousValidation::Dichotomy, bases<PathValidation>,
-         hpp::core::continuousValidation::DichotomyPtr_t, boost::noncopyable>(
-      "Dichotomy", DocClassDoc(), no_init)
-      .def("__init__",
-           make_constructor(DichotomyConstructor, default_call_policies(),
-                            (arg("robot"), arg("tolerance"))),
-           "Create a dichotomy-based continuous path validation.");
-
-  def("DiscretizedCollision",
-      &pathValidation::createDiscretizedCollisionChecking,
-      (arg("robot"), arg("stepSize")),
-      "Create a discretized collision-checking path validation.");
-  def("DiscretizedJointBound", &pathValidation::createDiscretizedJointBound,
-      (arg("robot"), arg("stepSize")),
-      "Create a discretized joint-bound path validation.");
-  def("DiscretizedCollisionAndJointBound",
-      &PVWrapper::createDiscretizedJointBoundAndCollisionChecking,
-      (arg("robot"), arg("stepSize")),
+  class_<pathValidation::NoValidation, bases<PathValidation>>(
+      "NoValidation", "Create a path validation that accepts every path.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("tolerance"))));
+  class_<pathValidation::Discretized, bases<PathValidation>>(
+      "Discretized", "Create a discretized collision-checking path validation.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("stepSize"))));
+  class_<pathValidation::DiscretizedCollision, bases<PathValidation>>(
+      "DiscretizedCollision",
+      "Create a discretized collision-checking path validation.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("stepSize"))));
+  class_<pathValidation::DiscretizedJointBound, bases<PathValidation>>(
+      "DiscretizedJointBound",
+      "Create a discretized joint-bound path validation.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("stepSize"))));
+  class_<pathValidation::DiscretizedCollisionAndJointBound,
+         bases<PathValidation>>(
+      "DiscretizedCollisionAndJointBound",
       "Create a discretized path validation checking both collision and joint "
-      "bounds.");
+      "bounds.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("stepSize"))));
+  class_<pathValidation::Progressive, bases<PathValidation>>(
+      "Progressive", "Create a progressive continuous path validation.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("tolerance"))));
+  class_<pathValidation::Dichotomy, bases<PathValidation>>(
+      "Dichotomy", "Create a dichotomy-based continuous path validation.",
+      init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
+          (arg("robot"), arg("tolerance"))));
 }
+
 }  // namespace core
 }  // namespace pyhpp
