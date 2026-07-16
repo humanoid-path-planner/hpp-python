@@ -4,7 +4,7 @@ import numpy as np
 
 from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
 from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
-from pyhpp.core import Dichotomy, Straight, ProgressiveProjector
+from pyhpp.core import Straight, ProgressiveProjector
 from pyhpp.constraints import LockedJoint
 from pyhpp.core.static_stability_constraint_factory import (
     StaticStabilityConstraintsFactory,
@@ -254,7 +254,6 @@ if not res:
     raise RuntimeError("Failed to project goal configuration.")
 
 problem.steeringMethod(Straight(problem))
-problem.pathValidation(Dichotomy(robot, 0))
 problem.pathProjector(
     ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.05)
 )
