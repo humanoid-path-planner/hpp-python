@@ -33,11 +33,13 @@
 #include <../src/pyhpp/manipulation/steering-method.hh>
 #include <boost/python.hpp>
 #include <hpp/core/configuration-shooter/uniform.hh>
+#include <hpp/core/obstacle-user.hh>
 #include <hpp/core/path-projector.hh>
 #include <hpp/core/problem.hh>
 #include <hpp/core/steering-method/straight.hh>
 #include <hpp/manipulation/steering-method/end-effector-trajectory.hh>
 #include <hpp/manipulation/steering-method/graph.hh>
+#include <pyhpp/core/path-validation.hh>
 #include <pyhpp/core/steering-method.hh>
 
 // DocNamespace(hpp::manipulation)
@@ -110,6 +112,29 @@ pyhpp::core::PyWSteeringMethodPtr_t Problem::steeringMethod() const {
   return std::shared_ptr<pyhpp::core::SteeringMethod>(sm);
 }
 
+pyhpp::core::PyWPathValidationPtr_t Problem::pyPathValidation() const {
+  if (pathValidation_ && pathValidation_->obj == obj->pathValidation())
+    return pathValidation_;
+  return std::make_shared<pyhpp::core::PathValidation>(obj->pathValidation());
+}
+
+void Problem::pyPathValidation(
+    const pyhpp::core::PyWPathValidationPtr_t& pathValidation) {
+  if (!pathValidation || !pathValidation->factory)
+    throw std::invalid_argument("Path validation has no factory.");
+  hpp::manipulation::ProblemPtr_t problem = asManipulationProblem();
+  auto obstacleUser = HPP_DYNAMIC_PTR_CAST(hpp::core::ObstacleUserInterface,
+                                           pathValidation->obj);
+  if (obstacleUser)
+    for (const auto& obstacle : problem->collisionObstacles())
+      obstacleUser->addObstacle(obstacle);
+
+  problem->pathValidation(pathValidation->obj);
+  pathValidation_ = pathValidation;
+  problem->setPathValidationFactory(pathValidation->factory,
+                                    pathValidation->tolerance);
+}
+
 // PathValidationPtr_t Problem::pathValidation() const {
 //     return obj->pathValidation();
 // }
@@ -173,6 +198,17 @@ void exposeProblem() {
            "Set the problem steering method directly. Unlike steeringMethod, "
            "this does not wrap the given steering method in a manipulation "
            "graph steering method.")
+      .def(
+          "pathValidation",
+          static_cast<pyhpp::core::PyWPathValidationPtr_t (Problem::*)() const>(
+              &Problem::pyPathValidation),
+          "Get the path validation object.")
+      .def("pathValidation",
+           static_cast<void (Problem::*)(
+               const pyhpp::core::PyWPathValidationPtr_t&)>(
+               &Problem::pyPathValidation),
+           (arg("pathValidation")),
+           "Set the path validation object and edge-validation factory.")
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,
