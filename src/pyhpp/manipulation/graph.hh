@@ -32,6 +32,7 @@
 
 #include <hpp/core/path-validation.hh>
 #include <hpp/manipulation/graph/graph.hh>
+#include <pyhpp/core/fwd.hh>
 #include <pyhpp/manipulation/fwd.hh>
 
 namespace pyhpp {
@@ -76,6 +77,7 @@ struct PyWEdge {
   std::size_t weight() const;
   PyWEdge waypoint(int index) const;
   PathValidationPtr_t pathValidation() const;
+  pyhpp::core::PyWPathValidationPtr_t pyPathValidation() const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
 

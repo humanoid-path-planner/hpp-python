@@ -73,6 +73,7 @@ struct Problem {
   PyWSteeringMethodPtr_t steeringMethod() const;
   const ConfigValidationsPtr_t& configValidation() const;
   PathValidationPtr_t pathValidation() const;
+  PyWPathValidationPtr_t pyPathValidation() const;
   PathProjectorPtr_t pathProjector() const;
   DistancePtr_t distance() const;
   const ProblemTargetPtr_t& target() const;
@@ -81,6 +82,7 @@ struct Problem {
   void configValidation(const ConfigValidationsPtr_t& cv);
   void clearConfigValidations();
   void pathValidation(const PathValidationPtr_t& pv);
+  void pyPathValidation(const PyWPathValidationPtr_t& pv);
   void pathProjector(const PathProjectorPtr_t& pp);
   void distance(const DistancePtr_t& d);
   void target(const ProblemTargetPtr_t& t);
@@ -146,6 +148,7 @@ struct Problem {
   boost::python::tuple directPath(ConfigurationIn_t start,
                                   ConfigurationIn_t end, bool validate);
   hpp::core::ConstraintSetPtr_t constraints_;
+  PyWPathValidationPtr_t pathValidation_;
   value_type errorThreshold_;
   size_type maxIterProjection_;
 };

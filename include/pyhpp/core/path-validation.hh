@@ -1,6 +1,6 @@
 //
-// Copyright (c) 2018 CNRS
-// Authors: Joseph Mirabel
+// Copyright (c) 2026 CNRS
+// Author: Paul Sardin
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -27,44 +27,38 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef PYHPP_CORE_FWD_HH
-#define PYHPP_CORE_FWD_HH
+#ifndef PYHPP_CORE_PATH_VALIDATION_HH
+#define PYHPP_CORE_PATH_VALIDATION_HH
 
-#include <pyhpp/util.hh>
+#include <hpp/core/path-validation.hh>
+#include <hpp/core/problem-solver.hh>
+#include <pyhpp/core/fwd.hh>
 
 namespace pyhpp {
 namespace core {
-void exposeConfigValidation();
-void exposeConfigurationShooter();
-void exposeConstraint();
 
-void exposeEquation();
+struct PathValidation {
+  hpp::core::PathValidationPtr_t obj;
+  hpp::core::PathValidationBuilder_t factory;
+  hpp::core::value_type tolerance;
 
-void exposeReports();
+  PathValidation(const hpp::core::PathValidationPtr_t& obj)
+      : obj(obj), factory(), tolerance(0) {}
 
-void exposeSteeringMethod();
+  PathValidation(const hpp::core::DevicePtr_t& robot,
+                 const hpp::core::PathValidationBuilder_t& factory,
+                 const hpp::core::value_type& tolerance)
+      : obj(factory(robot, tolerance)),
+        factory(factory),
+        tolerance(tolerance) {}
 
-void exposeNode();
-void exposeDistance();
-void exposeConnectedComponent();
-void exposeRoadmap();
-void exposeProblemTarget();
+  PathValidation(const hpp::core::PathValidationPtr_t& obj,
+                 const hpp::core::PathValidationBuilder_t& factory,
+                 const hpp::core::value_type& tolerance)
+      : obj(obj), factory(factory), tolerance(tolerance) {}
+};
 
-void exposePath();
-void exposePathOptimizer();
-void exposePathProjector();
-void exposePathValidation();
-void exposePathPlanner();
-
-void exposeParameter();
-void exposeProblem();
-
-// forward declaration of some classes
-class PathPlanner;
-struct PathValidation;
-class Problem;
-typedef std::shared_ptr<PathValidation> PyWPathValidationPtr_t;
 }  // namespace core
 }  // namespace pyhpp
 
-#endif  // PYHPP_CORE_FWD_HH
+#endif  // PYHPP_CORE_PATH_VALIDATION_HH

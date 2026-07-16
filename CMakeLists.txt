@@ -78,6 +78,7 @@ set(${PROJECT_NAME}_HEADERS
     include/pyhpp/core/fwd.hh
     include/pyhpp/core/path/fwd.hh
     include/pyhpp/core/path-planner.hh
+    include/pyhpp/core/path-validation.hh
     include/pyhpp/core/pathOptimization/fwd.hh
     include/pyhpp/core/problem.hh
     include/pyhpp/core/problemTarget/fwd.hh

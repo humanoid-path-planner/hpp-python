@@ -51,6 +51,7 @@
 #include <hpp/core/steering-method.hh>
 #include <hpp/pinocchio/center-of-mass-computation.hh>
 #include <hpp/pinocchio/frame.hh>
+#include <pyhpp/core/path-validation.hh>
 #include <pyhpp/core/steering-method.hh>
 
 namespace {
@@ -171,6 +172,12 @@ PathValidationPtr_t Problem::pathValidation() const {
   return obj->pathValidation();
 }
 
+PyWPathValidationPtr_t Problem::pyPathValidation() const {
+  if (pathValidation_ && pathValidation_->obj == obj->pathValidation())
+    return pathValidation_;
+  return std::make_shared<PathValidation>(obj->pathValidation());
+}
+
 PathProjectorPtr_t Problem::pathProjector() const {
   return obj->pathProjector();
 }
@@ -193,6 +200,12 @@ void Problem::configValidation(const ConfigValidationsPtr_t& cv) {
 
 void Problem::pathValidation(const PathValidationPtr_t& pv) {
   obj->pathValidation(pv);
+  pathValidation_.reset();
+}
+
+void Problem::pyPathValidation(const PyWPathValidationPtr_t& pv) {
+  obj->pathValidation(pv->obj);
+  pathValidation_ = pv;
 }
 
 void Problem::pathProjector(const PathProjectorPtr_t& pp) {
@@ -586,8 +599,8 @@ typedef void (Problem::*SetSteeringMethod)(const PyWSteeringMethodPtr_t&);
 typedef const ConfigValidationsPtr_t& (Problem::*GetConfigValidation)() const;
 typedef void (Problem::*SetConfigValidation)(const ConfigValidationsPtr_t&);
 
-typedef PathValidationPtr_t (Problem::*GetPathValidation)() const;
-typedef void (Problem::*SetPathValidation)(const PathValidationPtr_t&);
+typedef PyWPathValidationPtr_t (Problem::*GetPathValidation)() const;
+typedef void (Problem::*SetPathValidation)(const PyWPathValidationPtr_t&);
 
 typedef PathProjectorPtr_t (Problem::*GetPathProjector)() const;
 typedef void (Problem::*SetPathProjector)(const PathProjectorPtr_t&);
@@ -692,10 +705,10 @@ void exposeProblem() {
            DocClassMethod(clearConfigValidations))
 
       .def("pathValidation",
-           static_cast<GetPathValidation>(&Problem::pathValidation),
+           static_cast<GetPathValidation>(&Problem::pyPathValidation),
            DOC_P_PV_GET)
       .def("pathValidation",
-           static_cast<SetPathValidation>(&Problem::pathValidation),
+           static_cast<SetPathValidation>(&Problem::pyPathValidation),
            (arg("pathValidation")), DOC_P_PV_SET)
 
       .def("pathProjector",
