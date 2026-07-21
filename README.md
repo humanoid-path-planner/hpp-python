@@ -66,7 +66,7 @@ flowchart LR
 ### From source with CMake
 
 ```bash
-git clone --recursive https://github.com/humanoid-path-planner/hpp-python.git
+git clone https://github.com/humanoid-path-planner/hpp-python.git
 mkdir hpp-python/build
 cd hpp-python/build
 cmake -DCMAKE_INSTALL_PREFIX=<your_install_prefix> -DCMAKE_BUILD_TYPE=Release ..
