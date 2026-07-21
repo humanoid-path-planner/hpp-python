@@ -53,7 +53,7 @@ flowchart LR
 
 ## Dependencies
 
-- Python ≥ 3.9, with `numpy`
+- Python ≥ 3.10, with `numpy`
 - [Boost.Python](https://www.boost.org/doc/libs/release/libs/python/) (found via `search_for_boost_python()`)
 - [`eigenpy`](https://github.com/stack-of-tasks/eigenpy)
 - [Pinocchio](https://github.com/stack-of-tasks/pinocchio) (C++ and Python)
