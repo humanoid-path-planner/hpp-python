@@ -89,15 +89,16 @@ macro(ADD_PYTHON_LIBRARY MODULE)
 
     if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
         string(REPLACE "/" "." MODULE_DOT_PATH "${MODULE}")
-        set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
+        set(RAW_STUB_DIR ${CMAKE_BINARY_DIR}/stubs_raw)
+        set(FIXED_STUB_DIR ${CMAKE_BINARY_DIR}/stubs)
 
         add_custom_command(
-            OUTPUT ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            OUTPUT ${RAW_STUB_DIR}/${MODULE}/${LIBNAME}.pyi
             COMMAND
                 ${CMAKE_COMMAND} -E env
                 "PYTHONPATH=${CMAKE_BINARY_DIR}/src:$ENV{PYTHONPATH}"
                 ${PYBIND11_STUBGEN_EXECUTABLE} ${MODULE_DOT_PATH}.${LIBNAME}
-                --output-dir ${STUB_OUTPUT_DIR}
+                --output-dir ${RAW_STUB_DIR}
             DEPENDS all_pyhpp_bindings
             COMMENT "Generating Python stubs for ${MODULE_DOT_PATH}.${LIBNAME}"
             VERBATIM
@@ -106,11 +107,11 @@ macro(ADD_PYTHON_LIBRARY MODULE)
         add_custom_target(
             stubs_${TARGET_NAME}
             ALL
-            DEPENDS ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            DEPENDS ${RAW_STUB_DIR}/${MODULE}/${LIBNAME}.pyi
         )
 
         install(
-            FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+            FILES ${FIXED_STUB_DIR}/${MODULE}/${LIBNAME}.pyi
             DESTINATION ${PYTHON_SITELIB}/${MODULE}
         )
 
@@ -118,7 +119,15 @@ macro(ADD_PYTHON_LIBRARY MODULE)
             GLOBAL
             APPEND
             PROPERTY
-                PYHPP_ALL_STUB_FILES ${STUB_OUTPUT_DIR}/${MODULE}/${LIBNAME}.pyi
+                PYHPP_ALL_RAW_STUB_FILES
+                    ${RAW_STUB_DIR}/${MODULE}/${LIBNAME}.pyi
+        )
+        set_property(
+            GLOBAL
+            APPEND
+            PROPERTY
+                PYHPP_ALL_FIXED_STUB_FILES
+                    ${FIXED_STUB_DIR}/${MODULE}/${LIBNAME}.pyi
         )
     endif()
 endmacro()
@@ -249,19 +258,30 @@ python_install_on_site(pyhpp/tools xacro.py)
 python_install_on_site(pyhpp/tools constraint_error.py)
 
 if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
-    get_property(PYHPP_ALL_STUB_FILES GLOBAL PROPERTY PYHPP_ALL_STUB_FILES)
-    set(STUB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/stubs)
+    get_property(
+        PYHPP_ALL_RAW_STUB_FILES
+        GLOBAL
+        PROPERTY PYHPP_ALL_RAW_STUB_FILES
+    )
+    get_property(
+        PYHPP_ALL_FIXED_STUB_FILES
+        GLOBAL
+        PROPERTY PYHPP_ALL_FIXED_STUB_FILES
+    )
+    set(RAW_STUB_DIR ${CMAKE_BINARY_DIR}/stubs_raw)
+    set(FIXED_STUB_DIR ${CMAKE_BINARY_DIR}/stubs)
     set(FIX_STUBS_STAMP ${CMAKE_BINARY_DIR}/fix_stubs.stamp)
 
     add_custom_command(
         OUTPUT ${FIX_STUBS_STAMP}
-        BYPRODUCTS ${PYHPP_ALL_STUB_FILES}
+        BYPRODUCTS ${PYHPP_ALL_FIXED_STUB_FILES}
         COMMAND
             ${CMAKE_COMMAND} -E env
             "PYTHONPATH=${CMAKE_SOURCE_DIR}/doc:$ENV{PYTHONPATH}"
-            ${PYTHON_EXECUTABLE} -m fix_stubs ${STUB_OUTPUT_DIR}
+            ${PYTHON_EXECUTABLE} -m fix_stubs --output-dir ${FIXED_STUB_DIR}
+            ${RAW_STUB_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${FIX_STUBS_STAMP}
-        DEPENDS ${PYHPP_ALL_STUB_FILES}
+        DEPENDS ${PYHPP_ALL_RAW_STUB_FILES}
         COMMENT "Fixing Python stub signatures"
         VERBATIM
     )

@@ -40,6 +40,15 @@ def main() -> None:
             "Merged on top of the built-in METHOD_OVERRIDES table (external entries win)."
         ),
     )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Write fixed stubs to this directory instead of modifying in-place. "
+            "The input directory structure is preserved relative to each input path."
+        ),
+    )
     args = parser.parse_args()
 
     setter_overrides = load_setter_overrides(args.setter_overrides)
@@ -51,11 +60,18 @@ def main() -> None:
         if not p.exists():
             print(f"warning: path not found, skipping: {p}", file=sys.stderr)
             continue
+        root = p if p.is_dir() else p.parent
         files = sorted(p.rglob("*.pyi")) if p.is_dir() else [p]
         for f in files:
+            output_path = (
+                args.output_dir / f.relative_to(root)
+                if args.output_dir is not None
+                else None
+            )
             try:
                 n = fix_file(
                     f,
+                    output_path=output_path,
                     setter_overrides=setter_overrides,
                     method_overrides=method_overrides,
                 )

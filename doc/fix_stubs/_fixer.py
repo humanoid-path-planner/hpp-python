@@ -11,10 +11,14 @@ from ._renderer import render_file
 
 def fix_file(
     path: Path,
+    output_path: Path | None = None,
     setter_overrides: dict[str, str] | None = None,
     method_overrides: dict | None = None,
 ) -> int:
-    """Fix a single .pyi file in-place. Returns the number of signatures fixed."""
+    """Fix a single .pyi file. Returns the number of signatures fixed.
+
+    If output_path is given, writes there; otherwise modifies path in-place.
+    """
     header, tree = extract_tree(
         path,
         setter_overrides=setter_overrides,
@@ -33,6 +37,8 @@ def fix_file(
                 fixed += 1
 
     new_content = render_file(header, tree)
-    path.write_text(new_content)
+    target = output_path if output_path is not None else path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(new_content)
 
     return fixed
