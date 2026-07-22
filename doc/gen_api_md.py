@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Generate code-oriented Markdown API reference from pyhpp .pyi stubs (v2).
-
-Vs gen_api_md.py v1:
-- Full Python type annotations with clickable type links, embedded directly in
-  the code display (HTML <pre> block) — no separate parameter table needed
-- Per-method sub-headings (### / ####) for sidebar navigation
-- Docstrings shown as blockquotes under each signature
-"""
+"""Generate code-oriented Markdown API reference from pyhpp .pyi stubs."""
 
 from __future__ import annotations
 
@@ -96,7 +89,7 @@ def slug(module_name: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Math / Doxygen → KaTeX (identical to v1)
+# Math / Doxygen → KaTeX
 # ---------------------------------------------------------------------------
 
 _MATH_ENV_RE = re.compile(r"\\begin\{(\w+\*?)\}.*?\\end\{\1\}", re.DOTALL)
@@ -164,7 +157,7 @@ def doxygen_to_katex(text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Docstring parsing (identical to v1)
+# Docstring parsing
 # ---------------------------------------------------------------------------
 
 
@@ -256,6 +249,7 @@ def _parse_stub(stub_path: Path) -> ast.Module | None:
         source = stub_path.read_text()
         source = re.sub(r"ClassVar\[[^\]]*\.\]", "ClassVar[Any]", source)
         source = _KW_PARAM_RE.sub(r"\1\2_\3", source)
+
         return ast.parse(source)
     except Exception:
         return None
@@ -816,7 +810,7 @@ def generate_module_md(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Generate code-oriented mdbook Markdown from pyhpp .pyi stubs (v2)"
+        description="Generate code-oriented mdbook Markdown from pyhpp .pyi stubs"
     )
     parser.add_argument(
         "--stubs",
