@@ -55,3 +55,31 @@ def shrinkJointRange(robot, joints, ratio):
         M = mean + 0.5 * ratio * width
         model.lowerPositionLimit[iq] = m
         model.upperPositionLimit[iq] = M
+
+def projectInJointRange(robot, q, epsilon):
+    """
+    Project a configuration into the joint bounds of a robot
+
+      Input
+        - robot:   an instance of Robot class,
+        - q:       input configuration
+        - epsilon: distance inside the joint bounds each configuration variable is projected to
+                   in order to avoid projecting on the joint limits
+    """
+    model = robot.model()
+    result = q.copy()
+    for i in range(model.njoints):
+        if model.joints[i].nq != 1:
+            continue
+        iq = model.joints[i].idx_q
+        m, M = [model.lowerPositionLimit[iq], model.upperPositionLimit[iq]]
+        if m < q[iq] and q[iq] < M:
+            continue
+        if M - m  < 2*epsilon:
+            result[iq] = .5*(m+M)
+        else:
+            if q[iq] > M:
+                result[iq] = M - epsilon
+            elif q[iq] < m:
+                result[iq] = m + epsilon
+    return result
