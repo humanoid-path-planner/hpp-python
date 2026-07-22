@@ -255,14 +255,14 @@ if(GENERATE_PYTHON_STUBS AND PYBIND11_STUBGEN_EXECUTABLE)
 
     add_custom_command(
         OUTPUT ${FIX_STUBS_STAMP}
+        BYPRODUCTS ${PYHPP_ALL_STUB_FILES}
         COMMAND
             ${CMAKE_COMMAND} -E env
             "PYTHONPATH=${CMAKE_SOURCE_DIR}/doc:$ENV{PYTHONPATH}"
-            ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doc/fix_stubs.py
-            ${STUB_OUTPUT_DIR}
+            ${PYTHON_EXECUTABLE} -m fix_stubs ${STUB_OUTPUT_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${FIX_STUBS_STAMP}
         DEPENDS ${PYHPP_ALL_STUB_FILES}
-        COMMENT "Fixing Python stub signatures with fix_stubs.py"
+        COMMENT "Fixing Python stub signatures"
         VERBATIM
     )
 
