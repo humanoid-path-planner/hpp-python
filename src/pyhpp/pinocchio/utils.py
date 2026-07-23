@@ -74,7 +74,7 @@ def projectInJointRange(robot, q, epsilon):
             continue
         iq = model.joints[i].idx_q
         m, M = [model.lowerPositionLimit[iq], model.upperPositionLimit[iq]]
-        if m < q[iq] and q[iq] < M:
+        if m + epsilon <= q[iq] <= M - epsilon:
             continue
         if M - m < 2 * epsilon:
             result[iq] = 0.5 * (m + M)
