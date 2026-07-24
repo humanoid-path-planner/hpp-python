@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <package format='2'>
   <name>hpp_python</name>
-  <version>9.0.1</version>
+  <version>9.0.2</version>
   <description>Implement python bindings for HPP</description>
   <author>Joseph Mirabel</author>
   <author>Florent Lamiraux</author>
