@@ -35,6 +35,15 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_WD_ASDISTANCE =
+    "Return a clone of this WeighedDistance as a Distance shared pointer.";
+const char* DOC_WD_GETWEIGHTS =
+    "Return the weight vector used when computing distances.";
+const char* DOC_WD_SETWEIGHTS =
+    "Set the weight vector used when computing distances.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -58,16 +67,18 @@ struct DistanceWrapper {
 
 void exposeDistance() {
   // DocClass(Distance)
-  class_<Distance, DistancePtr_t, boost::noncopyable>("Distance", no_init)
+  class_<Distance, DistancePtr_t, boost::noncopyable>("Distance", DocClassDoc(),
+                                                      no_init)
       .def("compute", &DistanceWrapper::compute, DocClassMethod(compute));
 
   // DocClass(WeighedDistance)
   class_<WeighedDistance, bases<Distance>, WeighedDistancePtr_t,
-         boost::noncopyable>("WeighedDistance", no_init)
+         boost::noncopyable>("WeighedDistance", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&WeighedDistance::create))
-      .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t)
-      .def("getWeights", &DistanceWrapper::getWeights)
-      .def("setWeights", &DistanceWrapper::setWeights);
+      .def("asDistancePtr_t", &DistanceWrapper::AsDistancePtr_t,
+           DOC_WD_ASDISTANCE)
+      .def("getWeights", &DistanceWrapper::getWeights, DOC_WD_GETWEIGHTS)
+      .def("setWeights", &DistanceWrapper::setWeights, DOC_WD_SETWEIGHTS);
 }
 }  // namespace core
 }  // namespace pyhpp

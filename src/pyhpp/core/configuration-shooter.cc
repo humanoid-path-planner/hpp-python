@@ -47,7 +47,7 @@ struct CSWrapper {
 void exposeConfigurationShooter() {
   // DocClass(ConfigurationShooter)
   class_<ConfigurationShooter, ConfigurationShooterPtr_t, boost::noncopyable>(
-      "ConfigurationShooter", no_init)
+      "ConfigurationShooter", DocClassDoc(), no_init)
       .def("shoot", &CSWrapper::shoot, DocClassMethod(shoot));
 }
 }  // namespace core

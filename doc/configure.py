@@ -138,14 +138,16 @@ def indexFromNamespace(ns):
 
 
 def escape(s):
-    # return s.replace ('\n', r'\n')
-    return s.replace("\n", r"\n")
+    s = s.replace("\\", "\\\\")  # backslash → \\
+    s = s.replace('"', '\\"')  # double-quote → \"
+    s = s.replace("\n", "\\n")  # newline → \n
+    return s
 
 
 def make_doc_string(brief, detailled):
     if len(brief) == 0 or brief.isspace():
         return '"' + detailled + '"'
-    return '"' + brief + "\n" + detailled + '"'
+    return '"' + brief + "\\n" + detailled + '"'
 
 
 def make_args_string(args):
@@ -155,16 +157,40 @@ def make_args_string(args):
 def substitute(istr, ostr):
     nsPattern = re.compile(r"DocNamespace\s*\(\s*(?P<namespace>[\w:]+)\s*\)")
     classPattern = re.compile(r"DocClass\s*\(\s*(?P<class>[\w:]+)\s*\)")
+    dcdPattern = re.compile(r"DocClassDoc\s*\(\s*(?P<class>[\w:]+\s*)?\)")
     dcmPattern = re.compile(
         r"DocClassMethod\s*\(\s*(?P<method>[\w:]+)\s*(,\s*(?P<class>[\w:]+)\s*)?\)"
     )
     classDoc = None
+    currentClass = None
+    currentNamespace = None
+    index = None
     for line in map(lambda s: s.rstrip(), istr):
         for match in nsPattern.finditer(line):
             currentNamespace = match.group("namespace")
             index = indexFromNamespace(currentNamespace)
         for match in classPattern.finditer(line):
             currentClass = match.group("class")
+        for match in dcdPattern.finditer(line):
+            cn_arg = match.group("class")
+            cn = (
+                currentNamespace
+                + "::"
+                + (cn_arg.strip() if cn_arg and cn_arg.strip() else currentClass)
+            )
+            try:
+                if classDoc is None or classDoc.classname != cn:
+                    classDoc = index.classDoc(cn)
+                b, d = classDoc.getClassDoc()
+                line = line.replace(
+                    match.group(0), make_doc_string(escape(b), escape(d))
+                )
+            except Exception as e:
+                print(
+                    "Failed to find class doc for {0}: {1}".format(cn, e),
+                    file=sys.stderr,
+                )
+                line = line.replace(match.group(0), '"' + cn + '"')
         for match in dcmPattern.finditer(line):
             if match.group("class") is not None:
                 cn = currentNamespace + "::" + match.group("class")
@@ -177,7 +203,7 @@ def substitute(istr, ostr):
                 b, d, args = classDoc.getClassMethodDoc(mn)
                 line = line.replace(
                     match.group(0),
-                    escape(make_doc_string(b, d))
+                    make_doc_string(escape(b), escape(d))
                     + ", "
                     + ((make_args_string(args)) if len(args) > 0 else '""'),
                 )

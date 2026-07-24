@@ -38,6 +38,33 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_C_APPLY =
+    "Apply constraint to q in-place. Returns true on success.";
+const char* DOC_C_ISSATISFIED1 =
+    "Return true if configuration q satisfies the constraint.";
+const char* DOC_C_ISSATISFIED2 =
+    "Check if q satisfies the constraint; writes error into error. Returns "
+    "bool.";
+const char* DOC_C_COPY = "Return a copy of this constraint.";
+const char* DOC_CP_LASTISOPTIONAL =
+    "Get whether the last priority level is treated as optional.";
+const char* DOC_CP_LASTISOPTIONAL_SET =
+    "Set whether the last priority level is treated as optional.";
+const char* DOC_CP_SETRHSFROMCONFIG =
+    "Set right-hand side of all constraints from a configuration.";
+const char* DOC_CP_SETRHSOFCONSTRAINT =
+    "Set right-hand side of a specific constraint from a configuration.";
+const char* DOC_CP_NUMCONSTRAINTS =
+    "Return the list of numerical constraints held by this projector.";
+const char* DOC_CP_LINESEARCHTYPE = "Get/set the line search type.";
+const char* DOC_CP_MAXITER_GET =
+    "Get maximal number of iterations in config projector.";
+const char* DOC_CP_MAXITER_SET = "Set maximal number of iterations.";
+const char* DOC_CP_ERRTHRESH_GET = "Get error threshold in config projector.";
+const char* DOC_CP_ERRTHRESH_SET = "Set error threshold.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -94,18 +121,19 @@ static boost::python::list getNumConstraints(ConfigProjector& cp) {
 
 void exposeConstraint() {
   // DocClass(Constraint)
-  class_<Constraint, ConstraintPtr_t, boost::noncopyable>("Constraint", no_init)
+  class_<Constraint, ConstraintPtr_t, boost::noncopyable>(
+      "Constraint", DocClassDoc(), no_init)
       .def("__str__", &to_str_from_operator<Constraint>)
       .def("name", &Constraint::name, return_internal_reference<>(),
            DocClassMethod(name))
-      .def("apply", &CWrapper::apply)
-      .def("isSatisfied", &CWrapper::isSatisfied1)
-      .def("isSatisfied", &CWrapper::isSatisfied2)
-      .def("copy", &CWrapper::copy);
+      .def("apply", &CWrapper::apply, DOC_C_APPLY)
+      .def("isSatisfied", &CWrapper::isSatisfied1, DOC_C_ISSATISFIED1)
+      .def("isSatisfied", &CWrapper::isSatisfied2, DOC_C_ISSATISFIED2)
+      .def("copy", &CWrapper::copy, DOC_C_COPY);
 
   // DocClass(ConstraintSet)
   class_<ConstraintSet, ConstraintSetPtr_t, boost::noncopyable,
-         bases<Constraint> >("ConstraintSet", no_init)
+         bases<Constraint> >("ConstraintSet", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createConstraintSet))
       .def("addConstraint", &ConstraintSet::addConstraint,
            DocClassMethod(addConstraint))
@@ -119,7 +147,7 @@ void exposeConstraint() {
       .value("Constant", ConfigProjector::Constant);
   // DocClass(ConfigProjector)
   class_<ConfigProjector, ConfigProjectorPtr_t, boost::noncopyable,
-         bases<Constraint> >("ConfigProjector", no_init)
+         bases<Constraint> >("ConfigProjector", DocClassDoc(), no_init)
       .def("__init__", make_constructor(&createConfigProjector))
       .def("solver",
            static_cast<BySubstitution& (ConfigProjector::*)()>(
@@ -131,29 +159,42 @@ void exposeConstraint() {
                           const>(&ConfigProjector::lineSearchType),
           static_cast<void (ConfigProjector::*)(
               ConfigProjector::LineSearchType)>(
-              &ConfigProjector::lineSearchType))
+              &ConfigProjector::lineSearchType),
+          DOC_CP_LINESEARCHTYPE)
       .def("add", &ConfigProjector::add, DocClassMethod(add))
-      .def("lastIsOptional", static_cast<bool (ConfigProjector::*)() const>(
-                                 &ConfigProjector::lastIsOptional))
-      .def("lastIsOptional", static_cast<void (ConfigProjector::*)(bool)>(
-                                 &ConfigProjector::lastIsOptional))
-      .def("maxIterations", static_cast<size_type (ConfigProjector::*)() const>(
-                                &ConfigProjector::maxIterations))
-      .def("maxIterations", static_cast<void (ConfigProjector::*)(size_type)>(
-                                &ConfigProjector::maxIterations))
+      .def("lastIsOptional",
+           static_cast<bool (ConfigProjector::*)() const>(
+               &ConfigProjector::lastIsOptional),
+           DOC_CP_LASTISOPTIONAL)
+      .def("lastIsOptional",
+           static_cast<void (ConfigProjector::*)(bool)>(
+               &ConfigProjector::lastIsOptional),
+           DOC_CP_LASTISOPTIONAL_SET)
+      .def("maxIterations",
+           static_cast<size_type (ConfigProjector::*)() const>(
+               &ConfigProjector::maxIterations),
+           DOC_CP_MAXITER_GET)
+      .def("maxIterations",
+           static_cast<void (ConfigProjector::*)(size_type)>(
+               &ConfigProjector::maxIterations),
+           DOC_CP_MAXITER_SET)
       .def("errorThreshold",
            static_cast<void (ConfigProjector::*)(const value_type&)>(
-               &ConfigProjector::errorThreshold))
+               &ConfigProjector::errorThreshold),
+           DOC_CP_ERRTHRESH_SET)
       .def("errorThreshold",
            static_cast<value_type (ConfigProjector::*)() const>(
-               &ConfigProjector::errorThreshold))
+               &ConfigProjector::errorThreshold),
+           DOC_CP_ERRTHRESH_GET)
       .def("residualError", &ConfigProjector::residualError,
            DocClassMethod(residualError))
-      .def("setRightHandSideFromConfig", &rightHandSideFromConfig)
-      .def("setRightHandSideOfConstraint", &setRightHandSideOfConstraint)
+      .def("setRightHandSideFromConfig", &rightHandSideFromConfig,
+           DOC_CP_SETRHSFROMCONFIG)
+      .def("setRightHandSideOfConstraint", &setRightHandSideOfConstraint,
+           DOC_CP_SETRHSOFCONSTRAINT)
       .def("sigma", &ConfigProjector::sigma,
            return_value_policy<return_by_value>(), DocClassMethod(sigma))
-      .def("numericalConstraints", &getNumConstraints);
+      .def("numericalConstraints", &getNumConstraints, DOC_CP_NUMCONSTRAINTS);
 }
 }  // namespace core
 }  // namespace pyhpp

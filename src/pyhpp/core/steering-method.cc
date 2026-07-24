@@ -143,8 +143,10 @@ const ConstraintSetPtr_t& SteeringMethod::constraints() const {
 void exposeSteeringMethod() {
   register_ptr_to_python<std::shared_ptr<pyhpp::core::SteeringMethod>>();
   // DocClass(SteeringMethod)
-  class_<SteeringMethod>("SteeringMethod", no_init)
-      .def("__call__", &SteeringMethod::operator())
+  class_<SteeringMethod>("SteeringMethod", DocClassDoc(), no_init)
+      .def("__call__", &SteeringMethod::operator(),
+           "Compute a path between two configurations using the steering "
+           "method.")
       .def("steer", &SteeringMethod::steer, DocClassMethod(steer))
       .def("problem", &SteeringMethod::problem, DocClassMethod(problem))
       .def("constraints",
@@ -154,7 +156,7 @@ void exposeSteeringMethod() {
       .def("constraints",
            static_cast<const ConstraintSetPtr_t& (SteeringMethod::*)() const>(
                &SteeringMethod::constraints),
-           return_value_policy<copy_const_reference>());
+           return_value_policy<copy_const_reference>(), "Get constraint set.");
 
   pyhpp::core::steeringMethod::exposeSteeringMethods();
 }

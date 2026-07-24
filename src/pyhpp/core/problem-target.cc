@@ -42,8 +42,8 @@ using namespace hpp::core;
 
 void exposeProblemTarget() {
   // DocClass(ProblemTarget)
-  class_<ProblemTarget, ProblemTargetPtr_t, boost::noncopyable>("ProblemTarget",
-                                                                no_init)
+  class_<ProblemTarget, ProblemTargetPtr_t, boost::noncopyable>(
+      "ProblemTarget", DocClassDoc(), no_init)
 
       ;
 }

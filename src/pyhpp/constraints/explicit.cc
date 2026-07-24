@@ -64,8 +64,10 @@ ExplicitPtr_t createExplicit(const LiegroupSpacePtr_t& configSpace,
 
 void exposeExplicit() {
   // DocClass(Explicit)
-  class_<Explicit, ExplicitPtr_t, boost::noncopyable>("Explicit", no_init)
-      .def("__init__", make_constructor(&createExplicit));
+  class_<Explicit, ExplicitPtr_t, boost::noncopyable>("Explicit", DocClassDoc(),
+                                                      no_init)
+      .def("__init__", make_constructor(&createExplicit),
+           "Create an explicit constraint mapping output DOF from input DOF.");
 }
 }  // namespace constraints
 }  // namespace pyhpp

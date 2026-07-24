@@ -35,6 +35,30 @@
 
 // DocNamespace(hpp::manipulation)
 
+namespace {
+
+const char* DOC_HANDLE_NAME = "Name of the handle.";
+
+const char* DOC_HANDLE_LOCALPOSITION =
+    "Local position of the handle in the joint frame.";
+
+const char* DOC_HANDLE_MASK =
+    "mask( (Handle)arg1) -> list:\n"
+    "Constraint mask: vector<bool> of size 6 defining the symmetries of the "
+    "handle. See Handle class documentation for details.";
+
+const char* DOC_HANDLE_MASKCOMP = "Mask of the complement constraint.";
+
+const char* DOC_HANDLE_CLEARANCE =
+    "Distance from the center of the gripper along x-axis that ensures no "
+    "collision. Also gives an order of magnitude of the gripper size.";
+
+const char* DOC_HANDLE_APPROACHINGDIRECTION =
+    "Approaching direction for pregrasp (unit vector in handle frame, default "
+    "is x-axis).";
+
+}  // namespace
+
 namespace pyhpp {
 namespace manipulation {
 using namespace boost::python;
@@ -272,18 +296,20 @@ static JointIndex getParentJointId(const HandlePtr_t& handle) {
 
 void exposeHandle() {
   // DocClass(Handle)
-  class_<Handle, HandlePtr_t>("Handle", no_init)
-      .add_property("name", &getHandleName, &setHandleName)
+  class_<Handle, HandlePtr_t>("Handle", DocClassDoc(), no_init)
+      .add_property("name", &getHandleName, &setHandleName, DOC_HANDLE_NAME)
       .add_property("localPosition", &getHandleLocalPosition,
-                    &setHandleLocalPosition)
-      .add_property("mask", &getHandleMask, &setHandleMask)
-      .add_property("maskComp", &getHandleMaskComp, &setHandleMaskComp)
+                    &setHandleLocalPosition, DOC_HANDLE_LOCALPOSITION)
+      .add_property("mask", &getHandleMask, &setHandleMask, DOC_HANDLE_MASK)
+      .add_property("maskComp", &getHandleMaskComp, &setHandleMaskComp,
+                    DOC_HANDLE_MASKCOMP)
       .add_property(
           "clearance",
           static_cast<value_type (Handle::*)() const>(&Handle::clearance),
-          static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance))
+          static_cast<void (Handle::*)(const value_type&)>(&Handle::clearance),
+          DOC_HANDLE_CLEARANCE)
       .add_property("approachingDirection", &getApproachingDirection,
-                    &setApproachingDirection)
+                    &setApproachingDirection, DOC_HANDLE_APPROACHINGDIRECTION)
       .def("createGrasp", &Handle::createGrasp, DocClassMethod(createGrasp))
       .def("getParentJointId", &getParentJointId,
            "Get index of the joint the handle is attached to"
@@ -318,14 +344,22 @@ void exposeDevice() {
 
   // DocClass(Device)
   class_<Device, bases<pyhpp::pinocchio::Device>, boost::shared_ptr<Device>,
-         boost::noncopyable>("Device", init<const std::string&>())
-      .def("setRobotRootPosition", &Device::setRobotRootPosition)
-      .def("handles", &Device::handles)
-      .def("grippers", &Device::grippers)
+         boost::noncopyable>("Device", DocClassDoc(),
+                             init<const std::string&>())
+      .def("setRobotRootPosition", &Device::setRobotRootPosition,
+           "Set the root position of a sub-robot (identified by name) relative "
+           "to its parent joint.")
+      .def("handles", &Device::handles,
+           "Return a map from handle name to Handle object.")
+      .def("grippers", &Device::grippers,
+           "Return a map from gripper name to Gripper object.")
       .def("asPinDevice", &asPinDevice)
-      .def("getJointNames", &Device::getJointNames)
-      .def("getJointConfig", &Device::getJointConfig)
-      .def("setJointBounds", &Device::setJointBounds)
+      .def("getJointNames", &Device::getJointNames,
+           "Return list of all joint names in the Pinocchio model.")
+      .def("getJointConfig", &Device::getJointConfig,
+           "Return current configuration values of the named joint.")
+      .def("setJointBounds", &Device::setJointBounds,
+           "Set joint bounds from a flat list [min0, max0, min1, max1, ...].")
       .def("contactSurfaceNames", &Device::contactSurfaceNames,
            "Return list of contact surface names registered on device")
       .def("contactSurfaces", &Device::contactSurfaces,

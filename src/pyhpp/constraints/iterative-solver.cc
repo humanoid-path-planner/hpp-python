@@ -40,6 +40,32 @@
 
 // DocNamespace(hpp::constraints)
 
+namespace {
+const char* DOC_HI_ERRORTHRESHOLD = "Get error threshold.";
+const char* DOC_HI_MAXITERATIONS =
+    "Get maximal number of iterations in config projector.";
+const char* DOC_HI_RHSFC1 =
+    "Compute right hand side of equality constraints from a configuration.\n\n"
+    "For each constraint of type Equality, set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_HI_RHSFC2 =
+    "Compute right hand side of a constraint from a configuration.\n\n"
+    "Set right hand side as rhs = f(q).\n"
+    "Only parameterizable constraints (type Equality) are set.";
+const char* DOC_HI_RHS_SET1 =
+    "Set right hand side of a constraint.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_HI_RHS_SET2 =
+    "Set the right hand side.\n\n"
+    "Size of rhs should be equal to the total dimension of parameterizable\n"
+    "constraints (type Equality).";
+const char* DOC_HI_RHS_GET =
+    "Get the right hand side.\n\n"
+    "Size of result is equal to total dimension of parameterizable\n"
+    "constraints (type Equality).";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -63,7 +89,7 @@ void exposeHierarchicalIterativeSolver() {
       .def(vector_indexing_suite<ComparisonTypes_t>());
 
   // DocClass(solver::HierarchicalIterative)
-  class_<HierarchicalIterative>("HierarchicalIterative",
+  class_<HierarchicalIterative>("HierarchicalIterative", DocClassDoc(),
                                 init<LiegroupSpacePtr_t>())
       .def("__str__", &to_str<HierarchicalIterative>)
       .def("add", &HierarchicalIterative::add, DocClassMethod(add))
@@ -73,28 +99,36 @@ void exposeHierarchicalIterativeSolver() {
           static_cast<value_type (HierarchicalIterative::*)() const>(
               &HierarchicalIterative::errorThreshold),
           static_cast<void (HierarchicalIterative::*)(const value_type&)>(
-              &HierarchicalIterative::errorThreshold))
+              &HierarchicalIterative::errorThreshold),
+          DOC_HI_ERRORTHRESHOLD)
       .def("rightHandSideFromConfig",
            static_cast<vector_t (HierarchicalIterative::*)(ConfigurationIn_t)>(
-               &HierarchicalIterative::rightHandSideFromConfig))
+               &HierarchicalIterative::rightHandSideFromConfig),
+           DOC_HI_RHSFC1)
       .def("rightHandSideFromConfig",
            static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
                                                        ConfigurationIn_t)>(
-               &HierarchicalIterative::rightHandSideFromConfig))
-      .def("rightHandSide", static_cast<bool (HierarchicalIterative::*)(
-                                const ImplicitPtr_t&, vectorIn_t)>(
-                                &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSideFromConfig),
+           DOC_HI_RHSFC2)
+      .def("rightHandSide",
+           static_cast<bool (HierarchicalIterative::*)(const ImplicitPtr_t&,
+                                                       vectorIn_t)>(
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_SET1)
       .def("rightHandSide",
            static_cast<void (HierarchicalIterative::*)(vectorIn_t)>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_SET2)
       .def("rightHandSide",
            static_cast<vector_t (HierarchicalIterative::*)() const>(
-               &HierarchicalIterative::rightHandSide))
+               &HierarchicalIterative::rightHandSide),
+           DOC_HI_RHS_GET)
       .add_property("maxIterations",
                     static_cast<size_type (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::maxIterations),
                     static_cast<void (HierarchicalIterative::*)(size_type)>(
-                        &HierarchicalIterative::maxIterations))
+                        &HierarchicalIterative::maxIterations),
+                    DOC_HI_MAXITERATIONS)
       .add_property(
           "errorThreshold",
           static_cast<value_type (HierarchicalIterative::*)() const>(
@@ -105,16 +139,22 @@ void exposeHierarchicalIterativeSolver() {
                     static_cast<bool (HierarchicalIterative::*)() const>(
                         &HierarchicalIterative::lastIsOptional),
                     static_cast<void (HierarchicalIterative::*)(bool)>(
-                        &HierarchicalIterative::lastIsOptional))
-      .add_property("solveLevelByLevel",
-                    static_cast<bool (HierarchicalIterative::*)() const>(
-                        &HierarchicalIterative::solveLevelByLevel),
-                    static_cast<void (HierarchicalIterative::*)(bool)>(
-                        &HierarchicalIterative::solveLevelByLevel))
-      .def("numberStacks", &HierarchicalIterative::numberStacks)
-      .def("constraintsForPriority", &getConstraintsForPriority)
+                        &HierarchicalIterative::lastIsOptional),
+                    "Whether the last priority level is treated as optional.")
+      .add_property(
+          "solveLevelByLevel",
+          static_cast<bool (HierarchicalIterative::*)() const>(
+              &HierarchicalIterative::solveLevelByLevel),
+          static_cast<void (HierarchicalIterative::*)(bool)>(
+              &HierarchicalIterative::solveLevelByLevel),
+          "Whether to solve constraints one priority level at a time.")
+      .def("numberStacks", &HierarchicalIterative::numberStacks,
+           "Return the number of priority stacks.")
+      .def("constraintsForPriority", &getConstraintsForPriority,
+           "Return list of constraints at the given priority level.")
       .def("dimension", &HierarchicalIterative::dimension,
-           return_value_policy<copy_const_reference>());
+           return_value_policy<copy_const_reference>(),
+           "Return total dimension of the active constraints.");
 }
 }  // namespace constraints
 }  // namespace pyhpp

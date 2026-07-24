@@ -53,6 +53,63 @@
 #include <hpp/pinocchio/frame.hh>
 #include <pyhpp/core/steering-method.hh>
 
+namespace {
+const char* DOC_P_SM_GET = "Get the steering method.";
+const char* DOC_P_SM_SET = "Set the steering method.";
+const char* DOC_P_CV_GET = "Get the config validations object.";
+const char* DOC_P_CV_SET = "Set the config validations object.";
+const char* DOC_P_PV_GET = "Get the path validation object.";
+const char* DOC_P_PV_SET = "Set the path validation object.";
+const char* DOC_P_PP_GET = "Get the path projector.";
+const char* DOC_P_PP_SET = "Set the path projector.";
+const char* DOC_P_DIST_GET = "Get the distance function.";
+const char* DOC_P_DIST_SET = "Set the distance function.";
+const char* DOC_P_TARGET_GET = "Get the problem target.";
+const char* DOC_P_TARGET_SET = "Set the problem target.";
+const char* DOC_P_CS_GET = "Get the configuration shooter.";
+const char* DOC_P_CS_SET = "Set the configuration shooter.";
+const char* DOC_P_ADDPARTIALCOM =
+    "Create a named partial COM computation from a list of joint names.";
+const char* DOC_P_GETPARTIALCOM =
+    "Compute and return the position of the named partial center of mass.";
+const char* DOC_P_CREATERELATIVECOM =
+    "Create an implicit constraint: relative COM equals a reference point "
+    "expressed in a joint frame.";
+const char* DOC_P_CREATETRANSFORMATION =
+    "Create a relative or absolute transformation constraint between two "
+    "frames, with a 6-bool mask.";
+const char* DOC_P_SETCONSTANTRHS =
+    "If constant=True, set comparison type to EqualToZero; otherwise to "
+    "Equality.";
+const char* DOC_P_APPLYCONSTRAINTS =
+    "Project config onto active constraints. Returns (success, "
+    "projected_config, "
+    "residual_error).";
+const char* DOC_P_ISCONFIGVALID =
+    "Validate config against all config validations. Returns (valid, report).";
+const char* DOC_P_SETCONSTRAINTS =
+    "Set the active constraint set used by applyConstraints.";
+const char* DOC_P_GETCONSTRAINTS = "Return the active constraint set.";
+const char* DOC_P_SETRHS =
+    "Update right-hand side of the config projector from a configuration.";
+const char* DOC_P_ADDNUMCONSTRAINTS1 =
+    "Add constraints with priorities to the config projector, creating it if "
+    "needed.";
+const char* DOC_P_ADDNUMCONSTRAINTS2 =
+    "Add constraints at priority 0 to the config projector, creating it if "
+    "needed.";
+const char* DOC_P_CREATECOMBETWEENFEET =
+    "Create an implicit constraint: COM lies between two contact points.";
+const char* DOC_P_DIRECTPATH =
+    "Compute a direct path using the steering method. Returns (valid, path, "
+    "report).";
+const char* DOC_P_ERRTHRESH =
+    "Error threshold used when creating a new ConfigProjector.";
+const char* DOC_P_MAXITERPROJ =
+    "Maximum iterations for projection used when creating a new "
+    "ConfigProjector.";
+}  // namespace
+
 namespace pyhpp {
 namespace core {
 
@@ -604,7 +661,7 @@ void exposeProblem() {
   class_<hpp::core::Problem, boost::noncopyable>("CppCoreProblem", no_init);
 
   // DocClass(Problem)
-  class_<Problem>("Problem", init<const DevicePtr_t&>())
+  class_<Problem>("Problem", DocClassDoc(), init<const DevicePtr_t&>())
       .def("robot", &Problem::robot,
            return_value_policy<copy_const_reference>(), DocClassMethod(robot))
       .def("setParameter", &Problem::setParameter, DocClassMethod(setParameter))
@@ -615,17 +672,19 @@ void exposeProblem() {
            DocClassMethod(getParameter))
       .def("steeringMethod",
            static_cast<PyWSteeringMethodPtr_t (Problem::*)() const>(
-               &Problem::steeringMethod))
+               &Problem::steeringMethod),
+           DOC_P_SM_GET)
       .def("steeringMethod",
            static_cast<void (Problem::*)(const PyWSteeringMethodPtr_t&)>(
-               &Problem::steeringMethod))
+               &Problem::steeringMethod),
+           DOC_P_SM_SET)
 
       .def("configValidation",
            static_cast<GetConfigValidation>(&Problem::configValidation),
-           return_value_policy<copy_const_reference>())
+           return_value_policy<copy_const_reference>(), DOC_P_CV_GET)
       .def("configValidation",
            static_cast<SetConfigValidation>(&Problem::configValidation),
-           (arg("configValidation")))
+           (arg("configValidation")), DOC_P_CV_SET)
 
       .def("addConfigValidation", &Problem::addConfigValidation,
            DocClassMethod(addConfigValidation))
@@ -633,55 +692,69 @@ void exposeProblem() {
            DocClassMethod(clearConfigValidations))
 
       .def("pathValidation",
-           static_cast<GetPathValidation>(&Problem::pathValidation))
+           static_cast<GetPathValidation>(&Problem::pathValidation),
+           DOC_P_PV_GET)
       .def("pathValidation",
            static_cast<SetPathValidation>(&Problem::pathValidation),
-           (arg("pathValidation")))
+           (arg("pathValidation")), DOC_P_PV_SET)
 
       .def("pathProjector",
-           static_cast<GetPathProjector>(&Problem::pathProjector))
+           static_cast<GetPathProjector>(&Problem::pathProjector), DOC_P_PP_GET)
       .def("pathProjector",
            static_cast<SetPathProjector>(&Problem::pathProjector),
-           (arg("pathProjector")))
+           (arg("pathProjector")), DOC_P_PP_SET)
 
-      .def("distance", static_cast<GetDistance>(&Problem::distance))
+      .def("distance", static_cast<GetDistance>(&Problem::distance),
+           DOC_P_DIST_GET)
       .def("distance", static_cast<SetDistance>(&Problem::distance),
-           (arg("distance")))
+           (arg("distance")), DOC_P_DIST_SET)
 
       .def("target", static_cast<GetTarget>(&Problem::target),
-           return_value_policy<copy_const_reference>())
-      .def("target", static_cast<SetTarget>(&Problem::target), (arg("target")))
+           return_value_policy<copy_const_reference>(), DOC_P_TARGET_GET)
+      .def("target", static_cast<SetTarget>(&Problem::target), (arg("target")),
+           DOC_P_TARGET_SET)
       .def("configurationShooter",
-           static_cast<GetConfigurationShooter>(&Problem::configurationShooter))
+           static_cast<GetConfigurationShooter>(&Problem::configurationShooter),
+           DOC_P_CS_GET)
       .def("configurationShooter",
            static_cast<SetConfigurationShooter>(&Problem::configurationShooter),
-           (arg("configurationShooter")))
+           (arg("configurationShooter")), DOC_P_CS_SET)
       .def("initConfig", &Problem::initConfig, DocClassMethod(initConfig))
       .def("addGoalConfig", &Problem::addGoalConfig,
            DocClassMethod(addGoalConfig))
       .def("resetGoalConfigs", &Problem::resetGoalConfigs,
            DocClassMethod(resetGoalConfigs))
-      .PYHPP_DEFINE_METHOD(Problem, addPartialCom)
-      .PYHPP_DEFINE_METHOD(Problem, getPartialCom)
-      .PYHPP_DEFINE_METHOD(Problem, createRelativeComConstraint)
+      .def("addPartialCom", &Problem::addPartialCom, DOC_P_ADDPARTIALCOM)
+      .def("getPartialCom", &Problem::getPartialCom, DOC_P_GETPARTIALCOM)
+      .def("createRelativeComConstraint", &Problem::createRelativeComConstraint,
+           DOC_P_CREATERELATIVECOM)
       .def("createTransformationConstraint",
-           &Problem::createTransformationConstraint)
+           &Problem::createTransformationConstraint, DOC_P_CREATETRANSFORMATION)
       .def("createTransformationConstraint",
-           &Problem::createTransformationConstraint2)
-      .PYHPP_DEFINE_METHOD(Problem, setConstantRightHandSide)
-      .PYHPP_DEFINE_METHOD(Problem, applyConstraints)
-      .PYHPP_DEFINE_METHOD(Problem, isConfigValid)
-      .PYHPP_DEFINE_METHOD(Problem, setConstraints)
-      .PYHPP_DEFINE_METHOD(Problem, getConstraints)
-      .PYHPP_DEFINE_METHOD(Problem, setRightHandSideFromConfig)
+           &Problem::createTransformationConstraint2,
+           DOC_P_CREATETRANSFORMATION)
+      .def("setConstantRightHandSide", &Problem::setConstantRightHandSide,
+           DOC_P_SETCONSTANTRHS)
+      .def("applyConstraints", &Problem::applyConstraints,
+           DOC_P_APPLYCONSTRAINTS)
+      .def("isConfigValid", &Problem::isConfigValid, DOC_P_ISCONFIGVALID)
+      .def("setConstraints", &Problem::setConstraints, DOC_P_SETCONSTRAINTS)
+      .def("getConstraints", &Problem::getConstraints, DOC_P_GETCONSTRAINTS)
+      .def("setRightHandSideFromConfig", &Problem::setRightHandSideFromConfig,
+           DOC_P_SETRHS)
       .def("addNumericalConstraintsToConfigProjector",
-           &Problem::addNumericalConstraintsToConfigProjector1)
+           &Problem::addNumericalConstraintsToConfigProjector1,
+           DOC_P_ADDNUMCONSTRAINTS1)
       .def("addNumericalConstraintsToConfigProjector",
-           &Problem::addNumericalConstraintsToConfigProjector2)
-      .def_readwrite("errorThreshold", &Problem::errorThreshold_)
-      .def_readwrite("maxIterProjection", &Problem::maxIterProjection_)
-      .PYHPP_DEFINE_METHOD(Problem, createComBetweenFeet)
-      .PYHPP_DEFINE_METHOD(Problem, directPath);
+           &Problem::addNumericalConstraintsToConfigProjector2,
+           DOC_P_ADDNUMCONSTRAINTS2)
+      .def_readwrite("errorThreshold", &Problem::errorThreshold_,
+                     DOC_P_ERRTHRESH)
+      .def_readwrite("maxIterProjection", &Problem::maxIterProjection_,
+                     DOC_P_MAXITERPROJ)
+      .def("createComBetweenFeet", &Problem::createComBetweenFeet,
+           DOC_P_CREATECOMBETWEENFEET)
+      .def("directPath", &Problem::directPath, DOC_P_DIRECTPATH);
 
   register_problem_converters();
 }

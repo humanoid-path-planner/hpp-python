@@ -74,8 +74,12 @@ void loadModelFromString(const Device& robot, const FrameIndex& baseFrame,
 }
 
 void exposeUtil() {
-  def("loadModel", &loadModel);
-  def("loadModelFromString", &loadModelFromString);
+  def("loadModel", &loadModel,
+      "Load a robot model from URDF/SRDF files into a manipulation Device, "
+      "also parsing grasp/contact data from the SRDF.");
+  def("loadModelFromString", &loadModelFromString,
+      "Load a robot model from URDF/SRDF XML strings into a manipulation "
+      "Device, also parsing grasp/contact data from the SRDF.");
 }
 }  // namespace urdf
 }  // namespace manipulation

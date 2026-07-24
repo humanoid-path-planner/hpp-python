@@ -157,8 +157,8 @@ struct LgERWrapper {
 
 void exposeLiegroup() {
   // DocClass(LiegroupSpace)
-  class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable>("LiegroupSpace",
-                                                                no_init)
+  class_<LiegroupSpace, LiegroupSpacePtr_t, boost::noncopyable>(
+      "LiegroupSpace", DocClassDoc(), no_init)
       .def("__str__", &to_str_from_operator<LiegroupSpace>)
       .def("name", &LiegroupSpace::name, return_value_policy<return_by_value>(),
            DocClassMethod(name))
@@ -193,7 +193,7 @@ void exposeLiegroup() {
       .def("__mul__", &LgSWrapper::times);
 
   // DocClass(LiegroupElement)
-  class_<LiegroupElement>("LiegroupElement",
+  class_<LiegroupElement>("LiegroupElement", DocClassDoc(),
                           init<const vector_t&, const LiegroupSpacePtr_t&>())
       .def(init<const LiegroupSpacePtr_t&>())
       // Pythonic API
@@ -212,7 +212,7 @@ void exposeLiegroup() {
       .def(self + vector_t());
 
   // DocClass(LiegroupElementRef)
-  class_<LiegroupElementRef>("LiegroupElementRef",
+  class_<LiegroupElementRef>("LiegroupElementRef", DocClassDoc(),
                              init<vectorOut_t, LiegroupSpacePtr_t&>())
       // Pythonic API
       .def("__str__", &to_str_from_operator<LiegroupElementRef>)

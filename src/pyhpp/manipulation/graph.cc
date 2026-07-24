@@ -1290,14 +1290,14 @@ using namespace boost::python;
 
 void exposeGraph() {
   // DocClass(State)
-  class_<PyWState, PyWStatePtr_t>("State", no_init)
+  class_<PyWState, PyWStatePtr_t>("State", DocClassDoc(), no_init)
       .def("name", &PyWState::name, DocClassMethod(name))
       .def("id", &PyWState::id, DocClassMethod(id))
       .def("configConstraint", &PyWState::configConstraint)
       .PYHPP_DEFINE_METHOD1(PyWState, neighborEdges, DOC_NEIGHBOREDGES);
 
   // DocClass(Edge)
-  class_<PyWEdge, PyWEdgePtr_t>("Transition", no_init)
+  class_<PyWEdge, PyWEdgePtr_t>("Transition", DocClassDoc(), no_init)
       .def("id", &PyWEdge::id, DocClassMethod(id))
       .def("name", &PyWEdge::name, DocClassMethod(name))
       .def("isWaypointTransition", &PyWEdge::isWaypointTransition,
@@ -1310,16 +1310,33 @@ void exposeGraph() {
 
   // DocClass(Graph)
   class_<PyWGraph, PyWGraphPtr_t>(
-      "Graph",
+      "Graph", DocClassDoc(),
       init<const std::string&, const PyWDevicePtr_t&, const PyWProblemPtr_t&>())
 
-      .def("_get_native_graph", &getGraphCapsule)
-      .def_readwrite("robot", &PyWGraph::robot)
+      .def(
+          "_get_native_graph", &getGraphCapsule,
+          "Return a capsule wrapping the native C++ Graph object (for external "
+          "interop).")
+      .def_readwrite("robot", &PyWGraph::robot,
+                     "The robot device of the constraint graph.")
       // Configuration methods
-      .PYHPP_DEFINE_GETTER_SETTER(PyWGraph, maxIterations,
-                                  hpp::manipulation::size_type)
-      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(PyWGraph, errorThreshold,
-                                            hpp::manipulation::value_type)
+      .def("maxIterations",
+           static_cast<hpp::manipulation::size_type (PyWGraph::*)() const>(
+               &PyWGraph::maxIterations),
+           "Get maximal number of iterations in config projector.")
+      .def("maxIterations",
+           static_cast<void (PyWGraph::*)(hpp::manipulation::size_type)>(
+               &PyWGraph::maxIterations),
+           "Set maximal number of iterations.")
+      .def("errorThreshold",
+           static_cast<hpp::manipulation::value_type (PyWGraph::*)() const>(
+               &PyWGraph::errorThreshold),
+           "Get error threshold in config projector.")
+      .def(
+          "errorThreshold",
+          static_cast<void (PyWGraph::*)(const hpp::manipulation::value_type&)>(
+              &PyWGraph::errorThreshold),
+          "Set error threshold.")
 
       // Graph construction
       .PYHPP_DEFINE_METHOD1(PyWGraph, createState, DOC_CREATESTATE)
@@ -1339,12 +1356,18 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWeight, DOC_SETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getWeight, DOC_GETWEIGHT)
       .PYHPP_DEFINE_METHOD1(PyWGraph, setWaypoint, DOC_SETWAYPOINT)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getState)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getTransition)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getStates)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitions)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getStateNames)
-      .PYHPP_DEFINE_METHOD(PyWGraph, getTransitionNames)
+      .def("getState", &PyWGraph::getState,
+           "Return the state with the given name.")
+      .def("getTransition", &PyWGraph::getTransition,
+           "Return the transition with the given name.")
+      .def("getStates", &PyWGraph::getStates,
+           "Return a list of all states in the constraint graph.")
+      .def("getTransitions", &PyWGraph::getTransitions,
+           "Return a list of all transitions in the constraint graph.")
+      .def("getStateNames", &PyWGraph::getStateNames,
+           "Return a list of state names.")
+      .def("getTransitionNames", &PyWGraph::getTransitionNames,
+           "Return a list of transition names.")
 
       // State queries
       .PYHPP_DEFINE_METHOD1(PyWGraph, getStateFromConfiguration, DOC_GETSTATE)
@@ -1356,7 +1379,10 @@ void exposeGraph() {
                             DOC_ADDNUMERICALCONSTRAINTSTOSTATE)
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsToTransition,
                             DOC_ADDNUMERICALCONSTRAINTSTOTRANSITION)
-      .PYHPP_DEFINE_METHOD(PyWGraph, addNumericalConstraintsToGraph)
+      .def("addNumericalConstraintsToGraph",
+           &PyWGraph::addNumericalConstraintsToGraph,
+           "Add a list of numerical constraints to all transitions in the "
+           "graph.")
       .PYHPP_DEFINE_METHOD1(PyWGraph, addNumericalConstraintsForPath,
                             DOC_ADDNUMERICALCONSTRAINTSFORPATH)
       .PYHPP_DEFINE_METHOD1(PyWGraph, getNumericalConstraintsForState,
@@ -1379,8 +1405,11 @@ void exposeGraph() {
       .def("createPrePlacementConstraint",
            &PyWGraph::createPrePlacementConstraint2,
            DOC_CREATEPREPLACEMENTCONSTRAINT)
-      .def("createGraspConstraint", &PyWGraph::createGraspConstraint)
-      .def("createPreGraspConstraint", &PyWGraph::createPreGraspConstraint)
+      .def("createGraspConstraint", &PyWGraph::createGraspConstraint,
+           "Create grasp, complement and hold constraints for a gripper-handle "
+           "pair. Returns a list [grasp, complement, hold].")
+      .def("createPreGraspConstraint", &PyWGraph::createPreGraspConstraint,
+           "Create a pre-grasp constraint for a gripper-handle pair.")
       // Configuration error checking
       .PYHPP_DEFINE_METHOD1(PyWGraph, getConfigErrorForState,
                             DOC_GETCONFIGERRORFORSTATE)
@@ -1430,7 +1459,9 @@ void exposeGraph() {
       .PYHPP_DEFINE_METHOD1(PyWGraph, initialize, DOC_INITIALIZE)
 
       // Transition at parameter.
-      .def("transitionAtParam", &PyWGraph::transitionAtParam)
+      .def("transitionAtParam", &PyWGraph::transitionAtParam,
+           "Return the transition used at a given parameter on a path (static "
+           "method).")
       .staticmethod("transitionAtParam");
 }
 

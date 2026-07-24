@@ -77,12 +77,14 @@ struct CCWrapper {
 void exposeConnectedComponent() {
   // DocClass(ConnectedComponent)
   class_<ConnectedComponent, ConnectedComponentPtr_t, boost::noncopyable>(
-      "ConnectedComponent", no_init)
+      "ConnectedComponent", DocClassDoc(), no_init)
       .def("nodes", &CCWrapper::nodes, DocClassMethod(nodes))
       .def("reachableFrom", &CCWrapper::reachableFrom,
            DocClassMethod(reachableFrom))
       .def("reachableTo", &CCWrapper::reachableTo, DocClassMethod(reachableTo))
-      .def("__eq__", &CCWrapper::equality);
+      .def(
+          "__eq__", &CCWrapper::equality,
+          "Return true if both objects refer to the same connected component.");
 }
 }  // namespace core
 }  // namespace pyhpp

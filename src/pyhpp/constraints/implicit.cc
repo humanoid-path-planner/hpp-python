@@ -39,6 +39,11 @@
 
 // DocNamespace(hpp::constraints)
 
+namespace {
+const char* DOC_COMPARISONTYPE_GET = "Return the ComparisonType.";
+const char* DOC_COMPARISONTYPE_SET = "Set the comparison type.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -56,22 +61,27 @@ void exposeImplicit() {
       .value("Superior", Superior)
       .value("Inferior", Inferior);
   // DocClass(Implicit)
-  class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", no_init)
-      .def("__init__", make_constructor(&Implicit::create))
+  class_<Implicit, ImplicitPtr_t, boost::noncopyable>("Implicit", DocClassDoc(),
+                                                      no_init)
+      .def("__init__", make_constructor(&Implicit::create),
+           "Create an implicit constraint from a differentiable function and "
+           "comparison types.")
       .def("comparisonType",
            static_cast<const ComparisonTypes_t& (Implicit::*)() const>(
                &Implicit::comparisonType),
-           return_internal_reference<>(), DocClassMethod(comparisonType))
+           return_internal_reference<>(), DOC_COMPARISONTYPE_GET)
       .def("comparisonType",
            static_cast<void (Implicit::*)(const ComparisonTypes_t&)>(
-               &Implicit::comparisonType))
+               &Implicit::comparisonType),
+           DOC_COMPARISONTYPE_SET)
       .def("function", &Implicit::function, return_internal_reference<>(),
            DocClassMethod(function))
       .def("parameterSize", &Implicit::parameterSize,
            DocClassMethod(parameterSize))
       .def("rightHandSideSize", &Implicit::rightHandSideSize,
            DocClassMethod(rightHandSideSize))
-      .def("getFunctionOutputSize", &getFunctionOutputSize)
+      .def("getFunctionOutputSize", &getFunctionOutputSize,
+           "Return the output size of the underlying differentiable function.")
       .staticmethod("getFunctionOutputSize");
 }
 }  // namespace constraints

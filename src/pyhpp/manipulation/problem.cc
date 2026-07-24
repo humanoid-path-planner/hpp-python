@@ -42,6 +42,13 @@
 
 // DocNamespace(hpp::manipulation)
 
+namespace {
+
+const char* DOC_CONSTRAINTGRAPH_GET = "Get the graph of constraints.";
+const char* DOC_CONSTRAINTGRAPH_SET = "Set the graph of constraints.";
+
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -103,11 +110,6 @@ pyhpp::core::PyWSteeringMethodPtr_t Problem::steeringMethod() const {
   return std::shared_ptr<pyhpp::core::SteeringMethod>(sm);
 }
 
-void Problem::graphSteeringMethod(
-    const PyWGraphSteeringMethodPtr_t& steeringMethod) {
-  obj->steeringMethod(steeringMethod->obj);
-}
-
 // PathValidationPtr_t Problem::pathValidation() const {
 //     return obj->pathValidation();
 // }
@@ -144,23 +146,33 @@ void Problem::graphSteeringMethod(
 
 void exposeProblem() {
   // DocClass(Problem)
-  class_<Problem, bases<pyhpp::core::Problem>>("Problem",
+  class_<Problem, bases<pyhpp::core::Problem>>("Problem", DocClassDoc(),
                                                init<const PyWDevicePtr_t&>())
-      .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, constraintGraph,
-                                            PyWGraphPtr_t)
+      .def("constraintGraph",
+           static_cast<PyWGraphPtr_t (Problem::*)() const>(
+               &Problem::constraintGraph),
+           DOC_CONSTRAINTGRAPH_GET)
+      .def("constraintGraph",
+           static_cast<void (Problem::*)(const PyWGraphPtr_t&)>(
+               &Problem::constraintGraph),
+           DOC_CONSTRAINTGRAPH_SET)
       .def("checkProblem", &Problem::checkProblem, DocClassMethod(checkProblem))
       .def(
           "steeringMethod",
           static_cast<pyhpp::core::PyWSteeringMethodPtr_t (Problem::*)() const>(
-              &Problem::steeringMethod))
-      .def("steeringMethod", static_cast<void (Problem::*)(
-                                 const pyhpp::core::PyWSteeringMethodPtr_t&)>(
-                                 &Problem::steeringMethod))
+              &Problem::steeringMethod),
+          "Get the inner steering method (unwrapped from the graph steering "
+          "method if applicable).")
       .def("steeringMethod",
            static_cast<void (Problem::*)(
-               const pyhpp::manipulation::PyWGraphSteeringMethodPtr_t&)>(
-               &Problem::graphSteeringMethod))
-      .def("fullSteeringMethod", &Problem::fullSteeringMethod)
+               const pyhpp::core::PyWSteeringMethodPtr_t&)>(
+               &Problem::steeringMethod),
+           "Set the steering method.")
+
+      .def("fullSteeringMethod", &Problem::fullSteeringMethod,
+           "Set the problem steering method directly. Unlike steeringMethod, "
+           "this does not wrap the given steering method in a manipulation "
+           "graph steering method.")
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,

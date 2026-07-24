@@ -35,6 +35,45 @@
 
 // DocNamespace(hpp::core)
 
+namespace {
+const char* DOC_R_ADDNODE =
+    "Add a node with the given configuration to the roadmap.";
+const char* DOC_R_NEAREST1 =
+    "Find nearest node to configuration (optionally searching in reverse "
+    "direction). Returns (configuration, minDistance).";
+const char* DOC_R_NEAREST3 =
+    "Find nearest node within a connected component. Returns (configuration, "
+    "minDistance).";
+const char* DOC_R_NEARESTNODES1 =
+    "Find the k nearest nodes to configuration. Returns a list of nodes.";
+const char* DOC_R_NEARESTNODES2 =
+    "Find the k nearest nodes within a connected component.";
+const char* DOC_R_ADDNODEEDGES =
+    "Add node at 'to' and edges from the node nearest to 'from'.";
+const char* DOC_R_ADDNODEEDGE =
+    "Add node at 'to' and a single directed edge from the node nearest to "
+    "'from'.";
+const char* DOC_R_ADDEDGE1 =
+    "Add nodes at from and to, then add a directed edge between them.";
+const char* DOC_R_ADDEDGE2 =
+    "Add nodes at from and to; if bothEdges is true also adds the reverse "
+    "edge.";
+const char* DOC_R_NODES =
+    "Return list of all node configurations in the roadmap.";
+const char* DOC_R_NODESCC =
+    "Return list of configurations in the connected component identified by "
+    "connectedComponentId.";
+const char* DOC_R_INITNODE1 =
+    "Set the initial node to the given configuration.";
+const char* DOC_R_INITNODE2 = "Return the current initial node object.";
+const char* DOC_R_CCS = "Return list of all connected components.";
+const char* DOC_R_NUMCCS = "Return the number of connected components.";
+const char* DOC_R_GETCC = "Return connected component by index.";
+const char* DOC_R_CCOFNODE =
+    "Return the connected component of the node nearest to the given "
+    "configuration.";
+}  // namespace
+
 using namespace boost::python;
 
 namespace pyhpp {
@@ -221,26 +260,27 @@ struct RWrapper {
 
 void exposeRoadmap() {
   // DocClass(Roadmap)
-  class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", no_init)
+  class_<Roadmap, RoadmapPtr_t, boost::noncopyable>("Roadmap", DocClassDoc(),
+                                                    no_init)
       .def("__init__", make_constructor(&Roadmap::create))
       .def("__str__", &to_str<Roadmap>)
       .def("clear", &Roadmap::clear, DocClassMethod(clear))
       .def("addNode", &RWrapper::addNode,
-           return_value_policy<reference_existing_object>())
-      .def("nearestNode", &RWrapper::nearestNode1)
-      .def("nearestNode", &RWrapper::nearestNode2)
-      .def("nearestNode", &RWrapper::nearestNode3)
-      .def("nearestNode", &RWrapper::nearestNode4)
-      .def("nearestNodes", &RWrapper::nearestNodes1)
-      .def("nearestNodes", &RWrapper::nearestNodes2)
+           return_value_policy<reference_existing_object>(), DOC_R_ADDNODE)
+      .def("nearestNode", &RWrapper::nearestNode1, DOC_R_NEAREST1)
+      .def("nearestNode", &RWrapper::nearestNode2, DOC_R_NEAREST1)
+      .def("nearestNode", &RWrapper::nearestNode3, DOC_R_NEAREST3)
+      .def("nearestNode", &RWrapper::nearestNode4, DOC_R_NEAREST3)
+      .def("nearestNodes", &RWrapper::nearestNodes1, DOC_R_NEARESTNODES1)
+      .def("nearestNodes", &RWrapper::nearestNodes2, DOC_R_NEARESTNODES2)
       .def("nodesWithinBall", &Roadmap::nodesWithinBall,
            DocClassMethod(nodesWithinBall))
       .def("addNodeAndEdges", &RWrapper::addNodeAndEdges,
-           return_value_policy<reference_existing_object>())
+           return_value_policy<reference_existing_object>(), DOC_R_ADDNODEEDGES)
       .def("addNodeAndEdge", &RWrapper::addNodeAndEdge,
-           return_value_policy<reference_existing_object>())
-      .def("addEdge", &RWrapper::addEdge)
-      .def("addEdge", &RWrapper::addEdge2)
+           return_value_policy<reference_existing_object>(), DOC_R_ADDNODEEDGE)
+      .def("addEdge", &RWrapper::addEdge, DOC_R_ADDEDGE1)
+      .def("addEdge", &RWrapper::addEdge2, DOC_R_ADDEDGE2)
       .def("addEdges", &Roadmap::addEdges, DocClassMethod(addEdges))
       .def("merge",
            static_cast<void (Roadmap::*)(const RoadmapPtr_t&)>(&Roadmap::merge),
@@ -253,19 +293,23 @@ void exposeRoadmap() {
       .def("resetGoalNodes", &Roadmap::resetGoalNodes,
            DocClassMethod(resetGoalNodes))
       .def("pathExists", &Roadmap::pathExists, DocClassMethod(pathExists))
-      .def("nodes", &RWrapper::nodes)
-      .def("nodesConnectedComponent", &RWrapper::nodesConnectedComponent)
-      .def("initNode", &RWrapper::initNode1)
+      .def("nodes", &RWrapper::nodes, DOC_R_NODES)
+      .def("nodesConnectedComponent", &RWrapper::nodesConnectedComponent,
+           DOC_R_NODESCC)
+      .def("initNode", &RWrapper::initNode1, DOC_R_INITNODE1)
       .def("initNode", &RWrapper::initNode2,
-           return_value_policy<reference_existing_object>())
+           return_value_policy<reference_existing_object>(), DOC_R_INITNODE2)
       .def("goalNodes", &Roadmap::goalNodes, return_internal_reference<>(),
            DocClassMethod(goalNodes))
-      .def("connectedComponents", &RWrapper::connectedComponents)
+      .def("connectedComponents", &RWrapper::connectedComponents, DOC_R_CCS)
       .def("distance", &Roadmap::distance, return_internal_reference<>(),
            DocClassMethod(distance))
-      .def("numberConnectedComponents", &RWrapper::numberConnectedComponents)
-      .def("getConnectedComponent", &RWrapper::getConnectedComponent)
-      .def("connectedComponentOfNode", &RWrapper::connectedComponentOfNode);
+      .def("numberConnectedComponents", &RWrapper::numberConnectedComponents,
+           DOC_R_NUMCCS)
+      .def("getConnectedComponent", &RWrapper::getConnectedComponent,
+           DOC_R_GETCC)
+      .def("connectedComponentOfNode", &RWrapper::connectedComponentOfNode,
+           DOC_R_CCOFNODE);
 }
 }  // namespace core
 }  // namespace pyhpp

@@ -45,17 +45,20 @@ using namespace hpp::core;
 
 void exposeNode() {
   // DocClass(Node)
-  class_<Node, boost::shared_ptr<Node>, boost::noncopyable>("Node", no_init)
+  class_<Node, boost::shared_ptr<Node>, boost::noncopyable>(
+      "Node", DocClassDoc(), no_init)
       .def(init<ConfigurationIn_t>())
       .def(init<ConfigurationIn_t, ConnectedComponentPtr_t>())
       .def("addOutEdge", &Node::addOutEdge, DocClassMethod(addOutEdge))
       .def("addInEdge", &Node::addInEdge, DocClassMethod(addInEdge))
       .def("connectedComponent",
            static_cast<ConnectedComponentPtr_t (Node::*)() const>(
-               &Node::connectedComponent))
+               &Node::connectedComponent),
+           "Return the connected component the node belongs to.")
       .def("connectedComponent",
            static_cast<void (Node::*)(const ConnectedComponentPtr_t&)>(
-               &Node::connectedComponent))
+               &Node::connectedComponent),
+           "Store the connected component the node belongs to.")
       .def("outEdges", &Node::outEdges, return_internal_reference<>(),
            DocClassMethod(outEdges))
       .def("inEdges", &Node::inEdges, return_internal_reference<>(),
