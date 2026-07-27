@@ -294,6 +294,11 @@ def _unparse_ann(ann: ast.expr | None) -> str:
 # ---------------------------------------------------------------------------
 
 ClassIndex = dict[str, str]  # type name variants → "page.md#anchor"
+ClassDefinitionIndex = dict[str, ast.ClassDef]
+
+
+def _stub_module_name(relative_stub: str) -> str:
+    return str(Path(relative_stub).with_suffix("")).replace("/", ".")
 
 
 def build_class_index(stubs_root: Path) -> ClassIndex:
@@ -307,7 +312,7 @@ def build_class_index(stubs_root: Path) -> ClassIndex:
         if tree is None:
             continue
         page = slug(module_name)
-        stub_dotted = str(Path(rel_stub).with_suffix("")).replace("/", ".")
+        stub_dotted = _stub_module_name(rel_stub)
         for item in tree.body:
             if not isinstance(item, ast.ClassDef):
                 continue
@@ -331,6 +336,30 @@ def build_class_index(stubs_root: Path) -> ClassIndex:
                     index.setdefault(key, sub_target)
                 # simple name: setdefault so first occurrence wins
                 index.setdefault(sub.name, sub_target)
+    return index
+
+
+def build_class_definition_index(stubs_root: Path) -> ClassDefinitionIndex:
+    index: ClassDefinitionIndex = {}
+
+    def add_class(class_node: ast.ClassDef, parent: str) -> None:
+        qualified_class = f"{parent}.{class_node.name}"
+        index[qualified_class] = class_node
+        for item in class_node.body:
+            if isinstance(item, ast.ClassDef):
+                add_class(item, qualified_class)
+
+    for rel_stub, _, _ in MODULES:
+        stub_path = stubs_root / rel_stub
+        if not stub_path.exists():
+            continue
+        tree = _parse_stub(stub_path)
+        if tree is None:
+            continue
+        stub_module = _stub_module_name(rel_stub)
+        for item in tree.body:
+            if isinstance(item, ast.ClassDef):
+                add_class(item, stub_module)
     return index
 
 
@@ -410,9 +439,28 @@ def _fmt_ann(ann: str, class_index: ClassIndex, current_page: str) -> str:
 def _build_stub_module_index() -> dict[str, str]:
     index: dict[str, str] = {}
     for rel_stub, module_name, _ in MODULES:
-        dotted = str(Path(rel_stub).with_suffix("")).replace("/", ".")
-        index[dotted] = slug(module_name)
+        index[_stub_module_name(rel_stub)] = slug(module_name)
     return index
+
+
+def _base_name(base: ast.expr) -> str:
+    if isinstance(base, ast.Attribute):
+        return ast.unparse(base)
+    if isinstance(base, ast.Name):
+        return base.id
+    return ""
+
+
+def _resolve_base(
+    base: ast.expr,
+    current_stub_module: str,
+    class_definitions: ClassDefinitionIndex,
+) -> str | None:
+    raw = _base_name(base)
+    if not raw:
+        return None
+    qualified = raw if "." in raw else f"{current_stub_module}.{raw}"
+    return qualified if qualified in class_definitions else None
 
 
 def _base_links(
@@ -423,11 +471,7 @@ def _base_links(
 ) -> list[str]:
     links = []
     for b in class_node.bases:
-        raw = (
-            ast.unparse(b)
-            if isinstance(b, ast.Attribute)
-            else (b.id if isinstance(b, ast.Name) else "")
-        )
+        raw = _base_name(b)
         if not raw:
             continue
         class_name = raw.split(".")[-1]
@@ -449,6 +493,7 @@ def _base_links(
 # ---------------------------------------------------------------------------
 
 type BodyGroup = list[ast.FunctionDef] | ast.ClassDef
+type ClassMethods = dict[str, tuple[list[ast.FunctionDef], str]]
 
 
 def _group_body(body: list[ast.stmt]) -> list[BodyGroup]:
@@ -471,6 +516,80 @@ def _group_body(body: list[ast.stmt]) -> list[BodyGroup]:
     if pending:
         result.append(pending)
     return result
+
+
+def _class_mro(
+    qualified_class: str,
+    class_definitions: ClassDefinitionIndex,
+    cache: dict[str, list[str]],
+) -> list[str]:
+    if qualified_class in cache:
+        return cache[qualified_class]
+
+    class_node = class_definitions[qualified_class]
+    current_stub_module = qualified_class.rsplit(".", 1)[0]
+    bases = [
+        resolved
+        for base in class_node.bases
+        if (resolved := _resolve_base(base, current_stub_module, class_definitions))
+    ]
+    sequences = [_class_mro(base, class_definitions, cache).copy() for base in bases]
+    sequences.append(bases.copy())
+
+    result = [qualified_class]
+    while sequences:
+        sequences = [sequence for sequence in sequences if sequence]
+        if not sequences:
+            break
+        candidate = next(
+            (
+                sequence[0]
+                for sequence in sequences
+                if not any(sequence[0] in other[1:] for other in sequences)
+            ),
+            None,
+        )
+        if candidate is None:
+            raise ValueError(f"Inconsistent class hierarchy for {qualified_class}")
+        result.append(candidate)
+        for sequence in sequences:
+            if sequence[0] == candidate:
+                sequence.pop(0)
+
+    cache[qualified_class] = result
+    return result
+
+
+def _direct_method_groups(
+    class_node: ast.ClassDef,
+) -> dict[str, list[ast.FunctionDef]]:
+    methods: dict[str, list[ast.FunctionDef]] = {}
+    for group in _group_body(class_node.body):
+        if isinstance(group, ast.ClassDef):
+            continue
+        node = group[0]
+        methods.setdefault(node.name, []).extend(group)
+    return methods
+
+
+def _collect_class_methods(
+    qualified_class: str,
+    class_definitions: ClassDefinitionIndex,
+    cache: dict[str, ClassMethods],
+    mro_cache: dict[str, list[str]],
+) -> ClassMethods:
+    if qualified_class in cache:
+        return cache[qualified_class]
+
+    methods: ClassMethods = {}
+    for owner in _class_mro(qualified_class, class_definitions, mro_cache):
+        for name, group in _direct_method_groups(class_definitions[owner]).items():
+            if name == "__init__" and owner != qualified_class:
+                continue
+            methods.setdefault(name, (group, owner))
+
+    cache[qualified_class] = methods
+    return methods
 
 
 # ---------------------------------------------------------------------------
@@ -664,6 +783,8 @@ def render_class(
     class_index: ClassIndex,
     current_page: str,
     stub_module_index: dict[str, str],
+    qualified_class: str,
+    class_methods: dict[str, ClassMethods],
     heading_level: int = 2,
 ) -> tuple[list[str], bool]:
     """Render a class and return (lines, has_content)."""
@@ -679,22 +800,37 @@ def render_class(
     for g in groups:
         if isinstance(g, ast.ClassDef):
             sub_lines, _ = render_class(
-                g, class_index, current_page, stub_module_index, heading_level + 1
+                g,
+                class_index,
+                current_page,
+                stub_module_index,
+                f"{qualified_class}.{g.name}",
+                class_methods,
+                heading_level + 1,
             )
             nested_class_lines.extend(sub_lines)
-        else:
-            node = g[0]
-            if node.name in SKIP_NAMES or is_setter(node):
+
+    methods = class_methods.get(qualified_class)
+    if methods is None:
+        methods = {
+            name: (group, qualified_class)
+            for name, group in _direct_method_groups(class_node).items()
+        }
+    for group, owner in methods.values():
+        node = group[0]
+        if node.name in SKIP_NAMES or is_setter(node):
+            continue
+        if node.name == "__init__":
+            if any(
+                get_docstring(ov) and NOT_INSTANTIABLE.search(get_docstring(ov))
+                for ov in group
+            ):
                 continue
-            if node.name == "__init__":
-                if any(
-                    get_docstring(ov) and NOT_INSTANTIABLE.search(get_docstring(ov))
-                    for ov in g
-                ):
-                    continue
-            sig = _sig_cell(g, class_index, current_page)
-            desc = _desc_cell(g)
-            method_rows.append((sig, desc))
+        sig = _sig_cell(group, class_index, current_page)
+        if owner != qualified_class:
+            sig += f" *(inherited from {_type_link(owner, class_index, current_page)})*"
+        desc = _desc_cell(group)
+        method_rows.append((sig, desc))
 
     has_content = bool(raw_doc or bases or method_rows or nested_class_lines)
     if not has_content:
@@ -744,8 +880,10 @@ def render_class(
 def generate_module_md(
     stub_path: Path,
     module_name: str,
+    current_stub_module: str,
     class_index: ClassIndex,
     stub_module_index: dict[str, str],
+    class_methods: dict[str, ClassMethods],
 ) -> str:
     tree = _parse_stub(stub_path)
     if tree is None:
@@ -791,7 +929,12 @@ def generate_module_md(
     for item in tree.body:
         if isinstance(item, ast.ClassDef):
             class_lines, ok = render_class(
-                item, class_index, current_page, stub_module_index
+                item,
+                class_index,
+                current_page,
+                stub_module_index,
+                f"{current_stub_module}.{item.name}",
+                class_methods,
             )
             if ok:
                 lines.extend(class_lines)
@@ -828,7 +971,14 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=True)
 
     class_index = build_class_index(args.stubs)
+    class_definitions = build_class_definition_index(args.stubs)
     stub_module_index = _build_stub_module_index()
+    class_methods: dict[str, ClassMethods] = {}
+    mro_cache: dict[str, list[str]] = {}
+    for qualified_class in class_definitions:
+        _collect_class_methods(
+            qualified_class, class_definitions, class_methods, mro_cache
+        )
 
     generated: list[tuple[str, str, str]] = []
     for rel_stub, module_name, description in MODULES:
@@ -838,7 +988,14 @@ def main() -> None:
             continue
         out_file = args.output / f"{slug(module_name)}.md"
         out_file.write_text(
-            generate_module_md(stub_path, module_name, class_index, stub_module_index)
+            generate_module_md(
+                stub_path,
+                module_name,
+                _stub_module_name(rel_stub),
+                class_index,
+                stub_module_index,
+                class_methods,
+            )
         )
         generated.append((module_name, slug(module_name), description))
         print(f"  {out_file.name}")
