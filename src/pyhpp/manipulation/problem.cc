@@ -154,8 +154,6 @@ pyhpp::core::PyWPathValidationPtr_t Problem::pyPathValidation() const {
 
 void Problem::pyPathValidation(
     const pyhpp::core::PyWPathValidationPtr_t& pathValidation) {
-  if (!pathValidation || !pathValidation->factory)
-    throw std::invalid_argument("Path validation has no factory.");
   hpp::manipulation::ProblemPtr_t problem = asManipulationProblem();
   auto obstacleUser = HPP_DYNAMIC_PTR_CAST(hpp::core::ObstacleUserInterface,
                                            pathValidation->obj);
@@ -165,8 +163,19 @@ void Problem::pyPathValidation(
 
   problem->pathValidation(pathValidation->obj);
   pathValidation_ = pathValidation;
-  problem->setPathValidationFactory(pathValidation->factory,
-                                    pathValidation->tolerance);
+}
+
+pyhpp::core::PyWPathValidationPtr_t Problem::pyPathValidationFactory() const {
+  return std::make_shared<pyhpp::core::PathValidation>(
+      asManipulationProblem()->pathValidationFactory());
+}
+
+void Problem::pyPathValidationFactory(
+    const pyhpp::core::PyWPathValidationPtr_t& pathValidation) {
+  if (!pathValidation || !pathValidation->factory)
+    throw std::invalid_argument("Path validation has no factory.");
+  asManipulationProblem()->setPathValidationFactory(pathValidation->factory,
+                                                    pathValidation->tolerance);
 }
 
 // PathValidationPtr_t Problem::pathValidation() const {
@@ -245,8 +254,17 @@ void exposeProblem() {
            static_cast<void (Problem::*)(
                const pyhpp::core::PyWPathValidationPtr_t&)>(
                &Problem::pyPathValidation),
-           (arg("pathValidation")),
-           "Set the path validation object and edge-validation factory.")
+           (arg("pathValidation")), "Set the path validation object.")
+      .def(
+          "pathValidationFactory",
+          static_cast<pyhpp::core::PyWPathValidationPtr_t (Problem::*)() const>(
+              &Problem::pyPathValidationFactory),
+          "Create a path validation using the edge-validation factory.")
+      .def("pathValidationFactory",
+           static_cast<void (Problem::*)(
+               const pyhpp::core::PyWPathValidationPtr_t&)>(
+               &Problem::pyPathValidationFactory),
+           (arg("pathValidation")), "Set the edge-validation factory.")
       // .PYHPP_DEFINE_GETTER_SETTER_CONST_REF(Problem, pathValidation,
       // PathValidationPtr_t) .PYHPP_DEFINE_METHOD(Problem,
       // manipulationSteeringMethod) .PYHPP_DEFINE_METHOD(Problem,

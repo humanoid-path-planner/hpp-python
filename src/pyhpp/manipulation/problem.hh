@@ -65,6 +65,9 @@ struct Problem : public pyhpp::core::Problem {
   pyhpp::core::PyWPathValidationPtr_t pyPathValidation() const;
   void pyPathValidation(
       const pyhpp::core::PyWPathValidationPtr_t& pathValidation);
+  pyhpp::core::PyWPathValidationPtr_t pyPathValidationFactory() const;
+  void pyPathValidationFactory(
+      const pyhpp::core::PyWPathValidationPtr_t& pathValidation);
   // PathValidationPtr_t pathValidation() const;
   // void pathValidation (const PathValidationPtr_t &pathValidation);
   // SteeringMethodPtr_t manipulationSteeringMethod() const;
