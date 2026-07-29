@@ -260,6 +260,7 @@ for i in range(nSphere):
 
 problem.steeringMethod(Straight(problem))
 problem.pathValidation(Dichotomy(robot, 0))
+problem.pathValidationFactory(Dichotomy(robot, 0))
 problem.pathProjector(
     ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.01)
 )

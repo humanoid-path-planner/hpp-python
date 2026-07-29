@@ -408,6 +408,7 @@ if not args.bigGraph:
 
     problem.steeringMethod(Straight(problem))
     problem.pathValidation(Progressive(robot, 0.02))
+    problem.pathValidationFactory(Progressive(robot, 0.02))
     problem.pathProjector(
         ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.05)
     )
@@ -447,6 +448,7 @@ else:
 
     problem.steeringMethod(Straight(problem))
     problem.pathValidation(Progressive(robot, 0.02))
+    problem.pathValidationFactory(Progressive(robot, 0.02))
     problem.pathProjector(
         ProgressiveProjector(problem.distance(), problem.steeringMethod(), 0.05)
     )
