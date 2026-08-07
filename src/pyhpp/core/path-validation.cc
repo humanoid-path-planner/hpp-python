@@ -141,8 +141,7 @@ struct ProgressiveWrapper {
   }
   static void setTimeOut(PathValidation* pv,
                          const hpp::core::value_type& timeOut) {
-    HPP_DYNAMIC_PTR_CAST(hpp::core::continuousValidation::Progressive,
-                         pv->obj)
+    HPP_DYNAMIC_PTR_CAST(hpp::core::continuousValidation::Progressive, pv->obj)
         ->timeOut(timeOut);
   }
 };
