@@ -249,23 +249,18 @@ class GraphFactoryAbstract(ABC):
      The first node is defined by the empty set. The graph is built recursiveley
      as follows:
 
-     if the set of grasps defining the node is not allowed (method \\link
+     For any pair \\f$(g,h)\\f$ of available grippers and available handles,
+     \\li if the resulting set of grasps is allowed (method \\link
          constraint_graph_factory.GraphFactoryAbstract.graspIsAllowed
-         graspIsAllowed \\endlink), return.
-
-     Otherwise, for any pair \\f$(g,h)\f$ of available grippers and available
-     handles,
-     \\li build a new state by adding grasp \\f$(g,h)\\f$ to the current set of
-         grasps (method
-         \\link constraint_graph_factory.GraphFactoryAbstract.makeState
-         makeState\\endlink),
-     \\li build a transition from the current state to the new state (method \\link
-         constraint_graph_factory.GraphFactoryAbstract.makeTransition
-         makeTransition \\endlink)
-     \\li build a loopTransition from the current state to itself (method \\link
-         constraint_graph_factory.GraphFactoryAbstract.makeLoopTransition
-         makeLoopTransition \\endlink)
-     \\li repeat the two above states to the new state.
+         graspIsAllowed \\endlink), build a new state (method \\link
+         constraint_graph_factory.GraphFactoryAbstract.makeState
+         makeState\\endlink) and a transition from the current state (method
+         \\link constraint_graph_factory.GraphFactoryAbstract.makeTransition
+         makeTransition \\endlink),
+     \\li regardless of whether the next set of grasps is allowed, recurse into
+         it if it has not been visited before (to support non-monotonic filter
+         rules). A rejected set of grasps is memoized so its subtree is never
+         re-explored from a different parent path.
     """
 
     def __init__(self):
@@ -283,6 +278,9 @@ class GraphFactoryAbstract(ABC):
 
         self.states = dict()
         self.transitions = set()
+        # Recursion-visited memo for all nGrasps, accepted or rejected.
+        # Separate from self.states, which only holds created State objects.
+        self._visitedGrasps = set()
         # # the handle names
         self.handles = tuple()  # strings
         # # the gripper names
@@ -366,6 +364,10 @@ class GraphFactoryAbstract(ABC):
         Go through the combinatorial defined by the grippers and handles
         and create the states and transitions.
         """
+        # Re-seed with already-accepted states so their subtrees aren't
+        # re-walked, but leave previously-rejected combos unmarked so a
+        # regenerate after a rule change gets to re-evaluate them.
+        self._visitedGrasps = set(self.states)
         grasps = (None,) * len(self.grippers)
         self._recurse(self.grippers, self.handles, grasps, 0)
 
@@ -507,7 +509,9 @@ class GraphFactoryAbstract(ABC):
                 nGrasps = grasps[:isg] + (ish,) + grasps[isg + 1 :]
 
                 nextIsAllowed = self.graspIsAllowed(nGrasps)
-                isNewState = not self._existState(nGrasps)
+                isNewState = nGrasps not in self._visitedGrasps
+                if isNewState:
+                    self._visitedGrasps.add(nGrasps)
                 if nextIsAllowed:
                     nnext = self._makeState(nGrasps, depth + 1)
 
