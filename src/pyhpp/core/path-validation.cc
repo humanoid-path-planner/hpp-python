@@ -145,10 +145,9 @@ struct ProgressiveWrapper {
         hpp::core::continuousValidation::Progressive, pv->obj);
     progressive->timeOut(timeOut);
 
-    pv->factory =
-        [timeOut](const hpp::core::DevicePtr_t& robot,
-                 const hpp::core::value_type& tolerance)
-            -> hpp::core::PathValidationPtr_t {
+    pv->factory = [timeOut](const hpp::core::DevicePtr_t& robot,
+                            const hpp::core::value_type& tolerance)
+        -> hpp::core::PathValidationPtr_t {
       auto result = hpp::core::continuousValidation::Progressive::create(
           robot, tolerance);
       result->timeOut(timeOut);
