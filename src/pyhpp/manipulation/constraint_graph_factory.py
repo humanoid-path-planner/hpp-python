@@ -364,6 +364,10 @@ class GraphFactoryAbstract(ABC):
         Go through the combinatorial defined by the grippers and handles
         and create the states and transitions.
         """
+        # Re-seed with already-accepted states so their subtrees aren't
+        # re-walked, but leave previously-rejected combos unmarked so a
+        # regenerate after a rule change gets to re-evaluate them.
+        self._visitedGrasps = set(self.states)
         grasps = (None,) * len(self.grippers)
         self._recurse(self.grippers, self.handles, grasps, 0)
 
