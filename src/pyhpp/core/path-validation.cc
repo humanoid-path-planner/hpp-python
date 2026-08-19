@@ -133,6 +133,29 @@ struct Progressive : PathValidation {
                        tolerance) {}
 };
 
+struct ProgressiveWrapper {
+  static hpp::core::value_type getTimeOut(PathValidation* pv) {
+    return HPP_DYNAMIC_PTR_CAST(hpp::core::continuousValidation::Progressive,
+                                pv->obj)
+        ->timeOut();
+  }
+  static void setTimeOut(PathValidation* pv,
+                         const hpp::core::value_type& timeOut) {
+    auto progressive = HPP_DYNAMIC_PTR_CAST(
+        hpp::core::continuousValidation::Progressive, pv->obj);
+    progressive->timeOut(timeOut);
+
+    pv->factory = [timeOut](const hpp::core::DevicePtr_t& robot,
+                            const hpp::core::value_type& tolerance)
+        -> hpp::core::PathValidationPtr_t {
+      auto result = hpp::core::continuousValidation::Progressive::create(
+          robot, tolerance);
+      result->timeOut(timeOut);
+      return result;
+    };
+  }
+};
+
 struct Dichotomy : PathValidation {
   Dichotomy(const hpp::core::DevicePtr_t& robot,
             const hpp::core::value_type& tolerance)
@@ -184,7 +207,11 @@ void exposePathValidation() {
   class_<pathValidation::Progressive, bases<PathValidation>>(
       "Progressive", "Create a progressive continuous path validation.",
       init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
-          (arg("robot"), arg("tolerance"))));
+          (arg("robot"), arg("tolerance"))))
+      .def("timeOut", &pathValidation::ProgressiveWrapper::getTimeOut,
+           "Get wall-clock timeout (seconds) for path validation.")
+      .def("timeOut", &pathValidation::ProgressiveWrapper::setTimeOut,
+           "Set wall-clock timeout (seconds) for path validation.");
   class_<pathValidation::Dichotomy, bases<PathValidation>>(
       "Dichotomy", "Create a dichotomy-based continuous path validation.",
       init<const hpp::core::DevicePtr_t&, const hpp::core::value_type&>(
