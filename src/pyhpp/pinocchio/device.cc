@@ -224,58 +224,61 @@ static JointIndex getParentJointId(const GripperPtr_t& gripper) {
   return model.frames[model.getFrameId(gripper->name())].parentJoint;
 }
 
-// Class NameResult and NameDescriptor are temporary work-around to tranform getter "name"
-// in class Gripper into a property and to warn users when they call the deprecated name
-// method.
+// Class NameResult and NameDescriptor are temporary work-around to tranform
+// getter "name" in class Gripper into a property and to warn users when they
+// call the deprecated name method.
 class NameResult {
-public:
-    explicit NameResult(const std::string& name) : name_(name) {}
+ public:
+  explicit NameResult(const std::string& name) : name_(name) {}
 
-    std::string str() const { return name_; }
-    std::string call() const {
-      std::cerr << "Calling pyhpp.pinocchio.Gripper.name() as a method is deprecated. "
-        "Use the 'name' property instead." << std::endl;
-        return name_;
-    }
+  std::string str() const { return name_; }
+  std::string call() const {
+    std::cerr
+        << "Calling pyhpp.pinocchio.Gripper.name() as a method is deprecated. "
+           "Use the 'name' property instead."
+        << std::endl;
+    return name_;
+  }
 
-private:
-    std::string name_;
+ private:
+  std::string name_;
 };
 
 // --- 2. Descriptor to handle both attribute access and calls ---
 class NameDescriptor {
-public:
-    explicit NameDescriptor(std::string (*getter)(const GripperPtr_t&))
-        : getter_(getter) {}
+ public:
+  explicit NameDescriptor(std::string (*getter)(const GripperPtr_t&))
+      : getter_(getter) {}
 
-    // Python descriptor protocol: __get__(self, instance, owner)
-    bp::object get(const bp::object& instance, const bp::object& /*owner*/) const {
-        if (instance.is_none()) {
-            // Accessed via class (e.g., Gripper.name), not an instance
-            return bp::object();
-        }
-        GripperPtr_t g = bp::extract<GripperPtr_t>(instance);
-        return bp::object(NameResult(getter_(g)));
+  // Python descriptor protocol: __get__(self, instance, owner)
+  bp::object get(const bp::object& instance,
+                 const bp::object& /*owner*/) const {
+    if (instance.is_none()) {
+      // Accessed via class (e.g., Gripper.name), not an instance
+      return bp::object();
     }
+    GripperPtr_t g = bp::extract<GripperPtr_t>(instance);
+    return bp::object(NameResult(getter_(g)));
+  }
 
-private:
-    std::string (*getter_)(const GripperPtr_t&);
+ private:
+  std::string (*getter_)(const GripperPtr_t&);
 };
 
 void exposeGripper() {
   // Expose NameResult (callable + string-like)
   bp::class_<NameResult>("NameResult", bp::no_init)
-    .def("__str__", &NameResult::str)
-    .def("__repr__", &NameResult::str)
-    .def("__call__", &NameResult::call);
+      .def("__str__", &NameResult::str)
+      .def("__repr__", &NameResult::str)
+      .def("__call__", &NameResult::call);
 
   // Expose NameDescriptor
   bp::class_<NameDescriptor>("NameDescriptor", bp::no_init)
-    .def("__get__", &NameDescriptor::get);
+      .def("__get__", &NameDescriptor::get);
   // DocClass(Gripper)
-  class_<Gripper, GripperPtr_t> gripper_class("Gripper", DocClassDoc(), no_init);
-  gripper_class
-      .add_property("localPosition", &getObjectPositionInJoint)
+  class_<Gripper, GripperPtr_t> gripper_class("Gripper", DocClassDoc(),
+                                              no_init);
+  gripper_class.add_property("localPosition", &getObjectPositionInJoint)
       .add_property(
           "clearance",
           static_cast<value_type (Gripper::*)() const>(&Gripper::clearance),
@@ -287,9 +290,9 @@ void exposeGripper() {
   // Add the 'name' descriptor
   gripper_class.attr("name") = NameDescriptor(&getGripperName);
   class_<std::map<std::string, GripperPtr_t> >("GripperMap")
-    .def(
-         boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,
-         true>());
+      .def(
+          boost::python::map_indexing_suite<std::map<std::string, GripperPtr_t>,
+                                            true>());
 }
 
 static boost::shared_ptr<Device> createDevice(const std::string& name) {
