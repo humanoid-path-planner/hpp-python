@@ -233,8 +233,9 @@ class NameResult {
 
   std::string str() const { return name_; }
   std::string call() const {
-    throw std::logic_error("Calling pyhpp.pinocchio.Gripper.name() as a method is deprecated. "
-                           "Use the 'name' property instead.");
+    throw std::logic_error(
+        "Calling pyhpp.pinocchio.Gripper.name() as a method is deprecated. "
+        "Use the 'name' property instead.");
   }
 
  private:
