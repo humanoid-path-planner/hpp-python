@@ -120,7 +120,8 @@ Problem::Problem(const DevicePtr_t& robot)
     : obj(hpp::core::Problem::create(robot)),
       errorThreshold_(1e-4),
       maxIterProjection_(20) {
-  obj->constraints(hpp::core::ConstraintSet::create(robot, "Default constraint set"));
+  obj->constraints(
+      hpp::core::ConstraintSet::create(robot, "Default constraint set"));
 }
 
 const DevicePtr_t& Problem::robot() const { return obj->robot(); }
@@ -394,7 +395,7 @@ boost::python::tuple Problem::applyConstraints(ConfigurationIn_t config) {
     Configuration_t output = config;
     success = obj->constraints()->apply(output);
     if (hpp::core::ConfigProjectorPtr_t configProjector =
-        obj->constraints()->configProjector()) {
+            obj->constraints()->configProjector()) {
       residualError = configProjector->residualError();
     }
     return boost::python::make_tuple(success, output, residualError);
@@ -462,7 +463,7 @@ void Problem::addNumericalConstraintsToConfigProjector1(
         extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
     auto prioritiesVec = extract_vector<std::size_t>(priorities);
     hpp::core::ConfigProjectorPtr_t configProjector =
-      obj->constraints()->configProjector();
+        obj->constraints()->configProjector();
     for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
       if (!configProjector) {
         configProjector = hpp::core::ConfigProjector::create(
@@ -482,7 +483,7 @@ void Problem::addNumericalConstraintsToConfigProjector2(
     auto constraintsVec =
         extract_vector<hpp::constraints::ImplicitPtr_t>(constraints);
     hpp::core::ConfigProjectorPtr_t configProjector =
-      obj->constraints()->configProjector();
+        obj->constraints()->configProjector();
     for (unsigned int i = 0; i < constraintsVec.size(); ++i) {
       if (!configProjector) {
         configProjector = hpp::core::ConfigProjector::create(
