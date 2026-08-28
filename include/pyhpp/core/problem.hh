@@ -147,7 +147,6 @@ struct Problem {
 
   boost::python::tuple directPath(ConfigurationIn_t start,
                                   ConfigurationIn_t end, bool validate);
-  hpp::core::ConstraintSetPtr_t constraints_;
   PyWPathValidationPtr_t pathValidation_;
   value_type errorThreshold_;
   size_type maxIterProjection_;
