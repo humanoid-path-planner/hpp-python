@@ -7,7 +7,8 @@
 import unittest
 import numpy as np
 from pinocchio import SE3
-from unit.conftest import create_ur5_problem
+from pyhpp.manipulation import Problem as ManipulationProblem
+from unit.conftest import create_ur3_robot, create_ur5_problem
 
 
 class TestProblemAccessors(unittest.TestCase):
@@ -108,6 +109,34 @@ class TestProblemConstraintProjection(unittest.TestCase):
         success, output, residual = result
         self.assertIsInstance(success, bool)
         self.assertEqual(len(output), len(q))
+
+    def test_add_numerical_constraints_updates_active_constraint_set(self):
+        problem, robot = create_ur5_problem()
+        active_constraints = problem.getConstraints()
+        constraint = problem.createTransformationConstraint(
+            "test_constraint",
+            "",
+            "ur5/ee_fixed_joint",
+            SE3.Identity(),
+            [True, True, True, True, True, True],
+        )
+
+        problem.addNumericalConstraintsToConfigProjector("test-projector", [constraint])
+
+        projector = active_constraints.configProjector()
+        self.assertIsNotNone(projector)
+        self.assertEqual(len(projector.numericalConstraints()), 1)
+        self.assertIsNotNone(problem.getConstraints().configProjector())
+
+
+class TestManipulationProblemProjectionDefaults(unittest.TestCase):
+    def test_projection_defaults_match_core_problem(self):
+        robot = create_ur3_robot()
+
+        problem = ManipulationProblem(robot)
+
+        self.assertAlmostEqual(problem.errorThreshold, 1e-4)
+        self.assertEqual(problem.maxIterProjection, 20)
 
 
 class TestProblemTransformationConstraints(unittest.TestCase):
