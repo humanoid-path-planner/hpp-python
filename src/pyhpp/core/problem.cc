@@ -117,9 +117,7 @@ namespace core {
 using namespace boost::python;
 
 Problem::Problem(const DevicePtr_t& robot)
-    : obj(hpp::core::Problem::create(robot)),
-      errorThreshold_(1e-4),
-      maxIterProjection_(20) {
+    : obj(hpp::core::Problem::create(robot)) {
   obj->constraints(
       hpp::core::ConstraintSet::create(robot, "Default constraint set"));
 }
