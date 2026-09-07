@@ -30,6 +30,7 @@
 
 #include <boost/python.hpp>
 #include <eigenpy/eigenpy.hpp>
+#include <hpp/core/interpolated-path.hh>
 #include <hpp/core/path.hh>
 #include <hpp/core/straight-path.hh>
 #include <hpp/python/config.hh>
@@ -223,6 +224,25 @@ void exposePath() {
                static_cast<StraightPathPtr_t (*)(
                    const DevicePtr_t&, ConfigurationIn_t, ConfigurationIn_t,
                    interval_t, ConstraintSetPtr_t)>(&StraightPath::create)));
+
+  class_<InterpolatedPath, bases<Path>, InterpolatedPathPtr_t,
+         boost::noncopyable>("InterpolatedPath", no_init)
+      .def("__init__",
+           make_constructor(
+               static_cast<InterpolatedPathPtr_t (*)(
+                   const DevicePtr_t&, ConfigurationIn_t, ConfigurationIn_t,
+                   interval_t)>(&InterpolatedPath::create)))
+      .def("insert", &InterpolatedPath::insert,
+           "Insert a configuration at the given path parameter.")
+      .def(
+          "interpolationPoints",
+          +[](const InterpolatedPath& path) {
+            list points;
+            for (const auto& point : path.interpolationPoints())
+              points.append(make_tuple(point.first, point.second));
+            return points;
+          },
+          "Return ordered (parameter, configuration) interpolation points.");
 }
 }  // namespace core
 }  // namespace pyhpp
