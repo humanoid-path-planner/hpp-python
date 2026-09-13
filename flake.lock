@@ -268,11 +268,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786116273,
-        "narHash": "sha256-WO9Xn1TYXQB6qrnluYYAYN6990YFEionBZtLsoJ6hSE=",
+        "lastModified": 1788935451,
+        "narHash": "sha256-2nx7fuYz0NMQznGqdHfI/IJXqw3Hx+5739Ca1czKr90=",
         "owner": "humanoid-path-planner",
         "repo": "hpp-core",
-        "rev": "13a5dffb644e50a71b53d0541bc99b0d65823202",
+        "rev": "6a5de2f01625935170bdf8f7453594d54d33ee55",
         "type": "github"
       },
       "original": {
