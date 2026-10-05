@@ -35,9 +35,11 @@
 #include <hpp/core/problem.hh>
 #include <hpp/manipulation/graph-optimizer.hh>
 #include <hpp/manipulation/path-optimization/enforce-transition-semantic.hh>
+#include <hpp/manipulation/path-optimization/manipulation-spline.hh>
 #include <hpp/manipulation/path-optimization/random-shortcut.hh>
 #include <hpp/manipulation/path-optimization/spline-gradient-based.hh>
 #include <pyhpp/core/problem.hh>
+#include <pyhpp/util.hh>
 
 // DocNamespace(hpp::manipulation)
 
@@ -161,6 +163,22 @@ void exposeSplineGradientBased3(const char* name) {
       .def_readwrite("QPAccuracy", &SGB_t::QPAccuracy);
 }
 
+static pathOptimization::ManipulationSpline::Ptr_t createManipulationSpline(
+    const pyhpp::core::Problem& problem) {
+  return pathOptimization::ManipulationSpline::create(problem.obj);
+}
+
+static list getSingleSplineTransitions(
+    const pathOptimization::ManipulationSpline& spline) {
+  return pyhpp::to_python_list(spline.singleSplineTransitions);
+}
+
+static void setSingleSplineTransitions(
+    pathOptimization::ManipulationSpline& spline, const object& names) {
+  spline.singleSplineTransitions =
+      pyhpp::extract_vector<std::string>(list(names));
+}
+
 void exposePathOptimizers() {
   class_<pathOptimization::RandomShortcut,
          std::shared_ptr<pathOptimization::RandomShortcut>,
@@ -184,6 +202,21 @@ void exposePathOptimizers() {
       &createGraphOptimizer<hpp::core::pathOptimization::PartialShortcut>);
   exposeSplineGradientBased1("SplineGradientBased_bezier1");
   exposeSplineGradientBased3("SplineGradientBased_bezier3");
+
+  class_<pathOptimization::ManipulationSpline,
+         std::shared_ptr<pathOptimization::ManipulationSpline>, bases<SGB3_t>,
+         boost::noncopyable>(
+      "ManipulationSpline",
+      "Smooth transitions, then join splines within each manipulation state.\n"
+      "\n"
+      "The result contains one path vector per consecutive group of\n"
+      "transitions with the same containing state.",
+      no_init)
+      .def("__init__", make_constructor(&createManipulationSpline))
+      .add_property("singleSplineTransitions", &getSingleSplineTransitions,
+                    &setSingleSplineTransitions,
+                    "Transitions fitted with one spline between their "
+                    "endpoints.");
 }
 
 }  // namespace manipulation
