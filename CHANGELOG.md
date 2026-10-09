@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- [manipulation] Bind ManipulationSpline from C++
 - [manipulation] Add spline smoothing by transition and state
 - [Problem] Fix constraint handling and projection defaults
 - [pinocchio.Gripper] change name from getter to property
