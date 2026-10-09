@@ -744,7 +744,9 @@ def _sig_cell(
         ret_html = f" -&gt; {_fmt_ann(ret, class_index, current_page)}" if ret else ""
 
         kw = '<span class="hljs-keyword">def</span>'
-        fn = f'<span class="hljs-title function_">{_html.escape(node.name)}</span>'
+        # Underscores as entities so that Markdown does not read __init__ as bold.
+        name = _html.escape(node.name).replace("_", "&#95;")
+        fn = f'<span class="hljs-title function_">{name}</span>'
         params_str = ", ".join(params_html)
 
         sig_line = f"{kw} {fn}({params_str}){ret_html}"
