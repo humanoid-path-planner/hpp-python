@@ -4,134 +4,60 @@
 [![Coverage report](https://gitlab.laas.fr/humanoid-path-planner/hpp-python/badges/master/coverage.svg?job=doc-coverage)](https://gepettoweb.laas.fr/doc/humanoid-path-planner/hpp-python/master/coverage/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-`hpp-python` provides native Python bindings for the [HPP](https://github.com/humanoid-path-planner/hpp-doc) (Humanoid Path Planner) C++ libraries (`hpp-core`, `hpp-constraints`, `hpp-pinocchio`, `hpp-manipulation`, ...), generated with [`boost::python`](https://www.boost.org/doc/libs/release/libs/python/). These bindings differ from the ones provided by `hpp-corbaserver`: they are **native, in-process bindings that do not use a CORBA middleware**, so there is no client/server split and no serialization overhead.
+Python bindings of the
+[Humanoid Path Planner](https://humanoid-path-planner.github.io/hpp-doc/) C++
+libraries, built with Boost.Python.
 
-The resulting `pyhpp` package mirrors the C++ namespace layout:
+Package `pyhpp` follows the C++ libraries:
 
-- **`pyhpp.pinocchio`** — robot model (`Device`), grippers, Lie-group utilities. Wraps `hpp-pinocchio`.
-- **`pyhpp.constraints`** — differentiable functions, transformations, implicit/explicit constraints, the hierarchical iterative solver. Wraps `hpp-constraints`.
-- **`pyhpp.core`** — planning problem, path planners, path optimizers, path validation, roadmap, steering methods. Wraps `hpp-core`.
-- **`pyhpp.manipulation`** — manipulation-specific `Device`, constraint graph, path planners/optimizers for manipulation problems, URDF/SRDF loading. Wraps `hpp-manipulation` and `hpp-manipulation-urdf`.
-- **`pyhpp.tools`** — pure-Python helpers (xacro processing, constraint-error reporting) that are not generated bindings.
+| Module | Content |
+| ------ | ------- |
+| `pyhpp.pinocchio` | robot model (`Device`), grippers, Lie groups (hpp-pinocchio) |
+| `pyhpp.constraints` | differentiable functions, implicit and explicit constraints, solvers (hpp-constraints) |
+| `pyhpp.core` | problem, path planners, path optimizers, path validation, steering methods (hpp-core) |
+| `pyhpp.manipulation` | manipulation device, constraint graph, manipulation planners, URDF/SRDF loading (hpp-manipulation, hpp-manipulation-urdf) |
+| `pyhpp.tools` | Python helpers: xacro, constraint errors |
 
-## Table of contents
-
-- [Module dependency graph](#module-dependency-graph)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-  - [From source with CMake](#from-source-with-cmake)
-  - [With Nix](#with-nix)
-- [Documentation generation](#documentation-generation)
-  - [Injecting Doxygen docstrings into bindings](#injecting-doxygen-docstrings-into-bindings)
-  - [API reference from stubs](#api-reference-from-stubs)
-- [License](#license)
-
-
-## Module dependency graph
-
-The `BOOST_PYTHON_MODULE` initializers `import` each other in a fixed order, which also reflects the underlying C++ library dependencies:
-
-```mermaid
-flowchart LR
-    pin["pyhpp.pinocchio\n(hpp-pinocchio)"]
-    cons["pyhpp.constraints\n(hpp-constraints)"]
-    core["pyhpp.core\n(hpp-core)"]
-    manip["pyhpp.manipulation\n(hpp-manipulation)"]
-    ext["pinocchio\n(external package)"]
-
-    ext --> pin
-    pin --> cons
-    cons --> core
-    core --> manip
-
-    style pin fill:#dbe9f4,stroke:#4a90d9
-    style cons fill:#dbe9f4,stroke:#4a90d9
-    style core fill:#dbe9f4,stroke:#4a90d9
-    style manip fill:#dbe9f4,stroke:#4a90d9
-    style ext fill:#e8f4e8,stroke:#4a9d4a
-```
-
-## Dependencies
-
-- Python ≥ 3.10, with `numpy`
-- [Boost.Python](https://www.boost.org/doc/libs/release/libs/python/) (found via `search_for_boost_python()`)
-- [`eigenpy`](https://github.com/stack-of-tasks/eigenpy)
-- [Pinocchio](https://github.com/stack-of-tasks/pinocchio) (C++ and Python)
-- HPP C++ libraries: `hpp-util`, `hpp-pinocchio`, `hpp-constraints`, `hpp-core`, `hpp-manipulation`, `hpp-manipulation-urdf`
-- Optional: [`pybind11-stubgen`](https://github.com/sizmailov/pybind11-stubgen) to generate `.pyi` type stubs (`GENERATE_PYTHON_STUBS`, default `ON`)
-- For running the test suite (`BUILD_TESTING`): [`example-robot-data`](https://github.com/Gepetto/example-robot-data), `hpp-environments`
+The [tutorials](https://humanoid-path-planner.github.io/hpp-doc/reference/hpp-tutorial/)
+show how to use these bindings, and the
+[Python API reference](https://humanoid-path-planner.github.io/hpp-doc/reference/hpp-python/api/)
+lists their classes and methods.
 
 ## Installation
 
-### From source with CMake
+hpp-python is installed with the other HPP packages, see the
+[installation instructions](https://humanoid-path-planner.github.io/hpp-doc/installation/installation.html).
+To build it alone:
 
 ```bash
-git clone https://github.com/humanoid-path-planner/hpp-python.git
-mkdir hpp-python/build
-cd hpp-python/build
-cmake -DCMAKE_INSTALL_PREFIX=<your_install_prefix> -DCMAKE_BUILD_TYPE=Release ..
-make
-make test
-make install
+cmake -B build -DCMAKE_INSTALL_PREFIX=<prefix> -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+cmake --build build -t test
+cmake --build build -t install
 ```
 
-Relevant CMake options:
+Dependencies: Python 3 with numpy, Boost.Python, eigenpy, pinocchio, hpp-util,
+hpp-pinocchio, hpp-constraints, hpp-core, hpp-manipulation and
+hpp-manipulation-urdf. The tests also need example-robot-data and
+hpp-environments.
 
-- `GENERATE_PYTHON_STUBS` (default `ON`): generate `.pyi` stub files with `pybind11-stubgen` for IDE autocompletion; automatically disabled if the tool is not found.
-- `HPP_DEBUG` (default `OFF`): enable `hpp-util` debug logging (`-DHPP_DEBUG`).
-- `HPP_BENCHMARK` (default `OFF`): enable `hpp-util` benchmark output (`-DHPP_ENABLE_BENCHMARK`).
-- `BUILD_TESTING`: build and run the unit/integration test suite (requires `example-robot-data` and `hpp-environments`).
+## Documentation
 
-### With Nix
-
-A flake is provided, pulling `hpp-constraints`, `hpp-core` and `hpp-manipulation` from their own flakes and building against [`github:gepetto/nix`](https://github.com/gepetto/nix):
+- Docstrings: `doc/configure.py` generates the docstrings of the bindings from
+  the Doxygen XML documentation of the C++ libraries, which must therefore be
+  installed (`GENERATE_XML = YES` in their Doxygen configuration).
+- Stubs: with `GENERATE_PYTHON_STUBS` (default `ON`, requires
+  `pybind11-stubgen`), `.pyi` stubs are generated, their signatures are
+  recovered from the docstrings by `doc/fix_stubs`, and they are installed with
+  the modules.
+- API reference: `doc/gen_api_md.py` generates the pages of the Python API
+  reference from the installed stubs. The CI generates them on each push to
+  `devel`.
 
 ```bash
-nix build github:humanoid-path-planner/hpp-python
+python doc/gen_api_md.py --stubs <prefix>/lib/python3.X/site-packages --output api
 ```
-
-## Documentation generation
-
-### Injecting Doxygen docstrings into bindings
-
-Script `doc/configure.py` is used to generate documentation of Python objects from C++ objects.
-It reads the XML documentation generated by doxygen so the dependencies must provide such
-files. To make it work, do:
-- Add `GENERATE_XML=YES` into `doc/Doxyfile.extra.in` of all the dependency of this project.
-- Install the generated documentation by adding the following lines to `CMakeLists.txt`:
-```cmake
-IF(_INSTALL_DOC)
-  INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/doxygen-xml
-    DESTINATION ${CMAKE_INSTALL_DOCDIR})
-ENDIF()
-```
-
-File `doc/configure.py` contains a short documentation of how to document the bindings.
-
-### API reference from stubs
-
-After building and installing `pyhpp`, `pybind11-stubgen` produces `.pyi` stub files under the Python site-packages directory.
-
-**`doc/fix_stubs.py`** improves those raw Boost.Python stubs in-place by recovering proper parameter names, types, and return-type annotations from the embedded docstrings. The fixed stubs are useful on their own — IDEs (autocompletion, type checking) and static analysis tools consume them directly, independently of any documentation generation step:
-
-```bash
-python doc/fix_stubs.py path/to/site-packages/pyhpp/
-# or individual files:
-python doc/fix_stubs.py path/to/site-packages/pyhpp/core/bindings.pyi
-```
-
-Optional JSON override files can supply or correct signatures that cannot be inferred from docstrings alone (`--setter-overrides`, `--method-overrides`).
-
-**`doc/gen_api_md.py`** reads the (optionally fixed) stubs and generates one Markdown file per module — suitable for [mdbook](https://rust-lang.github.io/mdBook/) — plus an `index.md`, with syntax-coloured signatures and clickable cross-module type links:
-
-```bash
-python doc/gen_api_md.py \
-    --stubs path/to/site-packages \
-    --output path/to/docs/api/
-```
-
-Modules covered: `pyhpp.core`, `pyhpp.core.path`, `pyhpp.core.path_optimization`, `pyhpp.core.problem_target`, `pyhpp.constraints`, `pyhpp.manipulation`, `pyhpp.manipulation.urdf`, `pyhpp.manipulation.steering_method`, `pyhpp.pinocchio`, `pyhpp.pinocchio.urdf`.
 
 ## License
 
-`hpp-python` is released under the [BSD 2-Clause License](LICENSE), Copyright (c) 2018-2025, CNRS.
+BSD 2-Clause, see [LICENSE](LICENSE).

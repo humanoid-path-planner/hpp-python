@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- [README] Rewrite
 - [CI] Generate the Python API reference
 - [doc] Keep underscores of method names in API tables
 - [manipulation] Bind ManipulationSpline from C++
