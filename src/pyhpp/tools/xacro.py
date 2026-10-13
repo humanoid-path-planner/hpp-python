@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 try:  # python 2
     _basestr = basestring
     encoding = {"encoding": "utf-8"}
@@ -19,7 +18,7 @@ def process_xacro(*args):
         # If AMENT_PREFIX_PATH is defined (ROS 2), pass the content to retrieve resources
         ament_prefix_path = os.getenv("AMENT_PREFIX_PATH")
         if ament_prefix_path is not None:
-            dirs = list(map(lambda s: s + "/share", ament_prefix_path.split(":")))
+            dirs = [s + "/share" for s in ament_prefix_path.split(":")]
         # open and process file
         doc = xacro.process_file(retrieve_resource(input_file_name, dirs), **vars(opts))
 

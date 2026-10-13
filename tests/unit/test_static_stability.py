@@ -5,13 +5,14 @@
 #
 
 import unittest
+
 import numpy as np
 from pinocchio import SE3
 
-from pyhpp.manipulation import Device, Problem, urdf
 from pyhpp.core.static_stability_constraint_factory import (
     StaticStabilityConstraintsFactory,
 )
+from pyhpp.manipulation import Device, Problem, urdf
 
 
 def load_romeo():

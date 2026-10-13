@@ -10,4 +10,4 @@ from ._cli import main
 from ._fixer import fix_file
 from ._overrides import SETTER_TYPE_OVERRIDES
 
-__all__ = ["fix_file", "main", "SETTER_TYPE_OVERRIDES"]
+__all__ = ["SETTER_TYPE_OVERRIDES", "fix_file", "main"]

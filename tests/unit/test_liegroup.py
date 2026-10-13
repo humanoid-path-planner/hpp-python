@@ -5,8 +5,10 @@
 #
 
 import unittest
+
 import numpy as np
-from pyhpp.pinocchio import LiegroupSpace, LiegroupElement
+
+from pyhpp.pinocchio import LiegroupElement, LiegroupSpace
 
 
 class TestLiegroupSpace(unittest.TestCase):

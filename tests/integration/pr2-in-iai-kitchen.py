@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 import numpy as np
-
-from pyhpp.core import Problem, DiffusingPlanner, Dichotomy, Straight
-from pyhpp.pinocchio import Device, urdf
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
 from pinocchio import SE3
 
-from benchmark_utils import create_benchmark_parser, run_benchmark_main
+from pyhpp.core import Dichotomy, DiffusingPlanner, Problem, Straight
+from pyhpp.pinocchio import Device, urdf
 
 parser = create_benchmark_parser("PR2 Navigation in IAI Kitchen Benchmark")
 args = parser.parse_args()

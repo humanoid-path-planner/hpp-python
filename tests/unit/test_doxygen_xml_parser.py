@@ -10,7 +10,6 @@ from pathlib import Path
 
 from doc.doxygen_xml_parser import ClassDoc
 
-
 DOXYGEN_XML = """\
 <doxygen>
   <compounddef>

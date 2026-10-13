@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
 import numpy as np
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
+from pinocchio import SE3
 
-from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
-from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
-from pyhpp.core import Straight, ProgressiveProjector
 from pyhpp.constraints import LockedJoint
+from pyhpp.core import ProgressiveProjector, Straight
 from pyhpp.core.static_stability_constraint_factory import (
     StaticStabilityConstraintsFactory,
 )
-from pinocchio import SE3
-
-from benchmark_utils import create_benchmark_parser, run_benchmark_main
+from pyhpp.manipulation import Device, Graph, ManipulationPlanner, Problem, urdf
+from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
 
 parser = create_benchmark_parser("Romeo Placard Humanoid Manipulation Benchmark")
 args = parser.parse_args()
@@ -57,8 +56,8 @@ cg = Graph("graph", robot, problem)
 cg.errorThreshold(2e-4)
 cg.maxIterations(40)
 
-constraints = dict()
-graphConstraints = dict()
+constraints = {}
+graphConstraints = {}
 
 leftHandOpen = {
     "LHand": 1,
@@ -92,7 +91,7 @@ rightHandOpen = {
 
 
 # Lock left hand
-locklhand = list()
+locklhand = []
 for j, v in leftHandOpen.items():
     joint_name = "romeo/" + j
     locklhand.append(joint_name)
@@ -105,7 +104,7 @@ for j, v in leftHandOpen.items():
     graphConstraints[joint_name] = cs
 
 # Lock right hand
-lockrhand = list()
+lockrhand = []
 for j, v in rightHandOpen.items():
     joint_name = "romeo/" + j
     lockrhand.append(joint_name)

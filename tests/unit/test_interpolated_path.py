@@ -3,6 +3,7 @@
 import unittest
 
 import numpy as np
+
 from pyhpp.core import InterpolatedPath, interval
 from pyhpp.core.path import Vector
 from unit.conftest import create_ur5_problem

@@ -5,6 +5,7 @@ The tree is a list of ClassI objects.  The first entry may be a pseudo-class
 """
 
 from __future__ import annotations
+
 import sys
 from pathlib import Path
 

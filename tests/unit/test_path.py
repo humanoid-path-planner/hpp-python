@@ -5,9 +5,11 @@
 #
 
 import unittest
+
 import numpy as np
-from unit.conftest import create_ur5_problem
+
 import pyhpp.core.path
+from unit.conftest import create_ur5_problem
 
 
 class TestPathMethods(unittest.TestCase):

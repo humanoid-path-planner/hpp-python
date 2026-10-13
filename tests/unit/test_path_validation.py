@@ -5,7 +5,9 @@
 #
 
 import unittest
+
 import numpy as np
+
 from unit.conftest import create_ur5_problem
 
 
@@ -21,7 +23,7 @@ class TestPathValidation(unittest.TestCase):
         steer = self.problem.steeringMethod()
         path = steer(q1, q2)
 
-        is_valid, valid_part, report = self.problem.pathValidation().validate(
+        is_valid, _valid_part, _report = self.problem.pathValidation().validate(
             path, False
         )
         self.assertTrue(is_valid)
@@ -33,7 +35,7 @@ class TestPathValidation(unittest.TestCase):
         steer = self.problem.steeringMethod()
         path = steer(q1, q1)
 
-        is_valid, valid_part, report = self.problem.pathValidation().validate(
+        _is_valid, valid_part, _report = self.problem.pathValidation().validate(
             path, False
         )
         self.assertIsNotNone(valid_part)
@@ -66,7 +68,7 @@ class TestPathValidationNegativeCases(unittest.TestCase):
         steer = self.problem.steeringMethod()
         path = steer(q1, q2)
 
-        is_valid, valid_part, report = self.problem.pathValidation().validate(
+        _is_valid, valid_part, _report = self.problem.pathValidation().validate(
             path, False
         )
 
@@ -80,7 +82,7 @@ class TestPathValidationNegativeCases(unittest.TestCase):
         steer = self.problem.steeringMethod()
         path = steer(q1, q2)
 
-        is_valid, valid_part, report = self.problem.pathValidation().validate(
+        _is_valid, valid_part, _report = self.problem.pathValidation().validate(
             path, False
         )
 
@@ -94,7 +96,7 @@ class TestPathValidationNegativeCases(unittest.TestCase):
         steer = self.problem.steeringMethod()
         path = steer(q1, q2)
 
-        is_valid, valid_part, report = self.problem.pathValidation().validate(
+        is_valid, valid_part, _report = self.problem.pathValidation().validate(
             path, True
         )
 

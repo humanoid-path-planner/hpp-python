@@ -31,9 +31,7 @@ def fix_file(
     fixed = 0
     for cls in tree:
         for fn in cls.functions:
-            if fn.from_docstring:
-                fixed += 1
-            elif fn.setter_overloads:
+            if fn.from_docstring or fn.setter_overloads:
                 fixed += 1
 
     new_content = render_file(header, tree)

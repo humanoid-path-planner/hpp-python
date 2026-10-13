@@ -1,7 +1,7 @@
-from __future__ import print_function
-from lxml import etree
-from os import path
 import sys
+from os import path
+
+from lxml import etree
 
 
 class Index:

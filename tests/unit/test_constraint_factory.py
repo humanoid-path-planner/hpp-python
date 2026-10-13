@@ -5,10 +5,11 @@
 #
 
 import unittest
-from unit.conftest import create_constraint_graph_setup
+
 from pyhpp.manipulation.constraint_graph_factory import (
     Constraints,
 )
+from unit.conftest import create_constraint_graph_setup
 
 
 class TestConstraintFactoryBuildGrasp(unittest.TestCase):
@@ -104,21 +105,21 @@ class TestConstraintFactoryNegativeCases(unittest.TestCase):
         """Building grasp with non-existent gripper should raise."""
         cf = self.factory.constraints
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             cf.buildGrasp("nonexistent/gripper", "sphere0/handle")
 
     def test_build_grasp_invalid_handle_raises(self):
         """Building grasp with non-existent handle should raise."""
         cf = self.factory.constraints
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             cf.buildGrasp("ur3/gripper", "nonexistent/handle")
 
     def test_build_placement_invalid_object_raises(self):
         """Building placement with non-existent object should raise."""
         cf = self.factory.constraints
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             cf.buildPlacement("nonexistent_object")
 
     def test_grasp_constraints_not_empty(self):
