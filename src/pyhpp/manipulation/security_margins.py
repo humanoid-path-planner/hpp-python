@@ -37,10 +37,10 @@ class SecurityMargins:
         self.factory = factory
         self.robotsAndObjects = robotsAndObjects
         self.marginMatrix = {}
+        self.separators = ["/"]
         self.computeJoints()
         self.computeGrippers()
         self.computePossibleContacts()
-        self.separators = ["/"]
 
     def computeJoints(self):
         self.robotToJoints = {}
