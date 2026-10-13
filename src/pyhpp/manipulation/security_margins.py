@@ -38,13 +38,13 @@ class SecurityMargins:
         self.robot = robot
         self.factory = factory
         self.robotsAndObjects = robotsAndObjects
-        self.marginMatrix = dict()
+        self.marginMatrix = {}
         self.computeJoints()
         self.computeGrippers()
         self.computePossibleContacts()
 
     def computeJoints(self):
-        self.robotToJoints = dict()
+        self.robotToJoints = {}
         model = self.robot.model()
         jointNames = list(model.names)
         for ro in self.robotsAndObjects:
@@ -56,7 +56,7 @@ class SecurityMargins:
                 )
             )
         self.robotToJoints["universe"] = ["universe"]
-        self.jointToRobot = dict()
+        self.jointToRobot = {}
         for ro, joints in self.robotToJoints.items():
             for j in joints:
                 self.jointToRobot[j] = ro
@@ -86,8 +86,8 @@ class SecurityMargins:
         return None
 
     def computeGrippers(self):
-        self.gripperToRobot = dict()
-        self.gripperToJoints = dict()
+        self.gripperToRobot = {}
+        self.gripperToJoints = {}
         for g in self.factory.grippers:
             j = self._getGripperJoint(g)
             if j is not None and j in self.jointToRobot:
@@ -103,9 +103,9 @@ class SecurityMargins:
                         break
 
     def computePossibleContacts(self):
-        self.contactSurfaces = dict()
-        for k in self.robotToJoints.keys():
-            self.contactSurfaces[k] = list()
+        self.contactSurfaces = {}
+        for k in self.robotToJoints:
+            self.contactSurfaces[k] = []
 
         for io, obj_name in enumerate(self.factory.objects):
             if io < len(self.factory.contactsPerObjects):
@@ -128,7 +128,7 @@ class SecurityMargins:
             if not found:
                 self.contactSurfaces["universe"].append(surface_name)
 
-        self.possibleContacts = list()
+        self.possibleContacts = []
         for o1, l1 in self.contactSurfaces.items():
             for o2, l2 in self.contactSurfaces.items():
                 if o1 != o2 and len(l1) > 0 and len(l2) > 0:

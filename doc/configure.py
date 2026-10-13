@@ -165,7 +165,7 @@ def substitute(istr, ostr):
     currentClass = None
     currentNamespace = None
     index = None
-    for line in map(lambda s: s.rstrip(), istr):
+    for line in (s.rstrip() for s in istr):
         for match in nsPattern.finditer(line):
             currentNamespace = match.group("namespace")
             index = indexFromNamespace(currentNamespace)

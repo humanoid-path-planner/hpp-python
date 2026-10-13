@@ -822,12 +822,11 @@ def render_class(
         node = group[0]
         if node.name in SKIP_NAMES or is_setter(node):
             continue
-        if node.name == "__init__":
-            if any(
-                get_docstring(ov) and NOT_INSTANTIABLE.search(get_docstring(ov))
-                for ov in group
-            ):
-                continue
+        if node.name == "__init__" and any(
+            get_docstring(ov) and NOT_INSTANTIABLE.search(get_docstring(ov))
+            for ov in group
+        ):
+            continue
         sig = _sig_cell(group, class_index, current_page)
         if owner != qualified_class:
             sig += f" *(inherited from {_type_link(owner, class_index, current_page)})*"
@@ -906,10 +905,9 @@ def generate_module_md(
                 if pending_funcs:
                     func_groups.append(pending_funcs)
                 pending_funcs = [item]
-        elif isinstance(item, ast.ClassDef):
-            if pending_funcs:
-                func_groups.append(pending_funcs)
-                pending_funcs = []
+        elif isinstance(item, ast.ClassDef) and pending_funcs:
+            func_groups.append(pending_funcs)
+            pending_funcs = []
     if pending_funcs:
         func_groups.append(pending_funcs)
 

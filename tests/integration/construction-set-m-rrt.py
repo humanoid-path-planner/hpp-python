@@ -41,7 +41,7 @@ class StateName:
                 self.grasps = set()
             else:
                 g1 = [s.strip(" ") for s in grasps.split(":")]
-                self.grasps = set(tuple(s.split(" grasps ")) for s in g1)
+                self.grasps = {tuple(s.split(" grasps ")) for s in g1}
         else:
             raise TypeError("expecting a set of pairs (gripper, handle) or a string")
 

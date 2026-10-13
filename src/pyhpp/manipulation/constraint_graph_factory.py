@@ -30,7 +30,6 @@
 
 import abc
 import re
-import sys
 
 import numpy as np
 
@@ -47,7 +46,15 @@ class Constraints:
     \\li numerical constraint,
     """
 
-    def __init__(self, grasps=[], pregrasps=[], numConstraints=[], lockedJoints=[]):
+    def __init__(self, grasps=None, pregrasps=None, numConstraints=None, lockedJoints=None):
+        if lockedJoints is None:
+            lockedJoints = []
+        if numConstraints is None:
+            numConstraints = []
+        if pregrasps is None:
+            pregrasps = []
+        if grasps is None:
+            grasps = []
         if isinstance(grasps, str):
             raise TypeError("argument grasps should be a list of strings")
         if isinstance(pregrasps, str):
@@ -136,10 +143,10 @@ class PossibleGrasps:
                factory and whose values are lists of handles also registered in
                the factory
         """
-        self.possibleGrasps = list()
+        self.possibleGrasps = []
         for ig, gripper in enumerate(grippers):
-            handles_ = grasps.get(gripper, list())
-            handleIndices = list()
+            handles_ = grasps.get(gripper, [])
+            handleIndices = []
             handleIndices = list(map(handles.index, handles_))
             self.possibleGrasps.append(handleIndices)
 
@@ -159,7 +166,7 @@ class GraspIsAllowed:
          param grasps the set of grasp to validate
          return False if one validation fails, True otherwise
         """
-        self.graspValidations_ = list()
+        self.graspValidations_ = []
 
     def __call__(self, grasps):
         for gv in self.graspValidations_:
@@ -214,15 +221,7 @@ class Rules:
         return self.defaultAcceptation
 
 
-if sys.version_info.major == 2:
-
-    class ABC:
-        """Python 2.7 equivalent to abc.ABC Python 3 class."""
-
-        __metaclass__ = abc.ABCMeta
-
-else:
-    from abc import ABC
+from abc import ABC
 
 
 class GraphFactoryAbstract(ABC):
@@ -278,25 +277,25 @@ class GraphFactoryAbstract(ABC):
         # # \name Internal variables
         # \{
 
-        self.states = dict()
+        self.states = {}
         self.transitions = set()
         # Recursion-visited memo for all nGrasps, accepted or rejected.
         # Separate from self.states, which only holds created State objects.
         self._visitedGrasps = set()
         # # the handle names
-        self.handles = tuple()  # strings
+        self.handles = ()  # strings
         # # the gripper names
-        self.grippers = tuple()  # strings
+        self.grippers = ()  # strings
         # # the names of contact on the environment
-        self.envContacts = tuple()  # strings
+        self.envContacts = ()  # strings
         # # the object names
-        self.objects = tuple()  # strings
+        self.objects = ()  # strings
         # # See \\ref setObjects
-        self.handlesPerObjects = tuple()  # object index to handle indixes
+        self.handlesPerObjects = ()  # object index to handle indixes
         # # See \\ref setObjects
-        self.objectFromHandle = tuple()  # handle index to object index
+        self.objectFromHandle = ()  # handle index to object index
         # # See \\ref setObjects
-        self.contactsPerObjects = tuple()  # object index to contact names
+        self.contactsPerObjects = ()  # object index to contact names
         # # \}
 
     # # \name Main API
@@ -536,8 +535,8 @@ class ConstraintFactoryAbstract(ABC):
     """
 
     def __init__(self, graphfactory):
-        self._grasp = dict()
-        self._placement = dict()
+        self._grasp = {}
+        self._placement = {}
 
         self.graphfactory = graphfactory
 
@@ -684,10 +683,12 @@ class ConstraintFactory(ConstraintFactoryAbstract):
     gfields = ("grasp", "graspComplement", "preGrasp")
     pfields = ("placement", "placementComplement", "prePlacement")
 
-    def __init__(self, graphfactory, graph, constraints=dict()):
+    def __init__(self, graphfactory, graph, constraints=None):
+        if constraints is None:
+            constraints = {}
         super().__init__(graphfactory)
         self.graph = graph
-        self.available_constraints = dict()
+        self.available_constraints = {}
         self.registerConstraints(constraints)
 
     def registerConstraint(self, constraint, constraint_name):
@@ -882,12 +883,14 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
     # default distance between object and surface in preplacement configuration
     defaultPreplaceDist = 0.05
     # See methods setPreplacementDistance and getPreplacementDistance
-    preplaceDistance = dict()
+    preplaceDistance = {}
 
-    def __init__(self, graph, constraints=dict()):
+    def __init__(self, graph, constraints=None):
         """
         \\param graph an instance of ConstraintGraph
         """
+        if constraints is None:
+            constraints = {}
         super().__init__()
 
         # Stores the constraints in a child class of ConstraintFactoryAbstract
@@ -1202,7 +1205,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 forward_trans, backward_trans = wTransitionObjects[i + 1]
                 self.graph.setShort(forward_trans, True)
 
-                forward_trans_back, backward_trans_back = wTransitionObjects[i]
+                _forward_trans_back, backward_trans_back = wTransitionObjects[i]
                 self.graph.setShort(backward_trans_back, True)
 
         else:

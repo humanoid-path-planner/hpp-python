@@ -55,7 +55,7 @@ class StaticStabilityConstraintsFactory:
     def createSlidingStabilityConstraint(
         self, prefix, comName, leftAnkle, rightAnkle, q0
     ):
-        created_constraints = dict()
+        created_constraints = {}
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
         Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
@@ -112,7 +112,7 @@ class StaticStabilityConstraintsFactory:
     def createStaticStabilityConstraint(
         self, prefix, comName, leftAnkle, rightAnkle, q0, maskCom=[True] * 3
     ):
-        created_constraints = dict()
+        created_constraints = {}
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
         Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
@@ -158,7 +158,7 @@ class StaticStabilityConstraintsFactory:
     def createAlignedCOMStabilityConstraint(
         self, prefix, comName, leftAnkle, rightAnkle, q0, sliding
     ):
-        created_constraints = dict()
+        created_constraints = {}
 
         _tfs = self.robot.getJointsPosition(q0, [leftAnkle, rightAnkle])
         Ml = SE3(Quaternion(np.array(_tfs[0][3:7])), np.array(_tfs[0][0:3]))
