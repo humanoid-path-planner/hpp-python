@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [manipulation] Bind ManipulationSpline from C++
 - [manipulation] Add spline smoothing by transition and state
 - [Problem] Fix constraint handling and projection defaults
+- [core] Expose sparse spline constraint and cost matrices as dense matrices
 - [pinocchio.Gripper] change name from getter to property
 - Expose Progressive::timeOut() to Python
 - Fix combinatorial blowup in ConstraintGraphFactory._recurse() from missing negative-memoization
