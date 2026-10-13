@@ -5,9 +5,10 @@
 #
 
 import unittest
-from pinocchio import SE3
-from pyhpp.manipulation import Device, urdf
 
+from pinocchio import SE3
+
+from pyhpp.manipulation import Device, urdf
 
 UR3_URDF = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
 UR3_SRDF = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"

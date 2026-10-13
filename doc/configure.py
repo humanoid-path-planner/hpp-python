@@ -71,10 +71,10 @@
 #
 ############# README ###############################
 
-from __future__ import print_function
-import re
 import os
+import re
 import sys
+
 from doxygen_xml_parser import Index
 
 
@@ -187,7 +187,7 @@ def substitute(istr, ostr):
                 )
             except Exception as e:
                 print(
-                    "Failed to find class doc for {0}: {1}".format(cn, e),
+                    f"Failed to find class doc for {cn}: {e}",
                     file=sys.stderr,
                 )
                 line = line.replace(match.group(0), '"' + cn + '"')
@@ -209,7 +209,7 @@ def substitute(istr, ostr):
                 )
             except IndexError as e:
                 print(
-                    "Failed to find documentation of method {0}::{1}".format(cn, mn),
+                    f"Failed to find documentation of method {cn}::{mn}",
                     file=sys.stderr,
                 )
                 line = line.replace(match.group(0), '"' + str(e) + '", ""')

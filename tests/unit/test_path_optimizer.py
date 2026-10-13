@@ -5,10 +5,12 @@
 #
 
 import unittest
+
 import numpy as np
-from unit.conftest import create_ur5_problem
-from pyhpp.core import RandomShortcut, SimpleShortcut
+
 import pyhpp.core.path
+from pyhpp.core import RandomShortcut, SimpleShortcut
+from unit.conftest import create_ur5_problem
 
 
 class TestPathOptimizerInstantiation(unittest.TestCase):

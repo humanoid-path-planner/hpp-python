@@ -5,11 +5,12 @@
 #
 
 import unittest
-from unit.conftest import (
-    create_security_margins_instance,
-    create_constraint_graph_setup,
-)
+
 from pyhpp.manipulation.security_margins import SecurityMargins
+from unit.conftest import (
+    create_constraint_graph_setup,
+    create_security_margins_instance,
+)
 
 
 class TestSecurityMarginsCorrectness(unittest.TestCase):

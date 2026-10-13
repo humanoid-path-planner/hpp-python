@@ -5,11 +5,12 @@
 #
 
 import unittest
+
 from pyhpp.manipulation.constraint_graph_factory import (
-    PossibleGrasps,
     GraspIsAllowed,
-    Rules,
+    PossibleGrasps,
     Rule,
+    Rules,
 )
 
 

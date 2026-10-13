@@ -6,23 +6,24 @@
 # Test fixtures for hpp-python unit tests.
 # Provides factory functions that create test objects.
 
-import numpy as np
 from math import pi
+
+import numpy as np
 from pinocchio import SE3, Quaternion
 
-from pyhpp.pinocchio import Device as CoreDevice, urdf as core_urdf
-from pyhpp.core import Problem as CoreProblem
-from pyhpp.manipulation import Device, urdf, Graph, Problem
-from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
-from pyhpp.manipulation.security_margins import SecurityMargins
 from pyhpp.constraints import (
-    Transformation,
-    ComparisonTypes,
     ComparisonType,
+    ComparisonTypes,
     Implicit,
     LockedJoint,
+    Transformation,
 )
-
+from pyhpp.core import Problem as CoreProblem
+from pyhpp.manipulation import Device, Graph, Problem, urdf
+from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
+from pyhpp.manipulation.security_margins import SecurityMargins
+from pyhpp.pinocchio import Device as CoreDevice
+from pyhpp.pinocchio import urdf as core_urdf
 
 UR5_URDF = "package://example-robot-data/robots/ur_description/urdf/ur5_joint_limited_robot.urdf"
 UR5_SRDF = "package://example-robot-data/robots/ur_description/srdf/ur5_joint_limited_robot.srdf"

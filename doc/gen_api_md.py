@@ -3,12 +3,12 @@
 
 from __future__ import annotations
 
+import argparse
 import ast
 import html as _html
 import keyword
 import re
 import sys
-import argparse
 from pathlib import Path
 
 # ---------------------------------------------------------------------------

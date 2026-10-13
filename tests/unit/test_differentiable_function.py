@@ -5,9 +5,11 @@
 #
 
 import unittest
+
 import numpy as np
-from pyhpp.pinocchio import LiegroupElement
+
 from pyhpp.constraints import DifferentiableFunction
+from pyhpp.pinocchio import LiegroupElement
 
 
 class DoubleFunction(DifferentiableFunction):

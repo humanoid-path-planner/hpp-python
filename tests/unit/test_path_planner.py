@@ -5,13 +5,15 @@
 #
 
 import unittest
+
 import numpy as np
-from unit.conftest import create_ur5_problem
+
 from pyhpp.core import (
-    DiffusingPlanner,
     BiRRTPlanner,
+    DiffusingPlanner,
     VisibilityPrmPlanner,
 )
+from unit.conftest import create_ur5_problem
 
 
 class TestPathPlannerInstantiation(unittest.TestCase):
@@ -56,7 +58,7 @@ class TestPathPlannerConfiguration(unittest.TestCase):
 class TestPathPlannerSolve(unittest.TestCase):
     def test_birrt_solves_simple_path(self):
         """BiRRT should find a path between nearby collision-free configurations."""
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         q_init = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q_goal = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
@@ -79,31 +81,31 @@ class TestPathPlannerNegativeCases(unittest.TestCase):
 
     def test_solve_without_goal_raises(self):
         """Solving without a goal configuration should raise an error."""
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q_init = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         problem.initConfig(q_init)
 
         planner = BiRRTPlanner(problem)
         planner.maxIterations(10)
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa B017
             planner.solve()
 
     def test_solve_without_init_raises(self):
         """Solving without an initial configuration should raise an error."""
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q_goal = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
         problem.addGoalConfig(q_goal)
 
         planner = BiRRTPlanner(problem)
         planner.maxIterations(10)
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa B017
             planner.solve()
 
     def test_max_iterations_zero_limits_exploration(self):
         """Planner with zero max iterations should do minimal exploration."""
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q_init = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q_goal = np.array([3.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         problem.initConfig(q_init)
@@ -114,8 +116,8 @@ class TestPathPlannerNegativeCases(unittest.TestCase):
 
         try:
             planner.solve()
-        except Exception:
-            pass
+        except Exception as e:  # noqa: BLE001
+            print(e)
 
         roadmap = planner.roadmap()
         self.assertLessEqual(len(roadmap.nodes()), 2)

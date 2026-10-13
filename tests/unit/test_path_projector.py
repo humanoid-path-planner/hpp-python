@@ -5,12 +5,14 @@
 #
 
 import unittest
+
 import numpy as np
-from unit.conftest import create_ur5_problem
+
 from pyhpp.core import (
-    Progressive,
     GlobalProjector,
+    Progressive,
 )
+from unit.conftest import create_ur5_problem
 
 
 class TestPathProjectorInstantiation(unittest.TestCase):

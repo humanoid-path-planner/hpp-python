@@ -7,8 +7,9 @@
 
 import datetime as dt
 from argparse import ArgumentParser
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Callable, Optional, Any
+from typing import Any
 
 
 def create_benchmark_parser(description: str = "HPP Benchmark") -> ArgumentParser:
@@ -96,9 +97,9 @@ class BenchmarkRunner:
     def __init__(
         self,
         solve_func: Callable[[], Any],
-        reset_func: Optional[Callable[[], None]] = None,
-        get_nodes_func: Optional[Callable[[], int]] = None,
-        get_path_length_func: Optional[Callable[[], float]] = None,
+        reset_func: Callable[[], None] | None = None,
+        get_nodes_func: Callable[[], int] | None = None,
+        get_path_length_func: Callable[[], float] | None = None,
     ):
         self.solve_func = solve_func
         self.reset_func = reset_func

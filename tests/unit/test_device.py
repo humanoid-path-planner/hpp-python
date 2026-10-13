@@ -5,10 +5,11 @@
 #
 
 import unittest
+
 import numpy as np
 from pinocchio import SE3
-from pyhpp.pinocchio import Device, urdf
 
+from pyhpp.pinocchio import Device, urdf
 
 UR5_URDF = "package://example-robot-data/robots/ur_description/urdf/ur5_joint_limited_robot.urdf"
 UR5_SRDF = "package://example-robot-data/robots/ur_description/srdf/ur5_joint_limited_robot.srdf"
@@ -80,7 +81,7 @@ class TestDeviceJointBounds(unittest.TestCase):
     def test_set_joint_bounds_invalid_size_raises(self):
         robot = create_ur5_device()
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             robot.setJointBounds("ur5/shoulder_pan_joint", [-1.0])
 
 
@@ -157,7 +158,7 @@ class TestDeviceRankInConfiguration(unittest.TestCase):
 
         ranks = robot.rankInConfiguration
 
-        for joint_name, rank in ranks.items():
+        for rank in ranks.values():
             self.assertGreaterEqual(rank, 0)
             self.assertLess(rank, robot.configSize())
 
@@ -170,13 +171,13 @@ class TestDeviceNegativeCases(unittest.TestCase):
         robot.computeForwardKinematics(1)
         robot.computeFramesForwardKinematics()
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             robot.getJointPosition("nonexistent_joint")
 
     def test_set_joint_bounds_invalid_joint_raises(self):
         robot = create_ur5_device()
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception):  # noqa: B017
             robot.setJointBounds("nonexistent_joint", [-1.0, 1.0])
 
 

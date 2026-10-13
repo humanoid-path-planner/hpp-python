@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
 
-from math import pi, sqrt
-import numpy as np
 import re
-import typing as T
+from math import pi, sqrt
 
-from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
-from pyhpp.manipulation import Device, Graph, Problem, urdf, ManipulationPlanner
-from pyhpp.core import Straight, Progressive, ProgressiveProjector
-from pyhpp.constraints import (
-    Transformation,
-    ComparisonTypes,
-    ComparisonType,
-    Implicit,
-    LockedJoint,
-)
+import numpy as np
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
 from pinocchio import SE3, Quaternion
 
+from pyhpp.constraints import (
+    ComparisonType,
+    ComparisonTypes,
+    Implicit,
+    LockedJoint,
+    Transformation,
+)
+from pyhpp.core import Progressive, ProgressiveProjector, Straight
+from pyhpp.manipulation import Device, Graph, ManipulationPlanner, Problem, urdf
+from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory, Rule
 from pyhpp.manipulation.security_margins import SecurityMargins
-
-from benchmark_utils import create_benchmark_parser, run_benchmark_main
 
 parser = create_benchmark_parser("Construction Set M-RRT Benchmark")
 parser.add_argument(
@@ -32,7 +30,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-class StateName(object):
+class StateName:
     noGrasp = "free"
 
     def __init__(self, grasps):
@@ -43,7 +41,7 @@ class StateName(object):
                 self.grasps = set()
             else:
                 g1 = [s.strip(" ") for s in grasps.split(":")]
-                self.grasps = set([tuple(s.split(" grasps ")) for s in g1])
+                self.grasps = set(tuple(s.split(" grasps ")) for s in g1)
         else:
             raise TypeError("expecting a set of pairs (gripper, handle) or a string")
 
@@ -92,7 +90,7 @@ robot.setJointBounds("r1/elbow_joint", [-2.6, 2.6])
 ground_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(robot, 0, "ground", "anchor", ground_urdf, ground_srdf, ground_pose)
 
-objects = list()
+objects = []
 for i in range(nSphere):
     sphere_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
     urdf.loadModel(
@@ -161,7 +159,7 @@ cg = Graph("assembly", robot, problem)
 cg.errorThreshold(1e-4)
 cg.maxIterations(40)
 
-constraints = dict()
+constraints = {}
 
 for i in range(nSphere):
     placementName = f"place_sphere{i}"
@@ -318,8 +316,8 @@ allHandles = [handle for objHandles in handlesPerObjects for handle in objHandle
 
 
 def makeRule(grasps):
-    _grippers = list()
-    _handles = list()
+    _grippers = []
+    _handles = []
     for g, h in grasps:
         _grippers.append(g)
         _handles.append(h)
@@ -330,15 +328,15 @@ def makeRule(grasps):
     return Rule(grippers=_grippers, handles=_handles, link=True)
 
 
-def forbidExcept(g: str, h: T.List[str]) -> T.List[Rule]:
+def forbidExcept(g: str, h: list[str]) -> list[Rule]:
     gRegex = re.compile(g)
     hRegex = [re.compile(handle) for handle in h]
-    forbiddenList: T.List[Rule] = list()
+    forbiddenList: list[Rule] = []
     idForbidGrippers = [i for i in range(len(grippers)) if gRegex.match(grippers[i])]
     forbidHandles = [
         handle
         for handle in allHandles
-        if not any([handlePattern.match(handle) for handlePattern in hRegex])
+        if not any(handlePattern.match(handle) for handlePattern in hRegex)
     ]
     for id in idForbidGrippers:
         for handle in forbidHandles:
@@ -350,7 +348,7 @@ def forbidExcept(g: str, h: T.List[str]) -> T.List[Rule]:
 q0_r0 = [pi / 6, -pi / 2, pi / 2, 0, 0, 0]
 q0_r1 = q0_r0[::]
 
-q0_spheres = list()
+q0_spheres = []
 i = 0
 y = 0.04
 while i < nSphere:
@@ -358,7 +356,7 @@ while i < nSphere:
     i += 1
     y = -y
 
-q0_cylinders = list()
+q0_cylinders = []
 i = 0
 y = -0.04
 while i < nCylinder:
@@ -366,10 +364,10 @@ while i < nCylinder:
     i += 1
     y = -y
 
-q0 = np.array(q0_r0 + q0_r1 + sum(q0_spheres, []) + sum(q0_cylinders, []))
+q0 = np.array(q0_r0 + q0_r1 + sum(q0_spheres, []) + sum(q0_cylinders, []))  # noqa: RUF017
 if not args.bigGraph:
-    nodes = list()
-    rules = list()
+    nodes = []
+    rules = []
     grasps = set()
     nodes.append(StateName(grasps))
     rules.append(makeRule(grasps=grasps))
@@ -437,7 +435,7 @@ if not args.bigGraph:
     nodes.append(nodes[-1])
 
 else:
-    rules = list()
+    rules = []
 
     rules.extend(forbidExcept("^r0/gripper$", ["^sphere\\d*/handle$"]))
     rules.extend(forbidExcept("^r1/gripper$", ["^cylinder0*/handle$"]))

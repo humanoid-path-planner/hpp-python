@@ -1,27 +1,26 @@
 from math import pi
-import numpy as np
 
-from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
+import numpy as np
+from benchmark_utils import create_benchmark_parser, run_benchmark_main
+from pinocchio import SE3, Quaternion
+
+from pyhpp.constraints import (
+    ComparisonType,
+    ComparisonTypes,
+    Implicit,
+    LockedJoint,
+    Transformation,
+)
+from pyhpp.core import Dichotomy, Straight
 from pyhpp.manipulation import (
     Device,
     Graph,
+    ManipulationPlanner,
     Problem,
     ProgressiveProjector,
     urdf,
-    ManipulationPlanner,
 )
-from pyhpp.core import Dichotomy, Straight
-
-from pyhpp.constraints import (
-    Transformation,
-    ComparisonTypes,
-    ComparisonType,
-    Implicit,
-    LockedJoint,
-)
-from pinocchio import SE3, Quaternion
-
-from benchmark_utils import create_benchmark_parser, run_benchmark_main
+from pyhpp.manipulation.constraint_graph_factory import ConstraintGraphFactory
 
 parser = create_benchmark_parser("UR3 Spheres Manipulation Benchmark")
 args = parser.parse_args()
@@ -40,21 +39,21 @@ ur3_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 urdf.loadModel(robot, 0, "ur3", "anchor", ur3_urdf, ur3_srdf, ur3_pose)
 
 # Load sphere to be manipulated
-objects = list()
+objects = []
 nSphere = 2
 sphere_pose = SE3(rotation=np.identity(3), translation=np.array([0, 0, 0]))
 for i in range(nSphere):
     urdf.loadModel(
         robot,
         0,
-        "sphere{0}".format(i),
+        f"sphere{i}",
         "freeflyer",
         sphere_urdf,
         sphere_srdf,
         sphere_pose,
     )
     robot.setJointBounds(
-        "sphere{0}/root_joint".format(i),
+        f"sphere{i}/root_joint",
         [
             -1.0,
             1.0,
@@ -72,7 +71,7 @@ for i in range(nSphere):
             1.0001,
         ],
     )
-    objects.append("sphere{0}".format(i))
+    objects.append(f"sphere{i}")
 
 urdf.loadModel(
     robot,
@@ -92,18 +91,18 @@ robot.setJointBounds("ur3/elbow_joint", [-2.6, 2.6])
 problem = Problem(robot)
 cg = Graph("graph", robot, problem)
 
-constraints = dict()
+constraints = {}
 
 for i in range(nSphere):
     o = objects[i]
     h = robot.handles()[o + "/handle"]
     h.mask = [True, True, True, False, True, True]
     # placement constraint
-    placementName = "place_sphere{0}".format(i)
+    placementName = f"place_sphere{i}"
     Id = SE3.Identity()
     q = Quaternion(1, 0, 0, 0)
     ballPlacement = SE3(q, np.array([0, 0, 0.02]))
-    joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
+    joint = robot.model().getJointId(f"sphere{i}/root_joint")
     pc = Transformation(
         placementName,
         robot,
@@ -150,7 +149,7 @@ for i in range(nSphere):
     )
     ll = LockedJoint(
         robot,
-        "sphere{0}/root_joint".format(i),
+        f"sphere{i}/root_joint",
         np.array([0, 0, 0.02, 0, 0, 0, 1]),
         cts,
     )
@@ -161,11 +160,11 @@ for i in range(nSphere):
         constraints[placementName + "/hold"],
     )
 
-    preplacementName = "preplace_sphere{0}".format(i)
+    preplacementName = f"preplace_sphere{i}"
     Id = SE3.Identity()
     q = Quaternion(1, 0, 0, 0)
     ballPrePlacement = SE3(q, np.array([0, 0, 0.1]))
-    joint = robot.model().getJointId("sphere{0}/root_joint".format(i))
+    joint = robot.model().getJointId(f"sphere{i}/root_joint")
     pc = Transformation(
         preplacementName,
         robot,
@@ -229,7 +228,7 @@ q_goal = [
 ]
 
 grippers = ["ur3/gripper"]
-handlesPerObject = [["sphere{0}/handle".format(i)] for i in range(nSphere)]
+handlesPerObject = [[f"sphere{i}/handle"] for i in range(nSphere)]
 contactsPerObject = [[] for i in range(nSphere)]
 
 cg.maxIterations(40)
@@ -249,13 +248,13 @@ factory.generate()
 #  cg.setWeight(cg.getTransition(e), 100)
 
 for i in range(nSphere):
-    e = cg.getTransition("ur3/gripper > sphere{}/handle | f_23".format(i))
+    e = cg.getTransition(f"ur3/gripper > sphere{i}/handle | f_23")
     cg.addNumericalConstraintsToTransition(
-        e, [constraints["place_sphere{}/complement".format(i)]]
+        e, [constraints[f"place_sphere{i}/complement"]]
     )
-    e = cg.getTransition("ur3/gripper < sphere{}/handle | 0-{}_32".format(i, i))
+    e = cg.getTransition(f"ur3/gripper < sphere{i}/handle | 0-{i}_32")
     cg.addNumericalConstraintsToTransition(
-        e, [constraints["place_sphere{}/complement".format(i)]]
+        e, [constraints[f"place_sphere{i}/complement"]]
     )
 
 problem.steeringMethod(Straight(problem))

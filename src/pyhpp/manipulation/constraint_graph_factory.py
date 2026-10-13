@@ -31,7 +31,9 @@
 import abc
 import re
 import sys
+
 import numpy as np
+
 from pyhpp.constraints import Implicit, LockedJoint
 
 
@@ -394,7 +396,6 @@ class GraphFactoryAbstract(ABC):
         Create a loop transition.
         \\param state: an object returned by \\ref makeState which represent the state
         """
-        pass
 
     def transitionIsAllowed(self, stateFrom, stateTo):
         """
@@ -413,7 +414,6 @@ class GraphFactoryAbstract(ABC):
           - \\f$ stateFrom.grasps[i_g] \neq stateTo.grasps[i_g] \\f$
           - \\f$ \\forall i \neq i_g, stateFrom.grasps[i] = stateTo.grasps[i] \\f$
         """
-        pass
 
     # # \}
 

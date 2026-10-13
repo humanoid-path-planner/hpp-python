@@ -29,7 +29,7 @@
 # DAMAGE.
 
 import numpy as np
-from pinocchio import Quaternion, SE3
+from pinocchio import SE3, Quaternion
 
 
 # # This class provides tools to create static stability constraints

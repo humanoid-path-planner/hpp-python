@@ -5,11 +5,13 @@
 #
 
 import unittest
-import numpy as np
-from pinocchio import SE3, StdVec_Bool as Mask
-from pyhpp.pinocchio import Device, LiegroupElement, urdf
-from pyhpp.constraints import Position
 
+import numpy as np
+from pinocchio import SE3
+from pinocchio import StdVec_Bool as Mask
+
+from pyhpp.constraints import Position
+from pyhpp.pinocchio import Device, LiegroupElement, urdf
 
 UR5_URDF = "package://example-robot-data/robots/ur_description/urdf/ur5_joint_limited_robot.urdf"
 UR5_SRDF = "package://example-robot-data/robots/ur_description/srdf/ur5_joint_limited_robot.srdf"

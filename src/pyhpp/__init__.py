@@ -6,4 +6,4 @@ warnings.filterwarnings(
     category=RuntimeWarning,
 )
 
-import eigenpy  # noqa: E402, F401
+import eigenpy  # noqa: F401

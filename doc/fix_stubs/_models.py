@@ -163,7 +163,7 @@ class ClassI:
         self.bases: list[str] = []
         self.docstring = ""
         self.functions: list[Function] = []
-        self.nested_classes: list["ClassI"] = []
+        self.nested_classes: list[ClassI] = []
         self.is_module = is_module
         self.extra_lines: list[str] = []
 

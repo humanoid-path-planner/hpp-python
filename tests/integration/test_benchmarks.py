@@ -30,6 +30,7 @@ def main():
         result = subprocess.run(
             [sys.executable, str(script), "-N", "1"],
             cwd=str(folder),
+            check=False,
         )
 
         if result.returncode != 0:

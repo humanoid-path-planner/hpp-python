@@ -5,43 +5,45 @@
 #
 
 import unittest
+
 import numpy as np
 from pinocchio import SE3
+
 from pyhpp.manipulation import Problem as ManipulationProblem
 from unit.conftest import create_ur3_robot, create_ur5_problem
 
 
 class TestProblemAccessors(unittest.TestCase):
     def test_steering_method_returns_object(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         sm = problem.steeringMethod()
 
         self.assertIsNotNone(sm)
 
     def test_distance_returns_object(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         distance = problem.distance()
 
         self.assertIsNotNone(distance)
 
     def test_configuration_shooter_returns_object(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         shooter = problem.configurationShooter()
 
         self.assertIsNotNone(shooter)
 
     def test_path_validation_returns_object(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         pv = problem.pathValidation()
 
         self.assertIsNotNone(pv)
 
     def test_config_validation_returns_object(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         cv = problem.configValidation()
 
@@ -50,7 +52,7 @@ class TestProblemAccessors(unittest.TestCase):
 
 class TestProblemDirectPath(unittest.TestCase):
     def test_direct_path_without_validation(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q_start = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q_end = np.array([0.1, -1.57, -1.8, 0.0, 0.8, 0.0])
 
@@ -58,26 +60,26 @@ class TestProblemDirectPath(unittest.TestCase):
 
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 3)
-        valid, path, report = result
+        valid, path, _report = result
         self.assertTrue(valid)
         self.assertIsNotNone(path)
 
     def test_direct_path_with_validation(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         problem.addConfigValidation("JointBoundValidation")
         q_start = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q_end = np.array([0.1, -1.57, -1.8, 0.0, 0.8, 0.0])
 
-        valid, path, report = problem.directPath(q_start, q_end, True)
+        valid, _path, _report = problem.directPath(q_start, q_end, True)
 
         self.assertIsInstance(valid, bool)
 
     def test_direct_path_endpoints_match(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q_start = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
         q_end = np.array([0.5, -1.57, -1.8, 0.0, 0.8, 0.0])
 
-        valid, path, report = problem.directPath(q_start, q_end, False)
+        _valid, path, _report = problem.directPath(q_start, q_end, False)
 
         np.testing.assert_array_almost_equal(path.initial(), q_start)
         np.testing.assert_array_almost_equal(path.end(), q_end)
@@ -85,33 +87,33 @@ class TestProblemDirectPath(unittest.TestCase):
 
 class TestProblemConstraintProjection(unittest.TestCase):
     def test_error_threshold_settable(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         problem.errorThreshold = 1e-6
 
         self.assertAlmostEqual(problem.errorThreshold, 1e-6)
 
     def test_max_iter_projection_settable(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
 
         problem.maxIterProjection = 50
 
         self.assertEqual(problem.maxIterProjection, 50)
 
     def test_apply_constraints_returns_tuple(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         q = np.array([0.0, -1.57, -1.8, 0.0, 0.8, 0.0])
 
         result = problem.applyConstraints(q)
 
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 3)
-        success, output, residual = result
+        success, output, _residual = result
         self.assertIsInstance(success, bool)
         self.assertEqual(len(output), len(q))
 
     def test_add_numerical_constraints_updates_active_constraint_set(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         active_constraints = problem.getConstraints()
         constraint = problem.createTransformationConstraint(
             "test_constraint",
@@ -141,7 +143,7 @@ class TestManipulationProblemProjectionDefaults(unittest.TestCase):
 
 class TestProblemTransformationConstraints(unittest.TestCase):
     def test_create_transformation_constraint(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         M = SE3.Identity()
         mask = [True, True, True, True, True, True]
 
@@ -152,7 +154,7 @@ class TestProblemTransformationConstraints(unittest.TestCase):
         self.assertIsNotNone(constraint)
 
     def test_create_relative_transformation_constraint(self):
-        problem, robot = create_ur5_problem()
+        problem, _robot = create_ur5_problem()
         M = SE3.Identity()
         mask = [True, True, True, True, True, True]
 

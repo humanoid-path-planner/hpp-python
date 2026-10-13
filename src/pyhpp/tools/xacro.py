@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 try:  # python 2
     _basestr = basestring
     encoding = {"encoding": "utf-8"}
