@@ -10,6 +10,9 @@ from argparse import ArgumentParser
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
+from zoneinfo import ZoneInfo
+
+TZ = ZoneInfo("Europe/Paris")
 
 
 def create_benchmark_parser(description: str = "HPP Benchmark") -> ArgumentParser:
@@ -116,9 +119,9 @@ class BenchmarkRunner:
             self.reset_func()
 
         try:
-            t1 = dt.datetime.now()
+            t1 = dt.datetime.now(tz=TZ)
             path = self.solve_func()
-            t2 = dt.datetime.now()
+            t2 = dt.datetime.now(tz=TZ)
 
             result.success = True
             result.time_elapsed = t2 - t1
@@ -129,7 +132,7 @@ class BenchmarkRunner:
             if self.get_path_length_func and path is not None:
                 result.path_length = self.get_path_length_func()
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.error_message = str(e)
             print(f"Failed to plan path: {e}")
 

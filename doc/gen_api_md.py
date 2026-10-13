@@ -251,7 +251,7 @@ def _parse_stub(stub_path: Path) -> ast.Module | None:
         source = _KW_PARAM_RE.sub(r"\1\2_\3", source)
 
         return ast.parse(source)
-    except Exception:
+    except Exception:  # noqa: BLE001
         return None
 
 

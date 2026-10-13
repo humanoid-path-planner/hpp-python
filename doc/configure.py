@@ -185,7 +185,7 @@ def substitute(istr, ostr):
                 line = line.replace(
                     match.group(0), make_doc_string(escape(b), escape(d))
                 )
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 print(
                     f"Failed to find class doc for {cn}: {e}",
                     file=sys.stderr,

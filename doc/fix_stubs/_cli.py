@@ -75,7 +75,7 @@ def main() -> None:
                     setter_overrides=setter_overrides,
                     method_overrides=method_overrides,
                 )
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 print(f"error: failed to fix {f}: {e}", file=sys.stderr)
                 continue
             total_files += 1

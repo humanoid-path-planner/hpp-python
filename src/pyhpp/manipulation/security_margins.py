@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (c) 2020 CNRS, Airbus SAS
 # Author: Florent Lamiraux
@@ -31,7 +30,6 @@
 
 class SecurityMargins:
     defaultMargin = 0.0
-    separators = ["/"]
 
     def __init__(self, problem, factory, robotsAndObjects, robot):
         self.problem = problem
@@ -42,6 +40,7 @@ class SecurityMargins:
         self.computeJoints()
         self.computeGrippers()
         self.computePossibleContacts()
+        self.separators = ["/"]
 
     def computeJoints(self):
         self.robotToJoints = {}
@@ -65,7 +64,7 @@ class SecurityMargins:
         model = self.robot.model()
         try:
             jointId = model.getJointId(jointName)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return []
 
         childNames = []

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # Copyright (c) 2025 CNRS
 # Author: Paul Sardin
@@ -46,7 +45,9 @@ class Constraints:
     \\li numerical constraint,
     """
 
-    def __init__(self, grasps=None, pregrasps=None, numConstraints=None, lockedJoints=None):
+    def __init__(
+        self, grasps=None, pregrasps=None, numConstraints=None, lockedJoints=None
+    ):
         if lockedJoints is None:
             lockedJoints = []
         if numConstraints is None:
@@ -883,7 +884,6 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
     # default distance between object and surface in preplacement configuration
     defaultPreplaceDist = 0.05
     # See methods setPreplacementDistance and getPreplacementDistance
-    preplaceDistance = {}
 
     def __init__(self, graph, constraints=None):
         """
@@ -903,6 +903,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
         self.preplaceGuide = False
         self.state_objects = {}
         self.edge_objects = {}
+        self.preplaceDistance = {}
 
     # # \name Default functions
     # \{

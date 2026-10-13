@@ -74,7 +74,7 @@ def load_method_overrides(path: Path | None) -> dict[str, _MethodSig]:
 
     raw = json.loads(path.read_text())
     if not isinstance(raw, dict):
-        raise ValueError(f"{path}: expected a JSON object, got {type(raw).__name__}")
+        raise TypeError(f"{path}: expected a JSON object, got {type(raw).__name__}")
 
     for key, value in raw.items():
         entries = value if isinstance(value, list) else [value]
