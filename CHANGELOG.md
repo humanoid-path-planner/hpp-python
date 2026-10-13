@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [9.1.0] - 2026-10-13
+
 - [README] Rewrite
 - [CI] Generate the Python API reference
 - [doc] Keep underscores of method names in API tables
@@ -41,7 +43,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Initial release
 
-[Unreleased]: https://github.com/humanoid-path-planner/hpp-python/compare/v9.0.2...HEAD
+[Unreleased]: https://github.com/humanoid-path-planner/hpp-python/compare/v9.1.0...HEAD
+[9.1.0]: https://github.com/humanoid-path-planner/hpp-python/compare/v9.0.2...v9.1.0
 [9.0.2]: https://github.com/humanoid-path-planner/hpp-python/compare/v9.0.1...v9.0.2
 [9.0.1]: https://github.com/humanoid-path-planner/hpp-python/compare/v9.0.0...v9.0.1
 [9.0.0]: https://github.com/humanoid-path-planner/hpp-python/compare/v7.0.0...v9.0.0
