@@ -8,6 +8,8 @@
   <maintainer email='guilhem.saurel@laas.fr'>Guilhem Saurel</maintainer>
   <license>BSD-2-Clause</license>
 
+  <url type="repository">https://github.com/humanoid-path-planner/hpp-python</url>
+
   <depend>eigenpy</depend>
   <depend>pinocchio</depend>
   <depend>hpp_util</depend>
