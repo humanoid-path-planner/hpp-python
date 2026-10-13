@@ -208,8 +208,12 @@ void exposeSplineGradientBasedAbstracts() {
 }
 
 struct LCWrapper {
-  static void setJ(LinearConstraint& lc, const matrix_t& J) { lc.J = J; }
+  static matrix_t J(const LinearConstraint& lc) { return lc.J; }
+  static void setJ(LinearConstraint& lc, const matrix_t& J) {
+    lc.J = J.sparseView();
+  }
   static void setb(LinearConstraint& lc, const vector_t& b) { lc.b = b; }
+  static matrix_t PK(const LinearConstraint& lc) { return lc.PK; }
 };
 
 void exposeLinearConstraint() {
@@ -223,22 +227,22 @@ void exposeLinearConstraint() {
       .PYHPP_DEFINE_METHOD(LinearConstraint, computeSolution)
       .PYHPP_DEFINE_METHOD(LinearConstraint, isSatisfied)
       .PYHPP_DEFINE_METHOD(LinearConstraint, addRows)
-      .add_property("J",
-                    make_getter(&LinearConstraint::J,
-                                return_value_policy<return_by_value>()),
-                    &LCWrapper::setJ, "")
+      .add_property("J", &LCWrapper::J, &LCWrapper::setJ, "")
       .add_property("b",
                     make_getter(&LinearConstraint::b,
                                 return_value_policy<return_by_value>()),
                     &LCWrapper::setb, "")
       .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, rank, "")
-      .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, PK, "")
+      .add_property("PK", &LCWrapper::PK, "")
       .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xStar, "")
       .ADD_DATA_PROPERTY_READONLY_BYVALUE(LinearConstraint, xSol, "");
 }
 
 struct QPWrapper {
-  static void setH(QuadraticProgram& qp, const matrix_t& H) { qp.H = H; }
+  static matrix_t H(const QuadraticProgram& qp) { return qp.H; }
+  static void setH(QuadraticProgram& qp, const matrix_t& H) {
+    qp.H = H.sparseView();
+  }
   static void setb(QuadraticProgram& qp, const vector_t& b) { qp.b = b; }
 };
 
@@ -256,10 +260,7 @@ void exposeQuadraticProblem() {
                         const LinearConstraint&, const LinearConstraint&)>(
                         &QuadraticProgram::solve))
 
-      .add_property("H",
-                    make_getter(&QuadraticProgram::H,
-                                return_value_policy<return_by_value>()),
-                    &QPWrapper::setH, "")
+      .add_property("H", &QPWrapper::H, &QPWrapper::setH, "")
       .add_property("b",
                     make_getter(&QuadraticProgram::b,
                                 return_value_policy<return_by_value>()),
