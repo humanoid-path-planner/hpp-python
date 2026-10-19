@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [core] Problem.addConfigValidation raises on an unknown type
 - [CMake] Set the install RPATH of the bindings, for relocatable installs (pip wheels)
 - [pyproject] Add pyproject.toml with the package metadata (description, authors, maintainers, project URLs)
+- [CI] Upload the pyhpp package with its stubs
 
 ## [9.2.0] - 2026-10-29
 
