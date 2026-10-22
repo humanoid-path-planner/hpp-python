@@ -31,7 +31,6 @@
 #define PYHPP_CORE_PATH_VALIDATION_HH
 
 #include <hpp/core/path-validation.hh>
-#include <hpp/core/problem-solver.hh>
 #include <pyhpp/core/fwd.hh>
 
 namespace pyhpp {

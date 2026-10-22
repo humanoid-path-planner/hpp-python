@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- [path-validation] Create NoValidation without a ProblemSolver
+
 ## [9.1.0] - 2026-10-13
 
 - [README] Rewrite

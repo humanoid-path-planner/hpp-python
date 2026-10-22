@@ -36,7 +36,7 @@
 #include <hpp/core/path-validation/discretized-collision-checking.hh>
 #include <hpp/core/path-validation/discretized-joint-bound.hh>
 #include <hpp/core/path-validation/discretized.hh>
-#include <hpp/core/problem-solver.hh>
+#include <hpp/core/path-validation/no-validation.hh>
 #include <pyhpp/core/path-validation.hh>
 #include <pyhpp/util.hh>
 // DocNamespace(hpp::core)
@@ -54,12 +54,6 @@ hpp::core::PathValidationPtr_t createDiscretizedJointBoundAndCollisionChecking(
   return hpp::core::pathValidation::Discretized::create(
       stepSize, {hpp::core::JointBoundValidation::create(robot),
                  hpp::core::CollisionValidation::create(robot)});
-}
-
-const hpp::core::PathValidationBuilder_t& noValidationFactory() {
-  static const hpp::core::PathValidationBuilder_t factory =
-      hpp::core::ProblemSolver::create()->pathValidations.get("NoValidation");
-  return factory;
 }
 
 struct PVWrapper {
@@ -89,7 +83,8 @@ namespace pathValidation {
 struct NoValidation : PathValidation {
   NoValidation(const hpp::core::DevicePtr_t& robot,
                const hpp::core::value_type& tolerance)
-      : PathValidation(robot, noValidationFactory(), tolerance) {}
+      : PathValidation(robot, hpp::core::pathValidation::NoValidation::create,
+                       tolerance) {}
 };
 
 struct Discretized : PathValidation {
