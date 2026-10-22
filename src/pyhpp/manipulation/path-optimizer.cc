@@ -35,7 +35,6 @@
 #include <hpp/core/problem.hh>
 #include <hpp/manipulation/graph-optimizer.hh>
 #include <hpp/manipulation/path-optimization/enforce-transition-semantic.hh>
-#include <hpp/manipulation/path-optimization/manipulation-spline.hh>
 #include <hpp/manipulation/path-optimization/random-shortcut.hh>
 #include <hpp/manipulation/path-optimization/spline-gradient-based.hh>
 #include <pyhpp/core/problem.hh>
@@ -91,12 +90,10 @@ hpp::core::PathOptimizerPtr_t createGraphOptimizer(
   return GraphOptimizer::create<InnerOpt>(problem);
 }
 
-typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
-                                              1>
-    SGB1_t;
-
-static SGB1_t::Ptr_t createSplineGradientBased1(
-    const pyhpp::core::Problem& problem) {
+template <int Order>
+typename pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                               Order>::Ptr_t
+createSplineGradientBased(const pyhpp::core::Problem& problem) {
   hpp::manipulation::ProblemPtr_t manipProblem =
       HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, problem.obj);
   if (!manipProblem) {
@@ -104,79 +101,21 @@ static SGB1_t::Ptr_t createSplineGradientBased1(
         "SplineGradientBased_bezier1 constructor expects a "
         "pyhpp.manipulation.Problem as input");
   }
-  return SGB1_t::create(manipProblem);
+  return pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
+                                               Order>::create(manipProblem);
 }
 
-typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
-                                              3>
-    SGB3_t;
-
-static SGB3_t::Ptr_t createSplineGradientBased3(
-    const pyhpp::core::Problem& problem) {
-  hpp::manipulation::ProblemPtr_t manipProblem =
-      HPP_DYNAMIC_PTR_CAST(hpp::manipulation::Problem, problem.obj);
-  if (!manipProblem) {
-    throw std::runtime_error(
-        "SplineGradientBased_bezier3 constructor expects a "
-        "pyhpp.manipulation.Problem as input");
-  }
-  return SGB3_t::create(manipProblem);
-}
-
-void exposeSplineGradientBased1(const char* name) {
-  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
-                                                1>
+template <int Order>
+void exposeSplineGradientBased(const char* name) {
+  typedef hpp::manipulation::pathOptimization::SplineGradientBased<
+      hpp::core::path::BernsteinBasis, Order>
       SGB_t;
-  class_<SGB_t, std::shared_ptr<SGB_t>, bases<PathOptimizer>,
-         boost::noncopyable>(name, no_init)
-      .def("__init__", make_constructor(&createSplineGradientBased1))
-      .def_readwrite("alphaInit", &SGB_t::alphaInit)
-      .def_readwrite("alwaysStopAtFirst", &SGB_t::alwaysStopAtFirst)
-      .def_readwrite("costOrder", &SGB_t::costOrder)
-      .def_readwrite("usePathLengthAsWeights", &SGB_t::usePathLengthAsWeights)
-      .def_readwrite("reorderIntervals", &SGB_t::reorderIntervals)
-      .def_readwrite("linearizeAtEachStep", &SGB_t::linearizeAtEachStep)
-      .def_readwrite("checkJointBound", &SGB_t::checkJointBound)
-      .def_readwrite("returnOptimum", &SGB_t::returnOptimum)
-      .def_readwrite("costThreshold", &SGB_t::costThreshold)
-      .def_readwrite("guessThreshold", &SGB_t::guessThreshold)
-      .def_readwrite("QPAccuracy", &SGB_t::QPAccuracy);
-}
-
-void exposeSplineGradientBased3(const char* name) {
-  typedef pathOptimization::SplineGradientBased<hpp::core::path::BernsteinBasis,
-                                                3>
-      SGB_t;
-  class_<SGB_t, std::shared_ptr<SGB_t>, bases<PathOptimizer>,
-         boost::noncopyable>(name, no_init)
-      .def("__init__", make_constructor(&createSplineGradientBased3))
-      .def_readwrite("alphaInit", &SGB_t::alphaInit)
-      .def_readwrite("alwaysStopAtFirst", &SGB_t::alwaysStopAtFirst)
-      .def_readwrite("costOrder", &SGB_t::costOrder)
-      .def_readwrite("usePathLengthAsWeights", &SGB_t::usePathLengthAsWeights)
-      .def_readwrite("reorderIntervals", &SGB_t::reorderIntervals)
-      .def_readwrite("linearizeAtEachStep", &SGB_t::linearizeAtEachStep)
-      .def_readwrite("checkJointBound", &SGB_t::checkJointBound)
-      .def_readwrite("returnOptimum", &SGB_t::returnOptimum)
-      .def_readwrite("costThreshold", &SGB_t::costThreshold)
-      .def_readwrite("guessThreshold", &SGB_t::guessThreshold)
-      .def_readwrite("QPAccuracy", &SGB_t::QPAccuracy);
-}
-
-static pathOptimization::ManipulationSpline::Ptr_t createManipulationSpline(
-    const pyhpp::core::Problem& problem) {
-  return pathOptimization::ManipulationSpline::create(problem.obj);
-}
-
-static list getSingleSplineTransitions(
-    const pathOptimization::ManipulationSpline& spline) {
-  return pyhpp::to_python_list(spline.singleSplineTransitions);
-}
-
-static void setSingleSplineTransitions(
-    pathOptimization::ManipulationSpline& spline, const object& names) {
-  spline.singleSplineTransitions =
-      pyhpp::extract_vector<std::string>(list(names));
+  typedef hpp::core::pathOptimization::SplineGradientBased<
+      hpp::core::path::BernsteinBasis, Order>
+      Parent_t;
+  class_<SGB_t, std::shared_ptr<SGB_t>, bases<Parent_t>, boost::noncopyable>(
+      name, no_init)
+      .def("__init__", make_constructor(&createSplineGradientBased<Order>));
 }
 
 void exposePathOptimizers() {
@@ -200,23 +139,9 @@ void exposePathOptimizers() {
 
   def("GraphPartialShortcut",
       &createGraphOptimizer<hpp::core::pathOptimization::PartialShortcut>);
-  exposeSplineGradientBased1("SplineGradientBased_bezier1");
-  exposeSplineGradientBased3("SplineGradientBased_bezier3");
-
-  class_<pathOptimization::ManipulationSpline,
-         std::shared_ptr<pathOptimization::ManipulationSpline>, bases<SGB3_t>,
-         boost::noncopyable>(
-      "ManipulationSpline",
-      "Smooth transitions, then join splines within each manipulation state.\n"
-      "\n"
-      "The result contains one path vector per consecutive group of\n"
-      "transitions with the same containing state.",
-      no_init)
-      .def("__init__", make_constructor(&createManipulationSpline))
-      .add_property("singleSplineTransitions", &getSingleSplineTransitions,
-                    &setSingleSplineTransitions,
-                    "Transitions fitted with one spline between their "
-                    "endpoints.");
+  exposeSplineGradientBased<1>("SplineGradientBased_bezier1");
+  exposeSplineGradientBased<3>("SplineGradientBased_bezier3");
+  exposeSplineGradientBased<5>("SplineGradientBased_bezier5");
 }
 
 }  // namespace manipulation
