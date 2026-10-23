@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- [ConstraintGraphFactory] Register equivalent transitions
+- [manipulation] Bind equivalent transition
 - [manipulation] Remove class ManipulationSpline
 - [path-validation] Create NoValidation without a ProblemSolver
 
