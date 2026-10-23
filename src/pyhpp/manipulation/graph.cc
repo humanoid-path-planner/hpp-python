@@ -31,6 +31,7 @@
 #include <../src/pyhpp/manipulation/graph.hh>
 #include <../src/pyhpp/manipulation/problem.hh>
 #include <boost/python.hpp>
+#include <boost/operators.hpp>
 #include <hpp/constraints/convex-shape-contact.hh>
 #include <hpp/constraints/differentiable-function.hh>
 #include <hpp/constraints/explicit/convex-shape-contact.hh>
@@ -231,6 +232,34 @@ const char* DOC_CREATEPREPLACEMENTCONSTRAINT =
 const char* DOC_NEIGHBOREDGES =
     "Get the list of edges connected to this state.";
 
+const char* DOC_GET_EQUIVALENT_TRANSITION =
+  "Get equivalent transition"
+  ""
+  "  param transition: transition"
+  "  return a weak pointer to the equivalent transition"
+  ""
+  "Transitions linking a regular node to a pregrasp node are equivalent to the loop transition of"
+  "the state except for the target state. A motion leading to a pregrasp is usually composed of"
+  "a sequence of local paths belonging to the loop transition, and a last local path belonging"
+  "to the transition leading to the pregrasp state. When time parameterizing this sequence of"
+  "local paths, the last one is considered as different and the time parameterization stops"
+  "before it. This method enable to correct this issue by returning the loop transition when given"
+  "the transition of the last local path. For any other transition, it returns the input.";
+
+const char* DOC_SET_EQUIVALENT_TRANSITION =
+  "Set equivalent transition"
+  ""
+  "  param transition: input transition,"
+  "        equivalent: transition that is equivalent"
+  "  return a weak pointer to the equivalent transition"
+  ""
+  "Transitions linking a regular node to a pregrasp node are equivalent to the loop transition of"
+  "the state except for the target state. A motion leading to a pregrasp is usually composed of"
+  "a sequence of local paths belonging to the loop transition, and a last local path belonging"
+  "to the transition leading to the pregrasp state. When time parameterizing this sequence of"
+  "local paths, the last one is considered as different and the time parameterization stops"
+  "before it. This method enable to correct this issue by returning the loop transition when given"
+  "the transition of the last local path. For any other transition, it returns the input.";
 }  // namespace
 
 namespace pyhpp {
@@ -528,6 +557,16 @@ PyWEdgePtr_t PyWGraph::getTransition(const std::string& edgeName) {
   } catch (const std::exception& exc) {
     throw std::logic_error(exc.what());
   }
+}
+
+PyWEdgePtr_t PyWGraph::equivalentTransition(PyWEdgePtr_t edge) {
+  using namespace hpp::manipulation::graph;
+  EdgePtr_t e = obj->equivalentEdge(edge->obj);
+  return std::shared_ptr<PyWEdge>(new PyWEdge(e));
+}
+
+void PyWGraph::equivalentTransition(PyWEdgePtr_t edge, PyWEdgePtr_t equivalent) {
+  obj->equivalentEdge(edge->obj, equivalent->obj);
 }
 
 PyWStatePtr_t PyWGraph::getState(const std::string& stateName) {
@@ -957,6 +996,10 @@ pyhpp::core::PyWPathValidationPtr_t PyWEdge::pyPathValidation() const {
   return std::make_shared<pyhpp::core::PathValidation>(obj->pathValidation());
 }
 
+bool PyWEdge::operator==(const PyWEdge& other) const {
+  return obj == other.obj;
+}
+
 // =============================================================================
 // Subgraph management
 // =============================================================================
@@ -1311,7 +1354,8 @@ void exposeGraph() {
       .def("waypoint", &PyWEdge::waypoint, DocClassMethod(waypoint))
       .def("nbWaypoints", &PyWEdge::nbWaypoints, DocClassMethod(nbWaypoints))
       .def("pathValidation", &PyWEdge::pyPathValidation,
-           DocClassMethod(pathValidation));
+           DocClassMethod(pathValidation))
+    .def(self == self);
 
   // DocClass(Graph)
   class_<PyWGraph, PyWGraphPtr_t>(
@@ -1467,7 +1511,11 @@ void exposeGraph() {
       .def("transitionAtParam", &PyWGraph::transitionAtParam,
            "Return the transition used at a given parameter on a path (static "
            "method).")
-      .staticmethod("transitionAtParam");
+      .staticmethod("transitionAtParam")
+    .def("equivalentTransition", static_cast<PyWEdgePtr_t (PyWGraph::*)(PyWEdgePtr_t)>(
+        &PyWGraph::equivalentTransition), DOC_GET_EQUIVALENT_TRANSITION)
+    .def("equivalentTransition", static_cast<void (PyWGraph::*)(PyWEdgePtr_t, PyWEdgePtr_t)>(
+        &PyWGraph::equivalentTransition), DOC_SET_EQUIVALENT_TRANSITION);
 }
 
 }  // namespace manipulation

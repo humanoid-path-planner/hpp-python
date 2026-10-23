@@ -78,6 +78,7 @@ struct PyWEdge {
   PyWEdge waypoint(int index) const;
   PathValidationPtr_t pathValidation() const;
   pyhpp::core::PyWPathValidationPtr_t pyPathValidation() const;
+  bool operator==(const PyWEdge& other) const;
 };
 typedef std::shared_ptr<PyWEdge> PyWEdgePtr_t;
 
@@ -239,6 +240,9 @@ struct PyWGraph {
   // Get transition at given parameter of a PathVector
   static PyWEdgePtr_t transitionAtParam(hpp::core::PathVectorPtr_t path,
                                         value_type param);
+  //Equivalent transition
+  PyWEdgePtr_t equivalentTransition(PyWEdgePtr_t edge);
+  void equivalentTransition(PyWEdgePtr_t edge, PyWEdgePtr_t equivalent);
 };
 typedef std::shared_ptr<PyWGraph> PyWGraphPtr_t;
 
