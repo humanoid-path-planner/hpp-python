@@ -1076,17 +1076,21 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                 if i == 0:
                     #   First waypoint transition is equivalent to loop transition of
                     #   source state
-                    self.graph.equivalentTransition(forward_trans,
-                                                    self.loopTransition[sf.state_obj])
-                    self.graph.equivalentTransition(backward_trans,
-                                                    self.loopTransition[sf.state_obj])
+                    self.graph.equivalentTransition(
+                        forward_trans, self.loopTransition[sf.state_obj]
+                    )
+                    self.graph.equivalentTransition(
+                        backward_trans, self.loopTransition[sf.state_obj]
+                    )
                 if i == nTransitions - 1 and nTransitions == 4:
                     #   Last waypoint transition is equivalent to loop transition of
                     #   target state
-                    self.graph.equivalentTransition(forward_trans,
-                                                    self.loopTransition[st.state_obj])
-                    self.graph.equivalentTransition(backward_trans,
-                                                    self.loopTransition[st.state_obj])
+                    self.graph.equivalentTransition(
+                        forward_trans, self.loopTransition[st.state_obj]
+                    )
+                    self.graph.equivalentTransition(
+                        backward_trans, self.loopTransition[st.state_obj]
+                    )
 
                 if crossedFoliation:
                     nf_ls = nf
@@ -1108,8 +1112,10 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                         # First level set transition is equivalent to loop transition of
                         # source state
                         if nTransitions == 4:
-                            self.graph.equivalentTransition(level_set_edge_forward,
-                                                            self.loopTransition[sf.state_obj])
+                            self.graph.equivalentTransition(
+                                level_set_edge_forward,
+                                self.loopTransition[sf.state_obj],
+                            )
 
                         paramNC_constraints = self._get_constraint_objects(
                             (st.foliation - sf.foliation).numConstraints
@@ -1146,8 +1152,10 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
                             #   Last level set transition is equivalent to loop transition of
                             #   target state
                             if nTransitions == 4:
-                                self.graph.equivalentTransition(level_set_edge_backward,
-                                                                self.loopTransition[st.state_obj])
+                                self.graph.equivalentTransition(
+                                    level_set_edge_backward,
+                                    self.loopTransition[st.state_obj],
+                                )
 
                             pNC_constraints = self._get_constraint_objects(
                                 (sf.foliation - st.foliation).numConstraints
