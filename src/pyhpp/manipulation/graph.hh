@@ -240,7 +240,7 @@ struct PyWGraph {
   // Get transition at given parameter of a PathVector
   static PyWEdgePtr_t transitionAtParam(hpp::core::PathVectorPtr_t path,
                                         value_type param);
-  //Equivalent transition
+  // Equivalent transition
   PyWEdgePtr_t equivalentTransition(PyWEdgePtr_t edge);
   void equivalentTransition(PyWEdgePtr_t edge, PyWEdgePtr_t equivalent);
 };
