@@ -905,7 +905,7 @@ class ConstraintGraphFactory(GraphFactoryAbstract):
         self.edge_objects = {}
         self.preplaceDistance = {}
         # Store loop transition by state
-        self.loopTransition = dict()
+        self.loopTransition = {}
 
     # # \name Default functions
     # \{
