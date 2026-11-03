@@ -163,6 +163,9 @@ void Problem::pyPathValidation(
 
   problem->pathValidation(pathValidation->obj);
   pathValidation_ = pathValidation;
+  if (pathValidation->factory)
+    problem->setPathValidationFactory(pathValidation->factory,
+                                      pathValidation->tolerance);
 }
 
 pyhpp::core::PyWPathValidationPtr_t Problem::pyPathValidationFactory() const {
@@ -254,7 +257,9 @@ void exposeProblem() {
            static_cast<void (Problem::*)(
                const pyhpp::core::PyWPathValidationPtr_t&)>(
                &Problem::pyPathValidation),
-           (arg("pathValidation")), "Set the path validation object.")
+           (arg("pathValidation")),
+           "Set the path validation object and, if it has a factory, the "
+           "edge-validation factory.")
       .def(
           "pathValidationFactory",
           static_cast<pyhpp::core::PyWPathValidationPtr_t (Problem::*)() const>(
