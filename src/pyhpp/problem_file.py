@@ -80,6 +80,8 @@ Top-level keys:
 
 Steering method and path validation keep the HPP defaults when not given.
 Unknown keys raise ValueError.
+
+doc/problem_file_example.toml in the sources is a small complete example.
 """
 
 from dataclasses import dataclass
