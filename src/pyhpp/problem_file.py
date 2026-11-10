@@ -78,7 +78,9 @@ Top-level keys:
       max_iterations}
   planner: type, max_iterations, parameters
 
-Steering method and path validation keep the HPP defaults when not given.
+Parameter values are booleans, integers or floats, of the type HPP declares.
+Steering method, path validation and graph solver settings keep the HPP
+defaults when not given.
 Unknown keys raise ValueError.
 
 doc/problem_file_example.toml in the sources is a small complete example.
@@ -110,28 +112,40 @@ KEYS = {
     },
     "robot": {"name", "urdf", "srdf", "root_joint", "pose"},
     "handle": {"link", "pose", "clearance", "mask", "approaching_direction"},
-    "constraint": {
+    "absolute constraint": {
         "type",
-        "joint",
+        "joint2",
+        "frame1",
+        "frame2",
+        "handle2",
+        "gripper2",
+        "mask",
+        "comparison",
+    },
+    "relative constraint": {
+        "type",
         "joint1",
         "joint2",
         "frame1",
         "frame2",
-        "handle",
         "handle1",
         "handle2",
-        "gripper",
         "gripper1",
         "gripper2",
         "mask",
         "comparison",
-        "value",
+    },
+    "grasp": {"type", "gripper", "handle"},
+    "stability": {"type", "com", "left_ankle", "right_ankle", "config"},
+    "aligned com stability": {
+        "type",
         "com",
         "left_ankle",
         "right_ankle",
         "config",
         "sliding",
     },
+    "locked joint": {"type", "joint", "value", "comparison"},
     "graph": {
         "name",
         "error_threshold",
@@ -234,9 +248,11 @@ def comparison(names):
 
 def configuration(robot, c):
     """Full vector, or {joints: {name: value}} over the neutral configuration."""
-    if isinstance(c, list):
-        return np.array(c, dtype=float)
     model = robot.model()
+    if isinstance(c, list):
+        if len(c) != model.nq:
+            raise ValueError(f"configuration of size {len(c)}, expected {model.nq}")
+        return np.array(c, dtype=float)
     q = pinocchio.neutral(model)
     for joint, value in c["joints"].items():
         j = joint_id(robot, joint)
@@ -261,9 +277,9 @@ def constraint(name, c, robot, problem):
     """Numerical constraint, or a dict of them for the stability types."""
     from pyhpp import constraints
 
-    check_keys("constraint", c)
     kind = c["type"]
     if kind in ABSOLUTE or kind in RELATIVE:
+        check_keys(("absolute" if kind in ABSOLUTE else "relative") + " constraint", c)
         mask = [bool(m) for m in c["mask"]]
         j1, f1 = frame(robot, c, 1)
         j2, f2 = frame(robot, c, 2)
@@ -274,10 +290,13 @@ def constraint(name, c, robot, problem):
         cts = c.get("comparison") or ["EqualToZero"] * sum(mask)
         return constraints.Implicit(f, comparison(cts), [True] * len(cts))
     if kind == "grasp":
+        check_keys("grasp", c)
         return robot.handles()[c["handle"]].createGrasp(
             robot.grippers()[c["gripper"]], name
         )
     if kind in STABILITY:
+        aligned = kind == "aligned_com_stability"
+        check_keys("aligned com stability" if aligned else "stability", c)
         from pyhpp.core.static_stability_constraint_factory import (
             StaticStabilityConstraintsFactory,
         )
@@ -290,10 +309,11 @@ def constraint(name, c, robot, problem):
             c["right_ankle"],
             configuration(robot, c["config"]),
         ]
-        if kind == "aligned_com_stability":
+        if aligned:
             args.append(c.get("sliding", False))
         return getattr(factory, STABILITY[kind])(*args)
     if kind == "locked_joint":
+        check_keys("locked joint", c)
         value = np.array(c["value"], dtype=float)
         if "comparison" in c:
             return constraints.LockedJoint(
@@ -310,8 +330,10 @@ def graph_from(g, robot, problem, constraints):
 
     check_keys("graph", g)
     graph = Graph(g.get("name", "graph"), robot, problem)
-    graph.errorThreshold(g.get("error_threshold", 1e-4))
-    graph.maxIterations(g.get("max_iterations", 40))
+    if "error_threshold" in g:
+        graph.errorThreshold(g["error_threshold"])
+    if "max_iterations" in g:
+        graph.maxIterations(g["max_iterations"])
     factory_constraints = dict(constraints)
     for obj, pl in g.get("placements", {}).items():
         check_keys("placement", pl)
@@ -437,6 +459,13 @@ def load(spec):
     problem = Problem(robot)
     p = spec.get("problem", {})
     check_keys("problem", p)
+    pl = spec.get("planner", {})
+    check_keys("planner", pl)
+    # Some components read their parameters when they are created.
+    for k, v in {**p.get("parameters", {}), **pl.get("parameters", {})}.items():
+        problem.setParameter(
+            k, core.Parameter.create_bool(v) if isinstance(v, bool) else v
+        )
     if "config_validations" in p:
         problem.clearConfigValidations()
         for v in p["config_validations"]:
@@ -468,17 +497,16 @@ def load(spec):
     pv = p.get("path_validation")
     if pv:
         check_keys("path validation", pv)
-        validation = lambda: getattr(core, pv["type"])(robot, pv.get("tolerance", 0))
+        if pv.get("factory") not in (None, "graph"):
+            raise ValueError(f"unknown path validation factory {pv['factory']}")
+
+        def validation(wrap):
+            v = getattr(core, pv["type"])(robot, pv["tolerance"])
+            return module.GraphPathValidation(v) if wrap else v
+
+        problem.pathValidation(validation(graph and pv.get("graph", True)))
         if graph:
-            graph_validation = lambda: module.GraphPathValidation(validation())
-            problem.pathValidation(
-                graph_validation() if pv.get("graph", True) else validation()
-            )
-            problem.pathValidationFactory(
-                graph_validation() if pv.get("factory") == "graph" else validation()
-            )
-        else:
-            problem.pathValidation(validation())
+            problem.pathValidationFactory(validation(pv.get("factory") == "graph"))
     pp = p.get("path_projector")
     if pp:
         check_keys("path projector", pp)
@@ -534,8 +562,6 @@ def load(spec):
     if graph:
         problem.constraintGraph(graph)
 
-    pl = spec.get("planner", {})
-    check_keys("planner", pl)
     planner = None
     if "type" in pl:
         planner = (getattr(module, pl["type"], None) or getattr(core, pl["type"]))(
@@ -543,8 +569,6 @@ def load(spec):
         )
         if "max_iterations" in pl:
             planner.maxIterations(pl["max_iterations"])
-    for k, v in {**p.get("parameters", {}), **pl.get("parameters", {})}.items():
-        problem.setParameter(k, v)
     return ProblemFile(
         spec["name"], robot, problem, graph, planner, constraints, init, goal
     )
