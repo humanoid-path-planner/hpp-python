@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - [manipulation] Problem.pathValidation also sets the edge-validation factory
 - [problem_file] Build a planning problem from a problem file (TOML)
+- [core] Problem.addConfigValidation raises on an unknown type
 
 ## [9.2.0] - 2026-10-29
 
