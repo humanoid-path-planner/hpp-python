@@ -1,0 +1,20 @@
+[project]
+authors = [
+  { name = "Florent Lamiraux" },
+  { name = "Joseph Mirabel" }
+]
+description = "Implement python bindings for HPP"
+license = "BSD-2-Clause"
+maintainers = [
+  { email = "guilhem.saurel@laas.fr", name = "Guilhem Saurel" }
+]
+name = "hpp-python"
+version = "9.2.0"
+
+[project.urls]
+homepage = "https://github.com/humanoid-path-planner/hpp-python"
+issues = "https://github.com/humanoid-path-planner/hpp-python/issues"
+repository = "https://github.com/humanoid-path-planner/hpp-python"
+
+[tool.tomlsort]
+all = true

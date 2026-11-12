@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - [problem_file] Build a planning problem from a problem file (TOML)
 - [core] Problem.addConfigValidation raises on an unknown type
 - [CMake] Set the install RPATH of the bindings, for relocatable installs (pip wheels)
+- [pyproject] Add pyproject.toml with the package metadata (description, authors, maintainers, project URLs)
 
 ## [9.2.0] - 2026-10-29
 
