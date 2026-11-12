@@ -1,0 +1,100 @@
+# A UR3 moves a sphere lying on the ground from x = 0.2 to x = 0.3.
+#
+#   from pyhpp.problem_file import load_file
+#
+#   p = load_file("problem_file_example.toml")
+#   path = p.planner.solve()
+#
+# See the documentation of pyhpp.problem_file for all the keys.
+
+format = "hpp-problem/0.1"
+name = "ur3-sphere"
+
+[[robots]]
+name = "ur3"
+urdf = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
+srdf = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
+root_joint = "anchor"
+
+[[robots]]
+name = "ground"
+urdf = "package://hpp_environments/urdf/construction_set/ground.urdf"
+srdf = "package://hpp_environments/srdf/construction_set/ground.srdf"
+root_joint = "anchor"
+
+[[robots]]
+name = "sphere"
+urdf = "package://hpp_environments/urdf/construction_set/sphere.urdf"
+srdf = "package://hpp_environments/srdf/construction_set/sphere.srdf"
+root_joint = "freeflyer"
+
+[joint_bounds]
+"ur3/shoulder_pan_joint" = [-3.141592653589793, 4]
+"ur3/shoulder_lift_joint" = [-3.141592653589793, 0]
+"ur3/elbow_joint" = [-2.6, 2.6]
+"sphere/root_joint" = [
+  -1, 1, -1, 1, -0.1, 1, -1.0001, 1.0001, -1.0001, 1.0001, -1.0001, 1.0001, -1.0001, 1.0001,
+]
+
+[handles]
+"sphere/handle" = {mask = [1, 1, 1, 0, 1, 1]}
+
+# The sphere lies on the ground: fixed height and orientation about x and y,
+# free x, y and rotation about z. The complement keeps these free values
+# constant while the sphere is not held.
+[constraints.place_sphere]
+type = "transformation"
+joint2 = "sphere/root_joint"
+frame1 = [0, 0, 0.02, 0, 0, 0, 1]
+mask = [0, 0, 1, 1, 1, 0]
+
+[constraints."place_sphere/complement"]
+type = "transformation"
+joint2 = "sphere/root_joint"
+frame1 = [0, 0, 0.02, 0, 0, 0, 1]
+mask = [1, 1, 0, 0, 0, 1]
+comparison = ["Equality", "Equality", "Equality"]
+
+[constraints."place_sphere/hold"]
+type = "locked_joint"
+joint = "sphere/root_joint"
+value = [0, 0, 0.02, 0, 0, 0, 1]
+comparison = ["Equality", "Equality", "EqualToZero", "EqualToZero", "EqualToZero", "Equality"]
+
+[constraints.preplace_sphere]
+type = "transformation"
+joint2 = "sphere/root_joint"
+frame1 = [0, 0, 0.1, 0, 0, 0, 1]
+mask = [0, 0, 1, 1, 1, 0]
+
+[graph]
+grippers = ["ur3/gripper"]
+objects = [{name = "sphere", handles = ["sphere/handle"], contacts = []}]
+
+[graph.placements.sphere]
+constraint = "place_sphere"
+complement = "place_sphere/complement"
+hold = "place_sphere/hold"
+preplacement = "preplace_sphere"
+
+[problem]
+steering_method = "Straight"
+path_validation = {type = "Dichotomy", tolerance = 0}
+path_projector = {type = "Progressive", step = 0.01}
+
+# Joints not listed keep their neutral value.
+[init.joints]
+"ur3/shoulder_pan_joint" = 0.5235987755982988
+"ur3/shoulder_lift_joint" = -1.5707963267948966
+"ur3/elbow_joint" = 1.5707963267948966
+"sphere/root_joint" = [0.2, 0, 0.02, 0, 0, 0, 1]
+
+[goal.joints]
+"ur3/shoulder_pan_joint" = 0.5235987755982988
+"ur3/shoulder_lift_joint" = -1.5707963267948966
+"ur3/elbow_joint" = 1.5707963267948966
+"sphere/root_joint" = [0.3, 0, 0.02, 0, 0, 0, 1]
+
+[planner]
+type = "StatesPathFinder"
+max_iterations = 5000

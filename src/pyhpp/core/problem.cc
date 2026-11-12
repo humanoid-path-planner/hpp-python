@@ -144,6 +144,8 @@ void Problem::addConfigValidation(const std::string& type) {
     validation = hpp::core::CollisionValidation::create(robot());
   else if (type == "JointBoundValidation")
     validation = hpp::core::JointBoundValidation::create(robot());
+  else
+    throw std::invalid_argument("Unknown config validation " + type);
   obj->addConfigValidation(validation);
 }
 

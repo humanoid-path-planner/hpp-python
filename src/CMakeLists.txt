@@ -133,6 +133,7 @@ macro(ADD_PYTHON_LIBRARY MODULE)
 endmacro()
 
 python_install_on_site(pyhpp __init__.py)
+python_install_on_site(pyhpp problem_file.py)
 
 python_install_on_site(pyhpp/pinocchio utils.py)
 python_install_on_site(pyhpp/manipulation constraint_graph_factory.py)
