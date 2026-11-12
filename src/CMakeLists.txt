@@ -55,12 +55,14 @@ macro(ADD_PYTHON_LIBRARY MODULE)
     string(REGEX REPLACE "[/-]" "_" TARGET_NAME "${MODULE}")
     set(LIBNAME "bindings")
     add_library(${TARGET_NAME} SHARED ${GENERATED_FILES})
+    get_relative_rpath(${PYTHON_SITELIB}/${MODULE} ${TARGET_NAME}_INSTALL_RPATH)
     set_target_properties(
         ${TARGET_NAME}
         PROPERTIES
             PREFIX ""
             LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${MODULE}
             LIBRARY_OUTPUT_NAME ${LIBNAME}
+            INSTALL_RPATH "${${TARGET_NAME}_INSTALL_RPATH}"
     )
 
     target_link_boost_python(${TARGET_NAME} PUBLIC)
