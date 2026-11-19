@@ -33,6 +33,14 @@ jobs:
         with:
           name: pyhpp-api-md
           path: api-md
+      - name: Get the pyhpp package with its stubs for the documentation website
+        run: cp -r hpp-python/lib/python3*/site-packages/pyhpp pyhpp
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pyhpp
+          path: |
+            pyhpp
+            !pyhpp/**/*.so
   check:
     if: always()
     name: check-macos-linux-nix
