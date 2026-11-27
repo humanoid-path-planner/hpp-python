@@ -174,6 +174,25 @@ static boost::python::dict rankInConfiguration(Device& device) {
   return rank_dict;
 }
 
+static boost::python::dict rankInVelocity(Device& device) {
+  boost::python::dict rank_dict;
+  try {
+    auto joint_names = device.model().names;
+    for (const auto& joint_name : joint_names) {
+      Frame frame = device.obj->getFrameByName(joint_name.c_str());
+      if (!frame.isFixed()) {
+        JointPtr_t joint = frame.joint();
+        if (joint) {
+          rank_dict[joint_name] = joint->rankInVelocity();
+        }
+      }
+    }
+  } catch (const std::exception& exc) {
+    throw std::logic_error(exc.what());
+  }
+  return rank_dict;
+}
+
 static boost::python::list getJointsPosition(
     Device& device, const Configuration_t& dofArray,
     const boost::python::list& jointNames) {
@@ -393,6 +412,7 @@ void exposeDevice() {
       .def("updateGeometryPlacements", &Device::updateGeometryPlacements,
            DocClassMethod(updateGeometryPlacements))
       .add_property("rankInConfiguration", &rankInConfiguration)
+      .add_property("rankInVelocity", &rankInVelocity)
       .def("setJointBounds", &setJointBounds)
       .def("getCenterOfMass", &getCenterOfMass)
       .def("getJointPosition", &getJointPosition)
