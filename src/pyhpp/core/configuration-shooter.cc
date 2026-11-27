@@ -50,19 +50,28 @@ void exposeConfigurationShooter() {
       "ConfigurationShooter", DocClassDoc(), no_init)
       .def("shoot", &CSWrapper::shoot, DocClassMethod(shoot));
   class_<configurationShooter::Gaussian, configurationShooter::GaussianPtr_t,
-	 bases<ConfigurationShooter>, boost::noncopyable>(
-	"GaussianShooter", DocClassDoc(), no_init)
-    .def("__init__", make_constructor(&configurationShooter::Gaussian::create))
-    .def("center", static_cast<void (configurationShooter::Gaussian::*)(ConfigurationIn_t)>(
-	&configurationShooter::Gaussian::center))
-    .def("center", static_cast<const Configuration_t& (configurationShooter::Gaussian::*)() const>(
-        &configurationShooter::Gaussian::center), return_value_policy<return_by_value>())
-    .def("sigma", static_cast<void (configurationShooter::Gaussian::*)(const value_type&)>(
-        &configurationShooter::Gaussian::sigma))
-    .def("sigmas", static_cast<void (configurationShooter::Gaussian::*)(vectorIn_t)>(
-        &configurationShooter::Gaussian::sigmas))
-    .def("sigmas", static_cast<const vector_t& (configurationShooter::Gaussian::*)() const>(
-        &configurationShooter::Gaussian::sigmas), return_value_policy<return_by_value>());
+         bases<ConfigurationShooter>, boost::noncopyable>(
+      "GaussianShooter", DocClassDoc(), no_init)
+      .def("__init__",
+           make_constructor(&configurationShooter::Gaussian::create))
+      .def("center",
+           static_cast<void (configurationShooter::Gaussian::*)(
+               ConfigurationIn_t)>(&configurationShooter::Gaussian::center))
+      .def("center",
+           static_cast<const Configuration_t& (
+               configurationShooter::Gaussian::*)() const>(
+               &configurationShooter::Gaussian::center),
+           return_value_policy<return_by_value>())
+      .def("sigma",
+           static_cast<void (configurationShooter::Gaussian::*)(
+               const value_type&)>(&configurationShooter::Gaussian::sigma))
+      .def("sigmas",
+           static_cast<void (configurationShooter::Gaussian::*)(vectorIn_t)>(
+               &configurationShooter::Gaussian::sigmas))
+      .def("sigmas",
+           static_cast<const vector_t& (configurationShooter::Gaussian::*)()
+                           const>(&configurationShooter::Gaussian::sigmas),
+           return_value_policy<return_by_value>());
 }
 }  // namespace core
 }  // namespace pyhpp
